@@ -1,0 +1,11 @@
+package social2xxx_protocols;
+
+enum e_server_msg_type {
+    e_mst_s2xxx_start_index		= 50400;		
+	e_mst_w2s_join_guild = 50401;
+	e_mst_w2s_cmd_msg	= 50402;	
+	e_mst_s2w_join_guild	= 50403;
+	e_mst_s2w_quit_guild	= 50404;
+	
+	e_mst_s2xxx_end_index = 50599;
+  }  	

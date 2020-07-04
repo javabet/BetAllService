@@ -1,0 +1,144 @@
+package game_showhand_protocols;
+
+enum e_server_msg_type {
+	//客户端到服务端
+    e_mst_start_c2l						= 10000;
+	e_mst_c2l_get_room_info				= 10001;//请求房间列表信息
+	e_mst_c2l_enter_game_room			= 10002;//进入房间
+	e_mst_c2l_quit_game_room			= 10003;//离开房间
+	e_mst_c2l_desk_rule_setting			= 10004;//房间规则设置请求信息
+	e_mst_c2l_choose_desk				= 10005;//进入桌子
+	e_mst_c2l_get_table_scene_info      = 10006;//查看桌子场景信息
+	e_mst_c2l_quit_desk					= 10007;//离开桌子请求信息
+	e_mst_c2l_player_ready				= 10008;//玩家进入准备状态请求信息
+	e_mst_c2l_view_card					= 10009;//玩家看底牌请求信息
+	e_mst_c2l_bet_info					= 10010;//下注信息
+	e_mst_c2l_check_state				= 10011;//查看玩家状态
+    e_mst_c2l_control_win_info          = 10012;
+    e_mst_c2l_remove_rob_desk          = 10013;
+
+	// 服务端到客户端---------------------------------------------------------------------------
+	e_mst_start_l2c						= 15000;
+	e_mst_l2c_get_room_info_result		= 15001;//返回房间列表
+	e_mst_l2c_enter_game_room_result	= 15002;//返回进入房间结果信息
+	e_mst_l2c_desk_rule_setting_result	= 15003;//房间规则设置响应信息
+	e_mst_l2c_choose_desk_result		= 15004;//玩家选择一个桌子（包括快速选桌加入）响应信息
+	e_mst_l2c_get_table_scene_info		= 15005;//获得桌子内场景信息
+	e_mst_l2c_player_ready_result		= 15006;//玩家请求准备状态 响应信息
+	e_mst_l2c_view_card_result			= 15007;//玩家看底响应信息
+	e_mst_l2c_bet_result				= 15008;//玩家下注返回信息
+	e_mst_l2c_quit_game_room_result		= 15009;//退出游戏房间响应信息
+	e_mst_l2c_quit_desk_result			= 15010;//离开桌子响应信息
+	e_mst_l2c_check_state_result 		= 15011;//返回玩家状态
+	e_mst_l2c_control_enter_game_room_result = 15012;//返回超级客户端进入房间结果信息
+	
+	e_mst_l2c_notice_start_game_message = 15021;//通知开始游戏
+	e_mst_l2c_notice_start_bet_message  = 15022;//通知谁开始下注
+	e_mst_l2c_notice_sendcard_message   = 15023;//通知发牌信息
+	e_mst_l2c_notice_start_award_message= 15024;//通知发放奖励信息
+    e_mst_l2c_notice_check_message      = 15025;
+    e_mst_l2c_notice_control_message    = 15026;
+
+	e_mst_l2c_notice_join_table_message = 15030;//通知加入桌子
+	e_mst_l2c_notice_leave_table_message= 15031;//通知离开桌子
+	e_mst_l2c_notice_table_player_message= 15032;//通知桌子里玩家的状态信息
+
+    e_mst_l2c_control_change_result  = 15033;
+
+    e_mst_l2c_offline_time = 15034;
+    e_mst_l2c_out_time = 15035;
+    e_mst_l2c_notice_update_table_message = 15036;
+    e_mst_l2c_remove_rob_desk_result = 15037;
+
+	e_mst_l2c_bc_debuginfo  =17001;  //库存信息
+	e_mst_l2c_notice_gm_luck_info   =17002;  //幸运值信息	
+	e_mst_clend_index				= 20000;
+}
+
+enum e_game_state 
+{
+	e_state_game_none =0;
+	e_state_game_prepare =1;//准备期间
+	e_state_game_start = 2;	//游戏开始
+	e_state_game_takecard = 3;	//发牌期间
+	e_state_game_bet = 4;	//下注期间
+	e_state_game_award=5;//结算开奖期间
+	e_state_game_check=6;//检查结果期间
+}
+
+enum e_bet_type 
+{
+	e_call_none						= 0;
+	e_call_common_add_1				= 1;//普通下注
+	e_call_common_add_2				= 2;//普通下注	
+	e_call_common_add_3				= 3;//普通下注
+
+	e_call_common_follow				= 4;//跟注				
+	e_call_abandon			= 5;//弃牌(不下注)
+	e_call_showhand			= 6;//梭哈
+}
+
+
+
+//桌子信息
+message msg_table_info
+{
+	optional uint32 tableid = 1;
+	optional msg_player_info player_left=2;//座位信息（左）
+	optional msg_player_info player_right=3;//座位信息 （右）
+}
+
+//玩家信息
+message msg_player_info 
+{
+	optional int32 player_id = 1;				//玩家ID
+	optional string player_nickname = 2;		//玩家昵称
+	optional int32 player_head_frame = 3;		//头像框
+	optional string player_head_custom = 4;		//玩家头像
+	optional int64 player_gold = 5;				//玩家金币
+	optional int32 player_vip_lv = 6;			// Vip等级
+	optional bool is_rob = 7;			        // 是否为机器人 true 机器人  false非机器人
+	
+	optional uint32 state= 8;//桌子里玩家状态（1：未准备，2：准备，3：游戏中）	
+	repeated int32 cards = 9;
+	optional bool is_left = 10;//true:左边，false:右边
+}
+
+message msg_player_result 
+{
+	optional int32 player_id = 1;		//玩家ID
+	optional int32 card = 2;			//底牌
+	optional int64 winGoldCount=3;      //赢得金币数，如果==0,则输掉比赛
+	optional int32 combinecards_id=4;  //给你特殊牌型的ID
+	optional int64 synctotalGoldCount=5; //同步总金币数
+}
+
+//下注结果点数信息(如果不是组合牌combinecardId=0)
+message msg_result_point_info
+{
+	optional uint32 combinecardId=1 [default=0];
+	optional uint32 owner=2; 	
+}
+
+//下注结果信息
+message msg_bet_result_info
+{
+	optional e_bet_type type=1;
+	optional int64 bet_count = 2;
+}
+
+//下注信息
+message msg_bet_info
+{
+	optional e_bet_type type = 1;
+	optional int64 bet_count = 2;
+}
+
+//状态
+message p_bet_state
+{
+	optional int32 player_id = 1;//玩家ID
+	repeated e_bet_type  bet_type_list = 2;   //此玩家可以下注的类型
+	optional int32 state	=3;//下注状态（1：下注，2：不可以下注,3:等待发牌，4：等待开奖）
+	optional msg_bet_info last_betinfo =4;//对面下注信息（如果上个状态是下注）	
+}

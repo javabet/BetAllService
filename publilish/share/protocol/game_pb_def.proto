@@ -1,0 +1,28 @@
+package game_pb_protocols; 
+
+enum e_server_msg_type {
+	//客户端到服务端
+    e_mst_start_c2l = 10000;
+	e_mst_c2l_get_room_info = 10001;//得到房间
+	e_mst_c2l_enter_room = 10002;//进入房间
+	e_mst_c2l_leave_room = 10003;//离开房间
+	e_mst_c2l_get_room_scene_info = 10007;//获得桌子内信息
+	e_mst_c2l_check_state = 10008;//检测游戏状态
+
+	// 服务端到客户端---------------------------------------------------------------------------
+
+	e_mst_start_l2c = 15000;
+	e_mst_l2c_get_room_info_result = 15001;//得到房间返回
+	e_mst_l2c_enter_room_result = 15002;//进入房间
+	e_mst_l2c_leave_room_result = 15003;//离开房间
+	e_mst_l2c_get_room_scene_info = 15010;//获得桌子内信息
+	e_mst_l2c_check_state_result = 15013;//检测游戏状态
+
+	e_mst_clend_index = 20000;
+}
+
+enum e_game_state {
+	e_state_game_begin = 0;	//游戏开始
+	e_state_game_bet = 1;	//押注期间
+	e_state_game_award = 2;	//开奖期间
+}

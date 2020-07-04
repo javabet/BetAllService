@@ -1,0 +1,211 @@
+package game_texascowboy_protocols;
+
+import "game_texascowboy_def.proto"; 
+import "msg_type_def.proto";
+
+//游戏逻辑
+//获取场景信息
+message packetc2l_get_scene_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_scene_info];
+}
+
+//玩家信息
+message msg_player_info{
+	optional int32 player_id = 1;			//玩家ID
+	optional string player_name = 2;		//玩家昵称
+	optional int32 head_frame = 3;			//头像框
+	optional string head_custom = 4;		//玩家头像
+	optional int64 player_gold = 5;			//玩家金币
+	optional int32 player_sex = 6;			// 玩家性别	
+	optional int32 vip_level = 7;			// Vip等级
+	
+	optional int32 win_count = 8;			// 获胜数
+	optional int32 bets = 9;				// 下注数
+	optional int32 play_cnt = 10;			// 局数
+	
+	repeated int32 other_bets = 11;			// 15个区域
+	repeated int32 other_win = 12;			// 15个区域  不含抽水，不含本金
+}
+
+//下注信息
+message msg_bet_info{
+	repeated int64 self_bet_golds = 1;
+	repeated msg_betinfo bets = 2; 	
+}
+
+//结果信息
+message msg_result_info{
+	repeated int64 other_win_golds = 1;		//闲家输赢
+	optional int64 self_gold = 2;			//自己金钱
+	optional bool self_is_bet = 3;			//自己是否下注
+	optional int64 self_pure_win_gold = 4;	//自己纯赢  去除抽水，含返还本金
+}
+
+//房间信息
+message msg_scene_info{
+	optional int32 roomid = 1;
+	optional int32 scene_state = 2;
+	optional int32 count_down = 3;
+	optional int32 first_common_card = 4;				//第一张公共牌   （1~52  黑红梅方）
+	optional msg_bet_info bet_info = 5;					//下注
+	repeated int32 other_cards = 6;						//8张卡 左0~1  右2~3  剩余4张公共牌4~7  （1~52  黑红梅方）
+	repeated e_card_type cards_type = 7;				//2家牌类型
+	repeated int32 match_indexs = 8;  					//组成结果的10张牌位置 （0-6，手牌0~1 公共牌2~6）
+	repeated int32 winner = 9;				            //命中的下注区域 0~12：左,右,和,同花,连牌,对子,同花连牌,对A,高牌/一对,两对,三条/顺子/同花,葫芦,金刚/同花顺/皇家
+	optional msg_result_info result_info = 10;			//结果
+	optional int32 new_history = 11;					//本局牌路记录  万位:左手牌型（e_hand_card_type） 千位:右手牌型（e_hand_card_type） 百位:0左赢1右赢2和 十个位：赢方或和牌型（e_card_type）
+	optional int32 main_id = 12;						//局ID
+	optional int32 online_cnt = 13;						//在线人数
+}
+
+//返回场景信息
+message packetl2c_get_scene_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_scene_info_result];
+	optional msg_scene_info scene_info = 2;
+}
+
+//下注
+message packetc2l_ask_bet_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_ask_bet_info];
+	optional int32 bet_index = 2;
+	optional int64 bet_gold = 3;
+}
+
+//下注结果
+message packetl2c_bet_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bet_info_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int32 bet_index = 3;
+	optional int64 bet_gold = 4;
+}
+
+//续压
+message packetc2l_ask_continue_bet {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_ask_continue_bet];
+	repeated int64 bet_golds = 2;
+}
+
+//续压结果
+message packetl2c_continue_bet_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_continue_bet_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	repeated int64 bet_golds = 3;
+}
+
+//清空
+message packetc2l_ask_clear_bet {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_ask_clear_bet];
+}
+
+//清空结果
+message packetl2c_clear_bet_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_clear_bet_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+}
+
+//请求玩家列表
+message packetc2l_ask_playerlist {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_ask_playerlist];
+}
+
+//玩家列表结果
+message packetl2c_playerlist_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_playerlist_result];
+	repeated msg_player_info player_infos = 2;
+}
+
+//请求牌路
+message packetc2l_ask_history_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_ask_history_info];
+}
+
+//请求牌路结果
+message packetl2c_history_info{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_history_info];
+	repeated int32 history_infos = 2;	//本局牌路记录  万位:左手牌型（e_hand_card_type） 千位:右手牌型（e_hand_card_type） 百位:0左赢1右赢2和 十个位：赢方或和牌型（e_card_type）
+}
+
+//广播准备状态
+message packetl2c_bc_scene_prepare_into {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_scene_prepare_into];
+	optional int32 count_down = 2;
+	optional int32 first_common_card = 3;	//第一张公共牌 （1~52  黑红梅方）
+}
+
+//广播下注状态
+message packetl2c_bc_scene_bet_into {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_scene_bet_into];
+	optional int32 count_down = 2;
+}
+
+message msg_master_bets {
+	optional int32 player_id = 1;
+	optional int64 player_bets = 2; 
+}
+
+message msg_betinfo {
+	optional int64 bet_golds = 1; 
+	repeated msg_master_bets master_bets = 2; 
+}
+
+//同步下注状态
+message packetl2c_bc_sync_scene_bet_into {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_sync_scene_bet_into];
+	repeated msg_betinfo bets = 2; 
+}
+
+//广播发牌状态
+message packetl2c_bc_scene_deal_into {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_scene_deal_into];
+	optional int32 count_down = 2;
+	repeated int32 other_cards = 3;						//8张卡 左0~1  右2~3  剩余4张公共牌4~7  （1~52  黑红梅方）
+	repeated e_card_type cards_type = 4;				//2家牌类型
+	repeated int32 match_indexs = 5;  					//组成结果的10张牌位置 （0-6，手牌0~1 公共牌2~6）
+	repeated int32 winner = 6;				            //命中的下注区域 0~12：左,右,和,同花,连牌,对子,同花连牌,对A,高牌/一对,两对,三条/顺子/同花,葫芦,金刚/同花顺/皇家
+	optional int32 new_history = 7;						//本局牌路记录  万位:左手牌型（e_hand_card_type） 千位:右手牌型（e_hand_card_type） 百十个位：<100左赢 / >=100右赢  %100 type（e_card_type）
+}
+
+//广播结果状态
+message packetl2c_bc_scene_result_into {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_scene_result_into];
+	optional int32 count_down = 2;
+	optional msg_result_info result_info = 3;
+}
+
+//调试
+message packetl2c_debug {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_debug];
+	optional int32 kill_cnt = 2 [default = 0];
+	optional int32 kill_type = 3 [default = 0];  //1:定制 2:通杀 3:左 4:右 5:和
+	repeated int32 custom_cards = 4;//定制的数据 9张卡 红2  黑2 公共5   1~52  黑红梅方
+}
+
+message packetl2c_debug_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_debug_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];	
+}
+
+message msg_player_betinfo {
+	optional int32 player_id = 1;
+	optional string player_name = 2;
+	repeated int32 bet_gold = 3; 
+	optional int64 player_gold = 4;	
+}
+
+message packetl2c_notify_sceneinfo {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_notify_sceneinfo];
+	optional int32 main_id = 2;
+	optional int32 banker_type = 3;
+	optional string banker_name = 4;
+	repeated msg_player_betinfo player_betinfos = 5;
+	optional int64 earn_gold = 6;
+	optional int64 stock_gold = 7;
+	optional int64 banker_gold = 8;    
+	optional int32 count_down = 9;	
+	optional int32 retain_cnt = 10;	
+}
+
+message packetl2c_online_cnt {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_online_cnt];
+	optional int32 cnt = 2;
+}

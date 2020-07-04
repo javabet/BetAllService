@@ -1,0 +1,54 @@
+import "social2xxx_msg_type.proto";
+import "msg_info_def.proto";
+import "msg_type_def.proto";
+
+package social2xxx_protocols;
+
+/////////////////////////////////////////////
+// world -> social
+
+message packetw2s_join_guild
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2s_join_guild]; 	
+	optional int32 session_id = 2;			//
+	optional int32 guild_id = 3;			//
+	optional int32 player_id = 4;			//玩家ID
+	optional string player_name = 5;		//玩家昵称
+	optional int32 head_frame = 6;			//头像框
+	optional string head_custom = 7;		//玩家头像
+	optional int32 player_sex = 8;			//玩家性别	
+	optional int32 vip_level = 9;			//Vip等级
+}
+
+message packets2w_join_guild
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2w_join_guild]; 	
+	optional int32 player_id = 2;			//玩家ID
+	optional msg_type_def.e_msg_result_def result = 3  [default = e_rmt_unknow];	//返回结果 
+	optional int32 guild_id = 4;
+	optional int64 req_join_time = 5;
+}
+
+message packets2w_quit_guild
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2w_quit_guild]; 	
+	repeated int32 player_id = 2;			//玩家ID
+}
+
+enum e_social_cmd {
+    e_sc_player_online = 1;			// session_id
+    e_sc_player_offline = 2;		// 
+    e_sc_player_remove = 3;			// 
+    e_sc_player_enter_game = 4;		// game_id
+    e_sc_player_exit_game = 5;		// 
+}
+
+message packetw2s_cmd_msg
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2s_cmd_msg]; 
+	optional e_social_cmd cmd_id = 2;
+	optional int32 guild_id = 3;
+	optional int32 player_id = 4;
+	optional int32 param = 5;
+}
+

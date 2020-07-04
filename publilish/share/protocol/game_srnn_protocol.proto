@@ -1,0 +1,229 @@
+package game_srnn_protocols;
+
+import "game_srnn_def.proto"; 
+import "msg_type_def.proto"; 
+
+//玩家信息
+message msg_player_info{
+	optional int32 player_id = 1;			//玩家ID
+	optional string player_name = 2;		//玩家昵称
+	optional int32 head_frame = 3;			//头像框
+	optional string head_custom = 4;		//玩家头像
+	optional int64 player_gold = 5;			//玩家金币
+	optional int32 player_sex = 6;			//玩家性别	
+	optional int32 vip_level = 7;			//Vip等级
+}
+
+message msg_player_data{
+	optional int32 chair_id = 1;			//座位号
+	optional msg_player_info player = 2;
+	optional e_table_status status = 3;		//状态 e_ts_free(不在当前局中), >= e_ts_reset(当前局中)
+	
+	optional int32 other_bets = 4;			//1倍、5倍、10倍、20倍、40倍
+	optional cards_data cards = 5;			//牌信息
+	optional bool open_card = 6;			//开牌
+	optional int32 trustee = 7;				//0不托,1倍、5倍、10倍、20倍、40倍	
+}
+
+//检测游戏状态		//重连之后判断是否在桌子中
+message packetc2l_check_state {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_check_state];
+}
+
+//检测状态
+message packetl2c_check_state_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_check_state_result];
+	optional int32 result = 2 [default = 0]; // 0:不在,1:在room中,2:在table中
+}
+
+//获取场景信息
+message packetc2l_get_scene_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_scene_info];
+}
+
+//场景信息返回
+message packetl2c_scene_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_scene_info_result];
+	optional int32 room_type = 2; 				//房间类型	
+	optional e_table_status status = 3;			//桌子状态, 如果为 e_ts_result, 后面会紧跟着一个 packetl2c_game_end 消息
+	optional int32 banker_idx = 4;				//正在叫庄
+	repeated msg_player_data players = 5;		//玩家信息
+	optional packetl2c_game_end game_end = 6;
+	optional int32 status_remain_sec = 7;		//桌子状态剩余秒数	
+	optional int32 status_turn_sec = 8;			//桌子状态秒数	
+}
+
+//玩家进房间
+message packetc2l_enter_room {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_enter_room];
+	optional int32 room_type = 2;					//房间类型
+}
+
+//玩家进房间返回
+message packetl2c_enter_room_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_room_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+}
+
+//玩家退出房间
+message packetc2l_leave_room {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_leave_room];
+}
+
+//玩家退出房间返回
+message packetl2c_leave_room_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_room_result];
+	optional int64 player_gold = 2;
+}
+
+//玩家托管请求
+message packetc2l_user_trustee {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_user_trustee];
+	optional int32 bets = 2;				//0不托,1倍、5倍、10倍、20倍、40倍
+}
+
+//房间桌子状态通知
+message packetl2c_table_status_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_table_status_notify];
+	optional e_table_status status = 2;					// e_ts_reset
+}
+
+//玩家托管通知
+message packetl2c_user_trustee_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_user_trustee];
+	optional int32 chair_id = 2;
+	optional bool trustee = 3;
+}
+
+//玩家已准备
+message packetc2l_ready {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_ready];
+	optional bool change_table = 2;
+}
+
+//发送玩家信息
+message packetl2c_game_start {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_start];
+	optional int32 banker_user = 3;					//叫庄用户
+}
+
+//桌子进玩家通知
+message packetl2c_table_enter_player_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_table_enter_player_info];
+	optional msg_player_info player = 2;
+	optional int32 chair_id = 3;			//座位号	
+}
+
+message cards_data {
+	repeated int32 card = 1;			//[3+2]扑克列表
+	optional int32 card_type = 2;		//牌型	
+	
+	optional int32 chair_id = 3;			//座位号	
+}
+
+//开牌
+message packetc2l_open_card {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_open_card];
+}
+
+//开牌通知
+message packetl2c_open_card_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_open_card_notify];
+	optional int32 current_user = 2;		//开牌用户
+}
+
+//出牌数据包
+message packetc2l_bet_req {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_bet_req];
+	optional int32 bets = 2;				//1倍、5倍、10倍、20倍、40倍
+}
+
+//出牌通知
+message packetl2c_bet_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bet_notify];
+	optional int32 current_user = 2;		//当前用户
+	optional int32 bets = 3;				//1倍、5倍、10倍、20倍、40倍
+}
+
+//发送扑克
+message packetl2c_send_card {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_send_card];
+	repeated cards_data cards = 2;				//[2]2家扑克列表
+}
+
+//玩家抢庄请求
+message packetc2l_banker_req {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_banker_req];
+	optional bool grab_banker = 2;				//是否叫庄
+}
+
+//抢庄通知
+message packetl2c_banker_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_banker_notify];
+	optional int32 grab_user = 2;				//当前玩家
+	optional bool grab_banker = 3;				//是否叫庄
+	
+	optional int32 next_user = 4;				//下一个玩家
+}
+
+message msg_card_info {
+	optional int32 chair_id = 1;			//
+	//repeated int32 cards = 2;				//[3+2]扑克列表
+	//optional int32 card_type = 3;			//牌型
+	optional int32 game_score = 4;			//输赢金币
+	//optional int32 whn_type = 6 [default = 0]; //whn牌型
+	//optional int32 whn_per = 7 [default = 0]; //	
+}
+
+//游戏结束
+message packetl2c_game_end {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_end];
+	repeated msg_card_info cards = 2;		//[2]扑克信息	
+}
+
+//玩家通知消息
+message packetl2c_game_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_notify];
+	optional e_notify_type notify_type = 2;
+	optional int32 notify_param = 3;
+}
+
+//玩家信息
+message gm_player_info {
+	optional int32 player_id = 1;			//玩家ID
+	optional string player_name = 2;		//玩家昵称
+	optional int64 player_gold = 3;			//玩家金币
+	optional int32 player_room = 4;			//玩家房间
+	optional int64 player_profit = 5;		//玩家赢利
+	optional int64 player_kill_type = 6;	//(0:弱, 1:强)
+	optional int64 player_kill_cnt = 7;		//
+}
+
+//gm_list 请求
+message packetc2l_gm_list {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_gm_list];
+	optional int32 hours = 2;				//小时数
+}
+
+//房间信息
+message gm_room_info {
+	optional int32 id = 1;
+	optional int32 player_fee = 2;			//赢利
+	optional int64 player_win = 3;			//库存
+}
+
+//gm_list 数据
+message packetl2c_gm_list {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_gm_list];
+	repeated gm_player_info players = 2;		//
+	repeated gm_room_info rooms = 3;		//
+}
+
+//gm_kill 请求
+message packetc2l_gm_kill {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_gm_kill];
+	optional int32 player_id = 2;				//(0:所有玩家, x:指定玩家)
+	optional int32 kill_type = 3;				//(0:弱, 1:强, -1:无)
+	optional int32 kill_cnt = 4;				//
+}
+

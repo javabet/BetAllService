@@ -1,0 +1,237 @@
+// 金币礼券的变化原因
+enum PropertyReasonType
+{
+	//缺省
+	type_default = -1;
+	// 每日登录转盘抽奖
+	type_reason_dial_lottery = 1;
+
+	// 在线奖励
+	type_reason_online_reward = 2;
+
+	// 保险箱存入
+	type_reason_deposit_safebox = 3;
+
+	// 保险箱取出
+	type_reason_draw_safebox = 4;
+
+	// 赠送礼物
+	type_reason_send_gift = 5;
+
+	// 接收礼物
+	type_reason_accept_gift = 6;
+
+	// 玩家发小喇叭，全服通告
+	type_reason_player_notify = 7;
+	
+	// 玩家兑换礼物
+	type_reason_exchange = 8;
+
+	// 购买商品获得
+	type_reason_buy_commodity_gain = 9;
+
+	// 领取救济金
+	type_reason_receive_alms = 10;
+
+	// 单局结算
+	type_reason_single_round_balance = 11;
+
+	// 购买商品消耗
+	type_reason_buy_commodity_expend = 12;
+	
+	//购买捕鱼等级
+	type_reason_buy_fishlevel = 13;
+	//购买捕鱼道具
+	type_reason_buy_fishitem = 14;
+	//捕鱼升级
+	type_reason_fish_uplevel = 15;
+
+	// 新手引导
+	type_reason_new_guild = 16;
+
+	// 修改头像
+	type_reason_update_icon = 17;
+
+	// 充值
+	type_reason_recharge = 18;
+
+	// 修改昵称
+	type_reason_modify_nickname = 19;
+
+	// 充值赠送
+	type_reason_recharge_send = 20;
+
+	// 后台充值
+	type_reason_gm_recharge = 21;
+
+	// 后台充值赠送
+	type_reason_gm_recharge_send = 22;
+
+	// 月卡每日领取
+	type_reason_month_card_daily_recv = 23;
+
+	// 充值礼包
+	type_reason_recharge_gift = 24;
+
+	// 每日签到
+	type_reason_daily_sign = 25;
+
+	// 每日宝箱抽奖
+	type_reason_daily_box_lottery = 26;
+
+	// 谢谢参与兑换
+	type_reason_thank_you_exchange = 27;
+
+	// 连续发小喇叭
+	type_reason_continuous_send_speaker = 28;
+
+	// 领取邮件
+	type_reason_receive_mail = 29;
+
+	// 捕鱼掉落
+	type_reason_fishlord_drop = 30;
+
+	// 创建账号
+	type_reason_create_account = 31;
+
+	// 领取活动奖励
+	type_reason_receive_activity_reward = 32;
+	
+	//百家乐抢庄
+	type_reason_rob_banker = 33;
+	
+	//百家乐提前下庄
+	type_reason_leave_banker = 34;
+
+	// 使用技能
+	type_reason_use_skill = 35;
+	
+	//五龙翻倍游戏使用钻石
+	type_reason_double_game = 36;
+	
+	//五龙升级 //钻石收入和金币支出
+	type_reason_dragons_lv = 37;	
+
+	//星星奖池
+	type_reason_star_award = 38;
+	//星星抽奖	
+	type_reason_star_lottery = 39;	
+
+	//新手礼包
+	type_reason_new_player = 40;	
+
+	//任务
+	type_reason_daily_task = 41;
+	//成就
+	type_reason_achievement = 42;
+	//导弹产出
+	type_reason_missile = 43;
+
+	// 充值抽奖
+	type_reason_recharge_lottery = 44;	
+
+		// 购物
+	type_reason_shopping = 45;	
+
+    //cdk兑换
+    cdk_exchange = 46;
+
+	//提现
+	type_reason_alipay_transfer = 47;
+	//提现返还
+	type_reason_alipay_transfer_return = 48;
+	//绑定奖励
+	type_reason_bind_reward = 49;
+	//分享奖励
+	type_reason_share_reward = 50;
+	//七日奖励
+	type_reason_sevenday_reward = 51;
+	//邀请人奖励
+	type_reason_inviter_reward = 52;
+	//邀请人排行榜奖励
+	type_reason_inviter_ranklist = 53;
+	//庄家结算
+	type_reason_banker_settle = 54;
+
+	//流水大作战
+	type_reason_stream_war_reward = 55;	
+
+	//活动 首充
+	type_reason_ac_recharge	= 56;	
+	//活动 绑定有礼
+	type_reason_ac_bind	= 57;
+	//活动 聚宝盆
+	type_reason_ac_chest = 58;
+	//活动 代理分红
+	type_reason_ac_agent = 59;
+	//月卡
+	type_reason_month_card = 60;
+	//vip日签到
+	type_reason_vip_sign = 61;
+	//vip月俸禄
+	type_reason_vip_month_reward = 62;
+	//vip晋级奖励
+	type_reason_vip_lv_reward = 63;
+	//限时活动 累积充值
+	type_reason_ac_time_recharge = 64;
+	//限时活动 单笔充值
+	type_reason_ac_time_recharge_single = 65;
+	//限时活动 累积流水
+	type_reason_ac_time_performance = 66;
+	//限时活动 富贵轮盘
+	type_reason_ac_time_roulette = 67;
+	//sa平台 记录流水值
+	type_reason_sa_platform = 68;
+	//新会员活动 绑定抽奖
+	type_reason_ac_new_binding = 69;
+	//新会员活动 七日任务
+	type_reason_ac_new_seven = 70;
+	//新会员活动 首充有礼 
+	type_reason_ac_new_recharge_f = 71;
+	//新会员活动 充值
+	type_reason_ac_new_recharge = 72;
+	//新会员活动 流水
+	type_reason_ac_new_per = 73;
+	//新会员活动 冲级
+	type_reason_ac_new_lv = 74;
+	
+	//转账钱包上分
+	type_reason_api_up = 75;
+	//转账钱包下分
+	type_reason_api_down = 76;
+	//新用户绑定活动奖励
+	type_reason_binding_reward_new = 77;
+	
+	//sp平台 记录流水值
+	type_reason_sp_platform = 78;
+
+	//血战麻将 邮件补发
+	type_game_XueZhanMJ = 79;
+	type_game_XueZhanMJ_r = 80;
+	
+	//活动 在线奖励
+	type_reason_ac_online = 81;
+	//云平台修改金额
+	type_reason_cloud_gm = 82;
+	//活动 亏损救援
+	type_reason_ac_rescue = 83;
+	
+	//金牌体育 未注解单
+	type_reason_api_unsettle = 84;
+	//金牌体育  已结账注解单
+	type_reason_api_settle = 85;
+	//活动 天天发大财
+	type_reason_ac_ttfdc = 86;
+	//第三方转入
+	type_reaseon_api_trans_in = 87;			
+	//第三方转出
+	type_reaseon_api_trans_out = 88;
+	//活动 财神任务
+	type_reason_ac_csrw = 89;	
+	
+	//购买房卡
+	type_reason_buy_room_card = 90;	
+};
+
+
+

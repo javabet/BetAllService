@@ -1,0 +1,197 @@
+package game_redblack_protocols;
+
+import "game_redblack_def.proto"; 
+import "msg_type_def.proto"; 
+
+//牌信息
+message msg_cards_info{
+	repeated int32 red_cards = 1;			//红方牌	1·52   黑红梅方
+	repeated int32 black_cards = 2;			//黑方牌
+	optional int32 red_cards_type = 3;		//红方牌牌型  0:高牌 2~13:对2~对K 14:对A 20:顺子 21:同花 22:同花顺 23：三条
+	optional int32 black_cards_type = 4;	//黑方牌牌型  0:高牌 2~13:对2~对K 14:对A 20:顺子 21:同花 22:同花顺 23：三条
+}
+
+message msg_history_info{
+	optional int32 winner = 1;		//0:red 1:black
+	optional int32 cards_type = 2;	//牌型  0:高牌 2~13:对2~对K 14:对A 20:顺子 21:同花 22:同花顺 23：三条
+}
+
+//玩家信息
+message msg_player_info{
+	optional int32 player_id = 1;			//玩家ID
+	optional string player_name = 2;		//玩家昵称
+	optional int32 head_frame = 3;			//头像框
+	optional string head_custom = 4;		//玩家头像
+	optional int64 player_gold = 5;			//玩家金币
+	optional int32 player_sex = 6;			// 玩家性别	
+	optional int32 vip_level = 7;			// Vip等级
+}
+
+//下注信息
+message msg_bet_info{
+	repeated int64 self_bet_golds = 1;
+	repeated int64 total_bet_golds = 2;
+}
+
+//结果信息
+message msg_result_info{
+	optional int32 winner = 1;					//0:red 1:black
+	optional int32 cards_type = 2;				//牌型  0:高牌 2~13:对2~对K 14:对A 20:顺子 21:同花 22:同花顺 23：三条
+	repeated int64 red_win_gold = 3;			//押注结果
+	repeated int64 black_win_gold = 4;			//押注结果
+	repeated int64 special_win_gold = 5;		//押注结果
+	repeated int32 seat_list = 6;				//玩家座位列表(0~8)	
+}
+
+//房间信息
+message msg_scene_info{
+	optional int32 roomid = 1;
+	optional int32 scene_state = 2;						//0:未开始  1:准备 2:下注 3:发牌 4:结果
+	optional int32 count_down = 3;						//cd time
+	repeated int64 red_bet_golds = 4; 					//（最终值，非增加值）
+	repeated int64 black_bet_golds = 5;					//
+	repeated int64 special_bet_golds = 6; 				//
+	repeated msg_player_info player_infos = 7;			//玩家信息
+	repeated int32 seat_list = 8;						//玩家座位列表(0~8)
+	optional int32 red_leader_seat = 9[default = 99];	//红方队长座位号
+	optional int32 black_leader_seat = 10[default = 99];	//黑方队长座位号
+	optional msg_cards_info cards_info = 11;				//发牌
+	optional msg_result_info result_info = 12;			//结果	
+}
+
+//游戏逻辑
+//获取场景信息
+message packetc2l_get_scene_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_scene_info];
+}
+
+//返回场景信息
+message packetl2c_get_scene_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_scene_info_result];
+	optional msg_scene_info scene_info = 2;
+	repeated msg_history_info history_infos = 3;			//牌路记录 0:高牌 2~13:对2~对K 14:对A 20:顺子 21:同花 22:同花顺 23：三条  +0红赢/+100黑赢
+}
+
+//广播准备状态
+message packetl2c_bc_scene_prepare_into {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_scene_prepare_into];
+	optional int32 count_down = 2;
+}
+
+//广播下注状态
+message packetl2c_bc_scene_bet_into {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_scene_bet_into];
+	optional int32 count_down = 2;
+}
+
+//广播同步下注状态
+message packetl2c_bc_sync_scene_bet_into {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_sync_scene_bet_into];
+	repeated int64 red_bet_golds = 2; 		//同步结果（最终值，非增加值）
+	repeated int64 black_bet_golds = 3;		//
+	repeated int64 special_bet_golds = 4; 	//
+	repeated int32 seat_list = 5;			//玩家座位列表(0~8)
+}	
+
+//广播发牌状态
+message packetl2c_bc_scene_deal_into {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_scene_deal_into];
+	optional int32 count_down = 2;
+	optional msg_cards_info cards_info = 3;
+	optional int32 red_leader_seat = 4[default = 99];	//红方队长座位号(0~8)
+	optional int32 black_leader_seat = 5[default = 99];	//黑方队长座位号(0~8)
+}
+
+//广播结果状态
+message packetl2c_bc_scene_result_into {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_scene_result_into];
+	optional int32 count_down = 2;
+	optional msg_result_info result_info = 3;
+}
+
+//下注
+message packetc2l_ask_bet_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_ask_bet_info];
+	optional int32 bet_index = 2;	//下注类型 0:red 1:black 2:special
+	optional int32 bet_gold = 3;	//下注金额
+}
+
+//下注结果
+message packetl2c_bet_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bet_info_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int32 bet_index = 3;	//下注类型 0:red 1:black 2:special
+	optional int32 bet_gold = 4;	//下注金额
+	optional int64 self_gold = 5;
+}
+
+//续压
+message packetc2l_ask_continue_bet {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_ask_continue_bet];
+	repeated int32 bet_golds = 2;
+}
+
+//续压结果
+message packetl2c_continue_bet_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_continue_bet_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	repeated int32 bet_golds = 3;
+	optional int64 self_gold = 4;
+}
+
+//桌子进玩家通知
+message packetl2c_enter_player_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_player_info];
+	optional msg_player_info player_info = 2;
+	optional int32 seat_id = 3;					//(0~8)
+}
+
+//桌子退玩家通知
+message packetl2c_leave_player_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_player_info];
+	optional int32 seat_id = 2;					//(0~8)
+}
+
+//游戏控制
+message packetc2l_game_control {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_game_control];
+	optional int32 control = 2[default = 0]; //control_type  1红2黑3通杀
+}
+
+message packetl2c_game_control_result 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_control_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_success ];
+}
+
+//debug信息
+message packetl2c_bc_debuginfo {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_debuginfo];
+	optional int32 player_id = 2;	
+	optional int64 total_profit = 3[default = 0];		//抽水
+	optional int64 total_stock = 4[default = 0];		//库存
+    optional int64 total_Rate = 6[default = 0];		//抽水率
+
+	optional string debug_infos = 5; //调试信息 lua
+}
+
+//下注信息
+message msg_bet_infoex{
+	optional int32 bet_index = 1;
+	optional int64 bet_count = 2;
+}
+
+message gm_msg_bet_info
+{
+	optional msg_player_info player_info=1;
+	repeated msg_bet_infoex bet_info=2;
+	optional int32 seat_id = 3;	//tableId * 9 + seatId
+}
+
+//通知所有玩家下注信息
+message packetl2c_notice_all_bet_info 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_notice_gm_all_bet_info];
+	repeated gm_msg_bet_info bet_info_list = 2;
+
+}

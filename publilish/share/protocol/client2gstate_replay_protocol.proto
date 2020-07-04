@@ -1,0 +1,40 @@
+import "client2gstate_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+import "replay_base_protocol.proto";
+
+package client2gstate_protocols;
+
+//回放记录请求
+message packetc2gs_replay_history {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2gs_replay_history];
+	optional int32 PlayerId_GuildId = 2;	// >0:玩家id, <0:公会id
+}
+
+//回放记录数据
+message packetgs2c_replay_history {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_replay_history];
+	repeated replay_base_protocols.replay_record records = 2;	
+}
+
+//回放数据请求
+message packetc2gs_replay_detail {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2gs_replay_detail];
+	optional int32 game_id = 2;				//游戏id
+	optional string log_id = 3;				//回放id
+}
+
+import "game_ShQiaoMa_r_protocol.proto"; 
+
+//回放数据
+message packetgs2c_replay_detail_ShQiaoMa_r {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_replay_detail_ShQiaoMa_r];
+	repeated int64 StartGold = 2;										//[4]开局金币
+	repeated game_ShQiaoMa_r_protocols.replay_cards hand_card = 3;		//[4]4家手卡
+	repeated game_ShQiaoMa_r_protocols.replay_operate ops = 4;			//操作序列
+	repeated game_ShQiaoMa_r_protocols.win_result hu_data = 5;			//已胡流水	
+	optional int32 dice_count = 6;										//骰子点数
+	optional int32 banker_user = 7;										//庄家用户
+	optional int32 huang_fan_cnt = 8;									//荒翻数
+	optional bool dismiss = 9;											//解散标记
+}

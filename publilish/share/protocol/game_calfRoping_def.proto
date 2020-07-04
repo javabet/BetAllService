@@ -1,0 +1,41 @@
+package game_calfRoping_protocols; 
+
+enum e_server_msg_type {
+
+	//客户端到服务端---------------------------------------------------------------------------
+
+    e_mst_start_c2l = 10000;
+
+	e_mst_c2l_get_player_info = 10001;	//请求玩家信息
+	e_mst_c2l_req_start_game = 10002;	//开始游戏
+	e_mst_c2l_req_pass = 10003;			//请求通关
+	e_mst_c2l_req_miss = 10004;			//没套中牛
+	e_mst_c2l_req_buylife = 10005;		//续费购买绳子 
+	e_mst_c2l_req_pause = 10006;		//请求暂停	
+	e_mst_c2l_req_continue = 10007;		//请求继续游戏	
+	e_mst_c2l_req_reward = 10008;		//请求欢乐奖
+	e_mst_c2l_req_leave_game = 10009;	//请求结束游戏
+	e_mst_c2l_req_begin_pass = 10010;	//请求开始关卡
+	e_mst_c2l_req_go_to_lobby = 10011;	//请求返回大厅 
+	
+
+	// 服务端到客户端---------------------------------------------------------------------------
+
+	e_mst_start_l2c = 15000;
+
+	e_mst_l2c_get_player_info = 15001;	//请求玩家信息返回	
+	e_mst_l2c_req_start_game = 15002;	//开始游戏返回
+	e_mst_l2c_req_pass = 15003;			//请求通关返回
+	e_mst_12c_req_miss = 15004;			//没套中牛返回
+	e_mst_l2c_req_buylife = 15005;		//续费购买绳子返回	
+	e_mst_l2c_req_pause = 15006;		//暂停返回	
+	e_mst_l2c_req_continue = 15007;		//取消暂停返回	
+	e_mst_l2c_req_reward = 15008;		//请求欢乐奖返回
+	e_mst_l2c_req_leave_game = 15009;	//请求结束游戏返回
+	e_mst_l2c_req_begin_pass = 15010;	//请求开始关卡返回
+	e_mst_l2c_req_go_to_lobby = 15011;	//返回大厅的请求
+	
+
+	e_mst_clend_index = 20000;
+  }
+

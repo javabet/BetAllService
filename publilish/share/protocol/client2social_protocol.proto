@@ -1,0 +1,129 @@
+import "client2social_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2social_protocols;
+
+//公会玩家数据
+message guild_player {
+	optional int32 player_id = 1;			//玩家ID
+	optional string player_name = 2;		//玩家昵称
+	optional int32 head_frame = 3;			//头像框
+	optional string head_custom = 4;		//玩家头像
+	optional int32 player_sex = 5;			//玩家性别	
+	optional int32 vip_level = 6;			//Vip等级
+}
+
+//公会成员数据
+message guild_member {
+	optional guild_player player = 1;		//玩家
+	optional int32 points = 2;				//公会积分
+	optional bool online = 3;				//在线状态
+	optional int32 gaming_id = 4;			//游戏id
+}
+
+//申请批准记录
+message ask_record {
+	optional guild_player player = 1;		//玩家
+	optional int32 time = 2;				//时间
+}
+
+enum e_guild_msg_type {
+    e_gmt_join = 0;							//审批中
+    e_gmt_agree = 1;						//同意
+	e_gmt_has_guild = 2;					//玩家已经有公会了
+    e_gmt_refuse = 3;						//拒绝
+    e_gmt_quit = 4;							//退出
+}
+
+//公会消息记录
+message guild_msg_record {
+	optional guild_player player = 1;		//玩家
+	optional int32 time = 2;				//时间
+	optional e_guild_msg_type msg = 3;		//
+}
+
+//上下分消息记录
+message points_msg_record {
+	optional guild_player player = 1;		//玩家
+	optional int32 time = 2;				//时间
+	optional int32 points = 3;				//>0:上分 <0:下分 
+}
+
+//公会数据返回
+message packets2c_guild_data {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_data];
+	optional int32 guild_id = 2;			//公会id
+	optional int32 points = 3;				//公会房卡数
+	
+	repeated guild_member member = 4;			//公会成员数据
+	repeated guild_msg_record guild_msg = 5;	//公会消息记录
+	repeated points_msg_record points_msg = 6;	//上下分消息记录
+}
+
+//公会房卡数(覆盖)
+message packets2c_guild_points {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_points];
+	optional int32 points = 2;				//公会房卡数
+}
+
+//公会成员数据(新加,覆盖)
+message packets2c_guild_member_data {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_member_data];
+	optional guild_member member = 2;			//公会成员数据
+}
+
+enum e_member_prop {
+    e_mp_points = 1;						//公会积分
+    e_mp_online = 2;						//在线状态
+    e_mp_gaming_id = 3;						//游戏id
+}
+
+//公会成员属性数据
+message packets2c_guild_member_prop {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_member_prop];
+	optional int32 player_id = 2;
+	optional e_member_prop prop = 3;
+	optional int32 value = 4;
+}
+
+//公会申请批准数据
+message packets2c_guild_ask_data {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_ask_data];
+	repeated ask_record ask = 2;				//申请批准记录
+	optional bool all_data = 3;					//整个，新加 记录
+}
+
+//公会消息数据(新加)
+message packets2c_guild_msg_data {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_msg_data];
+	optional guild_msg_record guild_msg = 2;	//公会消息记录
+}
+
+//公会上下分消息数据(新加)
+message packets2c_guild_points_msg_data {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_points_msg_data];
+	optional points_msg_record points_msg = 2;	//上下分消息记录
+}
+
+//会长操作
+enum e_master_ops_type {
+    e_mot_agree = 1;						//同意
+    e_mot_refuse = 2;						//拒绝
+    e_mot_points = 3;						//param:上下分
+    e_mot_kick = 4;							//踢人
+	e_mot_dismiss = 5;						//解散
+}
+
+//会长操作
+message packetc2s_master_operation {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2s_master_operation];
+	optional int32 player_id = 2;			//
+	optional e_master_ops_type ops = 3;		//操作
+	optional int32 param = 4;				//
+}
+
+//成员退出
+message packetc2s_member_quit {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2s_member_quit];
+}

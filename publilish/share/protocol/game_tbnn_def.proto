@@ -1,0 +1,55 @@
+package game_tbnn_protocols; 
+
+enum e_server_msg_type {
+
+	//客户端到服务端---------------------------------------------------------------------------
+
+    e_mst_start_c2l = 10000;
+
+	e_mst_c2l_check_state = 10001;
+	e_mst_c2l_get_scene_info = 10002;
+	e_mst_c2l_get_room_info = 10010;
+	e_mst_c2l_enter_table = 10013;
+	e_mst_c2l_leave_table = 10014;
+	e_mst_c2l_user_trustee = 10015;
+	e_mst_c2l_ready = 10016;
+	e_mst_c2l_open_card_req = 10017;
+	e_mst_c2l_change_table = 10018;
+
+	// 服务端到客户端---------------------------------------------------------------------------
+
+	e_mst_start_l2c = 15000;
+	
+	e_mst_l2c_check_state_result = 15001;
+	e_mst_l2c_scene_info_result = 15002;
+	e_mst_l2c_room_info_result = 15010;
+	e_mst_l2c_enter_table_result = 15020;
+	e_mst_l2c_leave_table_result = 15021;
+	e_mst_l2c_table_enter_player_info = 15022;
+	e_mst_l2c_table_leave_player_info = 15023;
+	e_mst_l2c_user_trustee = 15024;
+	e_mst_l2c_game_start = 15026;
+	e_mst_l2c_open_card_notify = 15027;
+	e_mst_l2c_game_end = 15028;
+	e_mst_l2c_table_status_notify = 15029;
+	e_mst_l2c_room_award_list = 15030;
+	e_mst_l2c_room_total_award = 15031;
+	e_mst_l2c_room_award_item = 15032;
+
+	e_mst_l2c_game_notify = 15033;
+
+	e_mst_clend_index = 20000;
+}
+
+enum e_notify_type {
+	e_nt_table_dismiss = 1;
+	e_nt_gold_not_enough = 2;
+	e_nt_shutdown = 3;	
+}
+
+enum e_table_status {
+	e_ts_free = 0;
+	e_ts_reset = 1;
+	e_ts_open_card = 2;
+	e_ts_result = 3;
+}

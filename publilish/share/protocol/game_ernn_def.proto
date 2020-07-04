@@ -1,0 +1,52 @@
+package game_ernn_protocols; 
+
+enum e_server_msg_type {
+
+	//客户端到服务端---------------------------------------------------------------------------
+
+    e_mst_start_c2l = 10000;
+
+	e_mst_c2l_check_state = 10001;
+	e_mst_c2l_get_scene_info = 10002;
+	e_mst_c2l_enter_room = 10009;
+	e_mst_c2l_leave_room = 10010;
+	e_mst_c2l_ready = 10011;
+	e_mst_c2l_banker_req = 10012;
+	e_mst_c2l_bet_req = 10013;
+	e_mst_c2l_open_card = 10014;
+	e_mst_c2l_gm_list = 10015;
+	e_mst_c2l_gm_kill = 10016;
+	e_mst_c2l_user_trustee = 10007;
+
+	// 服务端到客户端---------------------------------------------------------------------------
+
+	e_mst_start_l2c = 15000;
+	
+	e_mst_l2c_check_state_result = 15001;
+	e_mst_l2c_scene_info_result = 15002;
+	e_mst_l2c_user_trustee = 15008;
+	e_mst_l2c_enter_room_result = 15009;
+	e_mst_l2c_leave_room_result = 15010;
+	e_mst_l2c_bet_notify = 15014;
+	e_mst_l2c_game_end = 15016;
+	e_mst_l2c_send_all_playerinfos = 15017;
+	e_mst_l2c_game_notify = 15018;
+	e_mst_l2c_open_card_notify = 15019;
+	e_mst_l2c_send_card = 15020;
+	e_mst_l2c_banker_notify = 15021;
+	e_mst_l2c_gm_list = 15024;
+
+	e_mst_clend_index = 20000;
+}
+
+enum e_notify_type {
+	e_nt_table_dismiss = 1;
+	e_nt_gold_not_enough = 2;
+	e_nt_shutdown = 3;
+	e_nt_listen = 4;
+	e_nt_assembling = 5;
+	e_nt_player_leave = 6;
+	e_nt_kill_ok = 7;
+}
+
+

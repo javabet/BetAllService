@@ -1,0 +1,20 @@
+package client2social_protocols;
+
+enum e_server_msg_type {
+	//客户端到服务端
+    e_mst_start_c2s = 50000;
+	e_mst_c2s_master_operation = 50001;				//会长操作
+	e_mst_c2s_member_quit = 50002;					//成员退出
+
+	// 服务端到客户端---------------------------------------------------------------------------
+	e_mst_start_s2c = 50200;	
+	e_mst_s2c_guild_data = 50201;					//公会数据返回
+	e_mst_s2c_guild_points = 50202;					//公会房卡数(覆盖)
+	e_mst_s2c_guild_member_data = 50203;			//公会成员数据(新加,覆盖)
+	e_mst_s2c_guild_member_prop = 50204;			//公会成员属性数据	
+	e_mst_s2c_guild_ask_data = 50205;				//公会申请批准数据(新加)
+	e_mst_s2c_guild_msg_data = 50206;				//公会消息数据(新加)
+	e_mst_s2c_guild_points_msg_data = 50207;		//公会上下分消息数据(新加)
+	
+	e_mst_c2s_end_index = 50999;
+  }

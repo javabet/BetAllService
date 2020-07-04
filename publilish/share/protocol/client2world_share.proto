@@ -1,0 +1,54 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+//通知分享
+message packetw2c_notify_share
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_notify_share];
+	optional int32 game_id = 2;
+	optional int32 room_id = 3;
+	optional int64 win_gold = 4;		//获胜的金币
+	optional int32 share_reward = 5;	//分享奖励
+}
+
+//领取分享奖励
+message packetc2w_receive_share_reward
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_receive_share_reward];
+}
+
+//领取分享奖励结果
+message packetw2c_receive_share_reward_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_receive_share_reward_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+
+	optional int64 reward = 3;	//分享奖励
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

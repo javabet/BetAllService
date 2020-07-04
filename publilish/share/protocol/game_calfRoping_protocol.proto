@@ -1,0 +1,139 @@
+package game_calfRoping_protocols;
+
+import "game_calfRoping_def.proto"; 
+import "msg_type_def.proto"; 
+
+//请求玩家状态
+message packetc2l_get_player_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_player_info];
+}
+
+//获得玩家状态		//进入房间跟断线重连情况下调用
+message packetl2c_get_player_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_player_info];
+	optional int32 game_state = 2;	//game_state
+	optional int32 type = 3;		//投注类型
+	optional int32 pass = 4;		//当前关卡
+	optional int32 cd_time = 5;		//剩余时间
+	optional int32 life = 6;		//剩余绳子
+	optional int32 pass_result = 7;	//本轮结果
+	optional bool need_ask = 8;		//是否需要询问玩家要不要领取欢乐奖
+}
+
+//开始游戏
+message packetc21_req_start_game {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_start_game];
+	optional int32 type = 2;
+}
+
+//开始游戏返回
+message packet12c_req_start_game_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_start_game];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int32 pass_result = 3;	
+	optional int32 type = 4;
+}
+
+//请求套中
+message packetc21_req_pass {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_pass];
+	optional int32 calfid = 2;	
+}
+
+//请求套中返回
+message packet12c_req_pass_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_pass];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int32 pass_id = 3;		//当前已通过的关卡ID
+	optional int32 life = 4;	
+}
+
+//请求开始关卡
+message packetc21_req_begin_pass {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_begin_pass];
+}
+
+//请求开始关卡返回
+message packet12c_req_begin_pass_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_begin_pass];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int32 pass_id = 3;		//当前已通过的关卡ID	
+	optional int32 life = 4;
+	optional int32 pass_result = 5;		
+}
+
+//没套中
+message packetc21_req_miss {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_miss];
+}
+
+//没套中返回
+message packet12c_req_miss_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_12c_req_miss];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];	
+	optional int32 life = 3;
+}
+
+//请求续费
+message packetc2l_req_buylife {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_buylife];
+}
+
+//续费返回
+message packet12c_req_buylife_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_buylife];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int32 pass = 3;		
+	//optional int32 pass_result = 4;
+}
+
+//请求暂停
+message packetc21_req_pause {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_pause];
+}
+
+//请求暂停返回
+message packet12c_req_pause_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_pause];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+}
+
+//取消暂停
+message packetc21_req_continue {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_continue];
+}
+
+//取消暂停返回
+message packet12c_req_continue_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_continue];
+	//optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int32 cur_state = 2;
+	optional int32 cd_time = 3;		
+}
+
+//请求欢乐奖
+message packetc2l_req_reward {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_reward ];
+}
+
+//请求欢乐奖返回,游戏结束
+message packetl2c_req_reward_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_reward];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+}
+
+//请求结束游戏
+message packetc2l_req_leave_game {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_leave_game ];
+}
+
+//请求结束游戏返回
+message packetl2c_req_leave_game_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_leave_game];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+}
+
+//请求退出到大厅
+message packetl2c_req_go_to_lobby_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_go_to_lobby];
+}

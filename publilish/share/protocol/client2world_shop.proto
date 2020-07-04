@@ -1,0 +1,35 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+//校验苹果订单
+message packetw2c_check_apple_order_form
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_check_apple_order_form]; 
+
+	optional string apple = 2;
+}
+
+//请求充值记录
+message packetc2w_ask_recharge_history
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ask_recharge_history]; 
+}
+
+//充值记录
+message packetw2c_recharge_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_recharge_history_result]; 
+	repeated string history_infos = 2;
+}
+
+//最新充值记录
+message packetw2c_recharge_new_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_recharge_new_result]; 
+    optional string new_infos = 2;
+    optional int32  playerid = 3;
+	
+}

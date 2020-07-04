@@ -1,0 +1,73 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+//代理信息
+message agency_info {
+	optional string  agencyName = 1;
+	optional int32  agencyType = 2;
+	optional string agencyMsg = 3;
+}
+// 请求代理
+message packetc2w_agency
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_agency]; 
+}
+ 
+// 请求代理结果
+message packetw2c_agency_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_agency_result]; 
+    repeated agency_info info = 2;
+	optional string discountTip = 3;	//折扣额度
+	optional int64 discountStart = 4;	//折扣开始时间
+	optional int64 discountEnd = 5;	//折扣结束时间
+}
+
+//币商客服
+message bskf_info {
+	optional string bskf_name = 1; //客服名字
+	optional int32  bskf_id = 2;	//客服ID
+	optional string bskf_pic= 3;	//客服头像
+	repeated int32 pay_types = 4;	//支持的充值方式
+}
+
+// 请求币商客服信息
+message packetc2w_bakf
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_bskf]; 
+}
+ 
+// 请求币商客服结果
+message packetw2c_bskf_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_bskf_result]; 
+    repeated bskf_info info = 2;
+}
+
+//支付开关
+message payopen_info {
+	optional int32  type = 1;
+	optional bool  isopen = 2;
+    optional bool  ishot = 3;
+    optional int32 priority = 4;//值越高优先级越高
+    optional string chipsValue = 5;//5个筹码值，单位元，用‘,’隔开
+    optional int32 max_value_per_time = 6;//单次充值最大值
+	optional bool isshow = 7 [default = true];//是否显示
+}
+
+// 请求支付开关
+message packetc2w_askPayopen
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_askPayopen]; 
+}
+ 
+// 支付开关结果
+message packetw2c_askPayopen_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_askPayopen_result]; 
+    repeated payopen_info info = 2;
+    optional bool isAppStoreOpen = 3;    
+}

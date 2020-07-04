@@ -1,0 +1,992 @@
+import "client2gstate_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2gstate_protocols;
+
+//连接gstate服务器
+message packetc2gs_player_connect {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2gs_player_connect];	
+	optional int32 playerid = 2;						//玩家id
+	optional int32 gameid = 3;							//游戏id
+	optional int32 agentid = 4;							//代理id
+}
+
+//连接返回
+message packetgs2c_player_connect_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_player_connect_result];		
+	optional msg_type_def.e_msg_result_def result = 2  [default = e_rmt_unknow];	//返回结果 
+}
+
+//断开gstate
+message packetc2gs_player_disconnect {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2gs_player_disconnect];	
+	optional int32 playerid = 2;						//玩家id
+}
+
+//
+message packetgs2c_player_disconnect_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_player_disconnect_result];		
+	optional msg_type_def.e_msg_result_def result = 2  [default = e_rmt_unknow];	//返回结果
+}
+
+//获取所有牌路数据
+message packetc2gs_game_history{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2gs_game_history]; 	
+	optional int32 gameid = 2;					// 游戏id
+}
+
+//非百人类房间基本信息
+message gs_table_room_info{
+	optional int32 room_id		= 1;				//房间id
+	optional int32 player_cnt	= 2;				//玩家数
+	optional int32 bot_cnt		= 3;				//机器人数
+	optional int64 total_award	= 4;				//总的彩金数
+	optional int32 agent_id		= 5;				//代理id
+}
+
+message packetgs2c_table_room_info
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_table_room_info]; 
+	optional int32 game_id = 2;				//游戏id		
+	optional int32 all_data_flag = 3;		//所有游戏数据标志 1代表所有，0代表更新数据
+	repeated gs_table_room_info infos = 4;
+}
+
+//牌路数据房间基本信息
+message gs_base_room_info{
+	optional int32 game_id		= 1;				//游戏id		
+	optional int32 room_id		= 2;				//房间id
+	optional int32 game_state	= 3;				//游戏状态
+	optional int32 state_time	= 4;				//游戏状态剩余时间	
+	optional int64 time_stamp	= 5;				//时间戳(客户端可以不理会这个值)
+	optional int32 calc_time	= 6;				//服务器及时计算剩余时间（给客户端用）
+	optional int32 player_cnt	= 7 [default = 0];	//玩家数，不为0时有效
+	optional int32 bot_cnt		= 8 [default = 0];	//机器人数，不为0时有效
+	optional string unique_id	= 9;				//房间唯一ID
+	optional int32 agent_id		= 10 [default = 0];	//代理ID
+}
+
+//cows 牌路数据
+message gs_msg_cows_history{
+	repeated bool is_win = 1;						//赢的标志
+}
+message gs_msg_cows_room_history
+{	
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息				
+	optional int32 total_count	= 2;						//总局数
+	repeated int32 win_counts	= 3;						//赢的局数
+	repeated int32 lose_counts	= 4;						//输的局数
+	repeated gs_msg_cows_history history_list = 5;			//房间牌路数据
+}
+
+message packetgs2c_cows_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_cows_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_cows_room_history room_history = 3;	//游戏数据
+}
+
+//shcd 牌路数据
+message gs_msg_shcd_history
+{
+	optional int32 card_type	= 1;		//牌的类型
+	optional int32 card_value	= 2;		//牌值
+	optional int32 open_type	= 3;		//开牌类型
+}
+message gs_msg_shcd_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息	
+	repeated gs_msg_shcd_history shcd_info = 2;				//房间牌路数据
+}
+
+//请求所有黑红梅方牌路结果、主动发送追加数据包也是这个
+message packetgs2c_shcd_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_shcd_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据,3代表牌路清空
+	repeated gs_msg_shcd_room_info room_history = 3;    //游戏数据
+}
+
+//baccarat 牌路数据
+message gs_msg_baccarat_history
+{
+	optional bool is_tie			= 1;		//是否和
+	optional bool is_player_win		= 2;		//是否闲胜
+	optional bool is_player_pair	= 3;		//是否闲对
+	optional bool is_banker_pair	= 4;		//是否庄对
+	optional bool is_banker_win		= 5;		//是否庄胜
+	optional int32  win_point		= 6;		//胜者点数
+}
+message gs_msg_baccarat_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_baccarat_history baccarat_info = 2;				//房间牌路数据
+}
+
+//请求所有百家乐牌路结果、主动发送追加数据包也是这个
+message packetgs2c_baccarat_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_baccarat_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据,3代表牌路清空
+	repeated gs_msg_baccarat_room_info room_history = 3;
+}
+
+//goldshark 牌路数据
+message gs_msg_goldshark_history
+{
+	optional int32 result = 1;	//开奖结果
+}
+message gs_msg_goldshark_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_goldshark_history goldshark_info = 2;			//房间牌路数据
+}
+
+//请求所有金鲨银鲨牌路结果、主动发送追加数据包也是这个
+message packetgs2c_goldshark_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_goldshark_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_goldshark_room_info room_history = 3;
+}
+
+//lhd 牌路数据
+message gs_msg_lhd_history
+{
+	optional int32 cards_info = 1;	// 0:龙 1:虎 2:和
+}
+message gs_msg_lhd_room_info
+{
+	optional gs_base_room_info	base_room_info = 1;		//游戏房间基本信息
+	repeated int32 total_win = 2;						//总共赢的局数
+	repeated int32 total_lose = 3;						//总共输的局数
+	repeated gs_msg_lhd_history lhd_info = 4;			//房间牌路数据
+}
+
+//请求所有龙虎斗牌路结果、主动发送追加数据包也是这个
+message packetgs2c_lhd_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_lhd_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_lhd_room_info room_history = 3;
+}
+
+//benzbmw 牌路数据
+message gs_msg_benzbmw_history
+{
+	optional int32 result = 1;							//开奖结果
+}
+message gs_msg_benzbmw_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_benzbmw_history card_road_info = 2;				//房间牌路数据
+}
+//请求所有奔驰宝马牌路结果、主动发送追加数据包也是这个
+message packetgs2c_benzbmw_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_benzbmw_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_benzbmw_room_info room_history = 3;
+}
+
+//multiredblack 牌路数据
+message gs_msg_multiredblack_history
+{
+	optional int32 result = 1;				//牌路记录 <100红赢 / >=100黑赢  %100 0:高牌 2~13:对2~对K 14:对A 20:顺子 21:同花 22:同花顺 23：三条
+}
+message gs_msg_multiredblack_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_multiredblack_history card_road_info = 2;		//房间牌路数据
+}
+//请求所有百人红黑牌路结果、主动发送追加数据包也是这个
+message packetgs2c_multiredblack_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_multiredblack_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_multiredblack_room_info room_history = 3;
+}
+
+//二八杠 牌路数据
+message gs_msg_ebg_history
+{
+	repeated int32 is_win = 1;						// 3家 (0:输, 1:赢, 2:和)
+	repeated int32 cards_id = 2;					// 3家 + 庄家 [xxyy]xx,yy,1到9筒,10为白皮
+}
+message gs_msg_ebg_room_info
+{
+	optional gs_base_room_info	base_room_info = 1;		//游戏房间基本信息
+	optional int32 total_count = 2;						//总共局数
+	repeated int32 win_counts = 3;						//赢的局数
+	repeated int32 lose_counts = 4;						//输的局数
+	repeated gs_msg_ebg_history card_road_info = 5;			//房间牌路数据
+	optional int32 banker_cnt	= 6;					//0的时候表示新的一轮开始
+	repeated int32 out_cards	= 7;					//当前一轮已经出去的所有牌
+}
+//请求所有二八扛牌路结果、主动发送追加数据包也是这个
+message packetgs2c_ebg_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_ebg_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有;2,代表更新游戏状态和时间;0代表追加数据;4代表bank_cnt是=0,清空out_cards数据
+	repeated gs_msg_ebg_room_info room_history = 3;
+}
+
+//欢乐骰宝 牌路数据
+message gs_msg_dice_history
+{
+	optional int32 dice1 = 1;				//骰宝点数1			
+	optional int32 dice2 = 2;				//骰宝点数2			
+	optional int32 dice3 = 3;				//骰宝点数3				
+}
+message gs_msg_dice_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_dice_history card_road_info = 2;				//房间牌路数据
+}
+//请求所有欢乐骰宝路结果、主动发送追加数据包也是这个
+message packetgs2c_dice_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_dice_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_dice_room_info room_history = 3;
+}
+
+//抢庄牛牛 房间彩金
+message gs_msg_qznn_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	optional int64 total_award = 2;							//总的彩金数
+}
+//请求抢庄牛房间彩金通知结果、主动发送追加数据包也是这个
+message packetgs2c_qznn_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_qznn_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，0代表追加数据
+	repeated gs_msg_qznn_room_info room_history = 3;
+}
+
+//通比牛牛 房间彩金
+message gs_msg_tbnn_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	optional int64 total_award = 2;							//总的彩金数
+}
+//请求通比牛房间彩金通知结果、主动发送追加数据包也是这个
+message packetgs2c_tbnn_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_tbnn_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，0代表追加数据
+	repeated gs_msg_tbnn_room_info room_history = 3;
+}
+
+//豪车大亨 牌路数据
+message gs_msg_carsmagnate_history
+{
+	optional int32 history_val = 1;						//每局开奖结果
+}
+message gs_msg_carsmagnate_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_carsmagnate_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有豪车大亨路结果、主动发送追加数据包也是这个
+message packetgs2c_carsmagnate_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_carsmagnate_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_carsmagnate_room_info room_history = 3;
+}
+
+//万人德州 牌路数据
+message gs_msg_multitexas_history
+{
+	repeated int32 win = 1;					//0:failed 1:win 2:和
+}
+message gs_msg_multitexas_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_multitexas_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有万人德州结果、主动发送追加数据包也是这个
+message packetgs2c_multitexas_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_multitexas_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_multitexas_room_info room_history = 3;
+}
+
+//水果缤纷 牌路数据
+message gs_msg_fruits_history
+{
+	optional int32 history_val = 1;				//每局开奖结果
+}
+message gs_msg_fruits_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 			//游戏房间基本信息
+	repeated gs_msg_fruits_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有水果缤纷结果、主动发送追加数据包也是这个
+message packetgs2c_fruits_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_fruits_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_fruits_room_info room_history = 3;
+}
+
+//森林舞会 牌路数据
+message gs_msg_forest_history
+{
+	optional int32 history_val = 1;			//每局开奖结果
+}
+message gs_msg_forest_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_forest_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有森林舞会结果、主动发送追加数据包也是这个
+message packetgs2c_forest_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_forest_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_forest_room_info room_history = 3;
+}
+
+//四色球 牌路数据
+message gs_msg_fourcolorball_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_fourcolorball_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_fourcolorball_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有四色球结果、主动发送追加数据包也是这个
+message packetgs2c_fourcolorball_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_fourcolorball_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_fourcolorball_room_info room_history = 3;
+}
+
+//欢乐至尊 牌路数据
+message gs_msg_happySupremacy_history
+{
+	optional bool is_forward_win = 1; //顺门
+	optional bool is_reverse_win = 2; //倒门
+	optional bool is_opposite_win = 3; //对门
+	repeated int32 cards = 4; //0:决定发牌顺序,忽略 1~7  e_card_owner * 1000 + e_card_flower * 100 + card_point
+	repeated int32 cards_type = 5 ; //e_card_owner * 100 + card_type
+}
+message gs_msg_happySupremacy_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_happySupremacy_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有欢乐至尊结果、主动发送追加数据包也是这个
+message packetgs2c_happySupremacy_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_happySupremacy_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_happySupremacy_room_info room_history = 3;
+}
+
+//推筒子 牌路数据
+message gs_msg_ttz_history
+{	
+	repeated int32 cardid = 1;							//前三位是其它cardid，第四位是庄家cardid	
+}
+message gs_msg_ttz_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		// 游戏房间基本信息
+	repeated gs_msg_ttz_history card_road_info = 2;			// 房间牌路数据
+	optional int32 banker_cnt	= 3;						// 0的时候表示新的一轮开始
+	repeated int32 out_cards	= 4;						// 当前一轮已经出去的所有牌
+}
+//请求所有推筒子结果、主动发送追加数据包也是这个
+message packetgs2c_ttz_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_ttz_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有;2,代表更新游戏状态和时间;0代表追加数据;4代表bank_cnt是=0,清空out_cards数据
+	repeated gs_msg_ttz_room_info room_history = 3;
+}
+
+//轮盘牌路数据
+message gs_msg_roulette_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_roulette_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_roulette_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有轮盘结果、主动发送追加数据包也是这个
+message packetgs2c_roulette_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_roulette_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_roulette_room_info room_history = 3;
+}
+
+//AK轮盘牌路数据
+message gs_msg_rouletteak_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_rouletteak_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_rouletteak_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有AK轮盘结果、主动发送追加数据包也是这个
+message packetgs2c_rouletteak_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_rouletteak_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_rouletteak_room_info room_history = 3;
+}
+
+//幸运轮盘牌路数据
+message gs_msg_roulettelucky_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_roulettelucky_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_roulettelucky_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有幸运轮盘结果、主动发送追加数据包也是这个
+message packetgs2c_roulettelucky_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_roulettelucky_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_roulettelucky_room_info room_history = 3;
+}
+
+//一球成名牌路数据
+message gs_msg_famousball_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_famousball_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_famousball_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有一球成名结果、主动发送追加数据包也是这个
+message packetgs2c_famousball_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_famousball_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_famousball_room_info room_history = 3;
+}
+
+//英雄联盟时时彩牌路数据
+message gs_msg_lol_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_lol_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_lol_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有英雄联盟时时彩结果、主动发送追加数据包也是这个
+message packetgs2c_lol_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_lol_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_lol_room_info room_history = 3;
+}
+
+//神兽之战牌路数据
+message gs_msg_sszz_history
+{
+	repeated bool is_win = 1;						//赢的标志
+}
+message gs_msg_sszz_room_history
+{	
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息				
+	optional int32 total_count	= 2;						//总局数
+	repeated int32 win_counts	= 3;						//赢的局数
+	repeated int32 lose_counts	= 4;						//输的局数
+	repeated gs_msg_sszz_history history_list = 5;			//房间牌路数据
+}
+message packetgs2c_sszz_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_sszz_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_sszz_room_history room_history = 3;	//游戏数据
+}
+
+//fightcow 牌路数据
+message gs_msg_fightcow_history
+{
+	optional int32 result = 1;				//牌路记录 （红类型 * 100 + 黑类型）    type: 0 无牛 1 ~ 10 牛一~牛牛 11 银牛 12 金牛 13 炸弹 14 五小牛
+}
+message gs_msg_fightcow_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_fightcow_history card_road_info = 2;		//房间牌路数据
+}
+//请求所有fightcow牌路结果、主动发送追加数据包也是这个
+message packetgs2c_fightcow_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_fightcow_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_fightcow_room_info room_history = 3;
+}
+
+//texascowboy 牌路数据
+message gs_msg_texascowboy_history
+{
+	optional int32 result = 1;				//本局牌路记录  万位:左手牌型 千位:右手牌型 百位:0左赢1右赢2和 十个位：赢方或和牌型 具体见游戏协议
+}
+message gs_msg_texascowboy_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_texascowboy_history card_road_info = 2;		//房间牌路数据
+}
+//请求所有texascowboy牌路结果、主动发送追加数据包也是这个
+message packetgs2c_texascowboy_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_texascowboy_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_texascowboy_room_info room_history = 3;
+}
+
+//百人三公 牌路数据
+message gs_msg_brsg_history{
+	repeated bool is_win = 1;						//赢的标志
+}
+message gs_msg_brsg_room_history
+{	
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息				
+	optional int32 total_count	= 2;						//总局数
+	repeated int32 win_counts	= 3;						//赢的局数
+	repeated int32 lose_counts	= 4;						//输的局数
+	repeated gs_msg_brsg_history history_list = 5;			//房间牌路数据
+}
+//请求所有百人三公牌路结果、主动发送追加数据包也是这个
+message packetgs2c_brsg_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_brsg_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_brsg_room_history room_history = 3;	//游戏数据
+}
+
+//万条筒牌路数据
+message gs_msg_wtt_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_wtt_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_wtt_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有万条筒结果、主动发送追加数据包也是这个
+message packetgs2c_wtt_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_wtt_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_wtt_room_info room_history = 3;
+}
+
+//斗三公牌路数据
+message gs_msg_dsg_history
+{
+	optional int32 result = 1;				//每局牌路记录 （结果 * 10000 + 龙类型 * 100 + 凤类型） 结果：0龙1凤   type: 0 ~ 9 0点~9点 10 三公 11 炸弹 12 爆玖 
+}
+message gs_msg_dsg_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_dsg_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有斗三公结果、主动发送追加数据包也是这个
+message packetgs2c_dsg_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_dsg_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_dsg_room_info room_history = 3;
+}
+
+//牌九 牌路数据
+message gs_msg_paigow_history
+{
+	repeated int32 is_win = 1;						// 3家
+	repeated int32 cards_id = 2;					// 3家 + 庄家
+}
+message gs_msg_paigow_room_info
+{
+	optional gs_base_room_info	base_room_info = 1;		//游戏房间基本信息
+	optional int32 total_count = 2;						//总共局数
+	repeated int32 win_counts = 3;						//赢的局数
+	repeated int32 lose_counts = 4;						//输的局数
+	repeated gs_msg_paigow_history card_road_info = 5;			//房间牌路数据
+	optional int32 banker_cnt	= 6;					//0的时候表示新的一轮开始
+	repeated int32 out_cards	= 7;					//当前一轮已经出去的所有牌
+}
+//请求所有牌九牌路结果、主动发送追加数据包也是这个
+message packetgs2c_paigow_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_paigow_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有;2,代表更新游戏状态和时间;0代表追加数据;4代表bank_cnt是=0,清空out_cards数据
+	repeated gs_msg_paigow_room_info room_history = 3;
+}
+
+//龙虎猜和牌路数据
+message gs_msg_lhch_history
+{
+	optional int32 result = 1;				//每局牌路记录 龙+虎结果：2~26
+}
+message gs_msg_lhch_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_lhch_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有龙虎猜和结果、主动发送追加数据包也是这个
+message packetgs2c_lhch_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_lhch_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_lhch_room_info room_history = 3;
+}
+
+//福星推筒子牌路数据
+message gs_msg_fxttz_history
+{
+	optional int32 result = 1;				//每局牌路记录 （童女牌型 * 10000 + 童男牌型）
+}
+message gs_msg_fxttz_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_fxttz_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有福星推筒子结果、主动发送追加数据包也是这个
+message packetgs2c_fxttz_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_fxttz_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_fxttz_room_info room_history = 3;
+}
+
+//赌神推牌九牌路数据
+message gs_msg_dstpj_history
+{
+	optional int32 result = 1;				//每局牌路记录 0：红方赢 1：黑方赢 2：和
+}
+message gs_msg_dstpj_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_dstpj_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有赌神推牌九结果、主动发送追加数据包也是这个
+message packetgs2c_dstpj_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_dstpj_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_dstpj_room_info room_history = 3;
+}
+
+//请求所有澳门百家乐结果、主动发送追加数据包也是这个
+message gs_msg_ambjl_history
+{
+	optional bool is_tie				= 1;		//是否和
+	optional bool is_player_win	= 2;		//是否闲胜
+	optional bool is_player_pair	= 3;		//是否闲对
+	optional bool is_banker_pair	= 4;		//是否庄对
+	optional bool is_banker_win	= 5;		//是否庄胜
+	optional bool is_lucky_six	= 6;			//是否幸运6
+	optional int32  win_point		= 7;		//胜者点数
+}
+message gs_msg_ambjl_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_ambjl_history ambjl_info = 2;				//房间牌路数据
+}
+
+//请求所有百家乐牌路结果、主动发送追加数据包也是这个
+message packetgs2c_ambjl_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_ambjl_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据,3代表牌路清空
+	repeated gs_msg_ambjl_room_info room_history = 3;
+}
+
+//鱼虾蟹 牌路数据
+message gs_msg_yxx_history
+{
+	optional int32 dice1 = 1;				//骰宝点数1			
+	optional int32 dice2 = 2;				//骰宝点数2			
+	optional int32 dice3 = 3;				//骰宝点数3				
+}
+message gs_msg_yxx_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_yxx_history card_road_info = 2;				//房间牌路数据
+}
+//请求所有鱼虾蟹路结果、主动发送追加数据包也是这个
+message packetgs2c_yxx_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_yxx_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_yxx_room_info room_history = 3;
+}
+
+//德州扑克 牌路数据
+message gs_msg_texas_history
+{
+}
+message gs_msg_texas_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 				//游戏房间基本信息
+	repeated gs_msg_texas_history card_road_info = 2;				//房间牌路数据
+}
+//请求德州扑克牌路结果、主动发送追加数据包也是这个
+message packetgs2c_texas_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_texas_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_texas_room_info room_history = 3;
+}
+
+//slot 牌路数据
+message gs_msg_slot_history
+{
+}
+
+//slot游戏
+message gs_msg_slot_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_slot_history card_road_info = 2;				//房间牌路数据
+}
+
+//请求水浒传牌路结果、主动发送追加数据包也是这个
+message packetgs2c_shuihz_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_shuihz_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//请求slot多福多财牌路结果、主动发送追加数据包也是这个
+message packetgs2c_slotdfdc_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_slotdfdc_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//请求slot荣耀王者牌路结果、主动发送追加数据包也是这个
+message packetgs2c_slotrywz_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_slotrywz_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//请求slot豪车汇牌路结果、主动发送追加数据包也是这个
+message packetgs2c_slothch_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_slothch_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//请求slot九线拉王牌路结果、主动发送追加数据包也是这个
+message packetgs2c_slotjxlw_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_slotjxlw_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//请求slot财神到牌路结果、主动发送追加数据包也是这个
+message packetgs2c_slotcsd_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_slotcsd_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//请求水果机牌路结果、主动发送追加数据包也是这个
+message packetgs2c_fruitmachine_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_fruitmachine_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//请求一元夺宝牌路结果、主动发送追加数据包也是这个
+message packetgs2c_oneyuanwin_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_oneyuanwin_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//请求红包扫雷牌路结果、主动发送追加数据包也是这个
+message packetgs2c_redsweep_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_redsweep_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//请求红包乱斗牌路结果、主动发送追加数据包也是这个
+message packetgs2c_redsweeppro_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_redsweeppro_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//幸运7 牌路数据
+message gs_msg_luckyseven_history
+{
+	optional int32 cards_info = 1;	// 0:小 1:大 2:和
+}
+message gs_msg_luckyseven_room_info
+{
+	optional gs_base_room_info	base_room_info = 1;		//游戏房间基本信息
+	repeated gs_msg_luckyseven_history luckyseven_info = 4;			//房间牌路数据
+}
+
+//请求所有幸运7牌路结果、主动发送追加数据包也是这个
+message packetgs2c_luckyseven_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_luckyseven_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_luckyseven_room_info room_history = 3;
+}
+
+//王者时时彩牌路数据
+message gs_msg_wzssc_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_wzssc_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_wzssc_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有王者时时彩结果、主动发送追加数据包也是这个
+message packetgs2c_wzssc_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_wzssc_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_wzssc_room_info room_history = 3;
+}
+
+message gs_msg_qxzl_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated int32 cards = 2;			//房间牌路数据
+	
+}
+//群雄逐鹿 牌路数据
+message packetgs2c_qxzl_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_qxzl_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_qxzl_room_info room_history = 3;
+}
+
+//dota时时彩牌路数据
+message gs_msg_dotassc_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_dotassc_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_dotassc_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有dota时时彩结果、主动发送追加数据包也是这个
+message packetgs2c_dotassc_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_dotassc_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_dotassc_room_info room_history = 3;
+}
+
+//请求加勒比海扑克牌路结果、主动发送追加数据包也是这个
+message packetgs2c_jlbpoker_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_jlbpoker_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slot_room_info room_history = 3;
+}
+
+//暴雪全家桶牌路数据
+message gs_msg_bxqjt_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_bxqjt_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_bxqjt_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有暴雪全家桶结果、主动发送追加数据包也是这个
+message packetgs2c_bxqjt_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_bxqjt_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_bxqjt_room_info room_history = 3;
+}
+
+//三国时时彩牌路数据
+message gs_msg_sgssc_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_sgssc_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_sgssc_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有三国时时彩结果、主动发送追加数据包也是这个
+message packetgs2c_sgssc_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_sgssc_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_sgssc_room_info room_history = 3;
+}
+
+//水浒时时彩牌路数据
+message gs_msg_shssc_history
+{
+	optional int32 history_val = 1;					//每局开奖结果
+}
+message gs_msg_shssc_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated gs_msg_shssc_history card_road_info = 2;			//房间牌路数据
+}
+//请求所有水浒时时彩结果、主动发送追加数据包也是这个
+message packetgs2c_shssc_game_history_result
+{	
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_shssc_history_result]; 
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_shssc_room_info room_history = 3;
+}
+
+message gs_msg_slm_room_info
+{
+	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
+	repeated int32 cards = 2;			//房间牌路数据 
+}
+
+//射龙门 牌路数据
+message packetgs2c_slm_game_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_gs2c_slm_history_result];
+	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
+	repeated gs_msg_slm_room_info room_history = 3;
+}

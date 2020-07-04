@@ -1,0 +1,47 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+//邀请人排行
+message msg_inviter_ranklist
+{
+	optional int32 photo_frame = 1;	//玩家头像
+	optional string nick_name = 2;	//昵称
+	optional int64 total_reward = 3;//累计收益
+	optional int32 player_id = 4;	//玩家ID
+	optional int64 reward = 5;		//排名奖励
+	optional string icon_custom = 6;//玩家头像
+	optional int32 viplvl = 7;		//vip等级
+}
+
+//请求推广排行榜
+message packetc2w_inviter_ranklist
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_inviter_ranklist];
+	optional int32 type = 2;	//0日排行1周排行
+}
+
+//请求推广排行榜结果
+message packetw2c_inviter_ranklist_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_inviter_ranklist_result];
+	repeated msg_inviter_ranklist ranking_list = 2;		//排行榜
+	optional msg_inviter_ranklist self_info = 3;		//个人排名信息
+	optional int32 type = 4;	//0日排行1周排行
+}
+
+//领取排行榜奖励
+message packetc2w_ranklist_receive
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ranklist_receive];
+}
+
+//领取排行榜奖励结果
+message packetw2c_ranklist_receive_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_ranklist_receive_result];
+	repeated int64 reward_day = 2;	//日奖励列表,每个奖励弹窗一次
+	repeated int64 reward_week = 3;	//周奖励列表,每个奖励弹窗一次
+}

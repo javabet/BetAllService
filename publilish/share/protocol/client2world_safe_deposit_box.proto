@@ -1,0 +1,143 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+// 设置保险箱密码
+message packetc2w_set_password
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_set_password]; 
+
+	optional string pwd1 = 2;
+
+	optional string pwd2 = 3;
+}
+ 
+// 设置保险箱密码结果
+message packetw2c_set_password_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_set_password_result]; 
+
+	optional int32 result = 2;
+}
+
+// 修改保险箱密码 
+message packetc2w_modify_password
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_modify_password]; 
+
+	// 旧密码
+	optional string old_pwd = 2;
+	// 新密码1
+	optional string new_pwd1 = 3;
+	// 新密码2
+	optional string new_pwd2 = 4;
+}
+
+// 修改保险箱密码结果
+message packetw2c_modify_password_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_modify_password_result]; 
+
+	optional int32 result = 2;
+}
+
+//   重设保险箱密码 
+message packetc2w_reset_password
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_reset_password]; 
+
+	optional string pwd1 = 2;
+
+	optional string pwd2 = 3;
+	// 验证码
+	optional string safeCode = 4;
+}
+
+// 重置保险箱密码结果
+message packetw2c_reset_password_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_reset_password_result]; 
+
+	optional int32 result = 2;
+}
+
+// 存入金币
+message packetc2w_deposit_gold
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_deposit_gold]; 
+
+	// 存储多少
+	optional int64 gold = 2;
+
+	// 保险箱密码
+	optional string pwd = 3;
+}
+
+// 存入金币结果
+message packetw2c_deposit_gold_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_deposit_gold_result]; 
+
+	optional int64 gold = 2;
+
+	optional int32 result = 3;
+}
+
+// 取出金币
+message packetc2w_draw_gold
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_draw_gold]; 
+
+	// 取出多少
+	optional int64 gold = 2;
+
+	// 保险箱密码
+	optional string pwd = 3;
+}
+
+// 取出金币结果
+message packetw2c_draw_gold_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_draw_gold_result]; 
+
+	optional int64 gold = 2;
+
+	optional int32 result = 3;
+}
+
+// 获取保险箱的验证码
+message packetc2w_get_safe_box_security_code
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_get_safe_box_security_code]; 
+}
+
+// 获取保险箱的验证码结果
+message packetw2c_get_safe_box_security_code_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_get_safe_box_security_code_result]; 
+
+	optional int32 result = 2;
+}
+
+// 验证保险箱密码 
+message packetc2w_check_password
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_check_password]; 
+
+	// 密码
+	optional string pwd = 2;
+}
+
+// 验证保险箱密码结果
+message packetw2c_check_password_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_check_password_result]; 
+
+	optional int32 result = 2;
+}
+
+
+
+

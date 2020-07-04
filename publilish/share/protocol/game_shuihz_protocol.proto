@@ -1,0 +1,303 @@
+package game_shuihz_protocols;
+
+import "game_shuihz_def.proto"; 
+import "msg_type_def.proto"; 
+
+// 是否在游戏
+message packetc2l_check_state
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_check_state];
+}
+
+// 是否在游戏 - 回执
+message packetc2l_check_state_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_check_state_result];
+
+	//大于0表示正在游戏中   0:不在游戏
+	optional int32 room_id = 2 ; 
+	//玩家等级
+	//optional int32 player_lv = 3;
+	//玩家经验
+	//optional int32 player_exp = 4;
+}
+
+//进入游戏 
+message packetc2l_enter_game   
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_enter_game];
+	optional int32 room_id = 2;
+}
+
+//进入游戏 - 回执
+message packetc2l_enter_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_game_result];
+	optional int32 result = 2;
+	optional int32 room_id = 3;
+	repeated msg_player_info player_list = 4;
+}
+
+//离开游戏 
+message packetc2l_leave_game
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_leave_game];
+	optional int32 room_id = 2;
+}
+
+//离开游戏 - 回执
+message packetc2l_leave_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_game_result];
+	optional int32 result = 2;
+}
+
+//开始游戏 
+message packetc2l_star_game
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_star_game];
+	
+	// 倍率索引，从0开始
+	optional int32 rateIndex = 2;
+}
+
+// 一条线的信息
+message LineInfo
+{
+	// 线ID 1-9
+	optional int32 lineId = 1;
+	
+	// 左右灯标记  0 左灯亮 1 右灯亮 2 左右灯全亮
+	optional int32 lightFlag = 2;
+
+	// 左边是几连 3是3连 4是4连 5是5连
+	optional int32 leftLinkCount = 3;
+	
+	// 右边是几连 3是3连 4是4连 5是5连
+	optional int32 rightLinkCount = 4;
+	
+	// 左边Icon 非0表示图标ID，否则表示没有
+	optional int32 leftIcon = 5;
+	
+	// 左边Icon 非0表示图标ID，否则表示没有
+	optional int32 rightIcon = 6;
+}
+
+// 结算图标信息
+message IconInfo
+{
+	// 图标ID
+	optional int32 iconId = 1;
+	
+	// 对应倍率
+	optional int32 rate = 2;
+
+}
+
+//开始游戏 - 回执
+message packetc2l_star_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_star_game_result];
+
+	// 货币类型
+	optional int32 moneyType = 2;
+
+	// 图标ID数组
+	optional string imageArr = 3;
+	
+	repeated LineInfo infoList = 4;
+
+	// 赢的钱数
+	optional int32 winMoney = 5;
+	
+	// 开始时候扣除的钱数
+	optional int32 deductMoney = 6;
+
+	// 结果
+	optional int32 result = 7;
+
+	// 当前的总钱数(服务器同步到客户端)
+	optional int32 curMoney = 8;
+
+	// 可玩小玛丽游戏次数
+	optional int32 bonusGameCount = 9;
+
+	// 全盘类型 0 没有全盘; 1 相同id的全盘; 2 武器全盘; 3 人物全盘
+	optional int32 fullType = 10;
+	
+	// 1 相同id的全盘 情况下的id
+	optional int32 fullId = 11;
+	
+	// 结算图标倍率信息
+	repeated IconInfo icons = 12;
+}
+
+// 请求一次小玛丽游戏 
+message packetc2l_req_bonus_game
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_bonus_game];
+}
+
+// 一次小玛丽游戏结果
+message packetl2c_req_bonus_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_bonus_game_result];
+
+	// 内圈4个图标(从左到右)
+	optional string innerIconArr = 2;
+
+	// 外圈转到的图标结果 1-8  0表示要转到Exit
+	optional int32 outerIcon = 3;
+
+	// 本次奖励
+	optional int32 winMoney = 4;
+
+	// 结果
+	optional int32 result = 5;
+	
+	// 内圈高亮
+	optional string showIcon = 6;
+}
+
+//请求一次比倍游戏
+message packetc2l_req_double_game
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_double_game];
+
+	//押的大小： 0 小; 1 和; 2 大;
+	optional int32  betpos = 2;
+	optional int32  betgold = 3;
+	optional int32  betid = 4;
+}
+
+//一次比倍游戏结果
+message packetl2c_req_double_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_double_game_result];
+	
+	optional int32 dice1 = 2;
+
+	optional int32 dice2 = 3;
+
+	//本交奖励
+	optional int32 winMoney = 4;
+	optional int32 betpos = 5;
+
+	//结果
+	optional int32 result = 6;
+}
+
+//获取游戏信息
+message packetc2l_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_info];
+}
+
+//房间信息
+message msg_room_info{
+	optional int32 roomid = 1;		
+}
+
+//返回游戏信息
+message packetl2c_get_room_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_room_info_result];
+	repeated msg_room_info rooms = 2;
+}
+
+//桌子进玩家通知
+message packetl2c_enter_player_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_player_info];
+	optional msg_player_info player_info = 2;
+}
+
+//桌子退玩家通知
+message packetl2c_leave_player_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_player_info];
+	optional int32 player_id = 2;
+}
+
+//玩家钱变化（机器人）
+message packetl2c_player_change_money {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_player_change_money];
+	optional int32 player_id = 2;
+	optional int64 cur_money = 3;
+	optional int64 change_money = 4;
+	optional int32 bonus_state = 5;	//小玛丽状态值 0.非小玛丽 1.进小玛丽 2.出小玛丽
+}
+
+//广播玩家属性变更（例如金币变化，包括充值，任务等）
+message packetl2c_bc_change_attr {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_change_attr];
+	optional int32 player_id = 2;
+	optional int32 item_type = 3;		//1.金币 非1.其他（金币以外的类型暂时没有用到）
+	optional int64 change_value = 4;	//变动值
+}
+
+//请求补充试玩金币
+message packetc2l_supply_chip {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_supply_chip];
+}
+
+//请求补充试玩金币返回
+message packetl2c_supply_chip_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_supply_chip_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int64 gold = 6;
+}
+
+//请求桌子内场景信息
+message packetc2l_get_room_scene_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_scene_info];
+}
+
+//获得桌子内场景信息		//进入桌子跟断线重连情况下调用
+message packetl2c_get_room_scene_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_room_scene_info];
+	optional int32 room_id = 2;
+	repeated msg_player_info player_list = 3;
+	optional int64 gold = 4;					//玩家金币（试玩场RoomType为0的房间，代表试玩金币）
+}
+
+//请求结算
+message packetc2l_settlement {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_settlement];
+}
+
+//请求结算返回
+message packetl2c_settlement_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_settlement_result];
+	optional int32 result = 2;//结果
+	optional int64 gold = 3;//当前钱（无论结果是否成功，都返回）
+}
+
+//房间信息
+message room_player{
+	optional int32 player_id = 1;
+	optional int64 gold = 2;
+	optional int64 bet = 3;
+	optional int64 profit_today = 4;
+}
+
+//前端控制 获取房间信息
+message packetl2c_gm_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_gm_get_room_info];
+}
+
+//前端控制 获取房间信息返回
+message packetl2c_gm_get_room_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_gm_get_room_info_result];
+	optional int32 result = 2;//结果
+	optional int32 killcount = 3;	//剩余GM杀分次数（人次）
+	repeated room_player players = 4;//玩家列表
+}
+
+//前端控制 执行杀分
+message packetl2c_gm_do_kill {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_gm_do_kill];
+	optional int32 killcount = 2; //设置杀分次数（人次）
+}
+
+//前端控制 执行杀分返回
+message packetl2c_gm_do_kill_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_gm_do_kill_result];
+	optional int32 result = 2;//结果
+}

@@ -1,0 +1,5 @@
+import "client2logic_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2logic_protocols;

@@ -1,0 +1,450 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+//连接世界
+message packetc2w_player_connect {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_player_connect];	
+	optional string account = 2;
+	optional string token = 3;	
+	optional string sign = 4;
+	optional string platform = 5; 
+	optional string login_platform = 6; 
+
+	optional string machine_code= 7; //硬件码
+	optional string machine_type = 8; //硬件类型
+	optional int32 channelid = 9;//渠道id
+}
+
+//连接返回
+message packetw2c_player_connect_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_player_connect_result];	
+	optional int32 result = 2 [default = 2];
+	optional int32 servertime = 3;//服务器时间
+	optional int32 gaming = 4[default = 0];//是否在游戏中
+	optional string ver = 5;//当前游戏版本
+}
+
+//请求时间同步
+message packet_c2w_timesync {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_timesync];
+}
+
+//
+message packet_w2c_timesync_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_timesync_result];	
+	optional int32 server_time = 2;
+}
+
+
+//请求登陆
+message packetc2w_ask_login {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_asklogin];
+	optional string channelid = 2;	//渠道号	
+}
+
+message msg_game_info{
+	optional int32 gameid = 1;	//游戏id
+	optional int32 gamever = 2;		//游戏版本
+	optional int32 curOnlineNum = 3;		//当前在线人数
+	optional bool  isHot = 4;       //火热标识
+	optional int32 sort = 5;		//排序
+	optional int32 minVer = 6;		//最小版本
+	repeated string h5GameVer = 7;	//游戏版本,H5用
+	optional bool  isPowerful = 8;  //高倍标识
+	optional msg_info_def.msg_roomcard_config roomcard_config  = 9;	//房卡游戏可选配置
+}
+//
+message packetw2c_ask_login_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_asklogin_result];	
+	optional msg_info_def.msg_account_info account_info = 2;	//账号信息
+	repeated msg_game_info game_list = 3;	//游戏列表
+	optional int32 gaming = 4[default = 0];//正在进行的游戏id
+	optional bool bind_phone_demo = 5;     	//是否绑定手机才能试玩
+	optional int64 bin_gold = 6;			//绑定赠送金额（分）
+	optional int64 benefits_limit = 7;		//救济金门槛（分）
+	optional int64 benefits_gold = 8;		//救济金领取金额（分）
+	optional int32 benefits_count = 9;		//救济金最大领取次数
+}
+
+//请求进入游戏
+message packetc2w_enter_game{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_enter_game];	
+	optional int32 gameid = 2;		//游戏id
+	optional int32 gamever = 3;		//游戏版本 （校验玩家客户端）
+	optional int32 roomid = 4 [default = -1];	//进入房间-1表示不自动进入房间
+	optional string unique_id = 5;	//房间唯一标识
+	optional int32 roomcard_number = 6;				//房号(加入房间传值)
+	optional msg_info_def.msg_sel_roomcard_config sel_config = 7;	//已选房卡配置(创建房间时传值)
+
+}
+
+//请求进入游戏返回
+message packetw2c_enter_game_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_enter_game_result];	
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];	
+	optional int32 result_param = 3 [default = 0];
+	optional int32 server_down_start = 4;	//服务器维护开始时间
+	optional int32 server_down_end = 5;		//服务器维护结束时间
+	optional int32 game_id = 6;				//游戏ID
+}
+
+//gm命令
+message packetc2w_gm_command {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_command];	
+	optional string command = 2;
+}
+
+message packetw2c_gm_command_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_command_result];	
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+}
+
+//请求退出小游戏
+message packetc2w_leave_game{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_leave_game];	
+}
+
+//退出小游戏返回
+message packetw2c_leave_game_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_leave_game_result];	
+	optional bool shutdown = 2 [default = false];   //关小游戏
+}
+
+
+//被人踢下线 重复登录
+message packetw2c_player_kick {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_player_kick];
+	optional int32 kick_type = 2 [default = 0];   //踢人类型0重新登录1踢人下线
+}
+
+//请求游戏列表
+message packetc2w_get_gamelist{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_get_gamelist];	
+	optional string channelid = 2;	//渠道号	
+}
+
+//返回游戏列表
+message packetw2c_get_gamelist_result{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_get_gamelist_result];	
+	repeated msg_game_info game_list = 2;	//游戏列表
+}
+
+//绑定奖励
+message packetw2c_bind_reward{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_bind_reward];	
+	optional int32 reward_gold = 2;	//奖励金额
+	optional int64 reward_gold_new = 3 [default = 0];	//新注册账号奖励金额
+}
+
+//消息
+message msg_some_info{  
+    optional string id = 1;              //记录id
+	optional int32 userId = 2;           //玩家id
+	optional int64 timeValue = 3;        //时间	
+	optional string msgInfo = 4;	    //消息
+    optional int32 read = 5;              //是否读了
+	repeated msg_info_def.msg_item items = 6;		//物品列表
+}
+
+//请求消息协议
+message packetc2w_ask_message{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ask_message];	
+}
+
+//请求消息协议返回
+message packetw2c_ask_message_result{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_ask_message_result];	
+	optional bool result = 2 [default = false];	    //返回结果
+	repeated msg_some_info msg_list = 3;	        //消息列表
+}
+
+//删除消息协议
+message packetc2w_delete_message{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_delete_message];	
+    repeated string delete_list = 2;
+}
+
+//删除消息协议返回
+message packetw2c_delete_message_result{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_delete_message_result];	
+	optional bool result = 2 [default = false];	    //返回结果
+}
+
+//标记消息为已读,若有附件,则领取附件
+message packetc2w_read_message 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_read_message];
+	optional string id = 2;
+}
+
+//标记消息已读结果
+message packetw2c_read_message_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_read_message_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional string id = 3;
+}
+
+//图片验证
+message packetw2c_picture_verify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_picture_verify];	
+}
+
+//图片验证结果
+message packetc2w_picture_verify_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_picture_verify_result];	
+	optional string validate = 2;
+}
+
+//举报账号获取
+message packetc2w_ask_report_account {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ask_report_account];	
+}
+//举报账号获取结果
+message packetw2c_ask_report_account_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_ask_report_account_result];	
+	optional string account = 2;
+}
+
+message msg_faq_def
+{
+	optional int32 index = 1;
+	optional string text = 2;
+}
+
+//获取常见问题
+message packetc2w_req_faq
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_req_faq];
+}
+
+//获取常见问题结果
+message packetw2c_req_faq_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_faq_result];
+	repeated msg_faq_def faq_list = 2;
+}
+
+//获取常见问题详细内容
+message packetc2w_req_faq_detail
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_req_faq_detail];
+	optional int32 index = 2;
+}
+
+//获取常见问题详细内容结果
+message packetw2c_req_faq_detail_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_faq_detail_result];
+	optional msg_faq_def faq = 2;
+}
+
+//请求客服联系方式
+message packetc2w_req_cs_contact
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_req_cs_contact];
+}
+
+//请求客服联系方式结果
+message packetw2c_req_cs_contact_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_cs_contact_result];
+	optional string qq = 2;
+}
+
+message msg_suggest
+{
+	optional string text = 1;
+	optional int64 time = 2;
+}
+
+//投诉建议
+message packetc2w_suggestion
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_suggestion];
+	optional string text = 2;
+}
+
+//投诉建议结果
+message packetw2c_suggestion_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_suggestion_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional msg_suggest suggest = 3;
+}
+
+//拉取投诉建议列表
+message packetc2w_req_suggest
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_req_suggest];
+}
+
+//拉取投诉建议列表结果
+message packetw2c_req_suggest_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_suggest_result];
+	repeated msg_suggest list = 2;
+}
+
+//同步金币,大厅断线重连用
+message packetc2w_req_sync_gold
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_req_sync_gold];
+}
+
+//同步金币结果
+message packetw2c_req_sync_gold_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_sync_gold_result];
+	optional int64 gold = 2;
+}
+
+//刷公告
+message packetw2c_notice {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_notice];
+}
+
+message msg_stream_war_info
+{
+	optional int32 rank_idx = 1;
+	optional string name = 2;
+	optional int64 total = 3;
+	
+	optional int32 player_id = 4;
+}
+
+//流水大作战 配置
+message packetw2c_stream_war_config {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_stream_war_config];
+	optional int32 begin_time = 2;			
+	optional int32 end_time = 3;
+	optional int32 terminal_time = 4;
+	optional int32 interval = 5;
+	repeated int32 games = 6;
+}
+
+//流水大作战 前60名
+message packetw2c_stream_war_rank {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_stream_war_rank];	
+	repeated msg_stream_war_info players = 2;
+}
+
+//流水大作战 我的流水
+message packetw2c_stream_war_self {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_stream_war_self];	
+	optional int64 total = 2;			// 我的流水
+	optional int32 index = 3;			// 我的排名
+}
+
+message ac_info{
+	optional int32 Uid = 1;		//实例ID
+	optional int32 Aid = 2;		//实例ID
+	optional int32 Tid = 3;		//实例ID
+	optional string Title = 4;	//活动标题
+	optional int32 indexSort = 5;	//活动排序
+}
+
+//获取vip相关信息
+message packetc2w_req_vip_info
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_req_vip_info];
+	optional int32 skin = 2  [default=0];	//指定皮肤（用以给服务端筛选）
+}
+
+//获取vip相关信息
+message packetw2c_req_vip_info_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_vip_info_result];
+	optional int32 viplv = 2;			// 等级
+	optional int64 vipexp = 3;			// 当前经验
+	repeated ac_info ac_list = 4;		// 活动列表
+}
+
+//房间配置信息
+message msg_room_config
+{
+	optional int32 room_id = 1;				//房间ID
+	optional string unique_id = 2;			//房间唯一标识
+	optional int64 banker_condition = 3;	//上庄条件(金币)
+	optional int64 first_banker_cost = 4;	//抢庄花费(金币)
+	optional int64 add_banker_cost = 5;		//每次抢庄竞价(金币)
+	optional int64 auto_leave_banker = 6;	//自动下庄条件(金币)
+	optional int64 player_max_count = 7;	//房间最大人数限制
+	optional int64 gold_condition = 8;		//进场金币条件
+	optional int64 bet_condition = 9;		//下注限制
+	optional int64 base_gold = 10;			//底分
+	repeated int64 weight_list = 11;		//筹码列表
+	repeated int64 bet_limit = 12;			//实际限红
+	repeated int64 bet_range = 13;			//限红(选房显示)
+	repeated int64 custom_list = 14;		//自定义筹码
+	repeated int64 plat_list = 15;			//人数值参数
+	optional string room_name = 16;			//房间名
+	optional string roomid_txt = 17;		//房间编号
+	optional int32 room_type = 18;			//房间类型
+	optional int32 room_name_type = 19;		//对战类房间类型
+	optional int32 carry_restriction = 20;	//最大携带(德州扑克)
+	optional int32 big_blind = 21;			//大盲(德州扑克)
+	optional int32 small_blind = 22;		//小盲(德州扑克)
+	repeated int32 rate_list = 23;			//倍率
+	optional int32 free_gold = 24;			//试玩金额
+	optional int32 max_ante = 25;			//单注最大金额(炸金花)
+	optional int32 hua_gold = 26;			//花分(上海敲麻)
+}
+
+//请求房间配置
+message packetc2w_req_room_config{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_req_room_config];
+	optional int32 game_id = 2;			//游戏ID
+}
+
+//请求房间配置结果
+message packetw2c_req_room_config_result{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_room_config_result];
+	optional int32 game_id = 2;								//游戏ID
+	optional int32 earnings_rate = 3 [default = 500];		//税率	万分比
+	optional bool award_open = 4 [default = true];			//是否开启彩金
+	optional int32 earnings_to_award = 5 [default = 2000];	//抽水进彩金的比例
+	optional int32 award_rate1 = 6 [default = 50];			//彩金返回比例
+	optional int32 award_rate2 = 7 [default = 100];			//彩金返回比例
+	optional int32 award_rate3 = 8 [default = 150];			//彩金返回比例
+	optional int32 award_rate4 = 9 [default = 900];			//彩金返回比例
+	repeated msg_room_config room_cfg = 10;					//房间配置列表
+}
+
+//检测游戏状态
+message packetc2w_check_game_state{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_check_game_state];
+	optional int32 game_id = 2;
+}
+//检测游戏状态结果
+message packetw2c_check_game_state_result{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_check_game_state_result];	
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];	
+	optional int32 server_down_start = 3;	//服务器维护开始时间
+	optional int32 server_down_end = 4;		//服务器维护结束时间
+	optional bool yyhd_enable = 5;			//运营活动业绩开关
+	optional bool wxdl_enable = 6;			//无限代理业绩开关
+}
+
+//玩家请求加入公会
+message packetc2w_join_guild {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_join_guild];	
+	optional int32 guild_id = 2;						//玩家id
+}
+
+//玩家请求加入公会返回
+message packetw2c_join_guild {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_join_guild];		
+	optional msg_type_def.e_msg_result_def result = 2  [default = e_rmt_unknow];	//返回结果 
+	optional int32 param = 3;		// e_rmt_guild_join_cooling:剩余秒数, e_rmt_success:请求加入公会时间
+}
+
+//玩家公会id返回
+message packetw2c_guild_id {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_guild_id];		
+	optional int32 id = 2;		// 0:退出了公会
+}
+

@@ -1,0 +1,74 @@
+package game_sport188_protocols;
+
+import "game_sport188_def.proto"; 
+import "msg_type_def.proto"; 
+
+//房间信息    
+message msg_room_info{
+	optional int32 roomid = 1;		
+}
+
+//获得房间信息
+message packetc2l_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_info];
+}
+
+//房间信息返回
+message packetl2c_get_room_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_room_info_result];
+	repeated msg_room_info room_list = 2;	
+}
+
+//进入房间
+message packetc2l_enter_room {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_enter_room];
+	optional int32 roomid = 2;
+	optional int32 channel = 3;			//0:未知 10:webSite,11:mobile website  20:mobile app - android  21:mobile app -ios
+	
+}
+
+//进入桌子返回
+message packetl2c_enter_room_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_room_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];	
+}
+
+//请求桌子内场景信息
+message packetc2l_get_room_scene_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_scene_info];
+
+}
+
+//获得桌子内场景信息		//进入桌子跟断线重连情况下调用
+message packetl2c_get_room_scene_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_room_scene_info];
+	optional string forward_url = 2;
+	optional int64 player_gold = 3;
+	optional int64 balance = 4;		//平台余额值
+}
+
+//离开桌子
+message packetc2l_leave_room {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_leave_room];
+}
+
+//离开桌子返回
+message packetl2c_leave_room_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_room_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_success];
+	optional int64 player_gold = 3;
+	optional int64 balance = 4;				//平台余额值
+}
+
+//检测游戏状态		//重连之后判断是否在桌子中
+message packetc2l_check_state {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_check_state];
+}
+
+//检测状态
+message packetl2c_check_state_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_check_state_result];
+	optional bool is_intable = 2 [default = false];//是否在桌子中
+	optional bool is_ingame = 3 [default = false]; //是否在游戏中
+	optional int64 balance = 4;	//游戏内的余额
+}

@@ -1,0 +1,45 @@
+package game_shi_san_shui_protocols; 
+
+enum e_server_msg_type {
+
+	//客户端到服务端---------------------------------------------------------------------------
+
+    e_mst_start_c2l = 10000;
+
+	e_mst_c2l_check_state = 10001;
+	e_mst_c2l_get_scene_info = 10002;
+	e_mst_c2l_user_trustee = 10003;
+	e_mst_c2l_ready = 10011;
+	e_mst_c2l_operate_card = 10014;
+	e_mst_c2l_gm_list = 10015;
+	e_mst_c2l_gm_kill = 10016;
+
+	// 服务端到客户端---------------------------------------------------------------------------
+
+	e_mst_start_l2c = 15000;
+	
+	e_mst_l2c_check_state_result = 15001;
+	e_mst_l2c_scene_info_result = 15002;
+	e_mst_l2c_user_trustee = 15008;
+	e_mst_l2c_game_start = 15013;
+	e_mst_l2c_send_playerinfo = 15014;
+	e_mst_l2c_operate_notify = 15015;
+	e_mst_l2c_game_end = 15016;
+	e_mst_l2c_send_all_playerinfos = 15017;
+	e_mst_l2c_game_notify = 15018;
+	e_mst_l2c_gm_list = 15019;
+
+	e_mst_clend_index = 20000;
+}
+
+enum e_notify_type {
+	//e_nt_table_dismiss = 1;
+	e_nt_gold_not_enough = 2;		// 钱不够了
+	//e_nt_shutdown = 3;
+	//e_nt_listen = 4;
+	e_nt_assembling = 5;			// 正在组桌中。。。
+	e_nt_player_leave = 6;			// 有人离开了
+	e_nt_kill_ok = 7;
+}
+
+

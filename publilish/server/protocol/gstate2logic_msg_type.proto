@@ -1,0 +1,66 @@
+package gstate2logic_protocols;
+
+enum e_server_msg_type {
+    e_mst_gstate2logic_start_index		= 31800;		
+	e_mst_l2gs_cows_history_result		= 31801;			//返回所有cows游戏牌路记录		
+	e_mst_l2gs_shcd_history_result		= 31802;			//黑红梅方牌路和状�
+	e_mst_l2gs_baccarat_history_result	= 31803;
+	e_mst_l2gs_goldshark_history_result	= 31804;
+	e_mst_l2gs_lhd_history_result		= 31805;
+	e_mst_l2gs_benzbmw_history_result	= 31806;
+	e_mst_l2gs_multiredblack_history_result	= 31807;
+	e_mst_l2gs_ebg_history_result		= 31808;
+	e_mst_l2gs_dice_history_result		= 31809;
+	e_mst_l2gs_qznn_history_result		= 31810;
+	e_mst_l2gs_carsmagnate_history_result	= 31811;
+	e_mst_l2gs_multitexas_history_result	= 31812;
+	e_mst_l2gs_fruits_history_result	= 31813;
+	e_mst_l2gs_forest_history_result	= 31814;
+	e_mst_l2gs_fourcolorball_history_result	= 31815;
+	e_mst_l2gs_happySupremacy_history_result= 31816;
+	e_mst_l2gs_tbnn_history_result		= 31817;
+	e_mst_l2gs_ttz_history_result		= 31818;
+	e_mst_l2gs_roulette_history_result  = 31819;
+	e_mst_l2gs_rouletteak_history_result  = 31820;
+	e_mst_l2gs_roulettelucky_history_result  = 31821;
+	e_mst_l2gs_famousball_history_result  = 31822;
+	e_mst_l2gs_lol_history_result  = 31823;
+	e_mst_l2gs_sszz_history_result  = 31824;
+	e_mst_l2gs_fightcow_history_result	= 31825;
+	e_mst_l2gs_texascowboy_history_result	= 31826;
+	e_mst_l2gs_brsg_history_result 		= 31827;
+	e_mst_l2gs_wtt_history_result 		= 31828;
+	e_mst_l2gs_dsg_history_result 		= 31829;
+	e_mst_l2gs_paigow_history_result 		= 31830;
+	e_mst_l2gs_QzZhaJinHua_history_result		= 31831;
+	e_mst_l2gs_lhch_history_result 		= 31832;
+	e_mst_l2gs_fxttz_history_result 		= 31833;
+	e_mst_l2gs_dstpj_history_result 		= 31834;
+	e_mst_l2gs_ambjl_history_result 		= 31835;
+	e_mst_l2gs_yxx_history_result 		= 31836;
+	e_mst_l2gs_texas_history_result 		= 31837;
+	e_mst_l2gs_shuihz_history_result 		= 31838;
+	e_mst_l2gs_slotdfdc_history_result 		= 31839;
+	e_mst_l2gs_slotrywz_history_result 		= 31840;
+	e_mst_l2gs_slothch_history_result 		= 31841;
+	e_mst_l2gs_slotjxlw_history_result 		= 31842;
+	e_mst_l2gs_fruitmachine_history_result 	= 31843;
+	e_mst_l2gs_oneyuanwin_history_result 		= 31844;
+	e_mst_l2gs_luckyseven_history_result 		= 31845;
+	e_mst_l2gs_redsweep_history_result 		= 31846;
+	e_mst_l2gs_wzssc_history_result 		= 31847;
+	e_mst_l2gs_qxzl_history_result 		= 31848;	
+	e_mst_l2gs_dotassc_history_result = 31849;
+	e_mst_l2gs_slotcsd_history_result 		= 31850;
+	e_mst_l2gs_jlbpoker_history_result 		= 31851;
+	e_mst_l2gs_redsweeppro_history_result 	= 31852;
+	e_mst_l2gs_bxqjt_history_result = 31853;
+	e_mst_l2gs_sgssc_history_result = 31854;
+	e_mst_l2gs_slm_history_result 		= 31855;	
+	e_mst_l2gs_shssc_history_result = 31856;
+	
+	e_mst_gs2l_get_all_game_history		= 31860;
+	e_mst_l2gs_room_close = 31861;
+		
+	e_mst_gstate2logic_wend_index = 31900;
+  }  	

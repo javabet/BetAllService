@@ -1,0 +1,23 @@
+package client2logic_protocols;
+
+enum e_server_msg_type {
+	//客户端到服务端
+    e_mst_start_c2l = 10000;
+
+
+	// 服务端到客户端---------------------------------------------------------------------------
+
+	e_mst_start_l2c = 15000;
+
+
+
+	e_mst_l2c_gaming_change_gold = 19999;
+	e_mst_clend_index = 20000;
+}
+
+//游戏中金币变动
+message packetl2c_gaming_change_gold {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_gaming_change_gold];
+	optional int32 player_id = 2;			//玩家ID
+	optional int64 current_gold = 3;		//当前金币	
+}

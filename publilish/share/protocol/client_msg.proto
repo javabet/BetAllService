@@ -1,0 +1,81 @@
+package client_protocols;
+
+enum client_msg_type {
+	c2s_heartbeat = 301;	//心跳协议
+	c2s_net_param = 302;//通讯密码设定
+	
+	s2c_send_msglist = 401;//发送协议列表	
+	s2c_net_param = 402;//通讯密码设定
+	s2c_shutdown = 403;//关服
+	s2c_heartbeat = 404;
+	t2t_start = 444;	
+	
+	c2s_connect = 5001;//玩家连接	
+	s2c_connect_result = 7501;//玩家连接返回
+  }
+  
+//心跳包
+message msg_c2s_heartbeat {
+	optional client_msg_type packet_id = 1 [default = c2s_heartbeat];
+}
+
+message msg_s2c_heartbeat {
+	optional client_msg_type packet_id = 1 [default = s2c_heartbeat];
+}
+
+message msg_list {
+	optional int32 msgid = 1;
+	optional bytes msginfo = 2;
+}
+
+//协议列表
+message msg_s2c_send_msglist {
+	optional client_msg_type packet_id = 1 [default = s2c_send_msglist];
+	repeated msg_list msgpaks = 3;
+}
+
+message msg_s2c_net_param {
+	optional client_msg_type packet_id = 1 [default = s2c_net_param];
+	optional int32 param_type = 2; //
+	optional bytes param1 = 3; // e
+	optional bytes param2 = 4; // xor_seed
+	optional bool shutdown = 5; // 关服标记
+}
+
+message msg_c2s_net_param {
+	optional client_msg_type packet_id = 1 [default = c2s_net_param];
+	optional int32 param_type = 2; //
+	optional bytes param1 = 3; // e
+	optional bytes param2 = 4; // xor_seed
+}
+
+message msg_s2c_shutdown {
+	optional client_msg_type packet_id = 1 [default = s2c_shutdown];
+}
+
+message msg_t2t_start {
+	optional client_msg_type packet_id = 1 [default = t2t_start];
+}
+
+//连接世界
+message msg_c2s_connect {
+	optional client_msg_type packet_id = 1 [default = c2s_connect];	
+	optional string account = 2;
+	optional string token = 3;	
+	optional string sign = 4;
+	optional string platform = 5; 
+	optional string login_platform = 6; 
+
+	optional string machine_code= 7; //硬件码
+	optional string machine_type = 8; //硬件类型
+	optional int32 channelid = 9;//渠道id
+}
+
+//连接返回
+message msg_s2c_connect_result {
+	optional client_msg_type packet_id = 1 [default = s2c_connect_result];	
+	optional int32 result = 2 [default = 2];
+	optional int32 servertime = 3;//服务器时间
+	optional int32 gaming = 4[default = 0];//是否在游戏中
+	optional string ver = 5;//当前游戏版本
+}

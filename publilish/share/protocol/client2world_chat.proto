@@ -1,0 +1,33 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+// 通告消息
+message packetw2c_notify
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_notify]; 
+
+	optional string content = 2;
+
+	optional int32 notifyType = 3;
+
+	// 通告者昵称
+	optional string talkerNickName = 4;
+
+	// 玩家ID，0是系统发送的
+	optional int32 playerId = 5;
+
+	// 说话者的VIP等级
+	optional int32 talkerVIPLevel = 6;
+
+	// 若由玩家发出，表示该玩家是否还有月卡。系统的忽略此字段
+	optional bool hasMonthCard = 7;
+
+	// 重复次数，本条消息从左到右共滚动次数
+	optional int32 repCount = 8[default = 1];
+	// 重复间隔，条条消息2次滚动之间间隔
+	optional int32 interval = 9[default = 0];
+	optional int32 moneyNum = 10;
+}

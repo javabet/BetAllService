@@ -1,0 +1,377 @@
+package game_slotjxlw_protocols;
+
+import "game_slotjxlw_def.proto"; 
+import "msg_type_def.proto"; 
+
+// 是否在游戏
+message packetc2l_check_state
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_check_state];
+}
+
+// 是否在游戏 - 回执
+message packetc2l_check_state_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_check_state_result];
+
+	//大于0表示正在游戏中   0:不在游戏
+	optional int32 room_id = 2 ; 
+	//玩家等级
+	//optional int32 player_lv = 3;
+	//玩家经验
+	//optional int32 player_exp = 4;
+}
+
+//进入游戏 
+message packetc2l_enter_game   
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_enter_game];
+	optional int32 room_id = 2;
+}
+
+//进入游戏 - 回执
+message packetc2l_enter_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_game_result];
+	optional int32 result = 2;
+	optional int32 room_id = 3;
+	repeated msg_player_info player_list = 4;
+	optional int32 free_count = 5;				//自己的剩余免费游戏次数
+	repeated msg_lottery_info infos = 6; 		//彩池信息
+	optional string last_name = 7;				//最新幸运玩家名字（历史100记录的最新一条的玩家名）
+	optional int64 gold = 8;					//玩家金币
+}
+
+//离开游戏 
+message packetc2l_leave_game
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_leave_game];
+	optional int32 room_id = 2;
+}
+
+//离开游戏 - 回执
+message packetc2l_leave_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_game_result];
+	optional int32 result = 2;
+	optional int64 gold = 3;					//玩家金币
+}
+
+//开始游戏 
+message packetc2l_star_game
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_star_game];
+	
+	// 倍率索引，从0开始
+	optional int32 rateIndex = 2;
+}
+
+// 一条线的信息
+message LineInfo
+{
+	// 线ID 1-9
+	optional int32 lineId = 1;
+	
+	// 左右灯标记  0 左灯亮 1 右灯亮 2 左右灯全亮
+	optional int32 lightFlag = 2;
+
+	// 左边是几连 3是3连 4是4连 5是5连
+	optional int32 leftLinkCount = 3;
+	
+	// 右边是几连 3是3连 4是4连 5是5连
+	optional int32 rightLinkCount = 4;
+	
+	// 左边Icon 非0表示图标ID，否则表示没有
+	optional int32 leftIcon = 5;
+	
+	// 左边Icon 非0表示图标ID，否则表示没有
+	optional int32 rightIcon = 6;
+}
+
+// 结算图标信息
+message IconInfo
+{
+	// 图标ID
+	optional int32 iconId = 1;
+	
+	// 连线长度
+	optional int32 len = 2;
+	
+	// 对应倍率
+	optional int32 rate = 3;
+	
+	// 图标位置（包括万能图标）
+	repeated int32 iconpos = 4;
+	
+	// 线ID
+	optional int32 lindid = 5;
+}
+
+// 免费游戏信息
+message FreeInfo
+{
+	// 图标ID数组
+	optional string imageArr = 1;
+
+	// 赢的钱数
+	optional int32 winMoney = 2;
+	
+	// 结算图标倍率信息
+	repeated IconInfo icons = 3;
+	
+	// 前两列是否出免费
+	optional bool freeCol = 4;
+	
+	// 本次新增免费次数
+	optional int32 freeAdd = 5;
+	
+	// 免费游戏累积中奖值
+	optional int64 freeEndGold = 6;
+}
+
+//开始游戏 - 回执
+message packetc2l_star_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_star_game_result];
+
+	// 结果
+	optional int32 result = 2;
+	
+	// 货币类型
+	optional int32 moneyType = 3;
+
+	// 图标ID数组
+	optional string imageArr = 4;
+	
+	//连线信息
+	repeated LineInfo infoList = 5;
+
+	// 赢的钱数
+	optional int32 winMoney = 6;
+	
+	// 开始时候扣除的钱数
+	optional int32 deductMoney = 7;
+
+	// 当前的总钱数(服务器同步到客户端)
+	optional int32 curMoney = 8;
+	
+	// 结算图标倍率信息
+	repeated IconInfo icons = 9;
+	
+	// 前两列是否出免费
+	optional bool freeCol = 10;
+	
+	//本次新增免费次数
+	optional int32 freeAdd = 11;
+	
+	// 免费游戏累积中奖值
+	optional int64 freeEndGold = 12;
+	
+	// 免费游戏信息集合
+	repeated FreeInfo freeInfos = 13;
+	
+	// 彩金游戏赢钱
+	optional int64 lotteryReward = 14;
+	
+	// 更新彩池信息（有福的情况）
+	repeated msg_lottery_info infos = 15;
+}
+
+//彩池信息
+message msg_lottery_info{
+	optional int32 index = 1;	
+	optional int32 gold = 2;	
+}
+
+//彩池更新
+message packetl2c_lottery_update
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_lottery_update];
+	repeated msg_lottery_info infos = 2; 		//彩池信息
+}
+
+//获取游戏信息
+message packetc2l_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_info];
+}
+
+//房间信息
+message msg_room_info{
+	optional int32 roomid = 1;		
+}
+
+//返回游戏信息
+message packetl2c_get_room_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_room_info_result];
+	repeated msg_room_info rooms = 2;
+}
+
+//桌子进玩家通知
+message packetl2c_enter_player_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_player_info];
+	optional msg_player_info player_info = 2;
+}
+
+//桌子退玩家通知
+message packetl2c_leave_player_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_player_info];
+	optional int32 player_id = 2;
+}
+
+//玩家钱变化（机器人）
+message packetl2c_player_change_money {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_player_change_money];
+	optional int32 player_id = 2;
+	optional int64 cur_money = 3;
+	optional int64 change_money = 4;
+	optional bool b_free = 5;
+	optional bool b_lottery = 6;
+}
+
+//广播玩家属性变更（例如金币变化，包括充值，任务等）
+message packetl2c_bc_change_attr {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_bc_change_attr];
+	optional int32 player_id = 2;
+	optional int32 item_type = 3;		//1.金币 非1.其他（金币以外的类型暂时没有用到）
+	optional int64 change_value = 4;	//变动值
+}
+
+//请求补充试玩金币
+message packetc2l_supply_chip {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_supply_chip];
+}
+
+//请求补充试玩金币返回
+message packetl2c_supply_chip_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_supply_chip_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int64 gold = 3;
+}
+
+//请求桌子内场景信息
+message packetc2l_get_room_scene_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_scene_info];
+}
+
+//获得桌子内场景信息		//进入桌子跟断线重连情况下调用
+message packetl2c_get_room_scene_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_room_scene_info];
+	optional int32 room_id = 2;
+	repeated msg_player_info player_list = 3;
+	optional int32 free_count = 4;				//自己的剩余免费游戏次数
+	repeated msg_lottery_info infos = 5; 		//彩池信息
+	optional string last_name = 6;				//最新幸运玩家名字（历史100记录的最新一条的玩家名）
+	optional int64 gold = 7;					//玩家金币
+	optional int64 freeEndGold = 8;				// 免费游戏累积中奖值
+}
+
+//场景信息同步，之后需要同步的消息逐步添加
+message packetl2c_scene_sync {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_scene_sync];
+	optional string last_name = 2;				//最新幸运玩家名字（历史100记录的最新一条的玩家名）
+}
+
+//请求结算
+message packetc2l_settlement {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_settlement];
+}
+
+//请求结算返回
+message packetl2c_settlement_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_settlement_result];
+	optional int32 result = 2;//结果
+	optional int64 gold = 3;//当前钱（无论结果是否成功，都返回）
+}
+
+//录像
+message replay_info{
+	optional string rid = 1; 			// 录像id
+	optional int32 pid = 2; 			// 玩家id
+	optional string nick = 3;			// 玩家昵称
+	optional int32 frame = 4; 			// 玩家头像
+	optional int64 winMoney = 5;		// 赢的钱数（滚轮赢钱）
+	optional int64 deductMoney = 6;		// 开始时候扣除的钱数
+	optional int64 curMoney = 7; 		// 当前的总钱数(滚轮之后)
+	optional int64 win = 8; 			// 总赢钱数
+	optional int64 rate = 9; 			// 总倍率
+	optional string imageArr = 10; 		// 面板字串
+	repeated IconInfo icons = 11;		// 结算图标倍率信息
+	optional bool freeCol = 12;			// 前两列是否出免费
+	optional int32 freeCount = 13;		// 剩余免费游戏次数
+	optional int32 freeAdd = 14;		// 本次新增免费次数
+	optional int64 freeEndGold = 15;	// 免费游戏累积中奖值
+	optional int64 lotteryReward = 16 [default = 0]; 	//彩金中奖金额	
+	optional int32 playerCount = 17; 	// 播放次数
+	optional int32 ts = 18; 			// 生成时间戳
+	repeated FreeInfo freeInfos = 19;	// 免费游戏信息集合
+	optional int32 viplv = 20; 			// 玩家vip等级
+}
+
+//
+//message lottery_op{
+//	optional int32 pos = 1;						//翻开位置
+//	optional int32 icon = 2;					//翻开图标
+//}
+
+//获取录像列表
+message packetl2c_replay_list {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_replay_list];
+	optional int32 rtype = 2; 					//录像类型 1.rank 2.最近
+}
+
+message packetl2c_replay_list_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_replay_list_result];
+	optional int32 rtype = 2; 					//录像类型 1.rank 2.最近
+	repeated replay_info replay_list = 3;		//列表中只返回列表中需要展示的信息
+}
+
+//获取录像详情（播放）
+message packetl2c_replay_detail {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_replay_detail];
+	optional int32 rtype = 2; 	//录像类型 1.rank 2.最近
+	optional string rid = 3; 	//录像id
+}
+
+//返回结果保持正常游戏返回结构
+message packetl2c_replay_detail_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_replay_detail_result];
+	optional int32 result = 2;			// 结果
+	optional int32 rtype = 3; 			// 录像类型 1.rank 2.最近
+	optional replay_info replay = 4; 	// 录像详情
+}
+
+//房间信息
+message room_player{
+	optional int32 player_id = 1;
+	optional int64 gold = 2;
+	optional int64 bet = 3;
+	optional int64 profit_today = 4;
+}
+
+//前端控制 获取房间信息
+message packetl2c_gm_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_gm_get_room_info];
+}
+
+//前端控制 获取房间信息返回
+message packetl2c_gm_get_room_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_gm_get_room_info_result];
+	optional int32 result = 2;//结果
+	optional int32 killcount = 3;	//剩余GM杀分次数（人次）
+	repeated room_player players = 4;//玩家列表
+}
+
+//前端控制 执行杀分
+message packetl2c_gm_do_kill {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_gm_do_kill];
+	optional int32 killcount = 2; 	//设置杀分次数（人次）
+	
+	optional int32 pid = 3; 		//指定玩家id（免费次数）
+	optional int32 free = 4; 		//指定免费次数 1 2（首次免费）
+}
+
+//前端控制 执行杀分返回
+message packetl2c_gm_do_kill_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_gm_do_kill_result];
+	optional int32 result = 2;//结果
+}

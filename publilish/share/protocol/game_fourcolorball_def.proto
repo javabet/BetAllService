@@ -1,0 +1,59 @@
+package game_fourcolorball_protocols; 
+
+enum e_server_msg_type {
+	//客户端到服务端
+    e_mst_start_c2l = 10000;
+	e_mst_c2l_get_room_info = 10001;//得到房间
+	e_mst_c2l_enter_room = 10002;//进入房间
+	e_mst_c2l_leave_room = 10003;//离开房间
+	e_mst_c2l_add_bet = 10004;//下注
+	e_mst_c2l_repeat_bet = 10005;//重复押注
+	e_mst_c2l_clear_bet = 10006;//押注清零
+	e_mst_c2l_get_room_scene_info = 10007;//获得桌子内信息
+	e_mst_c2l_check_state = 10008;//检测游戏状态
+	e_mst_c2l_gm = 10009;//GM
+	e_mst_c2l_ask_for_banker = 10010;//上庄
+	e_mst_c2l_leave_banker = 10011;//下庄
+	e_mst_c2l_ask_first_for_banker = 10012;//抢庄
+	e_mst_c2l_ask_player_list = 10013;//请求玩家列表
+	e_mst_c2l_ask_banker_list = 10014;//请求上庄列表
+	e_mst_c2l_ask_history_list = 10015;//请求牌路
+
+	e_mst_c2l_debug = 10100;				//控制
+
+	// 服务端到客户端---------------------------------------------------------------------------
+
+	e_mst_start_l2c = 15000;
+	e_mst_l2c_get_room_info_result = 15001;//得到房间返回
+	e_mst_l2c_enter_room_result = 15002;//进入房间
+	e_mst_l2c_leave_room_result = 15003;//离开房间
+	e_mst_l2c_add_bet = 15004;//下注
+	e_mst_l2c_repeat_bet = 15005;//重复押注
+	e_mst_l2c_clear_bet = 15006;//押注清零
+	e_mst_l2c_bc_begin_bet = 15007;//通知开始下注
+	e_mst_l2c_bc_begin_award = 15008;//通知开奖
+	e_mst_l2c_bc_total_bet_info = 15009;//通知所以玩家下注信息
+	e_mst_l2c_get_room_scene_info = 15010;//获得桌子内信息
+	e_mst_l2c_check_state_result = 15013;//检测游戏状态
+	e_mst_l2c_bc_accept_gift = 15015;//广播桌子内玩家收到礼物
+	e_mst_l2c_ask_for_banker = 15016;//上庄
+	e_mst_l2c_leave_banker = 15017;//下庄
+	e_mst_l2c_ask_first_for_banker = 15018;//抢庄
+	e_mst_l2c_bc_change_banker = 15019;//通知更换庄家
+	e_mst_l2c_ask_player_list = 15020;//请求玩家列表返回
+	e_mst_l2c_ask_banker_list = 15021;//请求上庄列表返回
+	e_mst_l2c_ask_history_list = 15022;//请求牌路返回
+	e_mst_l2c_bc_rob_banker_info = 15023;//通知抢庄信息
+
+	e_mst_l2c_notify_sceneinfo = 15101;			//通知场景信息
+	e_mst_l2c_debug_result = 15102;			//控制返回
+
+	e_mst_clend_index = 20000;
+}
+
+enum e_game_state {
+	e_state_game_begin = 0;	//游戏开始
+	e_state_game_bet = 1;	//押注期间
+	e_state_game_award = 2;	//开奖期间
+}
+

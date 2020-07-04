@@ -1,0 +1,113 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+// 修改昵称
+message packetc2w_update_nickname 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_update_nickname];
+
+	optional string nickName = 2;
+}
+
+// 修改昵称结果
+message packetw2c_update_nickname_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_update_nickname_result];	
+		
+	optional string nickName = 2;
+
+	optional int32 result = 3;
+}
+
+// 修改性别
+message packetc2w_update_sex
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_update_sex];
+
+	optional int32 sex = 2;	//1男 2女
+}
+
+// 修改性别结果
+message packetw2c_update_sex_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_update_sex_result];	
+	
+	optional int32 sex = 2;		//1男 2女
+
+	optional int32 result = 3;
+}
+
+// 改变相框
+message packetc2w_change_photo_frame
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_change_photo_frame];
+
+	// 相框ID
+	optional int32 photoFrameId = 2;
+}
+
+// 改变相框结果
+message packetw2c_change_photo_frame_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_change_photo_frame_result];
+
+	// 相框ID
+	optional int32 photoFrameId = 2;
+
+	// 结果
+	optional int32 result = 3;
+}
+
+// 请求保险箱日志
+message packetc2w_req_safebox_log
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_req_safebox_log];
+
+	// 上次请求时间，初始为0
+	optional int32 lastTime = 2;
+}
+
+message SafeBoxLogInfo
+{
+	// 时间
+	optional int32 time = 1;
+
+	// 修改金额
+	optional int64 gold = 2;
+	
+	// 保险箱金额
+	optional int64 player_gold = 3;
+}
+
+// 请求保险箱日志结果
+message packetw2c_req_safebox_log_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_safebox_log_result];
+
+	// 日志列表
+	repeated SafeBoxLogInfo logList = 2;	
+
+	// 新的时间
+	optional int32 lastTime = 3;
+}
+
+// 修改头像
+message packetc2w_update_playerhead
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_update_playerhead];
+
+	optional string headstr = 2;
+}
+
+// 修改头像结果
+message packetw2c_update_playerhead_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_update_playerhead_result];
+
+	optional string headstr = 2;
+
+	optional int32 result = 3;
+}

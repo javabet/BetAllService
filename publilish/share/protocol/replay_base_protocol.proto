@@ -1,0 +1,30 @@
+
+package replay_base_protocols;
+
+//玩家数据
+message replay_player {
+	optional int32 player_id = 1;			//玩家ID
+	optional string player_name = 2;		//玩家昵称
+	optional int32 head_frame = 3;			//头像框
+	optional string head_custom = 4;		//玩家头像
+	optional int32 player_sex = 5;			//玩家性别	
+	optional int32 vip_level = 6;			//Vip等级
+	optional int32 player_win = 7;			//输赢
+}
+
+//回合数据
+message replay_round {
+	repeated int32 player_win = 1;			//输赢
+	optional string log_id = 2;				//回放id
+}
+
+//回合记录
+message replay_record {
+	optional int32 game_id = 1;				//游戏id
+	optional int32 table_id = 2;			//房间id
+	optional int32 rounds_cnt = 3;			//回合数
+	optional int32 begin_time = 4;			//开始时间
+	repeated replay_player players = 5;		//玩家数据
+	repeated replay_round rounds = 6;		//回合数据
+}
+

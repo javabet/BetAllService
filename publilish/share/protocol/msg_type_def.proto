@@ -1,0 +1,255 @@
+package msg_type_def;
+
+//所有返回错误信息
+enum e_msg_result_def 
+{
+	e_rmt_unknow = 0; //未知错误
+	e_rmt_success = 1; //成功
+	e_rmt_fail = 2; //失败
+
+	e_rmt_change_gate = 3;//改变网关
+	e_rmt_connect_full = 4;//连接已满
+
+	e_rmt_player_max = 5;//玩家已满
+	
+	e_rmt_has_dial_lottery = 6;   // 今日转盘抽过奖励
+
+	e_rmt_error_nickname = 7;     // 昵称非法
+	   
+	e_rmt_same_nickname = 8;      // 昵称相同
+
+	e_rmt_length_beyond_range = 9;      // 长度超出范围
+
+	e_rmt_gold_not_enough = 10;         // 金币不足
+	
+	e_rmt_ticket_not_enough = 11;       // 礼券不足
+
+	e_rmt_room_full = 12;//房间已满	
+	e_rmt_vip_under = 13;//vip等级过低
+	e_rmt_level_under = 14;//游戏等级过低
+	e_rmt_friend_full = 15;				// 好友满
+	e_rmt_exists_friend = 16;			// 好友已存在，重复添加
+	e_rmt_player_not_exists = 17;		// 玩家不存在
+	e_rmt_runout_count = 18;			// 次数用完
+	e_rmt_time_not_arrive = 19;			// 时间未到
+
+	e_rmt_no_can_bet = 20;				//押注时间已过
+	e_rmt_bet_index_error = 21;			//押注序号不对
+	e_rmt_outof_bet_limit = 22;			//超过房间押注上限
+	e_rmt_no_find_table = 23;			//没有找到桌子
+
+	e_rmt_pwd_not_same = 24;			// 两次密码不一致
+	e_rmt_format_invalid = 25;			// 格式非法
+	e_rmt_need_set_pwd = 26;			// 需要设置密码
+	e_rmt_pwd_error = 27;				// 密码错误
+
+	e_rmt_not_find_item = 28;			// 没有找到道具
+
+	e_rmt_friend_offline = 29;			// 好友离线
+	e_rmt_not_in_game = 30;				// 不在游戏内
+	e_rmt_cant_buyitem = 31;			//无法购买
+	e_rmt_cannot_add_self = 32;			//无法加自己为好友
+
+	e_rmt_chat_too_often = 33;			//发言频繁
+	e_rmt_exp_not_enough = 34;			//经验不够
+	e_rmt_level_max = 35;				//已经达到最大等级
+	e_rmt_cannot_collect = 36;			//玩家不满足领取救济金的要求
+
+	e_rmt_has_bind_phone = 37;			//已绑定手机
+	e_rmt_code_error = 38;				//验证码出错
+
+	e_rmt_beyond_limit = 39;			//超出限制
+	e_rmt_not_bind_phone = 40;			//没有绑定手机
+
+	e_rmt_cannot_sendto_self = 41;		//不能给自己赠送
+
+	e_rmt_room_notopen = 42;           //房间未开放
+
+	e_rmt_bet_full = 43;               //押注已满
+
+	e_rmt_game_begun = 44;           //游戏已经开始
+
+	e_rmt_banker_not_bet = 45;           //庄家不能押注
+
+	e_rmt_banker_is_full = 46;			//上庄列表已满
+
+	e_rmt_can_not_leave = 47;			//上庄期间不能离开
+
+	e_rmt_has_receive_reward = 48;      // 已领取
+
+	e_rmt_not_recharge = 49;			// 还没有充值
+
+	e_rmt_custom_head_freezing = 50;	// 头像冻结中，此时时间内，不能再次上传头像
+
+	e_rmt_now_banker_first = 51;		//已经是上庄列表的第一个了
+
+	e_rmt_has_in_banker_list = 52;		//已经在上庄列表中
+	
+	e_rmt_now_is_banker = 53;			//现在是庄家
+	e_rmt_is_not_banker = 54;			//不是庄家
+	e_rmt_haven_apply_leave = 55;		//已经申请离开
+	e_rmt_banker_not_enough = 56;		//上庄次数不足
+	e_rmt_banker_betgold_is_full = 57;	//下注金额已满
+	e_rmt_other_betgold_is_full = 58;	//自己下注金额已满
+	e_rmt_error_game_state = 59;		//错误游戏状态
+
+	e_rmt_box_not_exist = 60;		   // 该宝箱不存在
+	e_rmt_box_has_opened = 61;		   // 宝箱已经抽过了，处于打开状态
+	e_rmt_thank_you_not_enough = 62;   // 谢谢参与个数不足
+
+	e_rmt_now_is_you = 63;			   // 已经是你自己了
+	e_rmt_banker_protect = 64;		   // 上庄保护期
+	e_rmt_snatch_is_you = 65;			// 当前最高价已经是你
+	e_rmt_snatch_is_low = 66;			// 你的竞价过低
+
+	e_rmt_last_speaker_not_finish = 67;			// 上次的连续小喇叭还没有发完
+	e_rmt_speaker_beyond_max_count = 68;		// 连续小喇叭超出最大次数
+
+	e_rmt_roping_over = 69;					//游戏结束
+
+	e_rmt_activity_outofdate = 70;		    // 活动过期
+
+	e_rmt_activity_not_satisfy_cond = 71;		    // 不满足领取条件
+
+	e_rmt_time_over = 72;					//时间到游戏结束
+	e_rmt_not_follow = 73;					//五龙游戏不能跟随  
+	e_rmt_not_follow_roping = 74;			//套牛游戏不能跟随
+
+	e_rmt_chip_not_enough = 75;				//碎片不足
+
+	e_rmt_month_card_out_date = 76;		    // 月卡到期
+
+	e_rmt_not_follow_prize_claw = 77;		//抓娃娃游戏不能跟随
+
+	e_rmt_no_empty_seat = 78;				// 没有空座位 座位被占
+
+	e_rmt_player_prohibit = 79;			//账户封停
+
+	e_rmt_can_not_change_table_setting	= 80; //当前不能改变桌子规则
+
+	e_rmt_player_have_no_enough_gold = 81;//玩家金币不够进入条件
+	e_rmt_player_absent_room = 82;//玩家不在房间
+	e_rmt_player_absent_desk = 83;//玩家不在桌子中
+    
+    e_rmt_can_not_leave_bet = 84;//玩家下注了不能离开   
+
+    e_rmt_can_not_bet_hasbet = 85;//玩家下注了不能续压
+
+    e_rmt_cdk_used = 86;            //cdk已经使用
+    e_rmt_cdk_none = 87;             //cdk不存在
+    e_rmt_cdk_notenough = 88;             //cdk库存不足
+    e_rmt_cdk_past = 89;             //cdk过期
+	e_rmt_binded_ac = 90;
+	e_rmt_not_bind_ac = 91;
+	e_rmt_betgold_not_enough = 92;         // 下注金币限制
+	e_rmt_shutdown = 93;         	//关服
+	e_rmt_has_inviter = 94;			//已绑定推荐人
+	e_rmt_not_has_inviter = 95;		//没有被绑定为推荐人
+	e_rmt_binded_bank_card = 96;	//银行卡已被绑定,或玩家已绑定银行卡
+	e_rmt_not_bind_bank_card = 97;	//没有绑定银行卡
+	e_rmt_inviter_error = 98;		//无法将下家绑定为自己的邀请人
+	e_rmt_suggest_limit = 99;		//投诉建议次数已达到上限
+	e_rmt_bank_unopened = 100;		//银行未开放
+	e_rmt_inviter_error_same_device = 101;	//同一设备无法绑定
+	e_rmt_bet_count_full = 102;		//押注次数已满
+	e_rmt_bet_players_full = 103;	//押注玩家已满
+	e_rmt_serverid_error = 104;		//连上的不是分配的服务器
+	e_rmt_has_draw = 105;			//已做过提现操作
+	e_rmt_too_offen = 106;			//操作过于频繁
+	e_rmt_alipay_exists = 107;		//支付宝账号已经被其他人绑定
+	e_rmt_agent_create_team_member_limit = 108;	//创建代理团队人数限制
+	e_rmt_agent_join_team_member_limit = 109;	//加入代理团队人数限制
+	e_rmt_room_card_invalid = 110;  //房卡无效
+	e_rmt_room_card_full = 111;  	//房间已满	
+	e_rmt_ac_chest_ts = 112;		//宝箱未到可领取时间
+	e_rmt_pay_product_erro = 113;	//充值购买的产品有误
+	e_rmt_third_pay_regtime_err = 114;	//第三方充值购买时注册限制时间有误
+	e_rmt_third_pay_viplvl_err = 115;	//第三方充值购买时vip等级限制有误
+	
+	e_rmt_activity_performance_check = 116; //提现时活动业绩不足
+	e_rmt_activity_timeout = 117; 	//活动超时
+	e_rmt_activity_apply = 118; 	//活动报名失败
+	e_rmt_activity_award = 119; 	//活动领奖失败
+	e_rmt_player_kick = 120;		//用户被踢出
+	e_rmt_withdraw_forbid = 121;	//禁止提现
+	e_rmt_service_not = 122;		//服务器正在进行维护
+	e_rmt_withdraw_limit = 123;		//提现次数限制
+	e_rmt_server_down = 124;		//游戏服务器维护
+	e_rmt_already_in_game = 125;	//已经在游戏中
+	e_rmt_pay_bank_not_player = 126;		//无此玩家
+	e_rmt_pay_bank_not_bank_id = 127;		//没有此银行卡
+
+	e_rmt_guild_not_found = 128;		//公会不存在
+	e_rmt_guild_has_join = 129;			//已加入了公会
+	e_rmt_guild_join_cooling = 130;		//公会加入冷却期中
+	e_rmt_guild_has_ask = 131;			//公会加入已经请求了
+}
+
+enum e_user_type
+{
+	e_user_type1 = 1;			
+	e_user_type2 = 2;		
+	e_user_type3 = 3;			
+	e_user_type4 = 4;		
+	e_user_type5 = 5;	
+	e_user_type6 = 6;			
+	e_user_type7 = 7;			
+	e_user_type8 = 8;	
+	e_user_type9 = 9;	
+	e_user_type10 = 10;	
+}
+enum e_item_type_def
+{
+	e_itd_gold = 1;			// 金币
+	e_itd_ticket = 2;		// 礼券
+	e_itd_gift = 3;			// 礼物
+	e_itd_exchange = 4;		// 兑换品
+	e_itd_photoframe = 5;	// 相框
+	e_itd_sex = 6;			// 性别
+	e_itd_vip = 7;			// vip
+	e_itd_iconcustom = 8;	// 头像
+	e_itd_nickname = 9;		// 昵称
+	e_itd_monthcard = 10;		// 月卡
+	e_itd_chip = 11;		//碎片
+	e_itd_privilege = 15;	//特权
+	e_itd_freegold = 17;
+	e_itd_recharged = 18;	//充值金额
+	e_itd_withdraw = 19;	//提现金额
+	e_itd_boxgold = 20;		//保险箱金币
+	e_itd_roomcard = 21;	//房卡
+
+	e_itd_firstgift = 99;	//首冲礼包
+	e_itd_vip_experience_card = 100; // vip体验卡
+}
+
+enum e_sex_def
+{
+	sex_unknown = 0;	
+	sex_boy = 1;		
+	sex_girl = 2;
+	sex_max = 3;
+}
+
+// 通告类型
+enum ENotifyType
+{
+//	NotifyTypeOperation = 0;		// 运营通告
+//	NotifyTypeWinningPrize = 1;		// 中奖通告
+//	NotifyTypePlayerSpeaker = 2;	// 用户喇叭
+
+	NotifyTypeSys = 200;			// 系统消息，优先级最高
+	NotifyTypePlayerSpeaker = 199;	// 用户喇叭
+
+	NotifyTypeWinningPrize = 198;	// 奖励通告
+	NotifyTypeImportantConsume = 197;	// 重要消费通告
+
+	NotifyTypeRobot = 196;			// 机器人通告
+}
+
+// 宝箱抽奖结果
+enum BoxLotteryResult
+{
+	result_big_prize = 0;     // 抽到大奖
+	result_samll_prize = 1;   // 抽到小奖
+	result_thank_you = 2;     // 谢谢参与+小奖
+}

@@ -1,0 +1,39 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+
+//月卡信息
+message packetc2w_month_card_info
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_month_card_info];
+}
+
+//月卡信息返回
+message packetw2c_month_card_info_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_month_card_info_result];
+	optional int32 count_buy = 2;					//当前购买月卡数量（未过期）
+	optional int32 count_effect = 3;				//当前生效月卡数量（进度已满）
+	optional int32 count_reward = 4;				//当前可领返利月卡数量（当日未领取，且进度达标）
+	optional int64 process = 5;						//当日进度
+	optional int32 timeout = 6 [default=-1];		//最近一张卡过期时间（7天内才有值）
+}
+
+//领取
+message packetc2w_month_card_reward
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_month_card_reward];
+	optional int32 count = 2;						//领取张数
+}
+
+//领取返回
+message packetw2c_month_card_reward_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_month_card_reward_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+	optional int32 count = 3;						//领取张数
+	optional int64 gold = 4;						//返利
+}

@@ -1,0 +1,63 @@
+package game_dotassc_protocols; 
+
+enum e_server_msg_type {
+	//客户端到服务端
+    e_mst_start_c2l = 10000;
+	e_mst_c2l_get_room_info = 10001;//获取房间信息
+	e_mst_c2l_enter_table = 10002;//进入房间
+	e_mst_c2l_leave_table = 10003;//离开房间
+	e_mst_c2l_check_state = 10004;   //检测状态
+	
+	e_mst_c2l_get_scene_info = 10010;	//获取场景信息
+	e_mst_c2l_ask_bet_info = 10011;		//请求下注
+	e_mst_c2l_ask_apply_banker = 10012;		//申请上庄
+	e_mst_c2l_ask_leave_banker = 10013;		//请求下庄
+	e_mst_c2l_ask_bankerlist = 10014;		//请求庄家列表
+	e_mst_c2l_ask_history_info = 10015;	//请求历史结果
+	e_mst_c2l_ask_continue_bet = 10016;		//请求续压
+	e_mst_c2l_ask_clear_bet = 10017;		//请求取消下注
+	e_mst_c2l_ask_playerlist = 10018;		//请求玩家列表
+	e_mst_c2l_ask_snatch_banker = 10019;	//请求抢庄
+
+	e_mst_c2l_leave_list_banker = 10020;//下庄列表
+	
+	e_mst_c2l_debug = 10100;				//控制
+	// 服务端到客户端---------------------------------------------------------------------------
+
+	e_mst_start_l2c = 15000;
+	e_mst_l2c_get_room_info_result = 15001;//返回房间信息
+	e_mst_l2c_enter_table_result = 15002;//进入房间返回
+	e_mst_l2c_leave_table_result = 15003;//离开房间返回
+	e_mst_l2c_check_state_result = 15004;//返回状态
+	
+	e_mst_l2c_get_scene_info_result = 15010;	//场景信息返回
+	e_mst_l2c_bet_info_result = 15011;			//下注结果
+	e_mst_l2c_apply_banker_result = 15012;		//申请上庄结果
+	e_mst_l2c_leave_banker_result = 15013;		//离开庄家
+	e_mst_l2c_bankerlist_result = 15014;		//庄家列表
+	e_mst_l2c_history_info = 15015;				//历史牌型
+	e_mst_l2c_banker_info = 15016;				//上庄下庄提示
+	e_mst_l2c_continue_bet_result = 15017;		//请求续压结果
+	e_mst_l2c_clear_bet_result = 15018;			//取消下注结果
+	e_mst_l2c_playerlist_result = 15019;		//玩家列表结果
+	e_mst_l2c_snatch_banker_result = 15020;		//抢庄结果
+	e_mst_l2c_banker_success = 15021;	//抢庄成功
+	
+	e_mst_l2c_bc_scene_prepare_into = 15050;	//场景准备状态
+	e_mst_l2c_bc_scene_bet_into = 15051;		//场景下注状态
+	e_mst_l2c_bc_sync_scene_bet_into = 15052;	//场景下注同步
+	e_mst_l2c_bc_scene_deal_into = 15053;		//场景发牌状态 
+	e_mst_l2c_bc_scene_result_into = 15054;		//场景结果状态 
+	e_mst_l2c_bc_snatch_banker = 15055;			//抢庄结果
+
+	e_mst_l2c_notify_sceneinfo = 15101;			//通知场景信息
+	e_mst_l2c_debug_result = 15102;			//控制返回
+
+	e_mst_l2c_leave_list_banker = 15103;//下庄列表
+
+    e_mst_l2c_online_cnt = 15104;
+	
+	e_mst_clend_index = 20000;
+  }
+
+

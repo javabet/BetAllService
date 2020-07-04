@@ -1,0 +1,69 @@
+package game_roulette_protocols; 
+
+enum e_server_msg_type {
+
+	//客户端到服务端---------------------------------------------------------------------------
+
+    e_mst_start_c2l = 10000;
+
+	e_mst_c2l_get_scene_info = 10001;			//获取场景信息
+	e_mst_c2l_ask_bet_info = 10011;				//请求下注
+	e_mst_c2l_continue_bet = 10012;				//请求续押
+	e_mst_c2l_game_control = 10013;
+	e_mst_c2l_get_room_info = 10014;			//房间信息
+	e_mst_c2l_enter_room = 10015;				//进入房间
+	e_mst_c2l_leave_room = 10016;				//离开房间
+	e_mst_c2l_room_history_list = 10017;		//请求所有房间的牌路
+	e_mst_c2l_req_seat = 10018;					//申请座位
+	e_mst_c2l_ask_player_list = 10019;			//请求玩家列表
+	e_mst_c2l_supply_chip = 10020;				//请求补充金币
+	e_mst_c2l_check_state = 10021;				//查看是否在房间中
+	e_mst_c2l_cancel_bet = 10022;				//取消下注
+	
+	e_mst_c2l_debug = 10100;					//控制
+	e_mst_c2l_gm_get_room_info = 10101;			//gm获取房间信息
+	e_mst_c2l_gm_set_bead = 10102;				//gm控制珠子pos
+
+	// 服务端到客户端---------------------------------------------------------------------------
+
+	e_mst_start_l2c = 15000;
+	
+	e_mst_l2c_get_scene_info_result = 15001;	//场景信息返回
+	e_mst_l2c_bet_info_result = 15011;			//下注结果
+	e_mst_l2c_continue_bet_result = 15012;		//续押结果
+	e_mst_l2c_bc_debuginfo = 15013;
+	e_mst_l2c_notice_gm_all_bet_info = 15014;
+
+
+	e_mst_l2c_bc_scene_prepare_into = 15050;	//场景准备状态	
+	e_mst_l2c_bc_scene_bet_into = 15051;		//场景下注状态
+	e_mst_l2c_bc_sync_scene_bet_into = 15052;	//场景下注同步
+	e_mst_l2c_bc_scene_deal_into = 15053;		//场景发牌状态 
+	e_mst_l2c_bc_scene_result_into = 15054;		//场景结果状态 
+	
+	e_mst_l2c_enter_player_info = 15055; 		//新玩家进入通知
+	e_mst_l2c_leave_player_info = 15056;		//玩家离开通知
+	e_mst_l2c_game_control_result = 15057;      //服务器返回控制客户端信息
+	e_mst_l2c_get_room_info_result = 15058;		//房间信息返回
+	e_mst_l2c_enter_room_result = 15059;		//进入房间
+	e_mst_l2c_leave_room_result = 15060;		//离开房间
+	e_mst_l2c_room_history_list_result = 15061; //请求所有房间的牌路返回
+	e_mst_l2c_notify_history = 15062;			//牌路通知
+	e_mst_l2c_req_seat_result = 15063;			//申请座位结果
+	e_mst_l2c_leave_seat = 15064;				//离开座位通知
+	e_mst_l2c_ask_player_list_result = 15065;			//请求玩家列表返回
+	e_mst_l2c_bc_change_attr = 15066;			//广播玩家金币变更
+	e_mst_l2c_supply_chip_result = 15067;		//请求补充金币返回
+	e_mst_l2c_check_state_result = 15068;		//查看是否在房间中返回
+	e_mst_l2c_cancel_bet_result = 15069;		//取消下注返回
+	
+	e_mst_l2c_notify_sceneinfo = 15101;			//通知场景信息
+	e_mst_l2c_debug_result = 15102;				//控制返回
+    	e_mst_l2c_online_cnt = 15103;
+	
+	e_mst_l2c_gm_get_room_info_result = 15104;	//gm获取房间信息返回
+	e_mst_l2c_gm_set_bead_result = 15105;		//gm控制珠子pos返回
+	
+	e_mst_clend_index = 20000;
+  }
+

@@ -1,0 +1,409 @@
+package client2world_protocols;
+
+enum e_server_msg_type {
+	//客户端到服务端
+    e_mst_start_c2w = 5000;
+	e_mst_c2w_player_connect = 5001;//玩家连接
+	e_mst_c2w_timesync = 5002;//时间同步
+	e_mst_c2w_asklogin = 5003;//请求登陆
+	e_mst_c2w_enter_game = 5004;//请求进入游戏
+	e_mst_c2w_command = 5005;//gm命令
+	e_mst_c2w_ask_check_payment = 5006;//检测支付
+	e_mst_c2w_ask_test_payment = 5007;//测试支付
+	e_mst_c2w_leave_game = 5008;//退出游戏
+	e_mst_c2w_req_dial_lottery = 5009;  // 请求转盘抽奖
+	e_mst_c2w_update_playerhead = 5010;  // 请求修改头像
+	e_mst_c2w_update_nickname = 5011;    // 修改昵称
+	e_mst_c2w_update_sex = 5012;		 // 修改性别
+	e_mst_c2w_update_signature = 5013;	 // 修改签名
+	e_mst_c2w_get_mails = 5014;			 // 获取玩家邮件列表请求
+	e_mst_c2w_recv_mail_gifts = 5015;	 // 领取邮件中的礼物请求
+	e_mst_c2w_send_mail = 5016;			 // 发送邮件
+	e_mst_c2w_remove_mail = 5017;		 // 删除某个邮件
+	e_mst_c2w_req_game_stat = 5018;		 // 获取战绩统计
+	e_mst_c2w_req_dial_lottery_flag = 5019;	 // 请求转盘标志
+	e_mst_c2w_req_coin_rank = 5020;			 // 请求金币排行
+	e_mst_c2w_chat = 5021;					 // 发送聊天
+	e_mst_c2w_exchange = 5022;				 // 请求兑换
+	e_mst_c2w_buy_commodity = 5023;			 // 购买商品
+	e_mst_c2w_add_friend = 5024;			 // 添加好友
+	e_mst_c2w_req_friend_list = 5025;		 // 请求好友列表
+	e_mst_c2w_remove_friend = 5026;			 // 移除好友
+	e_mst_c2w_search_friend = 5027;			 // 搜索好友
+	e_mst_c2w_set_password = 5029;			 // 设置保险箱密码
+	e_mst_c2w_deposit_gold = 5030;			 // 存入金币
+	e_mst_c2w_draw_gold = 5031;				 // 取出金币
+	e_mst_c2w_change_photo_frame = 5032;	 // 改变相框
+	e_mst_c2w_req_self_record = 5033;		 // 公共战绩统计
+	e_mst_c2w_modify_password = 5034;		 // 修改保险箱密码
+	e_mst_c2w_enter_friend_room = 5035;		 // 进入好友房间
+	e_mst_c2w_player_notify = 5036;			 // 玩家发起的通告消息
+	e_mst_c2w_beneifts = 5037;				 // 玩家领取救济金
+	e_mst_c2w_req_notice = 5038;			 // 请求公告
+	e_mst_c2w_req_bind_phone = 5039;		 // 请求绑定手机
+	e_mst_c2w_req_verify_code = 5040;		 // 请求验证
+	e_mst_c2w_get_friend_gameid = 5041;		 // 获取好友正玩的游戏id
+	e_mst_c2w_finish_one_new_guild = 5042;	 // 完成某个新手引导
+	e_mst_c2w_req_send_gift_log = 5043;		 // 请求赠送日志
+	e_mst_c2w_get_safe_box_security_code = 5044; // 获取保险箱的验证码
+	e_mst_c2w_req_send_mail_log = 5045;			 // 请求发送邮件日志
+	e_mst_c2w_remove_mail_log = 5046;			 // 删除某个邮件日志
+	e_mst_c2w_get_exchange_state = 5047;	     // 取得兑换状态
+	e_mst_c2w_get_gamelist = 5048;				//获取游戏列表
+	e_mst_c2w_check_apple_order_form = 5050;    //校验苹果订单
+	e_mst_c2w_req_recharge_rank = 5051;			//请求充值排行
+	e_mst_c2w_req_lottery_box = 5052;			//请求宝箱抽奖
+	e_mst_c2w_thankyou_exchange_ticket = 5053;	//谢谢参与兑换礼券
+	e_mst_c2w_req_coin_growth = 5054;			//请求金币增长排行
+	e_mst_c2w_player_continuous_send_speaker = 5055;   //玩家连续发小喇叭
+	e_mst_c2w_receive_activity_reward = 5056;		   //领取活动奖励
+	e_mst_c2w_get_questlist = 5058;					//请求任务列表
+	e_mst_c2w_receive_questreward = 5059;			//请求任务奖励
+	e_mst_c2w_star_lottery_info = 5060;			//获取星星抽奖信息
+	e_mst_c2w_req_star_lottery	= 5061;			//请求星星抽奖
+	e_mst_c2w_first_login = 5062;				//第1次登陆奖励
+	e_mst_c2w_inform_playerhead = 5063;		    // 举报头像
+	e_mst_c2w_req_month_card_reward = 5064;		// 领取月卡奖励
+	e_mst_c2w_ask_recharge_history = 5065;		// 请求充值记录
+	e_mst_c2w_reset_password = 5066;			// 重置密码
+	e_mst_c2w_req_safebox_log = 5067;		 // 请求保险箱日志
+	e_mst_c2w_check_password = 5068;			// 验证密码
+	e_mst_c2w_shopping = 5069;				//购物
+	e_mst_c2w_req_relieve_phone = 5070;		//请求解除绑定	
+	e_mst_c2w_req_relieve_verify = 5071;	//请求解除验证码
+	e_mst_c2w_ask_recharge_activity = 5072;	//充值活动
+    
+    e_mst_c2w_cdk = 5073; //cdk请求
+    e_mst_c2w_agency = 5074; //代理
+	e_mst_c2w_ac_bind = 5075;				//绑定支付宝
+	e_mst_c2w_ac_transfer = 5076;			//支付宝转账
+	e_mst_c2w_ac_url = 5077;			//支付宝充值URL
+
+    e_mst_c2w_ask_trans_account = 5078;     //请求转账
+    e_mst_c2w_ask_detail   = 5079;          //请求明细
+    e_mst_c2w_ask_message = 5080;           //请求消息
+    e_mst_c2w_delete_message = 5081;        //删除消息
+    e_mst_c2w_read_message = 5082;          //标记消息已读
+    e_mst_c2w_ask_trans_ex = 5083;
+
+    e_mst_c2w_askPayopen = 5084;
+	e_mst_c2w_picture_verify_result = 5085;		//图片验证结果
+	e_mst_c2w_ask_report_account = 5086;		//举报账号获取
+	e_mst_c2w_bind_inviter = 5087;			//绑定邀请人
+	e_mst_c2w_reward_list = 5088;			//请求收益列表
+	e_mst_c2w_receive_reward = 5089;		//领取收益
+	e_mst_c2w_inviter_ranklist = 5090;		//请求收益排行榜
+	e_mst_c2w_receive_share_reward = 5091;	//领取分享奖励
+	e_mst_c2w_req_faq = 5092;				//请求常见问题
+	e_mst_c2w_req_faq_detail = 5093;		//请求问题详细内容
+	e_mst_c2w_req_cs_contact = 5094;		//请求客服联系方式
+	e_mst_c2w_bind_bank_card = 5095;		//绑定银行卡
+	e_mst_c2w_req_bank_card = 5096;			//获取银行卡信息
+	e_mst_c2w_suggestion = 5097;			//提交投诉建议
+	e_mst_c2w_req_suggest = 5098;			//请求投诉建议列表
+	e_mst_c2w_req_bank_list = 5099;			//获取银行卡列表
+	e_mst_c2w_wechat_share_task = 5100;		//微信分享任务
+	e_mst_c2w_ranklist_receive = 5101;		//领取推广排行榜奖励
+	e_mst_c2w_ask_income_history = 5102;	//请求收益记录
+	e_mst_c2w_change_limit_head = 5103;		//修改限时头像
+	e_mst_c2w_baccarat_history = 5104;		//请求百家乐牌路
+	e_mst_c2w_cows_history = 5105;			//请求牛牛牌路
+	e_mst_c2w_dice_history = 5106;			//请求骰宝牌路
+	e_mst_c2w_ebg_history = 5107;			//请求二八杠牌路
+	e_mst_c2w_goldshark_history = 5108;		//请求金鲨银鲨牌路
+	e_mst_c2w_multitexas_history = 5109;	//请求万人德州牌路
+	e_mst_c2w_shcd_history = 5110;			//请求黑红梅方牌路
+	e_mst_c2w_req_sync_gold = 5111;			//同步金币,大厅断线重连用
+	e_mst_c2w_benzbmw_history = 5112;		//请求奔驰宝马牌路
+	e_mst_c2w_forestball_history = 5113;	//请求森林舞会牌路
+	e_mst_c2w_fruits_history = 5114;		//请求水果缤纷牌路
+	e_mst_c2w_lhd_history = 5115;			//请求龙虎斗牌路
+	e_mst_c2w_multiredblack_history = 5116; //请求百人红黑牌路
+	e_mst_c2w_happySupremacy_history = 5117; //请求欢乐至尊牌路
+	e_mst_c2w_carsmagnate_history = 5118; //请求豪车大亨牌路
+	e_mst_c2w_fourcolorball_history = 5119; //请求四色球牌路
+	
+	e_mst_c2w_performance_list = 5120;					//请求业绩列表
+	e_mst_c2w_performance_gain = 5121;					//请求领取业绩收益
+	e_mst_c2w_performance_child = 5122;					//下级查询
+	e_mst_c2w_performance_check_gain = 5123;			//查询当前可收取返利
+	e_mst_c2w_performance_team_create = 5124;			//创建团队
+	e_mst_c2w_performance_team_list = 5125;				//请求团队列表
+	e_mst_c2w_performance_team_info = 5126;				//请求团队详情（成员列表）
+	e_mst_c2w_performance_team_update = 5127;			//请求更新团队信息
+	e_mst_c2w_performance_info = 5128;					//业绩查询
+	e_mst_c2w_performance_info_self_today = 5129;		//我的今日业绩
+	e_mst_c2w_performance_info_self_yesterday = 5130;	//我的昨日业绩
+	e_mst_c2w_performance_info_agent_today = 5131;		//直属代理今日业绩
+	e_mst_c2w_performance_info_agent_yesterday = 5132;	//直属代理昨日业绩
+	e_mst_c2w_performance_configs = 5133;				//请求业绩配置
+
+	e_mst_c2w_ac_transfer_param = 5137;					//请求提现参数
+	e_mst_w2c_ac_transfer_param_result = 5138;			//参数结果
+	
+
+	e_mst_c2w_activity_bind = 5139;						//活动 绑定 获取信息
+	e_mst_c2w_activity_bind_lottery = 5140;				//活动 绑定 抽奖
+	e_mst_c2w_activity_recharge = 5141;					//活动 首充 获取信息
+	e_mst_c2w_activity_recharge_award = 5142;			//活动 首充 抽奖
+	e_mst_c2w_activity_check = 5143;					//活动 检查红点
+	e_mst_c2w_activity_chest = 5144;					//活动 聚宝盆
+	e_mst_c2w_activity_chest_open = 5145;				//活动 聚宝盆 开箱
+	e_mst_c2w_activity_agent = 5146;					//活动 代理分红
+	e_mst_c2w_activity_agent_reward = 5147;				//活动 代理分红领奖
+	
+	e_mst_c2w_month_card_info = 5148;					//获取月卡信息
+	e_mst_c2w_month_card_reward = 5149;					//获取月卡返利
+	
+	e_mst_c2w_req_vip_info = 5150;						//获取vip信息
+	
+	e_mst_c2w_activity_vip_info = 5151;					//活动 vip 信息
+	e_mst_c2w_activity_vip_sign = 5152;					//活动 vip 日签到
+	e_mst_c2w_activity_vip_month_reward = 5153;			//活动 vip 月俸禄
+	e_mst_c2w_activity_vip_lv_reward = 5154;			//活动 vip 晋级奖
+	
+	e_mst_c2w_activity_accumulate_rmb_info = 5155;		//活动 累积充值 信息
+	e_mst_c2w_activity_accumulate_rmb_apply = 5156;		//活动 累积充值 报名
+	e_mst_c2w_activity_accumulate_rmb_reward = 5157;	//活动 累积充值 领奖
+	e_mst_c2w_activity_accumulate_per_info = 5158;		//活动 累积业绩 信息
+	e_mst_c2w_activity_accumulate_per_apply = 5159;		//活动 累积业绩 报名
+	e_mst_c2w_activity_accumulate_per_reward = 5160;	//活动 累积业绩 领奖
+	
+	e_mst_c2w_activity_info = 5161;						//活动 通用
+	e_mst_c2w_activity_list = 5162;						//活动 列表
+	e_mst_c2w_activity_apply = 5163;					//活动 报名
+	e_mst_c2w_activity_reward = 5164;					//活动 领奖
+
+	e_mst_c2w_pay			= 5165;						//通道充值
+	e_mst_c2w_activity_reward_log = 5166;					//活动 领奖记录
+	e_mst_c2w_activity_roulette_play = 5167;			//活动 轮盘 转盘
+	e_mst_c2w_activity_roulette_reward = 5168;			//活动 轮盘 特殊奖励
+	e_mst_c2w_bskf = 5169;						//请求币商客服结果
+	e_mst_c2w_coindealer_record = 5170;			//请求联系过的币商客服列表
+	e_mst_c2w_activity_roulette_log = 5171;				//请求轮盘历史记录
+	
+	e_mst_c2w_withdraw_record = 5172;					//请求提现记录
+	e_mst_c2w_recharge_record = 5173;					//请求充值记录
+
+	e_mst_c2w_promote_url = 5174;						//请求推广域名
+	e_mst_c2w_req_room_config = 5175;					//请求房间配置
+	e_mst_c2w_check_game_state = 5176;					//检查游戏状态
+	e_mst_c2w_pay_bank		   = 5178;					//请求银行转账充值
+	e_mst_c2w_join_guild = 5179;						//玩家请求加入公会
+
+	
+	e_mst_c2w_buy_room_card    = 5181;					//请求购买房卡
+	//服务端到客户端--------------------------------------------------------------
+
+	e_mst_start_w2c = 7500;
+	e_mst_w2c_player_connect_result = 7501;//玩家连接返回
+	e_mst_w2c_timesync_result = 7502;//返回时间同步
+	e_mst_w2c_asklogin_result = 7503;//返回请求登陆
+	e_mst_w2c_enter_game_result = 7504;//进入游戏返回
+	e_mst_w2c_command_result = 7505;//返回gm命令
+	e_mst_w2c_ask_check_payment_result = 7506;//返回支付结果
+	e_mst_w2c_leave_game_result = 7507;//退出游戏返回
+	e_mst_w2c_req_dial_lottery_result = 7508;  // 请求转盘抽奖结果
+	e_mst_w2c_update_playerhead_result = 7509;  // 请求修改头像结果
+	e_mst_w2c_update_nickname_result = 7510;    // 修改昵称结果
+	e_mst_w2c_update_sex_result = 7511;			// 修改性别结果
+	e_mst_w2c_update_signature_result = 7512;	// 修改签名结果
+	e_mst_w2c_get_mails_result = 7513;			// 获取玩家邮件列表请求结果
+	e_mst_w2c_recv_mail_gifts_result = 7514;	// 领取邮件中的礼物回应
+	e_mst_w2c_send_mail_result = 7515;			// 发送邮件结果
+	e_mst_w2c_remove_mail_result = 7516;		// 删除某个邮件结果
+	e_mst_w2c_fishlord_stat_result = 7517;		// 捕鱼的战绩统计结果
+	e_mst_w2c_dice_stat_result = 7518;			// 骰宝的战绩统计结果
+	e_mst_w2c_crocodile_stat_result = 7519;		// 鳄鱼的战绩统计结果
+	e_mst_w2c_req_dial_lottery_flag_result = 7520; // 请求转盘标志结果
+	e_mst_w2c_req_coin_rank_result = 7521;		   // 请求金币排行结果
+	e_mst_w2c_chat_result = 7522;				   // 聊天结果
+	e_mst_w2c_notify = 7523;					   // 通告消息
+	e_mst_w2c_exchange_result = 7524;			   // 请求兑换结果
+	e_mst_w2c_buy_commodity_result = 7525;		   // 购买商品结果
+	e_mst_w2c_add_friend_result = 7526;			   // 添加好友结果
+	e_mst_w2c_req_friend_list_result = 7527;	   // 请求好友列表结果
+	e_mst_w2c_remove_friend_result = 7528;		   // 移除好友结果
+	e_mst_w2c_search_friend_result = 7529;		   // 搜索好友结果
+	e_mst_w2c_set_password_result = 7531;		   // 设置保险箱密码结果
+	e_mst_w2c_deposit_gold_result = 7532;		   // 存入金币结果
+	e_mst_w2c_draw_gold_result = 7533;			   // 取出金币结果
+	e_mst_w2c_change_photo_frame_result = 7534;	   // 改变相框结果
+	e_mst_w2c_req_self_record_result = 7535;	   // 公共战绩统计结果
+	e_mst_w2c_modify_password_result = 7536;	   // 修改保险箱密码结果
+	e_mst_w2c_enter_friend_room_result = 7537;	   // 进入好友房间结果
+	e_mst_w2c_player_notify_result = 7538;		   // 玩家发起的通告消息结果
+	e_mst_w2c_benefits_result =7539;			   // 玩家领取救济金的结果	
+	e_mst_w2c_req_notice_result =7540;			   // 请求公告结果	
+	e_mst_w2c_player_kick = 7541;			//被踢
+	e_mst_w2c_req_bind_phone_result = 7542;			//请求绑定手机结果
+	e_mst_w2c_req_verify_code_result = 7543;		//请求验证结果
+	e_mst_w2c_get_friend_gameid_result = 7544;		//返回好友在玩的游戏id
+	e_mst_w2c_finish_one_new_guild_result = 7545;	//完成某个新手引导结果
+	e_mst_w2c_accept_gift_notify = 7546;			//收到礼物通知
+	e_mst_w2c_req_send_gift_log_result = 7547;		//请求赠送日志结果
+	e_mst_w2c_get_safe_box_security_code_result = 7548;	 //获取保险箱的验证码结果
+	e_mst_w2c_req_send_mail_log_result = 7549;			 //请求发送邮件日志结果
+	e_mst_w2c_remove_mail_log_result = 7550;			 //删除某个邮件日志结果
+	e_mst_w2c_get_exchange_state_result = 7551;			 //取得兑换状态结果
+	e_mst_w2c_get_gamelist_result = 7552;				//返回游戏列表
+	e_mst_w2c_req_recharge_rank_result = 7554;			//返回充值排行
+	e_mst_w2c_req_lottery_box_result = 7555;			//请求宝箱抽奖结果
+	e_mst_w2c_thankyou_exchange_ticket_result = 7556;	//谢谢参与兑换礼券结果
+	e_mst_w2c_req_coin_growth_result = 7557;			//请求金币增长排行结果
+	e_mst_w2c_player_continuous_send_speaker_result = 7558;			//玩家连续发小喇叭结果
+	e_mst_w2c_receive_activity_reward_result = 7559;			   // 领取活动奖励结果
+	e_mst_w2c_get_questlist_result = 7561;			//返回任务列表
+	e_mst_w2c_questreward_result = 7562;		//返回任务奖励
+	e_mst_w2c_change_quest = 7563;				//任务变更
+	e_mst_w2c_star_lottery_info_result = 7564;	//返回星星抽奖信息
+	e_mst_c2w_req_star_lottery_result = 7565;	//返回星星抽奖结果
+	e_mst_w2c_first_login_result = 7566;	//第一次登陆返回
+	e_mst_w2c_inform_playerhead_result = 7567;		    // 举报头像结果
+	e_mst_w2c_req_month_card_reward_result = 7568;		// 领取月卡奖励结果
+	e_mst_w2c_open_first_gift = 7570;			// 打开首冲礼包
+	e_mst_w2c_recharge_history_result = 7571;	// 充值记录结果
+	e_mst_w2c_reset_password_result = 7572;		// 重置密码结果
+	e_mst_w2c_req_safebox_log_result = 7573;		//请求保险箱结果
+	e_mst_w2c_check_password_result = 7574;		// 验证密码结果
+	e_mst_w2c_shopping_result = 7575;		//购物结果
+	e_mst_w2c_req_relieve_phone_result = 7576;	//返回解除手机结果
+	e_mst_w2c_req_relieve_verify_result = 7577;	//返回解除验证码
+	e_mst_w2c_recharge_activity_result = 7578;	//充值活动
+
+    e_mst_w2c_cdk_result = 7579;  //请求cdk结果
+    e_mst_w2c_agency_result = 7580;  // 代理结果
+	
+	e_mst_w2c_ac_bind_result = 7581;				//绑定支付宝
+	e_mst_w2c_ac_transfer_result = 7582;			//支付宝转账
+	e_mst_w2c_ac_url_result = 7583;			//URL
+
+    e_mst_w2c_ask_trans_account_result = 7584;     //请求转账
+    e_mst_w2c_ask_detail_result   = 7585;          //请求明细
+    e_mst_w2c_ask_message_result = 7586;           //请求消息
+    e_mst_w2c_delete_message_result = 7587;        //删除消息
+    e_mst_w2c_read_message_result = 7588;          //标记消息已读
+	e_mst_w2c_bind_reward = 7589;					//账号绑定奖励
+    e_mst_w2c_ask_trans_ex_result = 7590;
+
+	e_mst_w2c_recharge_new_result = 7591;	// 充值记录
+
+    e_mst_w2c_askPayopen_result = 7592;
+	e_mst_w2c_picture_verify = 7593;			//图片验证
+	e_mst_w2c_ask_report_account_result = 7594;		//举报账号返回
+	e_mst_w2c_bind_inviter_result = 7595;		//绑定邀请人结果
+	e_mst_w2c_reward_list_result = 7596;		//请求收益列表结果
+	e_mst_w2c_receive_reward_result = 7597;		//领取收益结果
+	e_mst_w2c_inviter_ranklist_result = 7598;		//请求收益排行榜结果
+	e_mst_w2c_notify_share = 7599;				//通知分享
+	e_mst_w2c_receive_share_reward_result = 7600;	//领取分享奖励结果
+	e_mst_w2c_req_faq_result = 7601;			//请求常见问题结果
+	e_mst_w2c_req_faq_detail_result = 7602;		//请求问题详细内容
+	e_mst_w2c_req_cs_contact_result = 7603;		//请求客服联系方式结果
+	e_mst_w2c_bind_bank_card_result = 7604;		//绑定银行卡结果
+	e_mst_w2c_req_bank_card_result = 7605;		//获取银行卡信息结果
+	e_mst_w2c_suggestion_result = 7606;			//投诉建议结果
+	e_mst_w2c_req_suggest_result = 7607;		//请求投诉建议列表结果
+	e_mst_w2c_req_bank_list_result = 7608;		//获取银行卡列表结果
+	e_mst_w2c_notify_task_reflush = 7609;		//通知玩家任务刷新
+	e_mst_w2c_ranklist_receive_result = 7610;	//领取推广排行榜奖励结果
+	e_mst_w2c_income_history_result = 7611;	//请求收益记录结果
+	e_mst_w2c_income_new_result = 7612;			//最新收益记录
+	e_mst_w2c_change_limit_head_result = 7613;	//修改限时头像
+	e_mst_w2c_baccarat_history_result = 7614;		//请求百家乐牌路结果
+	e_mst_w2c_cows_history_result = 7615;			//请求牛牛牌路结果
+	e_mst_w2c_dice_history_result = 7616;			//请求骰宝牌路结果
+	e_mst_w2c_ebg_history_result = 7617;			//请求二八杠牌路结果
+	e_mst_w2c_goldshark_history_result = 7618;		//请求金鲨银鲨牌路结果
+	e_mst_w2c_multitexas_history_result = 7619;		//请求万人德州牌路结果
+	e_mst_w2c_shcd_history_result = 7620;			//请求黑红梅方牌路结果
+	e_mst_w2c_update_ipinfo_result = 7621;			//更新IP信息
+	e_mst_w2c_req_sync_gold_result = 7622;			//同步金币结果
+	e_mst_w2c_benzbmw_history_result = 7623;		//请求奔驰宝马牌路结果
+	e_mst_w2c_forestball_history_result = 7624;	//请求森林舞会牌路结果
+	e_mst_w2c_fruits_history_result = 7625;		//请求水果缤纷牌路结果
+	e_mst_w2c_lhd_history_result = 7626;		//请求龙虎斗牌路结果
+	e_mst_w2c_multiredblack_history_result = 7627;  //请求百人红黑牌路结果
+	e_mst_w2c_happySupremacy_history_result = 7628; //请求欢乐至尊牌路结果
+	e_mst_w2c_carsmagnate_history_result = 7629; //请求豪车大亨牌路结果
+	e_mst_w2c_fourcolorball_history_result = 7630; //请求四色球牌路结果
+	
+	e_mst_w2c_performance_list_result = 7631;			//请求业绩列表返回
+	e_mst_w2c_performance_gain_result = 7632;			//请求领取业绩收益返回
+	e_mst_w2c_performance_child_result = 7633;			//下级查询返回
+	e_mst_w2c_performance_check_gain_result = 7634;		//查询当前可收取返利
+	e_mst_w2c_performance_team_create_result = 7635;	//创建团队
+	e_mst_w2c_performance_team_list_result = 7636;		//请求团队列表
+	e_mst_w2c_performance_team_info_result = 7637;		//请求团队详情（成员列表）
+	e_mst_w2c_performance_team_update_result = 7638;	//更新团队信息返回
+	e_mst_w2c_performance_info_result = 7639;					//业绩查询返回
+	e_mst_w2c_performance_info_self_today_result = 7640;		//我的今日业绩
+	e_mst_w2c_performance_info_self_yesterday_result = 7641;	//我的昨日业绩
+	e_mst_w2c_performance_info_agent_today_result = 7642;		//直属代理今日业绩
+	e_mst_w2c_performance_info_agent_yesterday_result = 7643;	//直属代理昨日业绩
+	e_mst_w2c_notice = 7644;					// 刷公告
+	
+	e_mst_w2c_activity_bind_result = 7645;						//活动 绑定 获取信息
+	e_mst_w2c_activity_bind_lottery_result = 7646;				//活动 绑定 抽奖
+	e_mst_w2c_activity_recharge_result = 7647;					//活动 首充 获取信息
+	e_mst_w2c_activity_recharge_award_result = 7648;			//活动 首充 领奖
+	e_mst_w2c_activity_check_result = 7649;						//活动 检查红点
+	e_mst_w2c_bind_formal = 7650;								//账号 绑定成功
+	e_mst_w2c_activity_chest_result = 7651;						//活动 聚宝盆 获取信息
+	e_mst_w2c_activity_chest_open_result = 7652;				//活动 聚宝盆 开箱结果
+	e_mst_w2c_activity_agent_result = 7653;						//活动 代理分红 获取信息
+	e_mst_w2c_activity_agent_reward_result = 7654;				//活动 代理分红 领奖
+	
+	e_mst_w2c_month_card_info_result = 7655;					//获取月卡信息
+	e_mst_w2c_month_card_reward_result = 7656;					//获取月卡返利
+	
+	e_mst_w2c_stream_war_config = 7657;			//流水大作战 配置
+	e_mst_w2c_stream_war_rank = 7658;			//流水大作战 前60名
+	e_mst_w2c_stream_war_self = 7659;			//流水大作战 我的流水
+	
+	e_mst_w2c_req_vip_info_result = 7660;				//获取vip信息返回
+	
+	e_mst_w2c_activity_vip_info_result = 7661;	//活动 vip信息返回
+	e_mst_w2c_activity_vip_sign_result = 7662;	//活动 vip 日签到返回
+	e_mst_w2c_activity_vip_month_reward_result = 7663;	//活动 vip月俸禄返回
+	e_mst_w2c_activity_vip_lv_reward_result = 7664;	//活动 vip晋级奖返回
+	
+	e_mst_w2c_activity_accumulate_rmb_info_result = 7665;		//活动 累积充值 信息
+	e_mst_w2c_activity_accumulate_rmb_apply_result = 7666;		//活动 累积充值 报名
+	e_mst_w2c_activity_accumulate_rmb_reward_result = 7667;		//活动 累积充值 领奖
+	e_mst_w2c_activity_accumulate_per_info_result = 7668;		//活动 累积业绩 信息
+	e_mst_w2c_activity_accumulate_per_apply_result = 7669;		//活动 累积业绩 报名
+	e_mst_w2c_activity_accumulate_per_reward_result = 7670;		//活动 累积业绩 领奖
+	
+	e_mst_w2c_activity_info_result = 7671;						//活动 通用
+	e_mst_w2c_activity_list_result = 7672;						//活动 列表
+	e_mst_w2c_activity_apply_result = 7673;						//活动 报名
+	e_mst_w2c_activity_reward_result = 7674;					//活动 领奖
+
+	e_mst_w2c_pay_result	= 7675;								//通道支付返回
+	
+	e_mst_w2c_activity_reward_log_result = 7676;				//活动 领奖记录
+	e_mst_w2c_activity_roulette_play_result = 7677;				//活动 轮盘 转盘
+	e_mst_w2c_activity_roulette_reward_result = 7678;			//活动 轮盘 特殊奖励
+	e_mst_w2c_bskf_result = 7679;						//请求币商客服结果
+	e_mst_w2c_coindealer_record_result = 7680;			//请求联系过的币商客服列表结果
+	e_mst_w2c_activity_roulette_log_result = 7681;				//请求轮盘历史记录
+	
+	
+	e_mst_w2c_withdraw_record_result = 7682;					//请求提现记录
+	e_mst_w2c_recharge_record_result = 7683;					//请求充值记录
+
+	e_mst_w2c_promote_url_result = 7684;						//请求推广域名结果	
+	e_mst_w2c_req_room_config_result = 7685;					//请求房间配置结果
+	e_mst_w2c_performance_configs_result = 7686;				//请求业绩配置结果	
+	e_mst_w2c_check_game_state_result = 7687;					//检查游戏状态结果
+
+	e_mst_w2c_pay_bank_result		   	= 7688;					//请求银行转账充值返回
+	e_mst_w2c_join_guild = 7689;								//玩家请求加入公会返回	
+	e_mst_w2c_guild_id = 7690;									//玩家公会id返回	
+
+	e_mst_w2c_buy_room_card_result		= 7691;					//请求购买房卡返回
+	
+	e_mst_cwend_index = 10000;
+ }
+

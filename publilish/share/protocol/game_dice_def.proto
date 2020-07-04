@@ -1,0 +1,106 @@
+package dice_protocols; 
+
+enum e_dice_type {
+    e_dice_type_unknow = 0;      //未下注
+	e_dice_type_big = 1;         //大
+    e_dice_type_Leopard1 = 2;    //豹子1 
+	e_dice_type_Leopard2 = 3;    //豹子2 
+	e_dice_type_Leopard3 = 4;    //豹子3
+	e_dice_type_Leopard4 = 5;    //豹子4
+	e_dice_type_Leopard5 = 6;    //豹子5
+	e_dice_type_Leopard6 = 7;    //豹子6
+	e_dice_type_LeopardAny = 8;  //任意豹子
+	e_dice_type_small = 9;       //小	
+    e_dice_type_p4 = 10;          //点数4	
+	e_dice_type_p5 = 11;          //点数5
+	e_dice_type_p6 = 12;          //点数6
+	e_dice_type_p7 = 13;          //点数7
+	e_dice_type_p8 = 14;          //点数8
+	e_dice_type_p9 = 15;          //点数9
+	e_dice_type_p10 = 16;         //点数10
+	e_dice_type_p11 = 17;         //点数11
+	e_dice_type_p12 = 18;         //点数12	
+	e_dice_type_p13 = 19;         //点数13
+	e_dice_type_p14 = 20;         //点数14
+	e_dice_type_p15 = 21;         //点数15
+	e_dice_type_p16 = 22;         //点数16
+	e_dice_type_p17 = 23;         //点数17
+	e_dice_type_d1 = 24;          //1出现个数
+	e_dice_type_d2 = 25;          //2出现个数
+	e_dice_type_d3 = 26;          //3出现个数
+	e_dice_type_d4 = 27;          //4出现个数
+	e_dice_type_d5 = 28;          //5出现个数
+	e_dice_type_d6 = 29;          //6出现个数
+  }
+
+enum e_server_msg_type {   
+	//客户端到服务端
+    e_mst_start_c2l = 10000;
+	e_mst_c2l_check_state = 10001;      //查询玩家状态
+	e_mst_c2l_get_room_info = 10002;    //获取游戏房间信息 ROOM LIST
+	e_mst_c2l_get_table_info = 10003;   //获取桌面信息
+	e_mst_c2l_enter_table = 10004;      //进入游戏
+	e_mst_c2l_leave_table = 10005;      //离开游戏	
+	e_mst_c2l_bet = 10006;              //下注
+	e_mst_c2l_unbet = 10007;            //撤回下注
+	e_mst_c2l_bet_again = 10008;        //续压
+	e_mst_gm_command = 10009;           //gm命令
+	e_mst_chang_table = 10010;           //更换桌子
+	e_mst_player_list_info = 10011;      //请求桌子上的玩家信息
+	e_mst_c2l_ask_playerlist = 10013;		//请求玩家列表
+	e_mst_c2l_debug = 10100;				//控制
+	
+	// 服务端到客户端
+	e_mst_start_l2c = 15000;   
+	e_mst_l2c_check_state_result = 15001;     //回执 - 玩家状态
+	e_mst_l2c_get_room_info_result = 15002;   //回执 - 游戏房间信息
+	e_mst_l2c_get_table_info_result = 15003;  //回执 - 获取桌面信息
+	e_mst_l2c_enter_table_result = 15004;     //回执 - 进入游戏
+	e_mst_l2c_leave_table_result = 15005;     //回执 - 离开游戏
+ 
+	e_mst_bc_shake = 15006;                   //广播 - 通知客户端摇宝
+	e_mst_bc_beginbet = 15007;                //广播 - 通知客户端开始下注
+	e_mst_bc_endbet = 15008;                  //广播 - 通知客户端停止下注
+	e_mst_bc_dice = 15009;                    //广播开奖
+	
+	e_mst_l2c_bet_result = 15010;             //回执 - 下注
+	e_mst_l2c_unbet_result = 15011;           //回执 - 撤回下注  
+	e_mst_bc_bet = 15012;                     //广播玩家下注   
+	e_mst_bc_unbet = 15013;                   //广播玩家撤销下注
+	e_mst_bc_table_info = 15014;              //广播游戏场景
+	e_mst_bc_gold_change = 15015;             //广播玩家金币变化
+	e_mst_chang_table_result = 15016;         //回执 - 换桌结果
+	e_mst_balance_result = 15017;             //推送 - 推送结算结果给玩家   
+	e_mst_player_list_info_result = 15018;    // 回执 - 请求桌子上的玩家信息
+	e_mst_bc_other_bet = 15019;               // 广播 - 其他玩家下注信息
+
+    e_mst_l2c_bc_debuginfo = 15023;//库存等信息
+	e_mst_l2c_playerlist_result = 15024;		//玩家列表结果
+
+	e_mst_l2c_notify_sceneinfo = 15101;			//通知场景信息
+	e_mst_l2c_debug_result = 15102;			//控制返回
+
+	e_mst_clend_index = 20000;  
+  }
+        
+		  
+		       
+//enum e_msg_result_type {
+//	e_rmt_success = 0;              //成功
+//	e_rmt_roomid_incorrect = 1;     //房间ID错误 版本不正确或是作弊
+//	e_rmt_room_full = 2;            //房间已满	
+//	e_rmt_room_notopen = 3;         //房间未开放
+//	e_rmt_gold_less = 4;            //金币条件不满足	
+//	e_rmt_bet_full = 5;             //押注已满	
+//	e_rmt_game_begun = 6;           //游戏已经开始
+//	e_rmt_unknow = 7;               //未知错误
+//	e_rmt_fail = 8;                 //换桌失败
+//}
+  
+  enum e_msg_gamestate_type {
+    e_state_shake = 0;        //摇宝状态
+    e_state_beginbet = 1;     //开始下注时间
+	e_state_endbet = 2;       //停止下注时间
+	e_state_dice = 3;         //开奖
+	e_state_result = 4;       //同步数据 - 显示输赢结果
+  }

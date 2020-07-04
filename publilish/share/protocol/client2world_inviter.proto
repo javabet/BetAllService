@@ -1,0 +1,87 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+message msg_inviter_info
+{
+	optional int32 photo_frame = 1;	//玩家头像框
+	optional string nick_name = 2;	//昵称
+	optional int64 total_reward = 3;//累计收益
+	optional int32 player_id = 4;	//玩家ID
+	optional int64 today_reward = 5;//今日收益
+	optional string icon_custom = 6;//玩家头像
+	optional int32 viplvl = 7;		//vip等级
+}
+
+//绑定邀请人
+message packetc2w_bind_inviter
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_bind_inviter];
+	optional int32 inviter = 2;	//邀请人ID
+}
+
+//绑定邀请人结果
+message packetw2c_bind_inviter_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_bind_inviter_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+
+	optional int32 inviter = 3;	//邀请人ID
+	optional string channelid = 4;	//渠道ID
+}
+
+//请求收益列表
+message packetc2w_reward_list
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_reward_list];
+}
+
+//请求收益列表结果
+message packetw2c_reward_list_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_reward_list_result];
+	repeated msg_inviter_info inviter_list = 2;		//邀请列表
+	optional int32 water_reward = 3;				//抽水提成
+	optional int64 can_receive = 4;					//可领取收益
+	optional int64 total_reward = 5;				//总收益
+	optional msg_inviter_info inviter_info = 6;		//邀请人信息
+	optional int32 inviter_reward_count = 7;	//已领取邀请人奖励次数
+	optional int32 invite_count = 8;			//邀请人数
+}
+
+//领取收益
+message packetc2w_receive_reward
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_receive_reward];
+}
+
+//领取收益结果
+message packetw2c_receive_reward_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_receive_reward_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+	optional int64 reward = 3;	//获得的收益
+}
+
+//请求收益记录
+message packetc2w_ask_income_history
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ask_income_history]; 
+}
+
+//收益记录
+message packetw2c_income_history_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_income_history_result]; 
+	repeated string history_infos = 2;
+	
+}
+//最新收益记录
+message packetw2c_income_new_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_income_new_result]; 
+    optional string new_infos = 2;
+    optional int32  playerid = 3;
+}

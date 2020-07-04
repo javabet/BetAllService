@@ -1,0 +1,306 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+//V3////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+message msg_performance_info
+{
+	optional int32 player_id = 1;	//玩家ID
+	optional int32 photo_frame = 2;	//玩家头像
+	optional string nick_name = 3;	//昵称
+	optional int32 parent = 4;		//直属上级
+	
+	optional int64 per_today = 5;			//今日业绩（自己打的，不做展示）
+	optional int64 per_yesterday = 6;		//昨日业绩（自己打的，不做展示）
+	optional int64 per_sub_today = 7;		//今日业绩（下级打的）
+	optional int64 per_sub_yesterday = 8;	//昨日业绩（下级打的）
+	
+	optional int64 per_tw = 9;			//本周业绩（自己打的，不做展示）
+	optional int64 per_lw = 10;			//上周业绩（自己打的，不做展示）
+	optional int64 per_sub_tw = 11;		//本周业绩（下级打的）
+	optional int64 per_sub_lw = 12;		//上周业绩（下级打的）
+	
+	optional int32 ts_create = 13;		//创建时间
+	
+	optional int32 ac = 14;					//团队人数（代理人数，下家和自己）
+	optional int32 ac_inc = 15;				//今日新增
+	optional int32 ac_inc_yd = 16;			//昨日新增
+	optional int32 ac_inc_tw = 17;			//本周新增
+	optional int32 ac_inc_lw = 18;			//上周新增
+	optional int32 ac_inc_tm = 19;			//本月新增
+	optional int32 ac_inc_lm = 20;			//上月新增
+	
+	optional int64 gain_yd = 21;			//昨日获取佣金
+	optional int64 gain_tw = 22;			//本周获取佣金
+	optional int64 gain_lw = 23;			//上周获取佣金
+	optional int64 gain = 24;				//今日获取佣金
+}
+
+message msg_performance_team
+{
+	optional int32 id = 1;			//团队ID
+	optional string name = 2;		//昵称
+	optional int32 count = 3;		//当前排线人数
+	optional int32 count_limit = 4;	//排线人数上限
+	optional int32 code_tag = 5;	//二维码唯一标识(重置二维码时使用)
+	optional int32 ac_inc = 6;		//今日新增人数
+	repeated msg_performance_info member_infos = 7;//成员列表
+}
+
+
+//请求业绩列表
+message packetc2w_performance_list
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_list];
+}
+
+//请求业绩列表结果
+message packetw2c_performance_list_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_list_result];
+	repeated msg_performance_info info = 2;
+}
+
+//请求领取收益
+message packetc2w_performance_gain
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_gain];
+}
+message packetw2c_performance_gain_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_gain_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+	optional int64 gain = 3;	//收益
+}
+
+//下级查询
+message packetc2w_performance_child
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_child];
+	optional int32 player_id = 2;	//玩家ID
+}
+message packetw2c_performance_child_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_child_result];
+	optional msg_performance_info info = 2;
+}
+
+//查询可领取返利
+message packetc2w_performance_check_gain
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_check_gain];
+}
+message packetw2c_performance_check_gain_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_check_gain_result];
+	optional int64 gain = 2;		//可领取返利
+}
+
+
+//创建团队
+message packetc2w_performance_team_create
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_team_create];
+	optional int32 count = 2;	//排线人数
+	optional string nick_name = 3;	//团队名称
+}
+message packetw2c_performance_team_create_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_team_create_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+	optional int32 team_id = 3;	//团队id
+	optional int32 count = 4;	//排线人数
+	optional string nick_name = 5;	//团队名称
+	optional int32 code_tag = 6;	//二维码唯一标识(重置二维码时使用)
+}
+
+//请求团队列表
+message packetc2w_performance_team_list
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_team_list];
+}
+message packetw2c_performance_team_list_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_team_list_result];
+	repeated msg_performance_team teams = 2;
+}
+
+//团队成员
+message packetc2w_performance_team_info
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_team_info];
+	optional int32 team_id = 3;	//团队id
+}
+message packetw2c_performance_team_info_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_team_info_result];
+	//repeated msg_performance_info member_infos = 2;
+	optional msg_performance_team team = 2;
+}
+
+//团队更新
+message packetc2w_performance_team_update
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_team_update];
+	optional int32 optype = 2;		//更新类型 0.重置二维码 1.排线人数上限 2.修改名称
+	optional int32 team_id = 3;	//团队id
+	optional int32 limit = 4 [default = 0];		//排线上限（如果存在）
+	optional string nick_name =5;	//团队名称（如果存在）
+}
+message packetw2c_performance_team_update_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_team_update_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+	optional int32 optype = 3;		//更新类型 0.重置二维码 1.排线人数上限 2.修改名称
+	optional int32 team_id = 4;		//团队id
+	optional int32 limit = 5 [default = 0];		//排线上限（如果存在）
+	optional string nick_name = 6;	//团队名称（如果存在）
+	optional int32 code_tag = 7;	//二维码唯一标识(重置二维码时使用)
+}
+
+//业绩查询
+message packetc2w_performance_info
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_info];
+}
+message packetw2c_performance_info_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_info_result];
+	
+	optional int64 commission_today_team = 2;			//今日团队佣金
+	optional int64 commission_today_self = 3;			//我的今日佣金
+	optional int64 commission_today_agent = 4;			//代理的今日佣金
+	
+	optional int64 commission_yesterday_team = 5;		//昨日团队佣金
+	optional int64 commission_yesterday_self = 6;		//我的昨日佣金
+	optional int64 commission_yesterday_agent = 7;		//代理的昨日佣金
+	
+	optional int64 per_today_team = 8;					//今日团队业绩
+	optional int64 per_today_self = 9;					//我的今日直营业绩
+	optional int64 per_today_agent = 10;				//代理的今日业绩
+	
+	optional int64 per_yesterday_team = 11;				//昨日团队业绩
+	optional int64 per_yesterday_self = 12;				//我的昨日直营业绩
+	optional int64 per_yesterday_agent = 13;			//代理的昨日业绩
+	
+	optional int64 per_today = 14;					//我的今日业绩
+	optional int64 per_this_week = 15;				//我的本周业绩
+	optional int64 rebate_today = 16;				//今日返利金额
+	optional int64 rebate_this_week = 17;			//本周返利金额
+	
+	optional int64 per_b_self_today = 18;			//我今日的直营业绩
+	optional int64 per_b_child_today = 19;			//直属代理今日业绩
+	optional int64 per_b_self_yesterday = 20;		//我昨日的直营业绩
+	optional int64 per_b_child_yesterday = 21;		//直属代理昨日业绩
+	
+	optional int32 ac = 22;					//团队人数（代理人数，下家和自己）
+	optional int32 ac_inc = 23;				//今日新增
+	optional int32 ac_inc_yd = 24;			//昨日新增
+	optional int32 ac_inc_tw = 25;			//本周新增
+	optional int32 ac_inc_lw = 26;			//上周新增
+	optional int32 ac_inc_tm = 27;			//本月新增
+	optional int32 ac_inc_lm = 28;			//上月新增
+	
+	optional int32 parent = 29;				//上级ID
+	optional int64 gain_all = 30;			//历史总佣金
+	optional int32 ac_inc_dir = 31;			//今日直属新增加
+	optional int32 count_dir = 32;			//直属人数
+}
+
+//业绩查询 自己今日
+message packetc2w_performance_info_self_today
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_info_self_today];
+}
+message packetw2c_performance_info_self_today_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_info_self_today_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+}
+
+//业绩查询 自己昨日
+message packetc2w_performance_info_self_yesterday
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_info_self_yesterday];
+}
+message packetw2c_performance_info_self_yesterday_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_info_self_yesterday_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+}
+
+//业绩查询 代理今日
+message packetc2w_performance_info_agent_today
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_info_agent_today];
+}
+message packetw2c_performance_info_agent_today_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_info_agent_today_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+}
+
+//业绩查询 代理昨日
+message packetc2w_performance_info_agent_yesterday
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_info_agent_yesterday];
+}
+message packetw2c_performance_info_agent_yesterday_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_info_agent_yesterday_result];
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+}
+
+//获取推广链接
+message packetc2w_promote_url
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_promote_url];
+	optional string params = 2;		//链接的参数
+	optional string channel_id = 3;	//渠道号,无限代理用玩家身上的渠道号,房卡邀请链接用包体的渠道号
+}
+
+//获取推广链接结果
+message packetw2c_promote_url_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_promote_url_result];
+	optional string url = 2;	//返回的推广链接，如果为空,使用默认的推广链接
+}
+
+
+//查询配置
+message packetc2w_performance_configs
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_performance_configs]; 
+}
+
+ 
+
+message msg_performance_rate
+{
+	optional int32 gameid =1;
+	optional int64 performancerate =2;	 
+	optional string desc = 3;
+}
+
+message msg_performance_rebate
+{
+	optional int64 pbutton =1;
+	optional int64 ptop =2;
+	optional int64 rate =3;
+	optional string desc = 4;
+}
+
+
+//获取配置
+message packetw2c_performance_configs_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_performance_configs_result]; 
+	repeated msg_performance_rate rates =2;
+	repeated msg_performance_rebate rebates =3;
+}
+
+
+
+ 

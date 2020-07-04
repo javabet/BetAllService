@@ -1,0 +1,67 @@
+import "world2activity_msg_type.proto";
+import "msg_info_def.proto";
+import "msg_type_def.proto";
+
+package world2activity_protocols;
+
+/////////////////////////////////////////////
+enum e_w2a_sync_type {
+	//客户端到服务端
+    e_w2a_sync_type_init = 1;		//初始化基本信息
+	e_w2a_sync_type_recharge = 2;	//充值
+	e_w2a_sync_type_formal = 3;		//绑定	
+	e_w2a_sync_type_vip = 4;		//vip
+	e_w2a_sync_type_perfromance = 5;//业绩	
+	e_w2a_sync_type_clear = 6;		//清理缓存
+	e_w2a_sync_type_clear_command = 7;		//后台修改后清理缓存
+	e_w2a_sync_type_draw_water = 8;	//提存导致的提现需求流水变化
+}
+
+// world -> activity
+//同步信息
+message packet_w2a_sync_msg
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2a_sync_msg]; 
+	optional int32 playerid = 2;
+	optional int32 agentid = 3;
+	optional e_w2a_sync_type sync_type	= 4;	//同步数据类型
+	optional int64 value1 = 5[default = 0];
+	optional int64 value2 = 6[default = 0];
+	optional int64 value3 = 7[default = 0];
+}
+
+//初始化玩家信息
+message packet_w2a_init_player
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2a_init_player]; 
+	optional int32 worldid = 2;		//世界服ID
+	optional int32 playerid = 3;	//玩家id
+	optional int32 agentid = 4;		//代理ID
+	optional bool isformal = 5;		//是否绑定
+	optional int32 viplv = 6;		//vip等级
+	optional int64 recharged = 7;	//累积充值
+	optional int64 tsbinding = 8;	//绑定时间戳（老已绑定账号有可能是0）
+	optional int64 tslogin = 9;		//登录时间戳（最近一次）
+	optional int32 onlinetime = 10;	//当日在线时长（最近一次登录前）
+	optional string channelid = 11;	//渠道
+	optional string nickname = 12;	//昵称
+	optional int64 createtime = 13;	//创建时间戳
+	optional fixed32 sessionid = 14;	//会话ID
+	
+}
+
+//初始化玩家信息
+message packet_w2a_player_logout
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2a_player_logout]; 
+	optional int32 playerid = 2;	//玩家id
+}
+
+//玩家领奖成功
+message packet_a2w_player_reward
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_a2w_player_reward]; 
+	optional int32 playerid = 2;	//玩家id
+	optional int64 reward = 3;		//奖励（gold）
+	optional int64 reason = 4;		//原因
+}

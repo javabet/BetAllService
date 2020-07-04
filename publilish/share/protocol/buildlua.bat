@@ -1,0 +1,1 @@
+start ProtocolUpdate.exe --lua

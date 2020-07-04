@@ -1,0 +1,199 @@
+package game_blackjack_protocols;
+
+import "game_blackjack_def.proto";
+import "msg_type_def.proto";
+
+//房间信息
+message msg_room_info{
+	optional int32 roomid = 1;		
+}
+
+//获得房间信息
+message packetc2l_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_info];
+}
+
+//房间信息返回
+message packetl2c_get_room_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_room_info_result];
+	repeated msg_room_info room_list = 2;	
+}
+
+// 进入桌子
+message packetc2l_join_table 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_join_table];
+}
+
+// 进入桌子返回
+message packetl2c_join_table_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_join_table_result];
+
+	// 进入桌子结果
+	optional int32 result = 2; 
+	
+	// 房间id
+	optional int32 roomId = 3;
+
+	// 桌子id
+	optional int32 tableId = 4;
+
+	// 当前游戏所处状态  EDeskState
+	optional int32 gameState = 5;
+
+	// 玩家列表
+	repeated PlayerInfo playerList = 6;
+		
+	// 自己的要牌列表(包含两张底牌)
+	repeated PokerInfo pokerList = 7;
+
+	// 自己的状态
+	optional int32 state = 8;
+
+	// 表态等待时间(秒)
+	optional int32 waitDeclareTime = 10;		
+}
+
+// 离开桌子
+message packetc2l_leave_table 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_leave_table];
+}
+
+// 离开桌子返回
+message packetl2c_leave_table_result 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_table_result];
+
+	optional int32 result = 2;
+
+	optional int32 playerGold = 3;
+}
+
+// 玩家加入桌子通知(服务器->客户端)
+message packetl2c_join_table_notify 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_join_table_notify];
+
+	optional PlayerInfo playinfo = 2;
+}
+
+// 玩家离开通知(服务器->客户端)
+message packetl2c_leave_table_notify
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_table_notify];
+
+	optional int32 playerId = 2;
+}
+
+// 同桌的玩家信息
+message PlayerInfo
+{
+	// 玩家ID
+	optional int32 playerId = 1;
+
+	// 昵称
+	optional string nickName = 2;
+	
+	// 玩家状态 EDeskPlayerState
+	optional int32 state = 3;
+	
+	// 玩家要牌列表
+	repeated PokerInfo pokerList = 4;
+	
+	// 玩家所在座位号， 1-5范围内
+	optional int32 seat = 5;
+			
+	// 是否是庄家
+	optional bool is_dealer = 6;
+	
+	// 当前筹码数量
+	optional int64 curChip = 7;
+		
+	// 头像框
+	optional int32 headFrame = 9;		
+
+	// 玩家头像
+	optional string headCustom = 10;
+
+	// 玩家性别	
+	optional int32 sex = 11;			
+	
+	// Vip等级
+	optional int32 vipLevel = 12;
+	
+	// 是否开启自动补充筹码到最大值
+	optional bool supply = 13;
+	
+	// 是否触发自动补充
+	optional bool supply_done = 14;
+}
+
+message PokerInfo 
+{
+	// 除非是发底牌或者是分牌否则 poker2为 null
+	optional int32 poker1 = 1; // 牌1
+	optional int32 poker2 = 2; // 牌2  
+}
+
+// 游戏事件通知(服务器->客户端)
+message packetl2c_game_event_notify
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_event_notify];
+
+	// EGameEvent 事件类型
+	optional int32 event = 2;
+
+	// 事件关联的玩家
+	optional int32 playerId = 3;    
+	
+	// 玩家表态
+	optional int32 declared = 4;
+		
+	// 玩家要牌
+	optional PokerInfo pokerinfo = 5;  	
+}
+
+message PlayerBalance {
+	optional int32 playerId = 1;
+	optional int32 reward0 = 2; // 牌路1 负代表输， 正代表赢
+	optional int32 reward1 = 3; // 牌路2
+}
+
+message packetl2c_balance_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_balance_notify];
+	// 胜负奖励
+	repeated PlayerBalance balanceList = 2;
+}
+
+
+// 玩家请求表态
+message packetc2l_req_declare
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_declare];
+
+	// 所选结果 EDeclare
+	optional int32 declareSel = 2;
+}
+
+// 请求表态结果
+message packetl2c_req_declare_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_declare_result];
+
+	// 结果
+	optional int32 result = 2;
+} 
+
+//检测游戏状态		//重连之后判断是否在桌子中
+message packetc2l_check_state {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_check_state];
+}
+
+//检测状态
+message packetl2c_check_state_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_check_state_result];
+	optional bool is_ingame = 2 [default = false];//是否在
+}
+

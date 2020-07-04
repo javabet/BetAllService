@@ -1,0 +1,240 @@
+package game_slotcsd_protocols;
+
+import "game_slotcsd_def.proto"; 
+import "msg_type_def.proto"; 
+
+// 是否在游戏
+message packetc2l_check_state
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_check_state];
+}
+
+// 是否在游戏 - 回执
+message packetc2l_check_state_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_check_state_result];
+
+	//大于0表示正在游戏中   0:不在游戏
+	optional int32 room_id = 2 ; 
+}
+
+//进入游戏 
+message packetc2l_enter_game   
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_enter_game];
+	optional int32 room_id = 2;
+}
+
+//进入游戏 - 回执
+message packetc2l_enter_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_game_result];
+	optional int32 result = 2;
+	optional int32 room_id = 3;
+	optional int64 gold = 4;					//玩家金币
+	optional int32 free_count = 5;				//自己的剩余免费游戏次数
+}
+
+//离开游戏 
+message packetc2l_leave_game
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_leave_game];
+	optional int32 room_id = 2;
+}
+
+//离开游戏 - 回执
+message packetc2l_leave_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_game_result];
+	optional int32 result = 2;
+	optional int64 gold = 3;					//玩家金币
+}
+
+//开始游戏 
+message packetc2l_star_game
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_star_game];
+	
+	// 倍率索引，从0开始
+	optional int32 rateIndex = 2;
+}
+
+// 一条线的信息
+message LineInfo
+{
+	// 线ID 1-9
+	optional int32 lineId = 1;
+	
+	// 左右灯标记  0 左灯亮 1 右灯亮 2 左右灯全亮
+	optional int32 lightFlag = 2;
+
+	// 左边是几连 3是3连 4是4连 5是5连
+	optional int32 leftLinkCount = 3;
+	
+	// 右边是几连 3是3连 4是4连 5是5连
+	optional int32 rightLinkCount = 4;
+	
+	// 左边Icon 非0表示图标ID，否则表示没有
+	optional int32 leftIcon = 5;
+	
+	// 左边Icon 非0表示图标ID，否则表示没有
+	optional int32 rightIcon = 6;
+}
+
+// 结算图标信息
+message IconInfo
+{
+	// 图标ID
+	optional int32 iconId = 1;
+	
+	// 连线长度
+	optional int32 len = 2;
+	
+	// 对应倍率
+	optional int32 rate = 3;
+	
+	// 图标位置（包括万能图标）
+	repeated int32 iconpos = 4;
+}
+
+// 免费游戏信息
+message FreeInfo
+{
+	// 图标ID数组
+	optional string imageArr = 1;
+
+	// 赢的钱数
+	optional int32 winMoney = 2;
+	
+	// 结算图标倍率信息
+	repeated IconInfo icons = 3;
+	
+	// 前两列是否出免费
+	optional bool freeCol = 4;
+	
+	// 本次新增免费次数
+	optional int32 freeAdd = 5;
+	
+	// 免费游戏累积中奖值
+	optional int64 freeEndGold = 6;
+}
+
+//开始游戏 - 回执
+message packetc2l_star_game_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_star_game_result];
+
+	// 货币类型
+	optional int32 moneyType = 2;
+
+	// 图标ID数组
+	optional string imageArr = 3;
+	
+	repeated LineInfo infoList = 4;
+
+	// 赢的钱数
+	optional int32 winMoney = 5;
+	
+	// 开始时候扣除的钱数
+	optional int32 deductMoney = 6;
+
+	// 结果
+	optional int32 result = 7;
+
+	// 当前的总钱数(服务器同步到客户端)
+	optional int32 curMoney = 8;
+	
+	// 结算图标倍率信息
+	repeated IconInfo icons = 9;
+	
+	// 前两列是否出免费
+	optional bool freeCol = 10;
+	
+	//本次新增免费次数
+	optional int32 freeAdd = 11;
+	
+	// 免费游戏累积中奖值
+	optional int64 freeEndGold = 12;
+	
+	// 免费游戏信息集合
+	repeated FreeInfo freeInfos = 13;
+}
+
+//获取游戏信息
+message packetc2l_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_info];
+}
+
+//房间信息
+message msg_room_info{
+	optional int32 roomid = 1;		
+}
+
+//返回游戏信息
+message packetl2c_get_room_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_room_info_result];
+	repeated msg_room_info rooms = 2;
+}
+
+//请求补充试玩金币
+message packetc2l_supply_chip {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_supply_chip];
+}
+
+//请求补充试玩金币返回
+message packetl2c_supply_chip_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_supply_chip_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int64 gold = 3;
+}
+
+//请求桌子内场景信息
+message packetc2l_get_room_scene_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_scene_info];
+}
+
+//获得桌子内场景信息		//进入桌子跟断线重连情况下调用
+message packetl2c_get_room_scene_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_room_scene_info];
+	optional int32 room_id = 2;
+	repeated msg_player_info player_list = 3;
+	optional int32 free_count = 4;				//自己的剩余免费游戏次数
+	optional int64 gold = 5;					//玩家金币
+	optional int64 freeEndGold = 6;				// 免费游戏累积中奖值
+}
+
+//房间信息
+message room_player{
+	optional int32 player_id = 1;
+	optional int64 gold = 2;
+	optional int64 bet = 3;
+	optional int64 profit_today = 4;
+}
+
+//前端控制 获取房间信息
+message packetl2c_gm_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_gm_get_room_info];
+}
+
+//前端控制 获取房间信息返回
+message packetl2c_gm_get_room_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_gm_get_room_info_result];
+	optional int32 result = 2;//结果
+	optional int32 killcount = 3;	//剩余GM杀分次数（人次）
+	repeated room_player players = 4;//玩家列表
+}
+
+//前端控制 执行杀分
+message packetl2c_gm_do_kill {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_gm_do_kill];
+	optional int32 killcount = 2; 	//设置杀分次数（人次）
+	
+	optional int32 pid = 3; 		//指定玩家id（免费次数）
+	optional int32 free = 4; 		//指定免费次数 1 2（首次免费）
+}
+
+//前端控制 执行杀分返回
+message packetl2c_gm_do_kill_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_gm_do_kill_result];
+	optional int32 result = 2;//结果
+}

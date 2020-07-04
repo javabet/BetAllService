@@ -1,0 +1,13 @@
+package world2activity_protocols;
+
+enum e_server_msg_type {
+    e_mst_w2a_start_index		= 42000;		
+	e_mst_w2a_sync_msg	= 42001;			//同步数据	
+	e_mst_w2a_init_player	= 42002;		//初始化玩家数据
+	e_mst_w2a_player_logout	= 42003;		//玩家登出
+	
+	e_mst_a2w_start_index		= 42500;
+	e_mst_a2w_player_reward	= 42501;		//玩家领奖成功(加金币)
+	
+	e_mst_wa_end_index = 42999;
+  }  	

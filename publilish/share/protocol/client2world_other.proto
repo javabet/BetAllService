@@ -1,0 +1,294 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+
+//绑定支付宝
+message packetc2w_ac_bind{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ac_bind];
+	optional string account = 2;
+	optional string real_name = 3;
+}
+
+//绑定结果
+message packetw2c_ac_bind_result{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_ac_bind_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional string error_info = 3;
+	optional int32 ts_ac_bind = 4;	//上次绑定时间戳
+}
+
+//兑换
+message packetc2w_ac_transfer{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ac_transfer];
+	optional int64 gold = 2;
+	optional int32 type = 3 [default = 1];	//1支付宝 2银行卡
+}
+
+//兑换结果
+message packetw2c_ac_transfer_result{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_ac_transfer_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int64 gold = 3;
+}
+
+//充值url
+message packetc2w_ac_url{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ac_url];
+	optional int64 gold = 2;
+	optional int32 paytype = 3 [default = 1];
+	optional string param = 4;
+	optional int32  payKey = 5 [default = 0];			//通道id
+}
+
+//充值url结果
+message packetw2c_ac_url_result{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_ac_url_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional string url = 3;
+	optional string order_id = 4;
+	optional bool is_webview = 5[default = false];
+}
+
+//请求验证支付
+message packetc2w_ask_check_payment{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ask_check_payment];	
+	optional string orderid = 2;	
+}
+
+//请求测试支付
+message packetc2w_ask_test_payment{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ask_test_payment];	
+	optional int32 pay_type = 2;	//充值类型
+	optional int32 pay_value = 3;   //充值参数
+}
+
+//返回
+message packetw2c_ask_check_payment_result{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_ask_check_payment_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];	//充值结果
+	optional int32 pay_type = 3; 	//充值类型
+	optional int32 pay_value = 4;   //充值参数
+	optional int32 vip_exp = 5;		//VIP经验
+	optional string orderid = 6;
+}
+
+message msg_bank_info
+{
+	optional string code = 1;
+	optional string name = 2;
+	optional bool open = 3;
+}
+//获取银行卡列表
+message packetc2w_req_bank_list
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_req_bank_list];
+}
+//获取银行卡列表结果
+message packetw2c_req_bank_list_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_bank_list_result];
+	repeated msg_bank_info bank_list = 2;
+}
+
+//绑定银行卡
+message packetc2w_bind_bank_card
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_bind_bank_card];
+	optional string name = 2;				//姓名
+	optional string card_number = 3;		//卡号
+	optional string identity_number = 4;	//身份证号
+	optional string bank_name = 5;			//开户行
+	optional string card_number2 = 6;		//确认卡号
+	optional string phone_number = 7;		//手机号
+}
+
+//绑定银行卡结果
+message packetw2c_bind_bank_card_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_bind_bank_card_result];	
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional string error_info = 3;
+}
+
+//获取银行卡信息
+message packetc2w_req_bank_card
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_req_bank_card];
+}
+
+//获取银行卡信息结果
+message packetw2c_req_bank_card_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_bank_card_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional string name = 3;				//姓名
+	optional string card_number = 4;		//卡号
+	optional string bank_name = 5;			//开户行
+}
+
+//请求提现参数
+message packetc2w_ac_transfer_param
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_ac_transfer_param];		
+}
+
+message withdraw_param_info{
+	optional int32 pay_type = 1;				//1支付宝 2银行卡
+	optional int32 withdraw_cost = 2;			//兑换税率 因为不支持小数点，暂时这个数先 * 1000传给客户端
+	optional int32 min_withraw_gold = 3;		//兑换最小值	
+	optional int32 max_withraw_gold = 4;		//兑换最大值	
+}
+
+//参数结果
+message packetw2c_ac_transfer_param_result{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_ac_transfer_param_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_success];
+	repeated withdraw_param_info  param = 3;
+	optional int32 withdraw_limit = 4;			//每日提现次数
+	optional int32 withdraw_time = 5;			//现在每日已提现次数
+}
+
+//第三方支付信息
+message third_pay_info {
+	optional int32  ThirdKey 	= 1;			//第三方通道id
+	optional int32 	AgentId 	= 2;			//代理ID,根据玩家ID所属的代理ID，找到对应的支付配置
+	optional int32  PayIndex 	= 3;			//前端排序字段(Index 排序字段，从大到小排序.)
+	optional int32 	PayType 	= 4;			//支付类型
+	optional string GoldList 	= 5;			//充值金额列表
+	optional string PayMark 	= 6;			//
+	optional string PayName 	= 7;			//支付名称
+	optional bool	IsOpen      = 8;			//该通道是否开放(只给前端推送已开放的通道)
+	optional int32	BeginRegTime= 9;			//注册时间限制条件-开始(小时)
+	optional int32	EndRegTime 	= 10;			//注册时间限制条件-结束(小时)
+	optional int32  MinVip		= 11;			//VIP等级限制条件-最小条件	
+	optional int32  MaxVip		= 12;			//VIP等级限制条件-最大条件	
+	optional int64  MinGold     = 13;			//最小金额
+	optional int64  MaxGold     = 14;			//最大金额
+	optional bool   sdk_visible	= 15;			//是否有SDK才可见	
+	optional int64  BankNo     = 16;			//银行账号
+	optional string  BankName     = 17;			//银行名
+	optional string  BankAccount     = 18;			//银行账号
+}
+// 请求第三方支付
+message packetc2w_third_pay
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_pay]; 
+}
+ 
+// 请求第三方支付结果
+message packetw2c_third_pay_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_pay_result]; 
+    repeated third_pay_info info = 2;	
+	repeated int32 HotList = 3;		//火热标记
+}
+
+//币商客服记录
+message coindealer_record
+{
+	optional int32  id = 2;	//币商ID
+	optional string name = 1; //币商名字
+	optional string pic = 3;	//币商头像
+	repeated int32 pay_types = 4;	//支持的充值方式
+	optional int64 time = 5;	//上次联系的时间
+}
+
+//请求联系过的币商客服列表
+message packetc2w_coindealer_record
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_coindealer_record];
+}
+
+message packetw2c_coindealer_record_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_coindealer_record_result];
+	repeated coindealer_record list = 2;
+}
+
+//请求提现记录
+message packetc2w_withdraw_record
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_withdraw_record];
+	optional int32 page = 2;						// 取第几页的数据
+	optional int32 page_num = 3;					//每页的数据的条数
+}
+
+message packetw2c_withdraw_record_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_withdraw_record_result];
+	optional  int32 count = 2;					//当前数据的总长度
+	repeated withdraw_record_info list = 3;
+}
+
+
+//请求充值记录
+message packetc2w_recharge_record
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_recharge_record];
+	optional int32 page = 2;						// 取第几页的数据
+	optional int32 page_num = 3;					//每页的数据的条数
+}
+
+message packetw2c_recharge_record_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_recharge_record_result];
+	optional  int32 count = 2;					//当前数据的总长度
+	repeated recharge_record_info list = 3;		//当前获取的片断的数据值
+}
+
+message withdraw_record_info
+{
+	optional string  id 			= 1;	//提现编码
+	optional int32  gold 			= 2;	//金额
+	optional int32  create_time 	= 3;	//创建时间
+	optional int32  pay_type 		= 4;	//方式(1：支付宝，2：微信 3：网银  9：云闪付)
+	optional int32  status 			= 5;	//状态(1:已提现 2：未成交)
+}
+
+message recharge_record_info
+{
+	optional string  id 			= 1;	//提现编码
+	optional int32  gold 			= 2;	//金额
+	optional int64  create_time 	= 3;	//创建时间
+	optional int32  pay_type 		= 4;	//方式(1：支付宝，2：微信 3：网银  9：云闪付)
+	optional int32  status 			= 5;	//状态(1:已提现 2：未成交)
+	optional string  link_url 		= 6;	//需要打开的url
+}
+
+//请求提交订单
+message packetc2w_pay_bank
+{
+	optional e_server_msg_type packet_id 		= 1 [default = e_mst_c2w_pay_bank];
+	optional int32 pay_bank_id 					= 2;	// 银行转账的编号
+	optional int64 player_id 					= 3;	//充值PlayerId
+	optional string  recharge_account_name 		= 4;	//充值的用户名
+	optional string  recharge_time 				= 5;	//充值时间戳
+	optional int32  recharge_num 				= 6;	//充值的金额
+}
+  
+
+//请求提交订单返回
+message packetw2c_pay_bank_result
+{
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_w2c_pay_bank_result];
+	optional int32 result_type 						= 2;	// 转账错误结果
+}
+
+//请求购买房卡
+message packetc2w_buy_room_card
+{
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_c2w_buy_room_card];
+	optional int32 type 							= 2;	
+}
+
+//请求购买房卡返回
+message packetw2c_buy_room_card_result
+{
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_w2c_buy_room_card_result];
+	optional int32 result_type 						= 2;	
+	optional int32 chg_gold							= 3;	//金币变化的值
+	optional int32 chg_room_card					= 4;	//房卡变化的值
+}

@@ -1,0 +1,424 @@
+package game_texaspoker_protocols;
+
+import "game_texaspoker_def.proto"; 
+import "msg_type_def.proto"; 
+
+//房间信息
+message msg_room_info{
+	optional int32 roomid = 1;		
+}
+
+//获得房间信息
+message packetc2l_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_info];
+}
+
+//房间信息返回
+message packetl2c_get_room_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_get_room_info_result];
+	repeated msg_room_info room_list = 2;	
+}
+
+// 进入桌子
+message packetc2l_join_table 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_join_table];
+
+	// 房间id
+	optional int32 roomId = 2;
+}
+
+// 进入桌子返回
+message packetl2c_join_table_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_join_table_result];
+
+	// 进入桌子结果
+	optional int32 result = 2; 
+}
+
+// 离开桌子
+message packetc2l_leave_table 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_leave_table];
+}
+
+// 离开桌子返回
+message packetl2c_leave_table_result 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_table_result];
+
+	optional int32 result = 2;
+
+	optional int32 playerGold = 3;
+}
+
+// 同桌的玩家信息
+message PlayerInfo
+{
+	// 玩家ID
+	optional int32 playerId = 1;
+
+	// 昵称
+	optional string nickName = 2;
+
+	// 当前筹码数量
+	optional int64 curChip = 3;
+
+	// 已下注金额
+	optional int64 hasBet = 4;
+	
+	// 已下注金额（本阶段内）
+	optional int64 hasBetCur = 5;
+
+	// 当前所处状态  EDeskPlayerState枚举
+	optional int32 state = 6;
+
+	// 玩家所在座位号， 1-7范围内
+	optional int32 seat = 7;
+
+	// 玩家表态结果 EDeclare
+	optional int32 declareResult = 8;
+		
+	// 头像框
+	optional int32 headFrame = 9;		
+
+	// 玩家头像
+	optional string headCustom = 10;
+
+	// 玩家性别	
+	optional int32 sex = 11;			
+
+	// Vip等级
+	optional int32 vipLevel = 12;
+	
+	// 是否开启自动补充筹码到最大值
+	optional bool supply = 13;
+	
+	// 是否触发自动补充
+	optional bool supply_done = 14;
+}
+
+// 玩家下注信息（包括弃牌离场玩家）
+message PlayerBetInfo
+{
+	// 玩家ID
+	optional int32 playerId = 1;
+
+	// 已下注金额
+	optional int64 hasBet = 2;
+}
+
+// 游戏事件通知(服务器->客户端)
+message packetl2c_game_event_notify
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_event_notify];
+
+	// EGameEvent 事件类型
+	optional int32 event = 2;
+
+	// 玩家信息
+	optional PlayerInfo playerInfo = 3;
+
+	// 公共牌信息
+	repeated PokerInfo commonPoker = 4;
+
+	// 当前底池
+	optional int64 curRewardPool = 5;
+
+	// 加注时基本值
+	optional int64 addBetBaseValue = 6;
+	
+	// 本轮底注
+	optional int64 curBet = 7;
+	
+	// 玩家历史下注（包括弃牌离场玩家）
+	repeated PlayerBetInfo playerBetInfo = 8;
+}
+
+// 请求桌子内场景信息
+message packetc2l_get_table_scene_info 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_table_scene_info];
+}
+
+message PokerInfo
+{
+	// 花色  EPokerFlower
+	optional int32 flower = 1;
+
+	// 面值
+	optional int32 value = 2;
+};
+
+// 获得桌子内场景信息, 进入桌子跟断线重连情况下调用
+message packetl2c_get_table_scene_info_result 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_get_table_scene_info_result ];
+
+	// 房间id
+	optional int32 roomId = 2;
+
+	// 桌子id
+	optional int32 tableId = 3;
+
+	// 当前游戏所处状态  EDeskState
+	optional int32 gameState = 4;
+
+	// 玩家列表
+	repeated PlayerInfo playerList = 5;
+
+	// 公共牌
+	repeated PokerInfo commonPoker = 6;
+
+	// 自己的底牌 2张
+	repeated PokerInfo backPoker = 7;
+
+	// 小盲注下注数量(从表格TexasPoker_RoomCFG.xls中获取)
+	optional int64 smallBlindBet = 8;
+
+	// 全盲注下注数量(从表格TexasPoker_RoomCFG.xls中获取)
+	optional int64 fullBlindBet = 9;
+
+	// 表态等待时间(秒)
+	optional int32 waitDeclareTime = 10;
+
+	// 当前底池
+	optional int64 curRewardPool = 11;
+	
+	// 加注时基本值
+	optional int64 addBetBaseValue = 12;
+	
+	// 本轮底注
+	optional int64 curBet = 13;
+	
+	// 玩家历史下注（包括弃牌离场玩家）
+	repeated PlayerBetInfo playerBetInfo = 14;
+	
+	//游戏信息
+	optional GameInfo gameInfo = 15;
+}
+
+// 请求表态
+message packetc2l_req_declare
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_declare];
+
+	// 所选结果 EDeclare
+	optional int32 declareSel = 2;
+
+	// 参数，跟注时需用
+	optional int32 param = 3;
+}
+
+// 请求表态结果
+message packetl2c_req_declare_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_declare_result];
+
+	// 结果
+	optional int32 result = 2;
+
+	// 当前筹码
+	optional int32 curChip = 3;
+
+	// 已下注
+	optional int32 hasBet = 4;
+}
+
+// 游戏信息
+message GameInfo
+{
+	// 庄家所在座位
+	optional int32 bankerSeat = 1;
+
+	// 小盲注所在座位
+	optional int32 smallBlindSeat = 2;
+
+	// 大盲注所在座位
+	optional int32 bigBlindSeat = 3;
+}
+
+// 游戏开始通知
+message packetl2c_game_start_notify
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_start_notify];
+
+	optional GameInfo gameInfo = 2;
+
+	repeated PlayerInfo playerList = 3;
+
+	// 自己的底牌 2张
+	repeated PokerInfo backPoker = 4;
+
+	// 当前底池
+	optional int64 curRewardPool = 5;
+}
+
+// 通知游戏等待
+message packetl2c_game_wait_notify
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_wait_notify];
+}
+
+// 结算玩家信息
+message BalancePlayerInfo
+{
+	// 玩家ID
+	optional int32 playerId = 1;
+
+	// 玩家所在座位号， 1-9范围内
+	optional int32 seat = 2;
+
+	// 玩家底牌
+	repeated PokerInfo backPoker = 3;
+
+	// 最终的5张牌
+	repeated PokerInfo selPoker = 4;
+
+	// 最终5张牌的牌型	EPokerType
+	optional int32 pokerType = 5;
+
+	// 赢得的奖励
+	optional int32 winReward = 6;
+
+	// 是否弃牌 true是
+	optional bool isAbandon = 7;
+
+	// 是否赢家，牌型最大的若干玩家就是赢
+	optional bool isWinner = 8;
+
+	// 是否亮牌
+	optional bool isShowPoker = 9;
+	
+	// 排名
+	optional int32 rank = 10;
+}
+
+// 游戏结束通知，此时客户端结算
+message packetl2c_game_end_notify
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_end_notify]; 
+
+	// 当前底池
+	optional int64 curRewardPool = 2;
+
+	repeated BalancePlayerInfo playerList = 3;
+
+	// 是否全部弃牌，除了一个人以外。这种情况下，由于公共牌没有发完，弃牌玩家没有牌型
+	optional bool isAllAbandon = 4;
+	
+	// 公共牌信息
+	repeated PokerInfo commonPoker = 5;
+	
+	// 玩家历史下注（包括弃牌离场玩家）
+	repeated PlayerBetInfo playerBetInfo = 6;
+}
+
+// 处于观战的玩家请求坐下
+message packetc2l_req_sitdown
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_sitdown];
+}
+
+// 处于观战的玩家请求坐下结果
+message packetl2c_req_sitdown_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_sitdown_result];
+
+	// 结果
+	optional int32 result = 2;
+}
+
+// 请求设置自动补充
+message packetc2l_req_supply
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_supply];
+	
+	// 是否开启自动补充
+	optional bool auto = 2;
+}
+
+// 请求设置自动补充结果
+message packetl2c_req_supply_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_supply_result];
+
+	// 是否开启自动补充
+	optional bool auto = 2;
+	
+	// 结果
+	optional int32 result = 3;
+}
+
+// 请求设置筹码
+message packetc2l_req_chip
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_chip];
+	
+	// 请求筹码
+	optional int32 chip = 2;
+}
+
+// 请求设置筹码结果
+message packetl2c_req_chip_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_chip_result];
+
+	// 结果
+	optional int32 result = 2;
+}
+
+// 购买筹码通知
+message packetl2c_buy_chip_notify
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_buy_chip_notify]; 
+
+	// 玩家列表
+	repeated PlayerInfo playerList = 2;
+}
+
+// 设置结束时是否亮牌
+message packetc2l_show_poker
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_show_poker];
+
+	// true亮牌
+	optional bool isShow = 2;
+}
+
+// 设置结束时是否亮牌结果
+message packetl2c_show_poker_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_show_poker_result];
+
+	// 结果
+	optional int32 result = 2;
+}
+
+// 玩家请求站起
+message packetc2l_req_standup
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_req_standup];
+}
+
+// 玩家请求站起结果
+message packetl2c_req_standup_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_req_standup_result];
+
+	// 结果
+	optional int32 result = 2;
+}
+
+//检测游戏状态		//重连之后判断是否在桌子中
+message packetc2l_check_state {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_check_state];
+}
+
+//检测状态
+message packetl2c_check_state_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_check_state_result];
+	optional bool is_intable = 2 [default = false];//是否在桌子中
+}
+

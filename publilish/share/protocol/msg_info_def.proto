@@ -1,0 +1,123 @@
+package msg_info_def;
+
+//账号信息
+message msg_account_info{
+	optional int32 aid = 1;				//玩家id
+	optional string channelId = 2;		//渠道
+	optional string nickname = 3;		//昵称
+	optional int64 gold = 4;			//金币
+	optional int32 viplvl = 5;			//vip等级
+	optional int32 vipexp = 6;			//vip经验
+	//optional int32 icon_id = 7;			//废弃
+	optional string icon_custom = 8;	//自定义头像
+	optional int32 sex = 9;				// 性别
+	optional int32 Ticket = 14;			// 礼券
+	optional int32 curPhotoFrameId = 16; // 当前相框ID
+	repeated int32 payids = 19;						 // 已购买过的payid列表
+	optional bool isSafeDepositBoxPwdEmpty = 20;	 // 保险箱密码是否为空,true空
+	optional int64 safeBoxGold = 21;					 // 保险箱内的金币
+	optional int32 collected = 22;					//玩家今天内领取救济金的次数
+	optional int32 updateNicknameCount = 26;			// 修改昵称次数
+	optional bool isBindMobilePhone = 27;	            // 是否绑定了手机
+	optional int32 create_time = 36;			// 创建时间	
+	optional int32 Privilege = 44;				//特权
+	optional int32 lastGameId = 46;							//最后登陆的游戏
+	optional bool isFormal = 47 [default = false];			//正式账号
+	optional string BindInfo = 48;			//绑定的支付宝
+	optional string RealName = 49;			//支付宝姓名
+	optional int32 Recharged = 52;							//累计充值金额	
+	optional int32 inviter_id = 53;			//邀请人ID
+	optional int32 water = 54;				//抽水
+	optional int32 inviter_reward_count = 55;	//已领取邀请人奖励次数
+	optional int32 withdraw = 56;			//兑换金额
+	optional bool sevenday_done = 57;		//七日悬赏是否完成
+	repeated int32 quest_list = 58;			//任务列表
+	optional int32 limit_time_photo = 59;	//限时头像时间
+	optional string ipinfo = 60;			//ip归属地
+	optional int64 inviter_reward = 61;		//可领取的邀请收益
+	optional int64 performance = 62;		//业绩（无限极代理）
+	optional int32 ts_ac_bind = 63;			//上次绑定支付宝时间戳
+	optional bool can_bind_alipay = 64;		//是否可以修改绑定阿里账号
+	optional string cs_token = 65;			//客服token
+	optional int64 LogOutTime = 66;			//上次登出时间	
+	optional string bindphone = 67;			//绑定电话号码
+	optional int64 room_card = 68;			//房卡
+	optional int32 guild_id = 69;			//公会id
+	optional int32 req_join_guild_time = 70;//最后请求加入公会时间
+}
+
+message msg_account_info_ex{
+	optional bool is_robot = 1 [default = false];	//是否机器人
+	optional int64 free_gold = 2;					//免费金币
+	optional int64 profit = 3;						//总盈利
+}
+
+//物品
+message msg_item
+{
+	optional int32 id = 1;		//物品ID
+	optional int32 count = 2;	//数量
+}
+
+//任务信息
+message msg_quest_info
+{
+	optional int32 questid = 1;		//任务id
+	optional int32 count = 2;		//任务计数
+	optional bool received = 3;		//是否领取
+	optional int32 dayNumber = 4;	//任务进行到第几天
+}
+
+//金币变化信息（先预留尽量多的字段，需要用的时候赋值即可）
+message msg_gold_info	
+{
+	optional int32 playerid = 1;	//玩家ID
+	optional int32 gameid = 2;		//游戏ID
+	optional int32 roomid = 3;		//房间ID
+	optional int32 ts = 4;			//变化时间戳
+	optional int32 count = 5		[default = 0];	//每个房间有效游戏次数(产生输赢的情况才算有效)
+	optional int64 gold_bet = 6		[default = 0];	//有效投注总额(产生输赢的情况才算有效)
+	optional int64 gold_win = 7 	[default = 0];	//赢钱
+	optional int64 gold_lose = 8	[default = 0];	//输钱
+	optional int64 performance = 9	[default = 0];	//业绩变化
+	optional int64 profit = 10		[default = 0];	//总盈利变化（应对点控不记录）
+}
+
+//活动信息（属性变化）
+message msg_activity_info{
+	repeated msg_gold_info golds = 1;	//金币变化
+}
+
+//房卡可选配置
+message msg_roomcard_config{
+	optional int32 game_id = 1;		//游戏ID
+	repeated int32 base_gold = 2;	//底分选项
+	repeated int32 duration = 3;	//倒计时选项
+	repeated int32 model = 4;		//模式选项
+	repeated int32 type = 5;		//玩法选项
+	repeated int32 rate_limit = 6;	//封顶选项
+	repeated int32 rounds = 7;		//局数选项
+	repeated int32 cost_count = 8;	//开房间消耗数量
+	repeated int32 player_count = 9;//人数选项
+	repeated int32 small_blind = 10;//小盲选项
+	repeated int32 big_blind = 11;	//大盲选项
+	repeated int32 hua_gold = 12;	//花分选项
+	repeated int32 gold_condition = 13;	//入场条件选项
+}
+
+//已选房卡配置
+message msg_sel_roomcard_config{
+	optional int32 game_id = 1;		//游戏ID
+	optional int32 base_gold = 2;	//底分选项
+	optional int32 duration = 3;	//倒计时选项
+	optional int32 model = 4;		//模式选项
+	repeated int32 type = 5;		//玩法选项
+	optional int32 rate_limit = 6;	//封顶选项
+	optional int32 rounds = 7;		//局数选项
+	optional int32 cost_count = 8;	//开房间消耗数量
+	optional int32 player_count = 9;//人数选项
+	optional int32 small_blind = 10;//小盲选项
+	optional int32 big_blind = 11;	//大盲选项
+	optional int32 hua_gold = 12;	//花分选项
+	optional int32 gold_condition = 13;	//入场条件选项
+}

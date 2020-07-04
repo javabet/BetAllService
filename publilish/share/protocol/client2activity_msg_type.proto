@@ -1,0 +1,39 @@
+package client2activity_protocols;
+
+enum e_server_msg_type {
+	//客户端到服务端
+    e_mst_start_c2a = 40000;
+	e_mst_c2a_player_connect = 40001;				//玩家连接
+	e_mst_c2a_player_disconnect = 40002;			//玩家断开连接
+	
+	e_mst_c2a_activity_info = 40101;					//活动 通用
+	e_mst_c2a_activity_list = 40102;					//活动 列表
+	e_mst_c2a_activity_apply = 40103;					//活动 报名
+	e_mst_c2a_activity_reward = 40104;					//活动 领奖
+	e_mst_c2a_activity_reward_log = 40105;				//活动 领奖记录
+	e_mst_c2a_activity_roulette_play = 40106;			//活动 轮盘 转盘
+	e_mst_c2a_activity_roulette_reward = 40107;			//活动 轮盘 特殊奖励
+	e_mst_c2a_activity_roulette_log = 40108;			//活动 请求轮盘历史记录
+	e_mst_c2a_activity_vip_ac_list = 40109;				//活动 vip页面活动列表
+	
+	e_mst_c2a_activity_heartbeat = 40200;				//活动 心跳
+
+	// 服务端到客户端---------------------------------------------------------------------------
+	e_mst_start_a2c = 41000;	
+	e_mst_a2c_player_connect_result	= 41001;		//玩家连接返回
+	e_mst_a2c_player_disconnect_result = 41002;		//玩家断开连接返回	
+	
+	e_mst_a2c_activity_info_result = 41101;						//活动 通用
+	e_mst_a2c_activity_list_result = 41102;						//活动 列表
+	e_mst_a2c_activity_apply_result = 41103;					//活动 报名
+	e_mst_a2c_activity_reward_result = 41104;					//活动 领奖
+	e_mst_a2c_activity_reward_log_result = 41105;				//活动 领奖记录
+	e_mst_a2c_activity_roulette_play_result = 41106;			//活动 轮盘 转盘
+	e_mst_a2c_activity_roulette_reward_result = 41107;			//活动 轮盘 特殊奖励
+	e_mst_a2c_activity_roulette_log_result = 41108;				//活动 请求轮盘历史记录
+	e_mst_a2c_activity_vip_ac_list_result = 41109;				//活动 vip页面活动列表
+	
+	e_mst_c2a_activity_heartbeat_result = 41200;				//活动 心跳
+	
+	e_mst_ca_end_index = 49999;
+  }

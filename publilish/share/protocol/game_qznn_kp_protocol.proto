@@ -1,0 +1,261 @@
+package game_qznn_kp_protocols;
+
+import "game_qznn_kp_def.proto"; 
+import "msg_type_def.proto"; 
+
+//玩家信息
+message msg_player_info{
+	optional int32 player_id = 1;			//玩家ID
+	optional string player_name = 2;		//玩家昵称
+	optional int32 head_frame = 3;			//头像框
+	optional string head_custom = 4;		//玩家头像
+	optional int64 player_gold = 5;			//玩家金币
+	optional int32 player_sex = 6;			//玩家性别	
+	optional int32 vip_level = 7;			//Vip等级
+	optional int32 chair_id = 8;			//座位号
+	optional int32 status_param = 9;		//状态参数 8888:不在当前局中, 否则和 e_table_status status 相关(-1:未操作,否则此状态的操作选择)
+}
+
+message msg_award_item {
+	optional string player_name = 1;		//玩家昵称
+	optional int32 head_frame = 2;			//头像框
+	repeated int32 cards = 3;				//[3+2]扑克列表
+	optional int32 award = 4;				//赢金币
+	optional string head_custom = 5;		//玩家头像
+	optional int32 vip_level = 6;			//Vip等级
+}
+
+message msg_card_info {
+	optional int32 chair_id = 1;			//
+	repeated int32 cards = 2;				//[3+2]扑克列表
+	optional int32 card_type = 3;			//牌型
+	optional int32 game_score = 4;			//输赢金币
+	//optional int32 award = 5 [default = 0];	//彩金
+	//optional int32 whn_type = 6 [default = 0]; //whn牌型
+	//optional int32 whn_per = 7 [default = 0]; //	
+}
+
+//检测游戏状态		//重连之后判断是否在桌子中
+message packetc2l_check_state {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_check_state];
+}
+
+//检测状态
+message packetl2c_check_state_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_check_state_result];
+	optional int32 result = 2 [default = 0]; // 0:不在,1:在table中
+}
+
+//获取场景信息
+message packetc2l_get_scene_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_scene_info];
+}
+
+//场景信息返回
+message packetl2c_scene_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_scene_info_result];
+	optional int32 room_type = 2; 	//房间类型
+	optional e_table_status status = 3;		//桌子状态, 如果为 e_ts_result, 后面会紧跟着一个 packetl2c_game_end 消息
+	optional int32 status_remain_sec = 4;	//桌子状态剩余秒数
+	repeated msg_player_info players = 5;	//
+	optional int32 banker_idx = 6; 			//庄, e_table_status status >= e_ts_times 时有效
+	repeated int32 self_cards = 7;			//[3]扑克列表	
+	optional int32 max_times = 8;			// 非庄, status == e_ts_times 时有效
+}
+
+//请求房间信息
+message packetc2l_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_info];
+}
+
+//房间信息返回
+message packetl2c_room_info_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_room_info_result];
+//	repeated int32 room_table_cnt = 2;		//[3]
+}
+
+//玩家进桌子
+message packetc2l_enter_table {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_enter_table];
+	optional int32 room_type = 2;		//房间类型
+}
+
+//玩家换桌
+message packetc2l_change_table {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_change_table];
+}
+
+//玩家进桌子返回
+message packetl2c_enter_table_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_table_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+}
+
+//玩家退桌子
+message packetc2l_leave_table {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_leave_table];
+}
+
+//玩家退桌子返回
+message packetl2c_leave_table_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_leave_table_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+	optional int32 player_gold = 3;
+	optional int32 table_id = 4;
+}
+
+//桌子进玩家通知
+message packetl2c_table_enter_player_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_table_enter_player_info];
+	repeated msg_player_info players = 2;
+}
+
+//桌子退玩家通知
+message packetl2c_table_leave_player_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_table_leave_player_info];
+	optional int32 chair_id = 2;						//[0-5]
+}
+
+//房间桌子状态通知
+message packetl2c_table_status_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_table_status_notify];
+	optional e_table_status status = 2;					// e_ts_reset, e_ts_banker, e_ts_five_card
+}
+
+//游戏开始
+message packetl2c_game_start {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_start];
+	repeated int32 chair_ids = 2;			//参与用户
+	repeated int32 self_cards = 3;			//[3]扑克列表	
+}
+
+//玩家换牌请求
+message packetc2l_change_card_req {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_change_card_req];
+	repeated int32 cards = 2;
+}
+
+//玩家换牌返回
+message packetl2c_change_card_res {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_change_card_res];
+	repeated int32 cards = 2;
+}
+
+//玩家换牌通知
+message packetl2c_change_card_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_change_card_notify];
+	optional int32 chair_id = 2;
+	optional int32 change_cnt = 3;						// 0, 1, 2, 3, 4
+}
+
+//玩家抢庄请求
+message packetc2l_banker_req {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_banker_req];
+	optional int32 banker_times = 2;					// 0, 1
+}
+
+//玩家抢庄通知
+message packetl2c_banker_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_banker_info];
+	optional int32 chair_id = 2;
+	optional int32 banker_times = 3;
+}
+
+message max_info {
+	optional int32 chair_id = 1;
+	optional int32 max_times = 2;
+}
+
+//房间定庄通知
+message packetl2c_banker_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_banker_notify];
+	optional int32 banker_chair_id = 2;
+	repeated max_info infos = 3;
+}
+
+//玩家倍数请求
+message packetc2l_times_req {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_times_req];
+	optional int32 times = 2;							// 5, 10, 20, 30, 40
+}
+
+//玩家倍数通知
+message packetl2c_times_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_times_info];
+	optional int32 chair_id = 2;
+	optional int32 times = 3;
+}
+
+// message cards_info {
+// 	optional int32 chair_id = 1;			//
+// 	repeated int32 cards = 2;				//[3+2]扑克列表
+// 	optional int32 card_type = 3;			//牌型
+// }
+// 
+// //最后一张牌数据包
+// message packetl2c_five_card {
+// 	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_five_card];
+// 	repeated cards_info info = 2;
+// }
+
+////开牌数据包
+//message packetc2l_open_card_req {
+//	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_open_card_req];
+//	repeated int32 cards = 2;				//[3+2]扑克列表	
+//}
+//
+////用户开牌通知
+//message packetl2c_open_card_notify {
+//	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_open_card_notify];
+//	optional int32 chair_id = 2;			//
+//}
+
+//游戏结束
+message packetl2c_game_end {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_end];
+	optional int32 winner = 2;				//赢家
+	optional int32 bomb_time = 3;			//炸弹倍数	
+	repeated msg_card_info cards = 4;		//[5]扑克信息
+	//optional int64 total_award = 8; 		//总彩金
+}
+
+//玩家通知消息
+message packetl2c_game_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_notify];
+	optional e_notify_type notify_type = 2;
+}
+
+//房间彩金列表通知
+message packetl2c_room_award_list_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_room_award_list];
+	optional int64 total_award = 2;				//
+	optional int32 week_award = 3;				//
+	repeated msg_award_item award_list = 4;		//[10]
+}
+
+//房间彩金通知
+message packetl2c_room_total_award_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_room_total_award];
+	optional int64 total_award = 2;			//
+}
+
+//房间彩金通知
+message packetl2c_room_award_item_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_room_award_item];
+	optional msg_award_item award_item = 2;
+	optional int32 player_id = 3;			//玩家ID	
+}
+
+//玩家托管请求
+message packetc2l_user_trustee {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_user_trustee];
+	optional bool trustee = 2;
+}
+
+//玩家托管通知
+message packetl2c_user_trustee_notify {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_user_trustee];
+	optional int32 chair_id = 2;
+	optional bool trustee = 3;
+}
+

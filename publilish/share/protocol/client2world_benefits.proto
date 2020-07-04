@@ -1,0 +1,27 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+//用户领取救济金请
+message packet_c2w_benefits
+{
+	optional e_server_msg_type packet_id = 1 [default=e_mst_c2w_beneifts];
+}
+
+//用户领取救济金请求的返回
+message packet_w2c_benefits_result
+{
+	optional e_server_msg_type packet_id = 1 [default =e_mst_w2c_benefits_result]; 
+
+	optional msg_type_def.e_msg_result_def result=2 [default=e_rmt_fail];
+}
+
+//更新IP信息
+message packet_w2c_update_ipinfo_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_update_ipinfo_result]; 
+
+	optional string ipinfo = 2;
+}

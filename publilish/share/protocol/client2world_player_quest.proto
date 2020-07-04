@@ -1,0 +1,56 @@
+import "client2world_msg_type.proto";
+import "msg_type_def.proto";
+import "msg_info_def.proto";
+
+package client2world_protocols;
+
+
+
+//请求任务列表
+message packetc2w_get_questlist
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_get_questlist];
+}
+
+//返回任务列表
+message packetw2c_get_questlist_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_get_questlist_result];
+	repeated msg_info_def.msg_quest_info questlist = 2;
+	optional bool is_new = 3;		//新刷新出来的任务
+}
+
+//领取奖励
+message packetc2w_receive_questreward
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_receive_questreward];
+	optional int32 questid = 2;
+}
+
+//返回奖励
+message packetw2c_receive_questreward_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_questreward_result];
+	optional int32 questid = 2;
+	//返回结果
+	optional msg_type_def.e_msg_result_def result = 3 [default = e_rmt_unknow];
+}
+
+//任务信息更变
+message packetw2c_change_quest
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_change_quest];
+	optional msg_info_def.msg_quest_info qinfo = 3;
+}
+
+//通知玩家任务刷新
+message packetw2c_notify_task_reflush
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_notify_task_reflush];
+}
+
+//微信分享任务
+message packetc2w_wechat_share_task
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2w_wechat_share_task];
+}
