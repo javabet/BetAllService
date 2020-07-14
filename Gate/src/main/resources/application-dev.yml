@@ -1,2 +1,23 @@
 server:
   port: 8084
+
+
+mongodb:
+  account:
+    uri: mongodb://127.0.0.1:27017
+  config:
+    uri: mongodb://127.0.0.1:27017
+
+netty:
+  host: 127.0.0.1
+  port: 3001
+
+cfg:
+  monitor_ip: 127.0.0.1
+  monitor_port: 11001
+  out_port: 15002
+  server_type: 1
+  websocket: 1
+  gate_type: web
+  accountdb_url: 127.0.0.1:27017
+  accountdb_name: AccountDB

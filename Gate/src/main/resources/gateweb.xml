@@ -1,0 +1,15 @@
+<root>
+  <monitor_ip>127.0.0.1</monitor_ip>
+  <monitor_port>11001</monitor_port>
+  <out_port>15002</out_port>
+  <server_type>1</server_type>
+  <websocket>1</websocket>
+  <gate_type>web</gate_type>
+  
+  <debug>0</debug>
+  <mutli_thread>1</mutli_thread>
+  
+  <maxcount>10000</maxcount>
+  <accountdb_url>127.0.0.1:27017</accountdb_url>
+  <accountdb_name>AccountDB</accountdb_name>  
+</root>

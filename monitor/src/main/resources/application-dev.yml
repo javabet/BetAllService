@@ -1,0 +1,11 @@
+server:
+  port: 9001
+
+
+cfg:
+  out_port: 11001
+  accountdb_url: 127.0.0.1:27017
+  accountdb_name: AccountDB
+  configdb_url: 127.0.0.1:27017
+  configdb_name: ConfigDB
+  server_id: 1
