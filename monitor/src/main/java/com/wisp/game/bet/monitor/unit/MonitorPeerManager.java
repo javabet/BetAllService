@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
 
+
+/**
+ * 此类是不需要的，原来需要，是因为其分为两个过程，一个是创建前，一个是创建后
+ * 现在使用netty,创建前的过程，并不存在，所以此类不需要了
+ */
+@Deprecated
 @Component
 public class MonitorPeerManager extends EnableObjectManager<ChannelId,MonitorPeer> {
 
@@ -23,16 +29,6 @@ public class MonitorPeerManager extends EnableObjectManager<ChannelId,MonitorPee
             MonitorPeer monitorPeer = it.next();
             monitorPeer.heartbeat(elapsed);
         }
-    }
-
-    public boolean add_obj(ChannelId obj_id,MonitorPeer obj)
-    {
-        boolean ret =  super.add_obj(obj_id,obj);
-        if(ret)
-        {
-
-        }
-        return true;
     }
 
 }

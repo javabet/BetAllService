@@ -3,16 +3,16 @@ package com.wisp.game.share.netty.PacketManager;
 import com.google.protobuf.Message;
 import com.wisp.game.share.netty.PeerTcp;
 
-public abstract class RequestMessageFromSID <T extends Message,P extends PeerTcp,P2> implements IRequestMessage  {
+public abstract class RequestMessageFromSID <M extends Message,P extends PeerTcp> implements IRequestMessage<M,P,Object>  {
 
     @Override
-    public abstract   boolean packet_process(PeerTcp peer, Message msg);
+    public abstract   boolean packet_process(P peer, M msg);
 
     @Override
-    public abstract boolean packet_process(PeerTcp peer, int sessionId, Message msg);
+    public abstract boolean packet_process(P peer, int sessionId, M msg);
 
     @Override
-    public boolean packet_process(PeerTcp peer,Object player,Message msg)
+    public boolean packet_process(P peer,Object player,M msg)
     {
         return false;
     }

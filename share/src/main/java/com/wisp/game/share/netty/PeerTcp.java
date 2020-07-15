@@ -8,6 +8,7 @@ import io.netty.channel.ChannelId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Method;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -25,6 +26,7 @@ public abstract class PeerTcp {
     protected boolean m_need_route;
     protected boolean m_bcheck_time;
     protected boolean m_bread;
+    protected Method m_func;
 
     protected e_peer_state m_state;
 
@@ -61,16 +63,31 @@ public abstract class PeerTcp {
             MsgBuf msgBuf =  queue.remove();
             cur_tm_ms = System.currentTimeMillis();
 
-            if( m_need_route )
+            if( m_need_route && msgBuf.isNeed_route() )
             {
-
+                if( m_func != null  )
+                {
+                    try
+                    {
+                        boolean processFlag = (Boolean) m_func.invoke(this,msgBuf.getPacket_id(),msgBuf.getMsg());
+                        if(!processFlag)
+                        {
+                            return msgBuf.getPacket_id();
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        logger.error("packet_service has error ,the packetId:" + msgBuf.getPacket_id());
+                    }
+                }
             }
             else
             {
                 RequestMessageRegister.ProtocolStruct protocolStruct = RequestMessageRegister.Instance.getProtocolStruct(msgBuf.getPacket_id());
-                if( protocolStruct == null || protocolStruct.getHandlerInstance() == null || protocolStruct.getHandlerInstance() )
+                if( protocolStruct == null || protocolStruct.getHandlerInstance() == null ||
+                        !protocolStruct.getHandlerInstance().packet_process(this,msgBuf.getMsg()) )
                 {
-
+                    return msgBuf.getPacket_id();
                 }
             }
 
@@ -90,7 +107,7 @@ public abstract class PeerTcp {
 
         }
 
-        return -1;
+        return 0;
     }
 
      public void addProcessMsg(MsgBuf msgBuf)
@@ -117,12 +134,35 @@ public abstract class PeerTcp {
 
     public int send_msg(Message msg)
     {
+        if( !channelHandlerContext.channel().isActive() )
+        {
+            return -1;
+        }
+
+        int protocolId =  ResponseMessageRegitser.Instance.getProtocolIdByMessageClass(msg);
+
+        MsgBuf msgBuf = new MsgBuf();
+        msgBuf.setNeed_route(false);
+        msgBuf.setPacket_id(protocolId);
+        msgBuf.setMsg(msg);
+
+        channelHandlerContext.writeAndFlush(msgBuf);
+        return 1;
+    }
+
+    public int send_msg(int packet_id,Message msg)
+    {
         if( m_state != e_peer_state.e_ps_connected )
         {
             return -1;
         }
 
-        channelHandlerContext.writeAndFlush(msg);
+        MsgBuf msgBuf = new MsgBuf();
+        msgBuf.setNeed_route(false);
+        msgBuf.setPacket_id(packet_id);
+        msgBuf.setMsg(msg);
+
+        channelHandlerContext.writeAndFlush(msgBuf);
         return 1;
     }
 
@@ -133,7 +173,12 @@ public abstract class PeerTcp {
             return -1;
         }
 
+        MsgBuf msgBuf = new MsgBuf();
+        msgBuf.setPacket_id(packet_id);
+        msgBuf.setNeed_route(true);
+        msgBuf.setBytes(bytes);
 
+        channelHandlerContext.writeAndFlush(msgBuf);
 
         return 1;
     }
@@ -219,5 +264,11 @@ public abstract class PeerTcp {
 
     public void setChannelId(ChannelId channelId) {
         this.channelId = channelId;
+    }
+
+    public void set_route_handler(Method route_handler )
+    {
+        m_need_route = true;
+        m_func = route_handler;
     }
 }

@@ -42,58 +42,25 @@ public class RequestMessageRegister implements InitializingBean {
         while (clzIt.hasNext())
         {
             Class<?> clz =  clzIt.next();
-            Class<?>[] interfaces =  clz.getInterfaces();
-            if( interfaces.length == 0 )
+
+            boolean isRequestMessageFlag =  isHertFromIRequestMessage(clz);
+
+            if( !isRequestMessageFlag )
             {
-                logger.error("the request has not the protocol class");
+                logger.error("the class is not IRequestMessage:" + clz.getName());
                 continue;
             }
 
-            boolean isRequestMessage = false;
-            for(Class interfaceClz : interfaces)
-            {
-                if( interfaceClz.getName() == requestMessageName )
-                {
-                    isRequestMessage = true;
-                    break;
-                }
-            }
+           Type parentType = clz.getGenericSuperclass();
+            ParameterizedType p=(ParameterizedType)parentType;
 
-            if( !isRequestMessage )
-            {
-                logger.error("the class is not implement the IRequestMessage");
-                continue;
-            }
-
-
-            Type[] types =  clz.getGenericInterfaces();
-
-            Class findTypeClass = null;
-            for( java.lang.reflect.Type type : types)
-            {
-                if( !(type instanceof ParameterizedType))
-                {
-                    continue;
-                }
-
-                Type rType = ((ParameterizedType) type).getRawType();
-                java.lang.reflect.Type[] types2=((ParameterizedType) type).getActualTypeArguments();
-
-                Class<?> clzType = (Class<?>) types2[0];
-
-                findTypeClass = clzType;
-            }
-
-            if( findTypeClass == null )
-            {
-                continue;
-            }
+            Class findTypeClass =(Class) p.getActualTypeArguments()[0];
 
             int protocolId = ProtocolClassUtils.getProtocolByClass(findTypeClass);
 
             if( protocolId == -1 )
             {
-                logger.error("parse the protocol has error");
+                logger.error("parse the protocol has error,the clz:" + findTypeClass);
                 continue;
             }
 
@@ -101,7 +68,7 @@ public class RequestMessageRegister implements InitializingBean {
             protocolStruct.setProtocolId(protocolId);
             protocolStruct.setHandlerCls(clz);
             protocolStruct.setProtocolCls(findTypeClass);
-            protocolStruct.handlerInstance = clz.newInstance();
+            protocolStruct.handlerInstance = (IRequestMessage) clz.newInstance();
 
             try
             {
@@ -114,8 +81,48 @@ public class RequestMessageRegister implements InitializingBean {
                 continue;
             }
 
+            if( classConcurrentHashMap.containsKey(protocolId) )
+            {
+                logger.error("the repeated the protocolId:" + protocolId + " oldClassName:" + classConcurrentHashMap.get(protocolId).getHandlerCls().getName() + " nowCls:" + clz.getName());
+                continue;
+            }
+
             classConcurrentHashMap.put(protocolId,protocolStruct);
         }
+    }
+
+    private boolean isHertFromIRequestMessage(Class<?> clz)
+    {
+        if( clz.getSuperclass() == null )
+        {
+            return false;
+        }
+
+        Type[] types = clz.getGenericInterfaces();
+
+        if( types.length == 0 )
+        {
+            return isHertFromIRequestMessage(clz.getSuperclass());
+        }
+
+        for(int i = 0; i < types.length;i++)
+        {
+            Type type = types[i];
+
+            if( !(type instanceof ParameterizedType ))
+            {
+                continue;
+            }
+
+            Type rawType = ((ParameterizedType) type).getRawType();
+
+            if( rawType.getTypeName() == IRequestMessage.class.getName() )
+            {
+                return true;
+            }
+        }
+
+        return isHertFromIRequestMessage( clz.getSuperclass() );
     }
 
 
@@ -168,7 +175,7 @@ public class RequestMessageRegister implements InitializingBean {
 
         private Class protocolCls;      //需要处理的消息号的protocol的class
 
-        private Object handlerInstance; //需要处理消息号的实体对象
+        private IRequestMessage handlerInstance; //需要处理消息号的实体对象
 
         private Method staticByteArrParseFromMethod; //静态Byte[]的ParseFrom函数
 
@@ -196,14 +203,13 @@ public class RequestMessageRegister implements InitializingBean {
             this.protocolCls = protocolCls;
         }
 
-        public Object getHandlerInstance() {
+        public IRequestMessage getHandlerInstance() {
             return handlerInstance;
         }
 
-        public void setHandlerInstance(Object handlerInstance) {
+        public void setHandlerInstance(IRequestMessage handlerInstance) {
             this.handlerInstance = handlerInstance;
         }
-
 
         public Method getStaticByteArrParseFromMethod() {
             return staticByteArrParseFromMethod;

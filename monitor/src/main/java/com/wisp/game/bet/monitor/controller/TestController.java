@@ -50,13 +50,13 @@ public class TestController {
 
             Object obj = parseFromMethod.invoke(null,byteString);
 
-            requestMessage.process((Message)obj,null);
+            //requestMessage.packet_process((Message)obj,null);
 
             Method parseFromMethod2 =  protocolStruct.getProtocolCls().getMethod("parseFrom",byte[].class);
 
             Object obj1 = parseFromMethod2.invoke(null,bytes);
 
-            requestMessage.process((Message)obj1,null);
+            //requestMessage.process((Message)obj1,null);
 
             System.out.printf("obj");
         }

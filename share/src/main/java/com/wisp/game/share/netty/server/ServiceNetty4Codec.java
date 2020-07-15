@@ -2,6 +2,7 @@ package com.wisp.game.share.netty.server;
 
 import com.google.protobuf.Message;
 import com.wisp.game.core.SpringContextHolder;
+import com.wisp.game.share.common.EnableProcessinfo;
 import com.wisp.game.share.netty.RequestMessageRegister;
 import com.wisp.game.share.netty.head.IPacketHead;
 import com.wisp.game.share.netty.head.PacketHeadC;
@@ -28,8 +29,28 @@ public class ServiceNetty4Codec extends ByteToMessageCodec<MsgBuf> {
         packetHead_s = new PacketHeadS();
     }
 
-    protected  void encode(ChannelHandlerContext ctx, MsgBuf var2, ByteBuf var3) throws Exception
+    protected  void encode(ChannelHandlerContext ctx, MsgBuf msgBuf, ByteBuf byteBuf) throws Exception
     {
+        int time = EnableProcessinfo.get_tick_count();
+        byte[] bytes;
+
+        if( msgBuf.isNeed_route() )
+        {
+            bytes = msgBuf.getBytes();
+        }
+        else
+        {
+            bytes = msgBuf.getMsg().toByteArray();
+        }
+
+        byteBuf.writeIntLE(time);
+        byteBuf.writeShortLE( msgBuf.getPacket_id() );
+        byteBuf.writeShortLE(bytes.length);
+        byteBuf.writeByte(33);
+        byteBuf.writeByte(36);
+        byteBuf.writeByte(37);
+        byteBuf.writeByte(63);
+        byteBuf.writeBytes(bytes);
 
     }
 
@@ -38,6 +59,11 @@ public class ServiceNetty4Codec extends ByteToMessageCodec<MsgBuf> {
         if( buf.readableBytes() < 12 )
         {
             return;
+        }
+
+        if( messageRegister == null )
+        {
+            messageRegister = SpringContextHolder.getBean(RequestMessageRegister.class);
         }
 
         ByteBuf packHeadBuf = Unpooled.buffer(12);
@@ -60,10 +86,6 @@ public class ServiceNetty4Codec extends ByteToMessageCodec<MsgBuf> {
         ByteBuf readMsgBuf = Unpooled.buffer(packetSize);
         buf.readBytes(readMsgBuf);
 
-        if( messageRegister == null )
-        {
-            messageRegister = SpringContextHolder.getBean(RequestMessageRegister.class);
-        }
 
         byte[] msgBytes = readMsgBuf.array();
         Message message =  messageRegister.getMessageByProtocolId(packetId,msgBytes);
@@ -80,8 +102,9 @@ public class ServiceNetty4Codec extends ByteToMessageCodec<MsgBuf> {
             msgBuf.setMsg(message);
         }
 
+        System.out.printf("protocolId:" + packetId + "\n");
 
-        list.add(message);
+        list.add(msgBuf);
     }
 
 

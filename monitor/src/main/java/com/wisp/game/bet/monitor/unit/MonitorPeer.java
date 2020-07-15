@@ -27,6 +27,12 @@ public class MonitorPeer extends PeerTcp {
 
     public void heartbeat(double elapsed)
     {
+        int packet_id = packet_service(-1);
+        if( packet_id != 0 )
+        {
+            logger.error("monitor_peer packet_service error id:" + get_id() + " packetId:" + packet_id);
+        }
+
         if( check_timeout() )
         {
            if( serverManager == null )
@@ -54,7 +60,7 @@ public class MonitorPeer extends PeerTcp {
 
     private boolean check_timeout()
     {
-        if( get_state() != e_peer_state.e_ps_connected)
+        if( !channelHandlerContext.channel().isActive() )
         {
             return false;
         }

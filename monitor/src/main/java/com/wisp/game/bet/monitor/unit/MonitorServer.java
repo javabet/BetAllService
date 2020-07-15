@@ -31,9 +31,6 @@ public class MonitorServer extends ServerBase  {
     public SpringContextHolder springContextHolder;
 
     @Autowired
-    public MonitorPeerManager monitorPeerManager;
-
-    @Autowired
     public ServerManager serverManager;
 
     @Autowired
@@ -61,7 +58,6 @@ public class MonitorServer extends ServerBase  {
         while (is_runing())
         {
             long cur_tm_ms = System.currentTimeMillis();
-            monitorPeerManager.heartbeat(elapsed);
             serverManager.heartbeat(elapsed);
             elapsed = System.currentTimeMillis() - cur_tm_ms;
 

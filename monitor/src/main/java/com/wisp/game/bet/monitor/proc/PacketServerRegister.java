@@ -1,11 +1,11 @@
 package com.wisp.game.bet.monitor.proc;
 
 import com.wisp.game.bet.monitor.unit.MonitorPeer;
-import com.wisp.game.bet.monitor.unit.MonitorPeerManager;
 import com.wisp.game.bet.monitor.unit.MonitorServer;
 import com.wisp.game.bet.monitor.unit.ServerManager;
 import com.wisp.game.share.component.TimeHelper;
 import com.wisp.game.share.netty.IRequest;
+import com.wisp.game.share.netty.PacketManager.DefaultRequestMessage;
 import com.wisp.game.share.netty.PacketManager.IRequestMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +14,11 @@ import server_protocols.ServerProtocol;
 
 
 @IRequest
-public class PacketServerRegister  implements IRequestMessage<ServerProtocol.packet_server_register, MonitorPeer> {
+public class PacketServerRegister  extends DefaultRequestMessage<ServerProtocol.packet_server_register, MonitorPeer> {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    public boolean process(ServerProtocol.packet_server_register msg, MonitorPeer peer) {
+    public boolean packet_process(MonitorPeer peer,ServerProtocol.packet_server_register msg) {
 
         ServerProtocol.packet_server_register_result.Builder builder =  ServerProtocol.packet_server_register_result.newBuilder();
 
@@ -40,12 +40,12 @@ public class PacketServerRegister  implements IRequestMessage<ServerProtocol.pac
             server_info.setAttributes(msg.getAttributes());
         }
 
-        MonitorPeerManager.Instance.remove_obj(peer.get_id());
+
         if(ServerManager.Instance.regedit_server(peer,server_info))
         {
             ServerProtocol.packet_other_server_connect.Builder broadMsg = ServerProtocol.packet_other_server_connect.newBuilder();
             broadMsg.setSinfo(server_info.clone());
-            ServerManager.Instance.broadcast_msg(broadMsg.build(),peer.get_id());
+            ServerManager.Instance.broadcast_msg(broadMsg.build(),peer.getChannelId());
         }
         else
         {

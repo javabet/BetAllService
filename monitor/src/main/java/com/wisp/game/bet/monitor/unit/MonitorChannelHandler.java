@@ -1,11 +1,15 @@
 package com.wisp.game.bet.monitor.unit;
 
+import com.wisp.game.share.netty.IRequest;
 import com.wisp.game.share.netty.infos.MsgBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
 
     private MonitorServer monitorServer;
@@ -25,13 +29,21 @@ public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
         super.channelActive(ctx);
         MonitorPeer monitorPeer = new MonitorPeer();
         monitorPeer.init_peer(ctx,ctx.channel().id(),false,false);
-        MonitorPeerManager.Instance.add_obj(ctx.channel().id(),monitorPeer);
+        ServerManager.Instance.add_obj(ctx.channel().id(),monitorPeer);
     }
 
     //每当接收数据时，都会调用这个方法
     protected void channelRead0(ChannelHandlerContext ctx, MsgBuf msgBuf) throws Exception
     {
-        System.out.printf("go this...");
+        MonitorPeer monitorPeer = ServerManager.Instance.find_objr(ctx.channel().id());
+        if( monitorPeer != null )
+        {
+            monitorPeer.addProcessMsg(msgBuf);
+        }
+        else
+        {
+            logger.error("channelRead0 has the data but the peer is not exist");
+        }
     }
 
     //当 ChannelnboundHandler.fireUserEventTriggered()方法被调
@@ -44,6 +56,8 @@ public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
     //当处理过程中在 ChannelPipeline 中有错误产生时被调用
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         super.exceptionCaught(ctx,cause);
+
+        ctx.close();
     }
 
 
@@ -61,7 +75,9 @@ public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
 
-        MonitorPeerManager.Instance.remove_obj(ctx.channel().id());
+        ctx.close();
+        ctx.channel().close();
+        ServerManager.Instance.peer_disconnected(ctx.channel().id());
     }
 
 }
