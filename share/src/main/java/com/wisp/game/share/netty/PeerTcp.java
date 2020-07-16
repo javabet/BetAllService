@@ -1,5 +1,6 @@
 package com.wisp.game.share.netty;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
 import com.wisp.game.share.netty.infos.MsgBuf;
 import com.wisp.game.share.netty.infos.e_peer_state;
@@ -9,11 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
+import java.net.InetSocketAddress;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class PeerTcp {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     protected boolean m_is_websocket = false;
 
@@ -42,11 +44,11 @@ public abstract class PeerTcp {
 
     }
 
-    public void init_peer(ChannelHandlerContext channelHandlerContext,ChannelId channelId, boolean _encrypt, boolean _is_web)
+    public void init_peer(ChannelHandlerContext channelHandlerContext, boolean _encrypt, boolean _is_web)
     {
         this.channelHandlerContext = channelHandlerContext;
         m_is_websocket = _is_web;
-        this.channelId = channelId;
+        this.channelId = channelHandlerContext.channel().id();
     }
 
     public ChannelHandlerContext getChannelHandlerContext()
@@ -129,7 +131,11 @@ public abstract class PeerTcp {
         }
 
         m_state = e_peer_state.e_ps_disconnected;
+    }
 
+    public void set_check_time()
+    {
+        m_bcheck_time = true;
     }
 
     public int send_msg(Message msg)
@@ -164,6 +170,11 @@ public abstract class PeerTcp {
 
         channelHandlerContext.writeAndFlush(msgBuf);
         return 1;
+    }
+
+    public int send_msg(int packet_id, ByteString byteString)
+    {
+        return send_msg(packet_id,byteString.toByteArray());
     }
 
     public int send_msg(int packet_id,byte[] bytes)
@@ -215,15 +226,17 @@ public abstract class PeerTcp {
     }
 
     //TODO wisp
-    private int get_remote_port()
+    public int get_remote_port()
     {
-        return 0;
+        InetSocketAddress inetSocketAddress = (InetSocketAddress)channelHandlerContext.channel().localAddress();
+        return inetSocketAddress.getPort();
     }
 
     //TODO wisp
     public String get_remote_ip()
     {
-        return "";
+        InetSocketAddress inetSocketAddress = (InetSocketAddress)channelHandlerContext.channel().localAddress();
+        return inetSocketAddress.getHostString();
     }
 
     public void set_remote_type(int _type)
@@ -249,6 +262,15 @@ public abstract class PeerTcp {
     public e_peer_state get_state()
     {
         return m_state;
+    }
+
+    public void set_state(e_peer_state m_state) {
+        this.m_state = m_state;
+    }
+
+    public void set_id(int peer_id)
+    {
+        m_id = peer_id;
     }
 
     public int get_id()

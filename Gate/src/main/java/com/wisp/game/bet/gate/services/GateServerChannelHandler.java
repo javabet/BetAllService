@@ -1,14 +1,29 @@
-package com.wisp.game.share.netty.server;
+package com.wisp.game.bet.gate.services;
 
-import com.google.protobuf.GeneratedMessage;
 import com.wisp.game.share.netty.infos.MsgBuf;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.util.AttributeKey;
+import jodd.cli.Cli;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class ServerHandler extends SimpleChannelInboundHandler<MsgBuf> {
+import java.lang.reflect.Method;
 
 
-    public ServerHandler() {
+/**
+ * 作为服务器，接收客户端发送过来的信号
+ */
+
+@ChannelHandler.Sharable
+public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    private static final AttributeKey<Integer> ATTR_PEERID = AttributeKey.newInstance("PEERID");
+
+    public GateServerChannelHandler() {
 
     }
 
@@ -22,12 +37,32 @@ public class ServerHandler extends SimpleChannelInboundHandler<MsgBuf> {
     //将在一个连接建立时被调用。
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
+
+        int peerid = GateServer.Instance.generate_id();
+        ctx.attr( ATTR_PEERID ).set(peerid);
+
+        GatePeer gatePeer = new GatePeer();
+        gatePeer.init_peer(ctx,false,true);
+        gatePeer.set_id(peerid);
+        gatePeer.set_net_param();
+        Method route_method = ClientManager.Instance.getClass().getMethod("route_handler");
+        gatePeer.set_route_handler(route_method);
+        ClientManager.Instance.regedit_client(gatePeer);
     }
 
     //每当接收数据时，都会调用这个方法
     protected void channelRead0(ChannelHandlerContext ctx, MsgBuf msgBuf) throws Exception
     {
-
+        int peerId = ctx.attr( ATTR_PEERID ).get();
+        GatePeer gatePeer = ClientManager.Instance.find_objr(peerId);
+        if( gatePeer != null )
+        {
+            gatePeer.addProcessMsg(msgBuf);
+        }
+        else
+        {
+            logger.error("channelRead0 has the data but the peer is not exist");
+        }
     }
 
     //当 ChannelnboundHandler.fireUserEventTriggered()方法被调
@@ -40,6 +75,8 @@ public class ServerHandler extends SimpleChannelInboundHandler<MsgBuf> {
     //当处理过程中在 ChannelPipeline 中有错误产生时被调用
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         super.exceptionCaught(ctx,cause);
+
+        ctx.close();
     }
 
 
@@ -56,7 +93,19 @@ public class ServerHandler extends SimpleChannelInboundHandler<MsgBuf> {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
-    }
 
+        int peerId = ctx.attr( ATTR_PEERID ).get();
+
+        ctx.close();
+        ctx.channel().close();
+        GatePeer gatePeer = ClientManager.Instance.find_objr(peerId);
+        if( gatePeer != null )
+        {
+            GateServer.Instance.push_id(gatePeer.get_id());
+        }
+        ClientManager.Instance.peer_disconnected(peerId);
+        ClientManager.Instance.remove_client(peerId);
+
+    }
 
 }

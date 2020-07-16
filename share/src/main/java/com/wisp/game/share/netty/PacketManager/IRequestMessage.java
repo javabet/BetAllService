@@ -1,9 +1,7 @@
 package com.wisp.game.share.netty.PacketManager;
 
-import com.google.protobuf.GeneratedMessage;
 import com.google.protobuf.Message;
 import com.wisp.game.share.netty.PeerTcp;
-import com.wisp.game.share.netty.client.NettyClient;
 
 public interface IRequestMessage<M extends Message ,P extends PeerTcp ,P2> {
 

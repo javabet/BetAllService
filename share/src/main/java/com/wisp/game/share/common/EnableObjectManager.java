@@ -27,6 +27,11 @@ public class EnableObjectManager<K,T>
         return removeObj  != null;
     }
 
+    public boolean hasKey(K obj_id)
+    {
+        return obj_map.containsKey(obj_id);
+    }
+
     public void clear()
     {
         obj_map.clear();

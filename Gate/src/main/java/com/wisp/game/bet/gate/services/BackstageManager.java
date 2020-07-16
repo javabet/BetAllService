@@ -3,7 +3,8 @@ package com.wisp.game.bet.gate.services;
 import com.wisp.game.core.SpringContextHolder;
 import com.wisp.game.share.common.EnableObjectManager;
 import com.wisp.game.share.netty.infos.e_peer_state;
-import com.wisp.game.share.netty.client.NettyClient;
+import com.wisp.game.share.netty.client.ClientTcpPeer;
+import io.netty.channel.ChannelId;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import server_protocols.ServerBase;
@@ -11,20 +12,22 @@ import server_protocols.ServerBase;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 保存其它服务器的信息
+ */
 @Component
-public class BackstageManager extends EnableObjectManager<ServerPeer> implements InitializingBean {
-
+public class BackstageManager extends EnableObjectManager<ChannelId,ServerPeer> implements InitializingBean {
+    public static BackstageManager Instance;
     private ConcurrentHashMap<Integer,ServerPeer> servers_map = new ConcurrentHashMap<Integer,ServerPeer>();
+    //key为端口号
     private ConcurrentHashMap<Integer, ServerBase.server_info> SInfoMap = new ConcurrentHashMap<Integer, ServerBase.server_info>();
 
     public BackstageManager() {
+        Instance = this;
     }
 
 
-    public void heartbeat( double elapsed )
-    {
 
-    }
 
     public void afterPropertiesSet() throws Exception
     {
@@ -33,7 +36,7 @@ public class BackstageManager extends EnableObjectManager<ServerPeer> implements
 
     public boolean regedit_server(ServerPeer serverPeer)
     {
-        ServerPeer serverPeer1 =  find_objr(serverPeer.get_id());
+        ServerPeer serverPeer1 =  find_objr(serverPeer.getChannelId());
         if( serverPeer1 == null )
         {
             return false;
@@ -52,17 +55,12 @@ public class BackstageManager extends EnableObjectManager<ServerPeer> implements
             servers_map.remove(serverPeer.get_remote_id());
         }
 
-        return remove_obj(serverPeer.get_id());
+        return remove_obj(serverPeer.getChannelId());
     }
 
     public ServerPeer get_server_byid(int serverId)
     {
-        if( servers_map.contains(serverId) )
-        {
-            return servers_map.get(serverId);
-        }
-
-        return null;
+        return servers_map.get(serverId);
     }
 
     public ServerPeer get_server_bytype(int serverType)
@@ -115,6 +113,16 @@ public class BackstageManager extends EnableObjectManager<ServerPeer> implements
         return serverId;
     }
 
+    public void heartbeat( double elapsed )
+    {
+        for(ServerPeer peer : obj_map.values())
+        {
+            peer.heartbeat(elapsed);
+        }
+    }
+
+
+
     public int alloc_gstate_server()
     {
         return 0;
@@ -122,12 +130,6 @@ public class BackstageManager extends EnableObjectManager<ServerPeer> implements
     public int alloc_activity_server()
     {
         return 0;
-    }
-
-
-    public boolean add_obj(int obj_id, NettyClient obj)
-    {
-        return true;
     }
 
     public void check_servers()
@@ -144,7 +146,7 @@ public class BackstageManager extends EnableObjectManager<ServerPeer> implements
                 case e_st_gstate:
                 case e_st_activity:
                     ServerPeer serverPeer = get_server_byid(server_info.getServerPort());
-                    if( serverPeer == null || serverPeer.get_state() == e_peer_state.e_ps_connected.getNumber() )
+                    if( serverPeer == null || serverPeer.get_state() == e_peer_state.e_ps_connected )
                     {
                         needCoonect = true;
                     }
@@ -169,5 +171,9 @@ public class BackstageManager extends EnableObjectManager<ServerPeer> implements
 
     }
 
+    public ConcurrentHashMap<Integer,ServerBase.server_info> getSInfoMap()
+    {
+        return SInfoMap;
+    }
 
 }

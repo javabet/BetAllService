@@ -2,8 +2,12 @@ package com.wisp.game.share.netty.PacketManager;
 
 import com.google.protobuf.Message;
 import com.wisp.game.share.netty.PeerTcp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class DefaultRequestMessage<M extends Message ,P extends PeerTcp > implements IRequestMessage<M,P,Object> {
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     public DefaultRequestMessage() {
     }

@@ -10,11 +10,8 @@ import org.slf4j.LoggerFactory;
 public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
+    public MonitorChannelHandler() {
 
-
-    private MonitorServer monitorServer;
-    public MonitorChannelHandler(MonitorServer monitorServer) {
-        this.monitorServer = monitorServer;
     }
 
     /**
@@ -28,7 +25,7 @@ public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
         MonitorPeer monitorPeer = new MonitorPeer();
-        monitorPeer.init_peer(ctx,ctx.channel().id(),false,false);
+        monitorPeer.init_peer(ctx,false,false);
         ServerManager.Instance.add_obj(ctx.channel().id(),monitorPeer);
     }
 

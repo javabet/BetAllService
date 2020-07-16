@@ -114,6 +114,6 @@ public class MonitorServer extends ServerBase  {
 
     @Override
     protected ChannelHandler getChannelHandler() {
-        return new MonitorChannelHandler(this);
+        return new MonitorChannelHandler();
     }
 }

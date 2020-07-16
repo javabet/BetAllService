@@ -11,22 +11,39 @@ import java.util.List;
 
 public class ClientNettyInitializer extends ChannelInitializer<SocketChannel> {
 
-    private List<ChannelHandler> handlers;
+    private List<ChannelHandler> listHandlers;
+    private ChannelHandler endHandler;
 
-    public ClientNettyInitializer(List<ChannelHandler> handlers) {
-        this.handlers = handlers;
+    public ClientNettyInitializer(ChannelHandler endHandler ) {
+        endHandler = endHandler;
+    }
+
+
+    public void setMiddleHandlers(List<ChannelHandler> listHandlers)
+    {
+        this.listHandlers = listHandlers;
     }
 
     protected  void initChannel(SocketChannel ch) throws Exception
     {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new IdleStateHandler(180,0,0));
+
         pipeline.addLast(new ClientNetty4Codec());
 
-        for( ChannelHandler channelHandler : this.handlers )
+        if( listHandlers != null )
         {
-            pipeline.addLast(channelHandler);
+            for( ChannelHandler channelHandler : listHandlers )
+            {
+                pipeline.addLast( channelHandler );
+            }
         }
+
+        if( endHandler != null )
+        {
+            pipeline.addLast(endHandler);
+        }
+
     }
 
 }

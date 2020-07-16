@@ -1,111 +1,105 @@
 package com.wisp.game.bet.gate.services;
 
+import com.wisp.game.bet.gate.db.DbAccount;
 import com.wisp.game.core.SpringContextHolder;
-import com.wisp.game.share.netty.client.ClientHandler;
-import com.wisp.game.share.netty.client.NettyClient;
 import com.wisp.game.sshare.ServerBase;
 import io.netty.channel.ChannelHandler;
-import org.omg.CosNaming._BindingIteratorImplBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * 使用
+ */
 @Component
-public class GateServer extends ServerBase  {
+public final class GateServer extends ServerBase {
+    public static GateServer Instance;
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
-
-    @Resource
+    @Autowired
     public SpringContextHolder springContextHolder;
 
     @Autowired
     public Environment environment;
 
-    @Autowired
-    public BackstageManager backstageManager;
+    public GateServer() {
+        Instance = this;
+    }
 
-    @Autowired
-    public GatePeerManager gatePeerManager;
+    protected ChannelHandler getChannelHandler() {
+        return new GateServerChannelHandler();
+    }
 
-    @Autowired
-    public ClientManager clientManager;
+    public boolean on_init() {
+        init_db();
+        connect_monitor();
+        return true;
+    }
 
-    protected void on_run()
-    {
+    protected void on_run() {
         double elapsed = 0;
         while (is_runing())
         {
             long cur_tm_ms = System.currentTimeMillis();
-            gatePeerManager.heartbeat(elapsed);
-            clientManager.heartbeat(elapsed);
-            backstageManager.heartbeat(elapsed);
+
+            ClientManager.Instance.heartbeat(elapsed);
+            BackstageManager.Instance.heartbeat(elapsed);
 
             elapsed = System.currentTimeMillis() - cur_tm_ms;
 
-            if( elapsed  < 500 )
+            if( elapsed < 500 )
             {
                 try
                 {
-                    Thread.sleep(100);
+                    Thread.sleep(50);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    logger.error("thread sleep has error");
+                    logger.error("GateServer has error,the run has error");
                 }
+
             }
             else
             {
-                logger.error("server_run longtime:" + elapsed);
+                logger.warn("server_run longtime:" + elapsed);
             }
+
         }
     }
 
-
-
-    public boolean on_init()
-    {
-        init_db();
-        connect_monitor();
-
-        return true;
+    public void on_exit() {
+        ClientManager.Instance.clear();
+        BackstageManager.Instance.clear();;
     }
 
-    private void init_db()
-    {
-
-    }
-
-
-
-    public  <T extends NettyClient> T  create_peer(Class<T> cls,int remote_type )
+    public ServerPeer create_peer(int remote_type)
     {
         ServerPeer serverPeer = new ServerPeer();
-        serverPeer.init_peer( generate_id() ) ;
-        serverPeer.set_remote_type(remote_type);
-        return (T)serverPeer;
+        serverPeer.set_remote_type( remote_type );
+        return serverPeer;
+    }
+
+    private boolean init_db()
+    {
+        if( environment.containsProperty("cfg.accountdb_url") && environment.containsProperty("cfg.accountdb_name") )
+        {
+            DbAccount.Instance.init_db(environment.getProperty("cfg.accountdb_url"),environment.getProperty("cfg.accountdb_name"));
+        }
+
+        return true;
     }
 
     private void connect_monitor()
     {
         if( environment.containsProperty("cfg.monitor_ip") && environment.containsProperty("cfg.monitor_port") )
         {
-            ServerPeer serverPeer = create_peer(ServerPeer.class,6);
-            String host = environment.getProperty("cfg.monitor_ip","localhost");
+            String tarip = environment.getProperty("cfg.monitor_ip");
             int port = environment.getProperty("cfg.monitor_port",Integer.class);
-            serverPeer.connect(host,port);
+
+            ServerPeer serverPeer = create_peer( server_protocols.ServerBase.e_server_type.e_st_monitor_VALUE);
+            serverPeer.connect(tarip,port);
         }
-    }
-
-    @Override
-    public void on_exit() {
-
     }
 }

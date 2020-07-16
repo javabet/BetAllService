@@ -90,7 +90,6 @@ public abstract class ServerBase implements InitializingBean,Runnable {
 
             peerTcpServer = new PeerTcpServer();
             peerTcpServer.start(m_serverid,serverNettyInitializer);
-
         }
 
         if(!on_init())
@@ -104,6 +103,7 @@ public abstract class ServerBase implements InitializingBean,Runnable {
         return s_run();
     }
 
+    //作为服务器 处理接收客户端连接的数据处理
     protected  abstract ChannelHandler getChannelHandler();
 
     public abstract boolean on_init();
@@ -155,7 +155,7 @@ public abstract class ServerBase implements InitializingBean,Runnable {
         return b_run;
     }
 
-    protected int generate_id()
+    public int generate_id()
     {
         m_ncount ++;
 
