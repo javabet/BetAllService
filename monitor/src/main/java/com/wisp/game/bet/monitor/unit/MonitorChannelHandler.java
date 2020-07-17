@@ -2,14 +2,21 @@ package com.wisp.game.bet.monitor.unit;
 
 import com.wisp.game.share.netty.IRequest;
 import com.wisp.game.share.netty.infos.MsgBuf;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.util.AttributeKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@ChannelHandler.Sharable
 public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+    private static final AttributeKey<Integer> ATTR_PEERID = AttributeKey.newInstance("PEERID");
+
+
     public MonitorChannelHandler() {
 
     }
@@ -24,15 +31,21 @@ public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
     //将在一个连接建立时被调用。
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
+
+        int peerid = MonitorServer.Instance.generate_id();
+        ctx.attr( ATTR_PEERID ).set(peerid);
+
         MonitorPeer monitorPeer = new MonitorPeer();
         monitorPeer.init_peer(ctx,false,false);
-        ServerManager.Instance.add_obj(ctx.channel().id(),monitorPeer);
+        monitorPeer.set_id(peerid);
+        ServerManager.Instance.add_obj(peerid,monitorPeer);
     }
 
     //每当接收数据时，都会调用这个方法
     protected void channelRead0(ChannelHandlerContext ctx, MsgBuf msgBuf) throws Exception
     {
-        MonitorPeer monitorPeer = ServerManager.Instance.find_objr(ctx.channel().id());
+         int peerId = ctx.attr(ATTR_PEERID).get();
+        MonitorPeer monitorPeer = ServerManager.Instance.find_objr( peerId );
         if( monitorPeer != null )
         {
             monitorPeer.addProcessMsg(msgBuf);
@@ -52,7 +65,7 @@ public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
 
     //当处理过程中在 ChannelPipeline 中有错误产生时被调用
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx,cause);
+        //super.exceptionCaught(ctx,cause);
 
         ctx.close();
     }
@@ -74,7 +87,9 @@ public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
 
         ctx.close();
         ctx.channel().close();
-        ServerManager.Instance.peer_disconnected(ctx.channel().id());
+        int peerId = ctx.attr(ATTR_PEERID).get();
+        ServerManager.Instance.peer_disconnected(peerId);
+        MonitorServer.Instance.push_id(peerId);
     }
 
 }

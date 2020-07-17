@@ -55,7 +55,9 @@ public class ClientTcpPeer  {
         {
             ChannelFuture future = clientBootstrap.connect(host, port).sync();       //连接到远程节点，阻塞等待直到连接完成
             channel = future.channel();
-            channel.closeFuture().sync();           //阻塞，直到Channel 关闭
+            //channel.closeFuture().sync();           //阻塞，直到Channel 关闭
+
+            System.out.printf("the channel ready to Sync");
         }
         catch (Exception error)
         {
@@ -80,10 +82,4 @@ public class ClientTcpPeer  {
             channel.disconnect();
         }
     }
-
-    public void run()
-    {
-
-    }
-
 }

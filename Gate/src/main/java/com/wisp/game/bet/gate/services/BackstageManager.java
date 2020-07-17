@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 保存其它服务器的信息
  */
 @Component
-public class BackstageManager extends EnableObjectManager<ChannelId,ServerPeer> implements InitializingBean {
+public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> implements InitializingBean {
     public static BackstageManager Instance;
     private ConcurrentHashMap<Integer,ServerPeer> servers_map = new ConcurrentHashMap<Integer,ServerPeer>();
     //key为端口号
@@ -36,7 +36,7 @@ public class BackstageManager extends EnableObjectManager<ChannelId,ServerPeer> 
 
     public boolean regedit_server(ServerPeer serverPeer)
     {
-        ServerPeer serverPeer1 =  find_objr(serverPeer.getChannelId());
+        ServerPeer serverPeer1 =  find_objr(serverPeer.get_id());
         if( serverPeer1 == null )
         {
             return false;
@@ -55,7 +55,7 @@ public class BackstageManager extends EnableObjectManager<ChannelId,ServerPeer> 
             servers_map.remove(serverPeer.get_remote_id());
         }
 
-        return remove_obj(serverPeer.getChannelId());
+        return remove_obj(serverPeer.get_id());
     }
 
     public ServerPeer get_server_byid(int serverId)

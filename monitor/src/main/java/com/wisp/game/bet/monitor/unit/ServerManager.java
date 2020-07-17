@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 @Component
-public class ServerManager extends EnableObjectManager<ChannelId,MonitorPeer> {
+public class ServerManager extends EnableObjectManager<Integer,MonitorPeer> {
 
     private static final int UPDATE_TIME = 3000;            //单位ms
     private double m_checktime = 0;
@@ -36,7 +36,7 @@ public class ServerManager extends EnableObjectManager<ChannelId,MonitorPeer> {
 
     public boolean regedit_server(MonitorPeer peer, ServerBase.server_info.Builder sinfo)
     {
-        MonitorPeer monitorPeer =  find_objr(peer.getChannelId());
+        MonitorPeer monitorPeer =  find_objr(peer.get_id());
         if( monitorPeer == null )
         {
             return false;
@@ -74,7 +74,7 @@ public class ServerManager extends EnableObjectManager<ChannelId,MonitorPeer> {
         return true;
     }
 
-    public boolean remove_server(ChannelId peer_id)
+    public boolean remove_server(int peer_id)
     {
         boolean removeFlag = remove_obj(peer_id);
         ServerBase.server_info.Builder server_info =  m_infomap.remove(peer_id);
@@ -155,14 +155,14 @@ public class ServerManager extends EnableObjectManager<ChannelId,MonitorPeer> {
         DbConfig.Instance.getMongoTemplate().updateFirst(query,update,DbConfig.DB_SERVERLIST);
     }
 
-    public void peer_disconnected(ChannelId channelId)
+    public void peer_disconnected(int peerid)
     {
-        MonitorPeer monitorPeer = find_objr(channelId);
+        MonitorPeer monitorPeer = find_objr(peerid);
         if( monitorPeer == null )
         {
             return;
         }
-        remove_server(channelId);
+        remove_server(peerid);
 
         ServerProtocol.packet_other_server_disconnect.Builder builder = ServerProtocol.packet_other_server_disconnect.newBuilder();
         builder.setServerId(monitorPeer.get_remote_id());

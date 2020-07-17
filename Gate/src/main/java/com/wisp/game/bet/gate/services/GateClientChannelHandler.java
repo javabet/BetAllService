@@ -40,7 +40,7 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
             serverPeer.regedit_to_server();
         }
 
-        //连接别的服务器成功时，才能将其加入到BackstageManager
+       BackstageManager.Instance.add_obj(serverPeer.get_id(),serverPeer);
     }
 
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, MsgBuf message) throws Exception {
@@ -62,7 +62,7 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         GateServer.Instance.push_id(serverPeer.get_id());
 
         //如果注册失败，则有可能，没有加入到BackstageManager中
-        if( BackstageManager.Instance.hasKey(ctx.channel().id())  )
+        if( BackstageManager.Instance.hasKey(serverPeer.get_id())  )
         {
             BackstageManager.Instance.remove_server(serverPeer);
 

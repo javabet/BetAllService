@@ -1,6 +1,11 @@
 package com.wisp.game.share.netty.client;
 
 import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.Message;
+import com.wisp.game.core.SpringContextHolder;
+import com.wisp.game.share.common.EnableProcessinfo;
+import com.wisp.game.share.netty.RequestMessageRegister;
+import com.wisp.game.share.netty.infos.MsgBuf;
 import com.wisp.game.share.netty.infos.ProtocolInfo;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -14,99 +19,92 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.List;
 
-public class ClientNetty4Codec extends MessageToMessageCodec<ByteBuf,GeneratedMessage> {
+public class ClientNetty4Codec extends MessageToMessageCodec<ByteBuf, MsgBuf> {
 
     private Logger logger = LoggerFactory.getLogger(ClientNetty4Codec.class);
 
+    private RequestMessageRegister messageRegister;
 
-    protected  void encode(ChannelHandlerContext var1, GeneratedMessage message, List<Object> var3) throws Exception {
+    protected  void encode(ChannelHandlerContext var1, MsgBuf msgBuf, List<Object> list) throws Exception {
 
-        int protocolId = -1;
-        try
+        int time = EnableProcessinfo.get_tick_count();
+        byte[] bytes;
+
+        if( msgBuf.isNeed_route() )
         {
-            Class<?> cls = message.getClass();
-            Method method = cls.getMethod("getPacketId");
-            Object obj = method.invoke(message);
-            Method getNumberMethod = obj.getClass().getMethod("getNumber");
-            protocolId = (int) getNumberMethod.invoke(obj);
+            bytes = msgBuf.getBytes();
         }
-        catch (Exception exception)
+        else
         {
-            logger.error("ClientNetty4Codec has error,the message can't find the protocolId" + message.toString());
+            bytes = msgBuf.getMsg().toByteArray();
+        }
+
+        ByteBuf byteBuf = Unpooled.buffer(12 + bytes.length);
+
+        byteBuf.writeIntLE(time);
+        byteBuf.writeShortLE( msgBuf.getPacket_id() );
+        byteBuf.writeShortLE(bytes.length);
+        byteBuf.writeByte(33);
+        byteBuf.writeByte(36);
+        byteBuf.writeByte(37);
+        byteBuf.writeByte(63);
+        byteBuf.writeBytes(bytes);
+
+        list.add(byteBuf);
+    }
+
+    protected  void decode(ChannelHandlerContext var1, ByteBuf byteBuf, List<Object> list) throws Exception
+    {
+
+        if( byteBuf.readableBytes() < 12 )
+        {
             return;
         }
 
-        byte[] bytes = message.toByteArray();
-
-        ByteBuf byteBuf =  Unpooled.buffer(bytes.length + 12);
-        byteBuf.writeInt(0);
-        byteBuf.writeShort(protocolId);
-        byteBuf.writeShort(bytes.length);
-        byteBuf.writeInt(100);
-        //byteBuf.writeChar('1');//!
-        //byteBuf.writeChar('$');
-        //byteBuf.writeChar('%');
-        //byteBuf.writeChar('?');
-        byteBuf.writeBytes(bytes);
-
-        byte[] newBytes = new byte[bytes.length + 6];
-        byteBuf.readBytes(newBytes);
-
-        var3.add(newBytes);
-
-
-        //格式 protoclId + len + buff ,(4,2,buff)
-        System.out.printf(".......encode");
-    }
-
-    protected  void decode(ChannelHandlerContext var1, ByteBuf message, List<Object> var3) throws Exception
-    {
-
-        if( message.readableBytes() >= 6 )
+        if( messageRegister == null )
         {
-            message.markReaderIndex();
-
-            int protocolId = message.readInt();
-            int len = message.readShort();
-
-            if( message.readableBytes() >= len )
-            {
-                byte[] bytes = new byte[len];
-                message.readBytes(bytes,0,len);
-
-                ProtocolInfo protocolInfo = new ProtocolInfo();
-                protocolInfo.setProtocolId(protocolId);
-                protocolInfo.setBytes(bytes);
-                var3.add(protocolInfo);
-            }
-            else
-            {
-                //包的长度不够，需要等待后续的数据过来
-                message.resetReaderIndex();
-            }
-
-
+            messageRegister = SpringContextHolder.getBean(RequestMessageRegister.class);
         }
 
-        System.out.printf("cls:" + message.getClass().toString());
-        System.out.printf( "message:"+ message.toString());
-        /**
-        int protocolId = 100;
+        ByteBuf packHeadBuf = Unpooled.buffer(12);
+        byteBuf.readBytes(packHeadBuf);
 
-        byte[] bytes = message.toByteArray();
+        int time =  packHeadBuf.readIntLE();
+        int packetId = packHeadBuf.readShortLE();
+        int packetSize = packHeadBuf.readShortLE();
+        byte checkMark0 = packHeadBuf.readByte();
+        byte checkMark1 = packHeadBuf.readByte();
+        byte checkMark2 = packHeadBuf.readByte();
+        byte checkMark3 = packHeadBuf.readByte();
 
-        ByteBuf byteBuf =  Unpooled.buffer(bytes.length + 6);
-        byteBuf.writeInt(protocolId);
-        byteBuf.writeShort(bytes.length);
-        byteBuf.writeBytes(bytes);
+        if( byteBuf.readableBytes() < packetSize)
+        {
+            byteBuf.resetReaderIndex();
+            return;
+        }
 
-        byte[] newBytes = new byte[bytes.length + 6];
-        byteBuf.readBytes(newBytes);
+        ByteBuf readMsgBuf = Unpooled.buffer(packetSize);
+        byteBuf.readBytes(readMsgBuf);
 
-        var3.add(byteBuf);
-         **/
 
-        System.out.printf("go this...decode");
+        byte[] msgBytes = readMsgBuf.array();
+        Message message =  messageRegister.getMessageByProtocolId(packetId,msgBytes);
+
+        MsgBuf msgBuf = new MsgBuf();
+        msgBuf.setPacket_id(packetId);
+
+        if( message == null )
+        {
+            msgBuf.setBytes(msgBytes);
+        }
+        else
+        {
+            msgBuf.setMsg(message);
+        }
+
+        System.out.printf("protocolId:" + packetId + "\n");
+
+        list.add(msgBuf);
     }
 
 }

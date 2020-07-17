@@ -13,6 +13,7 @@ import io.netty.handler.codec.http.HttpServerCodec;
 
 import java.util.List;
 
+@ChannelHandler.Sharable
 public class ServerNettyInitializer extends ChannelInitializer<SocketChannel> {
 
     private List<ChannelHandler> listHandlers;

@@ -15,7 +15,7 @@ public class ClientNettyInitializer extends ChannelInitializer<SocketChannel> {
     private ChannelHandler endHandler;
 
     public ClientNettyInitializer(ChannelHandler endHandler ) {
-        endHandler = endHandler;
+        this.endHandler = endHandler;
     }
 
 
