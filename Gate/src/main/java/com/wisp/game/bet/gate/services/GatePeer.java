@@ -15,15 +15,20 @@ import server_protocols.ServerProtocol;
 
 import java.util.Date;
 
+/**
+ * 与客户端进行连行连线的数据
+ */
 public class GatePeer extends PeerTcp {
 
     private static int inc = 0;
     public int logic_id;
     public int world_id;
+    public int ErrorCount;
     private double m_checktime = 0;
     public boolean IsValid = false;
     private int m_net_param = 0;
     private String m_account = "";
+
 
     public GatePeer() {
         set_check_time();
@@ -51,7 +56,7 @@ public class GatePeer extends PeerTcp {
 
         if (m_checktime > 180000) {
             logger.error("gate_peer check timeout id:" + get_id());
-            //discannect();
+            discannect();
             m_checktime = 0;
         }
     }
@@ -108,7 +113,7 @@ public class GatePeer extends PeerTcp {
     }
 
     public void discannect() {
-
+        channelHandlerContext.close();
     }
 
     public boolean check_gate( String account )
@@ -178,5 +183,10 @@ public class GatePeer extends PeerTcp {
     {
         IsValid = false;
         m_checktime = 50;
+    }
+
+    public String get_account()
+    {
+        return m_account;
     }
 }

@@ -17,13 +17,13 @@ import java.util.Collections;
 public class MongoConfig {
 
 
-    @Value("${mongodb.account.uri}")
+   // @Value("${mongodb.account.uri}")
     private String accountDbUrl;
 
-    @Value("${mongodb.config.uri}")
+    //@Value("${mongodb.config.uri}")
     private String configDbUrl;
 
-    @Bean(name={"mongodb_account"})
+    //@Bean(name={"mongodb_account"})
     public MongoTemplate accountMongoTemplate( )
     {
         MongoDatabaseFactory factory = new SimpleMongoClientDatabaseFactory(MongoClients.create(accountDbUrl), "AccountDB");
@@ -31,7 +31,7 @@ public class MongoConfig {
         return new MongoTemplate(factory,mongoConverter);
     }
 
-    @Bean(name={"mongodb_config"})
+    //@Bean(name={"mongodb_config"})
     public MongoTemplate configMongoTemplate( )
     {
         MongoDatabaseFactory factory = new SimpleMongoClientDatabaseFactory(MongoClients.create(configDbUrl), "ConfigDB");

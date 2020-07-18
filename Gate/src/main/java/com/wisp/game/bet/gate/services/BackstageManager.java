@@ -8,6 +8,7 @@ import io.netty.channel.ChannelId;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import server_protocols.ServerBase;
+import server_protocols.ServerProtocol;
 
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
@@ -146,7 +147,7 @@ public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> im
                 case e_st_gstate:
                 case e_st_activity:
                     ServerPeer serverPeer = get_server_byid(server_info.getServerPort());
-                    if( serverPeer == null || serverPeer.get_state() == e_peer_state.e_ps_connected )
+                    if( serverPeer == null || serverPeer.get_state() == e_peer_state.e_ps_disconnected )
                     {
                         needCoonect = true;
                     }
@@ -168,7 +169,24 @@ public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> im
 
     public void world_serverdown( int server_id )
     {
+        ClientManager.Instance.world_serverdown(server_id);
 
+        boolean bdown = true;
+        for(ServerPeer serverPeer : obj_map.values())
+        {
+            if( serverPeer.get_remote_type() == ServerBase.e_server_type.e_st_world_VALUE &&
+                serverPeer.get_state() != e_peer_state.e_ps_disconnected)
+            {
+                bdown = false;
+                break;
+            }
+        }
+
+
+        if( bdown )
+        {
+            ClientManager.Instance.serverdown_client(0);
+        }
     }
 
     public ConcurrentHashMap<Integer,ServerBase.server_info> getSInfoMap()

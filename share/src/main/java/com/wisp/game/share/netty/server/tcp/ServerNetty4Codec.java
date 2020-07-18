@@ -1,4 +1,4 @@
-package com.wisp.game.share.netty.server;
+package com.wisp.game.share.netty.server.tcp;
 
 import com.google.protobuf.Message;
 import com.wisp.game.core.SpringContextHolder;
@@ -16,7 +16,7 @@ import io.netty.handler.codec.ByteToMessageCodec;
 import java.nio.ByteOrder;
 import java.util.List;
 
-public class ServiceNetty4Codec extends ByteToMessageCodec<MsgBuf> {
+public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
 
 
     private PacketHeadC packetHead_r;
@@ -24,7 +24,7 @@ public class ServiceNetty4Codec extends ByteToMessageCodec<MsgBuf> {
 
     private RequestMessageRegister messageRegister;
 
-    public ServiceNetty4Codec() {
+    public ServerNetty4Codec() {
         packetHead_r = new PacketHeadC();
         packetHead_s = new PacketHeadS();
     }

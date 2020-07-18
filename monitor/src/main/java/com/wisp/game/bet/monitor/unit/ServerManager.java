@@ -26,11 +26,11 @@ public class ServerManager extends EnableObjectManager<Integer,MonitorPeer> {
 
     private static final int UPDATE_TIME = 3000;            //单位ms
     private double m_checktime = 0;
-    private ConcurrentHashMap<ChannelId,ServerBase.server_info.Builder> m_infomap;
+    private ConcurrentHashMap<Integer,ServerBase.server_info.Builder> m_infomap;
     public static ServerManager Instance;
     public ServerManager() {
         ServerManager.Instance = this;
-        m_infomap = new ConcurrentHashMap<ChannelId, ServerBase.server_info.Builder>();
+        m_infomap = new ConcurrentHashMap<Integer, ServerBase.server_info.Builder>();
         m_checktime = EnableProcessinfo.get_tick_count();
     }
 
@@ -69,7 +69,7 @@ public class ServerManager extends EnableObjectManager<Integer,MonitorPeer> {
         }
 
 
-        m_infomap.put(peer.getChannelId(),sinfo);
+        m_infomap.put(peer.get_id(),sinfo);
 
         return true;
     }
@@ -100,6 +100,7 @@ public class ServerManager extends EnableObjectManager<Integer,MonitorPeer> {
                 builder.addSinfos( server_info_builder.clone() );
             }
 
+            broadcast_msg(builder.build());
             m_checktime = 0;
         }
 

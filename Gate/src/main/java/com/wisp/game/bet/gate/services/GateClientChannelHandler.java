@@ -26,7 +26,7 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
 
-        System.out.printf("GateClientChannelHandler channelActive channelId:" + ctx.channel().id());
+        //System.out.printf("GateClientChannelHandler channelActive channelId:" + ctx.channel().id());
 
         serverPeer.set_state(e_peer_state.e_ps_connected);
         serverPeer.init_peer(ctx,false,false);
@@ -44,7 +44,7 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
     }
 
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, MsgBuf message) throws Exception {
-        System.out.printf("GateClientChannelHandler:" + message.getClass().getName());
+        //System.out.printf("GateClientChannelHandler:" + message.getClass().getName());
         serverPeer.addProcessMsg(message);
     }
 

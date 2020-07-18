@@ -2,17 +2,16 @@ package com.wisp.game.sshare;
 
 import com.wisp.game.core.SpringContextHolder;
 import com.wisp.game.share.netty.server.PeerTcpServer;
-import com.wisp.game.share.netty.server.ServerNettyInitializer;
+import com.wisp.game.share.netty.server.tcp.ServerNettyInitializer;
+import com.wisp.game.share.netty.server.websocket.ServerWebSocketNettyInitializer;
 import io.netty.channel.ChannelHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.SpringApplication;
 import org.springframework.core.env.Environment;
 
 import java.util.Deque;
-import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -86,10 +85,10 @@ public abstract class ServerBase implements InitializingBean,Runnable {
         if( environment.containsProperty("cfg.out_port") ){
             m_serverid = environment.getProperty("cfg.out_port",Integer.class,-1);
 
-            ServerNettyInitializer serverNettyInitializer = new ServerNettyInitializer(m_is_web,getChannelHandler());
+            ChannelHandler childChannelHandler =  m_is_web ? new ServerWebSocketNettyInitializer(getChannelHandler()) : new ServerNettyInitializer(getChannelHandler());
 
             peerTcpServer = new PeerTcpServer();
-            peerTcpServer.start(m_serverid,serverNettyInitializer);
+            peerTcpServer.start(m_serverid,childChannelHandler);
         }
 
         if(!on_init())

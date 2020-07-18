@@ -57,15 +57,16 @@ public class MonitorServer extends ServerBase  {
         double elapsed = 0;
         while (is_runing())
         {
-            long cur_tm_ms = System.currentTimeMillis();
+            long start_tm_ms = System.currentTimeMillis();
             serverManager.heartbeat(elapsed);
-            elapsed = System.currentTimeMillis() - cur_tm_ms;
+            elapsed = System.currentTimeMillis() - start_tm_ms;
 
             if( elapsed < 100 )
             {
                 try
                 {
                     Thread.sleep(100);
+                    elapsed = System.currentTimeMillis() - start_tm_ms;
                 }
                 catch (Exception exception)
                 {

@@ -1,5 +1,6 @@
 package com.wisp.game.bet.gate.services;
 
+import client2gate_protocols.Client2GateProtocol;
 import client2logic_protocols.Client2LogicMsgType;
 import client2logic_protocols.Client2LogicProtocol;
 import client2world_protocols.Client2WorldMsgType;
@@ -162,16 +163,30 @@ public class ClientManager extends EnableObjectManager<Integer,GatePeer> {
 
         if( serverPeer != null )
         {
+            peer.reset_checktime();
             serverPeer.send_msg(builder2.build());
             if( msgid > Client2LogicMsgType.e_server_msg_type.e_mst_start_c2l.getNumber() &&
                     msgid < Client2LogicMsgType.e_server_msg_type.e_mst_start_l2c.getNumber() )
             {
-
+                peer.ErrorCount = 0;
             }
         }
         else
         {
+            if( msgid > Client2LogicMsgType.e_server_msg_type.e_mst_start_c2l.getNumber() &&
+                    msgid < Client2LogicMsgType.e_server_msg_type.e_mst_start_l2c.getNumber() )
+            {
+                peer.ErrorCount++;
+                if( peer.ErrorCount <= 3 )
+                {
+                    logger.warn("warning route_handler  serverpeer is null!  packetid:" + msgid + " peerId:" + peer.get_id());
+                    Client2GateProtocol.packetg2c_error_packet.Builder builder = Client2GateProtocol.packetg2c_error_packet.newBuilder();
+                    peer.send_msg(builder.build());
+                    return true;
+                }
+            }
 
+            return  false;
         }
 
         return  true;
@@ -191,12 +206,15 @@ public class ClientManager extends EnableObjectManager<Integer,GatePeer> {
 
     public void serverdown_client(int logicId)
     {
-
+        for( GatePeer gatePeer : obj_map.values() )
+        {
+            gatePeer.discannect();
+        }
     }
 
-    public void peer_disconnected(int channelId)
+    public void peer_disconnected(int peerid)
     {
-        GatePeer gatePeer = find_objr(channelId);
+        GatePeer gatePeer = find_objr(peerid);
         if(  gatePeer == null)
         {
             return;
@@ -216,7 +234,17 @@ public class ClientManager extends EnableObjectManager<Integer,GatePeer> {
 
     public int account_peer_count(String account)
     {
-        return 1;
+        int count = 0;
+
+        for( GatePeer gatePeer : obj_map.values() )
+        {
+            if( gatePeer.get_account() == account )
+            {
+                count ++;
+            }
+        }
+
+        return count;
     }
 
 

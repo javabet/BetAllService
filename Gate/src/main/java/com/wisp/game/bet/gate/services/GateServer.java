@@ -2,6 +2,7 @@ package com.wisp.game.bet.gate.services;
 
 import com.wisp.game.bet.gate.db.DbAccount;
 import com.wisp.game.core.SpringContextHolder;
+import com.wisp.game.share.netty.RequestMessageRegister;
 import com.wisp.game.sshare.ServerBase;
 import io.netty.channel.ChannelHandler;
 import org.slf4j.Logger;
@@ -23,6 +24,9 @@ public final class GateServer extends ServerBase {
 
     @Autowired
     public Environment environment;
+
+    @Autowired
+    public RequestMessageRegister requestMessageRegister;
 
     public GateServer() {
         Instance = this;
@@ -54,6 +58,7 @@ public final class GateServer extends ServerBase {
                 try
                 {
                     Thread.sleep(50);
+                    elapsed = System.currentTimeMillis() - cur_tm_ms;
                 }
                 catch (Exception ex)
                 {

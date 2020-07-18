@@ -1,31 +1,28 @@
 package com.wisp.game.share.netty.server;
 
-import com.wisp.game.share.netty.server.ServerNettyInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 
 public class PeerTcpServer implements Runnable {
 
     private int port;
 
-    private ServerNettyInitializer serverNettyInitializer;
+    private ChannelHandler childHandler;
 
     public PeerTcpServer() {
 
     }
 
-    public void start( int port,ServerNettyInitializer serverNettyInitializer )
+    public void start( int port,ChannelHandler serverNettyInitializer )
     {
         this.port = port;
-        this.serverNettyInitializer = serverNettyInitializer;
+        this.childHandler = serverNettyInitializer;
 
         Thread t = new Thread(this);
         t.setDaemon(true);
@@ -42,7 +39,7 @@ public class PeerTcpServer implements Runnable {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(bossGroup,workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(serverNettyInitializer)
+                    .childHandler(childHandler)
                     .option(ChannelOption.SO_BACKLOG,2048)
                     .childOption(ChannelOption.SO_KEEPALIVE,true)
                     ;
