@@ -1,5 +1,6 @@
 package com.wisp.game.share.netty.infos;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
 import io.netty.buffer.ByteBuf;
 
@@ -7,6 +8,7 @@ public class MsgBuf {
    private int packet_id;
    private boolean need_route;
    private ByteBuf msgBuff;
+   private ByteString byteString;
    private byte[] bytes;
    private Message msg;
 
@@ -54,5 +56,14 @@ public class MsgBuf {
 
     public void setBytes(byte[] bytes) {
         this.bytes = bytes;
+    }
+
+
+    public ByteString getByteString() {
+        return byteString;
+    }
+
+    public void setByteString(ByteString byteString) {
+        this.byteString = byteString;
     }
 }

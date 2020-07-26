@@ -9,6 +9,8 @@ import com.google.protobuf.Message;
 import com.wisp.game.share.common.EnableObjectManager;
 import com.wisp.game.share.netty.PeerTcp;
 import com.wisp.game.share.utils.SessionHelper;
+import com.wisp.game.sshare.IRouterHandler;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 保存与客户端的信息
  */
 @Component
-public class ClientManager extends EnableObjectManager<Integer,GatePeer> {
+public class ClientManager extends EnableObjectManager<Integer,GatePeer> implements IRouterHandler<GatePeer> {
     private Logger logger = LoggerFactory.getLogger(getClass());
     public static ClientManager Instance;
     private boolean m_is_shutdowning;

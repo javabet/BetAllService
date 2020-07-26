@@ -33,7 +33,7 @@ public class ServerWebSocketNettyInitializer extends ChannelInitializer<SocketCh
     protected  void initChannel(SocketChannel ch) throws Exception
     {
         ChannelPipeline pipeline = ch.pipeline();
-        pipeline.addLast(new IdleStateHandler(180,0,0));
+        pipeline.addLast(new IdleStateHandler(120,0,0));
 
         //http解码器
         pipeline.addLast(new HttpServerCodec());
@@ -42,8 +42,14 @@ public class ServerWebSocketNettyInitializer extends ChannelInitializer<SocketCh
         //http聚合器
         pipeline.addLast(new HttpObjectAggregator(1024*62));
         //websocket支持,设置路由
-        pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
+        pipeline.addLast(new WebSocketServerProtocolHandler("/ws",null,true));
+        //pipeline.addLast(new WebSocketServerProtocolHandler("/"));
 
+        //zhou-hj/NettyProtobufWebsocket
+
+        //pipeline.addLast(new WebsocketDecode());
+
+        pipeline.addLast(new ServerWebSocketCodec());
         pipeline.addLast(new ServerWebSocketNetty4Codec());
 
 

@@ -4,6 +4,7 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
 import com.wisp.game.share.netty.infos.MsgBuf;
 import com.wisp.game.share.netty.infos.e_peer_state;
+import com.wisp.game.sshare.IRouterHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelId;
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ public abstract class PeerTcp {
     protected boolean m_need_route;
     protected boolean m_bcheck_time;
     protected boolean m_bread;
-    protected Method m_func;
+    protected IRouterHandler m_router_handler;
 
     protected e_peer_state m_state;
 
@@ -36,8 +37,9 @@ public abstract class PeerTcp {
     private int m_id;
     private ChannelId channelId;
 
-    private Queue<MsgBuf> queue = new ConcurrentLinkedQueue<>();
+    private Queue<MsgBuf> receive_queue = new ConcurrentLinkedQueue<>();
 
+    private Queue<MsgBuf> send_queue = new ConcurrentLinkedQueue<>();
 
 
     public PeerTcp() {
@@ -56,30 +58,46 @@ public abstract class PeerTcp {
         return this.channelHandlerContext;
     }
 
+    public void packet_send_msgs()
+    {
+        boolean needSend = false;
+        while( send_queue.size() > 0 )
+        {
+            MsgBuf msgBuf =  send_queue.remove();
+            this.channelHandlerContext.write(msgBuf);
+            needSend = true;
+        }
+
+        if( needSend )
+        {
+            if( this.channelHandlerContext.channel().isActive() && this.channelHandlerContext.channel().isOpen()   )
+            {
+                this.channelHandlerContext.channel().flush();
+            }
+        }
+    }
+
     public int packet_service( int process_count )
     {
         int i = 0;
         long cur_tm_ms = 0;
-        while( queue.size() > 0 )
+        while( receive_queue.size() > 0 )
         {
-            MsgBuf msgBuf =  queue.remove();
+            MsgBuf msgBuf =  receive_queue.poll();
             cur_tm_ms = System.currentTimeMillis();
+
+            if( msgBuf.getPacket_id() == 5001 )
+            {
+                System.out.printf("go this...");
+            }
 
             if( m_need_route && msgBuf.isNeed_route() )
             {
-                if( m_func != null  )
+                if( m_router_handler != null  )
                 {
-                    try
-                    {
-                        boolean processFlag = (Boolean) m_func.invoke(this,msgBuf.getPacket_id(),msgBuf.getMsg());
-                        if(!processFlag)
-                        {
-                            return msgBuf.getPacket_id();
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        logger.error("packet_service has error ,the packetId:" + msgBuf.getPacket_id());
+                    boolean processFlag = m_router_handler.route_handler(this,msgBuf.getPacket_id(),msgBuf.getByteString());
+                    if(!processFlag) {
+                        return msgBuf.getPacket_id();
                     }
                 }
             }
@@ -114,8 +132,21 @@ public abstract class PeerTcp {
 
      public void addProcessMsg(MsgBuf msgBuf)
      {
-         queue.add(msgBuf);
+         receive_queue.add(msgBuf);
      }
+
+     public void addSendMsg(Message msg)
+     {
+         int protocolId =  ResponseMessageRegitser.Instance.getProtocolIdByMessageClass(msg);
+
+         MsgBuf msgBuf = new MsgBuf();
+         msgBuf.setNeed_route(false);
+         msgBuf.setPacket_id(protocolId);
+         msgBuf.setMsg(msg);
+
+         this.send_queue.add(msgBuf);
+     }
+
 
 
     public void dispose()
@@ -288,9 +319,9 @@ public abstract class PeerTcp {
         this.channelId = channelId;
     }
 
-    public void set_route_handler(Method route_handler )
+    public void set_route_handler(IRouterHandler route_handler )
     {
         m_need_route = true;
-        m_func = route_handler;
+        m_router_handler = route_handler;
     }
 }

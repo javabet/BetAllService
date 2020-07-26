@@ -1,5 +1,6 @@
 package com.wisp.game.share.netty.server.websocket;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
 import com.wisp.game.core.SpringContextHolder;
 import com.wisp.game.share.common.EnableProcessinfo;
@@ -30,7 +31,7 @@ public class ServerWebSocketNetty4Codec extends ByteToMessageCodec<MsgBuf> {
         }
 
 
-        byteBuf.writeShortLE( msgBuf.getPacket_id() );
+        byteBuf.writeIntLE( msgBuf.getPacket_id() );
         byteBuf.writeShortLE(bytes.length);
         byteBuf.writeBytes(bytes);
     }
@@ -50,7 +51,7 @@ public class ServerWebSocketNetty4Codec extends ByteToMessageCodec<MsgBuf> {
         ByteBuf packHeadBuf = Unpooled.buffer(6);
         byteBuf.readBytes(packHeadBuf);
 
-        int packetId = packHeadBuf.readShortLE();
+        int packetId = packHeadBuf.readIntLE();
         int packetSize = packHeadBuf.readShortLE();
 
 
@@ -72,7 +73,9 @@ public class ServerWebSocketNetty4Codec extends ByteToMessageCodec<MsgBuf> {
 
         if( message == null )
         {
+            msgBuf.setNeed_route(true);
             msgBuf.setBytes(msgBytes);
+            msgBuf.setByteString(ByteString.copyFrom(msgBytes));
         }
         else
         {

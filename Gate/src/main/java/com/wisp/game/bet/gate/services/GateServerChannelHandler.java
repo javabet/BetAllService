@@ -1,9 +1,12 @@
 package com.wisp.game.bet.gate.services;
 
+import com.alibaba.fastjson.JSON;
+import com.google.protobuf.ByteString;
 import com.wisp.game.share.netty.infos.MsgBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 import io.netty.util.AttributeKey;
 import jodd.cli.Cli;
 import org.slf4j.Logger;
@@ -45,9 +48,10 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         gatePeer.init_peer(ctx,false,true);
         gatePeer.set_id(peerid);
         gatePeer.set_net_param();
-        Method route_method = ClientManager.Instance.getClass().getMethod("route_handler");
-        gatePeer.set_route_handler(route_method);
+        gatePeer.set_route_handler(ClientManager.Instance);
         ClientManager.Instance.regedit_client(gatePeer);
+
+        System.out.printf("the........ peerId:" + peerid);
     }
 
     //每当接收数据时，都会调用这个方法
@@ -57,7 +61,7 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         GatePeer gatePeer = ClientManager.Instance.find_objr(peerId);
         if( gatePeer != null )
         {
-            gatePeer.addProcessMsg(msgBuf);
+            gatePeer.addProcessMsg( msgBuf );
         }
         else
         {
@@ -96,7 +100,10 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
 
         int peerId = ctx.attr( ATTR_PEERID ).get();
 
+        System.out.printf("channelInactive" + ctx.channel().id() + "\n");
+
         ctx.close();
+        ctx.channel().close();
         ctx.channel().close();
         GatePeer gatePeer = ClientManager.Instance.find_objr(peerId);
         if( gatePeer != null )
