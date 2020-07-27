@@ -4,7 +4,6 @@ import com.wisp.game.bet.monitor.unit.MonitorPeer;
 import com.wisp.game.bet.monitor.unit.ServerManager;
 import com.wisp.game.share.netty.IRequest;
 import com.wisp.game.share.netty.PacketManager.DefaultRequestMessage;
-import com.wisp.game.share.netty.PacketManager.IRequestMessage;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
 

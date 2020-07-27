@@ -6,7 +6,7 @@ import com.wisp.game.share.netty.PeerTcp;
 public abstract class RequestMessageFromSID <M extends Message,P extends PeerTcp> implements IRequestMessage<M,P,Object>  {
 
     @Override
-    public abstract   boolean packet_process(P peer, M msg);
+    public  boolean packet_process(P peer, M msg){return false;};
 
     @Override
     public abstract boolean packet_process(P peer, int sessionId, M msg);

@@ -6,7 +6,6 @@ import com.wisp.game.bet.monitor.unit.ServerManager;
 import com.wisp.game.share.component.TimeHelper;
 import com.wisp.game.share.netty.IRequest;
 import com.wisp.game.share.netty.PacketManager.DefaultRequestMessage;
-import com.wisp.game.share.netty.PacketManager.IRequestMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import server_protocols.ServerBase;

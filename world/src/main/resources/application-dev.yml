@@ -1,0 +1,32 @@
+server:
+  port: 12002
+
+
+cfg:
+  monitor_ip: 127.0.0.1
+  monitor_port: 11001
+  out_port: 12001
+  http_synch: 127.0.0.1:3000
+
+  debug: 1
+  is_main: 1
+  http_check: 127.0.0.1:21003
+  http_alipay: 0
+  VbSi7Ck1cr: ZiI8HFfPiSqEC6/ZNtIjssUN84MMWKPAS/3KJFC1Fr0=
+
+  playerdb_url: 127.0.0.1:27017
+  playerdb_name: PlayerDB_DWC
+  logdb_url: 127.0.0.1:27017
+  logdb_name: LogDB_DWC
+  gamedb_url: 127.0.0.1:27017
+  gamedb_name: GameDB
+  paydb_url: 127.0.0.1:27017
+  paydb_name: PaymentDB
+  configdb_url: 127.0.0.1:27017
+  configdb_name: ConfigDB
+  accountdb_url: 127.0.0.1:27017
+  accountdb_name: AccountDB
+  clouddb_url: 127.0.0.1:27017
+  clouddb_name: CloudDB
+  activiydb_url: 127.0.0.1:27017
+  activiydb_name: CloudDB

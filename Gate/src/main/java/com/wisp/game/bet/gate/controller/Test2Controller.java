@@ -2,12 +2,12 @@ package com.wisp.game.bet.gate.controller;
 
 import client2gate_protocols.Client2GateProtocol;
 import client2world_protocols.Client2WorldProtocol;
-import com.wisp.game.bet.gate.services.ClientManager;
-import com.wisp.game.bet.gate.services.GatePeer;
-import com.wisp.game.db.account.info.AccountTableInfo;
-import com.wisp.game.db.account.service.AccountTableServiceImpl;
-import com.wisp.game.db.config.info.ServerList;
-import com.wisp.game.db.config.service.ServerListImpl;
+import com.wisp.game.bet.gate.unit.ClientManager;
+import com.wisp.game.bet.gate.unit.GatePeer;
+import com.wisp.game.bet.world.db.mongo.account.info.AccountTableInfo;
+import com.wisp.game.bet.world.db.mongo.account.service.AccountTableServiceImpl;
+import com.wisp.game.bet.world.db.mongo.config.info.ServerList;
+import com.wisp.game.bet.world.db.mongo.config.service.ServerListImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

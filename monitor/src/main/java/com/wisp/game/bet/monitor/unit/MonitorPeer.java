@@ -2,7 +2,6 @@ package com.wisp.game.bet.monitor.unit;
 
 import com.wisp.game.core.SpringContextHolder;
 import com.wisp.game.share.common.EnableProcessinfo;
-import com.wisp.game.share.netty.infos.e_peer_state;
 import com.wisp.game.share.netty.PeerTcp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

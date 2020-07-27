@@ -1,6 +1,5 @@
 package com.wisp.game.bet.monitor.unit;
 
-import com.wisp.game.share.netty.IRequest;
 import com.wisp.game.share.netty.infos.MsgBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;

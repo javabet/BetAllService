@@ -1,6 +1,7 @@
 package main;
 
 
+import com.wisp.game.core.SpringContextHolder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
@@ -19,5 +20,6 @@ public class MonitorMain {
     public static void main(String[] args)
     {
         ApplicationContext context =  SpringApplication.run(MonitorMain.class,args);
+        //SpringContextHolder.getApplicationContext()
     }
 }

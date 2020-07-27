@@ -1,12 +1,14 @@
 package com.wisp.game.share.netty;
 
 import com.google.protobuf.Message;
+import com.wisp.game.core.SpringContextHolder;
 import com.wisp.game.share.common.ClassScanner;
 import com.wisp.game.share.netty.PacketManager.IRequestMessage;
 import com.wisp.game.share.utils.ProtocolClassUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -20,6 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 收集消息号相关
  */
 @Component
+@DependsOn({"springContextHolder"})
 public class RequestMessageRegister implements InitializingBean {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -64,11 +67,18 @@ public class RequestMessageRegister implements InitializingBean {
                 continue;
             }
 
+//            boolean debug = true;
+//            if(debug)
+//            {
+//                continue;
+//            }
+
+
             ProtocolStruct protocolStruct = new ProtocolStruct();
             protocolStruct.setProtocolId(protocolId);
-            protocolStruct.setHandlerCls(clz);
             protocolStruct.setProtocolCls(findTypeClass);
-            protocolStruct.handlerInstance = (IRequestMessage) clz.newInstance();
+            protocolStruct.handlerInstance = (IRequestMessage)SpringContextHolder.getBean( clz ); //(IRequestMessage) clz.newInstance();
+
 
             try
             {
@@ -83,7 +93,7 @@ public class RequestMessageRegister implements InitializingBean {
 
             if( classConcurrentHashMap.containsKey(protocolId) )
             {
-                logger.error("the repeated the protocolId:" + protocolId + " oldClassName:" + classConcurrentHashMap.get(protocolId).getHandlerCls().getName() + " nowCls:" + clz.getName());
+                logger.error("the repeated the protocolId:" + protocolId + " nowCls:" + clz.getName());
                 continue;
             }
 
@@ -171,9 +181,8 @@ public class RequestMessageRegister implements InitializingBean {
     {
         private int ProtocolId;         //需要处理的消息号
 
-        private Class handlerCls;       //处理此消息号的对象的cls
 
-        private Class protocolCls;      //需要处理的消息号的protocol的class
+        private Class<? extends Message> protocolCls;      //需要处理的消息号的protocol的class
 
         private IRequestMessage handlerInstance; //需要处理消息号的实体对象
 
@@ -187,19 +196,11 @@ public class RequestMessageRegister implements InitializingBean {
             ProtocolId = protocolId;
         }
 
-        public Class getHandlerCls() {
-            return handlerCls;
-        }
-
-        public void setHandlerCls(Class handlerCls) {
-            this.handlerCls = handlerCls;
-        }
-
-        public Class getProtocolCls() {
+        public Class<? extends Message> getProtocolCls() {
             return protocolCls;
         }
 
-        public void setProtocolCls(Class protocolCls) {
+        public void setProtocolCls(Class<? extends Message> protocolCls) {
             this.protocolCls = protocolCls;
         }
 
