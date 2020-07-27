@@ -9,4 +9,4 @@ cfg:
   websocket: 1
   gate_type: web
   accountdb_url: 127.0.0.1:27017
-  accountdb_name: AccountDB
+  accountdb_name: AccountDB packet_server_connect

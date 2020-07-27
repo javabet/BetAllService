@@ -1,17 +1,16 @@
-package com.wisp.game.bet.world.db.mongo.account.service;
+package com.wisp.game.bet.db.mongo.account.service;
 
-import com.wisp.game.bet.world.db.mongo.IMongoService;
-import com.wisp.game.bet.world.db.mongo.MongoService;
-import com.wisp.game.bet.world.db.mongo.account.info.AccountTableInfo;
-import com.wisp.game.bet.world.db.mongo.account.interfaceService.AcountService;
+import com.wisp.game.bet.db.mongo.IMongoService;
+import com.wisp.game.bet.db.mongo.MongoServiceMeta;
+import com.wisp.game.bet.db.mongo.account.info.AccountTableInfo;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 
 
-@MongoService("Account")
-public class AccountTableServiceImpl implements AcountService, IMongoService {
+@MongoServiceMeta("account")
+public class AccountTableServiceImpl implements IMongoService {
 
     private MongoTemplate mongoTemplate;
 

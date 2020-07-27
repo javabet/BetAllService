@@ -28,10 +28,10 @@ public class WorldServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
         int peerid = WorldServer.Instance.generate_id();
         ctx.attr( ATTR_PEERID ).set(peerid);
 
-        WorldPeer gatePeer = new WorldPeer();
-        gatePeer.init_peer(ctx,false,true);
-        gatePeer.set_id(peerid);
-        ServersManager.Instance.regedit_server(gatePeer);
+        WorldPeer worldPeer = new WorldPeer();
+        worldPeer.init_peer(ctx,false,true);
+        worldPeer.set_id(peerid);
+        ServersManager.Instance.add_obj(peerid,worldPeer);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class WorldServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
         }
         else
         {
-            logger.error("channelRead0 has the data but the peer is not exist");
+            logger.error("channelRead0 has the data but the peer is not exist,the peerId:" + peerId);
         }
     }
 
@@ -89,8 +89,8 @@ public class WorldServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
         WorldPeer worldPeer = ServersManager.Instance.find_objr(peerId);
         if( worldPeer != null )
         {
-            WorldServer.Instance.push_id(worldPeer.get_id());
             ServersManager.Instance.remove_server(worldPeer);
+            WorldServer.Instance.push_id(worldPeer.get_id());
         }
 
         if( worldPeer.get_remote_type() == ServerBase.e_server_type.e_st_logic_VALUE)

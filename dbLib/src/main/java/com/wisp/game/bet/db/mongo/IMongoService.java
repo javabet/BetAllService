@@ -1,4 +1,4 @@
-package com.wisp.game.bet.world.db.mongo;
+package com.wisp.game.bet.db.mongo;
 
 import org.springframework.data.mongodb.core.MongoTemplate;
 

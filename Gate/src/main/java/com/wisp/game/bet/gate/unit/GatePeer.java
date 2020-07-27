@@ -2,7 +2,7 @@ package com.wisp.game.bet.gate.unit;
 
 import client2gate_protocols.Client2GateProtocol;
 import com.wisp.game.bet.gate.db.DbAccount;
-import com.wisp.game.bet.world.db.mongo.account.info.ServerInfo;
+import com.wisp.game.bet.db.mongo.account.info.ServerInfo;
 import com.wisp.game.share.component.TimeHelper;
 import com.wisp.game.share.netty.PeerTcp;
 import com.wisp.game.share.netty.infos.e_peer_state;

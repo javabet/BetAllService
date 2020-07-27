@@ -1,4 +1,4 @@
-package com.wisp.game.bet.world.db.mongo;
+package com.wisp.game.bet.db.mongo;
 
 
 import org.springframework.stereotype.Component;
@@ -9,6 +9,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Component
-public @interface MongoService {
+public @interface MongoServiceMeta {
     String value() default "";
 }

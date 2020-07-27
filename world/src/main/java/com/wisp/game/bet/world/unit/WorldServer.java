@@ -10,9 +10,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 
-/**
- * 外部连接此World时
- */
 @Component
 public class WorldServer extends ServerBase {
     public static WorldServer Instance;
@@ -27,21 +24,21 @@ public class WorldServer extends ServerBase {
     @Autowired
     public RequestMessageRegister requestMessageRegister;
 
+    @Autowired
+    public MongoDbService dbControllerService;
 
     public WorldServer() {
         Instance = this;
     }
 
-
-
     @Override
     protected ChannelHandler getChannelHandler() {
-        return null;
+        return new WorldServerChannelHandler();
     }
 
     @Override
     public boolean on_init() {
-        this.init_db();
+        //this.init_db();
         connect_monitor();
         return true;
     }
@@ -92,7 +89,7 @@ public class WorldServer extends ServerBase {
 
     private boolean init_db()
     {
-
+        /**
         if( environment.containsProperty("cfg.playerdb_url") && environment.containsProperty("cfg.playerdb_name") )
         {
             DbPlayer.Instance.init_db(environment.getProperty("cfg.playerdb_url"),environment.getProperty("cfg.playerdb_name"));
@@ -122,6 +119,7 @@ public class WorldServer extends ServerBase {
         {
             DbAccount.Instance.init_db(environment.getProperty("cfg.accountdb_url"),environment.getProperty("cfg.accountdb_name"));
         }
+         **/
 
         if( environment.containsProperty("cfg.is_main") )
         {

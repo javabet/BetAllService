@@ -3,6 +3,7 @@ package com.wisp.game.bet.world.unit;
 
 import com.wisp.game.share.netty.infos.MsgBuf;
 import com.wisp.game.share.netty.infos.e_peer_state;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import server_protocols.ServerBase;
 /**
  * 作为客户端，发送信息给别的服务器
  */
+@ChannelHandler.Sharable
 public class WorldClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
 
     private Logger logger = LoggerFactory.getLogger( getClass() );

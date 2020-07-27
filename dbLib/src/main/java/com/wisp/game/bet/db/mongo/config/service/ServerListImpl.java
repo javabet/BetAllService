@@ -1,9 +1,8 @@
-package com.wisp.game.bet.world.db.mongo.config.service;
+package com.wisp.game.bet.db.mongo.config.service;
 
-import com.wisp.game.bet.world.db.mongo.IMongoService;
-import com.wisp.game.bet.world.db.mongo.MongoService;
-import com.wisp.game.bet.world.db.mongo.config.info.ServerList;
-import com.wisp.game.bet.world.db.mongo.config.interfaceService.ServerListService;
+import com.wisp.game.bet.db.mongo.IMongoService;
+import com.wisp.game.bet.db.mongo.MongoServiceMeta;
+import com.wisp.game.bet.db.mongo.config.info.ServerList;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -11,10 +10,9 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.List;
 
-@MongoService
-public class ServerListImpl implements ServerListService, IMongoService {
+@MongoServiceMeta
+public class ServerListImpl implements  IMongoService {
 
-    //@Resource(name = "mongodb_config")
     private MongoTemplate mongoTemplate;
 
     public List<ServerList> findAll()

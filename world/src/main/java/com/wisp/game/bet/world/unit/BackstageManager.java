@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> implements InitializingBean {
     public static BackstageManager Instance;
 
-    private ConcurrentHashMap<Integer, ServerBase.server_info> SInfoMap = new ConcurrentHashMap<>();
+    public ConcurrentHashMap<Integer, ServerBase.server_info> SInfoMap = new ConcurrentHashMap<>();
 
     public BackstageManager() {
         Instance = this;
