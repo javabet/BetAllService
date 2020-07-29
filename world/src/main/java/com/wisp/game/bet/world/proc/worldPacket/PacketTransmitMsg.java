@@ -4,10 +4,10 @@ import com.google.protobuf.Message;
 import com.wisp.game.bet.world.PlayerSys.GamePlayer;
 import com.wisp.game.bet.world.gameMgr.GamePlayerMgr;
 import com.wisp.game.bet.world.unit.WorldPeer;
-import com.wisp.game.share.netty.IRequest;
-import com.wisp.game.share.netty.PacketManager.DefaultRequestMessage;
-import com.wisp.game.share.netty.PacketManager.IRequestMessage;
-import com.wisp.game.share.netty.RequestMessageRegister;
+import com.wisp.game.bet.share.netty.IRequest;
+import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
+import com.wisp.game.bet.share.netty.PacketManager.IRequestMessage;
+import com.wisp.game.bet.share.netty.RequestMessageRegister;
 import server_protocols.ServerProtocol;
 
 @IRequest

@@ -4,9 +4,9 @@ package com.wisp.game.bet.monitor.unit;
 import com.wisp.game.bet.monitor.db.DbAccount;
 import com.wisp.game.bet.monitor.db.DbConfig;
 import com.wisp.game.bet.monitor.db.GameDb;
-import com.wisp.game.bet.db.mongo.config.info.ServerList;
-import com.wisp.game.core.SpringContextHolder;
-import com.wisp.game.sshare.ServerBase;
+import com.wisp.game.bet.db.mongo.config.info.ServerListDoc;
+import com.wisp.game.bet.core.SpringContextHolder;
+import com.wisp.game.bet.sshare.ServerBase;
 import io.netty.channel.ChannelHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,7 +105,7 @@ public class MonitorServer extends ServerBase  {
         Query query = new Query();
         Update update = new Update();
         update.set("Status",0);
-        dbConfig.getMongoTemplate().updateMulti(query,update, ServerList.class);
+        dbConfig.getMongoTemplate().updateMulti(query,update, ServerListDoc.class);
     }
 
 

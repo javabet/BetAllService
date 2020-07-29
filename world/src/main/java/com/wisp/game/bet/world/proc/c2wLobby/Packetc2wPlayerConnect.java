@@ -6,10 +6,10 @@ import com.wisp.game.bet.world.gameMgr.GamePlayerMgr;
 import com.wisp.game.bet.world.unit.WorldPeer;
 import com.wisp.game.bet.world.unit.WorldServer;
 import com.wisp.game.bet.db.mongo.account.service.AccountTableServiceImpl;
-import com.wisp.game.core.SpringContextHolder;
-import com.wisp.game.bet.db.mongo.account.info.AccountTableInfo;
-import com.wisp.game.share.netty.IRequest;
-import com.wisp.game.share.netty.PacketManager.RequestMessageFromSID;
+import com.wisp.game.bet.core.SpringContextHolder;
+import com.wisp.game.bet.db.mongo.account.info.AccountTableDoc;
+import com.wisp.game.bet.share.netty.IRequest;
+import com.wisp.game.bet.share.netty.PacketManager.RequestMessageFromSID;
 
 @IRequest
 public class Packetc2wPlayerConnect extends RequestMessageFromSID<Client2WorldProtocol.packetc2w_player_connect,WorldPeer> {
@@ -24,7 +24,7 @@ public class Packetc2wPlayerConnect extends RequestMessageFromSID<Client2WorldPr
             accountTableService = SpringContextHolder.getBean(AccountTableServiceImpl.class);
         }
 
-        AccountTableInfo accountTableInfo = accountTableService.load_data(msg.getAccount());
+        AccountTableDoc accountTableInfo = accountTableService.load_data(msg.getAccount());
 
         boolean ret = accountTableService.check_token(accountTableInfo,msg.getAccount(),msg.getToken(),msg.getSign(), WorldServer.Instance.get_serverid());
         if(ret)

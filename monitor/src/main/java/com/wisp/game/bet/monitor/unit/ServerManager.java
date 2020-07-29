@@ -3,9 +3,9 @@ package com.wisp.game.bet.monitor.unit;
 import com.google.protobuf.Message;
 import com.wisp.game.bet.monitor.db.DbAccount;
 import com.wisp.game.bet.monitor.db.DbConfig;
-import com.wisp.game.bet.db.mongo.config.info.ServerList;
-import com.wisp.game.share.common.EnableObjectManager;
-import com.wisp.game.share.common.EnableProcessinfo;
+import com.wisp.game.bet.db.mongo.config.info.ServerListDoc;
+import com.wisp.game.bet.share.common.EnableObjectManager;
+import com.wisp.game.bet.share.common.EnableProcessinfo;
 import io.netty.channel.ChannelId;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -52,7 +52,7 @@ public class ServerManager extends EnableObjectManager<Integer,MonitorPeer> {
             Update update = new Update();
             update.set("Status",1);
             update.set("ServerIp",sinfo.getServerIp());
-            DbConfig.Instance.getMongoTemplate().updateFirst(query,update, ServerList.class);
+            DbConfig.Instance.getMongoTemplate().updateFirst(query,update, ServerListDoc.class);
         }
 
         if( peer.get_remote_type() == ServerBase.e_server_type.e_st_world.getNumber() )
@@ -61,7 +61,7 @@ public class ServerManager extends EnableObjectManager<Integer,MonitorPeer> {
             Update update = new Update();
             update.set("Status",1);
             update.set("ServerIp",sinfo.getServerIp());
-            DbConfig.Instance.getMongoTemplate().updateFirst(query,update, ServerList.class);
+            DbConfig.Instance.getMongoTemplate().updateFirst(query,update, ServerListDoc.class);
         }
 
 

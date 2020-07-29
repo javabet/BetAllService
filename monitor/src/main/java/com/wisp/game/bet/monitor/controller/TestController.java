@@ -2,15 +2,12 @@ package com.wisp.game.bet.monitor.controller;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
-import com.wisp.game.share.netty.PacketManager.IRequestMessage;
-import com.wisp.game.share.netty.RequestMessageRegister;
+import com.wisp.game.bet.share.netty.RequestMessageRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
-
-import java.lang.reflect.Method;
 
 @RestController
 public class TestController {

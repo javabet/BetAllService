@@ -4,9 +4,9 @@ package com.wisp.game.bet.gate.proc.server;
 import com.wisp.game.bet.gate.unit.ClientManager;
 import com.wisp.game.bet.gate.unit.GatePeer;
 import com.wisp.game.bet.gate.unit.ServerPeer;
-import com.wisp.game.share.netty.IRequest;
-import com.wisp.game.share.netty.PacketManager.DefaultRequestMessage;
-import com.wisp.game.share.utils.SessionHelper;
+import com.wisp.game.bet.share.netty.IRequest;
+import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
+import com.wisp.game.bet.share.utils.SessionHelper;
 import server_protocols.ServerProtocol;
 
 @IRequest

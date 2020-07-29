@@ -2,7 +2,7 @@ package com.wisp.game.bet.world.unit;
 
 
 import com.google.protobuf.Message;
-import com.wisp.game.share.netty.PeerTcp;
+import com.wisp.game.bet.share.netty.PeerTcp;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
 

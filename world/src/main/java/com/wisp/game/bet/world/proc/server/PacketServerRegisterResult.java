@@ -1,9 +1,9 @@
 package com.wisp.game.bet.world.proc.server;
 
 import com.wisp.game.bet.world.unit.ServerPeer;
-import com.wisp.game.share.component.TimeHelper;
-import com.wisp.game.share.netty.IRequest;
-import com.wisp.game.share.netty.PacketManager.DefaultRequestMessage;
+import com.wisp.game.bet.share.component.TimeHelper;
+import com.wisp.game.bet.share.netty.IRequest;
+import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import server_protocols.ServerProtocol;
 
 @IRequest

@@ -1,6 +1,6 @@
 package com.wisp.game.bet.gate.unit;
 
-import com.wisp.game.share.netty.infos.MsgBuf;
+import com.wisp.game.bet.share.netty.infos.MsgBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

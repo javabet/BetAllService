@@ -2,8 +2,8 @@ package com.wisp.game.bet.gate.proc.server;
 
 import com.wisp.game.bet.gate.unit.BackstageManager;
 import com.wisp.game.bet.gate.unit.ServerPeer;
-import com.wisp.game.share.netty.IRequest;
-import com.wisp.game.share.netty.PacketManager.DefaultRequestMessage;
+import com.wisp.game.bet.share.netty.IRequest;
+import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
 

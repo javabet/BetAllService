@@ -1,6 +1,6 @@
 package com.wisp.game.bet.world.unit;
 
-import com.wisp.game.share.common.EnableObjectManager;
+import com.wisp.game.bet.share.common.EnableObjectManager;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import server_protocols.ServerBase;

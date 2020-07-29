@@ -17,16 +17,21 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.wisp.game.bet</groupId>
-            <artifactId>share</artifactId>
+            <artifactId>dbLib</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.wisp.game.bet</groupId>
-            <artifactId>dbLib</artifactId>
+            <artifactId>configLib</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.wisp.game.bet</groupId>
+            <artifactId>share</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

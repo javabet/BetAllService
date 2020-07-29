@@ -1,6 +1,6 @@
 package com.wisp.game.bet.gate.db;
 
-import com.wisp.game.sshare.DbBase;
+import com.wisp.game.bet.sshare.DbBase;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -4,9 +4,9 @@ import client2gate_protocols.Client2GateProtocol;
 import client2world_protocols.Client2WorldProtocol;
 import com.wisp.game.bet.gate.unit.ClientManager;
 import com.wisp.game.bet.gate.unit.GatePeer;
-import com.wisp.game.bet.db.mongo.account.info.AccountTableInfo;
+import com.wisp.game.bet.db.mongo.account.info.AccountTableDoc;
 import com.wisp.game.bet.db.mongo.account.service.AccountTableServiceImpl;
-import com.wisp.game.bet.db.mongo.config.info.ServerList;
+import com.wisp.game.bet.db.mongo.config.info.ServerListDoc;
 import com.wisp.game.bet.db.mongo.config.service.ServerListImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,9 +41,9 @@ public class Test2Controller {
         Map<String,String> map = new ConcurrentHashMap<String, String>();
         map.put("abc","def");
 
-        AccountTableInfo info =  accountTableService.findByAccount("web_225_a811409be73c48eaa014d8767fb8c848");
+        AccountTableDoc info =  accountTableService.findByAccount("web_225_a811409be73c48eaa014d8767fb8c848");
 
-        List<ServerList> list = serverListService.findAll();
+        List<ServerListDoc> list = serverListService.findAll();
 
         return list;
     }

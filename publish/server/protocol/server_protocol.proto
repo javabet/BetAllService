@@ -15,7 +15,7 @@ message packet_server_register {
 //����ע��ķ�����
 message packet_server_register_result {
 	optional e_server_msg_type packet_id = 1 [default = e_mst_server_register_result];	
-	optional fixed64 server_time = 2;packet_server_register_result
+	optional fixed64 server_time = 2;
 	optional fixed32 group_id = 3;
 }
 

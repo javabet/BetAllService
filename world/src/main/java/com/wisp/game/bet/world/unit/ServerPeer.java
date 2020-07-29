@@ -1,9 +1,9 @@
 package com.wisp.game.bet.world.unit;
 
 import com.wisp.game.bet.world.gameMgr.GamePlayerMgr;
-import com.wisp.game.share.netty.PeerTcp;
-import com.wisp.game.share.netty.client.ClientTcpPeer;
-import com.wisp.game.share.netty.infos.e_peer_state;
+import com.wisp.game.bet.share.netty.PeerTcp;
+import com.wisp.game.bet.share.netty.client.ClientTcpPeer;
+import com.wisp.game.bet.share.netty.infos.e_peer_state;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
 

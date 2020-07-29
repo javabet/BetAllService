@@ -2,9 +2,9 @@ package com.wisp.game.bet.world.db;
 
 import com.wisp.game.bet.db.mongo.IMongoService;
 import com.wisp.game.bet.db.mongo.MongoServiceMeta;
-import com.wisp.game.core.SpringContextHolder;
-import com.wisp.game.share.common.ClassScanner;
-import com.wisp.game.sshare.DbBase;
+import com.wisp.game.bet.core.SpringContextHolder;
+import com.wisp.game.bet.share.common.ClassScanner;
+import com.wisp.game.bet.sshare.DbBase;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -112,7 +112,7 @@ public class MongoDbService implements InitializingBean {
                 continue;
             }
 
-            if(  !mongoName.equals(mongoService.value()) )
+            if(  !mongoName.toLowerCase().equals(mongoService.value()) )
             {
                 continue;
             }

@@ -3,8 +3,8 @@ package com.wisp.game.bet.world.unit;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
-import com.wisp.game.share.common.EnableObjectManager;
-import com.wisp.game.share.utils.SessionHelper;
+import com.wisp.game.bet.share.common.EnableObjectManager;
+import com.wisp.game.bet.share.utils.SessionHelper;
 import org.springframework.stereotype.Component;
 import server_protocols.ServerProtocol;
 

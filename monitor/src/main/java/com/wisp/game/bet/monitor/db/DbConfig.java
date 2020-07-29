@@ -1,6 +1,6 @@
 package com.wisp.game.bet.monitor.db;
 
-import com.wisp.game.sshare.DbBase;
+import com.wisp.game.bet.sshare.DbBase;
 import org.springframework.stereotype.Component;
 
 @Component

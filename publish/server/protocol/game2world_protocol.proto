@@ -1,0 +1,14 @@
+import "logic2world_msg_type.proto";
+import "pump_type.proto";
+
+package logic2world_protocols;
+
+//ÓÎÏ··¢ÓÊ¼þ
+message packetl2w_player_mail
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2w_player_mail];	
+	optional int32 player_id = 2;
+	optional int32 gold = 3;
+	//optional PropertyReasonType gold_source = 4;
+	optional string content = 5;
+}

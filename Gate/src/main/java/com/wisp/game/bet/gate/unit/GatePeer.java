@@ -2,10 +2,10 @@ package com.wisp.game.bet.gate.unit;
 
 import client2gate_protocols.Client2GateProtocol;
 import com.wisp.game.bet.gate.db.DbAccount;
-import com.wisp.game.bet.db.mongo.account.info.ServerInfo;
-import com.wisp.game.share.component.TimeHelper;
-import com.wisp.game.share.netty.PeerTcp;
-import com.wisp.game.share.netty.infos.e_peer_state;
+import com.wisp.game.bet.db.mongo.account.info.ServerInfoDoc;
+import com.wisp.game.bet.share.component.TimeHelper;
+import com.wisp.game.bet.share.netty.PeerTcp;
+import com.wisp.game.bet.share.netty.infos.e_peer_state;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -131,7 +131,7 @@ public class GatePeer extends PeerTcp {
         m_account = account;
 
         Query query = new Query(Criteria.where("Account").is(account).and("GateId").is(GateServer.Instance.get_serverid()));
-         ServerInfo serverInfo =   DbAccount.Instance.getMongoTemplate().findOne(query, ServerInfo.class);
+         ServerInfoDoc serverInfo =   DbAccount.Instance.getMongoTemplate().findOne(query, ServerInfoDoc.class);
         if( serverInfo == null )
         {
             return  false;
@@ -151,7 +151,7 @@ public class GatePeer extends PeerTcp {
                 FindAndModifyOptions options = new FindAndModifyOptions();
                 options.upsert(true);
                 options.returnNew(true);
-                ServerInfo serverInfo1 = DbAccount.Instance.getMongoTemplate().findAndModify(query,update, options,ServerInfo.class);
+                ServerInfoDoc serverInfo1 = DbAccount.Instance.getMongoTemplate().findAndModify(query,update, options, ServerInfoDoc.class);
                 if( serverInfo1 == null )
                 {
                     return false;

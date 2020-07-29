@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+	<Data Id="1" Gold="1500" RoomCard="5" />
+	<Data Id="2" Gold="3000" RoomCard="10" />
+	<Data Id="3" Gold="15000" RoomCard="50" />
+</Root>

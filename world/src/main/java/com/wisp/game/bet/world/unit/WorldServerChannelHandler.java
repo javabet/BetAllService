@@ -2,7 +2,7 @@ package com.wisp.game.bet.world.unit;
 
 import com.wisp.game.bet.world.gameMgr.GameEngineMgr;
 import com.wisp.game.bet.world.gameMgr.GamePlayerMgr;
-import com.wisp.game.share.netty.infos.MsgBuf;
+import com.wisp.game.bet.share.netty.infos.MsgBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

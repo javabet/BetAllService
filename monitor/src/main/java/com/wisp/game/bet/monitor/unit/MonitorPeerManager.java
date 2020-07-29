@@ -1,7 +1,7 @@
 package com.wisp.game.bet.monitor.unit;
 
 
-import com.wisp.game.share.common.EnableObjectManager;
+import com.wisp.game.bet.share.common.EnableObjectManager;
 import io.netty.channel.ChannelId;
 import org.springframework.stereotype.Component;
 
