@@ -1,10 +1,12 @@
 package com.wisp.game.bet.share.utils;
 
+import com.google.protobuf.Message;
+
 import java.lang.reflect.Method;
 
 public class ProtocolClassUtils {
 
-    public static int getProtocolByClass(Class<?> cls )
+    public static int getProtocolByClass(Class<? extends Message> cls )
     {
         try
         {

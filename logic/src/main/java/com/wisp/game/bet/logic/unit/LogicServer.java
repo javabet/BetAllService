@@ -75,7 +75,6 @@ public class LogicServer extends ServerBase {
                 {
                     logger.error("GateServer has error,the run has error");
                 }
-
             }
             else
             {
@@ -95,6 +94,11 @@ public class LogicServer extends ServerBase {
             ServerPeer serverPeer = create_peer( server_protocols.ServerBase.e_server_type.e_st_monitor_VALUE);
             serverPeer.connect(tarip,port);
         }
+    }
+
+    public void init_game_engine()
+    {
+
     }
 
     @Override

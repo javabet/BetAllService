@@ -14,4 +14,9 @@ public class RobotManager {
     {
 
     }
+
+    public void heartbeat( double elapsed )
+    {
+
+    }
 }

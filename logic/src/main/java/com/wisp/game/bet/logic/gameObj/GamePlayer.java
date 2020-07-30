@@ -1,6 +1,7 @@
 package com.wisp.game.bet.logic.gameObj;
 
 import com.wisp.game.bet.logic.sshare.e_player_state;
+import com.wisp.game.bet.logic.unit.LogicPeer;
 
 public class GamePlayer {
 
@@ -12,6 +13,13 @@ public class GamePlayer {
     public int world_id = -1;
     public boolean isRobot = false;
     public int PlayerID = 0;
+    public LogicPeer GatePeer;
+    public long Gold;
+    public String NickName;
+    public int Sex;
+    public String channelId;
+    public int CreateTime;
+
 
     public GamePlayer() {
     }
@@ -51,5 +59,23 @@ public class GamePlayer {
         return isRobot;
     }
 
+    public void set_roomid(int roomId)
+    {
 
+    }
+
+    public void reset_gate()
+    {
+
+    }
+
+    public void reset_robot_life()
+    {
+
+    }
+
+    public int get_playerid()
+    {
+        return PlayerID;
+    }
 }
