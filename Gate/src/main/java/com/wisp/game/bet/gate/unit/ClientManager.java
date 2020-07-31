@@ -1,6 +1,5 @@
 package com.wisp.game.bet.gate.unit;
 
-import client2gate_protocols.Client2GateProtocol;
 import client2logic_protocols.Client2LogicMsgType;
 import client2world_protocols.Client2WorldMsgType;
 import com.google.protobuf.ByteString;

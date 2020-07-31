@@ -1,1 +1,1 @@
-start ProtocolUpdate.exe --lua
+start ProtocolUpdate.exe --java
