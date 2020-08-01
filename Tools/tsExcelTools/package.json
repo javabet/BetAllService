@@ -1,0 +1,15 @@
+{
+  "name": "excelTools",
+  "version": "0.0.0.1",
+  "description": "excel handler excel",
+  "main": "JavaApp.js",
+  "author": "czh",
+  "license": "xh game",
+  "private": true,
+  "dependencies": {
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^12.0.12",
+    "minimist": "^1.2.5",
+    "xlsx": "^0.14.3"
+  }
+}
