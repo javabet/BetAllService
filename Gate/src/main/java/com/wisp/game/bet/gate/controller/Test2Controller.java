@@ -1,5 +1,6 @@
 package com.wisp.game.bet.gate.controller;
 
+import client2gate_protocols.Client2GateProtocol;
 import client2world_protocols.Client2WorldProtocol;
 import com.wisp.game.bet.gate.unit.ClientManager;
 import com.wisp.game.bet.gate.unit.GatePeer;

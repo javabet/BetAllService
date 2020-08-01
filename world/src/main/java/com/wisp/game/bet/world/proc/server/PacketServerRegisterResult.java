@@ -12,7 +12,7 @@ public class PacketServerRegisterResult extends DefaultRequestMessage<ServerProt
 
     @Override
     public boolean packet_process(ServerPeer peer, ServerProtocol.packet_server_register_result msg) {
-        TimeHelper.Instance.set_base_time( msg.getServerTime() );
+        TimeHelper.Instance.set_base_time( Integer.valueOf(String.valueOf(msg.getServerTime()))  );
         peer.set_remote_id(peer.get_remote_port());
 
         return true;

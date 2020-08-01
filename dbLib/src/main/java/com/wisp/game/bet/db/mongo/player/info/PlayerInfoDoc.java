@@ -1,5 +1,6 @@
 package com.wisp.game.bet.db.mongo.player.info;
 
+import com.wisp.game.bet.db.mongo.BaseMongoDoc;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
@@ -8,11 +9,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Document("PlayerInfo")
-public class PlayerInfoDoc implements Serializable {
+public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
 
     private String Account;
     private String AccType;
     private int AgentId;
+    private String ChannelID;
     @Field( targetType = FieldType.DATE_TIME)
     private int CreateTime;
     private String CsToken;
@@ -26,6 +28,9 @@ public class PlayerInfoDoc implements Serializable {
     private int Sex;
     private int PlayerId;
     private String NickName;
+    private boolean IsRobot;
+    @Field( targetType = FieldType.DATE_TIME)
+    private int KickEndTime;
 
     public String getAccount() {
         return Account;
@@ -137,5 +142,30 @@ public class PlayerInfoDoc implements Serializable {
 
     public void setNickName(String nickName) {
         NickName = nickName;
+    }
+
+    public boolean isRobot() {
+        return IsRobot;
+    }
+
+    public void setRobot(boolean robot) {
+        IsRobot = robot;
+    }
+
+    public int getKickEndTime() {
+        return KickEndTime;
+    }
+
+    public void setKickEndTime(int kickEndTime) {
+        KickEndTime = kickEndTime;
+    }
+
+
+    public String getChannelID() {
+        return ChannelID;
+    }
+
+    public void setChannelID(String channelID) {
+        ChannelID = channelID;
     }
 }

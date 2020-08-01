@@ -1,5 +1,6 @@
 package com.wisp.game.bet.gate.unit;
 
+import client2gate_protocols.Client2GateProtocol;
 import com.wisp.game.bet.gate.db.DbAccount;
 import com.wisp.game.bet.db.mongo.account.info.ServerInfoDoc;
 import com.wisp.game.bet.share.component.TimeHelper;

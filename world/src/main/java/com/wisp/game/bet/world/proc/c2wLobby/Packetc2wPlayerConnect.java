@@ -10,6 +10,7 @@ import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.db.mongo.account.info.AccountTableDoc;
 import com.wisp.game.bet.share.netty.IRequest;
 import com.wisp.game.bet.share.netty.PacketManager.RequestMessageFromSID;
+import msg_type_def.MsgTypeDef;
 
 @IRequest
 public class Packetc2wPlayerConnect extends RequestMessageFromSID<Client2WorldProtocol.packetc2w_player_connect,WorldPeer> {
@@ -26,24 +27,46 @@ public class Packetc2wPlayerConnect extends RequestMessageFromSID<Client2WorldPr
 
         AccountTableDoc accountTableInfo = accountTableService.load_data(msg.getAccount());
 
+        String csToken = "";        //此值没有赋值
+
         boolean ret = accountTableService.check_token(accountTableInfo,msg.getAccount(),msg.getToken(),msg.getSign(), WorldServer.Instance.get_serverid());
         if(ret)
         {
              GamePlayer p = GamePlayerMgr.Instance.find_player(msg.getAccount());
-             if( p.get_sessionid() !=  sessionId )
+             if( p != null )
              {
-                 Client2WorldProtocol.packetw2c_player_kick.Builder builder = Client2WorldProtocol.packetw2c_player_kick.newBuilder();
-                 peer.send_msg(builder.build());
+                 if( p.get_sessionid() !=  sessionId )
+                 {
+                     Client2WorldProtocol.packetw2c_player_kick.Builder builder = Client2WorldProtocol.packetw2c_player_kick.newBuilder();
+                     peer.send_msg(builder.build());
 
-                 GamePlayerMgr.Instance.reset_player(p,sessionId);
-                p.set_sessionid(sessionId);
-                p.player_login(msg.getAccount(),msg.getPlatform(),msg.getLoginPlatform(),true,msg.getToken());
+                     GamePlayerMgr.Instance.reset_player(p,sessionId);
+                     p.set_sessionid(sessionId);
+                     p.player_login(accountTableInfo,msg.getPlatform(),msg.getLoginPlatform(),true,msg.getToken());
+                     return true;
+                 }
+             }
+             else
+             {
+                 GamePlayer gamePlayer = GamePlayerMgr.Instance.find_player(sessionId);
+                 if( gamePlayer != null )
+                 {
+                     gamePlayer.player_logout();
+                     GamePlayerMgr.Instance.remove_session(sessionId);
+                 }
+
+                 gamePlayer = new GamePlayer();
+                 gamePlayer.set_sessionid(sessionId);
+                 gamePlayer.player_login(accountTableInfo,msg.getPlatform(),msg.getLoginPlatform(),false,csToken);
+                 GamePlayerMgr.Instance.add_player(gamePlayer);
                  return true;
              }
         }
         else
         {
-
+            Client2WorldProtocol.packetw2c_player_connect_result.Builder builder = Client2WorldProtocol.packetw2c_player_connect_result.newBuilder();
+            builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_fail_VALUE);
+            peer.send_msg(builder.build());
         }
 
         return true;

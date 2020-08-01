@@ -78,9 +78,11 @@ public final class MainBuyRoomCardCardConfig {
             data.mGold = Integer.valueOf( childElement.attribute("Gold").getValue() ) ;
             data.mId = Integer.valueOf(childElement.attribute("Id").getValue());
 
-            if( mMapData.containsKey(data.mId) )
+
+
+            if( mMapData.containsKey(data.getmId()) )
             {
-                System.out.printf("data refind:" + data.mId);
+                System.out.printf("data refind:" + data.getmId());
                 continue;
             }
             mMapData.put(data.mId,data);

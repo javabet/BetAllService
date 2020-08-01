@@ -259,7 +259,7 @@ public class XMLUtil4DOM {
     /**
      * 系列转换�?
      * 元素至字符串
-     * @param doc
+     * @param ele
      * @return
      */
     public static String element2String(Element ele) {
@@ -377,7 +377,7 @@ public class XMLUtil4DOM {
     /**
      * 返回个节点对象集
      * 
-     * @param element
+     * @param ele
      * @param childPath
      * @return
      * @throws Exception

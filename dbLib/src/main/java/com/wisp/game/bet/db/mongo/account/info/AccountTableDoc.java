@@ -1,5 +1,7 @@
 package com.wisp.game.bet.db.mongo.account.info;
 
+import com.wisp.game.bet.db.mongo.BaseMongoDoc;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
@@ -8,13 +10,17 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 import java.io.Serializable;
 
 @Document(collection="AccountTable")
-public class AccountTableDoc implements Serializable {
+public class AccountTableDoc extends BaseMongoDoc implements Serializable {
 
     @MongoId(FieldType.OBJECT_ID)
     private String Id;
     private String Account;
     private String ChannelId;
+
+    @Transient
     private int AgentId;
+
+    //@Transient        //表示此值 是暂时的，不存储于数据库中
 
     //@Field(targetType=FieldType.DATE_TIME)
     //private Date RegisterTime;
@@ -30,7 +36,7 @@ public class AccountTableDoc implements Serializable {
         return Id;
     }
 
-
+    @Field(targetType = FieldType.STRING)
     public String getAccount() {
         return Account;
     }
