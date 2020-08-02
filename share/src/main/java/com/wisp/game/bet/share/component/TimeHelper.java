@@ -38,8 +38,17 @@ public class TimeHelper {
 
     private int get_cur_seconds()
     {
-        int mills =  Integer.valueOf( String.valueOf(System.currentTimeMillis())) ;
+        long mills0 = System.currentTimeMillis();
+        long cur_mills = mills0 - mills0 % 1000;
 
-        return mills - mills % 1000;
+        int mills =  Integer.valueOf( String.valueOf(cur_mills/1000)) ;
+
+
+        return mills;
+    }
+
+    public long get_cur_ms()
+    {
+        return System.currentTimeMillis();
     }
 }
