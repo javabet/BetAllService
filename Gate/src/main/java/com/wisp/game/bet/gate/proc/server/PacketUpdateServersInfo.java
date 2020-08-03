@@ -14,19 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @IRequest
 public class PacketUpdateServersInfo extends DefaultRequestMessage<ServerProtocol.packet_updata_servers_info,ServerPeer> {
 
-    private int lastTime = 0;
+
     public boolean packet_process(ServerPeer peer, ServerProtocol.packet_updata_servers_info msg) {
-
-        if( lastTime == 0 )
-        {
-            lastTime = TimeHelper.Instance.get_cur_time();
-        }
-        else
-        {
-            logger.info("gap:" + ( TimeHelper.Instance.get_cur_time() - lastTime ) );
-            lastTime = TimeHelper.Instance.get_cur_time();
-        }
-
         ConcurrentHashMap<Integer, ServerBase.server_info> sInfoMap =  BackstageManager.Instance.getSInfoMap();
 
         for(int i = 0; i < msg.getSinfosList().size();i++)

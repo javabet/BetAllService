@@ -1,5 +1,6 @@
 package com.wisp.game.bet.share.netty;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
 import com.wisp.game.bet.share.common.ClassScanner;
 import com.wisp.game.bet.share.utils.ProtocolClassUtils;
@@ -84,6 +85,9 @@ public class RequestMessageRegister implements InitializingBean {
             {
                 Method parseFromMethod = findTypeClass.getMethod("parseFrom",byte[].class);
                 protocolStruct.setStaticByteArrParseFromMethod(parseFromMethod);
+
+                Method parseByteStringFromMethod = findTypeClass.getMethod("parseFrom",ByteString.class);
+                protocolStruct.setStaticByteStringParseFromMethod(parseByteStringFromMethod);
             }
             catch (Exception exception)
             {
@@ -165,6 +169,35 @@ public class RequestMessageRegister implements InitializingBean {
         return (Message)object;
     }
 
+    public Message getMessageByProtocolId( int protocolId, ByteString byteString )
+    {
+        if( !classConcurrentHashMap.containsKey(protocolId) )
+        {
+            return null;
+        }
+
+        ProtocolStruct protocolStruct = classConcurrentHashMap.get(protocolId);
+
+        Object object = null;
+
+        try
+        {
+            object = protocolStruct.getStaticByteStringParseFromMethod().invoke(null,byteString);
+        }
+        catch (Exception exception)
+        {
+            logger.error("getMessageByProtocolId has error ,the protocolId:" + protocolId);
+        }
+
+        if( object == null )
+        {
+            return null;
+        }
+
+
+        return (Message)object;
+    }
+
     //获取当前的
     public ProtocolStruct getProtocolStruct(Integer protocolId)
     {
@@ -187,6 +220,7 @@ public class RequestMessageRegister implements InitializingBean {
         private IRequestMessage handlerInstance; //需要处理消息号的实体对象
 
         private Method staticByteArrParseFromMethod; //静态Byte[]的ParseFrom函数
+        private Method staticByteStringParseFromMethod; //静态Byte[]的ParseFrom函数
 
         public int getProtocolId() {
             return ProtocolId;
@@ -218,6 +252,14 @@ public class RequestMessageRegister implements InitializingBean {
 
         public void setStaticByteArrParseFromMethod(Method staticByteArrParseFromMethod) {
             this.staticByteArrParseFromMethod = staticByteArrParseFromMethod;
+        }
+
+        public Method getStaticByteStringParseFromMethod() {
+            return staticByteStringParseFromMethod;
+        }
+
+        public void setStaticByteStringParseFromMethod(Method staticByteStringParseFromMethod) {
+            this.staticByteStringParseFromMethod = staticByteStringParseFromMethod;
         }
     }
 }

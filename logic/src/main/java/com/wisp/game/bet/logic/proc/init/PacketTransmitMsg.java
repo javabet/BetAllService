@@ -21,7 +21,7 @@ public class PacketTransmitMsg extends DefaultRequestMessage<ServerProtocol.pack
         boolean bret = false;
         if( protocolStruct != null )
         {
-            Message innerMsg = RequestMessageRegister.Instance.getMessageByProtocolId(msg.getPacketId().getNumber(),msg.toByteArray());
+            Message innerMsg = RequestMessageRegister.Instance.getMessageByProtocolId(msg.getMsgpak().getMsgid(),msg.getMsgpak().getMsginfo());
 
             IRequestMessage requestMessage =  protocolStruct.getHandlerInstance();
             if( requestMessage.use_sessionid() )

@@ -3,11 +3,12 @@ package com.wisp.game.bet.gate.proc.gate;
 import client2world_protocols.Client2WorldProtocol;
 import com.wisp.game.bet.gate.unit.ClientManager;
 import com.wisp.game.bet.gate.unit.GatePeer;
+import com.wisp.game.bet.share.netty.IRequest;
 import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import msg_type_def.MsgTypeDef;
 
+@IRequest
 public class Packetc2wPlayerConnect extends DefaultRequestMessage<Client2WorldProtocol.packetc2w_player_connect, GatePeer> {
-
 
     public boolean packet_process(GatePeer peer, Client2WorldProtocol.packetc2w_player_connect msg) {
 

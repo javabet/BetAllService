@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Document("ServerInfo")
 public class ServerInfoDoc implements Serializable {
@@ -18,8 +19,7 @@ public class ServerInfoDoc implements Serializable {
 
     private int IsConnect;
 
-    @Field(targetType=FieldType.DATE_TIME)
-    private int LastTime;
+    private Date LastTime;
 
     private int WorldId;
 
@@ -56,11 +56,11 @@ public class ServerInfoDoc implements Serializable {
         IsConnect = isConnect;
     }
 
-    public int getLastTime() {
+    public Date getLastTime() {
         return LastTime;
     }
 
-    public void setLastTime(int lastTime) {
+    public void setLastTime(Date lastTime) {
         LastTime = lastTime;
     }
 

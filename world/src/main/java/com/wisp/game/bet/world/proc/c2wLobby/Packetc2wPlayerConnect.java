@@ -11,21 +11,22 @@ import com.wisp.game.bet.db.mongo.account.info.AccountTableDoc;
 import com.wisp.game.bet.share.netty.IRequest;
 import com.wisp.game.bet.share.netty.PacketManager.RequestMessageFromSID;
 import msg_type_def.MsgTypeDef;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @IRequest
 public class Packetc2wPlayerConnect extends RequestMessageFromSID<Client2WorldProtocol.packetc2w_player_connect,WorldPeer> {
 
+    @Autowired
     private AccountTableServiceImpl accountTableService;
 
     @Override
     public boolean packet_process(WorldPeer peer, int sessionId, Client2WorldProtocol.packetc2w_player_connect msg) {
 
-        if( accountTableService == null )
-        {
-            accountTableService = SpringContextHolder.getBean(AccountTableServiceImpl.class);
-        }
-
         AccountTableDoc accountTableInfo = accountTableService.load_data(msg.getAccount());
+        if( accountTableInfo == null )
+        {
+            return false;
+        }
 
         String csToken = "";        //此值没有赋值
 
@@ -66,7 +67,7 @@ public class Packetc2wPlayerConnect extends RequestMessageFromSID<Client2WorldPr
         {
             Client2WorldProtocol.packetw2c_player_connect_result.Builder builder = Client2WorldProtocol.packetw2c_player_connect_result.newBuilder();
             builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_fail_VALUE);
-            peer.send_msg(builder.build());
+            peer.send_msg_to_client(sessionId,builder);
         }
 
         return true;

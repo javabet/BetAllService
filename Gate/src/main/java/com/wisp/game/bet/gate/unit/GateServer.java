@@ -90,6 +90,13 @@ public final class GateServer extends ServerBase {
     {
         ServerPeer serverPeer = new ServerPeer();
         serverPeer.set_remote_type( remote_type );
+        serverPeer.set_id(generate_id());
+        boolean flag = BackstageManager.Instance.add_obj(serverPeer.get_id(),serverPeer);
+        if( !flag )
+        {
+            logger.error("add obj has error:" + serverPeer.get_id());
+        }
+
         return serverPeer;
     }
 

@@ -19,19 +19,22 @@ public class PacketTransmitMsg extends DefaultRequestMessage<ServerProtocol.pack
         boolean bret = false;
         if( protocolStruct != null )
         {
-            Message innerMsg = RequestMessageRegister.Instance.getMessageByProtocolId(msg.getPacketId().getNumber(),msg.toByteArray());
+            Message innerMsg = RequestMessageRegister.Instance.getMessageByProtocolId(msg.getMsgpak().getMsgid(),msg.getMsgpak().getMsginfo());
 
-            IRequestMessage requestMessage =  protocolStruct.getHandlerInstance();
-            if( requestMessage.use_sessionid() )
+            if( innerMsg != null )
             {
-                bret = requestMessage.packet_process(peer,msg.getSessionid(),innerMsg);
-            }
-            else
-            {
-                GamePlayer player = GamePlayerMgr.Instance.find_player( msg.getSessionid() );
-                if( player != null )
+                IRequestMessage requestMessage =  protocolStruct.getHandlerInstance();
+                if( requestMessage.use_sessionid() )
                 {
-                    bret = requestMessage.packet_process(peer,player,innerMsg);
+                    bret = requestMessage.packet_process(peer,msg.getSessionid(),innerMsg);
+                }
+                else
+                {
+                    GamePlayer player = GamePlayerMgr.Instance.find_player( msg.getSessionid() );
+                    if( player != null )
+                    {
+                        bret = requestMessage.packet_process(peer,player,innerMsg);
+                    }
                 }
             }
         }

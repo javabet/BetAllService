@@ -3,6 +3,8 @@ package com.wisp.game.bet.gate.unit;
 import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.share.common.EnableObjectManager;
 import com.wisp.game.bet.share.netty.infos.e_peer_state;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import server_protocols.ServerBase;
@@ -15,6 +17,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> implements InitializingBean {
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     public static BackstageManager Instance;
     private ConcurrentHashMap<Integer,ServerPeer> servers_map = new ConcurrentHashMap<Integer,ServerPeer>();
     //key为端口号
@@ -35,8 +39,9 @@ public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> im
     public boolean regedit_server(ServerPeer serverPeer)
     {
         ServerPeer serverPeer1 =  find_objr(serverPeer.get_id());
-        if( serverPeer1 != null )
+        if( serverPeer1 == null )
         {
+            logger.warn("can't regedit_server,the peerid:" + serverPeer.get_id() );
             return false;
         }
 
@@ -148,6 +153,7 @@ public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> im
                     {
                         needCoonect = true;
                     }
+
                     break;
                 default:break;
             }
@@ -157,7 +163,6 @@ public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> im
                 GateServer gateServer = SpringContextHolder.getBean(GateServer.class);
                 ServerPeer serverPeer = gateServer.create_peer(server_info.getServerType().getNumber());
                 serverPeer.set_remote_id(server_info.getServerPort());
-                serverPeer.set_remote_type(server_info.getServerType().getNumber());
                 serverPeer.connect(server_info.getServerIp(),server_info.getServerPort());
                 regedit_server(serverPeer);
             }

@@ -1,6 +1,7 @@
 package com.wisp.game.bet.gate.unit;
 
 import com.wisp.game.bet.share.netty.infos.MsgBuf;
+import com.wisp.game.bet.share.netty.infos.e_peer_state;
 import com.wisp.game.bet.share.utils.SessionHelper;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -45,6 +46,7 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         gatePeer.set_id(peerid);
         gatePeer.set_net_param();
         gatePeer.set_route_handler(ClientManager.Instance);
+        gatePeer.set_state(e_peer_state.e_ps_connected);
         ClientManager.Instance.regedit_client(gatePeer);
 
         System.out.printf("channelActive........ peerId:" + peerid);
@@ -74,7 +76,10 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
 
     //当处理过程中在 ChannelPipeline 中有错误产生时被调用
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx,cause);
+        if( cause.getMessage().indexOf("java.io.IOException:") == -1 )
+        {
+            super.exceptionCaught(ctx,cause);
+        }
 
         ctx.close();
     }
@@ -104,6 +109,7 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         GatePeer gatePeer = ClientManager.Instance.find_objr(peerId);
         if( gatePeer != null )
         {
+            gatePeer.set_state(e_peer_state.e_ps_disconnected);
             GateServer.Instance.push_id(gatePeer.get_id());
         }
         ClientManager.Instance.remove_client(peerId);

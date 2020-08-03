@@ -18,7 +18,7 @@ public class PacketTransmitMsg extends DefaultRequestMessage<ServerProtocol.pack
         GatePeer gatePeer = ClientManager.Instance.find_objr(sessionId);
         if( gatePeer != null )
         {
-            gatePeer.send_msg(msg.getMsgpak().getMsgid(),msg.getMsgpak().toByteArray());
+            gatePeer.send_msg(msg.getMsgpak().getMsgid(),msg.getMsgpak().getMsginfo());
         }
 
         return true;

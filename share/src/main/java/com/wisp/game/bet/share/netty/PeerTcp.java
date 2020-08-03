@@ -176,7 +176,8 @@ public abstract class PeerTcp {
 
     public int send_msg(Message msg)
     {
-        if( !channelHandlerContext.channel().isActive() )
+        if( channelHandlerContext == null || channelHandlerContext.channel() == null
+                || !channelHandlerContext.channel().isActive() )
         {
             return -1;
         }
@@ -217,6 +218,7 @@ public abstract class PeerTcp {
     {
         if(m_state != e_peer_state.e_ps_connected)
         {
+            logger.error("the pee is not e_ps_connected:" + m_state);
             return -1;
         }
 
