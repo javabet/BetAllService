@@ -40,8 +40,8 @@ public class WorldInitConfig implements InitializingBean {
         //System.out.printf(responseBody);
 
 
-        LoginResponse loginResponse =  restTemplate.postForObject("http://127.0.0.1:3000/Api/Test/Login",request,LoginResponse.class);
+        //LoginResponse loginResponse =  restTemplate.postForObject("http://127.0.0.1:3000/Api/Test/Login",request,LoginResponse.class);
 
-        System.out.printf("go this....2");
+        //System.out.printf("go this....2");
     }
 }

@@ -1,12 +1,14 @@
 package com.wisp.game.bet.gate.unit;
 
 import com.wisp.game.bet.share.netty.infos.MsgBuf;
+import com.wisp.game.bet.share.utils.SessionHelper;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.AttributeKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import server_protocols.ServerProtocol;
 
 
 /**
@@ -45,7 +47,7 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         gatePeer.set_route_handler(ClientManager.Instance);
         ClientManager.Instance.regedit_client(gatePeer);
 
-        System.out.printf("the........ peerId:" + peerid);
+        System.out.printf("channelActive........ peerId:" + peerid);
     }
 
     //每当接收数据时，都会调用这个方法
@@ -59,7 +61,7 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         }
         else
         {
-            logger.error("channelRead0 has the data but the peer is not exist");
+            logger.error("channelRead0 has the data but the peer is not exist:" + peerId);
         }
     }
 
@@ -104,9 +106,18 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         {
             GateServer.Instance.push_id(gatePeer.get_id());
         }
-        ClientManager.Instance.peer_disconnected(peerId);
         ClientManager.Instance.remove_client(peerId);
 
+        ServerProtocol.packet_player_disconnect.Builder builder = ServerProtocol.packet_player_disconnect.newBuilder();
+        builder.setSessionid( SessionHelper.get_sessionid(GateServer.Instance.get_serverid(),gatePeer.get_id()));
+
+        ServerPeer worldServerPeer = BackstageManager.Instance.get_server_byid(gatePeer.world_id);
+        if( worldServerPeer != null )
+        {
+            worldServerPeer.send_msg(builder.build());
+        }
+
+        gatePeer.on_logout();
     }
 
 }

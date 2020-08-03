@@ -28,8 +28,6 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
 
-        //System.out.printf("GateClientChannelHandler channelActive channelId:" + ctx.channel().id());
-
         serverPeer.set_state(e_peer_state.e_ps_connected);
         serverPeer.init_peer(ctx,false,false);
         serverPeer.set_id(GateServer.Instance.generate_id());
@@ -43,6 +41,8 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         }
 
        BackstageManager.Instance.add_obj(serverPeer.get_id(),serverPeer);
+
+        logger.info("GateClientChannelHandler channelActive peerId:" + serverPeer.get_id());
     }
 
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, MsgBuf message) throws Exception {
@@ -61,7 +61,8 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         super.channelInactive(ctx);
 
         serverPeer.set_state(e_peer_state.e_ps_disconnected);
-        GateServer.Instance.push_id(serverPeer.get_id());
+
+       logger.info("channelInactive....GateClientChannelHandler channelInactive peerId:" + serverPeer.get_id());
 
         //如果注册失败，则有可能，没有加入到BackstageManager中
         if( BackstageManager.Instance.hasKey(serverPeer.get_id())  )
@@ -81,6 +82,8 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
                 //do nohing
             }
         }
+
+        GateServer.Instance.push_id(serverPeer.get_id());
 
     }
 

@@ -53,7 +53,7 @@ public class ClientTcpPeer  {
             channel = future.channel();
             //channel.closeFuture().sync();           //阻塞，直到Channel 关闭
 
-            System.out.printf("the channel ready to Sync");
+            logger.info("the channel ready to Sync");
         }
         catch (Exception error)
         {

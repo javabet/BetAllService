@@ -100,23 +100,12 @@ public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
             msgBuf.setMsg(message);
         }
 
-        System.out.printf("protocolId:" + packetId + "\n");
-
-        list.add(msgBuf);
-    }
-
-
-    private void printEveryOne(ByteBuf byteBuf)
-    {
-        byteBuf.markReaderIndex();
-        StringBuilder builder = new StringBuilder();
-        for(int i = 0; i < 12;i++)
+        if( packetId != 4 && packetId != 9 )
         {
-            builder.append(" ").append( byteBuf.readByte() );
+            System.out.printf(" recevie protocolId:" + packetId + "\n");
         }
 
-        System.out.printf("buf:" + builder.toString());
-        byteBuf.resetReaderIndex();
+        list.add(msgBuf);
     }
 
 }

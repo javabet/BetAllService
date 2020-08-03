@@ -4,7 +4,7 @@ package com.wisp.game.bet.monitor.unit;
 import com.wisp.game.bet.monitor.db.DbAccount;
 import com.wisp.game.bet.monitor.db.DbConfig;
 import com.wisp.game.bet.monitor.db.GameDb;
-import com.wisp.game.bet.db.mongo.config.info.ServerListDoc;
+import com.wisp.game.bet.db.mongo.config.doc.ServerListDoc;
 import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.sshare.ServerBase;
 import io.netty.channel.ChannelHandler;

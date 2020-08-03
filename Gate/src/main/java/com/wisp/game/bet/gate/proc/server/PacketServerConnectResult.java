@@ -13,7 +13,7 @@ public class PacketServerConnectResult extends DefaultRequestMessage<ServerProto
         peer.set_remote_id(peer.get_remote_port());
         peer.regedit_result(true);
 
-        logger.info("packet_server_connect_result ok id:" + peer.get_remote_id() + " type:" + peer.get_remote_type() );
+        logger.info("packet_server_connect_result ok id:" + peer.get_remote_id() + " type:" + peer.get_remote_type() + "\n" );
         return true;
     }
 }

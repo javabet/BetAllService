@@ -2,7 +2,7 @@ package com.wisp.game.bet.db.mongo.config.service;
 
 import com.wisp.game.bet.db.mongo.IMongoService;
 import com.wisp.game.bet.db.mongo.MongoServiceMeta;
-import com.wisp.game.bet.db.mongo.config.info.ServerListDoc;
+import com.wisp.game.bet.db.mongo.config.doc.ServerListDoc;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;

@@ -4,7 +4,11 @@ import com.wisp.game.bet.db.mongo.IMongoService;
 import com.wisp.game.bet.db.mongo.MongoServiceMeta;
 import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.share.common.ClassScanner;
+import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.sshare.DbBase;
+import com.wisp.game.bet.world.dbConfig.AgentInfoConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -15,6 +19,8 @@ import java.util.Set;
 
 @Component
 public class MongoDbService implements InitializingBean {
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private DbAccount dbAccount;
@@ -45,6 +51,12 @@ public class MongoDbService implements InitializingBean {
 
     @Autowired
     public Environment environment;
+
+    @Autowired
+    private AgentInfoConfig agentInfoConfig;
+
+    @Autowired
+    private TimeHelper timeHelper;
 
     public  void afterPropertiesSet() throws Exception
     {
@@ -93,7 +105,6 @@ public class MongoDbService implements InitializingBean {
         {
             DbAccount.Instance.init_db(environment.getProperty("cfg.accountdb_url"),environment.getProperty("cfg.accountdb_name"));
         }
-
         return true;
     }
 
@@ -106,6 +117,12 @@ public class MongoDbService implements InitializingBean {
         {
             Class<?> clz =  clzIt.next();
             MongoServiceMeta mongoService =  clz.getAnnotation( MongoServiceMeta.class );
+
+            if( mongoService == null )
+            {
+                logger.warn("the mongoName has not the MongoServiceMeta:" + mongoName + " clz:" + clz.getName());
+                continue;
+            }
 
             if( mongoService.value() == "" )
             {

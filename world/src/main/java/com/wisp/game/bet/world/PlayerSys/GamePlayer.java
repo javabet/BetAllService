@@ -45,10 +45,6 @@ public class GamePlayer {
         this.m_playerInfo = new PlayerInfoDoc();
     }
 
-
-
-
-
     public void heartbeat( double elapsed )
     {
         if( m_state == e_player_state.e_ps_disconnect )
@@ -213,7 +209,7 @@ public class GamePlayer {
 
     }
 
-    private boolean is_gaming()
+    public boolean is_gaming()
     {
         return m_gameid > 0;
     }

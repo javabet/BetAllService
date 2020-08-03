@@ -1,6 +1,7 @@
 package com.wisp.game.bet.world.gameMgr;
 
 import com.wisp.game.bet.world.db.DbPlayer;
+import com.wisp.game.bet.world.gameMgr.info.GameInfo;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
@@ -28,4 +29,10 @@ public class GameEngineMgr  {
     {
 
     }
+
+    public GameInfo get_game_info(int gameId,int gameVer )
+    {
+        return null;
+    }
+
 }

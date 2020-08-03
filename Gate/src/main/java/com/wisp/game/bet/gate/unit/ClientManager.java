@@ -103,7 +103,7 @@ public class ClientManager extends EnableObjectManager<Integer,GatePeer> impleme
             if( serverPeer != null )
             {
                 ServerProtocol.packet_updata_self_info.Builder builder = ServerProtocol.packet_updata_self_info.newBuilder();
-                //builder.setAttributes()
+                builder.getAttributesBuilder().setClientCount(m_oldcount);
                 serverPeer.send_msg(builder.build());
             }
 
@@ -206,28 +206,11 @@ public class ClientManager extends EnableObjectManager<Integer,GatePeer> impleme
     {
         for( GatePeer gatePeer : obj_map.values() )
         {
-            gatePeer.discannect();
+            if( logicId == 0 || logicId == gatePeer.logic_id )
+            {
+                gatePeer.discannect();
+            }
         }
-    }
-
-    public void peer_disconnected(int peerid)
-    {
-        GatePeer gatePeer = find_objr(peerid);
-        if(  gatePeer == null)
-        {
-            return;
-        }
-
-        ServerProtocol.packet_player_disconnect.Builder builder = ServerProtocol.packet_player_disconnect.newBuilder();
-        builder.setSessionid( SessionHelper.get_sessionid(GateServer.Instance.get_serverid(),gatePeer.get_id()));
-
-        ServerPeer worldServerPeer = BackstageManager.Instance.get_server_byid(gatePeer.world_id);
-        if( worldServerPeer != null )
-        {
-            worldServerPeer.send_msg(builder.build());
-        }
-
-        gatePeer.on_logout();
     }
 
     public int account_peer_count(String account)

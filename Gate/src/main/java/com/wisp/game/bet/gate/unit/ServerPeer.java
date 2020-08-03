@@ -20,6 +20,7 @@ public final class ServerPeer extends PeerTcp {
         super();
 
         clientTcpPeer = new ClientTcpPeer(new GateClientChannelHandler(this));
+        this.m_state = e_peer_state.e_ps_disconnected;
     }
 
     public int get_type()
@@ -75,6 +76,7 @@ public final class ServerPeer extends PeerTcp {
     {
         set_state(e_peer_state.e_ps_connecting);
         clientTcpPeer.connect(host,port);
+        //set_state(e_peer_state.e_ps_accepting);
     }
 
     public void regedit_to_monitor()

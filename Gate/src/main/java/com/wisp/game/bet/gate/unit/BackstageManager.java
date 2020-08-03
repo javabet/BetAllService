@@ -35,7 +35,7 @@ public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> im
     public boolean regedit_server(ServerPeer serverPeer)
     {
         ServerPeer serverPeer1 =  find_objr(serverPeer.get_id());
-        if( serverPeer1 == null )
+        if( serverPeer1 != null )
         {
             return false;
         }

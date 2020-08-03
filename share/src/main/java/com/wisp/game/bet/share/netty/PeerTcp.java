@@ -169,6 +169,11 @@ public abstract class PeerTcp {
         m_bcheck_time = true;
     }
 
+    public int send_msg(Message.Builder builder)
+    {
+        return send_msg(builder.build());
+    }
+
     public int send_msg(Message msg)
     {
         if( !channelHandlerContext.channel().isActive() )

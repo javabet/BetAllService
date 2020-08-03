@@ -3,7 +3,7 @@ package com.wisp.game.bet.monitor.unit;
 import com.google.protobuf.Message;
 import com.wisp.game.bet.monitor.db.DbAccount;
 import com.wisp.game.bet.monitor.db.DbConfig;
-import com.wisp.game.bet.db.mongo.config.info.ServerListDoc;
+import com.wisp.game.bet.db.mongo.config.doc.ServerListDoc;
 import com.wisp.game.bet.share.common.EnableObjectManager;
 import com.wisp.game.bet.share.common.EnableProcessinfo;
 import io.netty.channel.ChannelId;

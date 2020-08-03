@@ -1,5 +1,6 @@
 package com.wisp.game.bet.world.unit;
 
+import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.world.db.*;
 import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.share.netty.RequestMessageRegister;
@@ -26,6 +27,9 @@ public class WorldServer extends ServerBase {
 
     @Autowired
     public MongoDbService dbControllerService;
+
+    @Autowired
+    public TimeHelper timeHelper;
 
     public WorldServer() {
         Instance = this;

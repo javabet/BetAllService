@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 public class DbConfig extends DbBase {
 
     public static final String DB_SERVERLIST = "ServerList";
+    public static final String DB_AgentInfo = "AgentInfo";
 
     public static DbConfig Instance;
 

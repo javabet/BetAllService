@@ -27,7 +27,6 @@ public class TimeHelper {
             return get_cur_seconds();
         }
 
-
         return m_baseTime + get_tick_count();
     }
 
@@ -38,12 +37,8 @@ public class TimeHelper {
 
     private int get_cur_seconds()
     {
-        long mills0 = System.currentTimeMillis();
-        long cur_mills = mills0 - mills0 % 1000;
-
-        int mills =  Integer.valueOf( String.valueOf(cur_mills/1000)) ;
-
-
+        long cur_mills = System.currentTimeMillis();
+        int mills =  (int)(cur_mills/1000);
         return mills;
     }
 

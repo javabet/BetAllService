@@ -1,4 +1,4 @@
-package com.wisp.game.bet.db.mongo.config.info;
+package com.wisp.game.bet.db.mongo.config.doc;
 
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;

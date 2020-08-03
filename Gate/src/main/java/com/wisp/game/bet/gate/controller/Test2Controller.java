@@ -6,7 +6,7 @@ import com.wisp.game.bet.gate.unit.ClientManager;
 import com.wisp.game.bet.gate.unit.GatePeer;
 import com.wisp.game.bet.db.mongo.account.info.AccountTableDoc;
 import com.wisp.game.bet.db.mongo.account.service.AccountTableServiceImpl;
-import com.wisp.game.bet.db.mongo.config.info.ServerListDoc;
+import com.wisp.game.bet.db.mongo.config.doc.ServerListDoc;
 import com.wisp.game.bet.db.mongo.config.service.ServerListImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

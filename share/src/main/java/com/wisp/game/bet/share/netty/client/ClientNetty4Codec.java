@@ -97,7 +97,11 @@ public class ClientNetty4Codec extends MessageToMessageCodec<ByteBuf, MsgBuf> {
             msgBuf.setMsg(message);
         }
 
-        System.out.printf("protocolId:" + packetId + "\n");
+        if( packetId != 4 && packetId != 9 )
+        {
+            System.out.printf("protocolId:" + packetId + "\n");
+        }
+
 
         list.add(msgBuf);
     }
