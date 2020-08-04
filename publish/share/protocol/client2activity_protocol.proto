@@ -60,6 +60,7 @@ message ac_define_info
 	repeated ac_lv_info lv = 9;		//档位信息数组
 	optional string rule = 10;	//规则文字
 	repeated int64 params = 11;		//配置参数列表
+	optional string paramsstr = 12;		//任务标题
 }
 
 //轮盘信息
@@ -94,6 +95,8 @@ enum e_ac_quest_condition {
 	e_aqc_per = 2;		//流水
 	e_aqc_bet = 3;		//下注
 	e_aqc_lose = 4;		//亏损
+	e_aqc_win = 5;		//赢钱
+	e_aqc_recharge = 6;	//充值
 }
 
 //任务条件（完成情况）
@@ -114,7 +117,8 @@ message ac_quest
 	repeated ac_quest_condition conditions = 5;	//完成条件
 	optional int64 count = 6;		//当天已完成次数
 	optional int64 count_limit = 7;	//可完成次数上限
-	optional int32 gameid = 8;	//可完成次数上限
+	optional int32 gameid = 8;		//单个所属游戏（财神任务字段）
+	optional int32 day = 9;			//第几天的任务（王者归来字段）
 }
 
 //亏损救援
@@ -127,6 +131,7 @@ message ac_rescue
 	//原因未明，不确定是proto机制，服务端框架，或其他导致
 	//之后把任务类的列表都集中在此处以避免上述问题
 	repeated ac_quest ac_csrw_quests = 4;		//财神任务列表
+	repeated ac_quest ac_wzgl_quests = 5;		//王者归来任务列表
 }
 
 message ac_user_info

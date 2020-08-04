@@ -178,11 +178,35 @@ enum e_msg_result_def
 	e_rmt_already_in_game = 125;	//已经在游戏中
 	e_rmt_pay_bank_not_player = 126;		//无此玩家
 	e_rmt_pay_bank_not_bank_id = 127;		//没有此银行卡
+	e_rmt_pay_bank_gold_valid = 128;		//传入金额非法
+	e_rmt_pay_bank_too_busy = 129;			//提交太频繁，1分钟内太多，或是1小时无效订单太多
 
-	e_rmt_guild_not_found = 128;		//公会不存在
-	e_rmt_guild_has_join = 129;			//已加入了公会
-	e_rmt_guild_join_cooling = 130;		//公会加入冷却期中
-	e_rmt_guild_has_ask = 131;			//公会加入已经请求了
+
+	e_rmt_guild_not_found = 130;		//公会不存在
+	e_rmt_guild_has_join = 131;			//已加入了公会
+	e_rmt_guild_join_cooling = 132;		//公会加入冷却期中
+	e_rmt_guild_has_ask = 133;			//公会加入已经请求了
+	
+	e_rmt_seat_has_player =  134;		//该座位已经有人了
+
+	e_rmt_guild_not_member = 135;		//非公会成员
+	e_rmt_guild_not_same = 136;			//非同一个公会
+	e_rmt_guild_roomcard_not_enough = 137;//公会房卡不够
+	e_rmt_guild_points_not_enough = 138;//公会积分不够
+
+	e_rmt_roomcard_game_err = 139;  	//房卡子游戏错误
+	e_rmt_roomcard_social_down = 140;	//房卡子游戏无公会服务器
+	e_rmt_roomcard_no_guild = 141;		//房卡子游戏无公会
+	e_rmt_roomcard_wait_guild = 142;	//房卡子游戏等公会返回
+	e_rmt_roomcard_gaming = 143;		//房卡子游戏有未决的
+	e_rmt_roomcard_need_continue = 144; //房卡子游戏需要续费
+	e_rmt_roomcard_kicked_player = 145; //房卡子游戏被踢过的玩家
+	e_rmt_roomcard_not_enough = 146;	//房主房卡不够
+	e_rmt_roomcard_game_too_much = 147;	//房卡游戏太多了
+	
+	e_rmt_guild_gaming_points = 148;	//公会积分游戏中, 积分操作错误
+	e_rmt_guild_gaming_kick = 149;		//公会积分游戏中, 踢人操作错误
+	e_rmt_guild_ask_invalid = 150;		//公会加入请求无效
 }
 
 enum e_user_type
@@ -217,6 +241,8 @@ enum e_item_type_def
 	e_itd_withdraw = 19;	//提现金额
 	e_itd_boxgold = 20;		//保险箱金币
 	e_itd_roomcard = 21;	//房卡
+	e_itd_guild_id = 22;	//公会id
+	e_itd_guild_points = 23;//公会积分
 
 	e_itd_firstgift = 99;	//首冲礼包
 	e_itd_vip_experience_card = 100; // vip体验卡
@@ -228,6 +254,19 @@ enum e_sex_def
 	sex_boy = 1;		
 	sex_girl = 2;
 	sex_max = 3;
+}
+
+//房卡游戏类型
+//积分, 公会积分 要消耗房主房卡和公会房卡
+//积分 没有入场条件，其它都有
+enum e_roomcard_type
+{
+	ert_gold = 0;				//金币			入场条件
+	ert_points = 1;				//积分			消耗房主房卡 
+	ert_guild_gold = 2;			//公会金币		入场条件
+	ert_guild_points = 3;		//公会积分		消耗公会房卡 入场条件
+	
+	ert_none = 99;
 }
 
 // 通告类型

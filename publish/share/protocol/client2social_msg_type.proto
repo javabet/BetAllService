@@ -4,17 +4,31 @@ enum e_server_msg_type {
 	//客户端到服务端
     e_mst_start_c2s = 50000;
 	e_mst_c2s_master_operation = 50001;				//会长操作
-	e_mst_c2s_member_quit = 50002;					//成员退出
+	e_mst_c2s_member_operation = 50002;				//成员操作
+	e_mst_c2s_join_guild_game = 50003;				//请求加入公会游戏
+	e_mst_c2s_guild_notice = 50004;					//修改公会公告
+	e_mst_c2s_guild_name = 50005;					//修改公会名称
 
 	// 服务端到客户端---------------------------------------------------------------------------
 	e_mst_start_s2c = 50200;	
 	e_mst_s2c_guild_data = 50201;					//公会数据返回
-	e_mst_s2c_guild_points = 50202;					//公会房卡数(覆盖)
-	e_mst_s2c_guild_member_data = 50203;			//公会成员数据(新加,覆盖)
-	e_mst_s2c_guild_member_prop = 50204;			//公会成员属性数据	
-	e_mst_s2c_guild_ask_data = 50205;				//公会申请批准数据(新加)
-	e_mst_s2c_guild_msg_data = 50206;				//公会消息数据(新加)
-	e_mst_s2c_guild_points_msg_data = 50207;		//公会上下分消息数据(新加)
+	e_mst_s2c_guild_roomcard_cnt = 50202;			//公会房卡数(覆盖)
+	e_mst_s2c_guild_name = 50203;					//公会名称
+	e_mst_s2c_guild_member_data = 50204;			//公会成员数据(新加,覆盖)
+	e_mst_s2c_guild_member_prop = 50205;			//公会成员属性数据	
+	e_mst_s2c_guild_ask_data = 50206;				//公会申请批准数据(新加)
+	e_mst_s2c_guild_msg_data = 50207;				//公会消息数据(新加)
+	e_mst_s2c_guild_points_msg_data = 50208;		//公会上下分消息数据(新加)
+	e_mst_s2c_guild_multi_member_points = 50209;	//公会多个成员积分数据
+	
+	e_mst_s2c_guild_game_create		= 50210;		//公会游戏创建
+	e_mst_s2c_guild_game_enter_exit	= 50211;		//公会游戏玩家进出
+	e_mst_s2c_guild_game_delete		= 50212;		//公会游戏消毁
+	e_mst_s2c_guild_notice = 50213;					//修改公会公告
+	e_mst_s2c_guild_master_spec_data = 50214;		//会长指定的数据
+	e_mst_s2c_guild_member_spec_data = 50215;		//会员指定的数据
+	e_mst_s2c_guild_expends_data = 50216;			//公会支出数据(新加)
+	e_mst_s2c_master_operation_err = 50217;			//会长操作错误码
 	
 	e_mst_c2s_end_index = 50999;
   }

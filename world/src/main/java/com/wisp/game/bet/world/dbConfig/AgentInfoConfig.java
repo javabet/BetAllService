@@ -2,6 +2,7 @@ package com.wisp.game.bet.world.dbConfig;
 
 import com.sun.javadoc.Doc;
 import com.wisp.game.bet.db.mongo.config.doc.AgentInfoDoc;
+import com.wisp.game.bet.db.mongo.config.doc.info.GameInfo;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.world.db.DbConfig;
 import com.wisp.game.bet.world.dbConfig.info.AgentGameInfo;
@@ -67,7 +68,7 @@ public final class AgentInfoConfig {
         }
 
         Query query = new Query(Criteria.where("ChannelId").is(channelId));
-        Document doc =  DbConfig.Instance.getMongoTemplate().findOne(query, Document.class,DbConfig.DB_AgentInfo);
+        AgentInfoDoc doc =  DbConfig.Instance.getMongoTemplate().findOne(query, AgentInfoDoc.class,DbConfig.DB_AgentInfo);
         if( doc == null )
         {
             return false;
@@ -79,18 +80,18 @@ public final class AgentInfoConfig {
 
         agentInfo.getGameMap().clear();
 
-        int agentId =  doc.getInteger("AgentId");
+        //int agentId =  doc.getInteger("AgentId");
 
-        List<Document> gameInfos = doc.getList("GameInfos", Document.class);
+        List<GameInfo> gameInfos = doc.getGameInfos();
         if( gameInfos != null )
         {
             for( int i = 0; i < gameInfos.size();i++ )
             {
-                Document childDoc = gameInfos.get(i);
+                GameInfo childDoc = gameInfos.get(i);
                 AgentGameInfo agentGameInfo = new AgentGameInfo();
-                agentGameInfo.setGameId( childDoc.getDouble("GameId").intValue() );
-                agentGameInfo.setSort(childDoc.getDouble("Sort").intValue());
-                agentGameInfo.setHot(childDoc.getDouble("IsHot").intValue()== 1);
+                agentGameInfo.setGameId( childDoc.getGameId() );
+                agentGameInfo.setSort(childDoc.getSort());
+                agentGameInfo.setHot(childDoc.getIsHot() == 1);
                 agentInfo.getGameMap().put( agentGameInfo.getGameId(),agentGameInfo );
             }
         }

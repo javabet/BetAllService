@@ -56,6 +56,14 @@ message msg_game_info{
 	optional bool  isPowerful = 8;  //高倍标识
 	optional msg_info_def.msg_roomcard_config roomcard_config  = 9;	//房卡游戏可选配置
 }
+
+//公会申请记录
+message guild_ask_record {
+	optional int32 time = 1;
+	optional int32 guild_id = 2;
+	optional int32 ask_status = 3;		//0:申请中, 1:被拒绝
+}
+
 //
 message packetw2c_ask_login_result {
 	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_asklogin_result];	
@@ -67,6 +75,7 @@ message packetw2c_ask_login_result {
 	optional int64 benefits_limit = 7;		//救济金门槛（分）
 	optional int64 benefits_gold = 8;		//救济金领取金额（分）
 	optional int32 benefits_count = 9;		//救济金最大领取次数
+	repeated guild_ask_record guild_asks = 10; //公会申请记录	
 }
 
 //请求进入游戏
@@ -300,6 +309,7 @@ message packetw2c_req_sync_gold_result
 {
 	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_req_sync_gold_result];
 	optional int64 gold = 2;
+	optional int64 roomcard = 3;
 }
 
 //刷公告
@@ -448,3 +458,8 @@ message packetw2c_guild_id {
 	optional int32 id = 2;		// 0:退出了公会
 }
 
+//玩家进公会被拒绝
+message packetw2c_guild_refused {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_guild_refused];		
+	optional int32 guild_id = 2;
+}

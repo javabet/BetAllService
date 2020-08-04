@@ -18,7 +18,24 @@ public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldPr
         Client2WorldProtocol.packetw2c_ask_login_result.Builder builder = Client2WorldProtocol.packetw2c_ask_login_result.newBuilder();
         msg_info_def.MsgInfoDef.msg_account_info.Builder msgAccountInfoBuilder = builder.getAccountInfoBuilder();
         msgAccountInfoBuilder.setAid(player.getPlayerInfoDoc().getPlayerId());
-        msgAccountInfoBuilder.setGold(100);
+        msgAccountInfoBuilder.setNickname( player.getPlayerInfoDoc().getNickName() );
+        msgAccountInfoBuilder.setGold( player.getPlayerInfoDoc().getGold() );
+        msgAccountInfoBuilder.setViplvl(player.getPlayerInfoDoc().getVipLevel());
+        msgAccountInfoBuilder.setVipexp(player.getPlayerInfoDoc().getVipExp());
+        msgAccountInfoBuilder.setRecharged( player.getPlayerInfoDoc().getRecharged() );
+        msgAccountInfoBuilder.setCreateTime( ((Long)(player.getPlayerInfoDoc().getCreateTime().getTime()/1000)).intValue() );
+        msgAccountInfoBuilder.setRoomCard(player.getPlayerInfoDoc().getRoomCard());
+        msgAccountInfoBuilder.setGuildId(0);
+        msgAccountInfoBuilder.setReqJoinGuildTime(0);
+
+
+        msgAccountInfoBuilder.setIconCustom("head_nan_1.png");
+        msgAccountInfoBuilder.setIpinfo(player.getPlayerInfoDoc().getLastIp());
+        msgAccountInfoBuilder.setChannelId(player.getPlayerInfoDoc().getChannelID());
+
+        msgAccountInfoBuilder.setSex( player.getPlayerInfoDoc().getSex() );
+        msgAccountInfoBuilder.setTicket(0);
+        msgAccountInfoBuilder.setSafeBoxGold(0);
 
 
         java.util.List<client2world_protocols.Client2WorldProtocol.msg_game_info.Builder> gameListBuilder = builder.getGameListBuilderList();
@@ -27,14 +44,18 @@ public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldPr
         {
             for(AgentGameInfo agentGameInfo : agentInfo.getGameMap().values())
             {
-                GameInfo gameInfo = GameEngineMgr.Instance.get_game_info(player.getPlayerInfoDoc().getPlayerId(),0);
+                GameInfo gameInfo = GameEngineMgr.Instance.get_game_info(player.getPlayerInfoDoc().getPlayerId());
                 client2world_protocols.Client2WorldProtocol.msg_game_info.Builder gameInfoBuilder = client2world_protocols.Client2WorldProtocol.msg_game_info.newBuilder();
                 gameInfoBuilder.setGameid( gameInfo.getGameId() );
                 gameInfoBuilder.setGamever(gameInfo.getGameVer());
-                gameInfoBuilder.setMinVer(0);
+                gameInfoBuilder.setMinVer( gameInfo.getMinVer() );
                 gameInfoBuilder.setIsHot(true);
                 gameInfoBuilder.setIsPowerful(true);
+
+
+                gameInfoBuilder.setCurOnlineNum(10);
                 gameInfoBuilder.setSort(agentGameInfo.getSort());
+
                 gameListBuilder.add(gameInfoBuilder);
             }
         }
@@ -44,7 +65,16 @@ public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldPr
             builder.setGaming( player.get_gameid() );
         }
 
-        peer.send_msg(builder.build());
+        msgAccountInfoBuilder.setUpdateNicknameCount(0);
+        msgAccountInfoBuilder.setIsBindMobilePhone(false);
+        msgAccountInfoBuilder.setPrivilege(0);
+        msgAccountInfoBuilder.setLastGameId( player.getPlayerInfoDoc().getLastGameId() );
+
+        builder.setBinGold(100);
+        builder.setBindPhoneDemo(false);
+
+
+        peer.send_msg_to_client(player.get_sessionid(),builder);
 
         return true;
     }

@@ -8,7 +8,8 @@ package client2gstate_protocols;
 //回放记录请求
 message packetc2gs_replay_history {
 	optional e_server_msg_type packet_id = 1 [default = e_mst_c2gs_replay_history];
-	optional int32 PlayerId_GuildId = 2;	// >0:玩家id, <0:公会id
+	optional int32 player_id = 2;	// >0:玩家id
+	optional int32 guild_id = 3;	// >0:公会id, player_id>0&&guild_id>0(公会内的玩家)
 }
 
 //回放记录数据

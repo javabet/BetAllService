@@ -48,10 +48,10 @@ public class DbBase {
 
     private  MongoConverter getDefaultMongoConverter(MongoDatabaseFactory factory) {
         List<Converter<?, ?>> converterList = new ArrayList<Converter<?, ?>>();
-        //converterList.add(new DateToTimeIntConvert());
-        //converterList.add(new TimeIntToDateConvert());
-        //converterList.add(new DateToTimeLongConvert());
-        //converterList.add(new TimeLongToDateConvert());
+        converterList.add(new DateToTimeIntConvert());
+        converterList.add(new TimeIntToDateConvert());
+        converterList.add(new DateToTimeLongConvert());
+        converterList.add(new TimeLongToDateConvert());
 
         DbRefResolver dbRefResolver = new DefaultDbRefResolver(factory);
         MongoCustomConversions conversions = new MongoCustomConversions(converterList);

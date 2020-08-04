@@ -50,21 +50,41 @@ message points_msg_record {
 	optional int32 points = 3;				//>0:上分 <0:下分 
 }
 
+//支出记录
+message expends_record {
+	optional guild_player player = 1;		//玩家
+	optional int32 time = 2;
+	optional int32 game_id = 3;
+	optional int32 roomcard_cnt = 4;
+}
+
+//公会游戏
+message guild_game {
+	optional int32 room_no = 1;				//房号	-xxxxxxyyy(xxxxxx:公会id, yyy:[1-999]显示用的桌号)
+	optional int32 game_id = 2;				//游戏id
+	repeated int32 players = 3;				//所有玩家id
+	optional msg_info_def.msg_sel_roomcard_config sel_config = 4;	//已选房卡配置(创建房间时传值)
+	optional msg_type_def.e_roomcard_type room_type = 5;
+	optional int32 create_time = 6;
+}
+
 //公会数据返回
 message packets2c_guild_data {
 	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_data];
 	optional int32 guild_id = 2;			//公会id
-	optional int32 points = 3;				//公会房卡数
+	optional string guild_name = 3;			//公会名称	
+	optional int32 roomcard_cnt = 4;		//公会房卡数
 	
-	repeated guild_member member = 4;			//公会成员数据
-	repeated guild_msg_record guild_msg = 5;	//公会消息记录
-	repeated points_msg_record points_msg = 6;	//上下分消息记录
+	repeated guild_member member = 5;			//公会成员数据
+	repeated guild_game games = 6;				//公会游戏
+	optional string guild_notice = 7;			//公会公告
+	optional bool changed_name = 8;				//已改过名称
 }
 
 //公会房卡数(覆盖)
-message packets2c_guild_points {
-	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_points];
-	optional int32 points = 2;				//公会房卡数
+message packets2c_guild_roomcard_cnt {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_roomcard_cnt];
+	optional int32 roomcard_cnt = 2;				//公会房卡数
 }
 
 //公会成员数据(新加,覆盖)
@@ -74,9 +94,8 @@ message packets2c_guild_member_data {
 }
 
 enum e_member_prop {
-    e_mp_points = 1;						//公会积分
-    e_mp_online = 2;						//在线状态
-    e_mp_gaming_id = 3;						//游戏id
+    e_mp_online = 1;						//在线状态
+    e_mp_gaming_id = 2;						//游戏id
 }
 
 //公会成员属性数据
@@ -87,11 +106,43 @@ message packets2c_guild_member_prop {
 	optional int32 value = 4;
 }
 
-//公会申请批准数据
+//公会成员积分数据
+message member_points {
+	optional int32 player_id = 1;
+	optional int32 points = 2;
+}
+
+//公会多个成员积分数据
+message packets2c_guild_multi_member_points {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_multi_member_points];
+	repeated member_points multi_points = 2;			//公会成员数据
+}
+
+//会长指定的数据
+message packets2c_guild_master_spec_data {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_master_spec_data];
+	repeated ask_record ask = 2;				//申请批准记录(10天)
+	repeated guild_msg_record guild_msg = 3;	//公会消息记录(10天)
+	repeated points_msg_record points_msg = 4;	//上下分消息记录(100天)
+	repeated expends_record expends = 5;		//支出记录(100天)
+}
+
+//会员指定的数据
+message packets2c_guild_member_spec_data {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_member_spec_data];
+	repeated points_msg_record points_msg = 2;	//上下分消息记录(10天)
+}
+
+//公会申请批准数据(新加)
 message packets2c_guild_ask_data {
 	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_ask_data];
-	repeated ask_record ask = 2;				//申请批准记录
-	optional bool all_data = 3;					//整个，新加 记录
+	optional ask_record ask = 2;				//申请批准记录
+}
+
+//支出记录(新加)
+message packets2c_guild_expends_data {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_expends_data];
+	optional expends_record expends_msg = 2;	//支出记录
 }
 
 //公会消息数据(新加)
@@ -123,7 +174,79 @@ message packetc2s_master_operation {
 	optional int32 param = 4;				//
 }
 
-//成员退出
-message packetc2s_member_quit {
-	optional e_server_msg_type packet_id = 1 [default = e_mst_c2s_member_quit];
+//会长操作错误码
+message packets2c_master_operation_err {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_master_operation_err];
+	optional msg_type_def.e_msg_result_def result = 2;	// e_rmt_guild_gaming_points, e_rmt_guild_gaming_kick, e_rmt_guild_ask_invalid(param=player_id)
+	optional int32 param = 3;
 }
+
+//会员操作
+enum e_member_ops_type {
+    e_mot_quit = 1;							//成员退出
+}
+
+//会员操作
+message packetc2s_member_operation {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2s_member_operation];
+	optional e_member_ops_type ops = 2;		//操作
+}
+
+//公会游戏创建
+message packets2c_guild_game_create
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_game_create];
+	optional int32 room_no = 2;
+	optional int32 player_id = 3;
+	optional int32 game_id = 4;
+	optional msg_info_def.msg_sel_roomcard_config sel_config = 5;	//已选房卡配置(创建房间时传值)
+	optional msg_type_def.e_roomcard_type room_type = 6;
+}
+
+//公会游戏玩家进出
+message packets2c_guild_game_enter_exit
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_game_enter_exit];
+	optional int32 room_no = 2;
+	optional int32 player_id = 3;
+	optional bool enter = 4;
+}
+
+//公会游戏消毁
+message packets2c_guild_game_delete
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_game_delete];
+	optional int32 room_no = 2;
+}
+
+//公会改名
+message packetc2s_guild_name {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2s_guild_name];
+	optional string new_name = 2;				//
+}
+
+//公会改名
+message packets2c_guild_name {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_name];
+	optional msg_type_def.e_msg_result_def result = 2;	// e_rmt_gold_not_enough, e_rmt_success
+	optional string new_name = 3;				//
+}
+
+//公会公告
+message packetc2s_guild_notice {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2s_guild_notice];
+	optional string new_notice = 2;				//
+}
+
+//公会公告
+message packets2c_guild_notice {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_s2c_guild_notice];
+	optional string new_notice = 2;				//
+}
+
+//请求加入公会游戏
+message packetc2s_join_guild_game {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2s_join_guild_game];
+	optional int32 roomcard_number = 2;			//房号
+}
+

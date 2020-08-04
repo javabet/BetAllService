@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 
-@Document(collation = "AccountTest" )
+@Document(collection = "AccountTest" )
 public class AccountTest extends BaseMongoDoc {
 
     @Field(targetType = FieldType.INT32)

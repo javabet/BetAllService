@@ -168,7 +168,7 @@ message third_pay_info {
 	optional int64  MinGold     = 13;			//最小金额
 	optional int64  MaxGold     = 14;			//最大金额
 	optional bool   sdk_visible	= 15;			//是否有SDK才可见	
-	optional int64  BankNo     = 16;			//银行账号
+	optional string  BankNo     = 16;			//银行账号
 	optional string  BankName     = 17;			//银行名
 	optional string  BankAccount     = 18;			//银行账号
 }

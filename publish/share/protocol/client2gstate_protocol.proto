@@ -976,11 +976,14 @@ message packetgs2c_shssc_game_history_result
 	optional int32 all_data_flag	= 2;				//所有游戏数据标志 1代表所有，2,代表更新游戏状态和时间，0代表追加数据
 	repeated gs_msg_shssc_room_info room_history = 3;
 }
-
+message gs_msg_slm_history
+{
+	repeated int32 cards = 1;					//每局开奖结果
+}
 message gs_msg_slm_room_info
 {
 	optional gs_base_room_info	base_room_info = 1; 		//游戏房间基本信息
-	repeated int32 cards = 2;			//房间牌路数据 
+	repeated gs_msg_slm_history card_road_info = 2;			//房间牌路数据 
 }
 
 //射龙门 牌路数据

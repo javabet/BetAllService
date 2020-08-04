@@ -1,3 +1,5 @@
+import "msg_type_def.proto";
+
 package msg_info_def;
 
 //账号信息
@@ -43,7 +45,11 @@ message msg_account_info{
 	optional string bindphone = 67;			//绑定电话号码
 	optional int64 room_card = 68;			//房卡
 	optional int32 guild_id = 69;			//公会id
-	optional int32 req_join_guild_time = 70;//最后请求加入公会时间
+	optional int32 guild_points = 70;		//公会积分
+	optional int32 req_join_guild_time = 71;//最后请求加入公会时间
+	optional string acctype = 72;			//账号类型 空值默认，wechat微信登录
+	optional string wechat_headimg = 73;	//微信头像
+	optional int32 flag_agent_status = 74;	//代理类型 0.无 1.无限代理（游戏内） 2.全民代理（后台）
 }
 
 message msg_account_info_ex{
@@ -103,6 +109,7 @@ message msg_roomcard_config{
 	repeated int32 big_blind = 11;	//大盲选项
 	repeated int32 hua_gold = 12;	//花分选项
 	repeated int32 gold_condition = 13;	//入场条件选项
+	optional msg_type_def.e_roomcard_type room_type = 14;		//房卡游戏类型
 }
 
 //已选房卡配置

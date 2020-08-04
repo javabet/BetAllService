@@ -190,9 +190,9 @@ enum e_server_msg_type {
 	e_mst_c2w_check_game_state = 5176;					//检查游戏状态
 	e_mst_c2w_pay_bank		   = 5178;					//请求银行转账充值
 	e_mst_c2w_join_guild = 5179;						//玩家请求加入公会
-
 	
 	e_mst_c2w_buy_room_card    = 5181;					//请求购买房卡
+	
 	//服务端到客户端--------------------------------------------------------------
 
 	e_mst_start_w2c = 7500;
@@ -403,7 +403,9 @@ enum e_server_msg_type {
 	e_mst_w2c_guild_id = 7690;									//玩家公会id返回	
 
 	e_mst_w2c_buy_room_card_result		= 7691;					//请求购买房卡返回
-	
+	e_mst_w2c_guild_refused	= 7692;								//玩家进公会被拒绝	
+
+
 	e_mst_cwend_index = 10000;
  }
 

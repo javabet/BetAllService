@@ -1,10 +1,13 @@
 package com.wisp.game.bet.world.unit;
 
 import com.wisp.game.bet.share.component.TimeHelper;
+import com.wisp.game.bet.world.PlayerSys.GamePlayer;
 import com.wisp.game.bet.world.db.*;
 import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.share.netty.RequestMessageRegister;
 import com.wisp.game.bet.sshare.ServerBase;
+import com.wisp.game.bet.world.gameMgr.GameEngineMgr;
+import com.wisp.game.bet.world.gameMgr.GamePlayerMgr;
 import io.netty.channel.ChannelHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -54,8 +57,10 @@ public class WorldServer extends ServerBase {
         {
             long cur_tm_ms = System.currentTimeMillis();
 
+            GameEngineMgr.Instance.heartbeat(elapsed);
             ServersManager.Instance.heartbeat(elapsed);
             BackstageManager.Instance.heartbeat(elapsed);
+            GamePlayerMgr.Instance.heartbeat(elapsed);
 
             elapsed = System.currentTimeMillis() - cur_tm_ms;
 

@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import java.util.List;
 
-@Document(collation = "AgentInfo")
+@Document(collection = "AgentInfo")
 public class AgentInfoDoc  {
     @Field( targetType = FieldType.INT32)
     private int AgentId;

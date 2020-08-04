@@ -4,12 +4,14 @@ import msg_info_def.MsgInfoDef;
 import msg_type_def.MsgTypeDef;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GameInfo {
     private int GameId;
     private int GameVer;
     private int minVer;
+    private List<String> H5GameVer;
     private Map<Integer,Integer> ServersMap;
     private MsgInfoDef.msg_roomcard_config roomcard_config;
 
@@ -55,5 +57,13 @@ public class GameInfo {
 
     public void setRoomcard_config(MsgInfoDef.msg_roomcard_config roomcard_config) {
         this.roomcard_config = roomcard_config;
+    }
+
+    public List<String> getH5GameVer() {
+        return H5GameVer;
+    }
+
+    public void setH5GameVer(List<String> h5GameVer) {
+        H5GameVer = h5GameVer;
     }
 }
