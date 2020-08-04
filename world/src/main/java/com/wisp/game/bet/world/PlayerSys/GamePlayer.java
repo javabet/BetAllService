@@ -7,6 +7,7 @@ import com.wisp.game.bet.db.mongo.player.doc.PlayerInfoDoc;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.share.utils.ProtocolClassUtils;
 import com.wisp.game.bet.share.utils.SessionHelper;
+import com.wisp.game.bet.sshare.convert.TimeInt;
 import com.wisp.game.bet.world.db.DbPlayer;
 import com.wisp.game.bet.world.gameMgr.GameEngineMgr;
 import com.wisp.game.bet.world.gameMgr.GamePlayerMgr;
@@ -121,7 +122,6 @@ public class GamePlayer {
 
                 init_acc_data(accountTableInfo);
                 create_player(false,accountTableInfo);
-
             }
         }
         else
@@ -153,8 +153,11 @@ public class GamePlayer {
     //同步账号信息
     private void init_acc_data(AccountTableDoc accountTableInfo)
     {
-        playerInfoDoc.setChannelID(accountTableInfo.getChannelId());
-        playerInfoDoc.setAgentId(accountTableInfo.getAgentId());
+        if( playerInfoDoc  != null )
+        {
+            playerInfoDoc.setChannelID(accountTableInfo.getChannelId());
+            playerInfoDoc.setAgentId(accountTableInfo.getAgentId());
+        }
     }
 
     public void set_sessionid(int sessionId)
@@ -200,10 +203,15 @@ public class GamePlayer {
     private void create_player(boolean isRobot, AccountTableDoc accountTableInfo)
     {
         playerInfoDoc = new PlayerInfoDoc();
+        init_acc_data(accountTableInfo);
         playerInfoDoc.setPlayerId( GamePlayerMgr.Instance.generic_playerid() );
         Date date = new Date();
         date.setTime(TimeHelper.Instance.get_cur_ms());
         playerInfoDoc.setCreateTime( date );
+        playerInfoDoc.setLastDayTime(TimeInt.create(TimeHelper.Instance.get_cur_time()));
+
+        set_default_head();
+
         playerInfoDoc.setNickName("nickName");
         playerInfoDoc.setChannelID(accountTableInfo.getChannelId());
         playerInfoDoc.setGold(100000);
@@ -214,7 +222,10 @@ public class GamePlayer {
         Query query = Query.query(Criteria.where("Account").is(accountTableInfo.getAccount()));
 
         DbPlayer.Instance.getMongoTemplate().upsert(query, Update.fromDocument(doc),PlayerInfoDoc.class);
+    }
 
+    private void set_default_head()
+    {
 
     }
 

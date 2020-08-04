@@ -1,6 +1,7 @@
 package com.wisp.game.bet.GameConfig;
 
 import com.wisp.game.bet.utils.XMLUtils;
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
@@ -75,12 +76,12 @@ public final class MainGameVerConfig {
             Element childElement = iterator.next();
             MainGameVerConfigData data = new MainGameVerConfigData();
             
-           data.mID = Integer.valueOf(childElement.attribute("ID").getValue());
+           data.mID = getIntByElement(childElement,"ID");
            data.mGameCnName = childElement.attribute("GameCnName").getValue();
            data.mGameEnName = childElement.attribute("GameEnName").getValue();
            data.mIsOpen = Boolean.valueOf(childElement.attribute("IsOpen").getValue());
-           data.mGameVer = Integer.valueOf(childElement.attribute("GameVer").getValue());
-           data.mMinVer = Integer.valueOf(childElement.attribute("MinVer").getValue());
+           data.mGameVer = getIntByElement(childElement,"GameVer");
+           data.mMinVer =  getIntByElement(childElement,"MinVer");
             {
                data.mH5GameVer = new ArrayList<>();
                String[] H5GameVerStr = childElement.attribute("H5GameVer").getValue().split(",");
@@ -89,7 +90,7 @@ public final class MainGameVerConfig {
                    data.mH5GameVer.add( H5GameVerStr[i] );
                }
             }
-           data.mGameType = Integer.valueOf(childElement.attribute("GameType").getValue());
+           data.mGameType = getIntByElement(childElement,"GameType");
 
 
             if( mMapData.containsKey(data.mID) )
@@ -100,6 +101,22 @@ public final class MainGameVerConfig {
             mMapData.put(data.mID,data);
         }
 
+    }
+
+    private int getIntByElement(Element element,String key)
+    {
+        Attribute attribute = element.attribute(key);
+        if( attribute == null )
+        {
+            return 0;
+        }
+        String numStr = attribute.getValue();
+        if( numStr == "" )
+        {
+            return 0;
+        }
+
+        return Integer.valueOf(numStr);
     }
 
     public class MainGameVerConfigData

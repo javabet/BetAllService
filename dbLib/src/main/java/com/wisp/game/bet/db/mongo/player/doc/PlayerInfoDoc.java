@@ -1,6 +1,7 @@
 package com.wisp.game.bet.db.mongo.player.doc;
 
 import com.wisp.game.bet.db.mongo.BaseMongoDoc;
+import com.wisp.game.bet.sshare.convert.TimeInt;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
@@ -13,11 +14,9 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
 
     private String Account;
     private String AccType;
-    @Field(targetType = FieldType.INT32)
-    private int AgentId;
+    @Field(targetType = FieldType.INT32) private int AgentId;
     private String ChannelID;
-    @Field( targetType = FieldType.DATE_TIME)
-    private Date CreateTime;
+    @Field( targetType = FieldType.DATE_TIME) private Date CreateTime;
     private String CsToken;
     private boolean Delete;
     private String DeviceId;
@@ -28,9 +27,10 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
     private boolean IsFormal;
     private boolean IsRobot;
     @Field( targetType = FieldType.DATE_TIME)private Date KickEndTime;
-    @Field( targetType = FieldType.DATE_TIME)private Date LastDayTime;
+    //@Field( targetType = FieldType.DATE_TIME)
+    private TimeInt LastDayTime;
     @Field(targetType = FieldType.INT32)private int LastGameId;
-    private String LastIp;
+    private String LastIp="";
     @Field( targetType = FieldType.DATE_TIME) private Date LastTime;
     @Field(targetType = FieldType.INT32) private int Level;
     @Field(targetType = FieldType.INT32)private int Sex;
@@ -43,8 +43,8 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
     private String RegisterIp;
     @Field( targetType = FieldType.DATE_TIME)private Date RegisterTime;
     @Field(targetType = FieldType.INT32)private int RoomCard;
-    private int VipExp;
-    private int VipLevel;
+    @Field(targetType = FieldType.INT32)private int VipExp;
+    @Field(targetType = FieldType.INT32)private int VipLevel;
 
     public String getAccount() {
         return Account;
@@ -223,11 +223,11 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
         IsFormal = formal;
     }
 
-    public Date getLastDayTime() {
+    public TimeInt getLastDayTime() {
         return LastDayTime;
     }
 
-    public void setLastDayTime(Date lastDayTime) {
+    public void setLastDayTime(TimeInt lastDayTime) {
         LastDayTime = lastDayTime;
     }
 

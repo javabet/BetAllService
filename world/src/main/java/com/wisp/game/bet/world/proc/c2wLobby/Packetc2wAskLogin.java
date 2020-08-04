@@ -11,6 +11,8 @@ import com.wisp.game.bet.world.gameMgr.info.GameInfo;
 import com.wisp.game.bet.world.proc.DefaultWorldRequestMessage;
 import com.wisp.game.bet.world.unit.WorldPeer;
 
+import java.util.ArrayList;
+
 @IRequest
 public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldProtocol.packetc2w_ask_login> {
     @Override
@@ -38,27 +40,28 @@ public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldPr
         msgAccountInfoBuilder.setSafeBoxGold(0);
 
 
-        java.util.List<client2world_protocols.Client2WorldProtocol.msg_game_info.Builder> gameListBuilder = builder.getGameListBuilderList();
+        java.util.List<client2world_protocols.Client2WorldProtocol.msg_game_info.Builder> gameListBuilder = new ArrayList<>();
          AgentInfo agentInfo =  AgentInfoConfig.Instance.getGameInfo(player.getPlayerInfoDoc().getChannelID());
         if( agentInfo != null )
         {
             for(AgentGameInfo agentGameInfo : agentInfo.getGameMap().values())
             {
-                GameInfo gameInfo = GameEngineMgr.Instance.get_game_info(player.getPlayerInfoDoc().getPlayerId());
+                GameInfo gameInfo = GameEngineMgr.Instance.get_game_info(agentGameInfo.getGameId());
                 client2world_protocols.Client2WorldProtocol.msg_game_info.Builder gameInfoBuilder = client2world_protocols.Client2WorldProtocol.msg_game_info.newBuilder();
                 gameInfoBuilder.setGameid( gameInfo.getGameId() );
                 gameInfoBuilder.setGamever(gameInfo.getGameVer());
                 gameInfoBuilder.setMinVer( gameInfo.getMinVer() );
                 gameInfoBuilder.setIsHot(true);
                 gameInfoBuilder.setIsPowerful(true);
-
-
                 gameInfoBuilder.setCurOnlineNum(10);
                 gameInfoBuilder.setSort(agentGameInfo.getSort());
 
-                gameListBuilder.add(gameInfoBuilder);
+                //gameListBuilder.add(gameInfoBuilder);
+                builder.addGameList(gameInfoBuilder);
             }
         }
+
+
 
         if( player.is_gaming() )
         {

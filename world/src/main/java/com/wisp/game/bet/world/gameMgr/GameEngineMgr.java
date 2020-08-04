@@ -29,7 +29,7 @@ public class GameEngineMgr implements InitializingBean {
     {
         init_games();
     }
-    
+
     public void heartbeat(double elapsed )
     {
         m_elapsed -= elapsed;
