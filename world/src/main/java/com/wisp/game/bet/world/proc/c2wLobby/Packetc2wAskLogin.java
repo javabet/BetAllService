@@ -17,16 +17,17 @@ public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldPr
     public boolean packet_process(WorldPeer peer, GamePlayer player, Client2WorldProtocol.packetc2w_ask_login msg) {
         Client2WorldProtocol.packetw2c_ask_login_result.Builder builder = Client2WorldProtocol.packetw2c_ask_login_result.newBuilder();
         msg_info_def.MsgInfoDef.msg_account_info.Builder msgAccountInfoBuilder = builder.getAccountInfoBuilder();
-        msgAccountInfoBuilder.setAid(player.getM_playerInfo().getPlayerId());
+        msgAccountInfoBuilder.setAid(player.getPlayerInfoDoc().getPlayerId());
         msgAccountInfoBuilder.setGold(100);
 
+
         java.util.List<client2world_protocols.Client2WorldProtocol.msg_game_info.Builder> gameListBuilder = builder.getGameListBuilderList();
-         AgentInfo agentInfo =  AgentInfoConfig.Instance.getGameInfo(player.getM_playerInfo().getChannelID());
+         AgentInfo agentInfo =  AgentInfoConfig.Instance.getGameInfo(player.getPlayerInfoDoc().getChannelID());
         if( agentInfo != null )
         {
             for(AgentGameInfo agentGameInfo : agentInfo.getGameMap().values())
             {
-                GameInfo gameInfo = GameEngineMgr.Instance.get_game_info(player.getM_playerInfo().getPlayerId(),0);
+                GameInfo gameInfo = GameEngineMgr.Instance.get_game_info(player.getPlayerInfoDoc().getPlayerId(),0);
                 client2world_protocols.Client2WorldProtocol.msg_game_info.Builder gameInfoBuilder = client2world_protocols.Client2WorldProtocol.msg_game_info.newBuilder();
                 gameInfoBuilder.setGameid( gameInfo.getGameId() );
                 gameInfoBuilder.setGamever(gameInfo.getGameVer());

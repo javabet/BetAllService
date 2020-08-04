@@ -2,11 +2,14 @@ package com.wisp.game.bet.db.mongo.config.doc;
 
 import com.wisp.game.bet.db.mongo.config.doc.info.GameInfo;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import java.util.List;
 
 @Document(collation = "AgentInfo")
 public class AgentInfoDoc  {
+    @Field( targetType = FieldType.INT32)
     private int AgentId;
     private String ChannelId;
     private List<GameInfo> GameInfos;

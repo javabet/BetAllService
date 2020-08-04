@@ -4,7 +4,7 @@ import client2gate_protocols.Client2GateProtocol;
 import client2world_protocols.Client2WorldProtocol;
 import com.wisp.game.bet.gate.unit.ClientManager;
 import com.wisp.game.bet.gate.unit.GatePeer;
-import com.wisp.game.bet.db.mongo.account.info.AccountTableDoc;
+import com.wisp.game.bet.db.mongo.account.doc.AccountTableDoc;
 import com.wisp.game.bet.db.mongo.account.service.AccountTableServiceImpl;
 import com.wisp.game.bet.db.mongo.config.doc.ServerListDoc;
 import com.wisp.game.bet.db.mongo.config.service.ServerListImpl;

@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.data.mongodb.core.query.Update;
 
 import java.io.Serializable;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -17,10 +16,6 @@ public class BaseMongoDoc implements Serializable {
 
     @Transient
     private Logger logger = LoggerFactory.getLogger(getClass());
-
-    //此字段不需要存入数据库中
-    @Transient
-    private boolean _update = false;
     @Transient
     private Set<String> updateKeys;
     @Transient
@@ -32,13 +27,7 @@ public class BaseMongoDoc implements Serializable {
         initFields();
     }
 
-    public boolean isUpdate() {
-        return _update;
-    }
 
-    public void setUpdate(boolean update) {
-        this._update = update;
-    }
 
     public void addUpdateKeys(String...keys)
     {
@@ -58,16 +47,6 @@ public class BaseMongoDoc implements Serializable {
         return to_bson(false);
     }
 
-    public Document to_bson(boolean to_all)
-    {
-        return new Document();
-    }
-
-    public Document getUpdateDoc()
-    {
-        return getUpdateDoc(false);
-    }
-
 
     /**
      * IMPLICIT(-1, Object.class), //
@@ -85,7 +64,7 @@ public class BaseMongoDoc implements Serializable {
      * 	INT64(17, Long.class), //
      * 	DECIMAL128(18, Decimal128.class);
      */
-    public Document getUpdateDoc(boolean to_all)
+    public Document to_bson(boolean to_all)
     {
         Update update = new Update();
 

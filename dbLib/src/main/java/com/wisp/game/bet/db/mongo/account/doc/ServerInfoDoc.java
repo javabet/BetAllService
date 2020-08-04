@@ -1,4 +1,4 @@
-package com.wisp.game.bet.db.mongo.account.info;
+package com.wisp.game.bet.db.mongo.account.doc;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -15,12 +15,15 @@ public class ServerInfoDoc implements Serializable {
 
     private String Account;
 
+    @Field( targetType = FieldType.INT32)
     private int GateId;
 
+    @Field( targetType = FieldType.INT32)
     private int IsConnect;
 
     private Date LastTime;
 
+    @Field( targetType = FieldType.INT32)
     private int WorldId;
 
 

@@ -21,21 +21,36 @@ public class PacketTransmitMsg extends DefaultRequestMessage<ServerProtocol.pack
         {
             Message innerMsg = RequestMessageRegister.Instance.getMessageByProtocolId(msg.getMsgpak().getMsgid(),msg.getMsgpak().getMsginfo());
 
-            if( innerMsg != null )
+            try
             {
-                IRequestMessage requestMessage =  protocolStruct.getHandlerInstance();
-                if( requestMessage.use_sessionid() )
+                if( innerMsg != null )
                 {
-                    bret = requestMessage.packet_process(peer,msg.getSessionid(),innerMsg);
-                }
-                else
-                {
-                    GamePlayer player = GamePlayerMgr.Instance.find_player( msg.getSessionid() );
-                    if( player != null )
+                    IRequestMessage requestMessage =  protocolStruct.getHandlerInstance();
+                    if( requestMessage.use_sessionid() )
                     {
-                        bret = requestMessage.packet_process(peer,player,innerMsg);
+                        bret = requestMessage.packet_process(peer,msg.getSessionid(),innerMsg);
+                    }
+                    else
+                    {
+                        GamePlayer player = GamePlayerMgr.Instance.find_player( msg.getSessionid() );
+                        if( player != null )
+                        {
+                            bret = requestMessage.packet_process(peer,player,innerMsg);
+                        }
                     }
                 }
+            }
+            catch (Exception exception)
+            {
+                bret = false;
+                logger.error(exception.getMessage());
+                StackTraceElement[] stackTraceElements = exception.getStackTrace();
+                int size = stackTraceElements.length;
+                for(int i = 0; i < size;i++)
+                {
+                    logger.error(stackTraceElements[i].toString());
+                }
+
             }
         }
 

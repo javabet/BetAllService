@@ -1,8 +1,8 @@
 package com.wisp.game.bet.world.gameMgr;
 
 import client2world_protocols.Client2WorldProtocol;
-import com.wisp.game.bet.db.mongo.player.info.CommonConfigDoc;
-import com.wisp.game.bet.db.mongo.player.info.OrderPlayerIdDoc;
+import com.wisp.game.bet.db.mongo.player.doc.CommonConfigDoc;
+import com.wisp.game.bet.db.mongo.player.doc.OrderPlayerIdDoc;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.world.PlayerSys.GamePlayer;
 import com.wisp.game.bet.world.db.DbPlayer;
@@ -62,14 +62,14 @@ public class GamePlayerMgr {
             return false;
         }
         m_playersbysid.put(gamePlayer.get_sessionid(), gamePlayer);
-        m_playersbyacc.put(gamePlayer.getM_accountTableInfo().getAccount(), gamePlayer);
+        m_playersbyacc.put(gamePlayer.getAccountTableInfoDoc().getAccount(), gamePlayer);
 
         return true;
     }
 
     public boolean addPlayerById(GamePlayer gamePlayer) {
-        if (!m_playerById.containsKey(gamePlayer.getM_playerInfo().getPlayerId())) {
-            m_playerById.put(gamePlayer.getM_playerInfo().getPlayerId(), gamePlayer);
+        if (!m_playerById.containsKey(gamePlayer.getPlayerInfoDoc().getPlayerId())) {
+            m_playerById.put(gamePlayer.getPlayerInfoDoc().getPlayerId(), gamePlayer);
         }
 
         return true;
@@ -77,8 +77,8 @@ public class GamePlayerMgr {
 
     public void remove_player(GamePlayer gamePlayer) {
         m_playersbysid.remove(gamePlayer.get_sessionid());
-        m_playerById.remove(gamePlayer.getM_playerInfo().getPlayerId());
-        m_playersbyacc.remove(gamePlayer.getM_accountTableInfo().getAccount());
+        m_playerById.remove(gamePlayer.getPlayerInfoDoc().getPlayerId());
+        m_playersbyacc.remove(gamePlayer.getAccountTableInfoDoc().getAccount());
     }
 
     public void reset_player(GamePlayer gamePlayer, int sessionId) {
@@ -167,7 +167,7 @@ public class GamePlayerMgr {
 
             gamePlayer.leave_game();
 
-            if( gamePlayer.getM_playerInfo().isRobot() )
+            if( gamePlayer.getPlayerInfoDoc().isRobot() )
             {
                 gamePlayer.player_logout();
             }
@@ -260,7 +260,7 @@ public class GamePlayerMgr {
         int cur_tm_s = TimeHelper.Instance.get_cur_time() + 600;
         for( GamePlayer gamePlayer : m_playerById.values() )
         {
-            if( gamePlayer.getM_playerInfo().getAgentId() != agent_id )
+            if( gamePlayer.getPlayerInfoDoc().getAgentId() != agent_id )
             {
                 continue;
             }
@@ -268,8 +268,8 @@ public class GamePlayerMgr {
             Client2WorldProtocol.packetw2c_player_kick.Builder builder = Client2WorldProtocol.packetw2c_player_kick.newBuilder();
             builder.setKickType(1);
             gamePlayer.send_msg_to_client(builder.build());
-            gamePlayer.getM_playerInfo().setKickEndTime(cur_tm_s * 1000);
-            m_kickList.add( gamePlayer.getM_playerInfo().getPlayerId() );
+            //gamePlayer.getPlayerInfo().setKickEndTime(cur_tm_s * 1000);
+            m_kickList.add( gamePlayer.getPlayerInfoDoc().getPlayerId() );
         }
     }
 

@@ -1,4 +1,4 @@
-package com.wisp.game.bet.db.mongo.player.info;
+package com.wisp.game.bet.db.mongo.player.doc;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 

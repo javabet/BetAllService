@@ -2,7 +2,7 @@ package com.wisp.game.bet.db.mongo.account.service;
 
 import com.wisp.game.bet.db.mongo.IMongoService;
 import com.wisp.game.bet.db.mongo.MongoServiceMeta;
-import com.wisp.game.bet.db.mongo.account.info.AccountTableDoc;
+import com.wisp.game.bet.db.mongo.account.doc.AccountTableDoc;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
@@ -41,7 +41,7 @@ public class AccountTableServiceImpl implements IMongoService {
 
     public boolean check_token(AccountTableDoc accountTableInfo, String account, String sign, String cstoken, int serverId )
     {
-        if( accountTableInfo.getAccount() != account )
+        if( !account.equals( accountTableInfo.getAccount() )   )
         {
             return false;
         }

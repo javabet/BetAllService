@@ -2,16 +2,21 @@ package com.wisp.game.bet.sshare;
 
 import com.mongodb.client.MongoClients;
 import com.wisp.game.bet.core.SpringContextHolder;
+import com.wisp.game.bet.sshare.convert.DateToTimeIntConvert;
+import com.wisp.game.bet.sshare.convert.DateToTimeLongConvert;
+import com.wisp.game.bet.sshare.convert.TimeIntToDateConvert;
+import com.wisp.game.bet.sshare.convert.TimeLongToDateConvert;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 import org.springframework.data.mongodb.core.convert.*;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DbBase {
 
@@ -42,8 +47,14 @@ public class DbBase {
     }
 
     private  MongoConverter getDefaultMongoConverter(MongoDatabaseFactory factory) {
+        List<Converter<?, ?>> converterList = new ArrayList<Converter<?, ?>>();
+        //converterList.add(new DateToTimeIntConvert());
+        //converterList.add(new TimeIntToDateConvert());
+        //converterList.add(new DateToTimeLongConvert());
+        //converterList.add(new TimeLongToDateConvert());
+
         DbRefResolver dbRefResolver = new DefaultDbRefResolver(factory);
-        MongoCustomConversions conversions = new MongoCustomConversions(Collections.emptyList());
+        MongoCustomConversions conversions = new MongoCustomConversions(converterList);
         MongoMappingContext mappingContext = new MongoMappingContext();
         mappingContext.setSimpleTypeHolder(conversions.getSimpleTypeHolder());
         mappingContext.afterPropertiesSet();

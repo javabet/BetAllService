@@ -2,8 +2,8 @@ package com.wisp.game.bet.world.PlayerSys;
 
 import client2world_protocols.Client2WorldProtocol;
 import com.google.protobuf.Message;
-import com.wisp.game.bet.db.mongo.account.info.AccountTableDoc;
-import com.wisp.game.bet.db.mongo.player.info.PlayerInfoDoc;
+import com.wisp.game.bet.db.mongo.account.doc.AccountTableDoc;
+import com.wisp.game.bet.db.mongo.player.doc.PlayerInfoDoc;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.share.utils.ProtocolClassUtils;
 import com.wisp.game.bet.share.utils.SessionHelper;
@@ -19,6 +19,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import server_protocols.ServerProtocol;
+
+import java.util.Date;
 
 public class GamePlayer {
 
@@ -38,11 +40,11 @@ public class GamePlayer {
     private WorldPeer m_gatePeer;
     private WorldPeer m_logicPeer;
 
-    private PlayerInfoDoc m_playerInfo;
-    private AccountTableDoc m_accountTableInfo;
+    private PlayerInfoDoc playerInfoDoc;
+    private AccountTableDoc accountTableInfoDoc;
 
     public GamePlayer() {
-        this.m_playerInfo = new PlayerInfoDoc();
+        this.playerInfoDoc = new PlayerInfoDoc();
     }
 
     public void heartbeat( double elapsed )
@@ -103,16 +105,17 @@ public class GamePlayer {
     public void player_login(AccountTableDoc accountTableInfo, String platfrom, String loginPlatform, boolean isRelogin, String csToken)
     {
         Query query = new Query(Criteria.where("Account").is(accountTableInfo.getAccount()));
-        PlayerInfoDoc playerInfoRet = DbPlayer.Instance.getMongoTemplate().findOne(query, PlayerInfoDoc.class);
 
-        this.m_accountTableInfo = accountTableInfo;
+        Document doc = DbPlayer.Instance.getMongoTemplate().findOne(query,Document.class,DbPlayer.DB_PLAYER_INFO);
+        this.playerInfoDoc = DbPlayer.Instance.getMongoTemplate().findOne(query, PlayerInfoDoc.class);
+        this.accountTableInfoDoc = accountTableInfo;
 
         reset_gatepeer();
 
         if( !is_relogin )
         {
             boolean new_player = false;
-            if( playerInfoRet == null )
+            if( playerInfoDoc == null )
             {
                 new_player = true;
 
@@ -150,8 +153,8 @@ public class GamePlayer {
     //同步账号信息
     private void init_acc_data(AccountTableDoc accountTableInfo)
     {
-        m_playerInfo.setChannelID(accountTableInfo.getChannelId());
-        m_playerInfo.setAgentId(accountTableInfo.getAgentId());
+        playerInfoDoc.setChannelID(accountTableInfo.getChannelId());
+        playerInfoDoc.setAgentId(accountTableInfo.getAgentId());
     }
 
     public void set_sessionid(int sessionId)
@@ -171,20 +174,20 @@ public class GamePlayer {
 
     public boolean load_player()
     {
-        Query query = new Query(Criteria.where("Account").is(m_accountTableInfo.getAccount()));
+        Query query = new Query(Criteria.where("Account").is(accountTableInfoDoc.getAccount()));
         PlayerInfoDoc playerInfoDoc =  DbPlayer.Instance.getMongoTemplate().findOne(query,PlayerInfoDoc.class);
         if( playerInfoDoc == null )
         {
             return false;
         }
 
-        m_playerInfo = playerInfoDoc;
+        this.playerInfoDoc = playerInfoDoc;
         return true;
     }
 
     public boolean loadPlayer(PlayerInfoDoc playerInfoDoc)
     {
-        this.m_playerInfo = playerInfoDoc;
+        this.playerInfoDoc = playerInfoDoc;
         return  true;
     }
 
@@ -196,15 +199,21 @@ public class GamePlayer {
 
     private void create_player(boolean isRobot, AccountTableDoc accountTableInfo)
     {
-        m_playerInfo = new PlayerInfoDoc();
-        m_playerInfo.setPlayerId( GamePlayerMgr.Instance.generic_playerid() );
-        m_playerInfo.setCreateTime( TimeHelper.Instance.get_cur_time() );
-        m_playerInfo.setNickName("nickName");
+        playerInfoDoc = new PlayerInfoDoc();
+        playerInfoDoc.setPlayerId( GamePlayerMgr.Instance.generic_playerid() );
+        Date date = new Date();
+        date.setTime(TimeHelper.Instance.get_cur_ms());
+        playerInfoDoc.setCreateTime( date );
+        playerInfoDoc.setNickName("nickName");
+        playerInfoDoc.setChannelID(accountTableInfo.getChannelId());
+        playerInfoDoc.setGold(100000);
+        playerInfoDoc.setLevel(0);
+        playerInfoDoc.setRobot(false);
 
-        Document doc = m_playerInfo.to_bson(true);
+        Document doc = playerInfoDoc.to_bson(true);
         Query query = Query.query(Criteria.where("Account").is(accountTableInfo.getAccount()));
 
-        DbPlayer.Instance.getMongoTemplate().updateFirst(query, Update.fromDocument(doc),PlayerInfoDoc.class);
+        DbPlayer.Instance.getMongoTemplate().upsert(query, Update.fromDocument(doc),PlayerInfoDoc.class);
 
 
     }
@@ -227,7 +236,7 @@ public class GamePlayer {
             Logic2WorldProtocol.packetw2l_player_login.Builder builder = Logic2WorldProtocol.packetw2l_player_login.newBuilder();
             builder.setRoomid(roomId);
             msg_info_def.MsgInfoDef.msg_account_info.Builder msgAccountInfoBuilder = builder.getAccountInfoBuilder();
-            msgAccountInfoBuilder.setChannelId(m_playerInfo.getChannelID());
+            msgAccountInfoBuilder.setChannelId(playerInfoDoc.getChannelID());
 
             m_logicPeer.send_msg(builder.build());
         }
@@ -247,7 +256,7 @@ public class GamePlayer {
         m_logicid = serverId;
         m_gameid = gameId;
         m_roomId = roomId;
-        if( !m_playerInfo.isRobot() )
+        if( !playerInfoDoc.isRobot() )
         {
             GameEngineMgr.Instance.update_game_info(gameId,serverId,true);
         }
@@ -266,7 +275,7 @@ public class GamePlayer {
 
         GamePlayerMgr.Instance.onExitGame(m_gameid);
 
-        if( !m_playerInfo.isRobot() )
+        if( !playerInfoDoc.isRobot() )
         {
             GameEngineMgr.Instance.update_game_info(m_gameid,m_logicid,false);
         }
@@ -286,7 +295,7 @@ public class GamePlayer {
             if( m_logicPeer != null )
             {
                 Logic2WorldProtocol.packetw2l_player_login.Builder builder = Logic2WorldProtocol.packetw2l_player_login.newBuilder();
-                builder.getAccountInfoBuilder().setAid(m_playerInfo.getPlayerId());
+                builder.getAccountInfoBuilder().setAid(playerInfoDoc.getPlayerId());
 
                m_logicPeer.send_msg(builder.build());
             }
@@ -383,7 +392,7 @@ public class GamePlayer {
 
     public void clear_gate_logicid()
     {
-        if(m_playerInfo.isRobot())
+        if(playerInfoDoc.isRobot())
         {
             return;
         }
@@ -401,20 +410,20 @@ public class GamePlayer {
 
 
 
-    public PlayerInfoDoc getM_playerInfo() {
-        return m_playerInfo;
+    public PlayerInfoDoc getPlayerInfoDoc() {
+        return playerInfoDoc;
     }
 
-    public void setM_playerInfo(PlayerInfoDoc m_playerInfo) {
-        this.m_playerInfo = m_playerInfo;
+    public void setPlayerInfoDoc(PlayerInfoDoc playerInfoDoc) {
+        this.playerInfoDoc = playerInfoDoc;
     }
 
-    public AccountTableDoc getM_accountTableInfo() {
-        return m_accountTableInfo;
+    public AccountTableDoc getAccountTableInfoDoc() {
+        return accountTableInfoDoc;
     }
 
-    public void setM_accountTableInfo(AccountTableDoc m_accountTableInfo) {
-        this.m_accountTableInfo = m_accountTableInfo;
+    public void setAccountTableInfoDoc(AccountTableDoc accountTableInfoDoc) {
+        this.accountTableInfoDoc = accountTableInfoDoc;
     }
 
     private void store_game_object()

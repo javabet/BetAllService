@@ -1,15 +1,12 @@
-package com.wisp.game.bet.db.mongo.account.info;
+package com.wisp.game.bet.db.mongo.account.doc;
 
 import com.wisp.game.bet.db.mongo.BaseMongoDoc;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.*;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Document(collection="AccountTable")
 @CompoundIndex(name = "Account",def = "{'Account':1}",unique = true)
@@ -24,6 +21,7 @@ public class AccountTableDoc extends BaseMongoDoc implements Serializable {
     @Indexed
     private String ChannelId;
 
+    @Field( targetType = FieldType.INT32)
     private int AgentId;
 
 

@@ -1,22 +1,13 @@
 package com.wisp.game.bet.gate.unit;
 
-import com.wisp.game.bet.db.mongo.account.info.AccountTableDoc;
 import com.wisp.game.bet.gate.db.DbAccount;
 import com.wisp.game.bet.core.SpringContextHolder;
-import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.share.netty.RequestMessageRegister;
 import com.wisp.game.bet.sshare.ServerBase;
 import io.netty.channel.ChannelHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -106,6 +97,7 @@ public final class GateServer extends ServerBase {
         {
             DbAccount.Instance.init_db(environment.getProperty("cfg.accountdb_url"),environment.getProperty("cfg.accountdb_name"));
         }
+
 
         return true;
     }

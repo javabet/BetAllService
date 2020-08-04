@@ -1,4 +1,4 @@
-package com.wisp.game.bet.db.mongo.player.info;
+package com.wisp.game.bet.db.mongo.player.doc;
 
 import com.wisp.game.bet.db.mongo.BaseMongoDoc;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,24 +13,30 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
 
     private String Account;
     private String AccType;
+    @Field(targetType = FieldType.INT32)
     private int AgentId;
     private String ChannelID;
     @Field( targetType = FieldType.DATE_TIME)
-    private int CreateTime;
+    private Date CreateTime;
     private String CsToken;
+    @Field(targetType = FieldType.INT32)
     private int Gold;
     private String IconCustom;
+    @Field(targetType = FieldType.INT32)
     private int LastGameId;
     private String LastIp;
     @Field( targetType = FieldType.DATE_TIME)
-    private int LastTime;
+    private Date LastTime;
+    @Field(targetType = FieldType.INT32)
     private int Level;
+    @Field(targetType = FieldType.INT32)
     private int Sex;
+    @Field(targetType = FieldType.INT32)
     private int PlayerId;
     private String NickName;
     private boolean IsRobot;
     @Field( targetType = FieldType.DATE_TIME)
-    private int KickEndTime;
+    private Date KickEndTime;
 
     public String getAccount() {
         return Account;
@@ -54,14 +60,6 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
 
     public void setAgentId(int agentId) {
         AgentId = agentId;
-    }
-
-    public int getCreateTime() {
-        return CreateTime;
-    }
-
-    public void setCreateTime(int createTime) {
-        CreateTime = createTime;
     }
 
     public String getCsToken() {
@@ -104,14 +102,6 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
         LastIp = lastIp;
     }
 
-    public int getLastTime() {
-        return LastTime;
-    }
-
-    public void setLastTime(int lastTime) {
-        LastTime = lastTime;
-    }
-
     public int getLevel() {
         return Level;
     }
@@ -152,14 +142,13 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
         IsRobot = robot;
     }
 
-    public int getKickEndTime() {
+    public Date getKickEndTime() {
         return KickEndTime;
     }
 
-    public void setKickEndTime(int kickEndTime) {
+    public void setKickEndTime(Date kickEndTime) {
         KickEndTime = kickEndTime;
     }
-
 
     public String getChannelID() {
         return ChannelID;
@@ -167,5 +156,21 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
 
     public void setChannelID(String channelID) {
         ChannelID = channelID;
+    }
+
+    public Date getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        CreateTime = createTime;
+    }
+
+    public Date getLastTime() {
+        return LastTime;
+    }
+
+    public void setLastTime(Date lastTime) {
+        LastTime = lastTime;
     }
 }
