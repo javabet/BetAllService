@@ -12,6 +12,8 @@ public class PacketServerConnect extends DefaultRequestMessage<ServerProtocol.pa
     @Override
     public boolean packet_process(LogicPeer peer, ServerProtocol.packet_server_connect msg) {
 
+        logger.info(" packet_server_connect:" + msg.getServerType() + " id:" + msg.getServerId() );
+
         if(ServersManager.Instance.regedit_server(peer))
         {
             ServerProtocol.packet_server_connect_result.Builder builder = ServerProtocol.packet_server_connect_result.newBuilder();

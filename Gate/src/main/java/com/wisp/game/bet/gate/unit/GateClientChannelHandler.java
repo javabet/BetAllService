@@ -42,7 +42,7 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
 
        BackstageManager.Instance.add_obj(serverPeer.get_id(),serverPeer);
 
-        logger.info("GateClientChannelHandler channelActive peerId:" + serverPeer.get_id());
+        logger.info("channelActive peerId:" + serverPeer.get_id() + " remoteType:" + serverPeer.get_remote_type());
     }
 
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, MsgBuf message) throws Exception {
@@ -62,7 +62,7 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
 
         serverPeer.set_state(e_peer_state.e_ps_disconnected);
 
-       logger.info("channelInactive....GateClientChannelHandler channelInactive peerId:" + serverPeer.get_id());
+       logger.info("channelInactive ......  peerId:" + serverPeer.get_id()  + " remoteType:" + serverPeer.get_remote_type());
 
         //如果注册失败，则有可能，没有加入到BackstageManager中
         if( BackstageManager.Instance.hasKey(serverPeer.get_id())  )

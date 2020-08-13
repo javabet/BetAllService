@@ -85,6 +85,14 @@ public abstract class ServerBase implements InitializingBean,Runnable {
         if( environment.containsProperty("cfg.out_port") ){
             m_serverid = environment.getProperty("cfg.out_port",Integer.class,-1);
 
+            ChannelHandler channelHandler = getChannelHandler();
+
+            if( channelHandler == null )
+            {
+                logger.error(getClass().getName() + " need override the channelHandler");
+                System.exit(0);
+            }
+
             ChannelHandler childChannelHandler =  m_is_web ? new ServerWebSocketNettyInitializer(getChannelHandler()) : new ServerNettyInitializer(getChannelHandler());
 
             peerTcpServer = new PeerTcpServer();

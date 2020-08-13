@@ -165,6 +165,8 @@ public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> im
                 serverPeer.set_remote_id(server_info.getServerPort());
                 serverPeer.connect(server_info.getServerIp(),server_info.getServerPort());
                 regedit_server(serverPeer);
+
+                logger.info("need connect the server port: " + server_info.getServerPort());
             }
         }
     }

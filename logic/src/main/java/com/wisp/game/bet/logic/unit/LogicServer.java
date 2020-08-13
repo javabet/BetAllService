@@ -41,7 +41,7 @@ public class LogicServer extends ServerBase {
 
     @Override
     protected ChannelHandler getChannelHandler() {
-        return null;
+        return new LogicServerChannelHandler();
     }
 
     public ServerPeer create_peer(int remote_type) {

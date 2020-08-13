@@ -57,6 +57,8 @@ public class PacketServerRegister  extends DefaultRequestMessage<ServerProtocol.
 
         peer.send_msg(builder.build());
 
+        logger.info("monitor packet_server_register: " + msg.getServerPort() );
+
         return true;
     }
 }
