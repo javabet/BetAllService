@@ -353,14 +353,18 @@ export class JavaExcelHandler
         let listTemplate=
             "            {\n" +
             "               data.m{PropertyKey} = new ArrayList<>();\n" +
-            "               String eleStr =  childElement.attribute(\"{PropertyKey}\").getValue();\n" +
-            "               if( eleStr != null && !eleStr.equals(\"\") )\n"+
+            "               Attribute attr =  childElement.attribute(\"{PropertyKey}\");\n"+
+            "               if(attr != null)\n"+
             "               {\n"+
-            "                   String[] {PropertyKey}Str = eleStr.split(\",\");\n" +
-            "                   for(int i = 0; i < {PropertyKey}Str.length;i++)\n" +
-            "                   {\n" +
-            "                       data.m{PropertyKey}.add( {PropertyValue} );\n" +
-            "                   }\n" +
+            "                   String eleStr =  attr.getValue();\n" +
+            "                   if( eleStr != null && !eleStr.equals(\"\") )\n"+
+            "                   {\n"+
+            "                       String[] {PropertyKey}Str = eleStr.split(\",\");\n" +
+            "                       for(int i = 0; i < {PropertyKey}Str.length;i++)\n" +
+            "                       {\n" +
+            "                           data.m{PropertyKey}.add( {PropertyValue} );\n" +
+            "                       }\n" +
+            "                   }\n"+
             "               }\n"+
             "            }\n";
 

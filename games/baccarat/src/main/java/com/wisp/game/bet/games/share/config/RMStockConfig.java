@@ -3,8 +3,10 @@ package com.wisp.game.bet.games.share.config;
 import com.wisp.game.bet.utils.XMLUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,9 +15,6 @@ import java.util.Map;
 @Component
 public class RMStockConfig {
     public static RMStockConfig Instance;
-
-
-
     private Map<Integer, RMStockConfigData> mMapData;
 
     public RMStockConfig() {
@@ -37,28 +36,42 @@ public class RMStockConfig {
         return this.mMapData;
     }
 
-    public void Reload()
+    public boolean Reload()
     {
         mMapData.clear();
-        this.Load();
+        return this.Load();
     }
 
-    public void Load()
+    public boolean Load()
     {
-        this.Load("./Config/BaccaratStockConfig.xml");
+        return this.Load("./Config/BaccaratStockConfig.xml");
     }
 
-    public void Load(String path) {
-        Document xmlDoc = XMLUtils.file2Document(path);
+    public boolean Load(String path) {
+        Document xmlDoc = null;
 
-        if (xmlDoc == null) {
-            return;
+        ClassPathResource classPathResource = new ClassPathResource(path);
+        if (classPathResource.exists())
+        {
+            try
+            {
+                xmlDoc = XMLUtils.file2Document(classPathResource.getInputStream());
+            }
+            catch (IOException ioexception)
+            {
+                //do nothing
+            }
+        }
+
+        if( xmlDoc == null )
+        {
+
         }
 
         Element root = xmlDoc.getRootElement();
 
         if (root == null) {
-            return;
+            return false;
         }
 
         Iterator<Element> iterator = root.elementIterator();
@@ -123,5 +136,7 @@ public class RMStockConfig {
             }
             mMapData.put(data.getmRoomID(), data);
         }
+
+        return true;
     }
 }

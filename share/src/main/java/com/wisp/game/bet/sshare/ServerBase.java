@@ -53,6 +53,7 @@ public abstract class ServerBase implements InitializingBean,Runnable {
     {
         Thread thread = new Thread(this);
         thread.setDaemon(true);
+        thread.setName("主线程");
         thread.start();
     }
 
@@ -68,7 +69,7 @@ public abstract class ServerBase implements InitializingBean,Runnable {
         }
     }
 
-    public boolean s_init(ApplicationArguments args, Environment environment )
+    protected boolean s_init(ApplicationArguments args, Environment environment )
     {
         logger.info("server start");
 
@@ -77,7 +78,6 @@ public abstract class ServerBase implements InitializingBean,Runnable {
         {
             m_groupid = groupId;
         }
-
 
         int type = environment.getProperty("cfg.server_type",Integer.class,-1);
         m_is_web = environment.getProperty("cfg.websocket",Integer.class,-1) == 1;

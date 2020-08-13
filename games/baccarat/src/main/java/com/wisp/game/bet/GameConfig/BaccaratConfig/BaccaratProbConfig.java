@@ -3,9 +3,12 @@ package com.wisp.game.bet.GameConfig.BaccaratConfig;
 import com.wisp.game.bet.utils.XMLUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
 
+import java.io.IOException;
 import java.util.*;
-
 
 public final class BaccaratProbConfig {
 
@@ -40,32 +43,51 @@ public final class BaccaratProbConfig {
         return this.mMapData;
     }
 
-    public void Reload()
+    public boolean Reload()
     {
         mMapData.clear();
-        this.Load();
+        return this.Load();
     }
 
-    public void Load()
+    public boolean Load()
     {
-        this.Load("./Config/BaccaratProbConfig.xml");
+        return this.Load("./Config/BaccaratProbConfig.xml");
     }
 
-    public void Load(String path)
+    public boolean Load(String path)
     {
-        Document xmlDoc = XMLUtils.file2Document(path);
+        Document xmlDoc = null;
+
+        ClassPathResource classPathResource = new ClassPathResource(path);
+        if (classPathResource.exists())
+        {
+            try
+            {
+                xmlDoc = XMLUtils.file2Document(classPathResource.getInputStream());
+            }
+            catch (IOException ioexception)
+            {
+                //do nothing
+            }
+        }
 
         if( xmlDoc == null )
         {
-            return;
+
+        }
+
+        if( xmlDoc == null )
+        {
+            return false;
         }
 
         Element root = xmlDoc.getRootElement();
 
         if( root == null )
         {
-            return;
+            return false;
         }
+
 
         Iterator<Element> iterator =  root.elementIterator();
 
@@ -97,6 +119,7 @@ public final class BaccaratProbConfig {
             mMapData.put(data.mkey,data);
         }
 
+        return true;
     }
 
     public class BaccaratProbConfigData

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+	<Data ID="GoldNotEnough" Name="金额不足" />
+	<Data ID="BetFull" Name="押注已满" />
+	<Data ID="VIPNotEnough" Name="VIP等级不足" />
+	<Data ID="RoomFull" Name="房间已满" />
+	<Data ID="WaitText" Name="正在奖励结算，请稍候…" />
+	<Data ID="SystemBanker" Name="系统小庄" />
+	<Data ID="BankerContinueCount" Name="连庄次数:" />
+	<Data ID="RemainCardCount" Name="剩余牌数:" />
+	<Data ID="NowFirstInBankerList" Name="您当前已经是上庄列表的首位" />
+	<Data ID="TicketNotEnough" Name="钻石不足" />
+	<Data ID="BankerListIsFull" Name="申请上庄列表已满，请稍候再申请" />
+	<Data ID="NowInBankerList" Name="您已经在上庄列表中" />
+	<Data ID="AskForBankerTip" Name="您已成功申请上庄，请稍候" />
+	<Data ID="AskLeaveBankerTip" Name="您已申请下庄，下轮您将不再是庄家" />
+	<Data ID="AskFirstBankerTip" Name="您已成功加入到上庄列表的第一位" />
+	<Data ID="NowBankerTip" Name="您当前正在坐庄" />
+	<Data ID="BankerGoldTip" Name="申请上庄至少需要%d元，是否前往充值" />
+	<Data ID="BankerLeaveTip" Name="您现在是庄家，下庄后才能离开" />
+	<Data ID="CurBankerText" Name="当前庄家" />
+	<Data ID="BankerResultText" Name="上庄成绩" />
+	<Data ID="BankerLimtText" Name="上庄条件" />
+	<Data ID="BankerListNull" Name="目前无人申请上庄" />
+	<Data ID="BankerText" Name="庄" />
+	<Data ID="PlayerText" Name="闲" />
+	<Data ID="TieText" Name="和" />
+	<Data ID="NowIsBanker" Name="您当前已经是庄家了" />
+	<Data ID="BankerWinText" Name="庄家成绩:    %s元" />
+	<Data ID="HelpText_1" Name="筹码区域" />
+	<Data ID="HelpText_2" Name="中心区域" />
+	<Data ID="HelpText_3" Name="当前庄家信息&amp;功能按钮" />
+	<Data ID="HelpText_4" Name="信息按钮" />
+	<Data ID="RobBankerInfo_1" Name="当前竞价是%s" />
+	<Data ID="RobBankerInfo_2" Name="您是最高出价者%s元" />
+	<Data ID="RobBankerTip" Name="是否花费%d元竞价抢庄！\n (如果无人超过您的出价，下一局即可上庄) \n tip:竞价失败不会扣除" />
+	<Data ID="RobBankerYouFirst" Name="你的竞价最高。" />
+	<Data ID="OnBankerTip" Name="%s 已上庄成功！" />
+	<Data ID="OnBankerRobTip" Name="(此次上庄使用了抢庄功能)" />
+	<Data ID="LeaveBankerTip" Name="上庄%d局后方可下庄，是否花费%d钻石提前下庄！" />
+	<Data ID="LeaveBankerRepeat" Name="您已经申请过下庄了" />
+	<Data ID="AwardTimeTip_1" Name="结算期间，无法申请上庄" />
+	<Data ID="AwardTimeTip_2" Name="结算期间，无法申请下庄" />
+	<Data ID="AwardTimeTip_3" Name="结算期间，无法抢庄" />
+	<Data ID="VipLockTip" Name="VIP%d才能解锁，是否立即前往充值？" />
+	<Data ID="BetMaxText" Name="单注上限:" />
+	<Data ID="WanText" Name="万" />
+	<Data ID="UpLimitTip" Name="是否现在进行充值？" />
+	<Data ID="BeginBetTip" Name="开始下注" />
+	<Data ID="TotalCanBet" Name="还能下注:" />
+	<Data ID="RepeatBetTip" Name="续压金额超过可押注上限" />
+	<Data ID="SystemDrawWaterTip" Name="您已成功下庄，扣除%d%%系统手续费，共计%d元" />
+	<Data ID="HasBetCantLeave" Name="已下注，本局结束前无法离开" />
+	<Data ID="Tip_LeaveBankerList" Name="下庄成功，您已从上庄列表中离开" />
+	<Data ID="Tip_NeedLeave" Name="您已到达上庄次数上限，已自动下庄" />
+	<Data ID="Tip_BankerProtectTime" Name="新庄家上庄保护期间，您无法抢庄" />
+	<Data ID="RobCanBanker" Name="可以竞价抢庄。" />
+	<Data ID="RobBankerTotalCost" Name="上庄需要%s元，抢庄需要%s元，总共%s元，您的余额不足，是否前往充值？" />
+	<Data ID="StrDian" Name="点" />
+	<Data ID="Snatch_success" Name="抢庄成功，如果没有人比您出更高的价，下局您将是庄家。" />
+	<Data ID="Tips_Bet_Banker_Is_Full" Name="下注失败，庄家下注金额已满。" />
+	<Data ID="Tips_ErrorState" Name="下注失败，错误状态。" />
+	<Data ID="OtherAreaBetBankerIsFull" Name="续押失败，庄家部分区域下注金额已满。" />
+</Root>

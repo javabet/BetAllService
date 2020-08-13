@@ -6,3 +6,6 @@
 */dist/out/
 /Tools/tsExcelTools/dist/
 /Tools/tsExcelTools/node_modules/
+*.class
+/target
+/games/*/target/

@@ -1,5 +1,6 @@
 package com.wisp.game.bet.games.baccarat.mgr;
 
+import com.wisp.game.bet.GameConfig.GameConfig;
 import com.wisp.game.bet.games.baccarat.logic.LogicLobby;
 import com.wisp.game.bet.games.baccarat.logic.LogicPlayer;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
@@ -21,6 +22,9 @@ public final class GameEngine implements IGameEngine {
 
     @Autowired
     private LogicLobby logicLobby;
+
+    @Autowired
+    private GameConfig gameConfig;
 
     public static GameEngine Instance;
 
@@ -65,6 +69,11 @@ public final class GameEngine implements IGameEngine {
     }
 
     @Override
+    public boolean player_can_leave(int playerid) {
+        return true;
+    }
+
+    @Override
     public int player_join_friend_game(GamePlayer gamePlayer, int friendId) {
         int ret =  logicLobby.player_join_friend_game(gamePlayer,friendId);
         if(ret != 1 )
@@ -74,11 +83,13 @@ public final class GameEngine implements IGameEngine {
         return 0;
     }
 
+    @Override
     public void set_room( int agentId,int roomId )
     {
         logicLobby.set_room(agentId,roomId);
     }
 
+    @Override
     public void open_room(int agentid, boolean open)
     {
         logicLobby.open_room(agentid, open);
@@ -87,7 +98,7 @@ public final class GameEngine implements IGameEngine {
 
     private void init_db()
     {
-
+        //do nothing
     }
 
     @Override
@@ -100,6 +111,7 @@ public final class GameEngine implements IGameEngine {
     {
         GameManager.Instance.request_robot(tag, banker, 0, exroom);
     }
+
 
     public void deduct_stock(int room_id, int gold)
     {

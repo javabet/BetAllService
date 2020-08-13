@@ -80,7 +80,7 @@ public class ServerPeer extends PeerTcp {
         ServerProtocol.packet_server_register.Builder builder = ServerProtocol.packet_server_register.newBuilder();
         builder.setServerType( ServerBase.e_server_type.valueOf(get_type()) );
         builder.setServerPort(LogicServer.Instance.get_serverid());
-        send_msg(builder.build());
+        send_msg(builder);
     }
 
     public void regedit_to_world()
@@ -88,7 +88,7 @@ public class ServerPeer extends PeerTcp {
         ServerProtocol.packet_server_connect.Builder builder = ServerProtocol.packet_server_connect.newBuilder();
         builder.setServerId(LogicServer.Instance.get_serverid());
         builder.setServerType( ServerBase.e_server_type.valueOf(get_type()) );
-        send_msg(builder.build());
+        send_msg(builder);
     }
 
 }

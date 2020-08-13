@@ -31,10 +31,17 @@ public class LogicClientChannelHandler extends SimpleChannelInboundHandler<MsgBu
         serverPeer.set_state(e_peer_state.e_ps_connected);
         serverPeer.init_peer(ctx,false,false);
         serverPeer.set_id(LogicServer.Instance.generate_id());
+
+        //相当于向
         if( serverPeer.get_remote_type() == ServerBase.e_server_type.e_st_monitor_VALUE )
         {
             serverPeer.regedit_to_monitor();
         }
+        else if( serverPeer.get_remote_type() == ServerBase.e_server_type.e_st_world_VALUE )
+        {
+            serverPeer.regedit_to_world();
+        }
+
        BackstageManager.Instance.add_obj(serverPeer.get_id(),serverPeer);
     }
 

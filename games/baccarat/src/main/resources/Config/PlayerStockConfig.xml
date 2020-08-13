@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+	<Data Recharge="20" PlayerProfit="500000,60000,48000,36000,24000,18000,15000" StrongKill="20,20,18,15,12,9,6" WeakKill="0,0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="40" PlayerProfit="120000,96000,72000,48000,36000,30000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="80" PlayerProfit="240000,192000,144000,96000,72000,60000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="160" PlayerProfit="480000,384000,288000,192000,144000,120000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="320" PlayerProfit="960000,768000,576000,384000,288000,240000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="640" PlayerProfit="1200000,960000,720000,480000,360000,300000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="1280" PlayerProfit="1500000,1200000,900000,600000,450000,380000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="2560" PlayerProfit="1880000,1500000,1130000,750000,560000,480000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="5120" PlayerProfit="2350000,1880000,1410000,940000,700000,600000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="10240" PlayerProfit="2940000,2350000,1760000,1180000,880000,750000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="20480" PlayerProfit="3680000,2940000,2200000,1480000,1100000,940000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="40960" PlayerProfit="4600000,3680000,2750000,1850000,1380000,1180000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="81920" PlayerProfit="5750000,4600000,3440000,2310000,1730000,1480000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="163840" PlayerProfit="7190000,5750000,4300000,2890000,2160000,1850000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="327680" PlayerProfit="8990000,7190000,5380000,3610000,2700000,2310000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="655360" PlayerProfit="11240000,8990000,6730000,4510000,3380000,2890000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+	<Data Recharge="1310720" PlayerProfit="14050000,11240000,8410000,5640000,4230000,3610000" StrongKill="20,18,15,12,9,6" WeakKill="0,0,0,0,0,0" MinRelushTime="30" MaxRelushTime="60" />
+</Root>

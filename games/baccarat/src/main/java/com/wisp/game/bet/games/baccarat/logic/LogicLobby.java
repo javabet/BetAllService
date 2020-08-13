@@ -116,9 +116,6 @@ public class LogicLobby {
     {
         m_max_player = maxCount;
 
-        rmConfig.Load("");
-        rmStockConfig.Load("");
-
         RoomMgr.Instance.init(rmConfig,null);
 
 

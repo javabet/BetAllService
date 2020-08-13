@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,6 +33,8 @@ public class GameManager {
     private  int m_gamever = 0;
     @Autowired
     private RobotManager robotmgr;
+
+    @Resource
     private IGameEngine gameEngine;
 
 
@@ -42,6 +45,7 @@ public class GameManager {
 
     public boolean open()
     {
+        game_regedit();
         return true;
     }
 
@@ -54,11 +58,12 @@ public class GameManager {
 
     public void on_init_engine(int gameId,String game_ver)
     {
-        m_gameid = 0;
+        m_gameid = gameId;
         m_gamever = 100;
 
         robotmgr.set_gameid(gameId);
-        game_regedit();
+        //有重复，不需要重复发送信息
+        //game_regedit();
     }
 
     public int get_gameid()

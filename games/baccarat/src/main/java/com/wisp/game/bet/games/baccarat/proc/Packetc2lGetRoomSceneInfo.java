@@ -8,9 +8,9 @@ import com.wisp.game.bet.share.netty.PacketManager.RequestMessageFromGate;
 import game_baccarat_protocols.GameBaccaratProtocol;
 
 @IRequest
-public class Packetc2lGetRoomSceneInfo extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_get_room_info, LogicPeer, GamePlayer> {
+public class Packetc2lGetRoomSceneInfo extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_get_room_scene_info, LogicPeer, GamePlayer> {
     @Override
-    public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_get_room_info msg) {
+    public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_get_room_scene_info msg) {
 
         LogicPlayer logicPlayer = (LogicPlayer)player.getPhandler();
         if( logicPlayer != null && logicPlayer.get_room() != null )

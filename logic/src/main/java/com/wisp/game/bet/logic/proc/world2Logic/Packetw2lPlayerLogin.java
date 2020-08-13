@@ -39,7 +39,7 @@ public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProto
            gamePlayer.set_roomid(msg.getRoomid());
            gamePlayer.channelId = msg.getAccountInfo().getChannelId();
            gamePlayer.PlayerID = msg.getAccountInfo().getAid();
-           gamePlayer.Gold = msg.getAccountInfo().getGold();
+           gamePlayer.Gold = (int)msg.getAccountInfo().getGold();
            gamePlayer.Sex = msg.getAccountInfo().getSex();
            gamePlayer.CreateTime = msg.getAccountInfo().getCreateTime();
 

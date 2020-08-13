@@ -17,7 +17,7 @@ public class TimeHelper {
     public void set_base_time(int _t)
     {
         m_baseTime = Integer.valueOf(_t).longValue() * 1000;
-        m_startTime = get_cur_ms();
+        m_startTime = System.currentTimeMillis();
     }
 
     /**
@@ -26,21 +26,20 @@ public class TimeHelper {
      */
     public int get_cur_time()
     {
-        long cur_tm_ms = get_cur_ms();
+        if( m_baseTime <= 0 )
+        {
+            return millToSecond(System.currentTimeMillis());
+        }
 
-        return millToSecond(cur_tm_ms);
+        return millToSecond(m_baseTime + get_tick_count());
     }
 
+    //相对的间隔数据
     private long get_tick_count()
     {
-        return get_cur_ms() - m_startTime;
+        return System.currentTimeMillis() - m_startTime;
     }
 
-    private int get_cur_seconds()
-    {
-        long cur_mills = System.currentTimeMillis();
-        return millToSecond(cur_mills);
-    }
 
     /**
      * 返回毫秒时间戳
@@ -50,12 +49,10 @@ public class TimeHelper {
     {
         if( m_baseTime <= 0 )
         {
-            return get_cur_seconds();
+            return System.currentTimeMillis();
         }
 
-        long tm_ms = m_baseTime + get_tick_count();
-
-        return  tm_ms;
+        return   m_baseTime + get_tick_count();
     }
 
     private int millToSecond(long mills)

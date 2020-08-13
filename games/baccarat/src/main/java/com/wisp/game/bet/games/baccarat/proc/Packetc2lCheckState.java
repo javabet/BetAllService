@@ -9,9 +9,9 @@ import game_baccarat_protocols.GameBaccaratProtocol;
 
 //检测协议
 @IRequest
-public class Packetc2lCheckState extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_clear_bet, LogicPeer, GamePlayer> {
+public class Packetc2lCheckState extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_check_state, LogicPeer, GamePlayer> {
     @Override
-    public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_clear_bet msg) {
+    public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_check_state msg) {
         LogicPlayer logicPlayer = (LogicPlayer)player.getPhandler();
         GameBaccaratProtocol.packetl2c_check_state_result.Builder builder =  GameBaccaratProtocol.packetl2c_check_state_result.newBuilder();
 

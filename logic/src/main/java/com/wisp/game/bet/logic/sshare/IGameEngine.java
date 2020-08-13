@@ -3,19 +3,25 @@ package com.wisp.game.bet.logic.sshare;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
 
 public interface IGameEngine {
-    public void notify_bot_state(boolean connected);
 
-    //玩家进入游戏
-    public boolean player_enter_game(GamePlayer gamePlayer,int roomId);
+    public boolean init_engine();
 
     public void heartbeat(double elapsed);
 
     public void exit_engine();
 
+    public void notify_bot_state(boolean connected);
+
+    //玩家进入游戏
+    public boolean player_enter_game(GamePlayer gamePlayer,int roomId);
+
     boolean player_leave_game(int playerid);
-
     boolean player_leave_game(int playerid, boolean bforce);
+    boolean player_can_leave(int playerid);
 
+    public int player_join_friend_game( GamePlayer gamePlayer,int friendId );
+
+    // 时间0点通知
     public void zero_time_arrive();
 
     public int get_gameid();
@@ -25,5 +31,9 @@ public interface IGameEngine {
 
     public String get_game_type();
 
-    public int player_join_friend_game( GamePlayer gamePlayer,int friendId );
+    //后台通知设置房间
+    public void set_room(int agentid, int roomid);
+    //通知打开,关闭房间
+    public void open_room(int agentid, boolean open);
+
 }

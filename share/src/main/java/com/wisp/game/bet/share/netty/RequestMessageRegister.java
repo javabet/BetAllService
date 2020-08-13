@@ -97,7 +97,11 @@ public class RequestMessageRegister implements InitializingBean {
 
             if( classConcurrentHashMap.containsKey(protocolId) )
             {
-                logger.error("the repeated the protocolId:" + protocolId + " nowCls:" + clz.getName());
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("the repeated the protocolId:").append(protocolId);
+                stringBuilder.append(" handlerClz:").append( clz.getName());
+                stringBuilder.append(" oldHandlerClz:").append( classConcurrentHashMap.get(protocolId).handlerInstance.getClass().getName() );
+                logger.error( stringBuilder.toString() );
                 continue;
             }
 

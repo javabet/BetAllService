@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+	<Data RoomID="1" RoomName="试玩场" BaseStock="100000000" InitStock="0" StockRate="0" StockStage="-1,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,-0.05,0" StockBuff="-100,-90,-80,-70,-60,-50,-40,-30,-20,-10,-5,0" BrightWater="5" MaxStock="1000000000" RelushTime="10800" StrongKill="" WeakKill="" />
+	<Data RoomID="2" RoomName="001号房" BaseStock="100000000" InitStock="0" StockRate="0" StockStage="-1,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,-0.05,0" StockBuff="-100,-90,-80,-70,-60,-50,-40,-30,-20,-10,-5,0" BrightWater="5" MaxStock="1000000000" RelushTime="10800" StrongKill="" WeakKill="" />
+	<Data RoomID="3" RoomName="002号房" BaseStock="100000000" InitStock="0" StockRate="0" StockStage="-1,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,-0.05,0" StockBuff="-100,-90,-80,-70,-60,-50,-40,-30,-20,-10,-5,0" BrightWater="5" MaxStock="1000000000" RelushTime="10800" StrongKill="" WeakKill="" />
+	<Data RoomID="4" RoomName="003号房" BaseStock="100000000" InitStock="0" StockRate="0" StockStage="-1,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,-0.05,0" StockBuff="-100,-90,-80,-70,-60,-50,-40,-30,-20,-10,-5,0" BrightWater="5" MaxStock="1000000000" RelushTime="10800" StrongKill="" WeakKill="" />
+	<Data RoomID="5" RoomName="004号房" BaseStock="100000000" InitStock="0" StockRate="0" StockStage="-1,-0.9,-0.8,-0.7,-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,-0.05,0" StockBuff="-100,-90,-80,-70,-60,-50,-40,-30,-20,-10,-5,0" BrightWater="5" MaxStock="1000000000" RelushTime="10800" StrongKill="" WeakKill="" />
+</Root>

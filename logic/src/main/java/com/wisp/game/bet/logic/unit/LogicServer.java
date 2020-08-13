@@ -1,9 +1,11 @@
 package com.wisp.game.bet.logic.unit;
 
+import com.wisp.game.bet.GameConfig.LogicConfig;
 import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.logic.db.MongoDbService;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameMgr.GamePlayerMgr;
+import com.wisp.game.bet.logic.sshare.IGameEngine;
 import com.wisp.game.bet.share.netty.RequestMessageRegister;
 import com.wisp.game.bet.sshare.ServerBase;
 import io.netty.channel.ChannelHandler;
@@ -27,6 +29,12 @@ public class LogicServer extends ServerBase {
     @Autowired
     public MongoDbService dbControllerService;
 
+    @Autowired
+    public LogicConfig logicConfig;
+
+    //这里不能给其赋值，需要加
+    private IGameEngine gameEngine;
+
     public LogicServer() {
         Instance = this;
     }
@@ -37,7 +45,16 @@ public class LogicServer extends ServerBase {
     }
 
     public ServerPeer create_peer(int remote_type) {
-        return null;
+        ServerPeer serverPeer = new ServerPeer();
+        serverPeer.set_remote_type( remote_type );
+        serverPeer.set_id(generate_id());
+        boolean flag = BackstageManager.Instance.add_obj(serverPeer.get_id(),serverPeer);
+        if( !flag )
+        {
+            logger.error("add obj has error:" + serverPeer.get_id());
+        }
+
+        return serverPeer;
     }
 
     @Override
@@ -63,6 +80,11 @@ public class LogicServer extends ServerBase {
             GameManager.Instance.heartbeat(elapsed);
 
             elapsed = System.currentTimeMillis() - cur_tm_ms;
+
+            if(  gameEngine != null && GamePlayerMgr.Instance.is_closing() )
+            {
+                gameEngine.heartbeat(elapsed);
+            }
 
             if( elapsed < 500 )
             {
@@ -98,11 +120,35 @@ public class LogicServer extends ServerBase {
 
     public void init_game_engine()
     {
-
+        GameManager.Instance.open();
+        if( gameEngine == null )
+        {
+            gameEngine = GameManager.Instance.get_game_engine();
+            if( gameEngine != null )
+            {
+                if(gameEngine.init_engine())
+                {
+                    gameEngine.exit_engine();
+                    gameEngine = null;
+                }
+                else if( ServersManager.Instance.get_bot() != null )
+                {
+                    gameEngine.notify_bot_state(true);
+                }
+            }
+        }
     }
 
     @Override
-    public void on_exit() {
+    public void on_exit()
+    {
+        if( gameEngine != null )
+        {
+            gameEngine.exit_engine();
+            gameEngine = null;
+        }
 
+        ServersManager.Instance.clear();
+        BackstageManager.Instance.clear();
     }
 }

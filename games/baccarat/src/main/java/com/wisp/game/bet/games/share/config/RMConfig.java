@@ -1,10 +1,13 @@
 package com.wisp.game.bet.games.share.config;
 
 import com.wisp.game.bet.utils.XMLUtils;
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,28 +38,42 @@ public class RMConfig {
         return this.mMapData;
     }
 
-    public void Reload()
+    public boolean Reload()
     {
         mMapData.clear();
-        this.Load();
+        return this.Load();
     }
 
-    public void Load()
+    public boolean Load()
     {
-        this.Load("./Config/BaccaratRoomConfig.xml");
+        return this.Load("./Config/BaccaratRoomConfig.xml");
     }
 
-    public void Load(String path) {
-        Document xmlDoc = XMLUtils.file2Document(path);
+    public boolean Load(String path) {
+        Document xmlDoc = null;
 
-        if (xmlDoc == null) {
-            return;
+        ClassPathResource classPathResource = new ClassPathResource(path);
+        if (classPathResource.exists())
+        {
+            try
+            {
+                xmlDoc = XMLUtils.file2Document(classPathResource.getInputStream());
+            }
+            catch (IOException ioexception)
+            {
+                //do nothing
+            }
+        }
+
+        if( xmlDoc == null )
+        {
+
         }
 
         Element root = xmlDoc.getRootElement();
 
         if (root == null) {
-            return;
+            return false;
         }
 
         Iterator<Element> iterator = root.elementIterator();
@@ -75,11 +92,15 @@ public class RMConfig {
             data.setmIsOpen(XMLUtils.getBooleanByElement(childElement, "IsOpen"));
             {
                 data.setmWeightList(new ArrayList<>());
-                String eleStr = childElement.attribute("WeightList").getValue();
-                if (eleStr != null && !eleStr.equals("")) {
-                    String[] WeightListStr = eleStr.split(",");
-                    for (int i = 0; i < WeightListStr.length; i++) {
-                        data.getmWeightList().add(Integer.valueOf(WeightListStr[i]));
+                Attribute weightListAtt =  childElement.attribute("WeightList");
+                if( weightListAtt != null )
+                {
+                    String eleStr = weightListAtt.getValue();
+                    if (eleStr != null && !eleStr.equals("")) {
+                        String[] WeightListStr = eleStr.split(",");
+                        for (int i = 0; i < WeightListStr.length; i++) {
+                            data.getmWeightList().add(Integer.valueOf(WeightListStr[i]));
+                        }
                     }
                 }
             }
@@ -90,52 +111,75 @@ public class RMConfig {
             data.setmAddBankerCost(XMLUtils.getIntByElement(childElement, "AddBankerCost"));
             {
                 data.setmBetLimit(new ArrayList<>());
-                String eleStr = childElement.attribute("BetLimit").getValue();
-                if (eleStr != null && !eleStr.equals("")) {
-                    String[] BetLimitStr = eleStr.split(",");
-                    for (int i = 0; i < BetLimitStr.length; i++) {
-                        data.getmBetLimit().add(Integer.valueOf(BetLimitStr[i]));
+                Attribute attribute = childElement.attribute("BetLimit");
+                if( attribute != null )
+                {
+                    String eleStr = attribute.getValue();
+                    if (eleStr != null && !eleStr.equals("")) {
+                        String[] BetLimitStr = eleStr.split(",");
+                        for (int i = 0; i < BetLimitStr.length; i++) {
+                            data.getmBetLimit().add(Integer.valueOf(BetLimitStr[i]));
+                        }
                     }
                 }
             }
             {
                 data.setmBetRange(new ArrayList<>());
-                String eleStr = childElement.attribute("BetRange").getValue();
-                if (eleStr != null && !eleStr.equals("")) {
-                    String[] BetRangeStr = eleStr.split(",");
-                    for (int i = 0; i < BetRangeStr.length; i++) {
-                        data.getmBetRange().add(Integer.valueOf(BetRangeStr[i]));
+                Attribute attribute = childElement.attribute("BetRange");
+                if( attribute != null )
+                {
+                    String eleStr = attribute.getValue();
+                    if (eleStr != null && !eleStr.equals("")) {
+                        String[] BetRangeStr = eleStr.split(",");
+                        for (int i = 0; i < BetRangeStr.length; i++) {
+                            data.getmBetRange().add(Integer.valueOf(BetRangeStr[i]));
+                        }
                     }
                 }
             }
             {
                 data.setmCustomList(new ArrayList<>());
-                String eleStr = childElement.attribute("CustomList").getValue();
-                if (eleStr != null && !eleStr.equals("")) {
-                    String[] CustomListStr = eleStr.split(",");
-                    for (int i = 0; i < CustomListStr.length; i++) {
-                        data.getmCustomList().add(Integer.valueOf(CustomListStr[i]));
+                Attribute attribute = childElement.attribute("CustomList");
+                if( attribute != null )
+                {
+                    String eleStr = attribute.getValue();
+                    if (eleStr != null && !eleStr.equals("")) {
+                        String[] CustomListStr = eleStr.split(",");
+                        for (int i = 0; i < CustomListStr.length; i++) {
+                            data.getmCustomList().add(Integer.valueOf(CustomListStr[i]));
+                        }
                     }
                 }
             }
             {
                 data.setmPlatList(new ArrayList<>());
-                String eleStr = childElement.attribute("PlatList").getValue();
-                if (eleStr != null && !eleStr.equals("")) {
-                    String[] PlatListStr = eleStr.split(",");
-                    for (int i = 0; i < PlatListStr.length; i++) {
-                        data.getmPlatList().add(Integer.valueOf(PlatListStr[i]));
+                Attribute attribute = childElement.attribute("PlatList");
+                if(  attribute != null)
+                {
+                    String eleStr = attribute.getValue();
+                    if (eleStr != null && !eleStr.equals("")) {
+                        String[] PlatListStr = eleStr.split(",");
+                        for (int i = 0; i < PlatListStr.length; i++) {
+                            data.getmPlatList().add(Integer.valueOf(PlatListStr[i]));
+                        }
                     }
                 }
+
             }
             data.setmFreeGold(XMLUtils.getIntByElement(childElement, "FreeGold"));
             {
                 data.setmBetNames(new ArrayList<>());
-                String eleStr = childElement.attribute("BetNames").getValue();
-                if (eleStr != null && !eleStr.equals("")) {
-                    String[] BetNamesStr = eleStr.split(",");
-                    for (int i = 0; i < BetNamesStr.length; i++) {
-                        data.getmBetNames().add(BetNamesStr[i]);
+                Attribute attr =  childElement.attribute("BetNames");
+                if(attr != null)
+                {
+                    String eleStr =  attr.getValue();
+                    if( eleStr != null && !eleStr.equals("") )
+                    {
+                        String[] BetNamesStr = eleStr.split(",");
+                        for(int i = 0; i < BetNamesStr.length;i++)
+                        {
+                            data.getmBetNames().add( BetNamesStr[i] );
+                        }
                     }
                 }
             }
@@ -160,23 +204,32 @@ public class RMConfig {
             data.setmLeopardLimit( XMLUtils.getIntByElement(childElement, "LeopardLimit"));
             {
                 data.setmOdds(new ArrayList<>());
-                String eleStr = childElement.attribute("Odds").getValue();
-                if (eleStr != null && !eleStr.equals("")) {
-                    String[] OddsStr = eleStr.split(",");
-                    for (int i = 0; i < OddsStr.length; i++) {
-                        data.getmOdds().add(Integer.valueOf(OddsStr[i]));
+                Attribute attribute = childElement.attribute("Odds");
+                if( attribute != null )
+                {
+                    String eleStr = attribute.getValue();
+                    if (eleStr != null && !eleStr.equals("")) {
+                        String[] OddsStr = eleStr.split(",");
+                        for (int i = 0; i < OddsStr.length; i++) {
+                            data.getmOdds().add(Integer.valueOf(OddsStr[i]));
+                        }
                     }
                 }
+
             }
             data.setmProfitRate(XMLUtils.getIntByElement(childElement, "ProfitRate"));
             data.setmProfitRateCheckIntervaltime(XMLUtils.getIntByElement(childElement, "ProfitRateCheckIntervaltime"));
             {
                 data.setmRatePoolList(new ArrayList<>());
-                String eleStr = childElement.attribute("RatePoolList").getValue();
-                if (eleStr != null && !eleStr.equals("")) {
-                    String[] RatePoolListStr = eleStr.split(",");
-                    for (int i = 0; i < RatePoolListStr.length; i++) {
-                        data.getmRatePoolList().add(Integer.valueOf(RatePoolListStr[i]));
+                Attribute attribute = childElement.attribute("RatePoolList");
+                if( attribute != null )
+                {
+                    String eleStr = attribute.getValue();
+                    if (eleStr != null && !eleStr.equals("")) {
+                        String[] RatePoolListStr = eleStr.split(",");
+                        for (int i = 0; i < RatePoolListStr.length; i++) {
+                            data.getmRatePoolList().add(Integer.valueOf(RatePoolListStr[i]));
+                        }
                     }
                 }
             }
@@ -186,11 +239,14 @@ public class RMConfig {
             data.setmRoomParam1(XMLUtils.getIntByElement(childElement, "RoomParam1"));
 
 
-            if (mMapData.containsKey(data.getmRoomID())) {
+            if (mMapData.containsKey(data.getmRoomID()))
+            {
                 System.out.printf("data refind:" + data.getmRoomID());
                 continue;
             }
             mMapData.put(data.getmRoomID(), data);
         }
+
+        return true;
     }
 }
