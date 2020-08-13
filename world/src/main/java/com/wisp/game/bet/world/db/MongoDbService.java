@@ -3,18 +3,29 @@ package com.wisp.game.bet.world.db;
 import com.wisp.game.bet.db.mongo.IMongoService;
 import com.wisp.game.bet.db.mongo.MongoServiceMeta;
 import com.wisp.game.bet.core.SpringContextHolder;
+import com.wisp.game.bet.db.mongo.games.GameRoomMgrDoc;
 import com.wisp.game.bet.share.common.ClassScanner;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.sshare.DbBase;
 import com.wisp.game.bet.world.dbConfig.AgentInfoConfig;
+import com.wisp.game.core.utils.FilePathUtils;
+import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -88,7 +99,7 @@ public class MongoDbService implements InitializingBean {
 
         if( environment.containsProperty("cfg.paydb_url") && environment.containsProperty("cfg.paydb_name") )
         {
-            DbGame.Instance.init_db(environment.getProperty("cfg.paydb_url"),environment.getProperty("cfg.paydb_name"));
+            DbPay.Instance.init_db(environment.getProperty("cfg.paydb_url"),environment.getProperty("cfg.paydb_name"));
         }
 
         if( environment.containsProperty("cfg.configdb_url") && environment.containsProperty("cfg.configdb_name") )
@@ -105,6 +116,49 @@ public class MongoDbService implements InitializingBean {
         {
             DbAccount.Instance.init_db(environment.getProperty("cfg.accountdb_url"),environment.getProperty("cfg.accountdb_name"));
         }
+
+
+
+
+        FilePathUtils filePathUtils = new FilePathUtils();
+
+        Collection<String> paths =  filePathUtils.searchLocationsForFile("./MainGameVerConfig.xml");
+        Collection<String> paths2 =  filePathUtils.searchLocationsForClasspath("./MainGameVerConfig.xml");
+
+        try
+        {
+            for( String path : paths)
+            {
+                URL url = Thread.currentThread().getContextClassLoader().getResource(path);
+                String filePath = URLDecoder.decode(url.getFile(),"UTF-8");
+
+                System.out.printf("filePath:" + filePath);
+            }
+        }
+        catch (Exception exception)
+        {
+            System.out.printf("go this...111");
+        }
+
+        try
+        {
+            for( String path : paths2)
+            {
+                File file =  ResourceUtils.getFile(path);
+                if( file.exists() )
+                {
+                    System.out.printf("the file:" + path);
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            System.out.printf("go this...222");
+        }
+
+
+        System.out.printf("...");
+
         return true;
     }
 

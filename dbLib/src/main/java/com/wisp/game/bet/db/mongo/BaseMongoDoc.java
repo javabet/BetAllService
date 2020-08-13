@@ -15,7 +15,7 @@ import java.util.*;
 public class BaseMongoDoc implements Serializable {
 
     @Transient
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    protected Logger logger = LoggerFactory.getLogger(getClass());
     @Transient
     private Set<String> updateKeys;
     @Transient

@@ -43,11 +43,6 @@ public class ServerWebSocketNettyInitializer extends ChannelInitializer<SocketCh
         pipeline.addLast(new HttpObjectAggregator(1024*62));
         //websocket支持,设置路由
         pipeline.addLast(new WebSocketServerProtocolHandler("/",null,true));
-        //pipeline.addLast(new WebSocketServerProtocolHandler("/"));
-
-        //zhou-hj/NettyProtobufWebsocket
-
-        //pipeline.addLast(new WebsocketDecode());
 
         pipeline.addLast(new ServerWebSocketCodec());
         pipeline.addLast(new ServerWebSocketNetty4Codec());

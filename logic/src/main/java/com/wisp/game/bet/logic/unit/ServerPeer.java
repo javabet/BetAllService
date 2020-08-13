@@ -8,6 +8,9 @@ import com.wisp.game.bet.share.netty.infos.e_peer_state;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
 
+/**
+ * 与务服务器之间通讯，主动发送信息给服务器
+ */
 public class ServerPeer extends PeerTcp {
     private final static int  CHECK_TIME = 10 * 1000;
     private double m_checktime = 0;

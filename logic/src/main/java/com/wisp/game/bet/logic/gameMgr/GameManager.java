@@ -1,6 +1,8 @@
 package com.wisp.game.bet.logic.gameMgr;
 
+import client2gate_protocols.Client2GateProtocol;
 import com.google.protobuf.Message;
+import com.wisp.game.bet.GameConfig.MainBaseConfig;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
 import com.wisp.game.bet.logic.sshare.IGameEngine;
 import com.wisp.game.bet.logic.sshare.MsgPacketOne;
@@ -9,6 +11,7 @@ import com.wisp.game.bet.share.utils.ProtocolClassUtils;
 import logic2world_protocols.Logic2WorldProtocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,8 +30,9 @@ public class GameManager {
     private double mCheckTime = 0;
     private  int m_gameid = 0;
     private  int m_gamever = 0;
-    private RobotManager m_robotmgr;
-    private IGameEngine m_gameEngine;
+    @Autowired
+    private RobotManager robotmgr;
+    private IGameEngine gameEngine;
 
 
     public GameManager() {
@@ -44,7 +48,7 @@ public class GameManager {
 
     public IGameEngine get_game_engine()
     {
-        return m_gameEngine;
+        return gameEngine;
     }
 
 
@@ -53,7 +57,7 @@ public class GameManager {
         m_gameid = 0;
         m_gamever = 100;
 
-        m_robotmgr.set_gameid(gameId);
+        robotmgr.set_gameid(gameId);
         game_regedit();
     }
 
@@ -65,6 +69,11 @@ public class GameManager {
     public int get_gamever()
     {
         return  m_gamever;
+    }
+
+    public void reflush_game_room()
+    {
+
     }
 
 
@@ -85,6 +94,64 @@ public class GameManager {
             builder.setGameVer(m_gamever);
             serverPeer.send_msg(builder.build());
         }
+    }
+
+
+
+    //请求机器人 请求的机器人不一定及时返回
+    //要求的vip 要求的gold  自定义标志tag
+    public void request_robot(int tag, int needgold, boolean exroom)
+    {
+        if (is_shutdowning())
+            return;
+
+        int playerid = robotmgr.request_robot(tag, needgold, exroom);
+        if(playerid >0)//找到机器人及时返回
+        {
+            robotmgr.inc_robot();
+            gameEngine.response_robot(playerid, tag);
+        }
+    }
+
+    public void request_robot(int tag, boolean banker, int bet_rate, boolean exroom)
+    {
+        if (is_shutdowning())
+            return;
+
+        int playerid = robotmgr.request_robot(tag, banker, bet_rate, exroom);
+        if(playerid >0)//找到机器人及时返回
+        {
+            robotmgr.inc_robot();
+            gameEngine.response_robot(playerid, tag);
+        }
+    }
+
+    public void request_bot(int tag, int needgold, int needvip)
+    {
+        if (is_shutdowning())
+            return;
+
+        int playerid = robotmgr.request_bot(tag, needgold, needvip);
+        if(playerid >0)//找到机器人及时返回
+        {
+            robotmgr.inc_robot();
+            gameEngine.response_robot(playerid, tag);
+        }
+    }
+
+    public void next_bot()
+    {
+        ServersManager.Instance.next_bot();
+    }
+
+    public int get_bet_robot_count(int tag, boolean exroom)
+    {
+        return robotmgr.get_bet_robot_count(tag, exroom);
+    }
+
+    public int get_banker_robot_count(int tag, boolean exroom)
+    {
+        return robotmgr.get_banker_robot_count(tag, exroom);
     }
 
     public void kick_out( int playerId )
@@ -118,9 +185,15 @@ public class GameManager {
         return m_is_shutdowning;
     }
 
+    //当不需要使用机器人时 只要退出到房间选择然后调用此函数
+    public void release_robot(int playerid)
+    {
+        robotmgr.release_robot(playerid);
+    }
+
     public void heartbeat( double elapsed )
     {
-        m_robotmgr.heartbeat(elapsed);
+        robotmgr.heartbeat(elapsed);
 
         if( m_force_time > 0 )
         {
@@ -156,9 +229,9 @@ public class GameManager {
 
     public void notify_bot_state( boolean connected )
     {
-        if( m_gameEngine != null )
+        if( gameEngine != null )
         {
-            m_gameEngine.notify_bot_state(connected);
+            gameEngine.notify_bot_state(connected);
         }
     }
 
@@ -226,12 +299,52 @@ public class GameManager {
             builder.addMsgpaks(  msg_packet_builder.build() );
         }
 
-        return ServersManager.Instance.send_msg_to_client(sids,builder.getPacketId(),builder.build());
+        return ServersManager.Instance.send_msg_to_client(sids,builder);
+    }
+
+    public void notify_close_room(int agent_id, int room_id)
+    {
+        /**
+        auto sendmsg = PACKET_CREATE(packetl2gs_room_close, e_mst_l2gs_room_close);
+        sendmsg->set_game_id(get_gameid());
+        sendmsg->set_agent_id(agent_id);
+        sendmsg->set_room_id(room_id);
+
+        auto& map = backstage_manager::instance().get_gstate_map();
+        for (auto& it : map)
+        {
+            if (it.second)
+            {
+                it.second->send_msg(sendmsg);
+            }
+        }
+        **/
+
     }
 
     public int get_serverid()
     {
         return LogicServer.Instance.get_serverid();
+    }
+
+    public boolean open_room()
+    {
+        boolean open = true;
+
+        return open;
+    }
+
+    public boolean is_room_config_check_act()
+    {
+        MainBaseConfig.MainBaseConfigData data =  MainBaseConfig.GetInstnace().GetData("RoomConfigCheck");
+
+
+        return data != null && data.getmValue() > 0;
+    }
+
+    public void on_exit_engine()
+    {
+
     }
 
 }

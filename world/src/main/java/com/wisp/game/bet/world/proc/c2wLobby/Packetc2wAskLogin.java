@@ -55,8 +55,6 @@ public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldPr
                 gameInfoBuilder.setIsPowerful(true);
                 gameInfoBuilder.setCurOnlineNum(10);
                 gameInfoBuilder.setSort(agentGameInfo.getSort());
-
-                //gameListBuilder.add(gameInfoBuilder);
                 builder.addGameList(gameInfoBuilder);
             }
         }

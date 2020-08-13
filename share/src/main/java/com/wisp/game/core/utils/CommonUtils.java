@@ -1,6 +1,6 @@
 package com.wisp.game.core.utils;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -210,6 +210,35 @@ public class CommonUtils {
         
         return message;
 	}
-	
+
+
+
+	public static <T>  T deepClone(T object)
+	{
+		Object o=null;
+		try{
+			if (object != null){
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ObjectOutputStream oos = new ObjectOutputStream(baos);
+				oos.writeObject(object);
+				oos.close();
+				ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+				ObjectInputStream ois = new ObjectInputStream(bais);
+				o = ois.readObject();
+				ois.close();
+			}
+		} catch (IOException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		if( o == null )
+		{
+			return null;
+		}
+
+		return (T)o;
+	}
 	
 }

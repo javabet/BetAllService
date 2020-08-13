@@ -3,6 +3,8 @@ package com.wisp.game.bet.logic.unit;
 
 import com.google.protobuf.Message;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
+import com.wisp.game.bet.logic.gameMgr.GamePlayerMgr;
+import com.wisp.game.bet.logic.gameObj.GamePlayer;
 import com.wisp.game.bet.share.common.EnableObjectManager;
 import com.wisp.game.bet.share.utils.ProtocolClassUtils;
 import com.wisp.game.bet.share.utils.SessionHelper;
@@ -16,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/*
+管理客户端通过Gate发过来的peer,每个peer  都是一个gate
+ */
 @Component
 public class ServersManager extends EnableObjectManager<Integer,LogicPeer> {
 
@@ -110,6 +115,11 @@ public class ServersManager extends EnableObjectManager<Integer,LogicPeer> {
         }
     }
 
+    public void broadcast_msg( Message.Builder builder)
+    {
+        broadcast_msg(builder.build());
+    }
+
     public void broadcast_msg( Message msg)
     {
         int packetId = ProtocolClassUtils.getProtocolByClass(msg.getClass());
@@ -134,16 +144,19 @@ public class ServersManager extends EnableObjectManager<Integer,LogicPeer> {
         }
     }
 
-    public  void shutdown()
-    {
-        ServerProtocol.packet_serverdown.Builder builder = ServerProtocol.packet_serverdown.newBuilder();
 
-        for( LogicPeer logicPeer : botVector)
-        {
-            logicPeer.send_msg(builder.build());
-        }
+
+    public int send_msg_to_client(int sessionid, Message.Builder builder)
+    {
+        return send_msg_to_client(sessionid,builder.build());
     }
 
+    public int send_msg_to_client(int sessionid,Message msg)
+    {
+        int packetId = ProtocolClassUtils.getProtocolByClass(msg.getClass());
+
+        return send_msg_to_client(sessionid,packetId,msg);
+    }
 
     public int send_msg_to_client(int sessionid,int packetId,Message msg)
     {
@@ -161,6 +174,17 @@ public class ServersManager extends EnableObjectManager<Integer,LogicPeer> {
         }
 
         return -1;
+    }
+
+    public int send_msg_to_client(List<Integer> sessionIds, Message.Builder builder )
+    {
+        return send_msg_to_client( sessionIds,builder.build() );
+    }
+
+    public int send_msg_to_client(List<Integer> sessionIds,Message msg )
+    {
+        int packetId = ProtocolClassUtils.getProtocolByClass(msg.getClass());
+        return send_msg_to_client( sessionIds,packetId,msg );
     }
 
     public int send_msg_to_client(List<Integer> sessionIds,int packetId,Message msg )
@@ -206,6 +230,28 @@ public class ServersManager extends EnableObjectManager<Integer,LogicPeer> {
         Map<Integer,List<Integer>> botsMap = new HashMap<>() ;
 
         //TODO wisp
+
+        for(int pid : pids)
+        {
+            GamePlayer gamePlayer = GamePlayerMgr.Instance.find_playerbyid(pid);
+            if( gamePlayer == null )
+            {
+                continue;
+            }
+
+
+        }
+
+    }
+
+    public  void shutdown()
+    {
+        ServerProtocol.packet_serverdown.Builder builder = ServerProtocol.packet_serverdown.newBuilder();
+
+        for( LogicPeer logicPeer : botVector)
+        {
+            logicPeer.send_msg(builder.build());
+        }
     }
 
 

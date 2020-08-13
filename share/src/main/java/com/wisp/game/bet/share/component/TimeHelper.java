@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TimeHelper {
 
-    private int m_startTime = 0;
-    private int m_baseTime = 0;
+    private long m_startTime = 0;
+    private long m_baseTime = 0;
 
     public static TimeHelper Instance;
 
@@ -16,34 +16,52 @@ public class TimeHelper {
 
     public void set_base_time(int _t)
     {
-        m_baseTime = _t;
-        m_startTime = get_cur_seconds();
+        m_baseTime = Integer.valueOf(_t).longValue() * 1000;
+        m_startTime = get_cur_ms();
     }
 
+    /**
+     * 返回秒时间戳
+     * @return
+     */
     public int get_cur_time()
+    {
+        long cur_tm_ms = get_cur_ms();
+
+        return millToSecond(cur_tm_ms);
+    }
+
+    private long get_tick_count()
+    {
+        return get_cur_ms() - m_startTime;
+    }
+
+    private int get_cur_seconds()
+    {
+        long cur_mills = System.currentTimeMillis();
+        return millToSecond(cur_mills);
+    }
+
+    /**
+     * 返回毫秒时间戳
+     * @return
+     */
+    public long get_cur_ms()
     {
         if( m_baseTime <= 0 )
         {
             return get_cur_seconds();
         }
 
-        return m_baseTime + get_tick_count();
+        long tm_ms = m_baseTime + get_tick_count();
+
+        return  tm_ms;
     }
 
-    public int get_tick_count()
+    private int millToSecond(long mills)
     {
-        return get_cur_seconds() - m_startTime;
-    }
+        int transSecond = (int)(mills/1000);
 
-    private int get_cur_seconds()
-    {
-        long cur_mills = System.currentTimeMillis();
-        int mills =  (int)(cur_mills/1000);
-        return mills;
-    }
-
-    public long get_cur_ms()
-    {
-        return System.currentTimeMillis();
+        return transSecond;
     }
 }

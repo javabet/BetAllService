@@ -5,9 +5,13 @@ import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.share.netty.RequestMessageRegister;
 import com.wisp.game.bet.sshare.ServerBase;
 import io.netty.channel.ChannelHandler;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -98,6 +102,9 @@ public final class GateServer extends ServerBase {
             DbAccount.Instance.init_db(environment.getProperty("cfg.accountdb_url"),environment.getProperty("cfg.accountdb_name"));
         }
 
+        String objId = new ObjectId().toHexString();
+
+        System.out.printf("objId:" + objId);
 
         return true;
     }

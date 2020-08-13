@@ -11,7 +11,7 @@ public class PacketShutdown extends DefaultRequestMessage<ServerProtocol.packet_
     @Override
     public boolean packet_process(ServerPeer peer, ServerProtocol.packet_shutdown msg) {
 
-        GameManager.Instance.prepare_shutdown();
+        GameManager.Instance.prepare_shutdown(msg.getGameid());
 
         return true;
     }

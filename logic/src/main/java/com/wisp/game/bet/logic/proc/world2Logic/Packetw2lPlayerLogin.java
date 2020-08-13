@@ -43,8 +43,8 @@ public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProto
            gamePlayer.Sex = msg.getAccountInfo().getSex();
            gamePlayer.CreateTime = msg.getAccountInfo().getCreateTime();
 
-           gamePlayer.isRobot = msg.getAccountInfoEx().getIsRobot();
-           if( !gamePlayer.isRobot )
+           gamePlayer.IsRobot = msg.getAccountInfoEx().getIsRobot();
+           if( !gamePlayer.IsRobot)
            {
                gamePlayer.world_id = peer.get_remote_id();
            }

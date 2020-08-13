@@ -12,13 +12,16 @@ public interface IGameEngine {
 
     public void exit_engine();
 
-    void player_leave_game(int playerid);
+    boolean player_leave_game(int playerid);
 
-    void player_leave_game(int playerid, boolean bforce);
+    boolean player_leave_game(int playerid, boolean bforce);
 
     public void zero_time_arrive();
 
     public int get_gameid();
+
+    //返回一个机器人 返回的机器人未进入房间？
+    void response_robot(int playerid, int tag);
 
     public String get_game_type();
 

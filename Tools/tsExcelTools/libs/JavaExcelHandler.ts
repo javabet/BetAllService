@@ -344,20 +344,24 @@ export class JavaExcelHandler
 
     private getParseConfigDataItem(config:ConfigType):string
     {
-        let strTemplate = "           data.m{PropertyKey} = childElement.attribute(\"{PropertyKey}\").getValue();\n";
-        let intTemplate = "           data.m{PropertyKey} = Integer.valueOf(childElement.attribute(\"{PropertyKey}\").getValue());\n";
-        let boolTemplate = "           data.m{PropertyKey} = Boolean.valueOf(childElement.attribute(\"{PropertyKey}\").getValue());\n";
-        let floatTemplate = "           data.m{PropertyKey} = Float.valueOf(childElement.attribute(\"{PropertyKey}\").getValue());\n";
-        let longTemplate = "           data.m{PropertyKey} = Long.valueOf(childElement.attribute(\"{PropertyKey}\").getValue());\n";
+        let strTemplate = "           data.m{PropertyKey} = XMLUtils.getStringByElement(childElement,\"{PropertyKey}\");\n";
+        let intTemplate = "           data.m{PropertyKey} = XMLUtils.getIntByElement(childElement,\"{PropertyKey}\");\n";
+        let boolTemplate = "           data.m{PropertyKey} = XMLUtils.getBooleanByElement(childElement,\"{PropertyKey}\");\n";
+        let floatTemplate = "           data.m{PropertyKey} = XMLUtils.getFloatleByElement(childElement,\"{PropertyKey}\");\n";
+        let longTemplate = "           data.m{PropertyKey} = XMLUtils.getLongByElement(childElement,\"{PropertyKey}\");\n";
 
         let listTemplate=
             "            {\n" +
             "               data.m{PropertyKey} = new ArrayList<>();\n" +
-            "               String[] {PropertyKey}Str = childElement.attribute(\"{PropertyKey}\").getValue().split(\",\");\n" +
-            "               for(int i = 0; i < {PropertyKey}Str.length;i++)\n" +
-            "               {\n" +
-            "                   data.m{PropertyKey}.add( {PropertyValue} );\n" +
-            "               }\n" +
+            "               String eleStr =  childElement.attribute(\"{PropertyKey}\").getValue();\n" +
+            "               if( eleStr != null && !eleStr.equals(\"\") )\n"+
+            "               {\n"+
+            "                   String[] {PropertyKey}Str = eleStr.split(\",\");\n" +
+            "                   for(int i = 0; i < {PropertyKey}Str.length;i++)\n" +
+            "                   {\n" +
+            "                       data.m{PropertyKey}.add( {PropertyValue} );\n" +
+            "                   }\n" +
+            "               }\n"+
             "            }\n";
 
         let KeyPropertyReg:RegExp = new RegExp("\\{PropertyKey\\}","g");

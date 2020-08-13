@@ -2,6 +2,7 @@ import minimist = require('minimist');
 import { JavaExcelHandler } from "./libs/JavaExcelHandler";
 import * as fs from 'fs';
 import * as path from 'path';
+import { Md5 } from './libs/EncryHelper';
 
 //循环取excel表数据
 function getExcelPath(filePath:string,fileList:string[],ignoreList:string[])
@@ -72,6 +73,7 @@ function getTemplateMsg(name:string):string | undefined
     return templateStr;
 }
 
+
 /**
  * 
  * @param sourcePath excels配置表路径
@@ -95,6 +97,14 @@ function main(sourcePath:string,outputConfigPath:string,outputScriptPath:string)
         console.log("模板文件不存在");
         return;
     }
+
+    let checkMd5Str = getTemplateMsg("fileCheck");
+    let checkMd5Obj:{[key:string]:string} = {};
+    if( checkMd5Str != null )
+    {
+        checkMd5Obj = JSON.parse(checkMd5Str);
+    }
+
 
     let list:string[] = [];
     let ignoreList:string[] = [];
@@ -123,23 +133,42 @@ function main(sourcePath:string,outputConfigPath:string,outputScriptPath:string)
 
     getExcelPath(sourcePath,list,ignoreList);
 
+
+    let hasChg:boolean = false;
+    let doNum:number = 0;
     for(let i = 0; i < list.length;i++)
     {
         let xlsFile = list[i];
 
-        if( xlsFile.indexOf("BenzBmwProbCFGConfig") != -1)
+        if( xlsFile.indexOf("BaccaratBaseConfig") != -1)
         {
             console.log("go this..");
         }
 
-
-        let excelHandler:JavaExcelHandler = new JavaExcelHandler( xlsFile );
-
         //去掉前缀路径
         let midPath = xlsFile.replace(sourcePath,"");
+        let longMidPath = midPath;
+        longMidPath = longMidPath.replace(/.((xls)|(xlsx))$/gi,"");
         //去掉文件名路径
         midPath = midPath.replace(/\/[^\/]*\.((xls)|(xlsx))$/gi,"");
         midPath = midPath.replace("\/","");
+
+        let xlsFileContent = fs.readFileSync(xlsFile,{encoding:"utf8"});
+        let md5Hash = Md5(xlsFileContent);
+        if( checkMd5Obj[ longMidPath ] != null && checkMd5Obj[ longMidPath ] == md5Hash )
+        {
+            continue
+        }
+
+        doNum ++;
+        if( doNum >= 300 )
+        {
+            continue;
+        }
+
+        let excelHandler:JavaExcelHandler = new JavaExcelHandler( xlsFile );
+
+   
         
         excelHandler.doWork();
         
@@ -158,12 +187,25 @@ function main(sourcePath:string,outputConfigPath:string,outputScriptPath:string)
         {
             excelHandler.saveFiles(realyOutPutConfigPath,realyOutPutScriptPath,templateStr,midPath,basePackagePath,xmlPath);
         }
-
-
         //console.log( xlsFile +   " handing.......");
+
+        hasChg = true;
+        checkMd5Obj[ longMidPath ] = md5Hash;
     }  
 
-    console.log("complete");
+    //如果有改动，则
+    if( hasChg )
+    {
+        let checkMd5JsonStr = JSON.stringify(checkMd5Obj);
+        fs.writeFileSync("./config/fileCheck.txt",checkMd5JsonStr );
+        console.log("need repeat done");
+    }
+    else
+    {
+        console.log("complete done");
+    }
+
+    
 }
 
 
