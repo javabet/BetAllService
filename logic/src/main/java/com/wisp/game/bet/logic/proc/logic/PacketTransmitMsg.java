@@ -1,4 +1,4 @@
-package com.wisp.game.bet.logic.proc.init;
+package com.wisp.game.bet.logic.proc.logic;
 
 
 import com.google.protobuf.Message;

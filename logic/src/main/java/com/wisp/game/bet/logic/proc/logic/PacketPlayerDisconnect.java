@@ -1,23 +1,23 @@
-package com.wisp.game.bet.logic.proc.init;
+package com.wisp.game.bet.logic.proc.logic;
 
 import com.wisp.game.bet.logic.gameMgr.GamePlayerMgr;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
+import com.wisp.game.bet.logic.sshare.e_player_state;
 import com.wisp.game.bet.logic.unit.LogicPeer;
 import com.wisp.game.bet.share.netty.IRequest;
 import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import server_protocols.ServerProtocol;
 
 @IRequest
-public class PacketGateSetlogicOk extends DefaultRequestMessage<ServerProtocol.packet_gate_setlogic_ok, LogicPeer> {
+public class PacketPlayerDisconnect extends DefaultRequestMessage<ServerProtocol.packet_player_disconnect, LogicPeer> {
     @Override
-    public boolean packet_process(LogicPeer peer, ServerProtocol.packet_gate_setlogic_ok msg) {
-        GamePlayer gamePlayer = GamePlayerMgr.Instance.find_player(msg.getSessionid());
-        if( gamePlayer == null )
-        {
-            return true;
-        }
+    public boolean packet_process(LogicPeer peer, ServerProtocol.packet_player_disconnect msg) {
 
-        gamePlayer.GatePeer = peer;
+        GamePlayer gamePlayer = GamePlayerMgr.Instance.find_player(msg.getSessionid());
+        if( gamePlayer != null )
+        {
+            gamePlayer.set_state(e_player_state.e_ps_disconnect);
+        }
 
         return true;
     }

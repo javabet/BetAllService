@@ -9,6 +9,7 @@ import com.wisp.game.bet.share.netty.PacketManager.IRequestMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 @DependsOn({"springContextHolder"})
 public class RequestMessageRegister implements InitializingBean {
+
+    @Autowired
+    private SpringContextHolder springContextHolder;
 
     private Logger logger = LoggerFactory.getLogger(getClass());
     //消息号与处理函数相关的处理
@@ -107,6 +111,8 @@ public class RequestMessageRegister implements InitializingBean {
 
             classConcurrentHashMap.put(protocolId,protocolStruct);
         }
+
+        logger.info("init the all protocols");
     }
 
     private boolean isHertFromIRequestMessage(Class<?> clz)

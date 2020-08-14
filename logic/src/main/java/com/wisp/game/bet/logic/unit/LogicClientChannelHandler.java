@@ -1,8 +1,10 @@
 package com.wisp.game.bet.logic.unit;
 
 
+import com.google.protobuf.Message;
 import com.wisp.game.bet.share.netty.infos.MsgBuf;
 import com.wisp.game.bet.share.netty.infos.e_peer_state;
+import com.wisp.game.bet.share.utils.ProtocolClassUtils;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -47,6 +49,11 @@ public class LogicClientChannelHandler extends SimpleChannelInboundHandler<MsgBu
 
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, MsgBuf message) throws Exception {
         //System.out.printf("GateClientChannelHandler:" + message.getClass().getName());
+
+        Message msg = message.getMsg();
+        int childProtocolId = ProtocolClassUtils.getProtocolByClass(msg.getClass());
+        System.out.printf("serverpeer childProtocolId:" + childProtocolId);
+
         serverPeer.addProcessMsg(message);
     }
 

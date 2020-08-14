@@ -58,7 +58,7 @@ public class ClientNetty4Codec extends MessageToMessageCodec<ByteBuf, MsgBuf> {
 
         if( messageRegister == null )
         {
-            messageRegister = SpringContextHolder.getBean(RequestMessageRegister.class);
+            messageRegister = RequestMessageRegister.Instance;  //SpringContextHolder.getBean(RequestMessageRegister.class);
         }
 
         ByteBuf packHeadBuf = Unpooled.buffer(12);

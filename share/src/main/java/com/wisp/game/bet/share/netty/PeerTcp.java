@@ -37,7 +37,7 @@ public abstract class PeerTcp {
     private int m_id;
     private ChannelId channelId;
 
-    private Queue<MsgBuf> receive_queue = new ConcurrentLinkedQueue<>();
+    protected Queue<MsgBuf> receive_queue = new ConcurrentLinkedQueue<>();
 
     private Queue<MsgBuf> send_queue = new ConcurrentLinkedQueue<>();
 
@@ -103,12 +103,21 @@ public abstract class PeerTcp {
             }
             else
             {
-                RequestMessageRegister.ProtocolStruct protocolStruct = RequestMessageRegister.Instance.getProtocolStruct(msgBuf.getPacket_id());
-                if( protocolStruct == null || protocolStruct.getHandlerInstance() == null ||
-                        !protocolStruct.getHandlerInstance().packet_process(this,msgBuf.getMsg()) )
+                try
                 {
-                    return msgBuf.getPacket_id();
+                    RequestMessageRegister.ProtocolStruct protocolStruct = RequestMessageRegister.Instance.getProtocolStruct(msgBuf.getPacket_id());
+                    if( protocolStruct == null || protocolStruct.getHandlerInstance() == null ||
+                            !protocolStruct.getHandlerInstance().packet_process(this,msgBuf.getMsg()) )
+                    {
+                        return msgBuf.getPacket_id();
+                    }
                 }
+                catch (Exception exception)
+                {
+                    logger.info(exception.getStackTrace().toString());
+                    logger.info(msgBuf.getMsg().toString());
+                }
+
             }
 
             long pre_tm_ms = cur_tm_ms;

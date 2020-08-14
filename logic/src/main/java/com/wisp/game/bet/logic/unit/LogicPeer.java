@@ -25,6 +25,17 @@ public class LogicPeer extends PeerTcp {
         }
     }
 
+    @Override
+    public int packet_service(int process_count) {
+
+        if( this.receive_queue.size() >  0)
+        {
+            System.out.printf("the receive_queue go this..");
+        }
+
+        return super.packet_service(process_count);
+    }
+
     public int send_msg_to_client(int sessionId, Message msg)
     {
         int packetId = ProtocolClassUtils.getProtocolByClass(msg.getClass());
