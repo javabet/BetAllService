@@ -1,4 +1,4 @@
-package com.wisp.game.bet.world.proc.worldPacket;
+package com.wisp.game.bet.world.proc.world;
 
 import com.wisp.game.bet.world.unit.ServersManager;
 import com.wisp.game.bet.world.unit.WorldPeer;

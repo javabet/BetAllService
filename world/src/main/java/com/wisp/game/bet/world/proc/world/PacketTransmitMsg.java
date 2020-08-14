@@ -1,4 +1,4 @@
-package com.wisp.game.bet.world.proc.worldPacket;
+package com.wisp.game.bet.world.proc.world;
 
 import com.google.protobuf.Message;
 import com.wisp.game.bet.world.PlayerSys.GamePlayer;
