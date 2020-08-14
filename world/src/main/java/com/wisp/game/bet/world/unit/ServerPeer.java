@@ -19,7 +19,9 @@ public class ServerPeer extends PeerTcp {
 
     private double m_checktime;
 
-    public ServerPeer() {
+    public ServerPeer(int peerId,int remoteType) {
+        m_id = peerId;
+        remoto_type = remoteType;
         clientTcpPeer = new ClientTcpPeer(new WorldClientChannelHandler(this));
     }
 
@@ -71,7 +73,8 @@ public class ServerPeer extends PeerTcp {
 
     public void reconnect()
     {
-
+        set_state(e_peer_state.e_ps_connecting);
+        clientTcpPeer.reconnect();;
     }
 
     public void regedit_to_monitor()

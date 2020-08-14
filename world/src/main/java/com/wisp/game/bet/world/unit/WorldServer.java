@@ -91,8 +91,7 @@ public class WorldServer extends ServerBase {
 
     public ServerPeer create_peer(int remote_type)
     {
-        ServerPeer serverPeer = new ServerPeer();
-        serverPeer.set_remote_type( remote_type );
+        ServerPeer serverPeer = new ServerPeer(generate_id(),remote_type);
         return serverPeer;
     }
 

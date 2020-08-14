@@ -17,12 +17,10 @@ public class GameEngineMgr implements InitializingBean {
     public static GameEngineMgr Instance;
     private double m_elapsed = 0;
     private Map<Integer,GameInfo> m_games;
-    private Map<Integer,Map<Integer, AgentRooms>> m_agent_rooms;
 
     public GameEngineMgr() {
         Instance = this;
         m_games = new HashMap<>();
-        m_agent_rooms = new HashMap<>();
     }
 
     public void afterPropertiesSet() throws Exception

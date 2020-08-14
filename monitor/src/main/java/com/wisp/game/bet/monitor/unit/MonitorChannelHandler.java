@@ -34,9 +34,7 @@ public class MonitorChannelHandler extends SimpleChannelInboundHandler<MsgBuf> {
         int peerid = MonitorServer.Instance.generate_id();
         ctx.attr( ATTR_PEERID ).set(peerid);
 
-        MonitorPeer monitorPeer = new MonitorPeer();
-        monitorPeer.init_peer(ctx,false,false);
-        monitorPeer.set_id(peerid);
+        MonitorPeer monitorPeer = new MonitorPeer(ctx,peerid);
         ServerManager.Instance.add_obj(peerid,monitorPeer);
     }
 

@@ -3,6 +3,7 @@ package com.wisp.game.bet.logic.unit;
 import com.google.protobuf.Message;
 import com.wisp.game.bet.share.netty.PeerTcp;
 import com.wisp.game.bet.share.utils.ProtocolClassUtils;
+import io.netty.channel.ChannelHandlerContext;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
 
@@ -10,6 +11,12 @@ import java.util.List;
 
 
 public class LogicPeer extends PeerTcp {
+
+    public LogicPeer(ChannelHandlerContext channelHandlerContext,int peerId) {
+        initChannelHandlerContext(channelHandlerContext);
+        m_id = peerId;
+    }
+
     @Override
     public int get_type() {
         return ServerBase.e_server_type.e_st_logic_VALUE;

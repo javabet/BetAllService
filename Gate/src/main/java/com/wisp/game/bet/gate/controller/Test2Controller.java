@@ -75,7 +75,6 @@ public class Test2Controller {
 
         map.put("success","ok");
         map.put("peerId:",gatePeer.get_id());
-        map.put("channellId",gatePeer.getChannelId().asLongText());
         return  map;
     }
 

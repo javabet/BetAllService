@@ -41,9 +41,7 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         int peerid = GateServer.Instance.generate_id();
         ctx.attr( ATTR_PEERID ).set(peerid);
 
-        GatePeer gatePeer = new GatePeer();
-        gatePeer.init_peer(ctx,false,true);
-        gatePeer.set_id(peerid);
+        GatePeer gatePeer = new GatePeer(ctx,peerid);
         gatePeer.set_net_param();
         gatePeer.set_route_handler(ClientManager.Instance);
         gatePeer.set_state(e_peer_state.e_ps_connected);

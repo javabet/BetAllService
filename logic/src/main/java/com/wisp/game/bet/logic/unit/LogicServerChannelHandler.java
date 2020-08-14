@@ -28,9 +28,7 @@ public class LogicServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
         int peerid = LogicServer.Instance.generate_id();
         ctx.attr( ATTR_PEERID ).set(peerid);
 
-        LogicPeer logicPeer = new LogicPeer();
-        logicPeer.init_peer(ctx,false,false);
-        logicPeer.set_id(peerid);
+        LogicPeer logicPeer = new LogicPeer(ctx,peerid);
         ServersManager.Instance.add_obj(peerid,logicPeer);
     }
 

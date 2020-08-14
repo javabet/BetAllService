@@ -29,8 +29,7 @@ public class WorldClientChannelHandler extends SimpleChannelInboundHandler<MsgBu
         super.channelActive(ctx);
 
         serverPeer.set_state(e_peer_state.e_ps_connected);
-        serverPeer.init_peer(ctx,false,false);
-        serverPeer.set_id(WorldServer.Instance.generate_id());
+        serverPeer.initChannelHandlerContext(ctx);
         if( serverPeer.get_remote_type() == ServerBase.e_server_type.e_st_monitor_VALUE )
         {
             serverPeer.regedit_to_monitor();

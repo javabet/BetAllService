@@ -29,7 +29,7 @@ public class GateClientChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         super.channelActive(ctx);
 
         serverPeer.set_state(e_peer_state.e_ps_connected);
-        serverPeer.init_peer(ctx,false,false);
+        serverPeer.initChannelHandlerContext(ctx);
         //serverPeer.set_id(GateServer.Instance.generate_id());
         if( serverPeer.get_remote_type() == ServerBase.e_server_type.e_st_monitor_VALUE )
         {

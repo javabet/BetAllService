@@ -28,9 +28,7 @@ public class WorldServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
         int peerid = WorldServer.Instance.generate_id();
         ctx.attr( ATTR_PEERID ).set(peerid);
 
-        WorldPeer worldPeer = new WorldPeer();
-        worldPeer.init_peer(ctx,false,false);
-        worldPeer.set_id(peerid);
+        WorldPeer worldPeer = new WorldPeer(ctx,peerid);
         ServersManager.Instance.add_obj(peerid,worldPeer);
     }
 

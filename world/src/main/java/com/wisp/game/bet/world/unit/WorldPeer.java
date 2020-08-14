@@ -4,6 +4,7 @@ package com.wisp.game.bet.world.unit;
 import com.google.protobuf.Message;
 import com.wisp.game.bet.share.netty.PeerTcp;
 import com.wisp.game.bet.share.utils.ProtocolClassUtils;
+import io.netty.channel.ChannelHandlerContext;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
 
@@ -11,6 +12,11 @@ import java.util.List;
 
 //World作为Netty服务器时，外部连接此时
 public class WorldPeer extends PeerTcp {
+
+    public WorldPeer(ChannelHandlerContext channelHandlerContext,int peerId) {
+        initChannelHandlerContext(channelHandlerContext);
+        m_id = peerId;
+    }
 
     private int gameid = -1;
 

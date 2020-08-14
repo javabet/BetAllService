@@ -108,14 +108,14 @@ public class ServerManager extends EnableObjectManager<Integer,MonitorPeer> {
 
     public void broadcast_msg(Message message)
     {
-        this.broadcast_msg(message,null);
+        this.broadcast_msg(message,-1);
     }
 
-    public void broadcast_msg(Message message, ChannelId except_id)
+    public void broadcast_msg(Message message, int except_id)
     {
         for( MonitorPeer monitorPeer : obj_map.values() )
         {
-            if( monitorPeer.getChannelId() == except_id )
+            if( monitorPeer.get_id() == except_id )
             {
                 continue;
             }

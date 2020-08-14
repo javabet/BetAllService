@@ -16,7 +16,10 @@ public class ServerPeer extends PeerTcp {
     private double m_checktime = 0;
     private ClientTcpPeer clientTcpPeer;
 
-    public ServerPeer() {
+    public ServerPeer(int peerid,int remoteType) {
+        m_id = peerid;
+        this.remoto_type = remoteType;
+
         clientTcpPeer = new ClientTcpPeer(new LogicClientChannelHandler(this));
     }
 
@@ -30,7 +33,7 @@ public class ServerPeer extends PeerTcp {
         int packetId = packet_service(-1);
         if( packetId != 0 )
         {
-            logger.error("monitor_peer packet_service error id:" + get_id() + " packetId:" + packetId + " remote_id:"+ get_remote_id() + " remote_type:" + get_remote_type());
+            logger.error("serverperr packet_service error id:" + get_id() + " packetId:" + packetId + " remote_id:"+ get_remote_id() + " remote_type:" + get_remote_type());
         }
 
         check_state(elapsed);
@@ -38,6 +41,7 @@ public class ServerPeer extends PeerTcp {
 
     private void check_state(double elapsed)
     {
+        m_checktime += elapsed;
         if( m_checktime < CHECK_TIME  )
         {
             return;
@@ -72,7 +76,8 @@ public class ServerPeer extends PeerTcp {
 
     public void reconnect()
     {
-
+        set_state(e_peer_state.e_ps_connecting);
+        clientTcpPeer.reconnect();
     }
 
     public void regedit_to_monitor()

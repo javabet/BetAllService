@@ -44,7 +44,7 @@ public class PacketServerRegister  extends DefaultRequestMessage<ServerProtocol.
         {
             ServerProtocol.packet_other_server_connect.Builder broadMsg = ServerProtocol.packet_other_server_connect.newBuilder();
             broadMsg.setSinfo(server_info.clone());
-            ServerManager.Instance.broadcast_msg(broadMsg.build(),peer.getChannelId());
+            ServerManager.Instance.broadcast_msg(broadMsg.build(),peer.get_id());
         }
         else
         {

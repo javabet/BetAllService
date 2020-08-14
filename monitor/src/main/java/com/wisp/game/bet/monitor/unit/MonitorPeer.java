@@ -3,6 +3,7 @@ package com.wisp.game.bet.monitor.unit;
 import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.share.common.EnableProcessinfo;
 import com.wisp.game.bet.share.netty.PeerTcp;
+import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import server_protocols.ServerBase;
@@ -15,7 +16,9 @@ public class MonitorPeer extends PeerTcp {
 
     private double m_check_time;
     private ServerManager serverManager;
-    public MonitorPeer() {
+    public MonitorPeer(ChannelHandlerContext channelHandlerContext,int peerId) {
+        initChannelHandlerContext(channelHandlerContext);
+        this.m_id = peerId;
         reset_time();
     }
 

@@ -16,8 +16,11 @@ public final class ServerPeer extends PeerTcp {
     private boolean m_regedit;
     private ClientTcpPeer clientTcpPeer;
 
-    public ServerPeer() {
+    public ServerPeer(int peerId,int remoteType) {
         super();
+
+        m_id = peerId;
+        remoto_type = remoteType;
 
         clientTcpPeer = new ClientTcpPeer(new GateClientChannelHandler(this));
         this.m_state = e_peer_state.e_ps_disconnected;
@@ -51,7 +54,7 @@ public final class ServerPeer extends PeerTcp {
         e_peer_state state = get_state();
         if(  state != e_peer_state.e_ps_connected && state != e_peer_state.e_ps_connecting )
         {
-            logger.info("server_reconnect id:" + getChannelId() + "  remote_id:" + get_remote_id() + "  remote_type:" + get_remote_type() );
+            logger.info("server_reconnect id:" + get_id() + "  remote_id:" + get_remote_id() + "  remote_type:" + get_remote_type() );
             clientTcpPeer.reconnect();
         }
         else if(!m_regedit && get_remote_type() == ServerBase.e_server_type.e_st_logic.getNumber() )

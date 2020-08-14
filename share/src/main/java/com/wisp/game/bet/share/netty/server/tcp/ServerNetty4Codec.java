@@ -103,7 +103,7 @@ public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
             msgBuf.setMsg(message);
         }
 
-        if( packetId != 4 && packetId != 9 )
+        if( packetId != 4 && packetId != 9 && packetId != 5 )
         {
             logger.info(" recevie protocolId:" + packetId);
         }

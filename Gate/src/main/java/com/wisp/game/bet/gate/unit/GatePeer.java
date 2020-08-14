@@ -6,6 +6,7 @@ import com.wisp.game.bet.db.mongo.account.doc.ServerInfoDoc;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.share.netty.PeerTcp;
 import com.wisp.game.bet.share.netty.infos.e_peer_state;
+import io.netty.channel.ChannelHandlerContext;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -29,7 +30,9 @@ public class GatePeer extends PeerTcp {
     private String m_account = "";
 
 
-    public GatePeer() {
+    public GatePeer(ChannelHandlerContext channelHandlerContext,int peerId) {
+        initChannelHandlerContext(channelHandlerContext);
+        m_id = peerId;
         set_check_time();
     }
 
@@ -76,7 +79,7 @@ public class GatePeer extends PeerTcp {
             //addProcessMsg(builder.build());
         } else {
             int t = 3;
-            if (m_is_websocket) {
+            if (true) {
                 t = 0;
             }
 

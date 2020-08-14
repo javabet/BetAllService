@@ -31,8 +31,7 @@ public class LogicClientChannelHandler extends SimpleChannelInboundHandler<MsgBu
         super.channelActive(ctx);
 
         serverPeer.set_state(e_peer_state.e_ps_connected);
-        serverPeer.init_peer(ctx,false,false);
-        serverPeer.set_id(LogicServer.Instance.generate_id());
+        serverPeer.initChannelHandlerContext(ctx);
 
         //相当于向
         if( serverPeer.get_remote_type() == ServerBase.e_server_type.e_st_monitor_VALUE )
