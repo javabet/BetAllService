@@ -95,7 +95,7 @@ public class WorldServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
 
         if( worldPeer.get_remote_type() == ServerBase.e_server_type.e_st_logic_VALUE)
         {
-            GameEngineMgr.Instance.remove_game_info(worldPeer.get_gameid(), worldPeer.get_remote_id());
+            GameEngineMgr.Instance.remove_game_info(worldPeer.getGameid(), worldPeer.get_remote_id());
             //要将所有在此游戏的玩家离开
             GamePlayerMgr.Instance.leave_game(peerId);
         }

@@ -9,12 +9,15 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageCodec;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class ServerWebSocketNetty4Codec extends ByteToMessageCodec<MsgBuf> {
 
     private RequestMessageRegister messageRegister;
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, MsgBuf msgBuf, ByteBuf byteBuf) throws Exception {
@@ -81,7 +84,11 @@ public class ServerWebSocketNetty4Codec extends ByteToMessageCodec<MsgBuf> {
             msgBuf.setMsg(message);
         }
 
-        System.out.printf("protocolId:" + packetId + "\n");
+        if( packetId != 301 )
+        {
+            logger.info("recevie protocolId:" + packetId);
+        }
+
 
         list.add(msgBuf);
     }

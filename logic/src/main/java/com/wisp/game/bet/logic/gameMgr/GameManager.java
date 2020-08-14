@@ -63,7 +63,7 @@ public class GameManager {
 
         robotmgr.set_gameid(gameId);
         //有重复，不需要重复发送信息
-        //game_regedit();
+        game_regedit();
     }
 
     public int get_gameid()

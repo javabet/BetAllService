@@ -12,7 +12,7 @@ import java.util.List;
 //World作为Netty服务器时，外部连接此时
 public class WorldPeer extends PeerTcp {
 
-    private int m_gameid = -1;
+    private int gameid = -1;
 
     public void heartbeat( double elapsed )
     {
@@ -79,8 +79,11 @@ public class WorldPeer extends PeerTcp {
         return ServerBase.e_server_type.e_st_world_VALUE;
     }
 
-    public int get_gameid()
-    {
-        return m_gameid;
+    public int getGameid() {
+        return gameid;
+    }
+
+    public void setGameid(int gameid) {
+        this.gameid = gameid;
     }
 }

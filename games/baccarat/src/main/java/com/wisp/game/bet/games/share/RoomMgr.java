@@ -408,31 +408,106 @@ public class RoomMgr{
     {
         int gameId = GameManager.Instance.get_gameid();
         Map<Integer,RMConfigData> map = m_cfg.GetMapData();// ->GetMapData();
-        Map<Integer, GameRoomMgrDoc > roomobjs = new HashMap<>();
+
         for (GameRoomMgrDoc obj : list)
         {
-            roomobjs.put(obj.getRoomId(),obj);
+            if(!map.containsKey(obj.getRoomId()))
+            {
+                map.put(obj.getRoomId(),new RMConfigData());
+            }
+
+            RMConfigData rmConfigData  = map.get(obj.getRoomId());
+            rmConfigData.setmRoomID(obj.getRoomId());
+            rmConfigData.setmRoomName(obj.getRoomName());
+            rmConfigData.setmRoomIDTxt(obj.getRoomIDTxt());
+            rmConfigData.setmBankerCondition((int)obj.getBankerCondition());
+            rmConfigData.setmFirstBankerCost((int)obj.getFirstBankerCost());
+            rmConfigData.setmAddBankerCost((int)obj.getAddBankerCost());
+            rmConfigData.setmAutoLeaveBanker((int)obj.getAutoLeaveBanker());
+            rmConfigData.setmPlayerMaxCount((int)obj.getPlayerMaxCount());// = roomObj->mPlayerMaxCount->get_value();
+            rmConfigData.setmGoldCondition((int)obj.getGoldCondition());// = roomObj->mGoldCondition->get_value();
+            rmConfigData.setmBetCondition((int)obj.getBetCondition());// = roomObj->mBetCondition->get_value();
+            rmConfigData.setmBaseGold((int)obj.getBaseGold());// = roomObj->mBaseGold->get_value();
+            rmConfigData.setmIsOpen(obj.isOpen());// = roomObj->IsOpen->get_value();
+            rmConfigData.setmMaxAnte(obj.getMaxAnte());// = roomObj->mMaxAnte->get_value();
+            rmConfigData.setmRoomType(obj.getRoomType());// = roomObj->mRoomType->get_value();
+            rmConfigData.setmFreeGold((int)obj.getFreeGold());// = roomObj->mFreeGold->get_value();
+            rmConfigData.setmLeopardLimit(obj.getLeopardLimit());// = roomObj->mLeopardLimit->get_value();
+            rmConfigData.setmEveryLeopardLimit(obj.getEveryLeopardLimit());// = roomObj->mEveryLeopardLimit->get_value();
+            rmConfigData.setmProfitRateCheckIntervaltime(obj.getProfitRateCheckIntervaltime());// = roomObj->mProfitRateCheckIntervaltime->get_value();
+            rmConfigData.setmFreeItem(obj.isFreeItem());// = roomObj->mFreeItem->get_value();
+            rmConfigData.setmCheckOpenRate(obj.isCheckOpenRate());// = roomObj->mCheckOpenRate->get_value();
+            rmConfigData.setmCanGetExp(obj.isCanGetExp());// = roomObj->mCanGetExp->get_value();
+            rmConfigData.setmMissileCost(obj.getMissileCost());// = roomObj->mMissileCost->get_value();
+            rmConfigData.setmBuyPowerCost(obj.getBuyPowerCost());// = roomObj->mBuyPowerCost->get_value();
+            rmConfigData.setmPowerParam(obj.getPowerParam());// = roomObj->mPowerParam->get_value();
+            rmConfigData.setmLevelCondition(obj.getLevelCondition());// = roomObj->mLevelCondition->get_value();
+            rmConfigData.setmBotMaxGold(obj.getBotMaxGold());// = roomObj->mBotMaxGold->get_value();
+            rmConfigData.setmBotMinGold(obj.getBotMinGold());// = roomObj->mBotMinGold->get_value();
+            rmConfigData.setmForceLeaveGold(obj.getForceLeaveGold());// = roomObj->mForceLeaveGold->get_value();
+            rmConfigData.setmBigBlind(obj.getBigBlind());// = roomObj->mBigBlind->get_value();
+            rmConfigData.setmSmallBlind(obj.getSmallBlind());// = roomObj->mSmallBlind->get_value();
+            rmConfigData.setmCarryRestriction(obj.getCarryRestriction());// = roomObj->mCarryRestriction->get_value();
+            rmConfigData.setmRoomNameType(obj.getRoomNameType());// = roomObj->mRoomNameType->get_value();
+            rmConfigData.setmTableCount(obj.getTableCount());// = roomObj->mTableCount->get_value();
+            rmConfigData.setmHuaGold(obj.getHuaGold());// = roomObj->mHuaGold->get_value();
+            rmConfigData.setmGameModel(obj.getGameModel());// = roomObj->mGameModel->get_string();
+
+            rmConfigData.setmBetNames(new ArrayList<>());
+            for (int i = 0; i < obj.getBetNames().size(); i++)
+            {
+                rmConfigData.getmBetNames().add(obj.getBetNames().get(i));
+            }
+
+            rmConfigData.setmWeightList(new ArrayList<>());
+            for (int i = 0; i < obj.getWeightList().size(); i++)
+            {
+                rmConfigData.getmWeightList().add(obj.getWeightList().get(i));
+            }
+
+            rmConfigData.setmBetRange(new ArrayList<>());//
+            for (int i = 0; i < obj.getBetRange().size(); i++)
+            {
+                rmConfigData.getmBetRange().add(obj.getBetRange().get(i));
+            }
+
+            rmConfigData.setmBetLimit(new ArrayList<>());//
+            for (int i = 0; i < obj.getBetLimit().size(); i++)
+            {
+                rmConfigData.getmBetLimit().add(obj.getBetLimit().get(i));
+            }
+
+            rmConfigData.setmCustomList(new ArrayList<>());//.getmCustomList().clear();
+            for (int i = 0; i < obj.getCustomList().size(); i++)
+            {
+                rmConfigData.getmCustomList().add(obj.getCustomList().get(i));
+            }
+
+            rmConfigData.setmPlatList(new ArrayList<>());//.getmPlatList().clear();
+            for (int i = 0; i < obj.getPlatList().size(); i++)
+            {
+                rmConfigData.getmPlatList().add(obj.getPlatList().get(i));
+            }
+
+            rmConfigData.setmRatePoolList(new ArrayList<>());
+            for (int i = 0; i < obj.getmRatePoolList().size(); i++)
+            {
+                rmConfigData.getmRatePoolList().add(obj.getmRatePoolList().get(i));
+            }
         }
 
         for (GameRoomMgrDoc obj : list)
         {
             int roomId = obj.getRoomId();
             if (!check_config(obj.getAgentId(),gameId, roomId, m_cfg,obj.getTemplateId())) {
-                //SLOG_CRITICAL << "open_room  check_room_config AgentId["<< roomObj->AgentId->get_value()<<"] game[" << gameId << "] \
-                //roomid[" << roomId << "] err!";
-                //roomObj->IsOpen->set_value(false);
-                //roomObj->store_game_object();
                 obj.setOpen(false);
                 obj.store_game_object( DbGame.Instance.getMongoTemplate(),true);
                 continue;
             }
-            //roomObj->Status->set_value(1);
-            //roomObj->store_game_object();
 
             obj.setStatus(1);
             obj.store_game_object( DbGame.Instance.getMongoTemplate(),true);
-
-            GameRoomMgrDoc doc = m_rooms.get( obj.getRoomId());
+;
             m_rooms.put( roomId,obj );
         }
     }

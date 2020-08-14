@@ -45,7 +45,7 @@ public class GatePeer extends PeerTcp {
 
         if (packet_id != 0) {
             logger.error("gate_peer packet_service error id:" + get_id() + " packetid:" + packet_id);
-            //discannect();
+            discannect();
             return;
         }
 

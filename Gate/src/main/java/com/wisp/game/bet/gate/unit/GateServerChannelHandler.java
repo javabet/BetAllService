@@ -76,7 +76,7 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
 
     //当处理过程中在 ChannelPipeline 中有错误产生时被调用
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        if( cause.getMessage().indexOf("java.io.IOException:") == -1 )
+        if( cause.getMessage().indexOf("远程主机强迫关闭了一个现有的连接") == -1 )
         {
             super.exceptionCaught(ctx,cause);
         }

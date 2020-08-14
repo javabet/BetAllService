@@ -11,11 +11,14 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageCodec;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     private PacketHeadC packetHead_r;
     private PacketHeadS packetHead_s;
@@ -102,7 +105,7 @@ public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
 
         if( packetId != 4 && packetId != 9 )
         {
-            System.out.printf(" recevie protocolId:" + packetId + "\n");
+            logger.info(" recevie protocolId:" + packetId);
         }
 
         list.add(msgBuf);

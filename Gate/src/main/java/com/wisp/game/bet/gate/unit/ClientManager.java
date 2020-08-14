@@ -153,6 +153,10 @@ public class ClientManager extends EnableObjectManager<Integer,GatePeer> impleme
         else if(  msgid > Client2WorldMsgType.e_server_msg_type.e_mst_start_c2w_VALUE && msgid < Client2WorldMsgType.e_server_msg_type.e_mst_start_w2c_VALUE )
         {
             serverPeer = BackstageManager.Instance.get_server_byid(peer.world_id);
+            if( serverPeer != null )
+            {
+                peer.IsValid = true;
+            }
         }
         else
         {

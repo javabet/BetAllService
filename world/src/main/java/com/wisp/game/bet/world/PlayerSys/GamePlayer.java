@@ -194,12 +194,6 @@ public class GamePlayer {
         return  true;
     }
 
-
-
-
-
-
-
     private void create_player(boolean isRobot, AccountTableDoc accountTableInfo)
     {
         playerInfoDoc = new PlayerInfoDoc();
@@ -256,6 +250,48 @@ public class GamePlayer {
     }
 
 
+    public MsgTypeDef.e_msg_result_def change_gold( int dif_gold,boolean needsend )
+    {
+        if( dif_gold == 0 )
+        {
+            return MsgTypeDef.e_msg_result_def.e_rmt_success;
+        }
+
+        int t = playerInfoDoc.getGold();
+        int old_value = t;
+        if( dif_gold > 0 )
+        {
+
+        }
+        else
+        {
+            t += dif_gold;
+        }
+
+        if( t < 0 )
+        {
+            t = 0;
+        }
+
+        playerInfoDoc.setGold(t);
+
+        if( needsend )
+        {
+            if( m_logicPeer == null )
+            {
+                return MsgTypeDef.e_msg_result_def.e_rmt_success;
+            }
+
+            Logic2WorldProtocol.packetw2l_change_player_property.Builder builder = Logic2WorldProtocol.packetw2l_change_player_property.newBuilder();
+            builder.setPlayerid(playerInfoDoc.getPlayerId());
+            builder.getChangeInfoBuilder().setGold(dif_gold);
+            m_logicPeer.send_msg(builder);
+
+        }
+
+        return MsgTypeDef.e_msg_result_def.e_rmt_success;
+    }
+
 
     private boolean setGameIdServerId(int gameId,int serverId,int roomId)
     {
@@ -299,7 +335,7 @@ public class GamePlayer {
         return true;
     }
 
-    private boolean on_joingame( boolean blogin )
+    public boolean on_joingame( boolean blogin )
     {
         if(blogin)
         {
@@ -343,6 +379,11 @@ public class GamePlayer {
         }
 
         m_logicPeer = ServersManager.Instance.find_server(m_logicid);
+    }
+
+    public int send_msg_to_client(Message.Builder builder)
+    {
+        return send_msg_to_client(builder.build());
     }
 
     public int send_msg_to_client(Message msg)

@@ -54,7 +54,10 @@ public class LogicClientChannelHandler extends SimpleChannelInboundHandler<MsgBu
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx, cause);
+        if( cause.getMessage().indexOf("远程主机强迫关闭了一个现有的连接") != -1 )
+        {
+            super.exceptionCaught(ctx, cause);
+        }
         serverPeer.set_state(e_peer_state.e_ps_disconnecting);
     }
 

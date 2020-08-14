@@ -10,6 +10,12 @@ import com.wisp.game.bet.world.unit.WorldPeer;
 public class Packetc2wGetGameList extends DefaultWorldRequestMessage<Client2WorldProtocol.packetc2w_get_gamelist> {
     @Override
     public boolean packet_process(WorldPeer peer, GamePlayer player, Client2WorldProtocol.packetc2w_get_gamelist msg) {
-        return false;
+
+        Client2WorldProtocol.packetw2c_get_gamelist_result.Builder builder = Client2WorldProtocol.packetw2c_get_gamelist_result.newBuilder();
+
+        logger.warn("this protocol must be override");
+
+
+        return true;
     }
 }

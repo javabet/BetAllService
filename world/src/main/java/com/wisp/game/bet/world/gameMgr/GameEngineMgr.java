@@ -69,26 +69,25 @@ public class GameEngineMgr implements InitializingBean {
         return m_games;
     }
 
-    public void update_server_info( int gameId,int serverId,int player_cnt )
+    public boolean add_game_info( int gameId,int gamever,int serverId )
     {
-        if( !m_games.containsKey(gameId) )
+        GameInfo gameInfo =  m_games.get(gameId);
+        if( gameInfo != null )
         {
-            return;
+            if( gameInfo.getServersMap().get(serverId) == null )
+            {
+                gameInfo.getServersMap().put(serverId,0);
+            }
+            return true;
         }
-
-        m_games.get(gameId).getServersMap().put(serverId,player_cnt);
+        return false;
     }
 
-    public void remove_game_info(int gameId,int serverId)
+    public GameInfo find_game_info( int serverid )
     {
-       if( !m_games.containsKey(gameId) )
-       {
-           return;
-       }
-
-       m_games.get(gameId).getServersMap().remove(serverId);
-
+        return m_games.get(serverid);
     }
+
 
     public void update_game_info(int gameId,int serverId )
     {
@@ -115,9 +114,58 @@ public class GameEngineMgr implements InitializingBean {
         return player_cnt;
     }
 
-    public GameInfo get_game_info(int gameId)
+    public void update_server_info( int gameId,int serverId,int player_cnt )
     {
-        return m_games.get(gameId);
+        if( !m_games.containsKey(gameId) )
+        {
+            return;
+        }
+
+        m_games.get(gameId).getServersMap().put(serverId,player_cnt);
+    }
+
+    public void remove_game_info(int gameId,int serverId)
+    {
+        if( !m_games.containsKey(gameId) )
+        {
+            return;
+        }
+
+        m_games.get(gameId).getServersMap().remove(serverId);
+
+    }
+
+    //查找玩家最少的那个服务器
+    public GameInfoStruct get_game_info_struct(int gameId)
+    {
+        if( !m_games.containsKey(gameId) )
+        {
+            return null;
+        }
+
+        int server_id = -1;
+        int player_cnt = Integer.MAX_VALUE;
+
+        Map<Integer,Integer> serversMap = m_games.get(gameId).getServersMap();
+
+        for(Integer key : serversMap.keySet())
+        {
+            if( serversMap.get(key) >= player_cnt )
+            {
+                continue;
+            }
+
+            player_cnt = serversMap.get(key);
+            server_id = key;
+        }
+
+        GameInfoStruct gameInfoStruct = new GameInfoStruct();
+        gameInfoStruct.gameId = gameId;
+        gameInfoStruct.serverId = server_id;
+        gameInfoStruct.gamever = m_games.get(gameId).getGameVer();
+
+
+        return gameInfoStruct;
     }
 
     public int get_game_info_player_cnt(int gameId,int gameVer )
@@ -141,6 +189,18 @@ public class GameEngineMgr implements InitializingBean {
         }
 
         return serverId;
+    }
+
+    public GameInfo get_game_info(int gameId)
+    {
+        return m_games.get(gameId);
+    }
+
+    public class GameInfoStruct
+    {
+        public  int gameId;
+        public int serverId;
+        public int gamever;
     }
 
 }

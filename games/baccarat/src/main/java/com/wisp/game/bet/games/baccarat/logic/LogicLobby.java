@@ -7,6 +7,8 @@ import com.wisp.game.bet.games.share.config.RMConfigData;
 import com.wisp.game.bet.games.share.config.RMStockConfig;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class LogicLobby {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
     private int TempTodayOutlay = 0;
     private int TempTodayIncome = 0;
 
@@ -134,6 +137,13 @@ public class LogicLobby {
                 }
 
                 RMConfigData rmConfigData =  RMConfig.Instance.GetData(gameRoomMgrDoc.getRoomId());
+
+                if( rmConfigData == null )
+                {
+                    logger.warn(" the rmConfig is not exist: " + gameRoomMgrDoc.getRoomId());
+                    continue;
+                }
+
                 LogicRoom logicRoom = new LogicRoom( rmConfigData,this );
                 m_rooms.put(gameRoomMgrDoc.getRoomId(), logicRoom );
             }

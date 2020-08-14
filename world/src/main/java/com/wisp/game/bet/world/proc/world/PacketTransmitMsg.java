@@ -21,6 +21,8 @@ public class PacketTransmitMsg extends DefaultRequestMessage<ServerProtocol.pack
         {
             Message innerMsg = RequestMessageRegister.Instance.getMessageByProtocolId(msg.getMsgpak().getMsgid(),msg.getMsgpak().getMsginfo());
 
+            logger.info(" world protocolId:" + msg.getMsgpak().getMsgid());
+
             try
             {
                 if( innerMsg != null )
