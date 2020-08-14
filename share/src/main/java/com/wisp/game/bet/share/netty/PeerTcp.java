@@ -103,21 +103,12 @@ public abstract class PeerTcp {
             }
             else
             {
-                try
+                RequestMessageRegister.ProtocolStruct protocolStruct = RequestMessageRegister.Instance.getProtocolStruct(msgBuf.getPacket_id());
+                if( protocolStruct == null || protocolStruct.getHandlerInstance() == null ||
+                        !protocolStruct.getHandlerInstance().packet_process(this,msgBuf.getMsg()) )
                 {
-                    RequestMessageRegister.ProtocolStruct protocolStruct = RequestMessageRegister.Instance.getProtocolStruct(msgBuf.getPacket_id());
-                    if( protocolStruct == null || protocolStruct.getHandlerInstance() == null ||
-                            !protocolStruct.getHandlerInstance().packet_process(this,msgBuf.getMsg()) )
-                    {
-                        return msgBuf.getPacket_id();
-                    }
+                    return msgBuf.getPacket_id();
                 }
-                catch (Exception exception)
-                {
-                    logger.info(exception.getStackTrace().toString());
-                    logger.info(msgBuf.getMsg().toString());
-                }
-
             }
 
             long pre_tm_ms = cur_tm_ms;

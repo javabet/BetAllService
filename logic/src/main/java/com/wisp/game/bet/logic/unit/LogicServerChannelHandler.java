@@ -39,11 +39,6 @@ public class LogicServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
         int peerId = channelHandlerContext.attr( ATTR_PEERID ).get();
         LogicPeer logicPeer = ServersManager.Instance.find_objr(peerId);
 
-        Message msg = msgBuf.getMsg();
-        int childProtocolId = ProtocolClassUtils.getProtocolByClass(msg.getClass());
-        System.out.printf("logicPeer childProtocolId:" + childProtocolId);
-
-
         if( logicPeer != null )
         {
             logicPeer.addProcessMsg( msgBuf );

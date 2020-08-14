@@ -1,8 +1,10 @@
 package com.wisp.game.bet.games.share.config;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RMConfigData {
+public class RMConfigData implements Serializable {
+    private static final long serialVersionUID = 8633988825916589390L;
     private int mRoomID; //房间id
 
     private String mRoomName; //房间名

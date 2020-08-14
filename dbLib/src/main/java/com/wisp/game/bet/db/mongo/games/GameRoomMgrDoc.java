@@ -531,11 +531,11 @@ public class GameRoomMgrDoc extends BaseMongoDoc {
 
         Criteria criteria = Criteria.where("Uid").is(Uid);
 
-        UpdateResult updateResult = mongoTemplate.updateFirst( Query.query(criteria), Update.fromDocument(doc),getClass());
+        UpdateResult updateResult = mongoTemplate.upsert( Query.query(criteria), Update.fromDocument(doc),getClass());
 
-        if( updateResult.getModifiedCount() < 1 )
+        if( updateResult.getModifiedCount() < 1 && updateResult.getUpsertedId() == null )
         {
-            logger.error("game_room_object::store_game_object :");
+            logger.error("game_room_object::store_game_object :" + Uid);
             return false;
         }
 

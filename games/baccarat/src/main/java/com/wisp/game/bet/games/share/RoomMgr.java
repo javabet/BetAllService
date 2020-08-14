@@ -15,6 +15,8 @@ import com.wisp.game.bet.logic.unit.LogicServer;
 import com.wisp.game.core.utils.CommonUtils;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -27,6 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class RoomMgr{
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
     public static RoomMgr Instance;
 
     private Map<Integer, GameRoomMgrDoc> m_rooms;
@@ -94,7 +97,7 @@ public class RoomMgr{
             Criteria criteria1 = Criteria.where("AgentId").is(agentid).and("ServerId").is(serverId).and("GameId").is(gameId);
             query = new Query(criteria);
             gameRoomMgrDocs = DbGame.Instance.getMongoTemplate().find(query,GameRoomMgrDoc.class);
-            if( gameRoomMgrDocs !=null && gameRoomMgrDocs.size() > 0 )
+            if( gameRoomMgrDocs == null || gameRoomMgrDocs.size() == 0  )
             {
                 create_default_room(agentid);
             }
@@ -534,6 +537,7 @@ public class RoomMgr{
 
             //create_room_log(agentid, gameId, obj->RoomId->get_value(), obj->TemplateId->get_value());
             //SLOG_CRITICAL << "create default room id:" << obj->RoomId->get_value();
+            logger.info("create default room id:",doc.getRoomId());
         }
     }
 

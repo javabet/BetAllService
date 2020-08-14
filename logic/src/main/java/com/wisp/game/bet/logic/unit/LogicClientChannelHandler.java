@@ -49,11 +49,6 @@ public class LogicClientChannelHandler extends SimpleChannelInboundHandler<MsgBu
 
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, MsgBuf message) throws Exception {
         //System.out.printf("GateClientChannelHandler:" + message.getClass().getName());
-
-        Message msg = message.getMsg();
-        int childProtocolId = ProtocolClassUtils.getProtocolByClass(msg.getClass());
-        System.out.printf("serverpeer childProtocolId:" + childProtocolId);
-
         serverPeer.addProcessMsg(message);
     }
 

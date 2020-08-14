@@ -117,6 +117,8 @@ public class LogicRoom {
         m_roomAll_betList = new ArrayList<>();
         m_roomAll_winList = new ArrayList<>();
 
+        m_room_odds_list = new LinkedList<>();
+
 
         m_cfg = cfg;
         m_stock_cfg = RMStockConfig.Instance.GetData(cfg.getmRoomID());
