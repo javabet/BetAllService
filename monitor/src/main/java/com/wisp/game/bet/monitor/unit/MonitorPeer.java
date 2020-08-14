@@ -17,8 +17,8 @@ public class MonitorPeer extends PeerTcp {
     private double m_check_time;
     private ServerManager serverManager;
     public MonitorPeer(ChannelHandlerContext channelHandlerContext,int peerId) {
-        initChannelHandlerContext(channelHandlerContext);
-        this.m_id = peerId;
+        setChannelHandlerContext(channelHandlerContext);
+        this.m_peerId = peerId;
         reset_time();
     }
 

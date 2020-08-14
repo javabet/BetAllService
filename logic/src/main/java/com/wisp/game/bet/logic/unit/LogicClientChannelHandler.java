@@ -1,10 +1,8 @@
 package com.wisp.game.bet.logic.unit;
 
 
-import com.google.protobuf.Message;
 import com.wisp.game.bet.share.netty.infos.MsgBuf;
 import com.wisp.game.bet.share.netty.infos.e_peer_state;
-import com.wisp.game.bet.share.utils.ProtocolClassUtils;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -31,7 +29,7 @@ public class LogicClientChannelHandler extends SimpleChannelInboundHandler<MsgBu
         super.channelActive(ctx);
 
         serverPeer.set_state(e_peer_state.e_ps_connected);
-        serverPeer.initChannelHandlerContext(ctx);
+        serverPeer.setChannelHandlerContext(ctx);
 
         //相当于向
         if( serverPeer.get_remote_type() == ServerBase.e_server_type.e_st_monitor_VALUE )

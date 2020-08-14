@@ -14,8 +14,8 @@ import java.util.List;
 public class WorldPeer extends PeerTcp {
 
     public WorldPeer(ChannelHandlerContext channelHandlerContext,int peerId) {
-        initChannelHandlerContext(channelHandlerContext);
-        m_id = peerId;
+        setChannelHandlerContext(channelHandlerContext);
+        m_peerId = peerId;
     }
 
     private int gameid = -1;

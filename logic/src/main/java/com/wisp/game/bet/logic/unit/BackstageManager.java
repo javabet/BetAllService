@@ -55,7 +55,6 @@ public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> {
             {
                 ServerPeer serverPeer = LogicServer.Instance.create_peer(server_info.getServerType().getNumber());
                 serverPeer.set_remote_id( server_info.getServerPort() );
-                serverPeer.set_remote_type( server_info.getServerType().getNumber() );
                 serverPeer.connect(server_info.getServerIp(),server_info.getServerPort());
                 regedit_server(serverPeer);
             }

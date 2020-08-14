@@ -17,8 +17,8 @@ public class ServerPeer extends PeerTcp {
     private ClientTcpPeer clientTcpPeer;
 
     public ServerPeer(int peerid,int remoteType) {
-        m_id = peerid;
-        this.remoto_type = remoteType;
+        m_peerId = peerid;
+        this.remote_type = remoteType;
 
         clientTcpPeer = new ClientTcpPeer(new LogicClientChannelHandler(this));
     }

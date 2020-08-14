@@ -19,8 +19,8 @@ public final class ServerPeer extends PeerTcp {
     public ServerPeer(int peerId,int remoteType) {
         super();
 
-        m_id = peerId;
-        remoto_type = remoteType;
+        m_peerId = peerId;
+        remote_type = remoteType;
 
         clientTcpPeer = new ClientTcpPeer(new GateClientChannelHandler(this));
         this.m_state = e_peer_state.e_ps_disconnected;

@@ -13,8 +13,8 @@ import java.util.List;
 public class LogicPeer extends PeerTcp {
 
     public LogicPeer(ChannelHandlerContext channelHandlerContext,int peerId) {
-        initChannelHandlerContext(channelHandlerContext);
-        m_id = peerId;
+        setChannelHandlerContext(channelHandlerContext);
+        m_peerId = peerId;
     }
 
     @Override

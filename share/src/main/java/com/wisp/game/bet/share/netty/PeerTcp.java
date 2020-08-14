@@ -6,7 +6,6 @@ import com.wisp.game.bet.share.netty.infos.MsgBuf;
 import com.wisp.game.bet.share.netty.infos.e_peer_state;
 import com.wisp.game.bet.sshare.IRouterHandler;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,17 +17,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public abstract class PeerTcp {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    protected int remoto_id;
-    protected int remoto_type;
+    protected int remote_id;
+    protected int remote_type;
     protected boolean m_need_route;
     protected boolean m_bcheck_time;
-    protected boolean m_bread;
     protected IRouterHandler m_router_handler;
-
     protected e_peer_state m_state;
-
     protected ChannelHandlerContext channelHandlerContext;
-    protected int m_id = 0;
+    protected int m_peerId = 0;
 
 
     protected Queue<MsgBuf> receive_queue = new ConcurrentLinkedQueue<>();
@@ -38,7 +34,7 @@ public abstract class PeerTcp {
 
     }
 
-    public void initChannelHandlerContext(ChannelHandlerContext channelHandlerContext)
+    public void setChannelHandlerContext(ChannelHandlerContext channelHandlerContext)
     {
         this.channelHandlerContext = channelHandlerContext;
     }
@@ -238,22 +234,22 @@ public abstract class PeerTcp {
 
     public void set_remote_type(int _type)
     {
-        remoto_type = _type;
+        remote_type = _type;
     }
 
     public int get_remote_type()
     {
-        return remoto_type;
+        return remote_type;
     }
 
     public int get_remote_id()
     {
-        return remoto_id;
+        return remote_id;
     }
 
     public void set_remote_id(int _id)
     {
-        remoto_id = _id;
+        remote_id = _id;
     }
 
     public e_peer_state get_state()
@@ -267,7 +263,7 @@ public abstract class PeerTcp {
 
     public int get_id()
     {
-        return m_id;
+        return m_peerId;
     }
 
     public abstract int get_type();

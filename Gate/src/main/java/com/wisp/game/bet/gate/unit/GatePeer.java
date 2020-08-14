@@ -31,8 +31,8 @@ public class GatePeer extends PeerTcp {
 
 
     public GatePeer(ChannelHandlerContext channelHandlerContext,int peerId) {
-        initChannelHandlerContext(channelHandlerContext);
-        m_id = peerId;
+        setChannelHandlerContext(channelHandlerContext);
+        m_peerId = peerId;
         set_check_time();
     }
 

@@ -20,8 +20,8 @@ public class ServerPeer extends PeerTcp {
     private double m_checktime;
 
     public ServerPeer(int peerId,int remoteType) {
-        m_id = peerId;
-        remoto_type = remoteType;
+        m_peerId = peerId;
+        remote_type = remoteType;
         clientTcpPeer = new ClientTcpPeer(new WorldClientChannelHandler(this));
     }
 
