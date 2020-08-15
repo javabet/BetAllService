@@ -10,8 +10,7 @@ import server_protocols.ServerProtocol;
 public class PacketServerConnectResult extends DefaultRequestMessage<ServerProtocol.packet_server_connect_result, ServerPeer> {
     @Override
     public boolean packet_process(ServerPeer peer, ServerProtocol.packet_server_connect_result msg) {
-        peer.set_remote_id(peer.get_remote_port());
-
+        //peer.set_remote_id(peer.get_remote_port());
         ServerProtocol.packet_server_connect_result.newBuilder();
 
         return true;

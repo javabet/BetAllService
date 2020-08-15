@@ -30,6 +30,8 @@ public class WorldServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
 
         WorldPeer worldPeer = new WorldPeer(ctx,peerid);
         ServersManager.Instance.add_obj(peerid,worldPeer);
+
+        logger.info("channelActive...." + peerid);
     }
 
     @Override

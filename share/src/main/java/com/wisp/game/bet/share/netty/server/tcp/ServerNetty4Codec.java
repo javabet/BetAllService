@@ -7,6 +7,7 @@ import com.wisp.game.bet.share.netty.infos.MsgBuf;
 import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.share.common.EnableProcessinfo;
 import com.wisp.game.bet.share.netty.RequestMessageRegister;
+import com.wisp.game.bet.share.utils.ProtocolClassUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -17,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
+
+    private static int HEAD_LENGTH = 8;
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -47,17 +50,23 @@ public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
         byteBuf.writeIntLE(time);
         byteBuf.writeShortLE( msgBuf.getPacket_id() );
         byteBuf.writeShortLE(bytes.length);
-        byteBuf.writeByte(33);
-        byteBuf.writeByte(36);
-        byteBuf.writeByte(37);
-        byteBuf.writeByte(63);
+        //byteBuf.writeByte(33);
+        //byteBuf.writeByte(36);
+        //byteBuf.writeByte(37);
+        //byteBuf.writeByte(63);
         byteBuf.writeBytes(bytes);
+
+        if(msgBuf.getPacket_id() == 6 && msgBuf.getMsg() != null )
+        {
+            logger.info(" send trans packet,the packetId: " + ProtocolClassUtils.getProtocolByClass(msgBuf.getMsg().getClass()));
+        }
+
 
     }
 
     protected  void decode(ChannelHandlerContext var1, ByteBuf buf, List<Object> list) throws Exception
     {
-        if( buf.readableBytes() < 12 )
+        if( buf.readableBytes() < HEAD_LENGTH )
         {
             return;
         }
@@ -67,16 +76,16 @@ public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
             messageRegister = SpringContextHolder.getBean(RequestMessageRegister.class);
         }
 
-        ByteBuf packHeadBuf = Unpooled.buffer(12);
+        ByteBuf packHeadBuf = Unpooled.buffer(HEAD_LENGTH);
         buf.readBytes(packHeadBuf);
 
         int time =  packHeadBuf.readIntLE();
         int packetId = packHeadBuf.readShortLE();
         int packetSize = packHeadBuf.readShortLE();
-        byte checkMark0 = packHeadBuf.readByte();
-        byte checkMark1 = packHeadBuf.readByte();
-        byte checkMark2 = packHeadBuf.readByte();
-        byte checkMark3 = packHeadBuf.readByte();
+        //byte checkMark0 = packHeadBuf.readByte();
+        //byte checkMark1 = packHeadBuf.readByte();
+        //byte checkMark2 = packHeadBuf.readByte();
+        //byte checkMark3 = packHeadBuf.readByte();
 
         if( buf.readableBytes() < packetSize)
         {

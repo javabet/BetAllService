@@ -21,6 +21,8 @@ public class PacketTransmitMsg extends DefaultRequestMessage<ServerProtocol.pack
             gatePeer.send_msg(msg.getMsgpak().getMsgid(),msg.getMsgpak().getMsginfo());
         }
 
+        logger.info("PacketTransmitMsg ,msgId::" + msg.getMsgpak().getMsgid());
+
         return true;
     }
 }

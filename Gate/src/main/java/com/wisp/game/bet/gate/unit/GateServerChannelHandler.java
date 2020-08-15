@@ -47,7 +47,7 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         gatePeer.set_state(e_peer_state.e_ps_connected);
         ClientManager.Instance.regedit_client(gatePeer);
 
-        System.out.printf("channelActive........ peerId:" + peerid);
+        logger.info("channelActive........ peerId:" + peerid);
     }
 
     //每当接收数据时，都会调用这个方法
@@ -99,7 +99,7 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
 
         int peerId = ctx.attr( ATTR_PEERID ).get();
 
-        System.out.printf("channelInactive" + ctx.channel().id() + "\n");
+        logger.info("channelInactive:" + peerId);
 
         ctx.close();
         ctx.channel().close();

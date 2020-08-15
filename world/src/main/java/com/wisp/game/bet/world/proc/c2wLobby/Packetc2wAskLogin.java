@@ -77,6 +77,8 @@ public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldPr
 
         peer.send_msg_to_client(player.get_sessionid(),builder);
 
+        logger.info("Packetc2wAskLogin has done,ready to send_to_client:" +  builder.getPacketId() );
+
         return true;
     }
 }

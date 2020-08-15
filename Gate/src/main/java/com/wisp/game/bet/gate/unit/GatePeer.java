@@ -59,7 +59,7 @@ public class GatePeer extends PeerTcp {
         m_checktime += elapsed;
 
         if (m_checktime > 180000) {
-            logger.error("gate_peer check timeout id:" + get_id());
+            logger.error("gate_peer check timeout id:" + get_id() + " remoteType:" + remote_type + " servePort:" + this.remote_id);
             discannect();
             m_checktime = 0;
         }

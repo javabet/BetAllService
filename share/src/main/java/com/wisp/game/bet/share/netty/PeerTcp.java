@@ -219,11 +219,11 @@ public abstract class PeerTcp {
     }
 
     //TODO wisp
-    public int get_remote_port()
-    {
-        InetSocketAddress inetSocketAddress = (InetSocketAddress)channelHandlerContext.channel().localAddress();
-        return inetSocketAddress.getPort();
-    }
+//    public int get_remote_port()
+//    {
+//        InetSocketAddress inetSocketAddress = (InetSocketAddress)channelHandlerContext.channel().localAddress();
+//        return inetSocketAddress.getPort();
+//    }
 
     //TODO wisp
     public String get_remote_ip()

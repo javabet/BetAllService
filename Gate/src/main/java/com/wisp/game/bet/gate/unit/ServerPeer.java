@@ -36,7 +36,7 @@ public final class ServerPeer extends PeerTcp {
         int packet_id = packet_service(-1);
         if( packet_id != 0 )
         {
-            logger.error("monitor_peer packet_service error id:" + channelHandlerContext.channel().id() + " packetId:" + packet_id +
+            logger.error("server_peer packet_service error id:" + get_id() + " packetId:" + packet_id +
                     " remote_id:" + get_remote_id() + " remote_type:" + get_remote_type());
         }
 

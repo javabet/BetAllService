@@ -1,5 +1,6 @@
 package com.wisp.game.bet.share.netty.client;
 
+import com.wisp.game.bet.share.netty.server.tcp.ServerNettyInitializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -31,7 +32,7 @@ public class ClientTcpPeer  {
         clientBootstrap.channel(NioSocketChannel.class);
 
         //第3步 给NIoSocketChannel初始化handler， 处理读写事件
-        ChannelHandler clientHandler = new ClientNettyInitializer( channelHandler );
+        ChannelHandler clientHandler =  new ServerNettyInitializer(channelHandler); //new ClientNettyInitializer( channelHandler );
         clientBootstrap.handler(clientHandler);
 
     }

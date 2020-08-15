@@ -51,6 +51,8 @@ public class WorldPeer extends PeerTcp {
         packetBuilder.setMsginfo(msg.toByteString());
         packetBuilder.setMsgid(packet_id);
 
+        logger.info("worldPeer send_msg_to_client:" + packet_id );
+
         return  send_msg(builder.build());
     }
 

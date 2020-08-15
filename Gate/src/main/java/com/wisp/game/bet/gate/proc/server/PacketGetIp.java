@@ -23,7 +23,7 @@ public class PacketGetIp extends DefaultRequestMessage<ServerProtocol.packet_get
         ServerProtocol.packet_get_ip_result.Builder builder = ServerProtocol.packet_get_ip_result.newBuilder();
         builder.setSessionid(msg.getSessionid());
         builder.setIp(gatePeer.get_remote_ip());
-        builder.setPort(gatePeer.get_remote_port());
+        builder.setPort(gatePeer.get_remote_id());
         peer.send_msg(builder.build());
 
         return true;

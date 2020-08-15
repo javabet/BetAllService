@@ -22,11 +22,11 @@ public class PacketServerConnect extends DefaultRequestMessage<ServerProtocol.pa
             builder.setServerType(ServerBase.e_server_type.e_st_world);
             peer.send_msg(builder.build());
 
-            logger.info("packet_server_connect ok id:" + msg.getServerId() + " type:" + msg.getServerType() + " ip:" + peer.get_remote_ip() + " port:" + peer.get_remote_port());
+            logger.info("packet_server_connect ok id:" + msg.getServerId() + " type:" + msg.getServerType() + " ip:" + peer.get_remote_ip() + " port:" + peer.get_remote_id());
         }
         else
         {
-            logger.info("packet_server_connect fail id:" + msg.getServerId()  + " type:" + msg.getServerType() + " ip:" + peer.get_remote_ip() + " port:" + peer.get_remote_port());
+            logger.info("packet_server_connect fail id:" + msg.getServerId()  + " type:" + msg.getServerType() + " ip:" + peer.get_remote_ip() + " port:" + peer.get_remote_id());
         }
 
         return true;
