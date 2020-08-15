@@ -18,7 +18,7 @@ public class PacketServerConnectResult extends DefaultRequestMessage<ServerProto
 
         logger.info(" packet_server_connect:" + msg.getServerType() + " id:" + msg.getPacketId() );
 
-        peer.set_remote_id( peer.get_remote_port() );
+        //peer.set_remote_id( peer.get_remote_port() );
         if( peer.get_remote_type() == ServerBase.e_server_type.e_st_world.getNumber())
         {
             BackstageManager.Instance.set_world_state(true);

@@ -158,6 +158,16 @@ public class ClientManager extends EnableObjectManager<Integer,GatePeer> impleme
                 peer.IsValid = true;
             }
         }
+        else if( msgid >= 30000 &&  msgid <= 32000  )
+        {
+            //skip
+            return true;
+        }
+        else if( msgid >= 40000 && msgid <= 45000 )
+        {
+            //skip
+            return true;
+        }
         else
         {
             logger.error("route_handler type error packetid:" + msgid + "  peerid:" + peer.get_id());

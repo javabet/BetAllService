@@ -1,14 +1,14 @@
 package com.wisp.game.bet.world.gameMgr;
 
 import com.wisp.game.bet.GameConfig.MainGameVerConfig;
-import com.wisp.game.bet.world.db.DbPlayer;
-import com.wisp.game.bet.world.gameMgr.info.AgentRooms;
+import com.wisp.game.bet.db.mongo.games.GameRoomMgrDoc;
+import com.wisp.game.bet.world.db.DbGame;
 import com.wisp.game.bet.world.gameMgr.info.GameInfo;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,11 +16,11 @@ import java.util.Map;
 public class GameEngineMgr implements InitializingBean {
     public static GameEngineMgr Instance;
     private double m_elapsed = 0;
-    private Map<Integer,GameInfo> m_games;
+    private Map<Integer,GameInfo> games;
 
     public GameEngineMgr() {
         Instance = this;
-        m_games = new HashMap<>();
+        games = new HashMap<>();
     }
 
     public void afterPropertiesSet() throws Exception
@@ -58,18 +58,18 @@ public class GameEngineMgr implements InitializingBean {
             gameInfo.setMinVer(configData.getmMinVer());
             gameInfo.setH5GameVer( configData.getmH5GameVer() );
             gameInfo.setRoomcard_config(null);
-            m_games.put(gameInfo.getGameId(),gameInfo);
+            games.put(gameInfo.getGameId(),gameInfo);
         }
     }
 
     public Map<Integer,GameInfo> get_gamelist()
     {
-        return m_games;
+        return games;
     }
 
     public boolean add_game_info( int gameId,int gamever,int serverId )
     {
-        GameInfo gameInfo =  m_games.get(gameId);
+        GameInfo gameInfo =  games.get(gameId);
         if( gameInfo != null )
         {
             if( gameInfo.getServersMap().get(serverId) == null )
@@ -83,7 +83,7 @@ public class GameEngineMgr implements InitializingBean {
 
     public GameInfo find_game_info( int serverid )
     {
-        return m_games.get(serverid);
+        return games.get(serverid);
     }
 
 
@@ -95,48 +95,48 @@ public class GameEngineMgr implements InitializingBean {
 
     public int update_game_info(int gameId,int serverId,boolean add_player )
     {
-        if( m_games.containsKey(gameId) )
+        if( games.containsKey(gameId) )
         {
             return -1;
         }
 
-        if( !m_games.get(gameId).getServersMap().containsKey(serverId) )
+        if( !games.get(gameId).getServersMap().containsKey(serverId) )
         {
             return  -1;
         }
 
-        int player_cnt = m_games.get(gameId).getServersMap().get(serverId);
+        int player_cnt = games.get(gameId).getServersMap().get(serverId);
         player_cnt += add_player ? 1 : -1;
-        m_games.get(gameId).getServersMap().put(serverId,player_cnt);
+        games.get(gameId).getServersMap().put(serverId,player_cnt);
 
         return player_cnt;
     }
 
     public void update_server_info( int gameId,int serverId,int player_cnt )
     {
-        if( !m_games.containsKey(gameId) )
+        if( !games.containsKey(gameId) )
         {
             return;
         }
 
-        m_games.get(gameId).getServersMap().put(serverId,player_cnt);
+        games.get(gameId).getServersMap().put(serverId,player_cnt);
     }
 
     public void remove_game_info(int gameId,int serverId)
     {
-        if( !m_games.containsKey(gameId) )
+        if( !games.containsKey(gameId) )
         {
             return;
         }
 
-        m_games.get(gameId).getServersMap().remove(serverId);
+        games.get(gameId).getServersMap().remove(serverId);
 
     }
 
     //查找玩家最少的那个服务器
     public GameInfoStruct get_game_info_struct(int gameId)
     {
-        if( !m_games.containsKey(gameId) )
+        if( !games.containsKey(gameId) )
         {
             return null;
         }
@@ -144,7 +144,7 @@ public class GameEngineMgr implements InitializingBean {
         int server_id = -1;
         int player_cnt = Integer.MAX_VALUE;
 
-        Map<Integer,Integer> serversMap = m_games.get(gameId).getServersMap();
+        Map<Integer,Integer> serversMap = games.get(gameId).getServersMap();
 
         for(Integer key : serversMap.keySet())
         {
@@ -160,7 +160,7 @@ public class GameEngineMgr implements InitializingBean {
         GameInfoStruct gameInfoStruct = new GameInfoStruct();
         gameInfoStruct.gameId = gameId;
         gameInfoStruct.serverId = server_id;
-        gameInfoStruct.gamever = m_games.get(gameId).getGameVer();
+        gameInfoStruct.gamever = games.get(gameId).getGameVer();
 
 
         return gameInfoStruct;
@@ -168,12 +168,12 @@ public class GameEngineMgr implements InitializingBean {
 
     public int get_game_info_player_cnt(int gameId,int gameVer )
     {
-        if( !m_games.containsKey(gameId) )
+        if( !games.containsKey(gameId) )
         {
             return 0;
         }
 
-        GameInfo gameInfo = m_games.get(gameId);
+        GameInfo gameInfo = games.get(gameId);
 
         int serverId = 0;
         int player_cnt = Integer.MAX_VALUE;
@@ -191,7 +191,48 @@ public class GameEngineMgr implements InitializingBean {
 
     public GameInfo get_game_info(int gameId)
     {
-        return m_games.get(gameId);
+        return games.get(gameId);
+    }
+
+
+    public Map<Integer, GameInfo> getGames() {
+        return games;
+    }
+
+    public void setGames(Map<Integer, GameInfo> games) {
+        this.games = games;
+    }
+
+
+    /**
+     * 查找人数最少的某个游戏的某个服务器的服务器
+     * @param gameId
+     * @return
+     */
+    public int get_server_id( int gameId )
+    {
+        if( !games.containsKey(gameId) )
+        {
+            return 0;
+        }
+
+        int serverId = 0;
+        int room_count = Integer.MAX_VALUE;
+
+        GameInfo gameInfo =  games.get(gameId);
+
+        for(int keyServerId : gameInfo.getServersMap().keySet() )
+        {
+            Criteria criteria = Criteria.where("GameId").is("gameid").and("ServerId").is(keyServerId);
+            long count =  DbGame.Instance.getMongoTemplate().count(Query.query(criteria), GameRoomMgrDoc.class);
+            if( count < room_count )
+            {
+                room_count = (int)count;
+                serverId = keyServerId;
+            }
+        }
+
+        return serverId;
     }
 
     public class GameInfoStruct
