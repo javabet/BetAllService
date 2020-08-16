@@ -106,6 +106,11 @@ public class ServerManager extends EnableObjectManager<Integer,MonitorPeer> {
         }
     }
 
+    public void broadcast_msg(Message.Builder builder)
+    {
+        this.broadcast_msg(builder.build());
+    }
+
     public void broadcast_msg(Message message)
     {
         this.broadcast_msg(message,-1);

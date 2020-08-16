@@ -22,6 +22,10 @@ public class ServerListDoc implements Serializable {
     @Field( targetType = FieldType.INT32)
     private int Status;
 
+
+    private String Host;
+    private String HostWeb;
+
     public int getServerId() {
         return ServerId;
     }
@@ -52,5 +56,21 @@ public class ServerListDoc implements Serializable {
 
     public void setStatus(int status) {
         Status = status;
+    }
+
+    public String getHost() {
+        return Host;
+    }
+
+    public void setHost(String host) {
+        Host = host;
+    }
+
+    public String getHostWeb() {
+        return HostWeb;
+    }
+
+    public void setHostWeb(String hostWeb) {
+        HostWeb = hostWeb;
     }
 }

@@ -10,8 +10,7 @@ import java.util.Date;
 
 @Document("ServerInfo")
 public class ServerInfoDoc implements Serializable {
-    @MongoId(FieldType.OBJECT_ID)
-    private String _id;
+
 
     private String Account;
 
@@ -26,14 +25,6 @@ public class ServerInfoDoc implements Serializable {
     @Field( targetType = FieldType.INT32)
     private int WorldId;
 
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
 
     public String getAccount() {
         return Account;

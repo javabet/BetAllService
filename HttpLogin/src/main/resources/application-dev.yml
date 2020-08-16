@@ -1,0 +1,11 @@
+server:
+  port: 9092
+
+cfg:
+  logdb_url: 127.0.0.1:27017
+  logdb_name: LogDB_DWC
+  configdb_url: 127.0.0.1:27017
+  configdb_name: ConfigDB
+  accountdb_url: 127.0.0.1:27017
+  accountdb_name: AccountDB
+
