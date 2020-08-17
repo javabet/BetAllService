@@ -1,6 +1,6 @@
 package com.wisp.game.bet.db.mongo.games;
 
-import com.wisp.game.bet.db.mongo.games.Baccara.info.HistoryItem;
+import com.wisp.game.bet.db.mongo.games.Baccara.info.HistoryItemChildDoc;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 
@@ -21,7 +21,7 @@ public class GameRoomDoc {
     @Field(targetType = FieldType.DOUBLE)private  double BrightRate;
     @Field(targetType = FieldType.INT64)private long BrightWater;
     @Field(targetType = FieldType.INT64)private long EnterCount;
-    private List<HistoryItem> HistoryList;
+    private List<HistoryItemChildDoc> HistoryList;
     @Field(targetType = FieldType.INT64)private long OtherStock;
     @Field(targetType = FieldType.INT64)private long PlayerCharge;
     @Field(targetType = FieldType.INT64)private boolean ResetStock;
@@ -112,11 +112,11 @@ public class GameRoomDoc {
         EnterCount = enterCount;
     }
 
-    public List<HistoryItem> getHistoryList() {
+    public List<HistoryItemChildDoc> getHistoryList() {
         return HistoryList;
     }
 
-    public void setHistoryList(List<HistoryItem> historyList) {
+    public void setHistoryList(List<HistoryItemChildDoc> historyList) {
         HistoryList = historyList;
     }
 

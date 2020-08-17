@@ -8,6 +8,7 @@ import com.wisp.game.bet.share.netty.RequestMessageRegister;
 import com.wisp.game.bet.sshare.ServerBase;
 import com.wisp.game.bet.world.gameMgr.GameEngineMgr;
 import com.wisp.game.bet.world.gameMgr.GamePlayerMgr;
+import com.wisp.game.bet.world.gameMgr.GameRoomMgr;
 import io.netty.channel.ChannelHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -58,6 +59,7 @@ public class WorldServer extends ServerBase {
             long cur_tm_ms = System.currentTimeMillis();
 
             GameEngineMgr.Instance.heartbeat(elapsed);
+            GameRoomMgr.Instance.heartbeat(elapsed);
             ServersManager.Instance.heartbeat(elapsed);
             BackstageManager.Instance.heartbeat(elapsed);
             GamePlayerMgr.Instance.heartbeat(elapsed);

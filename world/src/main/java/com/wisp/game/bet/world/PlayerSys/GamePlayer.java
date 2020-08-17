@@ -11,6 +11,7 @@ import com.wisp.game.bet.sshare.convert.TimeInt;
 import com.wisp.game.bet.world.db.DbPlayer;
 import com.wisp.game.bet.world.gameMgr.GameEngineMgr;
 import com.wisp.game.bet.world.gameMgr.GamePlayerMgr;
+import com.wisp.game.bet.world.gameMgr.GameRoomMgr;
 import com.wisp.game.bet.world.unit.ServersManager;
 import com.wisp.game.bet.world.unit.WorldPeer;
 import logic2world_protocols.Logic2WorldProtocol;
@@ -140,6 +141,7 @@ public class GamePlayer {
             //创建进出日志
         }
 
+        GameRoomMgr.Instance.init_room(playerInfoDoc.getAgentId());
         m_state = e_player_state.e_ps_playing;
 
         Client2WorldProtocol.packetw2c_player_connect_result.Builder builder = Client2WorldProtocol.packetw2c_player_connect_result.newBuilder();

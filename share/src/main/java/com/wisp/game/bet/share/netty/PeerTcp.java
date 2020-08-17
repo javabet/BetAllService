@@ -195,12 +195,8 @@ public abstract class PeerTcp {
         return 1;
     }
 
-    public int send_msg(int packet_id, ByteString byteString)
-    {
-        return send_msg(packet_id,byteString.toByteArray());
-    }
 
-    public int send_msg(int packet_id,byte[] bytes)
+    public int send_msg(int packet_id,ByteString byteString)
     {
         if(m_state != e_peer_state.e_ps_connected)
         {
@@ -211,7 +207,7 @@ public abstract class PeerTcp {
         MsgBuf msgBuf = new MsgBuf();
         msgBuf.setPacket_id(packet_id);
         msgBuf.setNeed_route(true);
-        msgBuf.setBytes(bytes);
+        msgBuf.setByteString(byteString);
 
         channelHandlerContext.writeAndFlush(msgBuf);
 

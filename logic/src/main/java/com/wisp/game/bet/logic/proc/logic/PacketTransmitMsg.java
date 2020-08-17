@@ -41,9 +41,10 @@ public class PacketTransmitMsg extends DefaultRequestMessage<ServerProtocol.pack
         if( !bret )
         {
             logger.error("packet_transmit_msg error id:" + msg.getMsgpak().getMsgid() + " serverId:" + peer.get_remote_id() + " sessionId:" + msg.getSessionid());
-            ServerProtocol.packet_player_disconnect.Builder builder =  ServerProtocol.packet_player_disconnect.newBuilder();
-            builder.setSessionid(msg.getSessionid());
-            peer.send_msg(builder.build());
+            //TODO wisp 开发阶段，段开暂时不处理
+            //ServerProtocol.packet_player_disconnect.Builder builder =  ServerProtocol.packet_player_disconnect.newBuilder();
+            //builder.setSessionid(msg.getSessionid());
+            //peer.send_msg(builder.build());
         }
 
         return true;

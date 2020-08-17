@@ -36,9 +36,9 @@ public class GameEngineMgr implements InitializingBean {
         {
             return;
         }
-
-
         m_elapsed = 60 * 1000;
+
+        init_games();
     }
 
     private void init_games()

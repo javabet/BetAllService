@@ -3,7 +3,7 @@ package com.wisp.game.bet.db.mongo.games.Baccara.info;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 
-public class HistoryItem {
+public class HistoryItemChildDoc {
     private boolean IsTie;
     private boolean IsPlayerWin;
     private boolean IsPlayerPair;

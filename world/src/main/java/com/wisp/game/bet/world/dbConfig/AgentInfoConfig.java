@@ -1,18 +1,15 @@
 package com.wisp.game.bet.world.dbConfig;
 
-import com.sun.javadoc.Doc;
 import com.wisp.game.bet.db.mongo.config.doc.AgentInfoDoc;
-import com.wisp.game.bet.db.mongo.config.doc.info.GameInfo;
+import com.wisp.game.bet.db.mongo.config.doc.info.GameInfoChildDoc;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.world.db.DbConfig;
 import com.wisp.game.bet.world.dbConfig.info.AgentGameInfo;
 import com.wisp.game.bet.world.dbConfig.info.AgentInfo;
-import org.bson.Document;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -82,12 +79,12 @@ public final class AgentInfoConfig {
 
         //int agentId =  doc.getInteger("AgentId");
 
-        List<GameInfo> gameInfos = doc.getGameInfos();
+        List<GameInfoChildDoc> gameInfos = doc.getGameInfos();
         if( gameInfos != null )
         {
             for( int i = 0; i < gameInfos.size();i++ )
             {
-                GameInfo childDoc = gameInfos.get(i);
+                GameInfoChildDoc childDoc = gameInfos.get(i);
                 AgentGameInfo agentGameInfo = new AgentGameInfo();
                 agentGameInfo.setGameId( childDoc.getGameId() );
                 agentGameInfo.setSort(childDoc.getSort());

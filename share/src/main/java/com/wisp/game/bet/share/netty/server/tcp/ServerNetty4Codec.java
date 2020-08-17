@@ -1,5 +1,6 @@
 package com.wisp.game.bet.share.netty.server.tcp;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
 import com.wisp.game.bet.share.netty.head.PacketHeadC;
 import com.wisp.game.bet.share.netty.head.PacketHeadS;
@@ -36,25 +37,25 @@ public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
     protected  void encode(ChannelHandlerContext ctx, MsgBuf msgBuf, ByteBuf byteBuf) throws Exception
     {
         int time = EnableProcessinfo.get_tick_count();
-        byte[] bytes;
+        ByteString byteString;
 
         if( msgBuf.isNeed_route() )
         {
-            bytes = msgBuf.getBytes();
+            byteString = msgBuf.getByteString();
         }
         else
         {
-            bytes = msgBuf.getMsg().toByteArray();
+            byteString = msgBuf.getMsg().toByteString();
         }
 
         byteBuf.writeIntLE(time);
         byteBuf.writeShortLE( msgBuf.getPacket_id() );
-        byteBuf.writeShortLE(bytes.length);
+        byteBuf.writeShortLE(byteString.size());
         //byteBuf.writeByte(33);
         //byteBuf.writeByte(36);
         //byteBuf.writeByte(37);
         //byteBuf.writeByte(63);
-        byteBuf.writeBytes(bytes);
+        byteBuf.writeBytes(byteString.toByteArray());
 
         if(msgBuf.getPacket_id() == 6 && msgBuf.getMsg() != null )
         {
@@ -97,15 +98,16 @@ public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
         buf.readBytes(readMsgBuf);
 
 
-        byte[] msgBytes = readMsgBuf.array();
-        Message message =  messageRegister.getMessageByProtocolId(packetId,msgBytes);
+        //byte[] msgBytes = readMsgBuf.array();
+        ByteString byteString = ByteString.copyFrom(readMsgBuf.array());
+        Message message =  messageRegister.getMessageByProtocolId(packetId,byteString);
 
         MsgBuf msgBuf = new MsgBuf();
         msgBuf.setPacket_id(packetId);
 
         if( message == null )
         {
-            msgBuf.setBytes(msgBytes);
+            msgBuf.setByteString(byteString);
         }
         else
         {

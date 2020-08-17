@@ -19,7 +19,7 @@ public class PacketBotTransmitMsg extends DefaultRequestMessage<ServerProtocol.p
         boolean bret = false;
         if( protocolStruct != null )
         {
-            Message innerMsg = RequestMessageRegister.Instance.getMessageByProtocolId(msg.getPacketId().getNumber(),msg.toByteArray());
+            Message innerMsg = RequestMessageRegister.Instance.getMessageByProtocolId(msg.getPacketId().getNumber(),msg.toByteString());
 
             IRequestMessage requestMessage =  protocolStruct.getHandlerInstance();
 

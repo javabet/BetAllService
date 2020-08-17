@@ -16,7 +16,7 @@ public class AgentRooms {
         rooms = new HashMap<>();
     }
 
-    private void init(int gameId,int agentId)
+    public void init(int gameId,int agentId)
     {
         init = true;
         this.gameId = gameId;

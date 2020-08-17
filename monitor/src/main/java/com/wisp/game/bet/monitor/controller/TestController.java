@@ -23,9 +23,9 @@ public class TestController {
         register.setServerType(ServerBase.e_server_type.e_st_gate);
 
         ByteString byteString = register.build().toByteString();
-        byte[] bytes = byteString.toByteArray();
+        //byte[] bytes = byteString.toByteArray();
 
-        Message message1 = messageRegister.getMessageByProtocolId(0,bytes);
+        Message message1 = messageRegister.getMessageByProtocolId(0,byteString);
 
         RequestMessageRegister.ProtocolStruct protocolStruct = messageRegister.getProtocolStruct(0);
 

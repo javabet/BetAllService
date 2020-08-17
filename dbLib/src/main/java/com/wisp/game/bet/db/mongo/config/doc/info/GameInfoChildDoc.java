@@ -3,7 +3,7 @@ package com.wisp.game.bet.db.mongo.config.doc.info;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 
-public class GameInfo {
+public class GameInfoChildDoc {
     @Field( targetType = FieldType.INT32)
     private int GameId;
     @Field( targetType = FieldType.INT32)

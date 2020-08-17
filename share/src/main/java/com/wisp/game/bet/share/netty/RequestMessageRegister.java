@@ -42,7 +42,7 @@ public class RequestMessageRegister implements InitializingBean {
 
     public void afterPropertiesSet() throws Exception
     {
-        String requestMessageName = IRequestMessage.class.getName();
+        //String requestMessageName = IRequestMessage.class.getName();
 
         Set<Class<?>> clzSet = ClassScanner.listClassesWithAnnotation("com.wisp.game",IRequest.class);
         Iterator<Class<?>> clzIt =  clzSet.iterator();
@@ -87,8 +87,8 @@ public class RequestMessageRegister implements InitializingBean {
 
             try
             {
-                Method parseFromMethod = findTypeClass.getMethod("parseFrom",byte[].class);
-                protocolStruct.setStaticByteArrParseFromMethod(parseFromMethod);
+//                Method parseFromMethod = findTypeClass.getMethod("parseFrom",byte[].class);
+//                protocolStruct.setStaticByteArrParseFromMethod(parseFromMethod);
 
                 Method parseByteStringFromMethod = findTypeClass.getMethod("parseFrom",ByteString.class);
                 protocolStruct.setStaticByteStringParseFromMethod(parseByteStringFromMethod);
@@ -149,7 +149,7 @@ public class RequestMessageRegister implements InitializingBean {
         return isHertFromIRequestMessage( clz.getSuperclass() );
     }
 
-
+    /**
     public Message getMessageByProtocolId( int protocolId,byte[] bytes )
     {
         if( !classConcurrentHashMap.containsKey(protocolId) )
@@ -178,6 +178,7 @@ public class RequestMessageRegister implements InitializingBean {
 
         return (Message)object;
     }
+    **/
 
     public Message getMessageByProtocolId( int protocolId, ByteString byteString )
     {
@@ -229,7 +230,7 @@ public class RequestMessageRegister implements InitializingBean {
 
         private IRequestMessage handlerInstance; //需要处理消息号的实体对象
 
-        private Method staticByteArrParseFromMethod; //静态Byte[]的ParseFrom函数
+        //private Method staticByteArrParseFromMethod; //静态Byte[]的ParseFrom函数
         private Method staticByteStringParseFromMethod; //静态Byte[]的ParseFrom函数
 
         public int getProtocolId() {
@@ -256,13 +257,13 @@ public class RequestMessageRegister implements InitializingBean {
             this.handlerInstance = handlerInstance;
         }
 
-        public Method getStaticByteArrParseFromMethod() {
-            return staticByteArrParseFromMethod;
-        }
-
-        public void setStaticByteArrParseFromMethod(Method staticByteArrParseFromMethod) {
-            this.staticByteArrParseFromMethod = staticByteArrParseFromMethod;
-        }
+//        public Method getStaticByteArrParseFromMethod() {
+//            return staticByteArrParseFromMethod;
+//        }
+//
+//        public void setStaticByteArrParseFromMethod(Method staticByteArrParseFromMethod) {
+//            this.staticByteArrParseFromMethod = staticByteArrParseFromMethod;
+//        }
 
         public Method getStaticByteStringParseFromMethod() {
             return staticByteStringParseFromMethod;

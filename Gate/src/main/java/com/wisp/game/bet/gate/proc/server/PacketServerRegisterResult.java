@@ -16,6 +16,8 @@ public class PacketServerRegisterResult extends DefaultRequestMessage<ServerProt
         TimeHelper.Instance.set_base_time( Integer.valueOf(String.valueOf( msg.getServerTime())));
         //peer.set_remote_id(peer.get_remote_port());
         BackstageManager.Instance.regedit_server(peer);
+
+        logger.info(" packet_server_register_result success:");
         return true;
     }
 }

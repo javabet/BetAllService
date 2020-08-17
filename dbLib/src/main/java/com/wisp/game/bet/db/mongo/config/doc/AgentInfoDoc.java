@@ -1,6 +1,6 @@
 package com.wisp.game.bet.db.mongo.config.doc;
 
-import com.wisp.game.bet.db.mongo.config.doc.info.GameInfo;
+import com.wisp.game.bet.db.mongo.config.doc.info.GameInfoChildDoc;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
@@ -12,7 +12,7 @@ public class AgentInfoDoc  {
     @Field( targetType = FieldType.INT32)
     private int AgentId;
     private String ChannelId;
-    private List<GameInfo> GameInfos;
+    private List<GameInfoChildDoc> GameInfos;
 
     public int getAgentId() {
         return AgentId;
@@ -30,11 +30,11 @@ public class AgentInfoDoc  {
         ChannelId = channelId;
     }
 
-    public List<GameInfo> getGameInfos() {
+    public List<GameInfoChildDoc> getGameInfos() {
         return GameInfos;
     }
 
-    public void setGameInfos(List<GameInfo> gameInfos) {
+    public void setGameInfos(List<GameInfoChildDoc> gameInfos) {
         GameInfos = gameInfos;
     }
 }

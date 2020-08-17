@@ -25,6 +25,7 @@ import java.util.Map;
 public class GameRoomMgr {
     public static GameRoomMgr Instance;
     private Map<Integer,Map<Integer, AgentRooms>> agent_rooms;
+    private  double m_elapsed = 0;
 
     public GameRoomMgr() {
         Instance = this;
@@ -33,7 +34,46 @@ public class GameRoomMgr {
 
     public void heartbeat(double elapsed)
     {
+        m_elapsed -= elapsed;
+        if( m_elapsed >= 0 )
+        {
+            return;
+        }
 
+        m_elapsed = 60 * 1000;
+
+        load_room_data();
+
+    }
+
+
+    private void load_room_data()
+    {
+        synchronized (agent_rooms)
+        {
+            agent_rooms.clear();
+
+            Criteria criteria = Criteria.where("Status").is(1);
+            List<GameRoomMgrDoc> gameRoomMgrDocList =  DbGame.Instance.getMongoTemplate().find(Query.query(criteria),GameRoomMgrDoc.class);
+
+            for( GameRoomMgrDoc gameRoomMgrDoc : gameRoomMgrDocList )
+            {
+                if( !agent_rooms.containsKey(gameRoomMgrDoc.getGameId()) )
+                {
+                    agent_rooms.put(gameRoomMgrDoc.getGameId(),new HashMap<>());
+                }
+               Map<Integer, AgentRooms> agentRoomsMap =   agent_rooms.get(gameRoomMgrDoc.getGameId());
+
+               if(  !agentRoomsMap.containsKey(gameRoomMgrDoc.getAgentId()) )
+               {
+                   AgentRooms agentRooms = new AgentRooms();
+                   agentRooms.init(gameRoomMgrDoc.getGameId(),gameRoomMgrDoc.getAgentId());
+                   agentRoomsMap.put(gameRoomMgrDoc.getAgentId(),agentRooms);
+               }
+
+               agentRoomsMap.get(gameRoomMgrDoc.getAgentId()).add_room(gameRoomMgrDoc);
+            }
+        }
     }
 
     public void init_room(int agentId)

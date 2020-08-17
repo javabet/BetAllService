@@ -21,21 +21,21 @@ public class ServerWebSocketNetty4Codec extends ByteToMessageCodec<MsgBuf> {
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, MsgBuf msgBuf, ByteBuf byteBuf) throws Exception {
-        byte[] bytes;
+        ByteString byteString;
 
         if( msgBuf.isNeed_route() )
         {
-            bytes = msgBuf.getBytes();
+            byteString = msgBuf.getByteString();
         }
         else
         {
-            bytes = msgBuf.getMsg().toByteArray();
+            byteString = msgBuf.getMsg().toByteString();
         }
 
 
         byteBuf.writeIntLE( msgBuf.getPacket_id() );
-        byteBuf.writeShortLE(bytes.length);
-        byteBuf.writeBytes(bytes);
+        byteBuf.writeShortLE(byteString.size());
+        byteBuf.writeBytes(byteString.toByteArray());
     }
 
     @Override
@@ -67,8 +67,9 @@ public class ServerWebSocketNetty4Codec extends ByteToMessageCodec<MsgBuf> {
         byteBuf.readBytes(readMsgBuf);
 
 
-        byte[] msgBytes = readMsgBuf.array();
-        Message message =  messageRegister.getMessageByProtocolId(packetId,msgBytes);
+        //byte[] msgBytes = readMsgBuf.array();
+        ByteString byteString = ByteString.copyFrom(readMsgBuf.array());
+        Message message =  messageRegister.getMessageByProtocolId(packetId,byteString);
 
         MsgBuf msgBuf = new MsgBuf();
         msgBuf.setPacket_id(packetId);
@@ -76,8 +77,7 @@ public class ServerWebSocketNetty4Codec extends ByteToMessageCodec<MsgBuf> {
         if( message == null )
         {
             msgBuf.setNeed_route(true);
-            msgBuf.setBytes(msgBytes);
-            msgBuf.setByteString(ByteString.copyFrom(msgBytes));
+            msgBuf.setByteString(byteString);
         }
         else
         {
