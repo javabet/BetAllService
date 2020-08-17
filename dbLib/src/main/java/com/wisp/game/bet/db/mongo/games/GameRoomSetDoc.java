@@ -9,6 +9,7 @@ public class GameRoomSetDoc {
 
      @Field(targetType = FieldType.INT32) private int AgentId;
      @Field(targetType = FieldType.INT32) private int GameId;
+     @Field(targetType = FieldType.INT32) private int RoomId;
      @Field(targetType = FieldType.INT32) private int Type;
      @Field(targetType = FieldType.INT32) private int ServerId;
 
@@ -76,5 +77,14 @@ public class GameRoomSetDoc {
 
     public void setRoomIDTxt(String roomIDTxt) {
         RoomIDTxt = roomIDTxt;
+    }
+
+
+    public int getRoomId() {
+        return RoomId;
+    }
+
+    public void setRoomId(int roomId) {
+        RoomId = roomId;
     }
 }

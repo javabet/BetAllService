@@ -57,7 +57,7 @@ public class LogicServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
 
     //当处理过程中在 ChannelPipeline 中有错误产生时被调用
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx,cause);
+        //super.exceptionCaught(ctx,cause);
 
         ctx.close();
     }

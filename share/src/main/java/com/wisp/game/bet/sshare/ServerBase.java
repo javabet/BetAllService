@@ -166,7 +166,7 @@ public abstract class ServerBase implements InitializingBean,Runnable {
     {
         m_ncount ++;
 
-        if( id_queue.size() > 0 )
+        if( id_queue.size() >= 1000 )        //保证释放的id，不会被马上利用
         {
             return id_queue.pollFirst();
         }

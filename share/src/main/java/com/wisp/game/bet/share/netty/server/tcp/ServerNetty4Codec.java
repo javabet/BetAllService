@@ -100,6 +100,8 @@ public class ServerNetty4Codec extends ByteToMessageCodec<MsgBuf> {
 
         //byte[] msgBytes = readMsgBuf.array();
         ByteString byteString = ByteString.copyFrom(readMsgBuf.array());
+
+
         Message message =  messageRegister.getMessageByProtocolId(packetId,byteString);
 
         MsgBuf msgBuf = new MsgBuf();

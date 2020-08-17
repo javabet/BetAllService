@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import server_protocols.ServerBase;
 
+import java.io.IOException;
+
 
 /**
  * 作为服务器，接收客户端发送过来的信号
@@ -58,7 +60,7 @@ public class WorldServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
 
     //当处理过程中在 ChannelPipeline 中有错误产生时被调用
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx,cause);
+        //super.exceptionCaught(ctx,cause);
 
         ctx.close();
     }
@@ -83,7 +85,6 @@ public class WorldServerChannelHandler extends SimpleChannelInboundHandler<MsgBu
         System.out.printf("channelInactive" + ctx.channel().id() + "\n");
 
         ctx.close();
-        ctx.channel().close();
         ctx.channel().close();
 
         WorldPeer worldPeer = ServersManager.Instance.find_objr(peerId);

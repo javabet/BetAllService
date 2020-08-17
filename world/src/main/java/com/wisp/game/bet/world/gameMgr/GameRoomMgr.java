@@ -10,6 +10,7 @@ import com.wisp.game.bet.world.gameMgr.info.GameInfo;
 import com.wisp.game.bet.world.unit.ServersManager;
 import com.wisp.game.bet.world.unit.WorldPeer;
 import logic2world_protocols.Logic2WorldProtocol;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -43,7 +44,7 @@ public class GameRoomMgr {
         m_elapsed = 60 * 1000;
 
         load_room_data();
-
+        check_open_room();
     }
 
 
@@ -83,6 +84,11 @@ public class GameRoomMgr {
         for( GameInfo gameInfo : games.values() )
         {
             if( gameInfo.getServersMap().size() == 0 )
+            {
+                continue;
+            }
+
+            if( gameInfo.getGameId() != 5 )
             {
                 continue;
             }
@@ -144,6 +150,66 @@ public class GameRoomMgr {
                 }
             }
         }
+    }
+
+    public void check_open_room()
+    {
+        //只有在主服务器才使用
+        Criteria criteria = Criteria.where("Type").is(5);
+        List<GameRoomSetDoc> gameRoomSetDocList =  DbGame.Instance.getMongoTemplate().find(Query.query(criteria),GameRoomSetDoc.class);
+
+        Map<Integer,List<Integer>> serverList = new HashMap<>();
+
+        if( gameRoomSetDocList != null && gameRoomSetDocList.size() > 0 )
+        {
+            for( GameRoomSetDoc gameRoomSetDoc : gameRoomSetDocList)
+            {
+                //打开房间
+                criteria = Criteria.where("AgentId").is(gameRoomSetDoc.getAgentId()).and("GameId").is(gameRoomSetDoc.getGameId())
+                        .and("RoomId").is(gameRoomSetDoc.getRoomId()).and("Status").is(0).and("IsOpen").is(false);
+
+                Update update = new Update();
+                update.set("IsOpen",true);
+                FindAndModifyOptions findAndModifyOptions = FindAndModifyOptions.options();
+                findAndModifyOptions.returnNew(true);
+                GameRoomMgrDoc gameRoomMgrDoc =  DbGame.Instance.getMongoTemplate().findAndModify(Query.query(criteria),update,findAndModifyOptions,GameRoomMgrDoc.class);
+                if( gameRoomMgrDoc != null && gameRoomMgrDoc.getServerId() > 0 )
+                {
+                   if( !serverList.containsKey(gameRoomMgrDoc.getServerId()) )
+                   {
+                       serverList.put(gameRoomMgrDoc.getServerId(),new ArrayList<>());
+                   }
+                   if( !serverList.get(gameRoomMgrDoc.getServerId()).contains(gameRoomSetDoc.getAgentId()) )
+                   {
+                       serverList.get(gameRoomMgrDoc.getServerId()).add(gameRoomSetDoc.getAgentId());
+                   }
+
+                   criteria = Criteria.where("AgentId").is(gameRoomSetDoc.getAgentId()).and("GameId").is(gameRoomSetDoc.getGameId())
+                           .and("RooomId").is(gameRoomSetDoc.getRoomId()).and("RoomId").is(gameRoomSetDoc.getRoomId()).and("Type").is(5);
+
+                   DbGame.Instance.getMongoTemplate().remove(Query.query(criteria),GameRoomSetDoc.class);
+                }
+            }
+        }
+
+
+        for(int serverId:serverList.keySet())
+        {
+            List<Integer> agentList = serverList.get(serverId);
+
+            for(int agentId : agentList)
+            {
+                Logic2WorldProtocol.packetw2l_room_open.Builder builder = Logic2WorldProtocol.packetw2l_room_open.newBuilder();
+                builder.setAgentId(agentId);
+                builder.setOpen(true);
+                WorldPeer worldPeer = ServersManager.Instance.find_server(serverId);
+                if( worldPeer != null )
+                {
+                    worldPeer.send_msg(builder);
+                }
+            }
+        }
+
     }
 
 
