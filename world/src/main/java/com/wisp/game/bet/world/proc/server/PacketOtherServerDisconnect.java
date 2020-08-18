@@ -9,7 +9,7 @@ import server_protocols.ServerProtocol;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-@IRequest
+@IRequest(3)
 public class PacketOtherServerDisconnect extends DefaultRequestMessage<ServerProtocol.packet_other_server_disconnect, ServerPeer> {
 
 

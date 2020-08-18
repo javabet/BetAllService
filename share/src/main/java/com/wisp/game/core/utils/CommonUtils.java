@@ -1,11 +1,7 @@
 package com.wisp.game.core.utils;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -239,6 +235,23 @@ public class CommonUtils {
 		}
 
 		return (T)o;
+	}
+
+	/**
+	 * 简单对象的复制，深度复制不要使用此
+	 * @param list
+	 * @param <T>
+	 * @return
+	 */
+	public static <T> List<T> deepSimpleList(List<?> list)
+	{
+		List<T> cloneList = new ArrayList<>();
+		for( int i = 0; i < list.size();i++ )
+		{
+			cloneList.add((T)list.get(i));
+		}
+
+		return cloneList;
 	}
 	
 }

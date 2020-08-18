@@ -10,7 +10,7 @@ import server_protocols.ServerProtocol;
 import java.util.concurrent.ConcurrentHashMap;
 
 //monitor 广播给所有的服务器某个服务器的状态
-@IRequest
+@IRequest(2)
 public class PacketOtherServerConnect extends DefaultRequestMessage<ServerProtocol.packet_other_server_connect, ServerPeer> {
 
 

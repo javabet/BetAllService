@@ -5,7 +5,7 @@ import com.wisp.game.bet.share.netty.IRequest;
 import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import server_protocols.ServerProtocol;
 
-@IRequest
+@IRequest(19)
 public class PacketGetIpResult extends DefaultRequestMessage<ServerProtocol.packet_get_ip_result, ServerPeer> {
 
 

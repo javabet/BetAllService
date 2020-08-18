@@ -1,15 +1,19 @@
 package com.wisp.game.bet.world.gameMgr;
 
 import com.wisp.game.bet.GameConfig.MainGameVerConfig;
+import com.wisp.game.bet.GameConfig.MainRoomCardConfig;
 import com.wisp.game.bet.db.mongo.games.GameRoomMgrDoc;
 import com.wisp.game.bet.world.db.DbGame;
-import com.wisp.game.bet.world.gameMgr.info.GameInfo;
+import com.wisp.game.core.utils.CommonUtils;
+import msg_info_def.MsgInfoDef;
+import msg_type_def.MsgTypeDef;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -52,13 +56,50 @@ public class GameEngineMgr implements InitializingBean {
                 continue;
             }
 
-            GameInfo gameInfo = new GameInfo();
-            gameInfo.setGameId(configData.getmID());
-            gameInfo.setGameVer(configData.getmGameVer());
-            gameInfo.setMinVer(configData.getmMinVer());
-            gameInfo.setH5GameVer( configData.getmH5GameVer() );
-            gameInfo.setRoomcard_config(null);
-            games.put(gameInfo.getGameId(),gameInfo);
+            GameInfo gameInfo;
+            if( games.containsKey(configData.getmID()) )
+            {
+                gameInfo = games.get(configData.getmID());
+                gameInfo.GameVer = configData.getmGameVer();
+                gameInfo.minVer = configData.getmMinVer();
+                gameInfo.setH5GameVer(configData.getmH5GameVer());
+            }
+            else
+            {
+                gameInfo = new GameInfo();
+                gameInfo.setGameId(configData.getmID());
+                gameInfo.setGameVer(configData.getmGameVer());
+                gameInfo.setMinVer(configData.getmMinVer());
+                gameInfo.setH5GameVer( configData.getmH5GameVer() );
+                gameInfo.setRoomcard_config(null);
+                games.put(gameInfo.getGameId(),gameInfo);
+            }
+
+
+            MainRoomCardConfig.MainRoomCardConfigData mainRoomCardConfigData =  MainRoomCardConfig.GetInstnace().GetData(configData.getmID());
+            if( mainRoomCardConfigData == null )
+            {
+                continue;
+            }
+
+            MsgInfoDef.msg_roomcard_config.Builder builder = MsgInfoDef.msg_roomcard_config.newBuilder();
+            gameInfo.setRoomcard_config( builder );
+
+            builder.setGameId(gameInfo.GameId);
+            builder.addAllBaseGold(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmBaseGold()));
+            builder.addAllDuration(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmDuration()));
+            builder.addAllModel(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmModel()));
+            builder.addAllType(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmType()));
+            builder.addAllRateLimit(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmRateLimit()));
+            builder.addAllRounds(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmRounds()));
+            builder.addAllCostCount(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmCostCount()));
+            builder.addAllPlayerCount(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmPlayerCount()));
+            builder.addAllSmallBlind(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmSmallBlind()));
+            builder.addAllBigBlind(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmBigBlind()));
+            builder.addAllHuaGold(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmHuaGold()));
+            builder.addAllGoldCondition(CommonUtils.deepSimpleList(mainRoomCardConfigData.getmGoldCondition()));
+            builder.setRoomType(MsgTypeDef.e_roomcard_type.valueOf(mainRoomCardConfigData.getmRoomType()));
+
         }
     }
 
@@ -240,6 +281,67 @@ public class GameEngineMgr implements InitializingBean {
         public  int gameId;
         public int serverId;
         public int gamever;
+    }
+
+    public class GameInfo {
+        private int GameId;
+        private int GameVer;
+        private int minVer;
+        private List<String> H5GameVer;
+        private Map<Integer,Integer> ServersMap;
+        private MsgInfoDef.msg_roomcard_config.Builder roomcard_config;
+
+        public GameInfo() {
+            ServersMap = new HashMap<>();
+        }
+
+        public int getGameId() {
+            return GameId;
+        }
+
+        public void setGameId(int gameId) {
+            GameId = gameId;
+        }
+
+        public int getGameVer() {
+            return GameVer;
+        }
+
+        public void setGameVer(int gameVer) {
+            GameVer = gameVer;
+        }
+
+        public int getMinVer() {
+            return minVer;
+        }
+
+        public void setMinVer(int minVer) {
+            this.minVer = minVer;
+        }
+
+        public Map<Integer, Integer> getServersMap() {
+            return ServersMap;
+        }
+
+        public void setServersMap(Map<Integer, Integer> serversMap) {
+            ServersMap = serversMap;
+        }
+
+        public MsgInfoDef.msg_roomcard_config.Builder getRoomcard_config() {
+            return roomcard_config;
+        }
+
+        public void setRoomcard_config(MsgInfoDef.msg_roomcard_config.Builder roomcard_config) {
+            this.roomcard_config = roomcard_config;
+        }
+
+        public List<String> getH5GameVer() {
+            return H5GameVer;
+        }
+
+        public void setH5GameVer(List<String> h5GameVer) {
+            H5GameVer = h5GameVer;
+        }
     }
 
 }

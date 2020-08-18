@@ -8,7 +8,7 @@ import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import server_protocols.ServerProtocol;
 
 //gate->world
-@IRequest
+@IRequest(13)
 public class PacketPlayerDisconnect extends DefaultRequestMessage<ServerProtocol.packet_player_disconnect, WorldPeer> {
     @Override
     public boolean packet_process(WorldPeer peer, ServerProtocol.packet_player_disconnect msg) {

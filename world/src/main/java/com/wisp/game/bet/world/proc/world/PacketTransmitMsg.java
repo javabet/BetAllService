@@ -10,7 +10,7 @@ import com.wisp.game.bet.share.netty.PacketManager.IRequestMessage;
 import com.wisp.game.bet.share.netty.RequestMessageRegister;
 import server_protocols.ServerProtocol;
 
-@IRequest
+@IRequest(6)
 public class PacketTransmitMsg extends DefaultRequestMessage<ServerProtocol.packet_transmit_msg, WorldPeer> {
     @Override
     public boolean packet_process(WorldPeer peer, ServerProtocol.packet_transmit_msg msg) {

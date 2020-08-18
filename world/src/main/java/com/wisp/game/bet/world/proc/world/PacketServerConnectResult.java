@@ -6,7 +6,7 @@ import com.wisp.game.bet.share.netty.IRequest;
 import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import server_protocols.ServerProtocol;
 
-@IRequest
+@IRequest(11)
 public class PacketServerConnectResult extends DefaultRequestMessage<ServerProtocol.packet_server_connect_result, ServerPeer> {
     @Override
     public boolean packet_process(ServerPeer peer, ServerProtocol.packet_server_connect_result msg) {

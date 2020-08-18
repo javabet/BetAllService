@@ -143,6 +143,8 @@ public abstract class ServerBase implements InitializingBean,Runnable {
         }
 
         b_run = false;
+
+        logger.error("ready to exit");
     }
 
     public  void close()

@@ -46,7 +46,6 @@ public class WorldServer extends ServerBase {
 
     @Override
     public boolean on_init() {
-        //this.init_db();
         connect_monitor();
         return true;
     }
@@ -89,6 +88,9 @@ public class WorldServer extends ServerBase {
     @Override
     public void on_exit() {
 
+        //GameEngineMgr.Instance.cl
+
+        ServersManager.Instance.clear();
     }
 
     public ServerPeer create_peer(int remote_type)
@@ -99,38 +101,6 @@ public class WorldServer extends ServerBase {
 
     private boolean init_db()
     {
-        /**
-        if( environment.containsProperty("cfg.playerdb_url") && environment.containsProperty("cfg.playerdb_name") )
-        {
-            DbPlayer.Instance.init_db(environment.getProperty("cfg.playerdb_url"),environment.getProperty("cfg.playerdb_name"));
-        }
-
-        if( environment.containsProperty("cfg.gamedb_url") && environment.containsProperty("cfg.gamedb_name") )
-        {
-            DbGame.Instance.init_db(environment.getProperty("cfg.gamedb_url"),environment.getProperty("cfg.gamedb_name"));
-        }
-
-        if( environment.containsProperty("cfg.paydb_url") && environment.containsProperty("cfg.paydb_name") )
-        {
-            DbGame.Instance.init_db(environment.getProperty("cfg.paydb_url"),environment.getProperty("cfg.paydb_name"));
-        }
-
-        if( environment.containsProperty("cfg.configdb_url") && environment.containsProperty("cfg.configdb_name") )
-        {
-            DbConfig.Instance.init_db(environment.getProperty("cfg.configdb_url"),environment.getProperty("cfg.configdb_name"));
-        }
-
-        if( environment.containsProperty("cfg.clouddb_url") && environment.containsProperty("cfg.clouddb_name") )
-        {
-            DbCloud.Instance.init_db(environment.getProperty("cfg.clouddb_url"),environment.getProperty("cfg.clouddb_name"));
-        }
-
-        if( environment.containsProperty("cfg.accountdb_url") && environment.containsProperty("cfg.accountdb_name") )
-        {
-            DbAccount.Instance.init_db(environment.getProperty("cfg.accountdb_url"),environment.getProperty("cfg.accountdb_name"));
-        }
-         **/
-
         if( environment.containsProperty("cfg.is_main") )
         {
             m_is_main = environment.getProperty("cfg.is_main",Integer.class) == 1;

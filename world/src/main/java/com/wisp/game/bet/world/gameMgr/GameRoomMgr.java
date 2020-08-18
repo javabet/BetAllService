@@ -6,7 +6,6 @@ import com.wisp.game.bet.db.mongo.games.GameRoomMgrDoc;
 import com.wisp.game.bet.db.mongo.games.GameRoomSetDoc;
 import com.wisp.game.bet.world.db.DbGame;
 import com.wisp.game.bet.world.gameMgr.info.AgentRooms;
-import com.wisp.game.bet.world.gameMgr.info.GameInfo;
 import com.wisp.game.bet.world.unit.ServersManager;
 import com.wisp.game.bet.world.unit.WorldPeer;
 import logic2world_protocols.Logic2WorldProtocol;
@@ -16,7 +15,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
-import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,9 +77,9 @@ public class GameRoomMgr {
 
     public void init_room(int agentId)
     {
-        Map<Integer, GameInfo> games =  GameEngineMgr.Instance.getGames();
+        Map<Integer, GameEngineMgr.GameInfo> games =  GameEngineMgr.Instance.getGames();
 
-        for( GameInfo gameInfo : games.values() )
+        for( GameEngineMgr.GameInfo gameInfo : games.values() )
         {
             if( gameInfo.getServersMap().size() == 0 )
             {
@@ -154,7 +152,7 @@ public class GameRoomMgr {
 
     public void check_open_room()
     {
-        //只有在主服务器才使用
+        //只有在主服务器才使用,即有多个world服务器时才需要的额外处理
         Criteria criteria = Criteria.where("Type").is(5);
         List<GameRoomSetDoc> gameRoomSetDocList =  DbGame.Instance.getMongoTemplate().find(Query.query(criteria),GameRoomSetDoc.class);
 

@@ -8,7 +8,7 @@ import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
 
 
-@IRequest
+@IRequest(10)
 public class PacketServerConnect extends DefaultRequestMessage<ServerProtocol.packet_server_connect, WorldPeer> {
     @Override
     public boolean packet_process(WorldPeer peer, ServerProtocol.packet_server_connect msg) {

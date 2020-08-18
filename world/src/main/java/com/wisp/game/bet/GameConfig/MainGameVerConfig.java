@@ -1,12 +1,16 @@
 package com.wisp.game.bet.GameConfig;
 
+import com.wisp.game.bet.share.utils.MD5Util;
 import com.wisp.game.bet.utils.XMLUtils;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
 
+import java.io.IOException;
 import java.util.*;
-
 
 public final class MainGameVerConfig {
 
@@ -41,33 +45,51 @@ public final class MainGameVerConfig {
         return this.mMapData;
     }
 
-    public void Reload()
+    public boolean Reload()
     {
         mMapData.clear();
-        this.Load();
+        return this.Load();
     }
 
-    public void Load()
+    public boolean Load()
     {
-        //this.Load("Config/MainGameVerConfig.xml");
-        this.Load("D:\\E\\myBet\\service\\CopyService\\world\\src\\main\\resources\\Config\\MainGameVerConfig.xml");
+        return this.Load("./Config/MainGameVerConfig.xml");
     }
 
-    public void Load(String path)
+    public boolean Load(String path)
     {
-        Document xmlDoc = XMLUtils.file2Document(path);
+        Document xmlDoc = null;
+
+        ClassPathResource classPathResource = new ClassPathResource(path);
+        if (classPathResource.exists())
+        {
+            try
+            {
+                xmlDoc = XMLUtils.file2Document(classPathResource.getInputStream());
+            }
+            catch (IOException ioexception)
+            {
+                //do nothing
+            }
+        }
 
         if( xmlDoc == null )
         {
-            return;
+
+        }
+
+        if( xmlDoc == null )
+        {
+            return false;
         }
 
         Element root = xmlDoc.getRootElement();
 
         if( root == null )
         {
-            return;
+            return false;
         }
+
 
         Iterator<Element> iterator =  root.elementIterator();
 
@@ -77,17 +99,25 @@ public final class MainGameVerConfig {
             MainGameVerConfigData data = new MainGameVerConfigData();
             
            data.mID = XMLUtils.getIntByElement(childElement,"ID");
-           data.mGameCnName = childElement.attribute("GameCnName").getValue();
-           data.mGameEnName = childElement.attribute("GameEnName").getValue();
-           data.mIsOpen = Boolean.valueOf(childElement.attribute("IsOpen").getValue());
+           data.mGameCnName = XMLUtils.getStringByElement(childElement,"GameCnName");
+           data.mGameEnName = XMLUtils.getStringByElement(childElement,"GameEnName");
+           data.mIsOpen = XMLUtils.getBooleanByElement(childElement,"IsOpen");
            data.mGameVer = XMLUtils.getIntByElement(childElement,"GameVer");
-           data.mMinVer =  XMLUtils.getIntByElement(childElement,"MinVer");
+           data.mMinVer = XMLUtils.getIntByElement(childElement,"MinVer");
             {
                data.mH5GameVer = new ArrayList<>();
-               String[] H5GameVerStr = childElement.attribute("H5GameVer").getValue().split(",");
-               for(int i = 0; i < H5GameVerStr.length;i++)
+               Attribute attr =  childElement.attribute("H5GameVer");
+               if(attr != null)
                {
-                   data.mH5GameVer.add( H5GameVerStr[i] );
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
+                   {
+                       String[] H5GameVerStr = eleStr.split(",");
+                       for(int i = 0; i < H5GameVerStr.length;i++)
+                       {
+                           data.mH5GameVer.add( H5GameVerStr[i] );
+                       }
+                   }
                }
             }
            data.mGameType = XMLUtils.getIntByElement(childElement,"GameType");
@@ -101,6 +131,7 @@ public final class MainGameVerConfig {
             mMapData.put(data.mID,data);
         }
 
+        return true;
     }
 
     public class MainGameVerConfigData

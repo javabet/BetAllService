@@ -7,7 +7,6 @@ import com.wisp.game.bet.world.dbConfig.AgentInfoConfig;
 import com.wisp.game.bet.world.dbConfig.info.AgentGameInfo;
 import com.wisp.game.bet.world.dbConfig.info.AgentInfo;
 import com.wisp.game.bet.world.gameMgr.GameEngineMgr;
-import com.wisp.game.bet.world.gameMgr.info.GameInfo;
 import com.wisp.game.bet.world.proc.DefaultWorldRequestMessage;
 import com.wisp.game.bet.world.unit.WorldPeer;
 
@@ -46,7 +45,7 @@ public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldPr
         {
             for(AgentGameInfo agentGameInfo : agentInfo.getGameMap().values())
             {
-                GameInfo gameInfo = GameEngineMgr.Instance.get_game_info(agentGameInfo.getGameId());
+                GameEngineMgr.GameInfo gameInfo = GameEngineMgr.Instance.get_game_info(agentGameInfo.getGameId());
                 client2world_protocols.Client2WorldProtocol.msg_game_info.Builder gameInfoBuilder = client2world_protocols.Client2WorldProtocol.msg_game_info.newBuilder();
                 gameInfoBuilder.setGameid( gameInfo.getGameId() );
                 gameInfoBuilder.setGamever(gameInfo.getGameVer());

@@ -9,7 +9,7 @@ import server_protocols.ServerProtocol;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-@IRequest
+@IRequest(5)
 public class PacketUpdataServersInfo extends DefaultRequestMessage<ServerProtocol.packet_updata_servers_info, ServerPeer> {
     @Override
     public boolean packet_process(ServerPeer peer, ServerProtocol.packet_updata_servers_info msg) {
