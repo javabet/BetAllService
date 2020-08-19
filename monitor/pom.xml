@@ -139,7 +139,8 @@
                             <mainClass>main.MonitorMain</mainClass>
                         </manifest>
                     </archive>
-                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <!--<outputDirectory>${project.build.directory}</outputDirectory>-->
+                    <outputDirectory>${project.basedir}/../bin</outputDirectory>
                 </configuration>
             </plugin>
 
@@ -155,7 +156,8 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <!--<outputDirectory>${project.build.directory}/lib</outputDirectory>-->
+                            <outputDirectory>${project.basedir}/../bin/lib</outputDirectory>
                             <overWriteReleases>true</overWriteReleases>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
