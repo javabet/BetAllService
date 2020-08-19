@@ -9,3 +9,5 @@
 *.class
 /target
 /games/*/target/
+/bin/*/*.jar
+/bin/*.jar
