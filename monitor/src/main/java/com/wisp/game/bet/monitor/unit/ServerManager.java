@@ -7,6 +7,8 @@ import com.wisp.game.bet.db.mongo.config.doc.ServerListDoc;
 import com.wisp.game.bet.share.common.EnableObjectManager;
 import com.wisp.game.bet.share.common.EnableProcessinfo;
 import io.netty.channel.ChannelId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -20,6 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class ServerManager extends EnableObjectManager<Integer,MonitorPeer> {
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
     private static final int UPDATE_TIME = 3000;            //单位ms
     private double m_checktime = 0;
     private ConcurrentHashMap<Integer,ServerBase.server_info.Builder> m_infomap;
@@ -178,6 +181,8 @@ public class ServerManager extends EnableObjectManager<Integer,MonitorPeer> {
         {
             reset_gate_id(monitorPeer.get_remote_id());
         }
+
+        logger.info("socket disconnect,the type:" + ServerBase.e_server_type.valueOf(monitorPeer.get_remote_type()));
     }
 
     public MonitorPeer get_server_bytype(int servertype)

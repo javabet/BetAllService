@@ -135,7 +135,7 @@ public final class GameEngine implements IGameEngine {
 
     @Override
     public int get_gameid() {
-        return 5;
+        return GAME_ID;
     }
 
 

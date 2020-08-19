@@ -213,19 +213,21 @@ public class GameRoomMgr {
 
     public List<GameRoomMgrDoc> get_room_list(int gameId,int agentId)
     {
+        List<GameRoomMgrDoc> list = new ArrayList<>();
+
         MainGameVerConfig.MainGameVerConfigData cfg =  MainGameVerConfig.GetInstnace().GetData(gameId);
         if( cfg == null || cfg.getmGameType() != 1 )
         {
-            return null;
+            return list;
         }
 
         Map<Integer,AgentRooms> agentRoomsMap = agent_rooms.get(gameId);
         if( agentRoomsMap == null )
         {
-            return null;
+            return list;
         }
 
-        List<GameRoomMgrDoc> list = new ArrayList<>();
+
 
         for(AgentRooms agentRooms : agentRoomsMap.values())
         {
@@ -236,7 +238,7 @@ public class GameRoomMgr {
 
         }
 
-        return null;
+        return list;
     }
 
 

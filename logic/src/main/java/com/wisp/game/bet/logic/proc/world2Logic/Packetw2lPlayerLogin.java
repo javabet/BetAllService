@@ -11,8 +11,14 @@ import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import logic2world_protocols.Logic2WorldProtocol;
 import msg_type_def.MsgTypeDef;
 
+import javax.annotation.Resource;
+
 @IRequest
 public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProtocol.packetw2l_player_login, ServerPeer> {
+
+    @Resource
+    private IGameEngine gameEngine;
+
     @Override
     public boolean packet_process(ServerPeer peer, Logic2WorldProtocol.packetw2l_player_login msg) {
         GamePlayer gamePlayer = GamePlayerMgr.Instance.find_playerbyid( msg.getAccountInfo().getAid() );
@@ -24,6 +30,7 @@ public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProto
         {
             GamePlayerMgr.Instance.reset_player(gamePlayer,msg.getSessionid());
             gamePlayer.set_state(e_player_state.e_ps_playing);
+            builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_already_in_game);
             if(!gamePlayer.is_robot())
             {
                 gamePlayer.world_id = peer.get_remote_id();
@@ -49,24 +56,23 @@ public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProto
                gamePlayer.world_id = peer.get_remote_id();
            }
 
-            IGameEngine gameEngine = GameManager.Instance.get_game_engine();
-           if( gameEngine != null )
-           {
-                if( gameEngine.player_enter_game(gamePlayer,msg.getRoomid()) )
-                {
-                    gamePlayer.reset_gate();
-                    gamePlayer.set_state(e_player_state.e_ps_playing);
-                    GamePlayerMgr.Instance.add_player(gamePlayer);
-                    gamePlayer.reset_robot_life();
-                }
-                else
-                {
-                    builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_room_notopen);
-                }
-           }
+            if( gameEngine.player_enter_game(gamePlayer,msg.getRoomid()) )
+            {
+                gamePlayer.reset_gate();
+                gamePlayer.set_state(e_player_state.e_ps_playing);
+                GamePlayerMgr.Instance.add_player(gamePlayer);
+                builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_success);
+
+                //机器人需要另外通知
+                gamePlayer.reset_robot_life();
+            }
+            else
+            {
+                builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_room_notopen);
+            }
         }
 
-        peer.send_msg(builder.build());
+        peer.send_msg(builder);
 
         return true;
     }

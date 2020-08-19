@@ -3,7 +3,7 @@ package com.wisp.game.bet.logic.unit;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameMgr.GamePlayerMgr;
 import com.wisp.game.bet.share.netty.PeerTcp;
-import com.wisp.game.bet.share.netty.client.ClientTcpPeer;
+import com.wisp.game.bet.share.netty.server.PeerTcpClient;
 import com.wisp.game.bet.share.netty.infos.e_peer_state;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
@@ -14,13 +14,13 @@ import server_protocols.ServerProtocol;
 public class ServerPeer extends PeerTcp {
     private final static int  CHECK_TIME = 10 * 1000;
     private double m_checktime = 0;
-    private ClientTcpPeer clientTcpPeer;
+    private PeerTcpClient peerTcpClient;
 
     public ServerPeer(int peerid,int remoteType) {
         m_peerId = peerid;
         this.remote_type = remoteType;
 
-        clientTcpPeer = new ClientTcpPeer(new LogicClientChannelHandler(this));
+        peerTcpClient = new PeerTcpClient(new LogicClientChannelHandler(this));
     }
 
     @Override
@@ -71,13 +71,13 @@ public class ServerPeer extends PeerTcp {
     public void connect(String host, int port)
     {
         set_state(e_peer_state.e_ps_connecting);
-        clientTcpPeer.connect(host,port);
+        peerTcpClient.connect(host,port);
     }
 
     public void reconnect()
     {
         set_state(e_peer_state.e_ps_connecting);
-        clientTcpPeer.reconnect();
+        peerTcpClient.reconnect();
     }
 
     public void regedit_to_monitor()

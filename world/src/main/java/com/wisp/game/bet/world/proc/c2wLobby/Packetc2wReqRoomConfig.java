@@ -40,6 +40,7 @@ public class Packetc2wReqRoomConfig extends DefaultWorldRequestMessage<Client2Wo
         for( GameRoomMgrDoc gameRoomMgrDoc : gameRoomMgrDocList )
         {
             client2world_protocols.Client2WorldProtocol.msg_room_config.Builder roomConfigBuilder = client2world_protocols.Client2WorldProtocol.msg_room_config.newBuilder();
+
             roomConfigBuilder.setRoomId(gameRoomMgrDoc.getRoomId());
             roomConfigBuilder.setUniqueId(gameRoomMgrDoc.getUid());
             roomConfigBuilder.setBankerCondition(gameRoomMgrDoc.getRoomId());
@@ -75,6 +76,8 @@ public class Packetc2wReqRoomConfig extends DefaultWorldRequestMessage<Client2Wo
             }
             roomConfigBuilder.addAllPlatList( convertListToLong(gameRoomMgrDoc.getPlatList()) );
             roomConfigBuilder.addAllRateList(gameRoomMgrDoc.getmRatePoolList());
+
+            builder.addRoomCfg(roomConfigBuilder);
         }
 
         player.send_msg_to_client(builder);
@@ -82,12 +85,12 @@ public class Packetc2wReqRoomConfig extends DefaultWorldRequestMessage<Client2Wo
     }
 
 
-    private <T> List<T> convertListToLong(List<?> list)
+    private List<Long> convertListToLong(List<Integer> list)
     {
-        List<T> longList = new ArrayList<>();
+        List<Long> longList = new ArrayList<>();
         for(int i = 0; i < list.size();i++)
         {
-            longList.add( (T)list.get(i) );
+            longList.add( list.get(i).longValue() );
         }
 
         return longList;

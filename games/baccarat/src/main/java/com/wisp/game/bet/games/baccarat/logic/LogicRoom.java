@@ -26,6 +26,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import pump_type.PumpType;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class LogicRoom {
     private static int MAX_BET_COUNT = 5;
@@ -118,6 +119,8 @@ public class LogicRoom {
         m_roomAll_winList = new ArrayList<>();
 
         m_room_odds_list = new LinkedList<>();
+        m_banker_list = new ArrayList<>();
+        m_room_players = new ConcurrentHashMap<>();
 
 
         m_cfg = cfg;

@@ -72,9 +72,9 @@ public abstract class PeerTcp {
             MsgBuf msgBuf =  receive_queue.poll();
             cur_tm_ms = System.currentTimeMillis();
 
-            if( msgBuf.getPacket_id() == 5001 )
+            if( msgBuf.getPacket_id() == 6 )
             {
-                System.out.printf("go this...");
+                logger.info("packet_service the size:" + receive_queue.size());
             }
 
             if( m_need_route && msgBuf.isNeed_route() )

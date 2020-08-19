@@ -311,7 +311,7 @@ public class GamePlayer {
         }
 
         GamePlayerMgr.Instance.onEnterGame(m_gameid);
-        reset_gatepeer();
+        reset_logicpeer();
         return true;
     }
 
@@ -360,7 +360,19 @@ public class GamePlayer {
 
     public void leave_game()
     {
+        if( !resetGameIdServerId() )
+        {
+            return;
+        }
 
+        //告诉网关服务器，某个玩家不在某个子游戏上面了
+        if( m_gatePeer != null )
+        {
+            ServerProtocol.packet_player_connect.Builder builder =  ServerProtocol.packet_player_connect.newBuilder();
+            builder.setLogicid(m_logicid);
+            builder.setSessionid(m_sessionid);
+            m_gatePeer.send_msg(builder);
+        }
     }
 
     public void clear_logic(int lid)

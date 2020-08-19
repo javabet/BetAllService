@@ -79,7 +79,7 @@ public class LogicServer extends ServerBase {
 
             elapsed = System.currentTimeMillis() - cur_tm_ms;
 
-            if(  gameEngine != null && GamePlayerMgr.Instance.is_closing() )
+            if(  gameEngine != null && !GamePlayerMgr.Instance.is_closing() )
             {
                 gameEngine.heartbeat(elapsed);
             }
@@ -124,7 +124,7 @@ public class LogicServer extends ServerBase {
             gameEngine = GameManager.Instance.get_game_engine();
             if( gameEngine != null )
             {
-                if(gameEngine.init_engine())
+                if(!gameEngine.init_engine())
                 {
                     gameEngine.exit_engine();
                     gameEngine = null;

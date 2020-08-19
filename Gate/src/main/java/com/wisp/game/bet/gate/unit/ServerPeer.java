@@ -2,7 +2,7 @@ package com.wisp.game.bet.gate.unit;
 
 import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.share.netty.PeerTcp;
-import com.wisp.game.bet.share.netty.client.ClientTcpPeer;
+import com.wisp.game.bet.share.netty.server.PeerTcpClient;
 import com.wisp.game.bet.share.netty.infos.e_peer_state;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
@@ -14,7 +14,7 @@ public final class ServerPeer extends PeerTcp {
     private static final int CHECK_TIME = 10000;
     private int m_checktime = 0;
     private boolean m_regedit;
-    private ClientTcpPeer clientTcpPeer;
+    private PeerTcpClient peerTcpClient;
 
     public ServerPeer(int peerId,int remoteType) {
         super();
@@ -22,7 +22,7 @@ public final class ServerPeer extends PeerTcp {
         m_peerId = peerId;
         remote_type = remoteType;
 
-        clientTcpPeer = new ClientTcpPeer(new GateClientChannelHandler(this));
+        peerTcpClient = new PeerTcpClient(new GateClientChannelHandler(this));
         this.m_state = e_peer_state.e_ps_disconnected;
     }
 
@@ -55,13 +55,13 @@ public final class ServerPeer extends PeerTcp {
         if(  state != e_peer_state.e_ps_connected && state != e_peer_state.e_ps_connecting )
         {
             logger.info("server_reconnect id:" + get_id() + "  remote_id:" + get_remote_id() + "  remote_type:" + get_remote_type() );
-            clientTcpPeer.reconnect();
+            peerTcpClient.reconnect();
         }
         else if(!m_regedit && get_remote_type() == ServerBase.e_server_type.e_st_logic.getNumber() )
         {
             //如果注册失败，则关闭socket,并且重新连接
             logger.info("logic_server regedit fail remote_id:" + get_remote_id() + "  remote_type:" + get_remote_type());
-            clientTcpPeer.discannect();
+            peerTcpClient.discannect();
         }
         else if( get_remote_type() == ServerBase.e_server_type.e_st_monitor_VALUE )
         {
@@ -78,7 +78,7 @@ public final class ServerPeer extends PeerTcp {
     public void connect(String host, int port)
     {
         set_state(e_peer_state.e_ps_connecting);
-        clientTcpPeer.connect(host,port);
+        peerTcpClient.connect(host,port);
         //set_state(e_peer_state.e_ps_accepting);
     }
 

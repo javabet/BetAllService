@@ -9,7 +9,6 @@ public class MsgBuf {
    private boolean need_route;
    private ByteBuf msgBuff;
    private ByteString byteString;
-   //private byte[] bytes;
    private Message msg;
 
     public MsgBuf() {
@@ -48,16 +47,6 @@ public class MsgBuf {
     public void setMsg(Message msg) {
         this.msg = msg;
     }
-
-
-//    public byte[] getBytes() {
-//        return bytes;
-//    }
-//
-//    public void setBytes(byte[] bytes) {
-//        this.bytes = bytes;
-//    }
-
 
     public ByteString getByteString() {
         return byteString;

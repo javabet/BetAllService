@@ -21,6 +21,9 @@ public interface IGameEngine {
 
     public int player_join_friend_game( GamePlayer gamePlayer,int friendId );
 
+    void deduct_stock(int room_id, int gold);
+
+
     // 时间0点通知
     public void zero_time_arrive();
 

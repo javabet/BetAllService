@@ -15,17 +15,7 @@ public class ServerNettyInitializer extends ChannelInitializer<SocketChannel> {
     private ChannelHandler endHandler;
 
     public ServerNettyInitializer(ChannelHandler endHandler ) {
-
         this.endHandler = endHandler;
-    }
-
-    /**
-     * 增加额外的中间处理过程
-     * @param listHandlers
-     */
-    public void setMiddleHandlers(List<ChannelHandler> listHandlers)
-    {
-        this.listHandlers = listHandlers;
     }
 
     protected  void initChannel(SocketChannel ch) throws Exception

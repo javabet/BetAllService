@@ -21,11 +21,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class LogicLobby {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
-    private int TempTodayOutlay = 0;
-    private int TempTodayIncome = 0;
-
-    private List<Integer> TempTodayOutlayArr;
-    private List<Integer> TempTodayIncomeArr;
 
     private boolean m_init;					//是否已初始化
     private int m_max_player;				//最大人数限制
@@ -43,8 +38,6 @@ public class LogicLobby {
     public LogicLobby() {
         m_rooms = new ConcurrentHashMap<>();
         m_all_players = new ConcurrentHashMap<>();
-
-        //resetToday();
     }
 
     public void set_room(int agentid, int roomid)
@@ -119,31 +112,28 @@ public class LogicLobby {
     {
         m_max_player = maxCount;
 
+        //初始化房间管理
         RoomMgr.Instance.init(rmConfig,null);
 
-
+        //创建混服房间
         if(GameManager.Instance.open_room())
         {
             RoomMgr.Instance.register_room(0);
             Map<Integer, GameRoomMgrDoc> mgrRooms =  RoomMgr.Instance.get_rooms();
 
             RoomMgr.Instance.set_stock_cfg(rmStockConfig);
-
             for( GameRoomMgrDoc gameRoomMgrDoc : mgrRooms.values())
             {
                 if( !gameRoomMgrDoc.isOpen() )
                 {
                     continue;
                 }
-
                 RMConfigData rmConfigData =  RMConfig.Instance.GetData(gameRoomMgrDoc.getRoomId());
-
                 if( rmConfigData == null )
                 {
                     logger.warn(" the rmConfig is not exist: " + gameRoomMgrDoc.getRoomId());
                     continue;
                 }
-
                 LogicRoom logicRoom = new LogicRoom( rmConfigData,this );
                 m_rooms.put(gameRoomMgrDoc.getRoomId(), logicRoom );
             }

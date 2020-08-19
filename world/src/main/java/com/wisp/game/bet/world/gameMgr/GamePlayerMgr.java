@@ -181,6 +181,11 @@ public class GamePlayerMgr {
 
     public void onEnterGame( int gameId )
     {
+        if( !m_onlineNum.containsKey(gameId) )
+        {
+            m_onlineNum.put(gameId,0);
+        }
+
         int oldValue =m_onlineNum.get(gameId);
         m_onlineNum.put(gameId, oldValue + 1);
     }

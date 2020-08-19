@@ -2,7 +2,7 @@ package com.wisp.game.bet.world.unit;
 
 import com.wisp.game.bet.world.gameMgr.GamePlayerMgr;
 import com.wisp.game.bet.share.netty.PeerTcp;
-import com.wisp.game.bet.share.netty.client.ClientTcpPeer;
+import com.wisp.game.bet.share.netty.server.PeerTcpClient;
 import com.wisp.game.bet.share.netty.infos.e_peer_state;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
@@ -15,14 +15,14 @@ public class ServerPeer extends PeerTcp {
 
     private static final int CHECK_TIME = 10 * 1000;
 
-    private ClientTcpPeer clientTcpPeer;
+    private PeerTcpClient peerTcpClient;
 
     private double m_checktime;
 
     public ServerPeer(int peerId,int remoteType) {
         m_peerId = peerId;
         remote_type = remoteType;
-        clientTcpPeer = new ClientTcpPeer(new WorldClientChannelHandler(this));
+        peerTcpClient = new PeerTcpClient(new WorldClientChannelHandler(this));
     }
 
     public void heartbeeat( double elapsed )
@@ -68,13 +68,13 @@ public class ServerPeer extends PeerTcp {
     public void connect(String host, int port)
     {
         set_state(e_peer_state.e_ps_connecting);
-        clientTcpPeer.connect(host,port);
+        peerTcpClient.connect(host,port);
     }
 
     public void reconnect()
     {
         set_state(e_peer_state.e_ps_connecting);
-        clientTcpPeer.reconnect();;
+        peerTcpClient.reconnect();;
     }
 
     public void regedit_to_monitor()
