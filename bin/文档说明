@@ -1,0 +1,47 @@
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <version>3.3.0</version>
+    <configuration>
+        <archive>                           <!-- 存档 -->
+          <addMavenDescriptor/>                 <!-- 添加maven 描述 -->
+          <compress/>                           <!-- 压缩 -->
+          <forced/>
+          <index/>
+          <manifest>                            <!-- 配置清单（MANIFEST）-->
+            <addClasspath/>                         <!-- 添加到classpath 开关 -->
+            <addDefaultImplementationEntries/>
+            <addDefaultSpecificationEntries/>
+            <addExtensions/>
+            <classpathLayoutType/>
+            <classpathMavenRepositoryLayout/>
+            <classpathPrefix/>                      <!-- classpath 前缀 -->
+            <customClasspathLayout/>
+            <mainClass/>                            <!-- 程序主函数入口 -->
+            <packageName/>                          <!-- 打包名称 -->
+            <useUniqueVersions/>                    <!-- 使用唯一版本 -->
+          </manifest>
+          <manifestEntries>                     <!-- 配置清单（MANIFEST）属性 -->
+            <key>value</key>
+          </manifestEntries>
+          <manifestFile/>                       <!-- MANIFEST 文件位置 -->
+          <manifestSections>
+            <manifestSection>
+              <name/>
+              <manifestEntries>
+                <key>value</key>
+              </manifestEntries>
+            <manifestSection/>
+          </manifestSections>
+          <pomPropertiesFile/>
+        </archive>
+
+        <excludes>                          <!-- 过滤掉不希望包含在jar中的文件  -->
+            <exclude/>
+        </excludes>
+
+        <includes>                          <!-- 添加文件到jar中的文件  -->
+            <include/>
+        </includes>
+    </configuration>
+</plugin>

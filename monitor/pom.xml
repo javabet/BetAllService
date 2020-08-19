@@ -141,6 +141,7 @@
                     </archive>
                     <!--<outputDirectory>${project.build.directory}</outputDirectory>-->
                     <outputDirectory>${project.basedir}/../bin</outputDirectory>
+                <finalName>monitor</finalName>
                 </configuration>
             </plugin>
 
