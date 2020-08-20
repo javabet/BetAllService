@@ -8,7 +8,7 @@ import com.wisp.game.bet.world.proc.DefaultWorldRequestMessage;
 import com.wisp.game.bet.world.unit.WorldPeer;
 import logic2world_protocols.Logic2WorldProtocol;
 
-@IRequest
+@IRequest(5008)
 public class Packetc2wLeaveGame extends DefaultWorldRequestMessage<Client2WorldProtocol.packetc2w_leave_game> {
     @Override
     public boolean packet_process(WorldPeer peer, GamePlayer player, Client2WorldProtocol.packetc2w_leave_game msg) {

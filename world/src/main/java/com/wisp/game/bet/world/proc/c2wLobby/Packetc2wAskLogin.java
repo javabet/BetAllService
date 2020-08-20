@@ -12,7 +12,7 @@ import com.wisp.game.bet.world.unit.WorldPeer;
 
 import java.util.ArrayList;
 
-@IRequest
+@IRequest(5003)
 public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldProtocol.packetc2w_ask_login> {
     @Override
     public boolean packet_process(WorldPeer peer, GamePlayer player, Client2WorldProtocol.packetc2w_ask_login msg) {

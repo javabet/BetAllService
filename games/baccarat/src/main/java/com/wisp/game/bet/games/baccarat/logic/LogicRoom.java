@@ -189,9 +189,19 @@ public class LogicRoom {
                 int tag = GameEngine.Instance.get_gameid() * 100 + m_cfg.getmRoomID();
                 boolean exroom = is_ex_room();
                 if (m_rob_min <= 0)
+                {
                     m_rob_min = GameManager.Instance.get_bet_robot_count(tag, exroom);
+                    //TODO wisp 暂时不需要机器人
+                    m_rob_min = 0;
+                }
+
                 if (m_rob_banker_min <= 0)
+                {
                     m_rob_banker_min = GameManager.Instance.get_banker_robot_count(tag, exroom);
+                    //TODO wisp 暂时不需要机器人
+                    m_rob_banker_min = 0;
+                }
+
 
                 if (m_rob_count < m_rob_min && m_cfg.getmIsOpen())
                 {

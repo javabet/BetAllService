@@ -7,7 +7,7 @@ import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
 
-@IRequest
+@IRequest(4)
 public class PacketUpdateSelfInfo extends DefaultRequestMessage<ServerProtocol.packet_updata_self_info, MonitorPeer> {
 
     public boolean packet_process( MonitorPeer peer,ServerProtocol.packet_updata_self_info message) {

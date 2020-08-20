@@ -124,6 +124,9 @@ public class GamePlayer {
                 init_acc_data(accountTableInfo);
                 create_player(false,accountTableInfo);
             }
+
+            m_login = true;
+            //GameEngineMgr.Instance.player_login
         }
         else
         {
@@ -140,8 +143,9 @@ public class GamePlayer {
         {
             //创建进出日志
         }
-
+        //创建代理房间
         GameRoomMgr.Instance.init_room(playerInfoDoc.getAgentId());
+        GamePlayerMgr.Instance.addPlayerById(this);
         m_state = e_player_state.e_ps_playing;
 
         Client2WorldProtocol.packetw2c_player_connect_result.Builder builder = Client2WorldProtocol.packetw2c_player_connect_result.newBuilder();
@@ -242,8 +246,27 @@ public class GamePlayer {
         {
             Logic2WorldProtocol.packetw2l_player_login.Builder builder = Logic2WorldProtocol.packetw2l_player_login.newBuilder();
             builder.setRoomid(roomId);
+            builder.setSessionid(m_sessionid);
             msg_info_def.MsgInfoDef.msg_account_info.Builder msgAccountInfoBuilder = builder.getAccountInfoBuilder();
             msgAccountInfoBuilder.setChannelId(playerInfoDoc.getChannelID());
+            msgAccountInfoBuilder.setAid(playerInfoDoc.getPlayerId());
+            msgAccountInfoBuilder.setGold(playerInfoDoc.getGold());
+            msgAccountInfoBuilder.setNickname(playerInfoDoc.getNickName());
+            msgAccountInfoBuilder.setViplvl(playerInfoDoc.getVipLevel());
+            msgAccountInfoBuilder.setRecharged(playerInfoDoc.getRecharged());
+            msgAccountInfoBuilder.setSex(playerInfoDoc.getSex());
+            msgAccountInfoBuilder.setCurPhotoFrameId(playerInfoDoc.getPhotoFrameId());
+            msgAccountInfoBuilder.setIconCustom(playerInfoDoc.getIconCustom());
+            msgAccountInfoBuilder.setTicket(0);
+            msgAccountInfoBuilder.setCreateTime(0);
+            msgAccountInfoBuilder.setPrivilege(0);
+            msgAccountInfoBuilder.setRoomCard(playerInfoDoc.getRoomCard());
+            msgAccountInfoBuilder.setGuildId(0);
+
+            msg_info_def.MsgInfoDef.msg_account_info_ex.Builder msgAccountInfoExBuilder =  builder.getAccountInfoExBuilder();
+            msgAccountInfoExBuilder.setIsRobot(playerInfoDoc.isRobot());
+            msgAccountInfoExBuilder.setFreeGold(0);
+            msgAccountInfoExBuilder.setProfit(0);
 
             m_logicPeer.send_msg(builder.build());
         }
@@ -345,13 +368,24 @@ public class GamePlayer {
             {
                 Logic2WorldProtocol.packetw2l_player_login.Builder builder = Logic2WorldProtocol.packetw2l_player_login.newBuilder();
                 builder.getAccountInfoBuilder().setAid(playerInfoDoc.getPlayerId());
-
-               m_logicPeer.send_msg(builder.build());
+                builder.setSessionid(m_sessionid);
+                m_logicPeer.send_msg(builder);
             }
         }
         else
         {
+            if( !playerInfoDoc.isRobot())
+            {
+                playerInfoDoc.setLastGameId(m_gameid);
+            }
+        }
 
+        if( m_gatePeer != null && m_logicid > 0)
+        {
+            ServerProtocol.packet_player_connect.Builder builder = ServerProtocol.packet_player_connect.newBuilder();
+            builder.setLogicid(m_logicid);
+            builder.setSessionid(m_sessionid);
+            m_gatePeer.send_msg(builder);
         }
 
         return true;

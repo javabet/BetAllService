@@ -7,6 +7,7 @@ import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import server_protocols.ServerBase;
+import server_protocols.ServerProtocol;
 
 public class MonitorPeer extends PeerTcp {
 
@@ -32,7 +33,7 @@ public class MonitorPeer extends PeerTcp {
         int packet_id = packet_service(-1);
         if( packet_id != 0 )
         {
-            logger.error("monitor_peer packet_service error id:" + get_id() + " packetId:" + packet_id);
+            logger.error("monitor_peer packet_service error id:" + get_id() + " packetId:" + packet_id + " type:" + ServerBase.e_server_type.valueOf(packet_id));
         }
 
         if( check_timeout() )

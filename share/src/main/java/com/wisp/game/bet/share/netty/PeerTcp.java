@@ -90,9 +90,14 @@ public abstract class PeerTcp {
             else
             {
                 RequestMessageRegister.ProtocolStruct protocolStruct = RequestMessageRegister.Instance.getProtocolStruct(msgBuf.getPacket_id());
-                if( protocolStruct == null || protocolStruct.getHandlerInstance() == null ||
-                        !protocolStruct.getHandlerInstance().packet_process(this,msgBuf.getMsg()) )
+                if( protocolStruct == null || protocolStruct.getHandlerInstance() == null)
                 {
+                    logger.error("the protocol has not register:" + msgBuf.getPacket_id());
+                    return msgBuf.getPacket_id();
+                }
+                else if( !protocolStruct.getHandlerInstance().packet_process(this,msgBuf.getMsg()))
+                {
+                    logger.error("packet process has error:" + msgBuf.getPacket_id());
                     return msgBuf.getPacket_id();
                 }
             }

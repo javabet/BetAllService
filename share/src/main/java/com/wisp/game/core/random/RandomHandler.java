@@ -23,6 +23,13 @@ public class RandomHandler {
      * @return
      */
     public int getRandomValue(int maxValue) {
+        if( maxValue <= 0 )
+        {
+            System.out.printf("go this...");
+
+            maxValue = 1;
+        }
+
         return this.random.nextInt(maxValue);
     }
 

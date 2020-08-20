@@ -9,7 +9,7 @@ import com.wisp.game.bet.world.proc.DefaultWorldRequestMessage;
 import com.wisp.game.bet.world.unit.WorldPeer;
 import msg_type_def.MsgTypeDef;
 
-@IRequest
+@IRequest(5004)
 public class Packetc2wEnterGame extends DefaultWorldRequestMessage<Client2WorldProtocol.packetc2w_enter_game> {
     @Override
     public boolean packet_process(WorldPeer peer, GamePlayer player, Client2WorldProtocol.packetc2w_enter_game msg) {

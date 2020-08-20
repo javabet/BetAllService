@@ -6,7 +6,7 @@ import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import org.springframework.beans.factory.InitializingBean;
 import server_protocols.ServerProtocol;
 
-@IRequest
+@IRequest(9)
 public class PacketHeartBeat extends DefaultRequestMessage<ServerProtocol.packet_heartbeat, MonitorPeer> implements InitializingBean {
 
 

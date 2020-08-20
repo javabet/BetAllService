@@ -45,6 +45,12 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
     @Field(targetType = FieldType.INT32)private int RoomCard;
     @Field(targetType = FieldType.INT32)private int VipExp;
     @Field(targetType = FieldType.INT32)private int VipLevel;
+    @Field(targetType = FieldType.INT32)private int PhotoFrameId;
+
+    public PlayerInfoDoc() {
+        IconCustom = "";
+        PhotoFrameId = 0;
+    }
 
     public String getAccount() {
         return Account;
@@ -301,5 +307,13 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
 
     public void setVipLevel(int vipLevel) {
         VipLevel = vipLevel;
+    }
+
+    public int getPhotoFrameId() {
+        return PhotoFrameId;
+    }
+
+    public void setPhotoFrameId(int photoFrameId) {
+        PhotoFrameId = photoFrameId;
     }
 }

@@ -63,6 +63,8 @@ public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProto
                 GamePlayerMgr.Instance.add_player(gamePlayer);
                 builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_success);
 
+                logger.info("add the player to the game_player_mgr");
+
                 //机器人需要另外通知
                 gamePlayer.reset_robot_life();
             }

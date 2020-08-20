@@ -12,7 +12,7 @@ import server_protocols.ServerBase;
 import server_protocols.ServerProtocol;
 
 
-@IRequest
+@IRequest(0)
 public class PacketServerRegister  extends DefaultRequestMessage<ServerProtocol.packet_server_register, MonitorPeer> {
 
     private Logger logger = LoggerFactory.getLogger(getClass());

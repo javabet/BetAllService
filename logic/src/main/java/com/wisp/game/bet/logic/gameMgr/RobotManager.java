@@ -443,6 +443,11 @@ public class RobotManager {
             }
         }
 
+        if(result < 0 )
+        {
+            result = 0;
+        }
+
         return RandomHandler.Instance.getRandomValue(result * 0.8, result * 1.2);
     }
 

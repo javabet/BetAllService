@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-@IRequest(7685)
+@IRequest(5175)
 public class Packetc2wReqRoomConfig extends DefaultWorldRequestMessage<Client2WorldProtocol.packetc2w_req_room_config> {
 
     @Autowired

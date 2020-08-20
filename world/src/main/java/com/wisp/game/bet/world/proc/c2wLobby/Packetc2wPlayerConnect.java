@@ -12,7 +12,7 @@ import com.wisp.game.bet.share.netty.PacketManager.RequestMessageFromSID;
 import msg_type_def.MsgTypeDef;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@IRequest
+@IRequest(5001)
 public class Packetc2wPlayerConnect extends RequestMessageFromSID<Client2WorldProtocol.packetc2w_player_connect,WorldPeer> {
 
     @Autowired

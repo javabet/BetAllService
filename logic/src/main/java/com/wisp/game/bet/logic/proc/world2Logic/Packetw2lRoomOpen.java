@@ -8,7 +8,7 @@ import logic2world_protocols.Logic2WorldProtocol;
 
 import javax.annotation.Resource;
 
-@IRequest
+@IRequest(20025)
 public class Packetw2lRoomOpen extends DefaultRequestMessage<Logic2WorldProtocol.packetw2l_room_open, ServerPeer> {
 
     @Resource

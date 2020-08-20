@@ -6,7 +6,7 @@ import com.wisp.game.bet.share.netty.IRequest;
 import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
 import server_protocols.ServerProtocol;
 
-@IRequest
+@IRequest(22)
 public class PacketServerDown extends DefaultRequestMessage<ServerProtocol.packet_serverdown, MonitorPeer> {
 
     public boolean packet_process( MonitorPeer peer,ServerProtocol.packet_serverdown message) {
