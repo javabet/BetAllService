@@ -43,7 +43,9 @@ public class GamePlayer {
     public int Sex;
     public String channelId;
     public int CreateTime;
-    private int Recharged;
+    public int Recharged;
+    public int Privilege;
+    public int RoomCard;
 
     //机器人性格 1急躁型 2持续型 3抄底型
     public int m_robot_type;

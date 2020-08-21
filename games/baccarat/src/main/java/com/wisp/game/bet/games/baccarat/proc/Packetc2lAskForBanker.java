@@ -10,7 +10,7 @@ import game_baccarat_protocols.GameBaccaratProtocol;
 import msg_type_def.MsgTypeDef;
 
 //上庄
-@IRequest
+@IRequest(10010)
 public class Packetc2lAskForBanker extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_ask_for_banker, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_ask_for_banker msg) {

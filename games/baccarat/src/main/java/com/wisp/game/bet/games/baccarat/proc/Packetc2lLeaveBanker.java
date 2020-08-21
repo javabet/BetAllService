@@ -9,7 +9,7 @@ import game_baccarat_protocols.GameBaccaratProtocol;
 
 
 //下庄
-@IRequest
+@IRequest(10011)
 public class Packetc2lLeaveBanker extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_leave_banker, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_leave_banker msg) {

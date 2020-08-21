@@ -10,7 +10,7 @@ import game_baccarat_protocols.GameBaccaratProtocol;
 import msg_type_def.MsgTypeDef;
 
 //抢庄
-@IRequest
+@IRequest(10012)
 public class Packetc2lAskForFirstBanker extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_ask_for_first_banker, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_ask_for_first_banker msg) {

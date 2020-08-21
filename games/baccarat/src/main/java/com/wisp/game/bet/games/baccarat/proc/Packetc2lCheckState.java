@@ -8,7 +8,7 @@ import com.wisp.game.bet.share.netty.PacketManager.RequestMessageFromGate;
 import game_baccarat_protocols.GameBaccaratProtocol;
 
 //检测协议
-@IRequest
+@IRequest(10008)
 public class Packetc2lCheckState extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_check_state, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_check_state msg) {

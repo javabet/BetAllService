@@ -12,6 +12,7 @@ import com.wisp.game.bet.games.share.config.RMStockConfigData;
 import com.wisp.game.bet.logic.db.DbGame;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.unit.LogicServer;
+import com.wisp.game.bet.sshare.DbBase;
 import com.wisp.game.core.utils.CommonUtils;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -157,15 +158,12 @@ public class RoomMgr{
                         return 0;
                     }
 
-                    RMConfigData cfgCpy =  cfgData ;//*cfgData;
+                    RMConfigData cfgCpy = CommonUtils.deepClone(cfgData);
                     //生成RoomId
                     GameRoomMgrDoc obj = new GameRoomMgrDoc();// game_room_object::malloc();
                     obj.setTemplateId( cfgCpy.getmRoomID());
-                    //obj.setTemplateId(cfgCpy.);
                     obj.setRoomId(roomid);
-                    //TOdO wisp
-                    //cfgCpy.mRoomID = obj->RoomId->get_value();
-
+                    cfgCpy.setmRoomID(obj.getRoomId());
 
                     //后台创建时指定房间编号
                     if (!roomIDTxt.isEmpty())
@@ -201,117 +199,72 @@ public class RoomMgr{
                     obj.setLeopardLimit(cfgCpy.getmLeopardLimit());//->mLeopardLimit->set_value(cfgCpy.mLeopardLimit);
                     obj.setEveryLeopardLimit(cfgCpy.getmEveryLeopardLimit());//->mEveryLeopardLimit->set_value(cfgCpy.mEveryLeopardLimit);
                     obj.setProfitRateCheckIntervaltime( cfgCpy.getmProfitRateCheckIntervaltime() );//->mProfitRateCheckIntervaltime->set_value(cfgCpy.mProfitRateCheckIntervaltime);
-                    //obj.setFreeItem( cfgCpy.getF );//->mFreeItem->set_value(cfgCpy.mFreeItem);
-                    //obj.setCheckOpenRate(cfgCpy.ge);->mCheckOpenRate->set_value(cfgCpy.mCheckOpenRate);
-                    //obj.setCanGetExp(cfgCpy.get);->mCanGetExp->set_value(cfgCpy.mCanGetExp);
-                    //obj->mMissileCost->set_value(cfgCpy.mMissileCost);
-                    //obj->mBuyPowerCost->set_value(cfgCpy.mBuyPowerCost);
-                    //obj->mPowerParam->set_value(cfgCpy.mPowerParam);
-                    //obj->mLevelCondition->set_value(cfgCpy.mLevelCondition);
-                    //obj->mBotMaxGold->set_value(cfgCpy.mBotMaxGold);
-                    //obj->mBotMinGold->set_value(cfgCpy.mBotMinGold);
-                    //obj->mForceLeaveGold->set_value(cfgCpy.mForceLeaveGold);
-                    //obj->mBigBlind->set_value(cfgCpy.mBigBlind);
-                    //obj->mSmallBlind->set_value(cfgCpy.mSmallBlind);
-                    //obj->mCarryRestriction->set_value(cfgCpy.mCarryRestriction);
-                    //obj->mHuaGold->set_value(cfgCpy.mHuaGold);
-                    //obj->mTableCount->set_value(cfgCpy.mTableCount);
-                    //obj->mGameModel->set_string(cfgCpy.mGameModel);
+                    obj.setFreeItem( cfgCpy.getmFreeItem() );//->mFreeItem->set_value(cfgCpy.mFreeItem);
+                    obj.setCheckOpenRate(cfgCpy.getmCheckOpenRate());//->mCheckOpenRate->set_value(cfgCpy.mCheckOpenRate);
+                    obj.setCanGetExp(cfgCpy.getmCanGetExp());//->mCanGetExp->set_value(cfgCpy.mCanGetExp);
+                    obj.setMissileCost( cfgCpy.getmMissileCost() );//->set_value(cfgCpy.mMissileCost);
+                    obj.setBuyPowerCost(cfgCpy.getmBuyPowerCost());//->mBuyPowerCost->set_value(cfgCpy.mBuyPowerCost);
+                    obj.setPowerParam(cfgCpy.getmPowerParam());//->mPowerParam->set_value(cfgCpy.mPowerParam);
+                    obj.setLevelCondition( cfgCpy.getmLevelCondition() );//->mLevelCondition->set_value(cfgCpy.mLevelCondition);
+                    obj.setBotMaxGold(cfgCpy.getmBotMaxGold());//->mBotMaxGold->set_value(cfgCpy.mBotMaxGold);
+                    obj.setBotMinGold(cfgCpy.getmBotMinGold());//->mBotMinGold->set_value(cfgCpy.mBotMinGold);
+                    obj.setForceLeaveGold(cfgCpy.getmForceLeaveGold());//->mForceLeaveGold->set_value(cfgCpy.mForceLeaveGold);
+                    obj.setBigBlind(cfgCpy.getmBigBlind());//->mBigBlind->set_value(cfgCpy.mBigBlind);
+                    obj.setSmallBlind(cfgCpy.getmSmallBlind());//->mSmallBlind->set_value(cfgCpy.mSmallBlind);
+                    obj.setCarryRestriction(cfgCpy.getmCarryRestriction());//->mCarryRestriction->set_value(cfgCpy.mCarryRestriction);
+                    obj.setHuaGold(cfgCpy.getmHuaGold());//->mHuaGold->set_value(cfgCpy.mHuaGold);
+                    obj.setTableCount(cfgCpy.getmTableCount());//->mTableCount->set_value(cfgCpy.mTableCount);
+                    obj.setGameModel(cfgCpy.getmGameModel());//->mGameModel->set_string(cfgCpy.mGameModel);
 
-                    obj.setBetNames(new ArrayList<>());
-                    for (String val : cfgCpy.getmBetNames())
+
+                    obj.setBetNames(CommonUtils.deepSimpleList(cfgCpy.getmBetNames()));
+                    obj.setWeightList(CommonUtils.deepSimpleList(cfgCpy.getmWeightList()));
+                    obj.setBetLimit(CommonUtils.deepSimpleList(cfgCpy.getmBetLimit()));
+                    obj.setBetRange(CommonUtils.deepSimpleList(cfgCpy.getmBetRange()));
+                    obj.setPlatList(CommonUtils.deepSimpleList(cfgCpy.getmPlatList()));
+                    obj.setCustomList(CommonUtils.deepSimpleList(cfgCpy.getmCustomList()));
+                    obj.setmRatePoolList(CommonUtils.deepSimpleList(cfgCpy.getmRatePoolList()));
+                    obj.store_game_object(DbGame.Instance,true);
+
+                    if( cfgCpy.getmIsOpen() )
                     {
-                        obj.getBetNames().add(val);//->mBetNames->put(val);
+                        m_rooms.put(obj.getRoomId(),obj);
+                        m_cfg.GetMapData().put(obj.getRoomId(),cfgCpy);
                     }
-
-                    obj.setWeightList(new ArrayList<>());
-                    for (int val : cfgCpy.getmWeightList())
-                    {
-                        obj.getWeightList().add(val);//->mWeightList->put(val);
-                    }
-
-                    /**
-                    for (auto val : cfgCpy.mBetLimit)
-                    {
-                        obj->mBetLimit->put(val);
-                    }
-
-                    for (auto val : cfgCpy.mBetRange)
-                    {
-                        obj->mBetRange->put(val);
-                    }
-
-                    for (auto val : cfgCpy.mPlatList)
-                    {
-                        obj->mPlatList->put(val);
-                    }
-
-                    for (auto val : cfgCpy.mCustomList)
-                    {
-                        obj->mCustomList->put(val);
-                    }
-
-                    for (auto val : cfgCpy.mRatePoolList)
-                    {
-                        obj->mRatePoolList->put(val);
-                    }
-
-                    obj->store_game_object(true);
-
-                    if (cfgCpy.mIsOpen)
-                    {
-                        auto& cfgMap = m_cfg->GetMapData();
-                        m_rooms.insert(std::make_pair(obj->RoomId->get_value(), obj));
-                        cfgMap[obj->RoomId->get_value()] = cfgCpy;
-
-                        create_room_log(agentid, gameId, obj->RoomId->get_value(), obj->TemplateId->get_value());
-                        SLOG_CRITICAL << "web create room id:" << obj->RoomId->get_value();
-                    }
-                     **/
                 }
                 else if (gameRoomSetDoc.getType()  == 2)
                 {
-                    /**
-                    //停用房间
-                    auto it = m_rooms.find(roomid);
-                    if (it != m_rooms.end())
+                    if(m_rooms.containsKey(roomid))
                     {
-                        SLOG_CRITICAL << "web close room:" << it->second->RoomId->get_value();
-                        it->second->IsOpen->set_value(false);
-                        auto& cfgMap = m_cfg->GetMapData();
-                        cfgMap[roomid].mIsOpen = false;
-                        it->second->store_game_object();
+                       m_rooms.get(roomid).setOpen(false);
+                        Map<Integer, RMConfigData> cfgMap =  m_cfg.GetMapData();
+                       cfgMap.get(roomid).setmIsOpen(false);
+                       m_rooms.get(roomid).store_game_object(DbGame.Instance.getMongoTemplate());
                     }
-                     **/
                 }
                 else if (type == 3)
                 {
                     //设置房间参数
+                    //do nothing 暂时
                 }
 
             }
         }
         else
         {
-            /**
-            auto filter = document{} << "AgentId" << agentid << "ServerId" << serverId << "GameId" << gameId << "Type" << 4 << finalize;
-            auto doc = db_game::instance().findAndRemove(DB_GAME_ROOM_SET, filter);
-            if (doc)
+             Criteria criteria = Criteria.where("AgentId").is(agentid).and("ServerId").is(serverId).and("GameId").is(gameId).and("Type").is(4);
+             GameRoomSetDoc gameRoomSetDoc =  DbGame.Instance.getMongoTemplate().findAndRemove(Query.query(criteria),GameRoomSetDoc.class);
+            if( gameRoomSetDoc != null )
             {
-                auto view = doc->view();
-                if (!view.empty())
+                criteria = Criteria.where("AgentId").is(agentid).and("GameId").is(gameId);
+                GameRoomMgrDoc gameRoomMgrDoc =  DbGame.Instance.getMongoTemplate().findOne(Query.query(criteria),GameRoomMgrDoc.class);
+                if( gameRoomMgrDoc == null )
                 {
-                    auto filter = document{} << "AgentId" << agentid  << "GameId" << gameId << finalize;
-                    auto result = db_game::instance().findone(DB_GAME_ROOM_MGR, filter);
-                    if (!result)
-                    {
-                        type = 4;
-                        create_default_room(agentid);
-                    }
+                    type = 4;
+                    create_default_room(agentid);
                 }
             }
 
-             **/
         }
         return type;
     }
@@ -356,15 +309,11 @@ public class RoomMgr{
             {
                 if ( doc.getAgentId() == agentid)
                 {
-                    /**
-                    auto& roomMap = m_cfg->GetSingleton()->GetMapData();
-                    auto itRoom = roomMap.find(it.second->RoomId->get_value());
-                    if (itRoom != roomMap.end())
+                    Map<Integer, RMConfigData> rmConfigDataMap =  m_cfg.GetMapData();
+                    if( rmConfigDataMap.containsKey(doc.getRoomId()) )
                     {
-                        SLOG_CRITICAL << "player count 0 close room:" << it.second->RoomId->get_value();
-                        itRoom->second.mIsOpen = false;
+                        rmConfigDataMap.get(doc.getRoomId()).setmIsOpen(false);
                     }
-                     **/
                 }
             }
         }
@@ -593,14 +542,14 @@ public class RoomMgr{
             doc.setTableCount(cfgCpy.getmTableCount());
             doc.setGameModel(cfgCpy.getmGameModel());
 
-            doc.setBetNames(cloneList(cfgCpy.getmBetNames()));
-            doc.setWeightList(cloneList(cfgCpy.getmWeightList()));
-            doc.setBetLimit(cloneList(cfgCpy.getmBetLimit()));
+            doc.setBetNames(CommonUtils.deepSimpleList(cfgCpy.getmBetNames()));
+            doc.setWeightList(CommonUtils.deepSimpleList(cfgCpy.getmWeightList()));
+            doc.setBetLimit(CommonUtils.deepSimpleList(cfgCpy.getmBetLimit()));
 
-            doc.setBetRange(cloneList(cfgCpy.getmBetRange()));
-            doc.setPlatList(cloneList(cfgCpy.getmPlatList()));
-            doc.setCustomList(cloneList(cfgCpy.getmCustomList()));
-            doc.setmRatePoolList(cloneList(cfgCpy.getmRatePoolList()));
+            doc.setBetRange(CommonUtils.deepSimpleList(cfgCpy.getmBetRange()));
+            doc.setPlatList(CommonUtils.deepSimpleList(cfgCpy.getmPlatList()));
+            doc.setCustomList(CommonUtils.deepSimpleList(cfgCpy.getmCustomList()));
+            doc.setmRatePoolList(CommonUtils.deepSimpleList(cfgCpy.getmRatePoolList()));
 
             doc.store_game_object( DbGame.Instance.getMongoTemplate(),true);
 
@@ -614,16 +563,6 @@ public class RoomMgr{
         }
     }
 
-    private <T> List<T> cloneList(List<T> source)
-    {
-        List<T> list = new ArrayList<>();
-        for(int i = 0; i < source.size();i++)
-        {
-            list.add(source.get(i));
-        }
-
-        return list;
-    }
 
 
     public void  set_stock_cfg(RMStockConfig cfg)
@@ -657,10 +596,10 @@ public class RoomMgr{
                 cfgCpy.setmRelushTime(gameRoomStockDoc.getRelushTime());
                 cfgCpy.setmRoomName(gameRoomStockDoc.getRoomName());
 
-                cfgCpy.setmStockStage(cloneList(gameRoomStockDoc.getStockStage()));
+                cfgCpy.setmStockStage(CommonUtils.deepSimpleList(gameRoomStockDoc.getStockStage()));
                 cfgCpy.setmStockBuff(gameRoomStockDoc.getStockBuff());
-                cfgCpy.setmStrongKill( cloneList(gameRoomStockDoc.getStrongKill()) );
-                cfgCpy.setmWeakKill(cloneList(gameRoomStockDoc.getWeakKill()));
+                cfgCpy.setmStrongKill( CommonUtils.deepSimpleList(gameRoomStockDoc.getStrongKill()) );
+                cfgCpy.setmWeakKill(CommonUtils.deepSimpleList(gameRoomStockDoc.getWeakKill()));
 
 
                 Map<Integer, RMStockConfigData> cfgMap = cfg.GetMapData();
@@ -692,10 +631,10 @@ public class RoomMgr{
                 gmstockDoc.setTemplateId(pStock.getmRoomID());
                 gmstockDoc.setExtKillPer(0);
 
-                gmstockDoc.setStockStage(cloneList(pStock.getmStockStage()));
-                gmstockDoc.setStockBuff(  cloneList(pStock.getmStockBuff() )  );
-                gmstockDoc.setStrongKill(cloneList(pStock.getmStrongKill()));
-                gmstockDoc.setWeakKill( cloneList(pStock.getmWeakKill()) );
+                gmstockDoc.setStockStage(CommonUtils.deepSimpleList(pStock.getmStockStage()));
+                gmstockDoc.setStockBuff(  CommonUtils.deepSimpleList(pStock.getmStockBuff() )  );
+                gmstockDoc.setStrongKill(CommonUtils.deepSimpleList(pStock.getmStrongKill()));
+                gmstockDoc.setWeakKill( CommonUtils.deepSimpleList(pStock.getmWeakKill()) );
 
 
                 Criteria criteria1 = Criteria.where("GameId").is(gameId).and("RoomId").is(it.getRoomId());

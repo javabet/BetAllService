@@ -2,6 +2,7 @@ package com.wisp.game.bet.world.dbConfig;
 
 import com.wisp.game.bet.db.mongo.config.doc.AgentConfigDoc;
 import com.wisp.game.bet.db.mongo.games.doc.AgentGameConfigDoc;
+import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.world.db.DbGame;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -14,11 +15,13 @@ import java.util.Map;
 
 @Component
 public class AgentConfig {
-
+    public static AgentConfig Instance;
     private Map<Integer, AgentConfigDoc> m_agent_cfg;
     private Map<Integer,Map<Integer,AgentGameConfigDoc>>  m_game_cfg;
+    private double m_lastTime = 0;
 
     public AgentConfig() {
+        Instance = this;
         m_game_cfg = new HashMap<>();
         m_agent_cfg = new HashMap<>();
     }
@@ -57,6 +60,23 @@ public class AgentConfig {
 
 
         return true;
+    }
+
+    public boolean is_share_agent(int agentId)
+    {
+        int cur_time_helper = TimeHelper.Instance.get_cur_time();
+        if( cur_time_helper - m_lastTime > 30 )
+        {
+            m_lastTime = cur_time_helper;
+            load_agent();
+        }
+
+        if( !m_agent_cfg.containsKey(agentId) )
+        {
+            return  false;
+        }
+
+        return m_agent_cfg.get(agentId).isShareServer();
     }
 
     public List<Integer> game_custom_list(int agentId,int gameId)

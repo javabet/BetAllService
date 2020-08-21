@@ -122,7 +122,6 @@ public class LogicRoom {
         m_banker_list = new ArrayList<>();
         m_room_players = new ConcurrentHashMap<>();
 
-
         m_cfg = cfg;
         m_stock_cfg = RMStockConfig.Instance.GetData(cfg.getmRoomID());
 

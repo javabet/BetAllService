@@ -2,6 +2,7 @@ package com.wisp.game.bet.db.mongo.games.doc;
 
 import com.mongodb.client.result.UpdateResult;
 import com.wisp.game.bet.db.mongo.BaseMongoDoc;
+import com.wisp.game.bet.sshare.DbBase;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -59,7 +60,7 @@ public class GameRoomMgrDoc extends BaseMongoDoc {
     @Field(targetType = FieldType.INT32) private int RoomType;
     @Field(targetType = FieldType.INT32) private int ServerId;
     @Field(targetType = FieldType.INT32) private int SmallBlind;
-    @Field(targetType = FieldType.INT32) private int Status;
+    @Field(targetType = FieldType.INT32) private int Status;                //0:停用 1：起用
     @Field(targetType = FieldType.INT32) private int TableCount;
     @Field(targetType = FieldType.INT32) private int TemplateId;
     private List<Integer> WeightList;
@@ -513,6 +514,11 @@ public class GameRoomMgrDoc extends BaseMongoDoc {
         }
 
         return list;
+    }
+
+    public boolean store_game_object(DbBase dbBase,boolean to_all)
+    {
+        return store_game_object(dbBase.getMongoTemplate(),to_all);
     }
 
     public boolean store_game_object( MongoTemplate mongoTemplate )

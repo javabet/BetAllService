@@ -11,6 +11,9 @@ public class AgentConfigDoc extends BaseMongoDoc {
     private static final long serialVersionUID = 7463117477455793083L;
 
     @Field(targetType = FieldType.INT32) private int AgentId;
+    private boolean ShareServer;
+    @Field(targetType = FieldType.INT32)private int NewGold;
+
 
     public int getAgentId() {
         return AgentId;
@@ -18,5 +21,25 @@ public class AgentConfigDoc extends BaseMongoDoc {
 
     public void setAgentId(int agentId) {
         AgentId = agentId;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public boolean isShareServer() {
+        return ShareServer;
+    }
+
+    public void setShareServer(boolean shareServer) {
+        ShareServer = shareServer;
+    }
+
+    public int getNewGold() {
+        return NewGold;
+    }
+
+    public void setNewGold(int newGold) {
+        NewGold = newGold;
     }
 }

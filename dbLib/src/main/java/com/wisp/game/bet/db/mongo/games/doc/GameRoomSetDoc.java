@@ -1,16 +1,19 @@
 package com.wisp.game.bet.db.mongo.games.doc;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.stereotype.Component;
 
-@Component
+
+@Document(collection = "GameRoomSet")
 public class GameRoomSetDoc {
+
 
      @Field(targetType = FieldType.INT32) private int AgentId;
      @Field(targetType = FieldType.INT32) private int GameId;
      @Field(targetType = FieldType.INT32) private int RoomId;
-     @Field(targetType = FieldType.INT32) private int Type;
+     @Field(targetType = FieldType.INT32) private int Type;             //1：新增 2：停用房间
      @Field(targetType = FieldType.INT32) private int ServerId;
 
     @Field(targetType = FieldType.INT32)private  int TemplateId;

@@ -11,7 +11,7 @@ import msg_type_def.MsgTypeDef;
 import java.util.List;
 
 //离开桌子
-@IRequest
+@IRequest(10003)
 public class Pacetc2lLeaveRoom extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_leave_room, LogicPeer, GamePlayer> {
 
 

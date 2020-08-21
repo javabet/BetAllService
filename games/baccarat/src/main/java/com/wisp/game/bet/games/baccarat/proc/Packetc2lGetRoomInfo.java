@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
-@IRequest
+@IRequest(10001)
 public class Packetc2lGetRoomInfo extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_get_room_info, LogicPeer,GamePlayer> {
 
     @Autowired

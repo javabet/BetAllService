@@ -12,7 +12,7 @@ import msg_type_def.MsgTypeDef;
 
 
 //续压
-@IRequest
+@IRequest(10005)
 public class Packetc2lRepeatBet extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_repeat_bet, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_repeat_bet msg) {

@@ -7,7 +7,7 @@ import com.wisp.game.bet.share.netty.IRequest;
 import com.wisp.game.bet.share.netty.PacketManager.RequestMessageFromGate;
 import game_baccarat_protocols.GameBaccaratProtocol;
 
-@IRequest
+@IRequest(10007)
 public class Packetc2lGetRoomSceneInfo extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_get_room_scene_info, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_get_room_scene_info msg) {

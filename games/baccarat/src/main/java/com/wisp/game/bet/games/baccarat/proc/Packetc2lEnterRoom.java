@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 //进入房间
-@IRequest
+@IRequest(10002)
 public class Packetc2lEnterRoom extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_enter_room, LogicPeer, GamePlayer> {
 
     @Autowired

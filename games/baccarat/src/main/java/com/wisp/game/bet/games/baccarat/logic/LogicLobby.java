@@ -7,6 +7,7 @@ import com.wisp.game.bet.games.share.config.RMConfigData;
 import com.wisp.game.bet.games.share.config.RMStockConfig;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
+import com.wisp.game.core.random.RandomHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,12 @@ public class LogicLobby {
     @Autowired
     private RMConfig rmConfig;
 
-    private double m_check_cache;
-
+    private int m_check_cache;
     public LogicLobby() {
         m_rooms = new ConcurrentHashMap<>();
         m_all_players = new ConcurrentHashMap<>();
+
+        logger.info("the lobby construct");
     }
 
     public void set_room(int agentid, int roomid)
@@ -154,6 +156,7 @@ public class LogicLobby {
         m_rooms.clear();
     }
 
+
     public void heartbeat( double elapsed )
     {
         if(!m_init)return;
@@ -163,12 +166,10 @@ public class LogicLobby {
             logicRoom.heartbeat(elapsed);
         }
         m_check_cache += elapsed;
-        if(m_check_cache > 60)
+        if(m_check_cache > 1000 * 3600)     //TODO wisp,一分钟后即可关闭，测试阶段，修改为一个小时
         {
             //save_cache();
             m_check_cache = 0;
-
-
             Iterator<LogicRoom> iterator =  m_rooms.values().iterator();
             while (iterator.hasNext())
             {

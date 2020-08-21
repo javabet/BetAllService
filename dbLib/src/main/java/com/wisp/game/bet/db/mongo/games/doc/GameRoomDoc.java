@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * 使用StockCtrlXX时，每个子游戏的名字不同，所以不能指定其collection
  */
-
 public class GameRoomDoc {
     @Field(targetType = FieldType.INT32) private int RoomId;
     @Field(targetType = FieldType.INT32)private int AgentId;

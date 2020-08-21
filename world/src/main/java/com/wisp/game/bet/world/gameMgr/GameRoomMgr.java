@@ -5,6 +5,7 @@ import com.wisp.game.bet.GameConfig.MainGameVerConfig;
 import com.wisp.game.bet.db.mongo.games.doc.GameRoomMgrDoc;
 import com.wisp.game.bet.db.mongo.games.doc.GameRoomSetDoc;
 import com.wisp.game.bet.world.db.DbGame;
+import com.wisp.game.bet.world.dbConfig.AgentConfig;
 import com.wisp.game.bet.world.gameMgr.info.AgentRooms;
 import com.wisp.game.bet.world.unit.ServersManager;
 import com.wisp.game.bet.world.unit.WorldPeer;
@@ -45,38 +46,13 @@ public class GameRoomMgr {
         check_open_room();
     }
 
-
-    private void load_room_data()
-    {
-        synchronized (agent_rooms)
-        {
-            agent_rooms.clear();
-
-            Criteria criteria = Criteria.where("Status").is(1);
-            List<GameRoomMgrDoc> gameRoomMgrDocList =  DbGame.Instance.getMongoTemplate().find(Query.query(criteria),GameRoomMgrDoc.class);
-
-            for( GameRoomMgrDoc gameRoomMgrDoc : gameRoomMgrDocList )
-            {
-                if( !agent_rooms.containsKey(gameRoomMgrDoc.getGameId()) )
-                {
-                    agent_rooms.put(gameRoomMgrDoc.getGameId(),new HashMap<>());
-                }
-               Map<Integer, AgentRooms> agentRoomsMap =   agent_rooms.get(gameRoomMgrDoc.getGameId());
-
-               if(  !agentRoomsMap.containsKey(gameRoomMgrDoc.getAgentId()) )
-               {
-                   AgentRooms agentRooms = new AgentRooms();
-                   agentRooms.init(gameRoomMgrDoc.getGameId(),gameRoomMgrDoc.getAgentId());
-                   agentRoomsMap.put(gameRoomMgrDoc.getAgentId(),agentRooms);
-               }
-
-               agentRoomsMap.get(gameRoomMgrDoc.getAgentId()).add_room(gameRoomMgrDoc);
-            }
-        }
-    }
-
     public void init_room(int agentId)
     {
+        //如果是混服，则不需要
+        if( AgentConfig.Instance.is_share_agent(agentId) )
+        {
+            return;
+        }
         Map<Integer, GameEngineMgr.GameInfo> games =  GameEngineMgr.Instance.getGames();
 
         for( GameEngineMgr.GameInfo gameInfo : games.values() )
@@ -149,6 +125,142 @@ public class GameRoomMgr {
             }
         }
     }
+
+    public void set_game_room( int agentId,int gameId,int roomId )
+    {
+        if( AgentConfig.Instance.is_share_agent(agentId))
+        {
+            return;
+        }
+
+        int serverId = 0;
+
+        Criteria criteria = Criteria.where("AgentId").is(agentId).and("GameId").is(gameId).and("RoomId").is(roomId);
+        GameRoomSetDoc gameRoomSetDoc =  DbGame.Instance.getMongoTemplate().findOne(Query.query(criteria),GameRoomSetDoc.class);
+        if( gameRoomSetDoc == null )
+        {
+            return;
+        }
+
+        if( gameRoomSetDoc.getType() == 1 ) //添加房间
+        {
+            init_room(agentId);
+
+            criteria = Criteria.where("AgentId").is(agentId).and("GameId").is(gameId).and("Type").is(4);
+            GameRoomSetDoc gameRoomSetDoc2 = DbGame.Instance.getMongoTemplate().findOne(Query.query(criteria),GameRoomSetDoc.class);
+            if(gameRoomSetDoc2 != null)
+            {
+                serverId = gameRoomSetDoc2.getServerId();
+            }
+
+            Map<Integer,AgentRooms> agentRoomsMap = agent_rooms.get(gameId);
+            if( !agentRoomsMap.containsKey(agentId) )
+            {
+                criteria = Criteria.where("AgentId").is(agentId).and("GameId").is(gameId);
+                GameRoomMgrDoc gameRoomMgrDoc =  DbGame.Instance.getMongoTemplate().findOne(Query.query(criteria),GameRoomMgrDoc.class);
+                if( gameRoomMgrDoc != null )
+                {
+                    serverId = gameRoomMgrDoc.getServerId();
+                }
+                if(serverId == 0)
+                {
+                    GameEngineMgr.GameInfoStruct gameInfoStruct = GameEngineMgr.Instance.get_game_info_struct(gameId);
+                    if( gameInfoStruct != null )
+                    {
+                        serverId = gameInfoStruct.serverId;
+                    }
+                }
+            }
+            else
+            {
+                AgentRooms agentRooms = agentRoomsMap.get(agentId);
+                int roomCount = Integer.MAX_VALUE;
+                Map<Integer,Integer> serverRoomCount = new HashMap<>();
+                for( GameRoomMgrDoc gameRoomMgrDoc : agentRooms.getRooms().values() )
+                {
+                    if( !serverRoomCount.containsKey(gameRoomMgrDoc.getServerId()) )
+                    {
+                        serverRoomCount.put(gameRoomMgrDoc.getServerId(),0);
+                    }
+                    int oldValue = serverRoomCount.get(gameRoomMgrDoc.getServerId());
+                    serverRoomCount.put(gameRoomMgrDoc.getServerId(),oldValue + 1);
+                }
+
+                for(int serverIdKey : serverRoomCount.keySet())
+                {
+                    int cnt =  serverRoomCount.get(serverIdKey);
+                    if( cnt < roomCount )
+                    {
+                        roomCount = cnt;
+                        serverId = serverIdKey;
+                    }
+                }
+            }
+        }
+        else if(gameRoomSetDoc.getType() == 2) //关闭房间
+        {
+
+            if( agent_rooms.containsKey(gameId) && agent_rooms.get(gameId).containsKey(agentId) )
+            {
+                GameRoomMgrDoc gameRoomMgrDoc = agent_rooms.get(gameId).get(agentId).get_room(roomId);
+                serverId = gameRoomMgrDoc.getServerId();
+            }
+
+            if(serverId == 0)
+            {
+                //房间未上线，直接设置为离线
+                criteria = Criteria.where("AgentId").is(agentId).and("GameId").is(gameId).is("RoomId").is(roomId);
+                Update update = new Update();
+                update.set("IsOpen",false);
+                DbGame.Instance.getMongoTemplate().updateFirst(Query.query(criteria),update,GameRoomMgrDoc.class);
+                DbGame.Instance.getMongoTemplate().findAndRemove(Query.query(criteria),GameRoomSetDoc.class);
+            }
+        }
+
+        if( serverId != 0 )
+        {
+            Logic2WorldProtocol.packetw2l_set_room.Builder builder =  Logic2WorldProtocol.packetw2l_set_room.newBuilder();
+            builder.setAgentId(agentId);
+            builder.setRoomId(roomId);
+            WorldPeer worldPeer = ServersManager.Instance.find_server(serverId);
+            if( worldPeer != null )
+            {
+                worldPeer.send_msg(builder);
+            }
+        }
+    }
+
+
+    private void load_room_data()
+    {
+        synchronized (agent_rooms)
+        {
+            agent_rooms.clear();
+
+            Criteria criteria = Criteria.where("Status").is(1);
+            List<GameRoomMgrDoc> gameRoomMgrDocList =  DbGame.Instance.getMongoTemplate().find(Query.query(criteria),GameRoomMgrDoc.class);
+
+            for( GameRoomMgrDoc gameRoomMgrDoc : gameRoomMgrDocList )
+            {
+                if( !agent_rooms.containsKey(gameRoomMgrDoc.getGameId()) )
+                {
+                    agent_rooms.put(gameRoomMgrDoc.getGameId(),new HashMap<>());
+                }
+               Map<Integer, AgentRooms> agentRoomsMap =   agent_rooms.get(gameRoomMgrDoc.getGameId());
+
+               if(  !agentRoomsMap.containsKey(gameRoomMgrDoc.getAgentId()) )
+               {
+                   AgentRooms agentRooms = new AgentRooms();
+                   agentRooms.init(gameRoomMgrDoc.getGameId(),gameRoomMgrDoc.getAgentId());
+                   agentRoomsMap.put(gameRoomMgrDoc.getAgentId(),agentRooms);
+               }
+
+               agentRoomsMap.get(gameRoomMgrDoc.getAgentId()).add_room(gameRoomMgrDoc);
+            }
+        }
+    }
+
+
 
     public void check_open_room()
     {
@@ -226,8 +338,6 @@ public class GameRoomMgr {
         {
             return list;
         }
-
-
 
         for(AgentRooms agentRooms : agentRoomsMap.values())
         {

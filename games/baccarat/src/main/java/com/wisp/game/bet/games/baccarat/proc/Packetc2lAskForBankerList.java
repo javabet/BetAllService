@@ -9,7 +9,7 @@ import com.wisp.game.bet.share.netty.PacketManager.RequestMessageFromGate;
 import game_baccarat_protocols.GameBaccaratProtocol;
 
 //请求上庄列表
-@IRequest
+@IRequest(10014)
 public class Packetc2lAskForBankerList extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_ask_for_banker_list, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_ask_for_banker_list msg) {

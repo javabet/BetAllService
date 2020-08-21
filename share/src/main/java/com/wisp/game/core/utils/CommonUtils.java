@@ -243,7 +243,7 @@ public class CommonUtils {
 	 * @param <T>
 	 * @return
 	 */
-	public static <T> List<T> deepSimpleList(List<?> list)
+	public static <T> List<T> deepSimpleList(List<T> list)
 	{
 		List<T> cloneList = new ArrayList<>();
 		for( int i = 0; i < list.size();i++ )

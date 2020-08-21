@@ -8,6 +8,7 @@ import com.wisp.game.bet.logic.sshare.e_player_state;
 import com.wisp.game.bet.logic.unit.ServerPeer;
 import com.wisp.game.bet.share.netty.IRequest;
 import com.wisp.game.bet.share.netty.PacketManager.DefaultRequestMessage;
+import logic2world_protocols.Logic2WorldMsgType;
 import logic2world_protocols.Logic2WorldProtocol;
 import msg_type_def.MsgTypeDef;
 
@@ -47,8 +48,16 @@ public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProto
            gamePlayer.channelId = msg.getAccountInfo().getChannelId();
            gamePlayer.PlayerID = msg.getAccountInfo().getAid();
            gamePlayer.Gold = (int)msg.getAccountInfo().getGold();
+           gamePlayer.NickName = msg.getAccountInfo().getNickname();
+           gamePlayer.VIPLevel = msg.getAccountInfo().getViplvl();
+           gamePlayer.PhotoFrame = msg.getAccountInfo().getCurPhotoFrameId();
            gamePlayer.Sex = msg.getAccountInfo().getSex();
            gamePlayer.CreateTime = msg.getAccountInfo().getCreateTime();
+           gamePlayer.set_sessionid(msg.getSessionid());
+           gamePlayer.Privilege = msg.getAccountInfo().getPrivilege();
+           gamePlayer.IconCustom = msg.getAccountInfo().getIconCustom();
+           gamePlayer.RoomCard = (int)msg.getAccountInfo().getRoomCard();
+
 
            gamePlayer.IsRobot = msg.getAccountInfoEx().getIsRobot();
            if( !gamePlayer.IsRobot)

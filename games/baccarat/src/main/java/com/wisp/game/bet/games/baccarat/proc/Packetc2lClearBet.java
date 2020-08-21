@@ -7,7 +7,7 @@ import com.wisp.game.bet.share.netty.PacketManager.RequestMessageFromGate;
 import game_baccarat_protocols.GameBaccaratProtocol;
 import msg_type_def.MsgTypeDef;
 
-@IRequest
+@IRequest(10006)
 public class Packetc2lClearBet extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_clear_bet, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_clear_bet msg) {

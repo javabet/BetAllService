@@ -31,6 +31,16 @@ public class PacketTransmitMsg extends DefaultRequestMessage<ServerProtocol.pack
             else
             {
                 GamePlayer player = GamePlayerMgr.Instance.find_player( msg.getSessionid() );
+                if( player == null )
+                {
+                    logger.error("the player is not exist");
+                    player = GamePlayerMgr.Instance.find_player( msg.getSessionid() );
+                }
+                else if( player != null && player.get_state() != e_player_state.e_ps_playing)
+                {
+                    logger.error("the player's state is not  e_player_state.e_ps_playing");
+                }
+
                 if( player != null && player.get_state() == e_player_state.e_ps_playing )
                 {
                     bret = requestMessage.packet_process(peer,player,innerMsg);

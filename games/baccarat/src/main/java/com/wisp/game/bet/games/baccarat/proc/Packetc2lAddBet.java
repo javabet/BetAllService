@@ -12,7 +12,7 @@ import msg_type_def.MsgTypeDef;
 
 
 //下注
-@IRequest
+@IRequest(10004)
 public class Packetc2lAddBet extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_add_bet, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_add_bet msg) {

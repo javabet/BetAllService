@@ -10,7 +10,7 @@ import game_baccarat_protocols.GameBaccaratProtocol;
 import msg_type_def.MsgTypeDef;
 
 //离开上庄列表
-@IRequest
+@IRequest(10017)
 public class Packetc2lLeaveListBanker extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_leave_list_banker, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_leave_list_banker msg) {
