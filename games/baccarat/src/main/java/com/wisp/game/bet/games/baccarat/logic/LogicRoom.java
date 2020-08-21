@@ -2,7 +2,7 @@ package com.wisp.game.bet.games.baccarat.logic;
 
 import com.google.protobuf.Message;
 import com.wisp.game.bet.GameConfig.BaccaratConfig.BaccaratBaseConfig;
-import com.wisp.game.bet.db.mongo.games.GameRoomDoc;
+import com.wisp.game.bet.db.mongo.games.doc.GameRoomDoc;
 import com.wisp.game.bet.games.baccarat.db.DbGameName;
 import com.wisp.game.bet.games.baccarat.mgr.GameEngine;
 import com.wisp.game.bet.games.share.PlayerControl;

@@ -1,7 +1,7 @@
 package com.wisp.game.bet.world.proc.c2wLobby;
 
 import client2world_protocols.Client2WorldProtocol;
-import com.wisp.game.bet.db.mongo.games.GameRoomMgrDoc;
+import com.wisp.game.bet.db.mongo.games.doc.GameRoomMgrDoc;
 import com.wisp.game.bet.share.netty.IRequest;
 import com.wisp.game.bet.world.PlayerSys.GamePlayer;
 import com.wisp.game.bet.world.dbConfig.AgentConfig;

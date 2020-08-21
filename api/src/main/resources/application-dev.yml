@@ -1,0 +1,21 @@
+server:
+  port: 3001
+
+
+cfg:
+  playerdb_url: 127.0.0.1:27017
+  playerdb_name: PlayerDB_DWC
+  logdb_url: 127.0.0.1:27017
+  logdb_name: LogDB_DWC
+  gamedb_url: 127.0.0.1:27017
+  gamedb_name: GameDB
+  paydb_url: 127.0.0.1:27017
+  paydb_name: PaymentDB
+  configdb_url: 127.0.0.1:27017
+  configdb_name: ConfigDB
+  accountdb_url: 127.0.0.1:27017
+  accountdb_name: AccountDB
+  clouddb_url: 127.0.0.1:27017
+  clouddb_name: CloudDB
+  activiydb_url: 127.0.0.1:27017
+  activiydb_name: CloudDB

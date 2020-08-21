@@ -1,4 +1,4 @@
-package com.wisp.game.bet.db.mongo.games;
+package com.wisp.game.bet.db.mongo.games.doc;
 
 import com.wisp.game.bet.db.mongo.BaseMongoDoc;
 import org.springframework.data.mongodb.core.mapping.Document;

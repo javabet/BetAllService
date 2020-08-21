@@ -3,20 +3,16 @@ package com.wisp.game.bet.world.db;
 import com.wisp.game.bet.db.mongo.IMongoService;
 import com.wisp.game.bet.db.mongo.MongoServiceMeta;
 import com.wisp.game.bet.core.SpringContextHolder;
-import com.wisp.game.bet.db.mongo.games.GameRoomMgrDoc;
 import com.wisp.game.bet.share.common.ClassScanner;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.sshare.DbBase;
 import com.wisp.game.bet.world.dbConfig.AgentInfoConfig;
 import com.wisp.game.core.utils.FilePathUtils;
-import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -25,7 +21,6 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 @Component

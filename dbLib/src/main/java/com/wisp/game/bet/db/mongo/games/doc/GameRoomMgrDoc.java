@@ -1,4 +1,4 @@
-package com.wisp.game.bet.db.mongo.games;
+package com.wisp.game.bet.db.mongo.games.doc;
 
 import com.mongodb.client.result.UpdateResult;
 import com.wisp.game.bet.db.mongo.BaseMongoDoc;
@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;

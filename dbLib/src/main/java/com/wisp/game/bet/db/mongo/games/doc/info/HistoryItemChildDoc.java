@@ -1,4 +1,4 @@
-package com.wisp.game.bet.db.mongo.games.Baccara.info;
+package com.wisp.game.bet.db.mongo.games.doc.info;
 
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;

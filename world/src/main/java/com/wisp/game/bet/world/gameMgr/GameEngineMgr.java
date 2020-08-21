@@ -2,7 +2,7 @@ package com.wisp.game.bet.world.gameMgr;
 
 import com.wisp.game.bet.GameConfig.MainGameVerConfig;
 import com.wisp.game.bet.GameConfig.MainRoomCardConfig;
-import com.wisp.game.bet.db.mongo.games.GameRoomMgrDoc;
+import com.wisp.game.bet.db.mongo.games.doc.GameRoomMgrDoc;
 import com.wisp.game.bet.world.db.DbGame;
 import com.wisp.game.core.utils.CommonUtils;
 import msg_info_def.MsgInfoDef;

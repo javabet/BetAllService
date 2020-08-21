@@ -1,6 +1,6 @@
 package com.wisp.game.bet.world.gameMgr.info;
 
-import com.wisp.game.bet.db.mongo.games.GameRoomMgrDoc;
+import com.wisp.game.bet.db.mongo.games.doc.GameRoomMgrDoc;
 
 import java.util.HashMap;
 import java.util.Map;

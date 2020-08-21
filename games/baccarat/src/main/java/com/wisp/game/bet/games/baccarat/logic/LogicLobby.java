@@ -1,6 +1,6 @@
 package com.wisp.game.bet.games.baccarat.logic;
 
-import com.wisp.game.bet.db.mongo.games.GameRoomMgrDoc;
+import com.wisp.game.bet.db.mongo.games.doc.GameRoomMgrDoc;
 import com.wisp.game.bet.games.share.RoomMgr;
 import com.wisp.game.bet.games.share.config.RMConfig;
 import com.wisp.game.bet.games.share.config.RMConfigData;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

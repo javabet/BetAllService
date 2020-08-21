@@ -1,17 +1,14 @@
 package com.wisp.game.bet.games.share;
 
-import com.wisp.game.bet.db.mongo.games.PlayerCtrlDoc;
-import com.wisp.game.bet.db.mongo.player.doc.PlayerInfoDoc;
+import com.wisp.game.bet.db.mongo.games.doc.PlayerCtrlDoc;
 import com.wisp.game.bet.games.baccarat.mgr.GameEngine;
 import com.wisp.game.bet.logic.db.DbGame;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.core.random.RandomHandler;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

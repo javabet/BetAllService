@@ -1,16 +1,13 @@
 package com.wisp.game.bet.world.dbConfig;
 
-import com.mongodb.internal.client.model.FindOptions;
 import com.wisp.game.bet.db.mongo.config.doc.AgentConfigDoc;
-import com.wisp.game.bet.db.mongo.games.AgentGameConfigDoc;
+import com.wisp.game.bet.db.mongo.games.doc.AgentGameConfigDoc;
 import com.wisp.game.bet.world.db.DbGame;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
-import sun.management.Agent;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,9 +1,9 @@
 package com.wisp.game.bet.games.share;
 
-import com.wisp.game.bet.db.mongo.games.GameRoomIndexDoc;
-import com.wisp.game.bet.db.mongo.games.GameRoomMgrDoc;
-import com.wisp.game.bet.db.mongo.games.GameRoomSetDoc;
-import com.wisp.game.bet.db.mongo.games.GameRoomStockDoc;
+import com.wisp.game.bet.db.mongo.games.doc.GameRoomIndexDoc;
+import com.wisp.game.bet.db.mongo.games.doc.GameRoomMgrDoc;
+import com.wisp.game.bet.db.mongo.games.doc.GameRoomSetDoc;
+import com.wisp.game.bet.db.mongo.games.doc.GameRoomStockDoc;
 import com.wisp.game.bet.games.baccarat.mgr.GameEngine;
 import com.wisp.game.bet.games.share.config.RMConfig;
 import com.wisp.game.bet.games.share.config.RMConfigData;
@@ -13,7 +13,6 @@ import com.wisp.game.bet.logic.db.DbGame;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.unit.LogicServer;
 import com.wisp.game.core.utils.CommonUtils;
-import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +23,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class RoomMgr{

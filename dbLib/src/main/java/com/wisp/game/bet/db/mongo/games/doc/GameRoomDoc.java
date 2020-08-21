@@ -1,6 +1,6 @@
-package com.wisp.game.bet.db.mongo.games;
+package com.wisp.game.bet.db.mongo.games.doc;
 
-import com.wisp.game.bet.db.mongo.games.Baccara.info.HistoryItemChildDoc;
+import com.wisp.game.bet.db.mongo.games.doc.info.HistoryItemChildDoc;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 

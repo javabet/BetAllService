@@ -1,17 +1,12 @@
 package com.wisp.game.bet.games.share;
 
-import com.wisp.game.bet.db.mongo.games.GameRoomDoc;
-import com.wisp.game.bet.db.mongo.games.GameRoomStockDoc;
-import com.wisp.game.bet.games.share.config.RMStockConfig;
+import com.wisp.game.bet.db.mongo.games.doc.GameRoomDoc;
 import com.wisp.game.bet.games.share.config.RMStockConfigData;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.core.random.RandomHandler;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class StockCtrlXX {
     private GameRoomDoc gameRoomDoc;

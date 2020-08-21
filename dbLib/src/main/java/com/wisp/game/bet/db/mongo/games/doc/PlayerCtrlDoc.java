@@ -1,4 +1,4 @@
-package com.wisp.game.bet.db.mongo.games;
+package com.wisp.game.bet.db.mongo.games.doc;
 
 import com.mongodb.client.result.UpdateResult;
 import com.wisp.game.bet.db.mongo.BaseMongoDoc;
