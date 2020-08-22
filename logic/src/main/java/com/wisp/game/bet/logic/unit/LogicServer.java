@@ -76,13 +76,12 @@ public class LogicServer extends ServerBase {
             BackstageManager.Instance.heartbeat(elapsed);
             GamePlayerMgr.Instance.heartbeat(elapsed);
             GameManager.Instance.heartbeat(elapsed);
-
-            elapsed = System.currentTimeMillis() - cur_tm_ms;
-
             if(  gameEngine != null && !GamePlayerMgr.Instance.is_closing() )
             {
                 gameEngine.heartbeat(elapsed);
             }
+
+            elapsed = System.currentTimeMillis() - cur_tm_ms;
 
             if( elapsed < 500 )
             {

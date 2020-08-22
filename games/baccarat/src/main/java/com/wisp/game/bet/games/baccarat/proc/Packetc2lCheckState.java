@@ -15,21 +15,25 @@ public class Packetc2lCheckState extends RequestMessageFromGate<GameBaccaratProt
         LogicPlayer logicPlayer = (LogicPlayer)player.getPhandler();
         GameBaccaratProtocol.packetl2c_check_state_result.Builder builder =  GameBaccaratProtocol.packetl2c_check_state_result.newBuilder();
 
-        if( logicPlayer == null )
+        if( logicPlayer != null )
         {
             builder.setIsIntable( logicPlayer.get_room() != null );
         }
         else
         {
+            /**
             if( logicPlayer.get_room() != null && logicPlayer.get_room().is_ex_room() &&
                     logicPlayer.get_gold() != logicPlayer.get_room().get_free_gold() )
             {
                 builder.setIsIntable(false);
             }
+
             else
             {
                 builder.setIsIntable( logicPlayer.get_room() != null );
             }
+             **/
+            builder.setIsIntable( false );
         }
 
         player.send_msg_to_client(builder);

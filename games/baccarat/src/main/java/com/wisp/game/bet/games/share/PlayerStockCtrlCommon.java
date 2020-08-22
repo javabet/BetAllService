@@ -12,6 +12,13 @@ public class PlayerStockCtrlCommon {
     //百人类判断是否进行个人库存杀分
     public static boolean is_player_kill_mode(int recharged, int profit)
     {
+        //不需要，直接判断为不需要库存杀分
+        boolean isDebug = true;
+        if(  isDebug )
+        {
+            return false;
+        }
+
         Map<Integer, PlayerStockConfig.PlayerStockConfigData> list =	PlayerStockConfig.GetInstnace().GetMapData();
         if (list.size() == 0)
             return false;

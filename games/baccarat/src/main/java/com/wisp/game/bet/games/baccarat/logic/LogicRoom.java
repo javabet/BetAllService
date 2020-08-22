@@ -112,6 +112,10 @@ public class LogicRoom {
 
     public LogicRoom(RMConfigData cfg,LogicLobby logicLobby) {
 
+        m_game_state = GameBaccaratDef.e_game_state.e_state_game_begin;
+
+        m_master_id = new ArrayList<>();
+
         m_room_bet_list = new ArrayList<>();
         m_room_award_list = new ArrayList<>();
         m_max_bet_list = new ArrayList<>();
@@ -121,10 +125,13 @@ public class LogicRoom {
         m_room_odds_list = new LinkedList<>();
         m_banker_list = new ArrayList<>();
         m_room_players = new ConcurrentHashMap<>();
+        m_history_list = new ArrayList<>();
+
+        m_map_players = new HashMap<>();
 
         m_cfg = cfg;
         m_stock_cfg = RMStockConfig.Instance.GetData(cfg.getmRoomID());
-
+        StockCtrlObj = new StockCtrlXX();
 
 
         this.m_lobby = logicLobby;
@@ -141,14 +148,13 @@ public class LogicRoom {
             m_cfg_time_bet_robot_sub = BaccaratBaseConfig.GetInstnace().GetData("RobotBetSubTime").getmValue();
         }
 
-        if(load_room() != null )
+
+        if(load_room() == null )
         {
             create_room();
         }
 
-        StockCtrlObj = new StockCtrlXX();
         StockCtrlObj.init(m_stock_cfg,gameRoomDoc,0,true);
-
         StockCtrlObj.set_control_param();
     }
 
@@ -191,14 +197,14 @@ public class LogicRoom {
                 {
                     m_rob_min = GameManager.Instance.get_bet_robot_count(tag, exroom);
                     //TODO wisp 暂时不需要机器人
-                    m_rob_min = 0;
+                    m_rob_min = 1;
                 }
 
                 if (m_rob_banker_min <= 0)
                 {
                     m_rob_banker_min = GameManager.Instance.get_banker_robot_count(tag, exroom);
                     //TODO wisp 暂时不需要机器人
-                    m_rob_banker_min = 0;
+                    m_rob_banker_min = 1;
                 }
 
 
@@ -219,7 +225,8 @@ public class LogicRoom {
         if( m_game_state == GameBaccaratDef.e_game_state.e_state_game_begin )
         {
             m_cd_time = BaccaratBaseConfig.GetInstnace().GetData("BetTime").getmValue();
-            m_cd_time += 1;
+            m_cd_time *= 1000;  //以ms 为单位
+            m_cd_time += 1000;
 
             boolean isShutingDown = false;
             if( isShutingDown )
@@ -245,6 +252,11 @@ public class LogicRoom {
                 bc_begin_bet();			//广播开始下注
                 m_room_bet_list = new ArrayList<>();
                 m_room_award_list = new ArrayList<>();
+                for(int i = 0; i < MAX_BET_COUNT;i++)
+                {
+                    m_room_bet_list.add(0);
+                    m_room_award_list.add(0);
+                }
                 m_total_bet_count = 0;
             }
         }
@@ -258,15 +270,15 @@ public class LogicRoom {
 
                 if( m_core_engine.get_send_card_count() <= 4 )
                 {
-                    m_cd_time = 15;
+                    m_cd_time = 15 * 1000;
                 }
                 else if( m_core_engine.get_send_card_count() == 5 )
                 {
-                    m_cd_time = 17;
+                    m_cd_time = 17 * 1000;
                 }
                 else if( m_core_engine.get_send_card_count() == 6 )
                 {
-                    m_cd_time = 19;
+                    m_cd_time = 19 * 1000;
                 }
 
                 set_game_state(GameBaccaratDef.e_game_state.e_state_game_award);
@@ -530,8 +542,8 @@ public class LogicRoom {
         m_roomAll_winList.clear();
         for(int i = 0; i < MAX_BET_COUNT;i++)
         {
-            m_roomAll_betList.set(i,0);
-            m_roomAll_winList.set(i,0);
+            m_roomAll_betList.add(0);
+            m_roomAll_winList.add(0);
         }
 
         m_roomAll_bet = 0;
@@ -540,7 +552,7 @@ public class LogicRoom {
             if(falseBanker == logicPlayer.is_robot()) // 根据庄家是否为机器人 选择统计玩家或者机器人的总下注
                 continue;
             List<Integer> temp_bet = logicPlayer.get_bet_list();
-            for (int j=0; j < MAX_BET_COUNT; ++j)
+            for (int j=0; j < MAX_BET_COUNT && j < temp_bet.size(); ++j)
             {
                 int addValue = temp_bet.get(j);
                 int oldValue = m_roomAll_betList.get(j);
@@ -549,7 +561,7 @@ public class LogicRoom {
             }
         }
 
-        for (int j=0; j < MAX_BET_COUNT; ++j)
+        for (int j=0; j < MAX_BET_COUNT && j < m_room_odds_list.size(); ++j)
         {
             double val = m_room_odds_list.get(j) * m_roomAll_betList.get(j) + m_roomAll_betList.get(j);
             m_roomAll_winList.set(j,(int)val);
@@ -620,17 +632,16 @@ public class LogicRoom {
         }
 
         m_room_bet_list.clear();
-        m_room_bet_list.set(0,0);
-        m_room_bet_list.set(1,0);
-        m_room_bet_list.set(2,0);
-        m_room_bet_list.set(3,0);
-        m_room_bet_list.set(4,0);
+        for(int i = 0; i < 5; i ++)
+        {
+            m_room_bet_list.add(0);
+        }
 
         m_total_bet_count = 0;
         for(LogicPlayer logicPlayer : m_room_players.values())
         {
             List<Integer> tmp_bet_list = logicPlayer.get_bet_list();
-            for(int i = 0; i < MAX_BET_COUNT;i++)
+            for(int i = 0; i < MAX_BET_COUNT && i < tmp_bet_list.size();i++)
             {
                 int oldValue = m_room_bet_list.get(i);
                 m_room_bet_list.set(i,oldValue + tmp_bet_list.get(i));
@@ -1232,7 +1243,7 @@ public class LogicRoom {
 
             List<Integer> temp_bet_list = logicPlayer.get_bet_list();
 
-            for(int i = 0; i < MAX_BET_COUNT;i++)
+            for(int i = 0; i < MAX_BET_COUNT && i < temp_bet_list.size();i++)
             {
                 int old_value = temp_bet_list.get(i);
                 temp_bet_list.set(i,old_value + temp_bet_list.get(i));
@@ -1302,9 +1313,10 @@ public class LogicRoom {
             List<Integer> temp_bet = logicPlayer.get_bet_list();
             int total_bet = 0;
             int total_win_bet = 0;
+            logicPlayer.getWins().clear();
             for (int k = 0; k < MAX_BET_COUNT ; k++)
             {
-                logicPlayer.getWins().set(k,0);
+                logicPlayer.getWins().add(0);
 
                 total_bet += temp_bet.get(k);
 
@@ -1399,7 +1411,7 @@ public class LogicRoom {
                 m_first_gold = m_first_player.get_gold();
             }
 
-            if (result_list.get(0)) //结果为“和”的话
+            if (result_list.get(0) && temp_bet.size() >= 5) //结果为“和”的话
             {
                 win_count += (temp_bet.get(1) + temp_bet.get(4));
                 total_win_bet += (temp_bet.get(1) + temp_bet.get(4));
@@ -1596,7 +1608,7 @@ public class LogicRoom {
             }
         }
 
-///////结果协议
+        ///////结果协议
         GameBaccaratProtocol.packetl2c_bc_begin_award.Builder builder =  GameBaccaratProtocol.packetl2c_bc_begin_award.newBuilder();
         {
             for (int i = 0; i < result_list.size() ; ++i)
@@ -1613,16 +1625,28 @@ public class LogicRoom {
             builder.setCdTime((int)m_cd_time);
             for (int j = 0; j < player_card.size() ; ++j)
             {
+                if(player_card.get(j).flower == null)
+                {
+                    continue;
+                }
                 game_baccarat_protocols.GameBaccaratProtocol.msg_card_info.Builder tempPlayerBuilder = game_baccarat_protocols.GameBaccaratProtocol.msg_card_info.newBuilder();
                 tempPlayerBuilder.setCardFlower(player_card.get(j).flower);
                 tempPlayerBuilder.setCardPoint(player_card.get(j).point);
                 builder.addPlayerCard( tempPlayerBuilder );
+            }
 
+            for (int j = 0; j < banker_card.size() ; ++j)
+            {
+                if( banker_card.get(j).flower == null)
+                {
+                    continue;
+                }
                 game_baccarat_protocols.GameBaccaratProtocol.msg_card_info.Builder temp_banker_builder = game_baccarat_protocols.GameBaccaratProtocol.msg_card_info.newBuilder();
                 temp_banker_builder.setCardFlower( banker_card.get(j).flower );
                 temp_banker_builder.setCardPoint( banker_card.get(j).point );
                 builder.addBankerCard(temp_banker_builder);
             }
+
             ////////////////////////////////////////////////////////明抽
             builder.setBankerWinGold(m_banker_once_win - bright_water);
 
@@ -1652,10 +1676,12 @@ public class LogicRoom {
             player_award_builder.setName(logicPlayer.get_nickname());
             builder.addPlayerList(player_award_builder);
 
+            List<Long> otherWinList = new ArrayList<>();
             for (int i = 0; i < MAX_BET_COUNT; i++)
             {
-                player_award_builder.getOtherWinList().add( (long)(logicPlayer.getWins().get(i)));
+                otherWinList.add( logicPlayer.getWins().get(i).longValue() );
             }
+            player_award_builder.addAllOtherWin(otherWinList);
 
             if (logicPlayer.get_is_banker())
             {
@@ -1747,12 +1773,12 @@ public class LogicRoom {
             player_info_builder.setPlayCnt(m_first_player.get_playing_cnt());
 
             List<Integer> bets = m_first_player.get_bet_list();
-            for (int i = 0; i < MAX_BET_COUNT; i++)
+            for (int i = 0; i < MAX_BET_COUNT && i < bets.size(); i++)
             {
                 player_info_builder.addOtherBets( bets.get(i) );
             }
 
-            for (int i = 0; i < MAX_BET_COUNT; i++)
+            for (int i = 0; i < MAX_BET_COUNT && i < m_first_player.getWins().size(); i++)
             {
                 player_info_builder.addOtherWin( m_first_player.getWins().get(i) );
             }
@@ -1856,6 +1882,11 @@ public class LogicRoom {
                     continue;
                 }
 
+                if( i >= logicPlayer.get_bet_list().size() )
+                {
+                    continue;
+                }
+
                 int betGold = logicPlayer.get_bet_list().get(i);
                 if( betGold == 0 )
                 {
@@ -1919,7 +1950,7 @@ public class LogicRoom {
                 bet_info_builder.setPlayerGold(player.get_gold());
 
 
-                for (int i = 0; i < MAX_BET_COUNT; i++)
+                for (int i = 0; i < MAX_BET_COUNT && i < player.get_bet_list().size(); i++)
                 {
                     bet_info_builder.addBetGold(player.get_bet_list().get(i));
                 }
@@ -2118,7 +2149,7 @@ public class LogicRoom {
         GameBaccaratProtocol.packetl2c_get_room_scene_info_result.Builder builder = GameBaccaratProtocol.packetl2c_get_room_scene_info_result.newBuilder();
         builder.setRoomId(m_cfg.getmRoomID());
         builder.setRoomState(m_game_state);
-        builder.setCdTime((int)m_cd_time);
+        builder.setCdTime((int)(m_cd_time/1000));
 
         if (player != null )
         {
@@ -2128,7 +2159,6 @@ public class LogicRoom {
         for (int i = 0; i < MAX_BET_COUNT; i++)//m_max_bet_list
         {
             game_baccarat_protocols.GameBaccaratProtocol.msg_betinfo.Builder msg_betinfo_builder = game_baccarat_protocols.GameBaccaratProtocol.msg_betinfo.newBuilder();
-            builder.addBetInfoList( msg_betinfo_builder );
             msg_betinfo_builder.setBetGolds(m_room_bet_list.get(i));
             msg_betinfo_builder.setMaxBetCount(m_max_bet_list.get(i));
 
@@ -2138,6 +2168,11 @@ public class LogicRoom {
 
                 if (it_player != null)
                 {
+                    if( i >= it_player.get_bet_list().size()  )
+                    {
+                        continue;
+                    }
+
                     int bet_golds = it_player.get_bet_list().get(i);
                     if (bet_golds > 0)
                     {
@@ -2149,11 +2184,13 @@ public class LogicRoom {
                     }
                 }
             }
+
+            builder.addBetInfoList( msg_betinfo_builder );
         }
 
         if (player != null )
         {
-            for (int i = 0; i < MAX_BET_COUNT; i++)//m_max_bet_list
+            for (int i = 0; i < MAX_BET_COUNT &&  i < player.get_bet_list().size(); i++)//m_max_bet_list
             {
                 builder.addSelfBetGolds( player.get_bet_list().get(i) );
             }

@@ -25,16 +25,24 @@ public class LogicCore {
     private boolean is_banker_third = false;
 
     public LogicCore() {
+        m_cards = new ArrayList<>();
         m_banker_card = new ArrayList<>(SEND_MAX_COUNT);
         m_player_card = new ArrayList<>(SEND_MAX_COUNT);
         m_result_list = new ArrayList<>(SEND_MAX_COUNT);
+
+        for(int i = 0; i < SEND_MAX_COUNT;i++)
+        {
+            m_result_list.add(false);
+        }
+
+        init_card();
     }
 
-    List<CardType> get_banker_card(){return m_banker_card;}
-    List<CardType> get_player_card(){return m_player_card;}
+    public List<CardType> get_banker_card(){return m_banker_card;}
+    public List<CardType> get_player_card(){return m_player_card;}
 
-    List<Boolean> get_result_list(){return m_result_list;}
-    int get_remain_card_count(){return m_cards.size();}
+    public List<Boolean> get_result_list(){return m_result_list;}
+    public int get_remain_card_count(){return m_cards.size();}
 
     public void init_card()
     {
@@ -77,9 +85,9 @@ public class LogicCore {
         //将牌打乱
         for(int i = 0; i < CARD_MAX_COUNT;i++ )
         {
-            int randIdx = Double.valueOf( Math.random() * CARD_MAX_COUNT).intValue() ;
+            int randIdx = RandomHandler.Instance.getRandomValue(CARD_MAX_COUNT);
 
-            CardType randValue = m_cards.remove(randIdx);
+            CardType randValue = m_cards.get(randIdx);
             CardType curValue = m_cards.get(i);
             m_cards.set(randIdx,curValue);
             m_cards.set(i,randValue);
@@ -96,7 +104,10 @@ public class LogicCore {
         m_player_point = 0;
         m_banker_point = 0;
         for (int i = 0;i<MAX_BET_COUNT;i++)
+        {
             m_result_list.add(false) ;
+        }
+
         is_player_third = false;
 //--------------------------
         random_result(true,0);
@@ -122,14 +133,14 @@ public class LogicCore {
                 m_banker_point = (to_point(m_banker_card.get(0).point) + to_point(m_banker_card.get(1).point) + to_point(m_banker_card.get(2).point))%10;	//庄家点数
             }
         }
-//--------------------------------结果   win_index  2  闲赢   4 庄赢
+
+        //--------------------------------结果   win_index  2  闲赢   4 庄赢
         if (m_player_point > m_banker_point)		//闲胜
         {
             if (win_index != 5)
             {
                 m_result_list.set(1,true);
             }
-
             else
             {
                 exchange_card();
@@ -160,7 +171,10 @@ public class LogicCore {
     {
         int SHUFFLE_LIMIT = BaccaratBaseConfig.GetInstnace().GetData("ShuffleLimit").getmValue();
         if (m_cards.size() < SHUFFLE_LIMIT)	//小于4副牌就洗牌
+        {
             init_card();
+        }
+
         while(m_cards.get(m_cards.size()-1).point > 13 || m_cards.get(m_cards.size()-1).point <= 0
                 || m_cards.get(m_cards.size()-1).flower.getNumber() >3 || m_cards.get(m_cards.size()-1).flower.getNumber() <0)
         {
@@ -169,11 +183,13 @@ public class LogicCore {
 
         if (is_player)
         {
-            m_player_card.set(index,m_cards.get(m_cards.size()-1)) ;
+            //m_player_card.set(index,m_cards.get(m_cards.size()-1)) ;
+            m_player_card.add(m_cards.get(m_cards.size() - 1));
         }
         else
         {
-            m_banker_card.set(index,m_cards.get(m_cards.size()-1));
+            //m_banker_card.set(index,m_cards.get(m_cards.size()-1));
+            m_banker_card.add(m_cards.get(m_cards.size() - 1));
         }
 
         m_cards.remove(m_cards.size() - 1);
@@ -269,9 +285,9 @@ public class LogicCore {
         int temp_count = 0;
         for (int i = 0; i < 3 ; i++)
         {
-            if (m_banker_card.get(i).point > 0)
+            if ( i < m_banker_card.size() - 1 && m_banker_card.get(i).point > 0)
                 temp_count ++ ;
-            if (m_player_card.get(i).point > 0)
+            if ( i < m_player_card.size() - 1 && m_player_card.get(i).point > 0)
                 temp_count ++ ;
         }
         return temp_count;
@@ -309,6 +325,11 @@ public class LogicCore {
 
         m_banker_card.clear();
         m_player_card.clear();
+        for(int i = 0; i < SEND_MAX_COUNT;i++)
+        {
+            m_banker_card.add(null);
+            m_player_card.add(null);
+        }
 
         if (which_win == 1)	//和  每家只有两张牌
         {
@@ -361,6 +382,11 @@ public class LogicCore {
 
                 m_banker_card.clear();
                 m_player_card.clear();
+                for(int i = 0; i < SEND_MAX_COUNT;i++)
+                {
+                    m_banker_card.add(null);
+                    m_player_card.add(null);
+                }
 
                 temp_point1 =  RandomHandler.Instance.getRandomValue(0,10);
                 temp_point2 =  RandomHandler.Instance.getRandomValue(0,10);
@@ -396,6 +422,11 @@ public class LogicCore {
 
                 m_banker_card.clear();;
                 m_player_card.clear();
+                for(int i = 0; i < SEND_MAX_COUNT;i++)
+                {
+                    m_banker_card.add(null);
+                    m_player_card.add(null);
+                }
 
                 temp_point1 =  RandomHandler.Instance.getRandomValue(0,10);					//闲家点数
                 temp_point2 =  RandomHandler.Instance.getRandomValue(0,10);	//庄家点数

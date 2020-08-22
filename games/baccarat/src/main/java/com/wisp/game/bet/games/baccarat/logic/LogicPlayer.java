@@ -65,6 +65,11 @@ public class LogicPlayer implements IGamePHandler {
         m_award_list = new ArrayList<>();
         m_old_bet_list = new ArrayList<>();
         m_win = new ArrayList<>();
+
+        for(int i= 0; i < 5;i ++)
+        {
+            m_bet_list.add(0);
+        }
     }
 
     public int get_bet_win(){return m_once_win_gold;}
@@ -206,6 +211,13 @@ public class LogicPlayer implements IGamePHandler {
         m_bet_list.clear();;
         m_old_bet_list.clear();
         m_award_list.clear();
+
+        for(int i = 0; i < MAX_BET_COUNT;i++)
+        {
+            m_bet_list.add(0);
+            m_old_bet_list.add(0);
+            m_award_list.add(0);
+        }
 
         first_bet_logicGold = m_logic_gold;
 
@@ -416,6 +428,11 @@ public class LogicPlayer implements IGamePHandler {
 
         m_bet_list.clear();
         m_award_list.clear();
+        for(int i = 0; i <  MAX_BET_COUNT;i++)
+        {
+            m_bet_list.add(0);
+            m_award_list.add(0);
+        }
 
         m_continue_bet_cnt = 0;
 
@@ -434,6 +451,13 @@ public class LogicPlayer implements IGamePHandler {
         m_bet_list.clear();;
         m_old_bet_list.clear();
         m_award_list.clear();
+
+        for(int i = 0; i < MAX_BET_COUNT;i++)
+        {
+            m_bet_list.add(0);
+            m_old_bet_list.add(0);
+            m_award_list.add(0);
+        }
 
         is_banker = false;
     }
@@ -583,6 +607,11 @@ public class LogicPlayer implements IGamePHandler {
         //}
         //memset(&m_bet_list[0],0,sizeof(GOLD_TYPE/*int*/)*MAX_BET_COUNT);
         m_bet_list.clear();
+        for(int i = 0; i < MAX_BET_COUNT;i++)
+        {
+            m_bet_list.add(0);
+        }
+
         m_bet_gold_count = 0;
 
         //m_room->get_game_detail_log()->clear_bet_gold(get_pid());
@@ -819,7 +848,7 @@ public class LogicPlayer implements IGamePHandler {
 
     public LogicRoom get_room()
     {
-        return null;
+        return m_room;
     }
     public List<Integer> getWins()
     {
