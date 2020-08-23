@@ -8,7 +8,7 @@ import com.wisp.game.bet.share.netty.PacketManager.RequestMessageFromGate;
 import game_baccarat_protocols.GameBaccaratProtocol;
 
 //请求玩家列表
-@IRequest(10013)
+@IRequest(10018)
 public class Packetc2lAskPlayerList extends RequestMessageFromGate<GameBaccaratProtocol.packetc2l_ask_playerlist, LogicPeer, GamePlayer> {
     @Override
     public boolean packet_process(LogicPeer peer, GamePlayer player, GameBaccaratProtocol.packetc2l_ask_playerlist msg) {

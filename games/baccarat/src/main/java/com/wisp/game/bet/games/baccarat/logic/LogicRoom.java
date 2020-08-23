@@ -21,6 +21,8 @@ import game_baccarat_protocols.GameBaccaratDef;
 import game_baccarat_protocols.GameBaccaratProtocol;
 
 import msg_type_def.MsgTypeDef;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import pump_type.PumpType;
@@ -29,6 +31,8 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class LogicRoom {
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     private static int MAX_BET_COUNT = 5;
     private static int SYNC_BET_TIME = 1;            //多少时间同步一次给客户端 单位为s
     private static int BANKER_MAX_COUNT = 10;
@@ -88,7 +92,7 @@ public class LogicRoom {
     private int m_rob_banker_cost;               //当前抢庄花费
     private boolean is_have_rob_banker;      //是否需要广播抢庄信息
 
-    private boolean is_gm;
+    private boolean is_gm = false;
     private int gm_index;
     private int gm_max;
     private boolean is_refresh_history;
@@ -325,6 +329,9 @@ public class LogicRoom {
                 set_game_state(GameBaccaratDef.e_game_state.e_state_game_begin);
             }
         }
+
+
+
     }
 
     public void set_game_state(GameBaccaratDef.e_game_state state)
@@ -1755,7 +1762,6 @@ public class LogicRoom {
         if (m_first_player != null )
         {
             game_baccarat_protocols.GameBaccaratProtocol.msg_player_info.Builder  player_info_builder = game_baccarat_protocols.GameBaccaratProtocol.msg_player_info.newBuilder();
-            m_msg_player_list_builder.addPlayerInfos(player_info_builder);
 
             cnt++;
             m_master_id.add(m_first_player.get_pid());
@@ -1782,6 +1788,8 @@ public class LogicRoom {
             {
                 player_info_builder.addOtherWin( m_first_player.getWins().get(i) );
             }
+
+            m_msg_player_list_builder.addPlayerInfos(player_info_builder);
         }
 
         for ( int winner_list_key : m_map_players.keySet())
@@ -1795,9 +1803,11 @@ public class LogicRoom {
                     if (player != m_first_player)
                     {
                         game_baccarat_protocols.GameBaccaratProtocol.msg_player_info.Builder player_info_builder =  game_baccarat_protocols.GameBaccaratProtocol.msg_player_info.newBuilder();
-                        m_msg_player_list_builder.addPlayerInfos(player_info_builder);
+
                         if (cnt++ <= 5)
+                        {
                             m_master_id.add(player.get_pid());
+                        }
 
                         player_info_builder.setPlayerId( player.get_pid() );
                         player_info_builder.setPlayerName( player.get_nickname() );
@@ -1821,6 +1831,7 @@ public class LogicRoom {
                         {
                             player_info_builder.addOtherWin(player.getWins().get(i));
                         }
+                        m_msg_player_list_builder.addPlayerInfos(player_info_builder);
                     }
                 }
             }
@@ -1870,7 +1881,6 @@ public class LogicRoom {
         for(int i = 0; i < MAX_BET_COUNT;i++)
         {
             GameBaccaratProtocol.msg_betinfo.Builder msgBetInfoBuilder = GameBaccaratProtocol.msg_betinfo.newBuilder();
-            builder.addBets(msgBetInfoBuilder);
             msgBetInfoBuilder.setBetGolds(m_room_bet_list.get(i));
             msgBetInfoBuilder.setMaxBetCount(m_max_bet_list.get(i));
 
@@ -1894,10 +1904,11 @@ public class LogicRoom {
                 }
 
                 GameBaccaratProtocol.msg_master_bets.Builder msgMasterbetsBuilder = GameBaccaratProtocol.msg_master_bets.newBuilder();
-                msgBetInfoBuilder.addMasterBets(msgMasterbetsBuilder);
                 msgMasterbetsBuilder.setPlayerId(logicPlayer.get_pid());
                 msgMasterbetsBuilder.setPlayerBets(betGold);
+                msgBetInfoBuilder.addMasterBets(msgMasterbetsBuilder);
             }
+            builder.addBets(msgBetInfoBuilder);
         }
 
         broadcast_msg_to_client(builder);
@@ -2686,16 +2697,4 @@ public class LogicRoom {
             return o2.stock - o1.stock;
         }
     }
-
-    /**
-    auto sort_rd = [](rd_result& a, rd_result& b)
-    {
-        return a.stock < b.stock;
-    };
-    auto sort_rd2 = [](rd_result& a, rd_result& b)
-    {
-        return a.stock > b.stock;
-    };
-    **/
-
 }

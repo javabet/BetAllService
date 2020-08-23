@@ -37,8 +37,6 @@ public class LogicLobby {
     public LogicLobby() {
         m_rooms = new ConcurrentHashMap<>();
         m_all_players = new ConcurrentHashMap<>();
-
-        logger.info("the lobby construct");
     }
 
     public void set_room(int agentid, int roomid)
