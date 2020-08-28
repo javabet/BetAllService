@@ -8,6 +8,8 @@ import com.wisp.game.bet.world.PlayerSys.GamePlayer;
 import com.wisp.game.bet.world.db.DbPlayer;
 import com.wisp.game.bet.world.unit.ServersManager;
 import com.wisp.game.bet.world.unit.WorldPeer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -21,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class GamePlayerMgr {
+    private Logger logger = LoggerFactory.getLogger(getClass());
     public static GamePlayerMgr Instance;
 
     private boolean b_closing;
@@ -153,7 +156,7 @@ public class GamePlayerMgr {
     {
         int gameId = 0;
 
-        for( GamePlayer gamePlayer : m_playerById.values() )
+       for( GamePlayer gamePlayer : m_playerById.values() )
         {
             if( gamePlayer.get_logicid() != gameserverId )
             {
@@ -226,13 +229,14 @@ public class GamePlayerMgr {
         {
             if( gamePlayer.get_gameid() == 0 )
             {
-                WorldPeer worldPeer =  gamePlayer.get_gate();
-                if(  worldPeer!= null )
+                WorldPeer gatePeer =  gamePlayer.get_gate();
+                if(  gatePeer!= null )
                 {
                     ServerProtocol.packet_player_disconnect.Builder builder = ServerProtocol.packet_player_disconnect.newBuilder();
                     builder.setSessionid(gamePlayer.get_sessionid());
                     builder.setShutdown(true);
-                    worldPeer.send_msg(builder.build());
+                    gatePeer.send_msg(builder.build());
+                    logger.info("shutdown_heartbeat ServerProtocol.packet_player_disconnect333.Builder");
                 }
                 GamePlayerMgr.Instance.set_del_player(gamePlayer);
             }

@@ -270,6 +270,8 @@ public class LogicRoom {
 
             if( m_cd_time <= 0 )
             {
+                set_game_state(GameBaccaratDef.e_game_state.e_state_game_award);
+
                 adjust_earn_rate();
 
                 if( m_core_engine.get_send_card_count() <= 4 )
@@ -285,7 +287,7 @@ public class LogicRoom {
                     m_cd_time = 19 * 1000;
                 }
 
-                set_game_state(GameBaccaratDef.e_game_state.e_state_game_award);
+
 
                 sync_bet_to_room();
                 bc_sync_bet_info();;
@@ -330,7 +332,10 @@ public class LogicRoom {
             }
         }
 
-
+        for( LogicPlayer logicPlayer : m_room_players.values() )
+        {
+            logicPlayer.heartbeat(elapsed);
+        }
 
     }
 
@@ -2110,51 +2115,6 @@ public class LogicRoom {
         return  m_cd_time;
     }
 
-    private void djust_earn_rate()
-    {
-        int gm_result = 0;
-        //m_control = 1;//test
-        int leftCount = 0;
-        int rightCount = 0;
-        calculate_all_betRewordList();
-
-
-        m_players_control = 0;
-        m_players_control_pid = 0;
-        m_player_store_control = 0;
-
-        if (m_roomAll_bet > 0 && m_kill_cnt > 0 && m_control >= 2 && m_control <= 7)
-        {//1:定制 2:通杀 3和 4闲 5闲对 6庄对 7庄 <=>1和 2闲 3闲对 4庄对 5庄
-            gm_result = m_control;
-            if (2 == gm_result)//通杀
-                gm_result = kill_pay(leftCount, rightCount, true, is_false_banker());
-            else
-                gm_result = gm_result - 2;
-            m_kill_cnt--;
-        }
-        else if(StockCtrlObj.get_control_game())//后台控制
-        {
-            //do nothing,不需要后台控制
-        }
-        else
-        {
-            int state = random_state();//库存控制的结果0  正常  11 通杀  12通赔
-            if(11== state)  //通杀
-                gm_result = kill_pay(leftCount,rightCount,true,is_false_banker());
-            else if(12 == state)//通赔
-                gm_result = kill_pay(leftCount,rightCount,false,is_false_banker());
-            else if (13 == state)//点杀
-            {
-                gm_result = control_player_result(leftCount, rightCount, m_players_control);
-            }
-            else
-                gm_result = state;
-        }
-
-        m_core_engine.send_gm_card(gm_result, leftCount, rightCount);
-
-    }
-
     public  GameBaccaratProtocol.packetl2c_get_room_scene_info_result.Builder get_room_scene_info(LogicPlayer player)
     {
         GameBaccaratProtocol.packetl2c_get_room_scene_info_result.Builder builder = GameBaccaratProtocol.packetl2c_get_room_scene_info_result.newBuilder();
@@ -2213,20 +2173,20 @@ public class LogicRoom {
         for ( GameBaccaratProtocol.history_info history_info : m_history_list)
         {
             game_baccarat_protocols.GameBaccaratProtocol.history_info.Builder history_info_builder = game_baccarat_protocols.GameBaccaratProtocol.history_info.newBuilder();
-            builder.addHistoryList(history_info_builder);
             history_info_builder.setIsTie(history_info.getIsTie());
             history_info_builder.setIsPlayerWin(history_info.getIsPlayerWin());
             history_info_builder.setIsPlayerPair(history_info.getIsPlayerPair());
             history_info_builder.setIsBankerPair(history_info.getIsPlayerPair());
             history_info_builder.setIsBankerWin(history_info.getIsBankerWin());
             history_info_builder.setWinPoint(history_info.getWinPoint());
+            builder.addHistoryList(history_info_builder);
         }
 
         builder.setBankerWinGold(m_banker_total_win);
         builder.setIsCanRobBanker(is_can_rob_banker);
 
         game_baccarat_protocols.GameBaccaratProtocol.player_info.Builder banker_info_builder = game_baccarat_protocols.GameBaccaratProtocol.player_info.newBuilder();
-        builder.setBankerInfo(banker_info_builder);
+
 
         boolean is_system_banker = true;
         if (m_now_banker_id > 0)
@@ -2255,6 +2215,7 @@ public class LogicRoom {
             banker_info_builder.setPlayerSex(1);
             banker_info_builder.setPlayerVipLv(0);
         }
+        builder.setBankerInfo(banker_info_builder);
 
         return builder;
     }

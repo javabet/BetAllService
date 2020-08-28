@@ -17,6 +17,8 @@ import com.wisp.game.bet.world.unit.WorldPeer;
 import logic2world_protocols.Logic2WorldProtocol;
 import msg_type_def.MsgTypeDef;
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -25,6 +27,8 @@ import server_protocols.ServerProtocol;
 import java.util.Date;
 
 public class GamePlayer {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     private boolean  m_login;
     private int m_check_outline = 0;
@@ -96,6 +100,7 @@ public class GamePlayer {
             ServerProtocol.packet_player_disconnect.Builder builder = ServerProtocol.packet_player_disconnect.newBuilder();
             builder.setSessionid(m_sessionid);
             m_logicPeer.send_msg(builder.build());
+            logger.info("ServerProtocol.packet_player_disconnect.11Builder player_logout ");
         }
         else
         {
@@ -116,15 +121,11 @@ public class GamePlayer {
 
         if( !is_relogin )
         {
-            boolean new_player = false;
             if( playerInfoDoc == null )
             {
-                new_player = true;
-
                 init_acc_data(accountTableInfo);
                 create_player(false,accountTableInfo);
             }
-
             m_login = true;
             //GameEngineMgr.Instance.player_login
         }
@@ -161,7 +162,7 @@ public class GamePlayer {
     {
         if( playerInfoDoc  != null )
         {
-            playerInfoDoc.setChannelID(accountTableInfo.getChannelId());
+            playerInfoDoc.setChannelId(accountTableInfo.getChannelId());
             playerInfoDoc.setAgentId(accountTableInfo.getAgentId());
         }
     }
@@ -213,7 +214,7 @@ public class GamePlayer {
         set_default_head();
 
         playerInfoDoc.setNickName("nickName");
-        playerInfoDoc.setChannelID(accountTableInfo.getChannelId());
+        playerInfoDoc.setChannelId(accountTableInfo.getChannelId());
         playerInfoDoc.setGold(100000);
         playerInfoDoc.setLevel(0);
         playerInfoDoc.setRobot(false);
@@ -248,7 +249,7 @@ public class GamePlayer {
             builder.setRoomid(roomId);
             builder.setSessionid(m_sessionid);
             msg_info_def.MsgInfoDef.msg_account_info.Builder msgAccountInfoBuilder = builder.getAccountInfoBuilder();
-            msgAccountInfoBuilder.setChannelId(playerInfoDoc.getChannelID());
+            msgAccountInfoBuilder.setChannelId(playerInfoDoc.getChannelId());
             msgAccountInfoBuilder.setAid(playerInfoDoc.getPlayerId());
             msgAccountInfoBuilder.setGold(playerInfoDoc.getGold());
             msgAccountInfoBuilder.setNickname(playerInfoDoc.getNickName());

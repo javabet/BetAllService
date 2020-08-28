@@ -1,5 +1,5 @@
 server:
-  port: 9092
+  port: 9192
 
 cfg:
   logdb_url: 127.0.0.1:27017
@@ -8,4 +8,6 @@ cfg:
   configdb_name: ConfigDB
   accountdb_url: 127.0.0.1:27017
   accountdb_name: AccountDB
+  paydb_url: 127.0.0.1:27017
+  paydb_name: PaymentDB
 

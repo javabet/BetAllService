@@ -1,8 +1,12 @@
 package com.wisp.game.core.web.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ErrorRespBean<T> {
+import java.io.Serializable;
+
+@JsonIgnoreProperties
+public class ErrorRespBean<T> implements Serializable {
     private int code;
     private String message;
     private T data;

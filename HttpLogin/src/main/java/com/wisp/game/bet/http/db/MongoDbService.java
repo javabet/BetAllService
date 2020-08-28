@@ -27,6 +27,9 @@ public class MongoDbService implements InitializingBean {
     private DbConfig dbConfig;
 
     @Autowired
+    private DbPay dbPay;
+
+    @Autowired
     private SpringContextHolder springContextHolder;
 
     @Autowired
@@ -44,6 +47,7 @@ public class MongoDbService implements InitializingBean {
         setMongoTemplteHandler( dbAccount,"account" );
         setMongoTemplteHandler( dbConfig,"config" );
         setMongoTemplteHandler( dbLog,"log" );
+        setMongoTemplteHandler( dbPay,"pay" );
     }
 
     private boolean init_db()
@@ -62,6 +66,11 @@ public class MongoDbService implements InitializingBean {
         if( environment.containsProperty("cfg.configdb_log") && environment.containsProperty("cfg.configlog_name") )
         {
             DbLog.Instance.init_db(environment.getProperty("cfg.configdb_log"),environment.getProperty("cfg.configlog_name"));
+        }
+
+        if( environment.containsProperty("cfg.paydb_url") && environment.containsProperty("cfg.paydb_name") )
+        {
+            DbPay.Instance.init_db(environment.getProperty("cfg.paydb_url"),environment.getProperty("cfg.paydb_name"));
         }
 
         return true;

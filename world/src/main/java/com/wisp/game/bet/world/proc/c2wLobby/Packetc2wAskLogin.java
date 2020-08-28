@@ -32,7 +32,7 @@ public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldPr
 
         msgAccountInfoBuilder.setIconCustom("head_nan_1.png");
         msgAccountInfoBuilder.setIpinfo(player.getPlayerInfoDoc().getLastIp());
-        msgAccountInfoBuilder.setChannelId(player.getPlayerInfoDoc().getChannelID());
+        msgAccountInfoBuilder.setChannelId(player.getPlayerInfoDoc().getChannelId());
 
         msgAccountInfoBuilder.setSex( player.getPlayerInfoDoc().getSex() );
         msgAccountInfoBuilder.setTicket(0);
@@ -40,7 +40,7 @@ public class Packetc2wAskLogin extends DefaultWorldRequestMessage<Client2WorldPr
 
 
         java.util.List<client2world_protocols.Client2WorldProtocol.msg_game_info.Builder> gameListBuilder = new ArrayList<>();
-         AgentInfo agentInfo =  AgentInfoConfig.Instance.getGameInfo(player.getPlayerInfoDoc().getChannelID());
+         AgentInfo agentInfo =  AgentInfoConfig.Instance.getGameInfo(player.getPlayerInfoDoc().getChannelId());
         if( agentInfo != null )
         {
             for(AgentGameInfo agentGameInfo : agentInfo.getGameMap().values())

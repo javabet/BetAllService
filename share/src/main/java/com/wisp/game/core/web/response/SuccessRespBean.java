@@ -2,10 +2,12 @@ package com.wisp.game.core.web.response;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
+@JsonIgnoreProperties(value = {"message","data"})
 public class SuccessRespBean<T> implements Serializable {
     private static final long serialVersionUID = -5881964204263384782L;
 

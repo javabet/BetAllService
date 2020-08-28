@@ -11,7 +11,7 @@ public class PacketServerConnectResult extends DefaultRequestMessage<ServerProto
     public boolean packet_process(ServerPeer peer, ServerProtocol.packet_server_connect_result msg) {
 
         //logger.info("the remote_id:" + peer.get_remote_id() + "port:" + peer.get_remote_port());
-        //peer.set_remote_id(peer.get_remote_port());
+        peer.set_remote_id(peer.get_remote_port());
         peer.regedit_result(true);
 
         logger.info("packet_server_connect_result ok id:" + peer.get_remote_id() + " type:" + peer.get_remote_type() + "\n" );

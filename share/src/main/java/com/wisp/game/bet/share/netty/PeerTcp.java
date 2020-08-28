@@ -25,6 +25,7 @@ public abstract class PeerTcp {
     protected e_peer_state m_state;
     protected ChannelHandlerContext channelHandlerContext;
     protected int m_peerId = 0;
+    protected int remote_port = 0;
 
 
     protected Queue<MsgBuf> receive_queue = new ConcurrentLinkedQueue<>();
@@ -220,16 +221,18 @@ public abstract class PeerTcp {
     }
 
     //TODO wisp
-//    public int get_remote_port()
-//    {
-//        InetSocketAddress inetSocketAddress = (InetSocketAddress)channelHandlerContext.channel().localAddress();
-//        return inetSocketAddress.getPort();
-//    }
+    public int get_remote_port()
+    {
+        InetSocketAddress inetSocketAddress = (InetSocketAddress)channelHandlerContext.channel().remoteAddress();
+        return inetSocketAddress.getPort();
+    }
+
+
 
     //TODO wisp
     public String get_remote_ip()
     {
-        InetSocketAddress inetSocketAddress = (InetSocketAddress)channelHandlerContext.channel().localAddress();
+        InetSocketAddress inetSocketAddress = (InetSocketAddress)channelHandlerContext.channel().remoteAddress();
         return inetSocketAddress.getHostString();
     }
 

@@ -14,6 +14,9 @@ public class PacketServerConnect extends DefaultRequestMessage<ServerProtocol.pa
 
         logger.info(" packet_server_connect:" + msg.getServerType() + " id:" + msg.getServerId() );
 
+        peer.set_remote_id(msg.getServerId());
+        peer.set_remote_type( msg.getServerType().getNumber() );
+
         if(ServersManager.Instance.regedit_server(peer))
         {
             ServerProtocol.packet_server_connect_result.Builder builder = ServerProtocol.packet_server_connect_result.newBuilder();

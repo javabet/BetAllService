@@ -15,7 +15,7 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
     private String Account;
     private String AccType;
     @Field(targetType = FieldType.INT32) private int AgentId;
-    private String ChannelID;
+    private String ChannelId;
     @Field( targetType = FieldType.DATE_TIME) private Date CreateTime;
     private String CsToken;
     private boolean Delete;
@@ -49,6 +49,7 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
 
     public PlayerInfoDoc() {
         IconCustom = "";
+        NickName = "";
         PhotoFrameId = 0;
     }
 
@@ -164,12 +165,12 @@ public class PlayerInfoDoc extends BaseMongoDoc implements Serializable {
         KickEndTime = kickEndTime;
     }
 
-    public String getChannelID() {
-        return ChannelID;
+    public String getChannelId() {
+        return ChannelId;
     }
 
-    public void setChannelID(String channelID) {
-        ChannelID = channelID;
+    public void setChannelId(String channelId) {
+        ChannelId = channelId;
     }
 
     public Date getCreateTime() {

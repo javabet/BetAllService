@@ -87,6 +87,11 @@ public class ServerPeer extends PeerTcp {
 
 
     @Override
+    public int get_remote_port() {
+        return peerTcpClient.getPort();
+    }
+
+    @Override
     public int get_type() {
         return ServerBase.e_server_type.e_st_world_VALUE;
     }
