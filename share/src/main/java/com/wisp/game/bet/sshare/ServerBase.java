@@ -5,6 +5,7 @@ import com.wisp.game.bet.share.netty.server.PeerTcpServer;
 import com.wisp.game.bet.share.netty.server.tcp.ServerNettyInitializer;
 import com.wisp.game.bet.share.netty.server.websocket.ServerWebSocketNettyInitializer;
 import io.netty.channel.ChannelHandler;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -13,6 +14,8 @@ import org.springframework.core.env.Environment;
 
 import java.util.Deque;
 import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class ServerBase implements InitializingBean,Runnable {
@@ -51,21 +54,31 @@ public abstract class ServerBase implements InitializingBean,Runnable {
 
     public void afterPropertiesSet() throws Exception
     {
-        Thread thread = new Thread(this);
-        thread.setDaemon(true);
-        thread.setName("主线程");
-        thread.start();
+        ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+        singleThreadExecutor.execute(this);
+        //Thread thread = new Thread(this);
+        //thread.setDaemon(true);
+        //thread.setName("主线程");
+        //thread.start();
     }
 
     public void run()
     {
-        Environment environment = SpringContextHolder.getBean(Environment.class);
-        ApplicationArguments applicationArguments = SpringContextHolder.getBean(ApplicationArguments.class);
-        boolean sInitFlag =  s_init(applicationArguments,environment);
-        if( !sInitFlag )
+        Thread.currentThread().setName("主线程");
+        try
         {
-            logger.error("sInitFlag has error");
-            System.exit(0);
+            Environment environment = SpringContextHolder.getBean(Environment.class);
+            ApplicationArguments applicationArguments = SpringContextHolder.getBean(ApplicationArguments.class);
+            boolean sInitFlag =  s_init(applicationArguments,environment);
+            if( !sInitFlag )
+            {
+                logger.error("sInitFlag has error");
+                System.exit(0);
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.error("游戏线程异常![{}]", ExceptionUtils.getStackTrace(ex));
         }
     }
 

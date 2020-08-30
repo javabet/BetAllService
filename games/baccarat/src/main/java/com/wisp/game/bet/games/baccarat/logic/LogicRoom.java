@@ -17,6 +17,7 @@ import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.sshare.e_player_state;
 import com.wisp.game.bet.share.utils.ProtocolClassUtils;
 import com.wisp.game.core.random.RandomHandler;
+import com.wisp.game.core.utils.CommonUtils;
 import game_baccarat_protocols.GameBaccaratDef;
 import game_baccarat_protocols.GameBaccaratProtocol;
 
@@ -342,6 +343,8 @@ public class LogicRoom {
     public void set_game_state(GameBaccaratDef.e_game_state state)
     {
         m_game_state = state;
+
+        logger.info("current gameState:" + state);
 
         //同步信息到gstate
         //不需要此动作
@@ -1926,7 +1929,7 @@ public class LogicRoom {
         {
             if( logicPlayer.get_privilege() > 0 )
             {
-                logicPlayer.getGamePlayer().send_msg_to_client(builder);
+                logicPlayer.getGamePlayer().send_msg_to_client(notifySceneInfoBuilder);
             }
         }
     }

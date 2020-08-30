@@ -72,6 +72,15 @@ public class PeerTcpClient {
         if( channel != null )
         {
             channel.disconnect();
+            channel.close();
         }
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 }

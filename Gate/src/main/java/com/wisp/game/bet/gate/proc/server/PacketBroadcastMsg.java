@@ -20,7 +20,7 @@ public class PacketBroadcastMsg extends DefaultRequestMessage<ServerProtocol.pac
             GatePeer gatePeer = ClientManager.Instance.find_objr(SessionHelper.get_peerid(msg.getSessionids(i)));
             if( gatePeer != null )
             {
-                 gatePeer.send_msg(msg.getMsgpak().getMsgid(),msg.getMsgpak());
+                 gatePeer.send_msg(msg.getMsgpak().getMsgid(),msg.getMsgpak().getMsginfo());
             }
         }
 

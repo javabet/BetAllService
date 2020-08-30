@@ -10,4 +10,6 @@ cfg:
   accountdb_name: AccountDB
   paydb_url: 127.0.0.1:27017
   paydb_name: PaymentDB
+  playerdb_url: 127.0.0.1:27017
+  playerdb_name: PlayerDB_DWC
 
