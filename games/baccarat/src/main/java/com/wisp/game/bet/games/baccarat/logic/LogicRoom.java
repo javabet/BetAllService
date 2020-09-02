@@ -201,15 +201,11 @@ public class LogicRoom {
                 if (m_rob_min <= 0)
                 {
                     m_rob_min = GameManager.Instance.get_bet_robot_count(tag, exroom);
-                    //TODO wisp 暂时不需要机器人
-                    m_rob_min = 1;
                 }
 
                 if (m_rob_banker_min <= 0)
                 {
                     m_rob_banker_min = GameManager.Instance.get_banker_robot_count(tag, exroom);
-                    //TODO wisp 暂时不需要机器人
-                    m_rob_banker_min = 1;
                 }
 
 

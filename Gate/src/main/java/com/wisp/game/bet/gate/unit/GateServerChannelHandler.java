@@ -119,6 +119,7 @@ public class GateServerChannelHandler extends SimpleChannelInboundHandler<MsgBuf
         if( worldServerPeer != null )
         {
             worldServerPeer.send_msg(builder.build());
+            logger.info("channelInactive  ServerProtocol.packet_player_disconnect222.Builder");
         }
 
         gatePeer.on_logout();

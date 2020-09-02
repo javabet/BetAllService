@@ -30,6 +30,9 @@ public class MongoDbService implements InitializingBean {
     private DbPay dbPay;
 
     @Autowired
+    private  DbPlayer dbPlayer;
+
+    @Autowired
     private SpringContextHolder springContextHolder;
 
     @Autowired
@@ -48,11 +51,15 @@ public class MongoDbService implements InitializingBean {
         setMongoTemplteHandler( dbConfig,"config" );
         setMongoTemplteHandler( dbLog,"log" );
         setMongoTemplteHandler( dbPay,"pay" );
+        setMongoTemplteHandler( dbPlayer,"player" );
     }
 
     private boolean init_db()
     {
-
+        if( environment.containsProperty("cfg.playerdb_url") && environment.containsProperty("cfg.playerdb_name") )
+        {
+            DbPlayer.Instance.init_db(environment.getProperty("cfg.playerdb_url"),environment.getProperty("cfg.playerdb_name"));
+        }
         if( environment.containsProperty("cfg.configdb_url") && environment.containsProperty("cfg.configdb_name") )
         {
             DbConfig.Instance.init_db(environment.getProperty("cfg.configdb_url"),environment.getProperty("cfg.configdb_name"));

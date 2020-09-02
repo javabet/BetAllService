@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
-@RestController()
-@RequestMapping("/Web")
+//@RestController()
+//@RequestMapping("/Web")
 public class LoginController extends BaseController {
 
     public static String WEB_ACC = "8DB1C7CE26C2A748FA3627410DB0FB0F";

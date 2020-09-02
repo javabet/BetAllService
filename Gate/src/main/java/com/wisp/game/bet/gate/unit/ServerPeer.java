@@ -61,6 +61,7 @@ public final class ServerPeer extends PeerTcp {
         {
             //如果注册失败，则关闭socket,并且重新连接
             logger.info("logic_server regedit fail remote_id:" + get_remote_id() + "  remote_type:" + get_remote_type());
+
             peerTcpClient.discannect();
         }
         else if( get_remote_type() == ServerBase.e_server_type.e_st_monitor_VALUE )
