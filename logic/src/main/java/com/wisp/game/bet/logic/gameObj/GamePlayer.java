@@ -4,7 +4,7 @@ import com.google.protobuf.Message;
 import com.wisp.game.bet.GameConfig.MainRobotBaseConfig;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameMgr.GamePlayerMgr;
-import com.wisp.game.bet.logic.gameMgr.MainRobotTypeConfig;
+import com.wisp.game.bet.GameConfig.MainRobotTypeConfig;
 import com.wisp.game.bet.logic.sshare.IGameEngine;
 import com.wisp.game.bet.logic.sshare.IGamePHandler;
 import com.wisp.game.bet.logic.sshare.e_player_state;
@@ -341,7 +341,7 @@ public class GamePlayer {
         MainRobotTypeConfig.MainRobotTypeConfigData data = MainRobotTypeConfig.GetInstnace().GetData(m_robot_type);
         if(data != null)
         {
-            float r = RandomHandler.Instance.getRandomValue(data.getmBetRate().get(0), data.getmBetRate().get(1));
+            double r = RandomHandler.Instance.getRandomValue(data.getmBetRate().get(0), data.getmBetRate().get(1));
             logic_gold *= r;
             //根据下注筹码列表取整
             for(int i = 0; i < bet_list.size(); i++)

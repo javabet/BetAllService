@@ -1,11 +1,15 @@
-package com.wisp.game.bet.logic.gameMgr;
+package com.wisp.game.bet.GameConfig;
 
 import com.wisp.game.bet.utils.XMLUtils;
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
 
+import java.io.IOException;
 import java.util.*;
-
 
 public final class MainRobotTypeConfig {
 
@@ -40,31 +44,49 @@ public final class MainRobotTypeConfig {
         return this.mMapData;
     }
 
-    public void Reload()
+    public boolean Reload()
     {
         mMapData.clear();
-        this.Load();
+        return this.Load();
     }
 
-    public void Load()
+    public boolean Load()
     {
-        this.Load("./Config/MainRobotTypeConfig.xml");
+        return this.Load("./Config/MainRobotTypeConfig.xml");
     }
 
-    public void Load(String path)
+    public boolean Load(String path)
     {
-        Document xmlDoc = XMLUtils.file2Document(path);
+        Document xmlDoc = null;
+
+        ClassPathResource classPathResource = new ClassPathResource(path);
+        if (classPathResource.exists())
+        {
+            try
+            {
+                xmlDoc = XMLUtils.file2Document(classPathResource.getInputStream());
+            }
+            catch (IOException ioexception)
+            {
+                //do nothing
+            }
+        }
 
         if( xmlDoc == null )
         {
-            return;
+
+        }
+
+        if( xmlDoc == null )
+        {
+            return false;
         }
 
         Element root = xmlDoc.getRootElement();
 
         if( root == null )
         {
-            return;
+            return false;
         }
 
         Iterator<Element> iterator =  root.elementIterator();
@@ -78,37 +100,49 @@ public final class MainRobotTypeConfig {
            data.mWeight = XMLUtils.getIntByElement(childElement,"Weight");
             {
                data.mBeginTime = new ArrayList<>();
-               String eleStr =  childElement.attribute("BeginTime").getValue();
-               if( eleStr != null && !eleStr.equals("") )
+               Attribute attr =  childElement.attribute("BeginTime");
+               if(attr != null)
                {
-                   String[] BeginTimeStr = eleStr.split(",");
-                   for(int i = 0; i < BeginTimeStr.length;i++)
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
                    {
-                       data.mBeginTime.add( Integer.valueOf(BeginTimeStr[i]) );
+                       String[] BeginTimeStr = eleStr.split(",");
+                       for(int i = 0; i < BeginTimeStr.length;i++)
+                       {
+                           data.mBeginTime.add( Integer.valueOf(BeginTimeStr[i]) );
+                       }
                    }
                }
             }
             {
                data.mInterval = new ArrayList<>();
-               String eleStr =  childElement.attribute("Interval").getValue();
-               if( eleStr != null && !eleStr.equals("") )
+               Attribute attr =  childElement.attribute("Interval");
+               if(attr != null)
                {
-                   String[] IntervalStr = eleStr.split(",");
-                   for(int i = 0; i < IntervalStr.length;i++)
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
                    {
-                       data.mInterval.add( Integer.valueOf(IntervalStr[i]) );
+                       String[] IntervalStr = eleStr.split(",");
+                       for(int i = 0; i < IntervalStr.length;i++)
+                       {
+                           data.mInterval.add( Integer.valueOf(IntervalStr[i]) );
+                       }
                    }
                }
             }
             {
                data.mBetRate = new ArrayList<>();
-               String eleStr =  childElement.attribute("BetRate").getValue();
-               if( eleStr != null && !eleStr.equals("") )
+               Attribute attr =  childElement.attribute("BetRate");
+               if(attr != null)
                {
-                   String[] BetRateStr = eleStr.split(",");
-                   for(int i = 0; i < BetRateStr.length;i++)
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
                    {
-                       data.mBetRate.add( Float.valueOf(BetRateStr[i]) );
+                       String[] BetRateStr = eleStr.split(",");
+                       for(int i = 0; i < BetRateStr.length;i++)
+                       {
+                           data.mBetRate.add( Float.valueOf(BetRateStr[i]) );
+                       }
                    }
                }
             }
@@ -123,6 +157,7 @@ public final class MainRobotTypeConfig {
             mMapData.put(data.mID,data);
         }
 
+        return true;
     }
 
     public class MainRobotTypeConfigData

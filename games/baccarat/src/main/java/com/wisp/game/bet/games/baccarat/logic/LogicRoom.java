@@ -1396,7 +1396,7 @@ public class LogicRoom {
 
             //it->second->add_log(pure_win_gold > 0, total_bet, total_win, total_bets);
 
-            //add_player_list(player, total_win, total_bets);
+            add_player_list(player, total_win, total_bets);
 
             boolean first_player = false;
 
@@ -2312,9 +2312,9 @@ public class LogicRoom {
         return false;
     }
 
-    public int rob_bet_count()
+    public double rob_bet_count()
     {
-        int temp_count = 0;
+        double temp_count = 0;
         if (m_now_banker_id == 0)
         {
             temp_count = RandomHandler.Instance.getRandomValue(0,20000);
@@ -2383,7 +2383,7 @@ public class LogicRoom {
         StockCtrlObj.deduct_stock(gold);
     }
 
-    public Map<String,Integer> add_player_list(LogicPlayer player, int win, int bets)
+    public void add_player_list(LogicPlayer player, int win, int bets)
     {
         WinnerList winner_list = m_map_players.get(bets);
 
@@ -2426,9 +2426,9 @@ public class LogicRoom {
              **/
         }
         else
+        {
             m_players_cnt++;
-
-        return null;
+        }
     }
 
 

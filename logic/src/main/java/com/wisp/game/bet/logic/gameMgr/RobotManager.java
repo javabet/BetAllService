@@ -3,17 +3,15 @@ package com.wisp.game.bet.logic.gameMgr;
 import com.wisp.game.bet.GameConfig.MainMultiLanguageConfig;
 import com.wisp.game.bet.GameConfig.MainRobotBaseConfig;
 import com.wisp.game.bet.GameConfig.MainRobotNameConfig;
+import com.wisp.game.bet.GameConfig.MainRobotTypeConfig;
 import com.wisp.game.bet.db.mongo.player.doc.OrderPlayerIdDoc;
-import com.wisp.game.bet.db.mongo.player.doc.PlayerInfoDoc;
 import com.wisp.game.bet.logic.db.DbPlayer;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
 import com.wisp.game.bet.logic.sshare.IGameEngine;
 import com.wisp.game.bet.logic.sshare.e_player_state;
 import com.wisp.game.bet.logic.unit.LogicPeer;
 import com.wisp.game.bet.logic.unit.ServersManager;
-import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.core.random.RandomHandler;
-import logic2world_protocols.Logic2WorldProtocol;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
@@ -448,7 +446,7 @@ public class RobotManager {
             result = 0;
         }
 
-        return RandomHandler.Instance.getRandomValue(result * 0.8, result * 1.2);
+        return (int)RandomHandler.Instance.getRandomValue(result * 0.8, result * 1.2);
     }
 
 

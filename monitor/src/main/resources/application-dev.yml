@@ -9,3 +9,5 @@ cfg:
   configdb_url: 127.0.0.1:27017
   configdb_name: ConfigDB
   server_id: 1
+logging:
+  config: classpath:log4j2.xml

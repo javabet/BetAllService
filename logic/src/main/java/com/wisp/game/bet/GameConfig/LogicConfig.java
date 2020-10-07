@@ -25,9 +25,14 @@ public class LogicConfig implements InitializingBean {
             configFlag = MainRobotNameConfig.GetInstnace().Load();
         }
 
+        if( configFlag )
+        {
+            configFlag = MainRobotTypeConfig.GetInstnace().Load();
+        }
+
         if( !configFlag )
         {
-
+            logger.error("load the data has error");
             System.exit(0);
         }
     }

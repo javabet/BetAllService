@@ -43,10 +43,8 @@ public class RandomHandler {
         return this.random.nextInt(maxValue - minValu + 1) + minValu;
     }
 
-    public int getRandomValue(double minValue, double maxValue) {
-
-        return getRandomValue((int)maxValue - (int)minValue) + (int)minValue;
+    public double getRandomValue(double minValue, double maxValue)
+    {
+        return minValue + ( maxValue - minValue ) * random.nextDouble();
     }
-
-
 }

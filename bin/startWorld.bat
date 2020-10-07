@@ -1,0 +1,1 @@
+start "world" java -jar world.jar &

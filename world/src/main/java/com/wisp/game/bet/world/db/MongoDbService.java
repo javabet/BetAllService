@@ -112,48 +112,6 @@ public class MongoDbService implements InitializingBean {
             DbAccount.Instance.init_db(environment.getProperty("cfg.accountdb_url"),environment.getProperty("cfg.accountdb_name"));
         }
 
-
-
-
-        FilePathUtils filePathUtils = new FilePathUtils();
-
-        Collection<String> paths =  filePathUtils.searchLocationsForFile("./MainGameVerConfig.xml");
-        Collection<String> paths2 =  filePathUtils.searchLocationsForClasspath("./MainGameVerConfig.xml");
-
-        try
-        {
-            for( String path : paths)
-            {
-                URL url = Thread.currentThread().getContextClassLoader().getResource(path);
-                String filePath = URLDecoder.decode(url.getFile(),"UTF-8");
-
-                System.out.printf("filePath:" + filePath);
-            }
-        }
-        catch (Exception exception)
-        {
-            System.out.printf("go this...111");
-        }
-
-        try
-        {
-            for( String path : paths2)
-            {
-                File file =  ResourceUtils.getFile(path);
-                if( file.exists() )
-                {
-                    System.out.printf("the file:" + path);
-                }
-            }
-        }
-        catch (Exception exception)
-        {
-            System.out.printf("go this...222");
-        }
-
-
-        System.out.printf("...");
-
         return true;
     }
 
