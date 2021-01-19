@@ -1,4 +1,4 @@
-package game_baccarat_protocols; 
+package game_guanyuan_protocols; 
 
 enum e_server_msg_type {
 	//客户端到服务端
@@ -23,12 +23,9 @@ enum e_server_msg_type {
 	e_mst_c2l_ask_playerlist = 10018;		//请求玩家列表
 	
 	
-	e_mst_c2l_game_start_nt								=	11001;			//游戏开始
-	e_mst_c2l_game_send_nt								=	11002;			//开始发牌
-	e_mst_c2l_game_circle_over_nt						=	11003;			//一局结束通知
-	e_mst_c2l_game_over_nt								=	11004;			//游戏结束通知
+
 	
-	e_mst_c2l_debug = 10100;				//控制
+	e_mst_c2l_debug = 11000;				//控制
 	// 服务端到客户端---------------------------------------------------------------------------
 
 	e_mst_start_l2c = 15000;
@@ -59,6 +56,11 @@ enum e_server_msg_type {
 
 	e_mst_l2c_notify_sceneinfo = 15101;			//通知场景信息
 	e_mst_l2c_debug_result = 15102;			//控制返回
+
+	e_mst_l2c_game_start_nt								=	15201;			//游戏开始
+	e_mst_l2c_game_send_nt								=	15202;			//开始发牌
+	e_mst_l2c_game_circle_over_nt						=	15203;			//一局结束通知
+	e_mst_l2c_game_over_nt								=	15204;			//游戏结束通知
 
 	e_mst_clend_index = 20000;
 }

@@ -5,6 +5,7 @@ import com.wisp.game.bet.games.baccarat.logic.LogicLobby;
 import com.wisp.game.bet.games.baccarat.logic.LogicPlayer;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
+import com.wisp.game.bet.logic.sshare.AbstractGameEngine;
 import com.wisp.game.bet.logic.sshare.IGameEngine;
 import com.wisp.game.bet.logic.sshare.IGamePHandler;
 import org.springframework.beans.factory.InitializingBean;
@@ -13,7 +14,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class GameEngine implements IGameEngine {
+public final class GameEngine extends AbstractGameEngine {
 
     private static int GAME_ID = 5;
 

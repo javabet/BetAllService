@@ -43,6 +43,29 @@ public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProto
         }
         else
         {
+            int err_no =  MsgTypeDef.e_msg_result_def.e_rmt_success_VALUE;
+            int roomcard_number = msg.getRoomcardNumber();
+            if( msg.hasRoomCfgType() && msg.hasRoomCfg() )
+            {
+                if( roomcard_number == 0 )
+                {
+                    roomcard_number = GameManager.Instance.generate_room_no();
+                }
+
+                if( roomcard_number == 0 )
+                {
+                    err_no = MsgTypeDef.e_msg_result_def.e_rmt_fail_VALUE;;
+                }
+
+            }
+
+            if( err_no !=   MsgTypeDef.e_msg_result_def.e_rmt_success_VALUE)
+            {
+                builder.setResult(MsgTypeDef.e_msg_result_def.valueOf(err_no));
+                peer.send_msg(builder);
+                return true;
+            }
+
            gamePlayer = new GamePlayer();
            gamePlayer.set_roomid(msg.getRoomid());
            gamePlayer.channelId = msg.getAccountInfo().getChannelId();
@@ -65,7 +88,17 @@ public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProto
                gamePlayer.world_id = peer.get_remote_id();
            }
 
-            if( gameEngine.player_enter_game(gamePlayer,msg.getRoomid()) )
+           boolean enter_game_flag = false;
+           if( roomcard_number == 0 )
+           {
+               enter_game_flag = gameEngine.player_enter_game(gamePlayer,msg.getRoomid());
+           }
+           else
+           {
+               enter_game_flag = gameEngine.player_enter_game(gamePlayer,roomcard_number,msg.getRoomCfgType(),msg.getRoomCfg());
+           }
+
+            if( enter_game_flag )
             {
                 gamePlayer.reset_gate();
                 gamePlayer.set_state(e_player_state.e_ps_playing);

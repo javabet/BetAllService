@@ -1,5 +1,6 @@
 package com.wisp.game.bet.logic.sshare;
 
+import com.google.protobuf.ByteString;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
 
 public interface IGameEngine {
@@ -14,6 +15,8 @@ public interface IGameEngine {
 
     //玩家进入游戏
     public boolean player_enter_game(GamePlayer gamePlayer,int roomId);
+    //玩家进入游戏
+    public boolean player_enter_game(GamePlayer gamePlayer, int roomNum, int room_cfg_type,ByteString room_cfg);
 
     boolean player_leave_game(int playerid);
     boolean player_leave_game(int playerid, boolean bforce);

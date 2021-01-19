@@ -65,7 +65,7 @@ public class MaJiangPlayerData {
 	
 	private Map<String,Boolean> huList;			//当前玩家胡牌型 
 	
-	private List<MjEndDetailEntity> detailList; //玩家此局牌胡牌的具体信息
+	//private List<MjEndDetailEntity> detailList; //玩家此局牌胡牌的具体信息
 	
 	private int cardTypeMask = 0;			//玩家的类型的掩码,手里的牌 + 碰杠吃的牌的牌类型掩码
 	
@@ -90,7 +90,7 @@ public class MaJiangPlayerData {
 		
 		this.initFlowerCards = new ArrayList<>();
 		
-		this.detailList = new ArrayList<>();
+		//this.detailList = new ArrayList<>();
 		
 		this.wangGangList = new ArrayList<>();
 		this.angGangList = new ArrayList<>();
@@ -374,16 +374,16 @@ public class MaJiangPlayerData {
 	}
 
 
-	public List<MjEndDetailEntity> getDetailList()
-	{
-		return detailList;
-	}
-
-
-	public void setDetailList(List<MjEndDetailEntity> detailList)
-	{
-		this.detailList = detailList;
-	}
+//	public List<MjEndDetailEntity> getDetailList()
+//	{
+//		return detailList;
+//	}
+//
+//
+//	public void setDetailList(List<MjEndDetailEntity> detailList)
+//	{
+//		this.detailList = detailList;
+//	}
 
 
 	public List<Integer> getWangGangList() {

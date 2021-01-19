@@ -1,11 +1,21 @@
 package com.wisp.game.bet.games.guanyuan.mgr;
 
+import com.google.protobuf.ByteString;
+import com.wisp.game.bet.games.guanyuan.logic.LogicLobby;
+import com.wisp.game.bet.games.guanyuan.logic.LogicPlayer;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
+import com.wisp.game.bet.logic.sshare.AbstractGameEngine;
 import com.wisp.game.bet.logic.sshare.IGameEngine;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GameEngine implements IGameEngine {
+public class GameEngine extends AbstractGameEngine {
+
+    @Autowired
+    private LogicLobby logicLobby;
+
+
     @Override
     public boolean init_engine() {
         return false;
@@ -13,7 +23,7 @@ public class GameEngine implements IGameEngine {
 
     @Override
     public void heartbeat(double elapsed) {
-
+        logicLobby.heartbeat(elapsed);
     }
 
     @Override
@@ -27,8 +37,9 @@ public class GameEngine implements IGameEngine {
     }
 
     @Override
-    public boolean player_enter_game(GamePlayer gamePlayer, int roomId) {
-        return false;
+    public boolean player_enter_game(GamePlayer gamePlayer, int roomNum,int room_cfg_type, ByteString roomCardCfgByteString)
+    {
+        return logicLobby.player_enter_game(gamePlayer,roomNum,room_cfg_type,roomCardCfgByteString);
     }
 
     @Override
@@ -43,6 +54,7 @@ public class GameEngine implements IGameEngine {
 
     @Override
     public boolean player_can_leave(int playerid) {
+
         return false;
     }
 

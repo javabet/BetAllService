@@ -3,6 +3,10 @@ package com.wisp.game.bet.logic.gameMgr;
 import client2gate_protocols.Client2GateProtocol;
 import com.google.protobuf.Message;
 import com.wisp.game.bet.GameConfig.MainBaseConfig;
+import com.wisp.game.bet.db.mongo.player.doc.CommonConfigDoc;
+import com.wisp.game.bet.db.mongo.player.doc.OnlineRoomCardDoc;
+import com.wisp.game.bet.db.mongo.player.doc.RandomRoomNumberDoc;
+import com.wisp.game.bet.logic.db.DbPlayer;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
 import com.wisp.game.bet.logic.sshare.IGameEngine;
 import com.wisp.game.bet.logic.sshare.MsgPacketOne;
@@ -12,6 +16,9 @@ import logic2world_protocols.Logic2WorldProtocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -345,6 +352,59 @@ public class GameManager {
 
 
         return data != null && data.getmValue() > 0;
+    }
+
+    //创建房间号
+    public int generate_room_no()
+    {
+        int room_no = 0;
+        int i = 0;
+        while (i < 10000)
+        {
+            Criteria criteria = Criteria.where("type").is("cur_roomcard_index");
+            Update update = new Update();
+            update.inc("value");
+            CommonConfigDoc commonConfigDoc =  DbPlayer.Instance.getMongoTemplate().findAndModify(Query.query(criteria),update, CommonConfigDoc.class);
+
+            RandomRoomNumberDoc randomRoomNumberDoc =  DbPlayer.Instance.getMongoTemplate().findOne(Query.query(Criteria.where("Index").is(commonConfigDoc.getValue())), RandomRoomNumberDoc.class);
+
+            if( commonConfigDoc.getValue() == 999999 )
+            {
+                DbPlayer.Instance.getMongoTemplate().findAndModify(Query.query(criteria),Update.update("value",1),CommonConfigDoc.class);
+            }
+
+            boolean flag = has_room_number(randomRoomNumberDoc.getRoomNumber());
+            if( !flag )
+            {
+                room_no = randomRoomNumberDoc.getRoomNumber();
+                break;
+            }
+            i++;
+        }
+
+        //插入数据库中，当前的房间所在的服务器位置
+        OnlineRoomCardDoc onlineRoomCardDoc = new OnlineRoomCardDoc();
+        onlineRoomCardDoc.setRoomNumber(room_no);
+        onlineRoomCardDoc.setServerId(LogicServer.Instance.get_serverid());
+        DbPlayer.Instance.getMongoTemplate().insert(onlineRoomCardDoc);
+
+        return room_no;
+    }
+
+    public void delete_room_no(int room_no)
+    {
+        DbPlayer.Instance.getMongoTemplate().findAndRemove(Query.query(Criteria.where("RoomNumber").is(room_no)),OnlineRoomCardDoc.class);
+    }
+
+    public boolean has_room_number(int room_number)
+    {
+        OnlineRoomCardDoc onlineRoomCardDoc =  DbPlayer.Instance.getMongoTemplate().findOne(Query.query(Criteria.where("RoomNumber").is(room_number)), OnlineRoomCardDoc.class);
+        if( onlineRoomCardDoc == null )
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void on_exit_engine()

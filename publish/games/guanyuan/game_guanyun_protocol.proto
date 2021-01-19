@@ -1,6 +1,6 @@
-package game_baccarat_protocols;
+package game_guanyuan_protocols;
 
-import "game_baccarat_def.proto"; 
+import "game_guanyuan_def.proto"; 
 import "msg_type_def.proto"; 
 
 //房间信息    
@@ -350,3 +350,40 @@ message packetl2c_notify_sceneinfo {
 	optional int32 retain_cnt = 10;	
 }
 
+message msg_yuan_room_rule
+{
+	optional int32 hua_type 						= 1;//0:四花,	1:20花	2:28花
+    optional int32 bao_type       				= 2;    // 0:1包1     1：一包三
+    optional int32 hu_type						= 3;		//0:截胡  1：一炮多胡
+}
+
+//---------------------------推送消息----------------------------------------
+message packetl2c_circle_start_nt {
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_game_start_nt];
+	optional int32 host_pos 						= 2;				//庄家位置
+	optional int32 circle_count  					= 3;    //第几圈
+    optional int32 circle_info   					= 4;    //预留，局的方向；  //东风位置
+	optional int32 curMul							= 5;	//当前局是否是比下胡	
+}
+
+message packetl2c_card_send_nt {
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_game_start_nt]; 
+	repeated int32 cards 							= 2;				//每人的牌的集合
+	optional int32 leftCard 						= 3;				//余下的牌
+}
+
+message packetl2c_action_nt {
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_game_start_nt];
+	optional int32 pos 								= 2;		//触发的位置
+	repeated int32 action_list						= 3;		//动作类型，如果是空，则是等待命令
+	optional int32 left_card_count					= 4;		//当前余下的牌的数量
+	repeated int32 wan_gan_list						= 5;		//当前可以弯杠的列表
+	repeated int32 an_gan_list						= 6;		//当前可以暗杠的列表
+	optional int32 time_expire						= 7;		//此命令过期时间戳
+}
+
+
+message packetl2c_dice_nt {
+	optional int32 pos 								=	1;				//哪家丢的色子
+	repeated int32 dice_list						=	2;				//当前色子的值，
+}

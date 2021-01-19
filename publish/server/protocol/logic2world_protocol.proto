@@ -21,6 +21,8 @@ message packetw2l_player_login {
 	optional int32 roomid = 5 [default = -1];
 	optional fixed32 roomcard_number = 6;			//房号
 	optional msg_info_def.msg_sel_roomcard_config sel_config = 7;	//已选房卡配置(创建房间时才有值)
+	optional int32 room_cfg_type = 8;				//如果房卡配置有时，与room_cfg一起使用
+	optional bytes room_cfg = 9;					//具体的房间规则，	与room_cfg_type一起使用
 }
 
 message packetl2w_player_login_result {

@@ -3,13 +3,16 @@ package com.wisp.game.bet.world.gameMgr;
 import com.wisp.game.bet.GameConfig.MainGameVerConfig;
 import com.wisp.game.bet.GameConfig.MainRoomCardConfig;
 import com.wisp.game.bet.db.mongo.games.doc.GameRoomMgrDoc;
+import com.wisp.game.bet.db.mongo.player.doc.CommonConfigDoc;
 import com.wisp.game.bet.world.db.DbGame;
+import com.wisp.game.bet.world.db.DbPlayer;
 import com.wisp.game.core.utils.CommonUtils;
 import msg_info_def.MsgInfoDef;
 import msg_type_def.MsgTypeDef;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -274,6 +277,30 @@ public class GameEngineMgr implements InitializingBean {
         }
 
         return serverId;
+    }
+
+    public int generic_room_number()
+    {
+        Criteria criteria = Criteria.where("type").is("cur_roomcard_index");
+        Update update = new Update();
+        update.inc("value");
+        CommonConfigDoc doc =  DbPlayer.Instance.getMongoTemplate().findAndModify(Query.query(criteria),update, CommonConfigDoc.class);
+        if( doc == null)
+        {
+            return 0;
+        }
+
+
+        DbPlayer.Instance.getMongoTemplate().findOne();
+
+        return 0;
+    }
+
+    public class GameRoomCardServerStruct
+    {
+        public int gameId;
+        public int roomCard;
+        public int serverId;
     }
 
     public class GameInfoStruct
