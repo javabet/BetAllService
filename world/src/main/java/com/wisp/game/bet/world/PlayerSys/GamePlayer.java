@@ -1,6 +1,7 @@
 package com.wisp.game.bet.world.PlayerSys;
 
 import client2world_protocols.Client2WorldProtocol;
+import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
 import com.wisp.game.bet.db.mongo.account.doc.AccountTableDoc;
 import com.wisp.game.bet.db.mongo.player.doc.PlayerInfoDoc;
@@ -235,7 +236,12 @@ public class GamePlayer {
         return m_gameid > 0;
     }
 
-    public boolean join_game(int gameId,int serverId,int roomId)
+    public boolean join_game(int gameId, int serverId, int roomId)
+    {
+        return join_game(gameId,serverId,roomId,-1,null);
+    }
+
+    public boolean join_game(int gameId, int serverId, int roomId, int roomNum, ByteString gameCfgBytes)
     {
         boolean res = setGameIdServerId(gameId,serverId,roomId);
         if(!res)
@@ -268,6 +274,16 @@ public class GamePlayer {
             msgAccountInfoExBuilder.setIsRobot(playerInfoDoc.isRobot());
             msgAccountInfoExBuilder.setFreeGold(0);
             msgAccountInfoExBuilder.setProfit(0);
+
+            if( roomNum > 0 )
+            {
+                builder.setRoomcardNumber(roomNum);
+            }
+
+            if( gameCfgBytes != null )
+            {
+                builder.setRoomCfg(gameCfgBytes);
+            }
 
             m_logicPeer.send_msg(builder.build());
         }

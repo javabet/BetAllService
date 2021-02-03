@@ -44,20 +44,6 @@ public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProto
         else
         {
             int err_no =  MsgTypeDef.e_msg_result_def.e_rmt_success_VALUE;
-            int roomcard_number = msg.getRoomcardNumber();
-            if( msg.hasRoomCfgType() && msg.hasRoomCfg() )
-            {
-                if( roomcard_number == 0 )
-                {
-                    roomcard_number = GameManager.Instance.generate_room_no();
-                }
-
-                if( roomcard_number == 0 )
-                {
-                    err_no = MsgTypeDef.e_msg_result_def.e_rmt_fail_VALUE;;
-                }
-
-            }
 
             if( err_no !=   MsgTypeDef.e_msg_result_def.e_rmt_success_VALUE)
             {
@@ -89,13 +75,13 @@ public class Packetw2lPlayerLogin extends DefaultRequestMessage<Logic2WorldProto
            }
 
            boolean enter_game_flag = false;
-           if( roomcard_number == 0 )
+           if( !msg.hasRoomCfg() && !msg.hasRoomCfg() )
            {
                enter_game_flag = gameEngine.player_enter_game(gamePlayer,msg.getRoomid());
            }
            else
            {
-               enter_game_flag = gameEngine.player_enter_game(gamePlayer,roomcard_number,msg.getRoomCfgType(),msg.getRoomCfg());
+               enter_game_flag = gameEngine.player_enter_game(gamePlayer,msg.getRoomcardNumber(),msg.getRoomCfg());
            }
 
             if( enter_game_flag )

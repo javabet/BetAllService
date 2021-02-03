@@ -46,117 +46,45 @@ public final class GameGuanyuanDef {
      */
     e_mst_c2l_leave_room(3, 10003),
     /**
-     * <code>e_mst_c2l_add_bet = 10004;</code>
+     * <code>e_mst_c2l_action = 10004;</code>
      *
      * <pre>
-     *下注
+     *动作请求:摸牌，打牌，碰,明杠，暗杠,吃，胡
      * </pre>
      */
-    e_mst_c2l_add_bet(4, 10004),
+    e_mst_c2l_action(4, 10004),
     /**
-     * <code>e_mst_c2l_repeat_bet = 10005;</code>
+     * <code>e_mst_c2l_ready = 10005;</code>
      *
      * <pre>
-     *重复押注
+     *请求准备操作
      * </pre>
      */
-    e_mst_c2l_repeat_bet(5, 10005),
+    e_mst_c2l_ready(5, 10005),
     /**
-     * <code>e_mst_c2l_clear_bet = 10006;</code>
+     * <code>e_mst_c2l_gps = 10006;</code>
      *
      * <pre>
-     *押注清零
+     *更新玩家的gps信息状态
      * </pre>
      */
-    e_mst_c2l_clear_bet(6, 10006),
+    e_mst_c2l_gps(6, 10006),
     /**
-     * <code>e_mst_c2l_get_room_scene_info = 10007;</code>
+     * <code>e_mst_c2l_dis_room = 10007;</code>
      *
      * <pre>
-     *获得桌子内信息
+     *请求解散
      * </pre>
      */
-    e_mst_c2l_get_room_scene_info(7, 10007),
+    e_mst_c2l_dis_room(7, 10007),
     /**
-     * <code>e_mst_c2l_check_state = 10008;</code>
+     * <code>e_mst_c2l_check_state = 10010;</code>
      *
      * <pre>
      *检测游戏状态
      * </pre>
      */
-    e_mst_c2l_check_state(8, 10008),
-    /**
-     * <code>e_mst_c2l_gm = 10009;</code>
-     *
-     * <pre>
-     *GM
-     * </pre>
-     */
-    e_mst_c2l_gm(9, 10009),
-    /**
-     * <code>e_mst_c2l_ask_for_banker = 10010;</code>
-     *
-     * <pre>
-     *上庄
-     * </pre>
-     */
-    e_mst_c2l_ask_for_banker(10, 10010),
-    /**
-     * <code>e_mst_c2l_leave_banker = 10011;</code>
-     *
-     * <pre>
-     *下庄
-     * </pre>
-     */
-    e_mst_c2l_leave_banker(11, 10011),
-    /**
-     * <code>e_mst_c2l_ask_first_for_banker = 10012;</code>
-     *
-     * <pre>
-     *抢庄
-     * </pre>
-     */
-    e_mst_c2l_ask_first_for_banker(12, 10012),
-    /**
-     * <code>e_mst_c2l_ask_player_list = 10013;</code>
-     *
-     * <pre>
-     *请求玩家列表
-     * </pre>
-     */
-    e_mst_c2l_ask_player_list(13, 10013),
-    /**
-     * <code>e_mst_c2l_ask_banker_list = 10014;</code>
-     *
-     * <pre>
-     *请求上庄列表
-     * </pre>
-     */
-    e_mst_c2l_ask_banker_list(14, 10014),
-    /**
-     * <code>e_mst_c2l_ask_history_list = 10015;</code>
-     *
-     * <pre>
-     *请求牌路
-     * </pre>
-     */
-    e_mst_c2l_ask_history_list(15, 10015),
-    /**
-     * <code>e_mst_c2l_leave_list_banker = 10017;</code>
-     *
-     * <pre>
-     *下庄列表
-     * </pre>
-     */
-    e_mst_c2l_leave_list_banker(16, 10017),
-    /**
-     * <code>e_mst_c2l_ask_playerlist = 10018;</code>
-     *
-     * <pre>
-     *请求玩家列表
-     * </pre>
-     */
-    e_mst_c2l_ask_playerlist(17, 10018),
+    e_mst_c2l_check_state(8, 10010),
     /**
      * <code>e_mst_c2l_debug = 11000;</code>
      *
@@ -164,11 +92,15 @@ public final class GameGuanyuanDef {
      *控制
      * </pre>
      */
-    e_mst_c2l_debug(18, 11000),
+    e_mst_c2l_debug(9, 11000),
     /**
      * <code>e_mst_start_l2c = 15000;</code>
+     *
+     * <pre>
+     * 服务端到客户端---------------------------------------------------------------------------
+     * </pre>
      */
-    e_mst_start_l2c(19, 15000),
+    e_mst_start_l2c(10, 15000),
     /**
      * <code>e_mst_l2c_get_room_info_result = 15001;</code>
      *
@@ -176,7 +108,7 @@ public final class GameGuanyuanDef {
      *得到房间返回
      * </pre>
      */
-    e_mst_l2c_get_room_info_result(20, 15001),
+    e_mst_l2c_get_room_info_result(11, 15001),
     /**
      * <code>e_mst_l2c_enter_room_result = 15002;</code>
      *
@@ -184,7 +116,7 @@ public final class GameGuanyuanDef {
      *进入房间
      * </pre>
      */
-    e_mst_l2c_enter_room_result(21, 15002),
+    e_mst_l2c_enter_room_result(12, 15002),
     /**
      * <code>e_mst_l2c_leave_room_result = 15003;</code>
      *
@@ -192,215 +124,139 @@ public final class GameGuanyuanDef {
      *离开房间
      * </pre>
      */
-    e_mst_l2c_leave_room_result(22, 15003),
+    e_mst_l2c_leave_room_result(13, 15003),
     /**
-     * <code>e_mst_l2c_add_bet = 15004;</code>
+     * <code>e_mst_l2c_action_result = 15004;</code>
      *
      * <pre>
-     *下注
+     *玩家通知请求返回		
      * </pre>
      */
-    e_mst_l2c_add_bet(23, 15004),
+    e_mst_l2c_action_result(14, 15004),
     /**
-     * <code>e_mst_l2c_repeat_bet = 15005;</code>
+     * <code>e_mst_l2c_ready_result = 15005;</code>
      *
      * <pre>
-     *重复押注
+     *玩家广播准备状态
      * </pre>
      */
-    e_mst_l2c_repeat_bet(24, 15005),
+    e_mst_l2c_ready_result(15, 15005),
     /**
-     * <code>e_mst_l2c_clear_bet = 15006;</code>
+     * <code>e_mst_l2c_gps_result = 15006;</code>
      *
      * <pre>
-     *押注清零
+     *gps信息反馈
      * </pre>
      */
-    e_mst_l2c_clear_bet(25, 15006),
+    e_mst_l2c_gps_result(16, 15006),
     /**
-     * <code>e_mst_l2c_bc_begin_bet = 15007;</code>
-     *
-     * <pre>
-     *通知开始下注
-     * </pre>
-     */
-    e_mst_l2c_bc_begin_bet(26, 15007),
-    /**
-     * <code>e_mst_l2c_bc_begin_award = 15008;</code>
-     *
-     * <pre>
-     *通知开奖
-     * </pre>
-     */
-    e_mst_l2c_bc_begin_award(27, 15008),
-    /**
-     * <code>e_mst_l2c_bc_total_bet_info = 15009;</code>
-     *
-     * <pre>
-     *通知所以玩家下注信息
-     * </pre>
-     */
-    e_mst_l2c_bc_total_bet_info(28, 15009),
-    /**
-     * <code>e_mst_l2c_get_room_scene_info = 15010;</code>
-     *
-     * <pre>
-     *获得桌子内信息
-     * </pre>
-     */
-    e_mst_l2c_get_room_scene_info(29, 15010),
-    /**
-     * <code>e_mst_l2c_check_state_result = 15013;</code>
+     * <code>e_mst_l2c_check_state_result = 15010;</code>
      *
      * <pre>
      *检测游戏状态
      * </pre>
      */
-    e_mst_l2c_check_state_result(30, 15013),
+    e_mst_l2c_check_state_result(17, 15010),
     /**
-     * <code>e_mst_l2c_bc_accept_gift = 15015;</code>
+     * <code>e_mst_l2c_game_start_nt = 15200;</code>
      *
      * <pre>
-     *广播桌子内玩家收到礼物
+     *广播玩家游戏开始了
      * </pre>
      */
-    e_mst_l2c_bc_accept_gift(31, 15015),
+    e_mst_l2c_game_start_nt(18, 15200),
     /**
-     * <code>e_mst_l2c_ask_for_banker = 15016;</code>
-     *
-     * <pre>
-     *上庄
-     * </pre>
-     */
-    e_mst_l2c_ask_for_banker(32, 15016),
-    /**
-     * <code>e_mst_l2c_leave_banker = 15017;</code>
-     *
-     * <pre>
-     *下庄
-     * </pre>
-     */
-    e_mst_l2c_leave_banker(33, 15017),
-    /**
-     * <code>e_mst_l2c_ask_first_for_banker = 15018;</code>
-     *
-     * <pre>
-     *抢庄
-     * </pre>
-     */
-    e_mst_l2c_ask_first_for_banker(34, 15018),
-    /**
-     * <code>e_mst_l2c_bc_change_banker = 15019;</code>
-     *
-     * <pre>
-     *通知更换庄家
-     * </pre>
-     */
-    e_mst_l2c_bc_change_banker(35, 15019),
-    /**
-     * <code>e_mst_l2c_ask_player_list = 15020;</code>
-     *
-     * <pre>
-     *请求玩家列表返回
-     * </pre>
-     */
-    e_mst_l2c_ask_player_list(36, 15020),
-    /**
-     * <code>e_mst_l2c_ask_banker_list = 15021;</code>
-     *
-     * <pre>
-     *请求上庄列表返回
-     * </pre>
-     */
-    e_mst_l2c_ask_banker_list(37, 15021),
-    /**
-     * <code>e_mst_l2c_ask_history_list = 15022;</code>
-     *
-     * <pre>
-     *请求牌路返回
-     * </pre>
-     */
-    e_mst_l2c_ask_history_list(38, 15022),
-    /**
-     * <code>e_mst_l2c_bc_rob_banker_info = 15023;</code>
-     *
-     * <pre>
-     *通知抢庄信息
-     * </pre>
-     */
-    e_mst_l2c_bc_rob_banker_info(39, 15023),
-    /**
-     * <code>e_mst_l2c_leave_list_banker = 15028;</code>
-     *
-     * <pre>
-     *下庄列表
-     * </pre>
-     */
-    e_mst_l2c_leave_list_banker(40, 15028),
-    /**
-     * <code>e_mst_attention_needLeave = 15029;</code>
-     */
-    e_mst_attention_needLeave(41, 15029),
-    /**
-     * <code>e_mst_l2c_playerlist_result = 15030;</code>
-     *
-     * <pre>
-     *玩家列表结果
-     * </pre>
-     */
-    e_mst_l2c_playerlist_result(42, 15030),
-    /**
-     * <code>e_mst_l2c_notify_sceneinfo = 15101;</code>
-     *
-     * <pre>
-     *通知场景信息
-     * </pre>
-     */
-    e_mst_l2c_notify_sceneinfo(43, 15101),
-    /**
-     * <code>e_mst_l2c_debug_result = 15102;</code>
-     *
-     * <pre>
-     *控制返回
-     * </pre>
-     */
-    e_mst_l2c_debug_result(44, 15102),
-    /**
-     * <code>e_mst_l2c_game_start_nt = 15201;</code>
+     * <code>e_mst_l2c_circle_start_nt = 15201;</code>
      *
      * <pre>
      *游戏开始
      * </pre>
      */
-    e_mst_l2c_game_start_nt(45, 15201),
+    e_mst_l2c_circle_start_nt(19, 15201),
     /**
-     * <code>e_mst_l2c_game_send_nt = 15202;</code>
+     * <code>e_mst_l2c_dice_nt = 15202;</code>
      *
      * <pre>
-     *开始发牌
+     *掷骰子
      * </pre>
      */
-    e_mst_l2c_game_send_nt(46, 15202),
+    e_mst_l2c_dice_nt(20, 15202),
     /**
-     * <code>e_mst_l2c_game_circle_over_nt = 15203;</code>
+     * <code>e_mst_l2c_init_card_nt = 15203;</code>
      *
      * <pre>
-     *一局结束通知
+     *初始化玩家手牌
      * </pre>
      */
-    e_mst_l2c_game_circle_over_nt(47, 15203),
+    e_mst_l2c_init_card_nt(21, 15203),
     /**
-     * <code>e_mst_l2c_game_over_nt = 15204;</code>
+     * <code>e_mst_l2c_trun_index_nt = 15204;</code>
      *
      * <pre>
-     *游戏结束通知
+     *提示玩家指向
      * </pre>
      */
-    e_mst_l2c_game_over_nt(48, 15204),
+    e_mst_l2c_trun_index_nt(22, 15204),
+    /**
+     * <code>e_mst_l2c_replace_flower_nt = 15205;</code>
+     *
+     * <pre>
+     *补花
+     * </pre>
+     */
+    e_mst_l2c_replace_flower_nt(23, 15205),
+    /**
+     * <code>e_mst_l2c_player_action_nt = 15206;</code>
+     *
+     * <pre>
+     *提示某个玩家的可以进行的保重
+     * </pre>
+     */
+    e_mst_l2c_player_action_nt(24, 15206),
+    /**
+     * <code>e_mst_l2c_action_nt = 15207;</code>
+     *
+     * <pre>
+     *广播给所有的玩家，某个
+     * </pre>
+     */
+    e_mst_l2c_action_nt(25, 15207),
+    /**
+     * <code>e_mst_l2c_hu_info_nt = 15208;</code>
+     *
+     * <pre>
+     *胡牌后广播
+     * </pre>
+     */
+    e_mst_l2c_hu_info_nt(26, 15208),
+    /**
+     * <code>e_mst_l2c_circle_result_nt = 15209;</code>
+     *
+     * <pre>
+     *一局结束后 当前局详情广播
+     * </pre>
+     */
+    e_mst_l2c_circle_result_nt(27, 15209),
+    /**
+     * <code>e_mst_l2c_player_enter_room_nt = 15210;</code>
+     *
+     * <pre>
+     *玩家进入房间通知
+     * </pre>
+     */
+    e_mst_l2c_player_enter_room_nt(28, 15210),
+    /**
+     * <code>e_mst_l2c_line_status_nt = 15211;</code>
+     *
+     * <pre>
+     *玩家在线也离线情况
+     * </pre>
+     */
+    e_mst_l2c_line_status_nt(29, 15211),
     /**
      * <code>e_mst_clend_index = 20000;</code>
      */
-    e_mst_clend_index(49, 20000),
+    e_mst_clend_index(30, 20000),
     ;
 
     /**
@@ -436,117 +292,45 @@ public final class GameGuanyuanDef {
      */
     public static final int e_mst_c2l_leave_room_VALUE = 10003;
     /**
-     * <code>e_mst_c2l_add_bet = 10004;</code>
+     * <code>e_mst_c2l_action = 10004;</code>
      *
      * <pre>
-     *下注
+     *动作请求:摸牌，打牌，碰,明杠，暗杠,吃，胡
      * </pre>
      */
-    public static final int e_mst_c2l_add_bet_VALUE = 10004;
+    public static final int e_mst_c2l_action_VALUE = 10004;
     /**
-     * <code>e_mst_c2l_repeat_bet = 10005;</code>
+     * <code>e_mst_c2l_ready = 10005;</code>
      *
      * <pre>
-     *重复押注
+     *请求准备操作
      * </pre>
      */
-    public static final int e_mst_c2l_repeat_bet_VALUE = 10005;
+    public static final int e_mst_c2l_ready_VALUE = 10005;
     /**
-     * <code>e_mst_c2l_clear_bet = 10006;</code>
+     * <code>e_mst_c2l_gps = 10006;</code>
      *
      * <pre>
-     *押注清零
+     *更新玩家的gps信息状态
      * </pre>
      */
-    public static final int e_mst_c2l_clear_bet_VALUE = 10006;
+    public static final int e_mst_c2l_gps_VALUE = 10006;
     /**
-     * <code>e_mst_c2l_get_room_scene_info = 10007;</code>
+     * <code>e_mst_c2l_dis_room = 10007;</code>
      *
      * <pre>
-     *获得桌子内信息
+     *请求解散
      * </pre>
      */
-    public static final int e_mst_c2l_get_room_scene_info_VALUE = 10007;
+    public static final int e_mst_c2l_dis_room_VALUE = 10007;
     /**
-     * <code>e_mst_c2l_check_state = 10008;</code>
+     * <code>e_mst_c2l_check_state = 10010;</code>
      *
      * <pre>
      *检测游戏状态
      * </pre>
      */
-    public static final int e_mst_c2l_check_state_VALUE = 10008;
-    /**
-     * <code>e_mst_c2l_gm = 10009;</code>
-     *
-     * <pre>
-     *GM
-     * </pre>
-     */
-    public static final int e_mst_c2l_gm_VALUE = 10009;
-    /**
-     * <code>e_mst_c2l_ask_for_banker = 10010;</code>
-     *
-     * <pre>
-     *上庄
-     * </pre>
-     */
-    public static final int e_mst_c2l_ask_for_banker_VALUE = 10010;
-    /**
-     * <code>e_mst_c2l_leave_banker = 10011;</code>
-     *
-     * <pre>
-     *下庄
-     * </pre>
-     */
-    public static final int e_mst_c2l_leave_banker_VALUE = 10011;
-    /**
-     * <code>e_mst_c2l_ask_first_for_banker = 10012;</code>
-     *
-     * <pre>
-     *抢庄
-     * </pre>
-     */
-    public static final int e_mst_c2l_ask_first_for_banker_VALUE = 10012;
-    /**
-     * <code>e_mst_c2l_ask_player_list = 10013;</code>
-     *
-     * <pre>
-     *请求玩家列表
-     * </pre>
-     */
-    public static final int e_mst_c2l_ask_player_list_VALUE = 10013;
-    /**
-     * <code>e_mst_c2l_ask_banker_list = 10014;</code>
-     *
-     * <pre>
-     *请求上庄列表
-     * </pre>
-     */
-    public static final int e_mst_c2l_ask_banker_list_VALUE = 10014;
-    /**
-     * <code>e_mst_c2l_ask_history_list = 10015;</code>
-     *
-     * <pre>
-     *请求牌路
-     * </pre>
-     */
-    public static final int e_mst_c2l_ask_history_list_VALUE = 10015;
-    /**
-     * <code>e_mst_c2l_leave_list_banker = 10017;</code>
-     *
-     * <pre>
-     *下庄列表
-     * </pre>
-     */
-    public static final int e_mst_c2l_leave_list_banker_VALUE = 10017;
-    /**
-     * <code>e_mst_c2l_ask_playerlist = 10018;</code>
-     *
-     * <pre>
-     *请求玩家列表
-     * </pre>
-     */
-    public static final int e_mst_c2l_ask_playerlist_VALUE = 10018;
+    public static final int e_mst_c2l_check_state_VALUE = 10010;
     /**
      * <code>e_mst_c2l_debug = 11000;</code>
      *
@@ -557,6 +341,10 @@ public final class GameGuanyuanDef {
     public static final int e_mst_c2l_debug_VALUE = 11000;
     /**
      * <code>e_mst_start_l2c = 15000;</code>
+     *
+     * <pre>
+     * 服务端到客户端---------------------------------------------------------------------------
+     * </pre>
      */
     public static final int e_mst_start_l2c_VALUE = 15000;
     /**
@@ -584,209 +372,133 @@ public final class GameGuanyuanDef {
      */
     public static final int e_mst_l2c_leave_room_result_VALUE = 15003;
     /**
-     * <code>e_mst_l2c_add_bet = 15004;</code>
+     * <code>e_mst_l2c_action_result = 15004;</code>
      *
      * <pre>
-     *下注
+     *玩家通知请求返回		
      * </pre>
      */
-    public static final int e_mst_l2c_add_bet_VALUE = 15004;
+    public static final int e_mst_l2c_action_result_VALUE = 15004;
     /**
-     * <code>e_mst_l2c_repeat_bet = 15005;</code>
+     * <code>e_mst_l2c_ready_result = 15005;</code>
      *
      * <pre>
-     *重复押注
+     *玩家广播准备状态
      * </pre>
      */
-    public static final int e_mst_l2c_repeat_bet_VALUE = 15005;
+    public static final int e_mst_l2c_ready_result_VALUE = 15005;
     /**
-     * <code>e_mst_l2c_clear_bet = 15006;</code>
+     * <code>e_mst_l2c_gps_result = 15006;</code>
      *
      * <pre>
-     *押注清零
+     *gps信息反馈
      * </pre>
      */
-    public static final int e_mst_l2c_clear_bet_VALUE = 15006;
+    public static final int e_mst_l2c_gps_result_VALUE = 15006;
     /**
-     * <code>e_mst_l2c_bc_begin_bet = 15007;</code>
-     *
-     * <pre>
-     *通知开始下注
-     * </pre>
-     */
-    public static final int e_mst_l2c_bc_begin_bet_VALUE = 15007;
-    /**
-     * <code>e_mst_l2c_bc_begin_award = 15008;</code>
-     *
-     * <pre>
-     *通知开奖
-     * </pre>
-     */
-    public static final int e_mst_l2c_bc_begin_award_VALUE = 15008;
-    /**
-     * <code>e_mst_l2c_bc_total_bet_info = 15009;</code>
-     *
-     * <pre>
-     *通知所以玩家下注信息
-     * </pre>
-     */
-    public static final int e_mst_l2c_bc_total_bet_info_VALUE = 15009;
-    /**
-     * <code>e_mst_l2c_get_room_scene_info = 15010;</code>
-     *
-     * <pre>
-     *获得桌子内信息
-     * </pre>
-     */
-    public static final int e_mst_l2c_get_room_scene_info_VALUE = 15010;
-    /**
-     * <code>e_mst_l2c_check_state_result = 15013;</code>
+     * <code>e_mst_l2c_check_state_result = 15010;</code>
      *
      * <pre>
      *检测游戏状态
      * </pre>
      */
-    public static final int e_mst_l2c_check_state_result_VALUE = 15013;
+    public static final int e_mst_l2c_check_state_result_VALUE = 15010;
     /**
-     * <code>e_mst_l2c_bc_accept_gift = 15015;</code>
+     * <code>e_mst_l2c_game_start_nt = 15200;</code>
      *
      * <pre>
-     *广播桌子内玩家收到礼物
+     *广播玩家游戏开始了
      * </pre>
      */
-    public static final int e_mst_l2c_bc_accept_gift_VALUE = 15015;
+    public static final int e_mst_l2c_game_start_nt_VALUE = 15200;
     /**
-     * <code>e_mst_l2c_ask_for_banker = 15016;</code>
-     *
-     * <pre>
-     *上庄
-     * </pre>
-     */
-    public static final int e_mst_l2c_ask_for_banker_VALUE = 15016;
-    /**
-     * <code>e_mst_l2c_leave_banker = 15017;</code>
-     *
-     * <pre>
-     *下庄
-     * </pre>
-     */
-    public static final int e_mst_l2c_leave_banker_VALUE = 15017;
-    /**
-     * <code>e_mst_l2c_ask_first_for_banker = 15018;</code>
-     *
-     * <pre>
-     *抢庄
-     * </pre>
-     */
-    public static final int e_mst_l2c_ask_first_for_banker_VALUE = 15018;
-    /**
-     * <code>e_mst_l2c_bc_change_banker = 15019;</code>
-     *
-     * <pre>
-     *通知更换庄家
-     * </pre>
-     */
-    public static final int e_mst_l2c_bc_change_banker_VALUE = 15019;
-    /**
-     * <code>e_mst_l2c_ask_player_list = 15020;</code>
-     *
-     * <pre>
-     *请求玩家列表返回
-     * </pre>
-     */
-    public static final int e_mst_l2c_ask_player_list_VALUE = 15020;
-    /**
-     * <code>e_mst_l2c_ask_banker_list = 15021;</code>
-     *
-     * <pre>
-     *请求上庄列表返回
-     * </pre>
-     */
-    public static final int e_mst_l2c_ask_banker_list_VALUE = 15021;
-    /**
-     * <code>e_mst_l2c_ask_history_list = 15022;</code>
-     *
-     * <pre>
-     *请求牌路返回
-     * </pre>
-     */
-    public static final int e_mst_l2c_ask_history_list_VALUE = 15022;
-    /**
-     * <code>e_mst_l2c_bc_rob_banker_info = 15023;</code>
-     *
-     * <pre>
-     *通知抢庄信息
-     * </pre>
-     */
-    public static final int e_mst_l2c_bc_rob_banker_info_VALUE = 15023;
-    /**
-     * <code>e_mst_l2c_leave_list_banker = 15028;</code>
-     *
-     * <pre>
-     *下庄列表
-     * </pre>
-     */
-    public static final int e_mst_l2c_leave_list_banker_VALUE = 15028;
-    /**
-     * <code>e_mst_attention_needLeave = 15029;</code>
-     */
-    public static final int e_mst_attention_needLeave_VALUE = 15029;
-    /**
-     * <code>e_mst_l2c_playerlist_result = 15030;</code>
-     *
-     * <pre>
-     *玩家列表结果
-     * </pre>
-     */
-    public static final int e_mst_l2c_playerlist_result_VALUE = 15030;
-    /**
-     * <code>e_mst_l2c_notify_sceneinfo = 15101;</code>
-     *
-     * <pre>
-     *通知场景信息
-     * </pre>
-     */
-    public static final int e_mst_l2c_notify_sceneinfo_VALUE = 15101;
-    /**
-     * <code>e_mst_l2c_debug_result = 15102;</code>
-     *
-     * <pre>
-     *控制返回
-     * </pre>
-     */
-    public static final int e_mst_l2c_debug_result_VALUE = 15102;
-    /**
-     * <code>e_mst_l2c_game_start_nt = 15201;</code>
+     * <code>e_mst_l2c_circle_start_nt = 15201;</code>
      *
      * <pre>
      *游戏开始
      * </pre>
      */
-    public static final int e_mst_l2c_game_start_nt_VALUE = 15201;
+    public static final int e_mst_l2c_circle_start_nt_VALUE = 15201;
     /**
-     * <code>e_mst_l2c_game_send_nt = 15202;</code>
+     * <code>e_mst_l2c_dice_nt = 15202;</code>
      *
      * <pre>
-     *开始发牌
+     *掷骰子
      * </pre>
      */
-    public static final int e_mst_l2c_game_send_nt_VALUE = 15202;
+    public static final int e_mst_l2c_dice_nt_VALUE = 15202;
     /**
-     * <code>e_mst_l2c_game_circle_over_nt = 15203;</code>
+     * <code>e_mst_l2c_init_card_nt = 15203;</code>
      *
      * <pre>
-     *一局结束通知
+     *初始化玩家手牌
      * </pre>
      */
-    public static final int e_mst_l2c_game_circle_over_nt_VALUE = 15203;
+    public static final int e_mst_l2c_init_card_nt_VALUE = 15203;
     /**
-     * <code>e_mst_l2c_game_over_nt = 15204;</code>
+     * <code>e_mst_l2c_trun_index_nt = 15204;</code>
      *
      * <pre>
-     *游戏结束通知
+     *提示玩家指向
      * </pre>
      */
-    public static final int e_mst_l2c_game_over_nt_VALUE = 15204;
+    public static final int e_mst_l2c_trun_index_nt_VALUE = 15204;
+    /**
+     * <code>e_mst_l2c_replace_flower_nt = 15205;</code>
+     *
+     * <pre>
+     *补花
+     * </pre>
+     */
+    public static final int e_mst_l2c_replace_flower_nt_VALUE = 15205;
+    /**
+     * <code>e_mst_l2c_player_action_nt = 15206;</code>
+     *
+     * <pre>
+     *提示某个玩家的可以进行的保重
+     * </pre>
+     */
+    public static final int e_mst_l2c_player_action_nt_VALUE = 15206;
+    /**
+     * <code>e_mst_l2c_action_nt = 15207;</code>
+     *
+     * <pre>
+     *广播给所有的玩家，某个
+     * </pre>
+     */
+    public static final int e_mst_l2c_action_nt_VALUE = 15207;
+    /**
+     * <code>e_mst_l2c_hu_info_nt = 15208;</code>
+     *
+     * <pre>
+     *胡牌后广播
+     * </pre>
+     */
+    public static final int e_mst_l2c_hu_info_nt_VALUE = 15208;
+    /**
+     * <code>e_mst_l2c_circle_result_nt = 15209;</code>
+     *
+     * <pre>
+     *一局结束后 当前局详情广播
+     * </pre>
+     */
+    public static final int e_mst_l2c_circle_result_nt_VALUE = 15209;
+    /**
+     * <code>e_mst_l2c_player_enter_room_nt = 15210;</code>
+     *
+     * <pre>
+     *玩家进入房间通知
+     * </pre>
+     */
+    public static final int e_mst_l2c_player_enter_room_nt_VALUE = 15210;
+    /**
+     * <code>e_mst_l2c_line_status_nt = 15211;</code>
+     *
+     * <pre>
+     *玩家在线也离线情况
+     * </pre>
+     */
+    public static final int e_mst_l2c_line_status_nt_VALUE = 15211;
     /**
      * <code>e_mst_clend_index = 20000;</code>
      */
@@ -801,51 +513,32 @@ public final class GameGuanyuanDef {
         case 10001: return e_mst_c2l_get_room_info;
         case 10002: return e_mst_c2l_enter_room;
         case 10003: return e_mst_c2l_leave_room;
-        case 10004: return e_mst_c2l_add_bet;
-        case 10005: return e_mst_c2l_repeat_bet;
-        case 10006: return e_mst_c2l_clear_bet;
-        case 10007: return e_mst_c2l_get_room_scene_info;
-        case 10008: return e_mst_c2l_check_state;
-        case 10009: return e_mst_c2l_gm;
-        case 10010: return e_mst_c2l_ask_for_banker;
-        case 10011: return e_mst_c2l_leave_banker;
-        case 10012: return e_mst_c2l_ask_first_for_banker;
-        case 10013: return e_mst_c2l_ask_player_list;
-        case 10014: return e_mst_c2l_ask_banker_list;
-        case 10015: return e_mst_c2l_ask_history_list;
-        case 10017: return e_mst_c2l_leave_list_banker;
-        case 10018: return e_mst_c2l_ask_playerlist;
+        case 10004: return e_mst_c2l_action;
+        case 10005: return e_mst_c2l_ready;
+        case 10006: return e_mst_c2l_gps;
+        case 10007: return e_mst_c2l_dis_room;
+        case 10010: return e_mst_c2l_check_state;
         case 11000: return e_mst_c2l_debug;
         case 15000: return e_mst_start_l2c;
         case 15001: return e_mst_l2c_get_room_info_result;
         case 15002: return e_mst_l2c_enter_room_result;
         case 15003: return e_mst_l2c_leave_room_result;
-        case 15004: return e_mst_l2c_add_bet;
-        case 15005: return e_mst_l2c_repeat_bet;
-        case 15006: return e_mst_l2c_clear_bet;
-        case 15007: return e_mst_l2c_bc_begin_bet;
-        case 15008: return e_mst_l2c_bc_begin_award;
-        case 15009: return e_mst_l2c_bc_total_bet_info;
-        case 15010: return e_mst_l2c_get_room_scene_info;
-        case 15013: return e_mst_l2c_check_state_result;
-        case 15015: return e_mst_l2c_bc_accept_gift;
-        case 15016: return e_mst_l2c_ask_for_banker;
-        case 15017: return e_mst_l2c_leave_banker;
-        case 15018: return e_mst_l2c_ask_first_for_banker;
-        case 15019: return e_mst_l2c_bc_change_banker;
-        case 15020: return e_mst_l2c_ask_player_list;
-        case 15021: return e_mst_l2c_ask_banker_list;
-        case 15022: return e_mst_l2c_ask_history_list;
-        case 15023: return e_mst_l2c_bc_rob_banker_info;
-        case 15028: return e_mst_l2c_leave_list_banker;
-        case 15029: return e_mst_attention_needLeave;
-        case 15030: return e_mst_l2c_playerlist_result;
-        case 15101: return e_mst_l2c_notify_sceneinfo;
-        case 15102: return e_mst_l2c_debug_result;
-        case 15201: return e_mst_l2c_game_start_nt;
-        case 15202: return e_mst_l2c_game_send_nt;
-        case 15203: return e_mst_l2c_game_circle_over_nt;
-        case 15204: return e_mst_l2c_game_over_nt;
+        case 15004: return e_mst_l2c_action_result;
+        case 15005: return e_mst_l2c_ready_result;
+        case 15006: return e_mst_l2c_gps_result;
+        case 15010: return e_mst_l2c_check_state_result;
+        case 15200: return e_mst_l2c_game_start_nt;
+        case 15201: return e_mst_l2c_circle_start_nt;
+        case 15202: return e_mst_l2c_dice_nt;
+        case 15203: return e_mst_l2c_init_card_nt;
+        case 15204: return e_mst_l2c_trun_index_nt;
+        case 15205: return e_mst_l2c_replace_flower_nt;
+        case 15206: return e_mst_l2c_player_action_nt;
+        case 15207: return e_mst_l2c_action_nt;
+        case 15208: return e_mst_l2c_hu_info_nt;
+        case 15209: return e_mst_l2c_circle_result_nt;
+        case 15210: return e_mst_l2c_player_enter_room_nt;
+        case 15211: return e_mst_l2c_line_status_nt;
         case 20000: return e_mst_clend_index;
         default: return null;
       }
@@ -1013,138 +706,6 @@ public final class GameGuanyuanDef {
     // @@protoc_insertion_point(enum_scope:game_guanyuan_protocols.e_game_state)
   }
 
-  /**
-   * Protobuf enum {@code game_guanyuan_protocols.e_card_flower}
-   */
-  public enum e_card_flower
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>e_flower_diamond = 0;</code>
-     *
-     * <pre>
-     *方块
-     * </pre>
-     */
-    e_flower_diamond(0, 0),
-    /**
-     * <code>e_flower_club = 1;</code>
-     *
-     * <pre>
-     *梅花
-     * </pre>
-     */
-    e_flower_club(1, 1),
-    /**
-     * <code>e_flower_spade = 2;</code>
-     *
-     * <pre>
-     *黑桃
-     * </pre>
-     */
-    e_flower_spade(2, 2),
-    /**
-     * <code>e_flower_heart = 3;</code>
-     *
-     * <pre>
-     *红心
-     * </pre>
-     */
-    e_flower_heart(3, 3),
-    ;
-
-    /**
-     * <code>e_flower_diamond = 0;</code>
-     *
-     * <pre>
-     *方块
-     * </pre>
-     */
-    public static final int e_flower_diamond_VALUE = 0;
-    /**
-     * <code>e_flower_club = 1;</code>
-     *
-     * <pre>
-     *梅花
-     * </pre>
-     */
-    public static final int e_flower_club_VALUE = 1;
-    /**
-     * <code>e_flower_spade = 2;</code>
-     *
-     * <pre>
-     *黑桃
-     * </pre>
-     */
-    public static final int e_flower_spade_VALUE = 2;
-    /**
-     * <code>e_flower_heart = 3;</code>
-     *
-     * <pre>
-     *红心
-     * </pre>
-     */
-    public static final int e_flower_heart_VALUE = 3;
-
-
-    public final int getNumber() { return value; }
-
-    public static e_card_flower valueOf(int value) {
-      switch (value) {
-        case 0: return e_flower_diamond;
-        case 1: return e_flower_club;
-        case 2: return e_flower_spade;
-        case 3: return e_flower_heart;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<e_card_flower>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<e_card_flower>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<e_card_flower>() {
-            public e_card_flower findValueByNumber(int number) {
-              return e_card_flower.valueOf(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return game_guanyuan_protocols.GameGuanyuanDef.getDescriptor().getEnumTypes().get(2);
-    }
-
-    private static final e_card_flower[] VALUES = values();
-
-    public static e_card_flower valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private e_card_flower(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:game_guanyuan_protocols.e_card_flower)
-  }
-
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1155,50 +716,32 @@ public final class GameGuanyuanDef {
   static {
     java.lang.String[] descriptorData = {
       "\n\027game_guanyuan_def.proto\022\027game_guanyuan" +
-      "_protocols*\203\014\n\021e_server_msg_type\022\024\n\017e_ms" +
+      "_protocols*\210\007\n\021e_server_msg_type\022\024\n\017e_ms" +
       "t_start_c2l\020\220N\022\034\n\027e_mst_c2l_get_room_inf" +
       "o\020\221N\022\031\n\024e_mst_c2l_enter_room\020\222N\022\031\n\024e_mst" +
-      "_c2l_leave_room\020\223N\022\026\n\021e_mst_c2l_add_bet\020" +
-      "\224N\022\031\n\024e_mst_c2l_repeat_bet\020\225N\022\030\n\023e_mst_c" +
-      "2l_clear_bet\020\226N\022\"\n\035e_mst_c2l_get_room_sc" +
-      "ene_info\020\227N\022\032\n\025e_mst_c2l_check_state\020\230N\022" +
-      "\021\n\014e_mst_c2l_gm\020\231N\022\035\n\030e_mst_c2l_ask_for_" +
-      "banker\020\232N\022\033\n\026e_mst_c2l_leave_banker\020\233N\022#",
-      "\n\036e_mst_c2l_ask_first_for_banker\020\234N\022\036\n\031e" +
-      "_mst_c2l_ask_player_list\020\235N\022\036\n\031e_mst_c2l" +
-      "_ask_banker_list\020\236N\022\037\n\032e_mst_c2l_ask_his" +
-      "tory_list\020\237N\022 \n\033e_mst_c2l_leave_list_ban" +
-      "ker\020\241N\022\035\n\030e_mst_c2l_ask_playerlist\020\242N\022\024\n" +
-      "\017e_mst_c2l_debug\020\370U\022\024\n\017e_mst_start_l2c\020\230" +
-      "u\022#\n\036e_mst_l2c_get_room_info_result\020\231u\022 " +
-      "\n\033e_mst_l2c_enter_room_result\020\232u\022 \n\033e_ms" +
-      "t_l2c_leave_room_result\020\233u\022\026\n\021e_mst_l2c_" +
-      "add_bet\020\234u\022\031\n\024e_mst_l2c_repeat_bet\020\235u\022\030\n",
-      "\023e_mst_l2c_clear_bet\020\236u\022\033\n\026e_mst_l2c_bc_" +
-      "begin_bet\020\237u\022\035\n\030e_mst_l2c_bc_begin_award" +
-      "\020\240u\022 \n\033e_mst_l2c_bc_total_bet_info\020\241u\022\"\n" +
-      "\035e_mst_l2c_get_room_scene_info\020\242u\022!\n\034e_m" +
-      "st_l2c_check_state_result\020\245u\022\035\n\030e_mst_l2" +
-      "c_bc_accept_gift\020\247u\022\035\n\030e_mst_l2c_ask_for" +
-      "_banker\020\250u\022\033\n\026e_mst_l2c_leave_banker\020\251u\022" +
-      "#\n\036e_mst_l2c_ask_first_for_banker\020\252u\022\037\n\032" +
-      "e_mst_l2c_bc_change_banker\020\253u\022\036\n\031e_mst_l" +
-      "2c_ask_player_list\020\254u\022\036\n\031e_mst_l2c_ask_b",
-      "anker_list\020\255u\022\037\n\032e_mst_l2c_ask_history_l" +
-      "ist\020\256u\022!\n\034e_mst_l2c_bc_rob_banker_info\020\257" +
-      "u\022 \n\033e_mst_l2c_leave_list_banker\020\264u\022\036\n\031e" +
-      "_mst_attention_needLeave\020\265u\022 \n\033e_mst_l2c" +
-      "_playerlist_result\020\266u\022\037\n\032e_mst_l2c_notif" +
-      "y_sceneinfo\020\375u\022\033\n\026e_mst_l2c_debug_result" +
-      "\020\376u\022\034\n\027e_mst_l2c_game_start_nt\020\341v\022\033\n\026e_m" +
-      "st_l2c_game_send_nt\020\342v\022\"\n\035e_mst_l2c_game" +
-      "_circle_over_nt\020\343v\022\033\n\026e_mst_l2c_game_ove" +
-      "r_nt\020\344v\022\027\n\021e_mst_clend_index\020\240\234\001*T\n\014e_ga",
-      "me_state\022\026\n\022e_state_game_begin\020\000\022\024\n\020e_st" +
-      "ate_game_bet\020\001\022\026\n\022e_state_game_award\020\002*`" +
-      "\n\re_card_flower\022\024\n\020e_flower_diamond\020\000\022\021\n" +
-      "\re_flower_club\020\001\022\022\n\016e_flower_spade\020\002\022\022\n\016" +
-      "e_flower_heart\020\003"
+      "_c2l_leave_room\020\223N\022\025\n\020e_mst_c2l_action\020\224" +
+      "N\022\024\n\017e_mst_c2l_ready\020\225N\022\022\n\re_mst_c2l_gps" +
+      "\020\226N\022\027\n\022e_mst_c2l_dis_room\020\227N\022\032\n\025e_mst_c2" +
+      "l_check_state\020\232N\022\024\n\017e_mst_c2l_debug\020\370U\022\024" +
+      "\n\017e_mst_start_l2c\020\230u\022#\n\036e_mst_l2c_get_ro" +
+      "om_info_result\020\231u\022 \n\033e_mst_l2c_enter_roo",
+      "m_result\020\232u\022 \n\033e_mst_l2c_leave_room_resu" +
+      "lt\020\233u\022\034\n\027e_mst_l2c_action_result\020\234u\022\033\n\026e" +
+      "_mst_l2c_ready_result\020\235u\022\031\n\024e_mst_l2c_gp" +
+      "s_result\020\236u\022!\n\034e_mst_l2c_check_state_res" +
+      "ult\020\242u\022\034\n\027e_mst_l2c_game_start_nt\020\340v\022\036\n\031" +
+      "e_mst_l2c_circle_start_nt\020\341v\022\026\n\021e_mst_l2" +
+      "c_dice_nt\020\342v\022\033\n\026e_mst_l2c_init_card_nt\020\343" +
+      "v\022\034\n\027e_mst_l2c_trun_index_nt\020\344v\022 \n\033e_mst" +
+      "_l2c_replace_flower_nt\020\345v\022\037\n\032e_mst_l2c_p" +
+      "layer_action_nt\020\346v\022\030\n\023e_mst_l2c_action_n",
+      "t\020\347v\022\031\n\024e_mst_l2c_hu_info_nt\020\350v\022\037\n\032e_mst" +
+      "_l2c_circle_result_nt\020\351v\022#\n\036e_mst_l2c_pl" +
+      "ayer_enter_room_nt\020\352v\022\035\n\030e_mst_l2c_line_" +
+      "status_nt\020\353v\022\027\n\021e_mst_clend_index\020\240\234\001*T\n" +
+      "\014e_game_state\022\026\n\022e_state_game_begin\020\000\022\024\n" +
+      "\020e_state_game_bet\020\001\022\026\n\022e_state_game_awar" +
+      "d\020\002"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

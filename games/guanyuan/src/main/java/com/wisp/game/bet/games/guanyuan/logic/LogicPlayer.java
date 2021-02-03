@@ -11,11 +11,12 @@ import org.springframework.data.mongodb.core.query.Query;
 public class LogicPlayer  implements IGamePHandler {
 
     private GamePlayer gamePlayer;
-
-
-    private boolean ready = false;          //是否准备好了
     private int seatIndex;      //0,1,2,3   //玩家的位置
     private int roomId;
+    private double lng;         ///经度
+    private  double lat;        //纬度
+    private String address;     //地址
+    private  int gpsStatus;     //gps是否开启 0:未开启 1：已开启
 
     public int send_msg_to_client(Message.Builder builder)
     {
@@ -34,11 +35,8 @@ public class LogicPlayer  implements IGamePHandler {
     private boolean load_player()
     {
         GuanYunPlayerDoc guanYunPlayerDoc =  DbGame.Instance.getMongoTemplate().findOne(Query.query(Criteria.where("PlayerId").is(gamePlayer.get_playerid())), GuanYunPlayerDoc.class);
-        if( guanYunPlayerDoc != null )
-        {
-            return true;
-        }
-        return false;
+
+        return guanYunPlayerDoc != null;
     }
 
     private boolean create_player()
@@ -66,14 +64,6 @@ public class LogicPlayer  implements IGamePHandler {
         return gamePlayer.get_playerid();
     }
 
-    public boolean isReady() {
-        return ready;
-    }
-
-    public void setReady(boolean ready) {
-        this.ready = ready;
-    }
-
     public int getSeatIndex() {
         return seatIndex;
     }
@@ -88,5 +78,38 @@ public class LogicPlayer  implements IGamePHandler {
 
     public void setRoomId(int roomId) {
         this.roomId = roomId;
+    }
+
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getGpsStatus() {
+        return gpsStatus;
+    }
+
+    public void setGpsStatus(int gpsStatus) {
+        this.gpsStatus = gpsStatus;
     }
 }

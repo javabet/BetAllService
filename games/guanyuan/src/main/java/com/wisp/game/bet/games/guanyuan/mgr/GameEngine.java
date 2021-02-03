@@ -37,9 +37,9 @@ public class GameEngine extends AbstractGameEngine {
     }
 
     @Override
-    public boolean player_enter_game(GamePlayer gamePlayer, int roomNum,int room_cfg_type, ByteString roomCardCfgByteString)
+    public boolean player_enter_game(GamePlayer gamePlayer, int roomNum, ByteString roomCardCfgByteString)
     {
-        return logicLobby.player_enter_game(gamePlayer,roomNum,room_cfg_type,roomCardCfgByteString);
+        return logicLobby.player_enter_game(gamePlayer,roomNum,roomCardCfgByteString);
     }
 
     @Override

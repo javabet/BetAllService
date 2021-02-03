@@ -42,6 +42,7 @@ export class JavaExcelHandler
     private outPutDataList:any[] = [];               //需要输出的最终数据
     private outPutTPScript:string = "";             //需要输出的每个表的字段解析
     private outPutTPScript1:string = "";             //需要输出的每个表的字段解析
+    private outPutXmlStr:string = "";
 
     isMapType:boolean = false;                  //是否map类型的数据
 
@@ -85,10 +86,7 @@ export class JavaExcelHandler
         
         this.handlerSheet(firstSheet);          //解析出头
         this.parseSheet(firstSheet);            //解析出具体的数据
-        //this.setComboxRowData();                //将解析出来的头与数据进行拼装组合
-        //this.setComboxRowData2();                   //使用配置表提供的类型来分配数据
-        //this.outPutJsonData();                  //将得到的数据整合进一个数组中，方便导出
-        //this.outPutTSConstCode();               //利用生成的字段生成全局的字段变量
+        this.outPutJsonData();
     }
 
 
@@ -198,8 +196,6 @@ export class JavaExcelHandler
 
     private parseSheet(sheet:xlsx.WorkSheet)
     {
-        let colLen = 0;
-
         let self = this;
         for(let i = 4; i <= self.maxRow;i++)
         {
@@ -220,23 +216,108 @@ export class JavaExcelHandler
         }
     }
 
+    private outPutJsonData()
+    {
+        let self = this;
+        for(let i = 0; i < self.tmpRowArrData.length;i++)
+        {
+            let tmpRowData = self.tmpRowArrData[i];
+            let len = 0;
+            for(let rowKey in tmpRowData)
+            {
+                len ++;
+            } 
+
+            //没有数据
+            if( len == 0 )
+            {
+                continue;
+            }
+
+            let rowData:any= {};
+
+            for(let rowKey in tmpRowData)
+            {
+                let firstRowData = Reflect.get(self.colList,rowKey);// self.colList[ rowKey ];
+                if( firstRowData == null )
+                {
+                    continue;
+                }
+
+                let rowValue:string = Reflect.get(tmpRowData,rowKey);// tmpRowData[  rowKey ];
+                if( firstRowData.isArr )
+                {
+                    rowData[ firstRowData.colName ] = rowValue.split(",");
+                }
+                else
+                {
+                    if( firstRowData.tp === "number" )
+                    {
+                        rowData[ firstRowData.name ] = parseInt(rowValue);
+                    }
+                    else
+                    {
+                        rowData[ firstRowData.name ] = rowValue
+                    }
+
+                }
+            }
+
+            self.outPutDataList.push( rowData );
+        }
+
+        let xmlStr:string = '<?xml version="1.0" encoding="utf-8"?>' + "\n";
+        xmlStr += "<Root>\n";
+
+        for(let i:number = 0; i < self.outPutDataList.length;i++)
+        {
+            let itemData = self.outPutDataList[i];
+            let itemDataStr:string = "  <Data ";
+            for(let key in itemData )
+            {
+                itemDataStr += `${key}="${itemData[key]}" `;
+            }
+
+            itemDataStr += "/>\n";
+
+            xmlStr += itemDataStr;
+        }
+
+        xmlStr += "</Root>";
+
+        console.log(xmlStr)
+
+        self.outPutXmlStr = xmlStr;
+    }
+
 
     /**
      * 将生成的数据保存起来,需要保存两个文件，分别是配置表json,解析ts
      * @param baseJsonPath 保存Json 的数据的基础路径
-     * @param baseTsPath  保存两个ts文件的基础路径
+     * @param baseJavaPath  保存两个ts文件的基础路径
      */
-    public saveFiles(outPutConfigPath:string,baseTsPath:string,templateTxt:string,dirName:string,packageStr:string = "com.wisp.game.bet",sourcePath:string = "../Config/abc/"):void
+    public saveFiles(outPutConfigPath:string,baseJavaPath:string,templateTxt:string,dirName:string,packageStr:string = "com.wisp.game.bet",sourcePath:string = "../Config/abc/"):void
     {
         let self = this;
         let outputStr = self.formatTempStr(templateTxt,dirName,packageStr,sourcePath);
-        fs.writeFileSync(baseTsPath + "/" + self.excelFileName + ".java",outputStr );
+        fs.writeFileSync(baseJavaPath + "/" + self.excelFileName + ".java",outputStr );
+
+        //保存xml文件
+        fs.writeFileSync(outPutConfigPath + "/" + self.excelFileName + ".xml",self.outPutXmlStr );
     }
 
     private formatTempStr(templateTxt:string,dirName:string,packageStr:string = "com.wisp.game.bet",sourcePath:string = "../Config/abc/"):string
     {
         let self = this;
-        templateTxt = templateTxt.replace(self.packageNameReg,packageStr + "." + dirName);
+        if( dirName == "" )
+        {
+            templateTxt = templateTxt.replace(self.packageNameReg,packageStr);
+        }
+        else
+        {
+            templateTxt = templateTxt.replace(self.packageNameReg,packageStr + "." + dirName);
+        }
+        
         templateTxt = templateTxt.replace(self.classNameReg,self.excelFileName);
         templateTxt = templateTxt.replace(self.KeyPropertyTypeReg,self.primaryKeyPropertyType);
         templateTxt = templateTxt.replace(self.KeyPropertyTypeShortReg,self.firstColType);

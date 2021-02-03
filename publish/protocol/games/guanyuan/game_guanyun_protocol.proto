@@ -1,0 +1,404 @@
+package game_guanyuan_protocols;
+
+import "game_guanyuan_def.proto"; 
+import "msg_type_def.proto"; 
+
+
+//操作类型
+enum e_action_type {
+	e_action_skip				=	1;			//过
+	e_action_out_card			=	2;			//出牌
+	e_action_eat_card			=	3;			//吃牌
+	e_action_gang				=	4;			//杠
+	e_action_peng				=	5;			//碰
+	e_action_ting				=	6;			//叫听
+	e_action_hu					=	7;			//胡
+	e_action_ready				=	8;			//准备
+	e_action_unready			=	9;			//取消准备
+	e_action_mo_card			=	10;			//玩家摸一张牌 服务器向客户端发送
+}
+
+//玩家能操作的类型
+enum e_player_ation_type
+{
+	e_player_ation_peng			=	1;
+	e_player_ation_hu				=	2;
+	e_player_ation_ting				= 	3;		//叫听
+	e_player_ation_gang_an			=	4;		//暗杠
+	e_player_ation_gang_wang		=	5;		//弯杠
+	e_player_ation_gang_ming		=	6;		//明杠
+}
+
+//当前游戏的状态
+enum e_game_status_type
+{
+	e_game_waiting					=	1;			//正在等待玩家的阶段
+	e_game_ready					=	2;			//玩家满了，正在准备阶段
+	e_game_gameing					=	3;			//游戏开始阶段
+	e_game_circle_over				=	4;			//一局结束时
+	e_game_game_over				=	5;			//游戏结束时
+}
+
+
+
+message msg_chi_card_info
+{
+	optional int32 start_card    		= 	1;		//吃牌的起始位置
+	optional int32 eated_card			=	2;		//被吃的牌
+}
+
+//获得房间信息
+message packetc2l_get_room_info {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_get_room_info];
+}
+
+//房间信息返回
+message packetl2c_get_room_info_result {
+	optional e_server_msg_type packet_id 							= 1 [default = e_mst_l2c_get_room_info_result];
+	optional e_game_status_type status 								= 2;		//当前的房间的状态
+	repeated msg_user_info user_infos								= 3;		//当前玩家的信息
+	optional msg_base_room_rule_info	base_room_rule_info			= 4;		//当前房间的基础信息
+	optional msg_status_gaming_info gaming_info 					= 5;		//正在游戏时的状态
+	optional msg_dis_room_info		dis_room_info					= 6;		//如果有此存在，则表示当前正在处理于解散的请求
+	optional msg_circle_over_info	circle_over_info				= 7;		//一局结束时的状态信息
+	optional msg_game_over_info game_over_info						= 8;		//游戏全部结束时的状态信息
+}
+
+//房间的规则信息
+message msg_base_room_rule_info
+{
+    optional int32 circle_count      = 1;    //局数
+    optional int32 card_cost         = 2;    //房卡消耗数量
+    optional int32 cost_type         = 3;    //1-创建者扣门卡,2-AA制
+    optional int32 base_score        = 4;     //底分，默认为1
+	
+	optional int32 hua_type 		= 5;	//0:四花,	1:20花	2:28花
+    optional int32 bao_type       	= 6;    // 0:1包1     1：一包三
+    optional int32 hu_type			= 7;	//0:截胡  1：一炮多胡
+
+    optional uint32 room_id          = 8;		//房间号
+    optional uint64 creator_id       = 9;		//房间创建者	
+    optional int64 create_time       = 10;		
+	optional int32 baseHua			 = 11;		//底花值
+}
+
+
+//玩家的信息，
+message msg_user_info
+{
+	optional int32 seat_pos										=	1;			//玩家的位置
+	optional int32 playerId										=	2;			//玩家的Id
+	optional string user_name									=	3;			//玩家的名字
+	optional int32 gold											=	4;			//玩家的身上金币的数量
+	optional string head_icon									=	5;			//玩家的身上的图标类型
+	optional int32 sex											=	6;			//玩家的性别
+	optional int32 score										= 	7;			//当前的分数
+	optional int32 line_status									=	8;			//玩家在线状态 0：未在线，1：在线
+}
+
+//正在游戏时房间信息
+message msg_status_gaming_info
+{
+	repeated msg_room_info   room_info							=	1;		//房间里每个人的信息状态
+	repeated int32 angang_cards									=	2;		//当前自己暗杠牌
+	repeated int32 hand_hards									=	3;		//当前玩家的手牌信息
+	optional int32 host_pos										=	4;		//当前庄家
+	optional int32 active_pos									=	5;		//当前激活的位置
+	optional int32 left_card_num								=	6;		//余下牌的数量
+	optional int32 last_out_card_pos							=	7;		//最后出牌的位置
+	optional int32 last_out_card								=	8;		//最后出的牌
+	optional int32 circle_idx									=	9;		//当前的圈数
+	optional int32 my_pos										= 	10;		//我的位置
+}
+
+//房间信息    
+message msg_room_info{
+	optional int32 hand_card_num   	 				= 1;		//玩家手牌的数量	
+	repeated int32 wall_cards 						= 2;		//已出的墙牌	
+    repeated int32 gang_cards    					= 3;		//杠牌的集合，[3,6,8]
+    optional int32 angang_card_num  				= 4;		//暗杠的数量	
+    repeated int32 peng_cards    					= 5;		//碰牌的集合
+    repeated msg_chi_card_info chiCards     		= 6; 		//吃牌数据
+    repeated int32 flower_cards  					= 7;		//花牌
+    repeated int32 hu_cards      					= 8;		//胡的牌，目前，血流成河有用 
+	optional int32 jiao_ting_card					= 9;		//叫听牌，
+}
+
+//解散的信息
+message msg_dis_room_info
+{
+	optional int32 playerId							= 1;			//提出解散的人
+	repeated int32 agree_poses						= 2;			//同意解散的人的列表
+	optional int64 expire_tm						= 3;			//同意解散的过期时间戳，
+}
+
+message packetc2l_ready
+{
+	optional e_server_msg_type packet_id 							= 	1 [default = e_mst_c2l_ready];
+	optional int32 seat_pos											=	2;	//玩家的位置
+	optional bool ready												=	3;	//准备状态，
+}
+
+message packetl2c_ready_result
+{
+	optional e_server_msg_type packet_id 							= 	1 [default = e_mst_l2c_ready_result];
+	optional int32 seat_pos											=	2;	//玩家的位置
+	optional bool ready												=	3;	//准备状态，
+}
+
+//一局结束时的信息
+message msg_circle_over_info
+{
+	optional int32  type         									= 1;//类型：0－流局；1-胡；2-自摸；
+    optional int32  hu_pos       									= 2;//胡牌位置
+    optional int32  last_pos     									= 3; //最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
+    //repeated MjHandCardEntity  player_cards 						= 4;    //玩家的牌
+    //repeated MjScoreEntity     score_list   						= 5;    //玩家分数
+    repeated int32             hu_cards     						= 6;    //胡牌牌型
+    optional int32   circle_num                      				= 7;    //第几圈
+    optional int32   hu_card                        				= 8 ;//默认为0；有值时代表胡的哪张牌
+	repeated msg_circle_over_detail detailList0 					= 9;		//具体的结算情况
+	optional uint64 nextCircleStartTm								= 10;		//下局开始时间戳
+}
+
+message msg_circle_over_detail
+{
+	optional int32 pos						=	1;				//位置
+	optional int32 jiaoting_card			=	2;				//每个人叫听情况,如果没有，则为0
+	optional string detail           		= 	3;    //具体的名字
+	optional int32 fen           			= 	4;    //获得的分的数量
+	optional int32 hua           			= 	5;    //获得的花的数量
+}
+
+//游戏全部结束时的信息
+message msg_game_over_info
+{
+
+}
+
+
+//进入房间
+message packetc2l_enter_room {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_enter_room];
+	optional int32 roomid = 2;
+}
+
+//进入桌子返回
+message packetl2c_enter_room_result {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_room_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
+}
+
+
+//离开桌子
+message packetc2l_leave_room {
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_leave_room];
+}
+
+//离开桌子返回
+message packetl2c_leave_room_result {
+	optional e_server_msg_type packet_id		 	= 1 [default = e_mst_l2c_leave_room_result];
+	optional msg_type_def.e_msg_result_def result 	= 2 [default = e_rmt_success];
+	optional int32 seat_pos							= 3;			//离开的玩家的位置
+}
+
+//玩家的某个动作
+message packetc2l_action 
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_action];
+	optional e_action_type action_type  	=	2;				//玩家触发的动作类型 
+	repeated int32 cards					=	3;				//不同的操作会有不同的牌
+}
+
+//玩家请求某个动作类型
+message packetl2c_action_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_action_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_success];
+	optional e_action_type		action_type		  = 3;		//服务器返回的操作类型
+	optional int32 card 						  = 4;		//当前触发的牌的值
+	optional int32 left_card_num				  = 5;		//当前余下牌的数量
+}
+
+
+
+//发送给服务器当前玩家的
+message packetc2l_gps
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_gps];
+	optional msg_gps_info	gps_info	=	2;
+}
+
+//广播gps信息
+message packetl2c_gps_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_gps_result];
+	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_success];
+	repeated msg_gps_info	gps_infos	 =	3;	//具体的gps信息
+}
+
+message msg_gps_info
+{
+	optional double lng  		=	1;				
+	optional double lat  		=	2;			
+	optional int32 	status  	=	3;		//gps 是否开启			
+	optional string address  	=	4;		//玩家的具体地址
+	optional int32	seat_pos	= 5;		//具体位置
+}
+
+
+
+
+message packetc2l_dis_room
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_dis_room];
+}
+
+message msg_create_room_param
+{
+    optional int32 circle_count      			= 1;    //局数
+    optional int32 cost_type         			= 2;    //0-创建者扣门卡,1-AA制
+    optional int32 base_score        			= 3;    //底分，默认为1
+    optional int32 baseHua         				= 4 ;   //底花
+	optional int32 hua_type 					= 5;	//0:四花,	1:20花	2:28花
+    optional int32 bao_type       				= 6;    // 0:1包1     1：一包三
+    optional int32 hu_type						= 7;	//0:截胡  1：一炮多胡 
+}
+
+
+
+
+//---------------------------推送消息----------------------------------------
+message packetl2c_game_start_nt {
+	optional e_server_msg_type packet_id 			=   1 [default = e_mst_l2c_game_start_nt];
+	optional int32	start_tm						=	2;			//游戏开始了	用于倒计时
+}
+
+//一局游戏开始时发送
+message packetl2c_circle_start_nt {
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_circle_start_nt];
+	optional int32 host_pos 						= 2;				//庄家位置
+	optional int32 circle_idx  						= 3;    			//第几圈
+    optional int32 east_start_pos   				= 4;    			//东风位置	
+}
+
+//掷骰子
+message packetl2c_dice_nt
+{
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_dice_nt];
+	optional int32 fire_pos							= 2;		//触发的位置
+	repeated int32 dice_list						= 3;		//骰子的值
+}
+
+
+//游戏开始时初始化玩家的手牌
+message packetl2c_init_card_nt {
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_init_card_nt]; 
+	repeated int32 cards 							= 2;				//玩家的手牌
+	optional int32 left_card_num 					= 3;				//余下牌的数量
+}
+
+
+//指示某个的提示
+message packetl2c_trun_index_nt 
+{
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_trun_index_nt];
+	optional int32 pos 								= 2;		//触发的位置
+	optional int32 left_card_num					= 3;		//余下牌的数量
+	optional int32 time_expire						= 4;		//此命令过期时间戳
+}
+
+//补花操作
+message packetl2c_replace_flower_nt
+{
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_replace_flower_nt];
+	optional int32 	seat_pos						= 2;		//补花的位置
+	repeated int32 flower_cards						= 3;		//补花的花值
+	optional int32 replace_card						= 4;		//摸牌时，补花后的牌值
+}
+
+//通知某个玩家现在可以的操作类型
+message packetl2c_player_action_nt
+{
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_player_action_nt];
+	repeated  msg_action_type action_type 			= 2;	//玩家可以操作的列表
+}
+
+message msg_action_type
+{
+	optional e_player_ation_type	action_type					=	1;		//可以操作的类型
+	repeated int32 cards									=	2;		//当前操作可以支持的牌的类型
+}
+
+//广播给所有的玩家，某个玩家要进行的某个操作，比如碰，杠，叫听，过等
+message packetl2c_action_nt
+{
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_action_nt];
+	optional int32 seat_pos							= 2;		//某个操作的玩家
+	optional int32 card								= 3;		//操作的牌值
+	optional e_action_type action_type				= 4;		//玩家操作的类型
+}
+
+
+//胡牌后的广播信息
+message packetl2c_hu_info_nt
+{
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_hu_info_nt];
+	optional int32 hu_pos							= 2;			//胡牌位置
+	optional int32 fire_pos							= 3;			//炮手位置
+	optional int32 card								= 4;			//胡的哪张牌
+	optional int32 hu_type							= 5;			//胡牌的类型 0：普通胡 1：抢杠胡
+	repeated int32 scroes							= 6;			//胡牌后每个的分数
+}
+
+//胡牌后一局情况
+message packetl2c_circle_result_nt
+{
+	optional e_server_msg_type packet_id 					= 1 [default = e_mst_l2c_circle_result_nt];
+	optional int32  hu_type        			 				= 2;//类型：0；流局 1-胡；2-自摸；
+    optional int32  hu_pos       							= 3;	//胡牌位置
+    optional int32  hued_pos     							= 4; 	//最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
+    optional int32  circleN_idx								= 5;		//当前是第几局
+	optional int32 next_circle_start_tm						= 6;		//下局开始时间戳
+	optional int32 hu_card									= 7;		//胡牌的值
+	optional int32 best_pao_player							= 8;		//最佳炮手
+	repeated msg_player_circle_result 	players_result 		= 9;		//此局人物相关的数据
+}
+
+
+message msg_player_circle_result
+{
+	repeated int32 hide_cards						=	1;			//玩家最后手上的牌
+	repeated int32 gang_cards						=	2;			//玩家最后手上的牌
+	repeated int32 angang_cards						=	3;			//暗杠牌
+	repeated int32 peng_cards						=	4;			//碰牌的
+	repeated int32 flower_cards						=	5;			//吃的牌的集合
+	optional int32	score							=	6;			//玩家得分
+	optional int32 ting_card						=   7;			//玩家叫听的牌
+	repeated msg_hu_detail_info		detail_info		=	8;		//胡牌时的信息状态
+}
+
+message msg_hu_detail_info
+{
+	optional int32 hu_id				=	1;			//胡牌的具体Id
+	optional int32 fen					=	2;			//分值
+	optional int32 hua					=	3;			//花值
+	
+}
+
+
+
+//通知桌上其它玩家，某个人进入房间了
+message packetl2c_player_enter_game_nt
+{
+	optional e_server_msg_type packet_id 					= 1 [default = e_mst_l2c_player_enter_room_nt];
+	optional msg_user_info user_info						=  2;			//当前玩家信息
+}
+
+//某个玩家的上下线通知
+message packetl2c_line_status_nt
+{
+	optional e_server_msg_type packet_id 					= 1 [default = e_mst_l2c_line_status_nt];
+	optional int32 seat_pos									=	2;			//某个位置
+	optional int32 line_status								=	3;			//上下线状态 0：离线 1：上线
+}

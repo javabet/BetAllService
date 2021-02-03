@@ -292,3 +292,109 @@ Caused by: java.io.FileNotFoundException: D:\E\myBet\service\CopyService\classpa
 21:17:00.503 INFO  com.wisp.game.bet.sshare.ServerBase 121 s_init - server_base start 
 21:17:00.573 INFO  com.wisp.game.bet.share.netty.server.tcp.ServerNetty4Codec 272 innerdecode -  recevie protocolId:1
 21:17:01.151 WARN  com.wisp.game.bet.world.unit.WorldServer 83 on_run - server_run longtime:589.0
+21:46:52.519 INFO  org.springframework.boot.StartupInfoLogger 55 logStarting - Starting WorldMain on DESKTOP-GD331LN with PID 16796 (D:\E\myBet\service\CopyService\world\target\classes started by 52529 in D:\E\myBet\service\CopyService)
+21:46:52.599 DEBUG org.springframework.boot.StartupInfoLogger 56 logStarting - Running with Spring Boot v2.3.1.RELEASE, Spring v5.2.7.RELEASE
+21:46:52.600 INFO  org.springframework.boot.SpringApplication 655 logStartupProfileInfo - The following profiles are active: dev
+21:46:54.987 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate 127 registerRepositoriesIn - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+21:46:55.059 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate 187 registerRepositoriesIn - Finished Spring Data repository scanning in 66ms. Found 0 MongoDB repository interfaces.
+21:46:56.249 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer 108 initialize - Tomcat initialized with port(s): 12002 (http)
+21:46:56.319 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Initializing ProtocolHandler ["http-nio-12002"]
+21:46:56.320 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting service [Tomcat]
+21:46:56.320 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting Servlet engine: [Apache Tomcat/9.0.36]
+21:46:56.323 INFO  org.apache.juli.logging.DirectJDKLog 173 log - An older version [1.2.18] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+21:46:56.323 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Loaded Apache Tomcat Native library [1.2.18] using APR version [1.6.5].
+21:46:56.323 INFO  org.apache.juli.logging.DirectJDKLog 173 log - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+21:46:56.324 INFO  org.apache.juli.logging.DirectJDKLog 173 log - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+21:46:56.336 INFO  org.apache.juli.logging.DirectJDKLog 173 log - OpenSSL successfully initialized [OpenSSL 1.1.1  11 Sep 2018]
+21:46:56.495 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Initializing Spring embedded WebApplicationContext
+21:46:56.496 INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext 285 prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 3787 ms
+21:46:56.733 WARN  com.wisp.game.bet.core.SpringContextHolder 80 setApplicationContext - SpringContextHolder.applicationContext被覆盖
+21:46:57.539 INFO  com.wisp.game.bet.share.netty.RequestMessageRegister 115 afterPropertiesSet - init the all protocols
+21:46:57.541 INFO  com.wisp.game.bet.sshare.ServerBase 87 s_init - server start
+21:46:57.953 INFO  org.springframework.scheduling.concurrent.ExecutorConfigurationSupport 181 initialize - Initializing ExecutorService 'taskScheduler'
+21:46:57.972 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting ProtocolHandler ["http-nio-12002"]
+21:46:58.045 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer 220 start - Tomcat started on port(s): 12002 (http) with context path ''
+21:46:58.058 INFO  org.springframework.boot.StartupInfoLogger 61 logStarted - Started WorldMain in 7.909 seconds (JVM running for 16.867)
+21:46:58.548 INFO  com.wisp.game.bet.share.netty.server.PeerTcpClient 57 connect - the channel ready to Sync,the host:127.0.0.1 port:11001
+21:46:58.549 INFO  com.wisp.game.bet.sshare.ServerBase 121 s_init - server_base start 
+21:46:58.649 INFO  com.wisp.game.bet.share.netty.server.tcp.ServerNetty4Codec 272 innerdecode -  recevie protocolId:1
+21:46:58.747 INFO  com.wisp.game.bet.world.unit.WorldServerChannelHandler 36 channelActive - channelActive....peerId:2
+21:46:58.761 INFO  com.wisp.game.bet.share.netty.server.tcp.ServerNetty4Codec 272 innerdecode -  recevie protocolId:10
+21:46:59.469 INFO  com.wisp.game.bet.world.proc.world.PacketServerConnect 25 packet_process - packet_server_connect ok id:15002 type:e_st_gate ip:127.0.0.1 port:15002
+21:46:59.470 WARN  com.wisp.game.bet.world.unit.WorldServer 83 on_run - server_run longtime:858.0
+21:53:48.642 ERROR com.wisp.game.bet.sshare.ServerBase 160 s_exit - ready to exit
+21:53:49.001 ERROR com.wisp.game.bet.sshare.ServerBase 160 s_exit - ready to exit
+21:53:49.233 INFO  org.springframework.scheduling.concurrent.ExecutorConfigurationSupport 218 shutdown - Shutting down ExecutorService 'taskScheduler'
+21:53:49.235 WARN  com.wisp.game.bet.core.SpringContextHolder 90 destroy - SpringContextHolder.applicationContext被清除
+21:55:28.470 INFO  org.springframework.boot.StartupInfoLogger 55 logStarting - Starting WorldMain on DESKTOP-GD331LN with PID 16588 (D:\E\myBet\service\CopyService\world\target\classes started by 52529 in D:\E\myBet\service\CopyService)
+21:55:28.478 DEBUG org.springframework.boot.StartupInfoLogger 56 logStarting - Running with Spring Boot v2.3.1.RELEASE, Spring v5.2.7.RELEASE
+21:55:28.479 INFO  org.springframework.boot.SpringApplication 655 logStartupProfileInfo - The following profiles are active: dev
+21:55:30.433 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate 127 registerRepositoriesIn - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+21:55:30.454 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate 187 registerRepositoriesIn - Finished Spring Data repository scanning in 17ms. Found 0 MongoDB repository interfaces.
+21:55:31.088 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer 108 initialize - Tomcat initialized with port(s): 12002 (http)
+21:55:31.142 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Initializing ProtocolHandler ["http-nio-12002"]
+21:55:31.143 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting service [Tomcat]
+21:55:31.143 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting Servlet engine: [Apache Tomcat/9.0.36]
+21:55:31.145 INFO  org.apache.juli.logging.DirectJDKLog 173 log - An older version [1.2.18] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+21:55:31.145 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Loaded Apache Tomcat Native library [1.2.18] using APR version [1.6.5].
+21:55:31.146 INFO  org.apache.juli.logging.DirectJDKLog 173 log - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+21:55:31.146 INFO  org.apache.juli.logging.DirectJDKLog 173 log - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+21:55:31.151 INFO  org.apache.juli.logging.DirectJDKLog 173 log - OpenSSL successfully initialized [OpenSSL 1.1.1  11 Sep 2018]
+21:55:31.400 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Initializing Spring embedded WebApplicationContext
+21:55:31.400 INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext 285 prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2873 ms
+21:55:31.556 WARN  com.wisp.game.bet.core.SpringContextHolder 80 setApplicationContext - SpringContextHolder.applicationContext被覆盖
+21:55:34.056 INFO  com.wisp.game.bet.share.netty.RequestMessageRegister 115 afterPropertiesSet - init the all protocols
+21:55:34.106 INFO  com.wisp.game.bet.sshare.ServerBase 87 s_init - server start
+21:55:34.331 INFO  org.springframework.scheduling.concurrent.ExecutorConfigurationSupport 181 initialize - Initializing ExecutorService 'taskScheduler'
+21:55:34.347 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting ProtocolHandler ["http-nio-12002"]
+21:55:34.376 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer 220 start - Tomcat started on port(s): 12002 (http) with context path ''
+21:55:34.433 INFO  org.springframework.boot.StartupInfoLogger 61 logStarted - Started WorldMain in 6.568 seconds (JVM running for 9.393)
+21:55:34.900 INFO  com.wisp.game.bet.share.netty.server.PeerTcpClient 57 connect - the channel ready to Sync,the host:127.0.0.1 port:11001
+21:55:34.901 INFO  com.wisp.game.bet.sshare.ServerBase 121 s_init - server_base start 
+21:55:35.026 INFO  com.wisp.game.bet.share.netty.server.tcp.ServerNetty4Codec 272 innerdecode -  recevie protocolId:1
+21:55:35.076 INFO  com.wisp.game.bet.world.unit.WorldServerChannelHandler 36 channelActive - channelActive....peerId:2
+21:55:35.080 INFO  com.wisp.game.bet.share.netty.server.tcp.ServerNetty4Codec 272 innerdecode -  recevie protocolId:10
+21:55:35.588 INFO  com.wisp.game.bet.world.proc.world.PacketServerConnect 25 packet_process - packet_server_connect ok id:15002 type:e_st_gate ip:127.0.0.1 port:15002
+21:55:35.589 WARN  com.wisp.game.bet.world.unit.WorldServer 83 on_run - server_run longtime:626.0
+22:04:40.688 ERROR com.wisp.game.bet.sshare.ServerBase 160 s_exit - ready to exit
+22:04:40.934 INFO  org.springframework.scheduling.concurrent.ExecutorConfigurationSupport 218 shutdown - Shutting down ExecutorService 'taskScheduler'
+22:04:40.935 WARN  com.wisp.game.bet.core.SpringContextHolder 90 destroy - SpringContextHolder.applicationContext被清除
+22:36:57.958 INFO  org.springframework.boot.StartupInfoLogger 55 logStarting - Starting WorldMain on DESKTOP-GD331LN with PID 10604 (D:\E\myBet\service\CopyService\world\target\classes started by 52529 in D:\E\myBet\service\CopyService)
+22:36:57.986 DEBUG org.springframework.boot.StartupInfoLogger 56 logStarting - Running with Spring Boot v2.3.1.RELEASE, Spring v5.2.7.RELEASE
+22:36:57.987 INFO  org.springframework.boot.SpringApplication 655 logStartupProfileInfo - The following profiles are active: dev
+22:37:00.161 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate 127 registerRepositoriesIn - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+22:37:00.186 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate 187 registerRepositoriesIn - Finished Spring Data repository scanning in 19ms. Found 0 MongoDB repository interfaces.
+22:37:01.227 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer 108 initialize - Tomcat initialized with port(s): 12002 (http)
+22:37:01.242 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Initializing ProtocolHandler ["http-nio-12002"]
+22:37:01.242 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting service [Tomcat]
+22:37:01.242 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting Servlet engine: [Apache Tomcat/9.0.36]
+22:37:01.244 INFO  org.apache.juli.logging.DirectJDKLog 173 log - An older version [1.2.18] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+22:37:01.244 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Loaded Apache Tomcat Native library [1.2.18] using APR version [1.6.5].
+22:37:01.244 INFO  org.apache.juli.logging.DirectJDKLog 173 log - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+22:37:01.244 INFO  org.apache.juli.logging.DirectJDKLog 173 log - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+22:37:01.249 INFO  org.apache.juli.logging.DirectJDKLog 173 log - OpenSSL successfully initialized [OpenSSL 1.1.1  11 Sep 2018]
+22:37:01.423 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Initializing Spring embedded WebApplicationContext
+22:37:01.423 INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext 285 prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 3318 ms
+22:37:01.706 WARN  com.wisp.game.bet.core.SpringContextHolder 80 setApplicationContext - SpringContextHolder.applicationContext被覆盖
+22:37:03.688 INFO  com.wisp.game.bet.share.netty.RequestMessageRegister 115 afterPropertiesSet - init the all protocols
+22:37:03.803 INFO  com.wisp.game.bet.sshare.ServerBase 87 s_init - server start
+22:37:03.946 INFO  org.springframework.scheduling.concurrent.ExecutorConfigurationSupport 181 initialize - Initializing ExecutorService 'taskScheduler'
+22:37:03.964 INFO  org.apache.juli.logging.DirectJDKLog 173 log - Starting ProtocolHandler ["http-nio-12002"]
+22:37:03.983 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer 220 start - Tomcat started on port(s): 12002 (http) with context path ''
+22:37:03.995 INFO  org.springframework.boot.StartupInfoLogger 61 logStarted - Started WorldMain in 6.572 seconds (JVM running for 8.311)
+22:37:04.816 INFO  com.wisp.game.bet.share.netty.server.PeerTcpClient 57 connect - the channel ready to Sync,the host:127.0.0.1 port:11001
+22:37:04.816 INFO  com.wisp.game.bet.sshare.ServerBase 121 s_init - server_base start 
+22:37:05.060 INFO  com.wisp.game.bet.share.netty.server.tcp.ServerNetty4Codec 272 innerdecode -  recevie protocolId:1
+22:37:05.098 INFO  com.wisp.game.bet.world.unit.WorldServerChannelHandler 36 channelActive - channelActive....peerId:2
+22:37:05.100 INFO  com.wisp.game.bet.share.netty.server.tcp.ServerNetty4Codec 272 innerdecode -  recevie protocolId:10
+22:37:05.775 INFO  com.wisp.game.bet.world.proc.world.PacketServerConnect 25 packet_process - packet_server_connect ok id:15002 type:e_st_gate ip:127.0.0.1 port:15002
+22:37:05.776 WARN  com.wisp.game.bet.world.unit.WorldServer 83 on_run - server_run longtime:883.0
+22:46:05.935 WARN  com.wisp.game.bet.world.unit.WorldServer 83 on_run - server_run longtime:673.0
+22:56:36.622 WARN  com.wisp.game.bet.share.netty.PeerTcp 111 packet_service - sessionId:1 packet_process id:4 time:188
+22:56:38.496 WARN  com.wisp.game.bet.world.unit.WorldServer 83 on_run - server_run longtime:3696.0
+22:57:07.522 WARN  com.wisp.game.bet.world.unit.WorldServer 83 on_run - server_run longtime:1174.0
+23:01:21.373 WARN  com.wisp.game.bet.world.unit.WorldServer 83 on_run - server_run longtime:14663.0
+23:01:21.900 ERROR com.wisp.game.bet.sshare.ServerBase 160 s_exit - ready to exit
+23:01:22.243 ERROR com.wisp.game.bet.sshare.ServerBase 160 s_exit - ready to exit
+23:01:23.988 INFO  org.springframework.scheduling.concurrent.ExecutorConfigurationSupport 218 shutdown - Shutting down ExecutorService 'taskScheduler'
+23:01:23.990 WARN  com.wisp.game.bet.core.SpringContextHolder 90 destroy - SpringContextHolder.applicationContext被清除

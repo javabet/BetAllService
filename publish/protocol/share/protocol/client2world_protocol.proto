@@ -87,6 +87,7 @@ message packetc2w_enter_game{
 	optional string unique_id = 5;	//房间唯一标识
 	optional int32 roomcard_number = 6;				//房号(加入房间传值)
 	optional msg_info_def.msg_sel_roomcard_config sel_config = 7;	//已选房卡配置(创建房间时传值)
+	optional bytes  room_card_cfg_bytes                       = 8;    //已选房卡配置(创建房间时传值)
 
 }
 

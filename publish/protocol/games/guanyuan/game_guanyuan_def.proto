@@ -1,0 +1,55 @@
+package game_guanyuan_protocols; 
+
+enum e_server_msg_type {
+	//客户端到服务端
+    e_mst_start_c2l = 10000;
+	
+	e_mst_c2l_get_room_info 					= 10001;	//得到房间
+	e_mst_c2l_enter_room 						= 10002;	//进入房间
+	e_mst_c2l_leave_room 						= 10003;	//离开房间
+	e_mst_c2l_action							= 10004;	//动作请求:摸牌，打牌，碰,明杠，暗杠,吃，胡
+	e_mst_c2l_ready								= 10005;	//请求准备操作
+	e_mst_c2l_gps								= 10006;	//更新玩家的gps信息状态
+	e_mst_c2l_dis_room							= 10007;	//请求解散
+	
+	e_mst_c2l_check_state 						= 10010;	//检测游戏状态
+	
+
+	
+	e_mst_c2l_debug = 11000;				//控制
+	
+	
+	// 服务端到客户端---------------------------------------------------------------------------
+	e_mst_start_l2c = 15000;
+	
+	e_mst_l2c_get_room_info_result 						= 15001;	//得到房间返回
+	e_mst_l2c_enter_room_result							= 15002;	//进入房间
+	e_mst_l2c_leave_room_result 						= 15003;	//离开房间
+	e_mst_l2c_action_result								= 15004;	//玩家通知请求返回		
+	e_mst_l2c_ready_result								= 15005;	//玩家广播准备状态
+	e_mst_l2c_gps_result								= 15006;	//gps信息反馈
+	e_mst_l2c_check_state_result 						= 15010;	//检测游戏状态
+	
+
+	
+	e_mst_l2c_game_start_nt									=	15200;			//广播玩家游戏开始了
+	e_mst_l2c_circle_start_nt								=	15201;			//游戏开始
+	e_mst_l2c_dice_nt										=	15202;			//掷骰子
+	e_mst_l2c_init_card_nt									=	15203;			//初始化玩家手牌
+	e_mst_l2c_trun_index_nt									=	15204;			//提示玩家指向
+	e_mst_l2c_replace_flower_nt								=	15205;			//补花
+	e_mst_l2c_player_action_nt								= 	15206;			//提示某个玩家的可以进行的保重
+	e_mst_l2c_action_nt										= 	15207;			//广播给所有的玩家，某个
+	e_mst_l2c_hu_info_nt									= 	15208;			//胡牌后广播
+	e_mst_l2c_circle_result_nt								= 	15209;			//一局结束后 当前局详情广播
+	e_mst_l2c_player_enter_room_nt							= 	15210;			//玩家进入房间通知
+	e_mst_l2c_line_status_nt									=	15211;			//玩家在线也离线情况
+
+	e_mst_clend_index = 20000;
+}
+
+enum e_game_state {
+	e_state_game_begin = 0;	//游戏开始
+	e_state_game_bet = 1;	//押注期间
+	e_state_game_award = 2;	//开奖期间
+}

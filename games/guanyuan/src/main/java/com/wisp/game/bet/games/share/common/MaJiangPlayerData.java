@@ -1,12 +1,17 @@
 package com.wisp.game.bet.games.share.common;
 
+import com.wisp.game.bet.games.guanyuan.logic.info.PlayerOperationInfo;
+import com.wisp.game.bet.games.share.HuStrategy.HistoryActionInfo;
+import com.wisp.game.bet.games.share.enums.HistoryActionEnum;
+import com.wisp.game.bet.games.share.utils.IMaJiangPlayerData;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 //打牌时玩家数据
-public class MaJiangPlayerData {
+public class MaJiangPlayerData implements IMaJiangPlayerData {
 	
 	private int seatIndex; //玩家的坐位信息0,1,2,3
 	
@@ -22,9 +27,9 @@ public class MaJiangPlayerData {
 	
 	private List<Integer> initFlowerCards;		//初始化时花牌的数据
 	
-	private List<Integer> outCardActionList;		//已经推倒的牌  //包括,碰,杠(明杠,暗杠,点杠),吃 //wispAdd 用于替换上面的outCards里的数据,里面的数据mjActionList里的数据是一致的
+	private List<HistoryActionInfo> outHistoryList;		//已经推倒的牌  //包括,碰,杠(明杠,暗杠,点杠),吃 //wispAdd 用于替换上面的outCards里的数据,里面的数据mjActionList里的数据是一致的
 	
-	private List<Integer> mjActionList;		//所有操作的集合		//数据类拟于 最低4位是标识位，向上4位为位置，再上8位为牌的数据，再上以4位表示一个位置
+	private List<HistoryActionInfo> historyList;		//所有操作的集合
 	
 	private Map<Integer,Integer> countMap;//玩家手上的牌的数目，用于快速判定碰杠
 
@@ -77,10 +82,9 @@ public class MaJiangPlayerData {
 		holds = new ArrayList<>();
 		folds = new ArrayList<>();
 		flowers = new ArrayList<>();
-		
-		outCardActionList  = new ArrayList<>();
-		
-		mjActionList = new ArrayList<>();
+
+        outHistoryList  = new ArrayList<>();
+        historyList = new ArrayList<>();
 		
 		countMap = new HashMap<>();
 		
@@ -111,7 +115,41 @@ public class MaJiangPlayerData {
 		this.wangGangList.clear();
 		this.angGangList.clear();
 	}
-	
+
+	//去掉最后一张打出去在牌
+	public void removeLastOutCard()
+    {
+        int val = folds.remove(folds.size() - 1);
+    }
+
+	public void addHistoryItem(HistoryActionInfo historyActionInfo)
+    {
+        historyList.add(historyActionInfo);
+
+        if( historyActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_PENG ||
+            historyActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_WANG_GANG ||
+            historyActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_DIAN_GANG ||
+            historyActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_AN_GANG ||
+            historyActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_CHI_PAI)
+        {
+            outHistoryList.add(historyActionInfo);
+        }
+    }
+
+
+    public void outCard(int card)
+	{
+		int idx = holds.indexOf(card);
+
+		holds.remove(idx);
+		countMap.put(card,countMap.get(card) - 1);
+		if( countMap.get(card) == 0 )
+		{
+			countMap.remove(card);
+		}
+		folds.add(card);
+		calcCardMask();
+	}
 
 	public int getSeatIndex() {
 		return seatIndex;
@@ -137,6 +175,10 @@ public class MaJiangPlayerData {
 		return holds;
 	}
 
+	public void clearTingMap()
+    {
+        tingMap.clear();
+    }
 
 	public void setHolds(List<Integer> holds) {
 		this.holds = holds;
@@ -315,14 +357,7 @@ public class MaJiangPlayerData {
 		this.lastFangGangSeat = lastFangGangSeat;
 	}
 
-	public List<Integer> getMjActionList() {
-		return mjActionList;
-	}
 
-
-	public void setMjActionList(List<Integer> mjActionList) {
-		this.mjActionList = mjActionList;
-	}
 
 
 
@@ -355,14 +390,14 @@ public class MaJiangPlayerData {
 	}
 
 
-	public List<Integer> getOutCardActionList() {
-		return outCardActionList;
+	public List<HistoryActionInfo> getPlayerHistoryList() {
+		return historyList;
 	}
 
-
-	public void setOutCardActionList(List<Integer> outCardActionList) {
-		this.outCardActionList = outCardActionList;
-	}
+	public List<HistoryActionInfo> getOutHistoryList()
+    {
+        return outHistoryList;
+    }
 
 	public int getJiaoTingCard() {
 		return jiaoTingCard;
@@ -372,18 +407,6 @@ public class MaJiangPlayerData {
 	public void setJiaoTingCard(int jiaoTingCard) {
 		this.jiaoTingCard = jiaoTingCard;
 	}
-
-
-//	public List<MjEndDetailEntity> getDetailList()
-//	{
-//		return detailList;
-//	}
-//
-//
-//	public void setDetailList(List<MjEndDetailEntity> detailList)
-//	{
-//		this.detailList = detailList;
-//	}
 
 
 	public List<Integer> getWangGangList() {
@@ -405,9 +428,7 @@ public class MaJiangPlayerData {
 		this.angGangList = angGangList;
 	}
 	
-	
-	
-	
+
 	public int getCardTypeMask()
 	{
 		return cardTypeMask;
@@ -472,34 +493,35 @@ public class MaJiangPlayerData {
 	}
 	
 	
-	public void setActionFlag(int flag )
+	public void setActionOperation(PlayerOperationInfo playerOperationInfo)
 	{
-		if( (flag & GameMsg.ACTION_PENG ) == GameMsg.ACTION_PENG )
+		if( playerOperationInfo.hasAction(HistoryActionEnum.HISTORY_ACTION_PENG) )
 		{
 			canPeng = true;
 		}
+
 		
-		if( (flag & GameMsg.ACTION_HU ) == GameMsg.ACTION_HU )
+		if( playerOperationInfo.hasAction(HistoryActionEnum.HISTORY_ACTION_HU) )
 		{
 			canHu = true;
 		}
 		
-		if( (flag & GameMsg.ACTION_ANGANG ) == GameMsg.ACTION_ANGANG )
+		if(  playerOperationInfo.hasAction(HistoryActionEnum.HISTORY_ACTION_AN_GANG) )
 		{
 			canAnGang = true;
 		}
 		
-		if( (flag & GameMsg.ACTION_WANGANG ) == GameMsg.ACTION_WANGANG )
+		if(  playerOperationInfo.hasAction(HistoryActionEnum.HISTORY_ACTION_WANG_GANG) )
 		{
 			canWanGang = true;
 		}
 		
-		if( (flag & GameMsg.ACTION_DIANGGANG ) == GameMsg.ACTION_DIANGGANG )
+		if( playerOperationInfo.hasAction(HistoryActionEnum.HISTORY_ACTION_DIAN_GANG))
 		{
 			canDianGang = true;
 		}
 		
-		if( (flag & GameMsg.ACTION_CHI ) == GameMsg.ACTION_CHI )
+		if( playerOperationInfo.hasAction(HistoryActionEnum.HISTORY_ACTION_CHI_PAI) )
 		{
 			canChi = true;
 		}
@@ -509,16 +531,16 @@ public class MaJiangPlayerData {
 	public void calcCardMask()
 	{
 		cardTypeMask = 0;
-		for(int holdCard:  holds)
-		{
-			cardTypeMask |= (0x01 << (holdCard >> 4 ));
-		}
-		
-		for(int outCardAction:  outCardActionList)
-		{
-			int outCard = (outCardAction) >> 8 & 0x0FF;
-			cardTypeMask |= (0x01 << (outCard >> 4 ));
-		}
+//		for(int holdCard:  holds)
+//		{
+//			cardTypeMask |= (0x01 << (holdCard >> 4 ));
+//		}
+//
+//		for(int outCardAction:  outCardActionList)
+//		{
+//			int outCard = (outCardAction) >> 8 & 0x0FF;
+//			cardTypeMask |= (0x01 << (outCard >> 4 ));
+//		}
 	}
 	
 	
@@ -529,20 +551,20 @@ public class MaJiangPlayerData {
 	public int calcCardMaskExcept(int card)
 	{
 		int mask = 0;
-		for(int holdCard:  holds)
-		{
-			if(card == holdCard)
-			{
-				continue;
-			}
-			cardTypeMask |= (0x01 << (holdCard >> 4 ));
-		}
-		
-		for(int outCardAction:  outCardActionList)
-		{
-			int outCard = (outCardAction) >> 8 & 0x0FF;
-			cardTypeMask |= (0x01 << (outCard >> 4 ));
-		}
+//		for(int holdCard:  holds)
+//		{
+//			if(card == holdCard)
+//			{
+//				continue;
+//			}
+//			cardTypeMask |= (0x01 << (holdCard >> 4 ));
+//		}
+//
+//		for(int outCardAction:  outCardActionList)
+//		{
+//			int outCard = (outCardAction) >> 8 & 0x0FF;
+//			cardTypeMask |= (0x01 << (outCard >> 4 ));
+//		}
 		
 		return mask;
 	}

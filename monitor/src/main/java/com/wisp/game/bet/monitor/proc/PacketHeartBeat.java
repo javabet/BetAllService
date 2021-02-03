@@ -19,6 +19,6 @@ public class PacketHeartBeat extends DefaultRequestMessage<ServerProtocol.packet
 
      public void afterPropertiesSet() throws Exception
     {
-        System.out.printf("..................\n");
+        //System.out.printf("..................\n");
     }
 }

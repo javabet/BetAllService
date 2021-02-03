@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wisp.game.bet.games.share.common.HuPattern;
-import com.wisp.game.bet.games.share.common.MaJiangPlayerData;
-
+import com.wisp.game.bet.games.share.enums.HuTypeEnum;
 
 //0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09, //万1 - 9
 //0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19, //条 1- 9
@@ -23,14 +22,14 @@ public class MaJianUtils {
 	/**
 	 *
 	 * @param seatData	玩家
-	 * @param nunType
+	 * @param mjType
 	 * @param hunMj		需要检查的牌，加上此牌是否可以胡
 	 */
-	public static void checkAllTingPai(MaJiangPlayerData seatData, int nunType, int hunMj)
+	public static void checkAllTingPai(IMaJiangPlayerData seatData, int mjType, int hunMj)
 	{
 		if(!seatData.getCountMap().containsKey(hunMj))
 		{
-			checkTingPaiRecursion(seatData, nunType, 0);
+			checkTingPaiRecursion(seatData, mjType, 0);
 			return;
 		}
 
@@ -54,7 +53,7 @@ public class MaJianUtils {
 		}
 
 
-		checkTingPaiRecursion(seatData, nunType, c_old);
+		checkTingPaiRecursion(seatData, mjType, c_old);
 
 		seatData.getCountMap().put(hunMj, c_old);
 		 //需要将前面删除的数据给还原
@@ -70,7 +69,7 @@ public class MaJianUtils {
 	 * @param jiangCard
 	 * @return
 	 */
-	public static boolean checkCanHuSkipJiang(MaJiangPlayerData seatData,int jiangCard)
+	public static boolean checkCanHuSkipJiang(IMaJiangPlayerData seatData,int jiangCard)
 	{
 		changeMapValue( seatData,jiangCard,-2);
 		boolean b_flag = checkSingle(seatData);
@@ -85,7 +84,7 @@ public class MaJianUtils {
 	 * @param seatData
 	 * @param jiangCard
 	 */
-	public static boolean checkCanHuSkipKe(MaJiangPlayerData seatData,int keCard)
+	public static boolean checkCanHuSkipKe(IMaJiangPlayerData seatData,int keCard)
 	{
 		changeMapValue( seatData,keCard,-3);
 		boolean b_flag = checkCanHu(seatData);
@@ -100,7 +99,7 @@ public class MaJianUtils {
 	 * @param mjNum
 	 * @param hunNum  混牌的数量
 	 */
-	private static void checkTingPaiRecursion(MaJiangPlayerData seatData,int mjNum,int hunNum)
+	private static void checkTingPaiRecursion(IMaJiangPlayerData seatData,int mjNum,int hunNum)
 	{
 		if( hunNum <= 0 )
 		{
@@ -110,39 +109,44 @@ public class MaJianUtils {
 		{
 			hunNum -- ;
 
-			/**
-			List<Integer> currentList = ConfigDataPool.getInstance().gameConfig.getTingCardByMjNum(mjNum);
-			
-			for(int i = 0; i < currentList.size();i ++)
+			List<CardType> list = MajiangCards.getCardTypes(mjNum);
+
+			for(int i = 0; i < list.size();i++)
 			{
-				int mj = currentList.get(i);
-				
-				if(seatData.getCountMap().containsKey(mj))
+				CardType cardType = list.get(i);
+				if( !cardType.isTingEnable() )
 				{
-					int old_c = seatData.getCountMap().get(mj);
-					seatData.getCountMap().put(mj, old_c + 1);
+					continue;
 				}
-				else
+				for(int j = cardType.getStart(); j <= cardType.getEnd();j++)
 				{
-					seatData.getCountMap().put(mj, 1);
+					int mj = j;
+					if(seatData.getCountMap().containsKey(mj))
+					{
+						int old_c = seatData.getCountMap().get(mj);
+						seatData.getCountMap().put(mj, old_c + 1);
+					}
+					else
+					{
+						seatData.getCountMap().put(mj, 1);
+					}
+
+					seatData.getHolds().add(mj);
+
+					checkTingPaiRecursion(seatData, mjNum, hunNum);
+
+					if(seatData.getCountMap().get(mj) > 1)
+					{
+						changeMapValue(seatData,mj,-1);
+					}
+					else
+					{
+						seatData.getCountMap().remove(mj);
+					}
+
+					seatData.getHolds().remove(seatData.getHolds().size() -1);
 				}
-				
-				seatData.getHolds().add(mj);
-				
-				checkTingPaiRecursion(seatData, mjNum, hunNum);
-				
-				if(seatData.getCountMap().get(mj) > 1)
-				{
-					changeMapValue(seatData,mj,-1);					
-				}
-				else
-				{
-					seatData.getCountMap().remove(mj);
-				}
-					
-				seatData.getHolds().remove(seatData.getHolds().size() -1);
 			}
-			 **/
 		}
 	}
 	
@@ -151,7 +155,7 @@ public class MaJianUtils {
 	 * @param seatData
 	 * @param numType 0:108,1:136
 	 */
-	private static void checkTingPai(MaJiangPlayerData seatData,int numType)
+	private static void checkTingPai(IMaJiangPlayerData seatData,int numType)
 	{
 		//first check the seven pairs
 		if(seatData.getHolds().size() == 13)
@@ -188,7 +192,7 @@ public class MaJianUtils {
 			{
 				HuPattern pattern = new HuPattern();
 				pattern.setFan( 2 );
-				pattern.setPattern(HuPattern.SEVENN);
+				pattern.setPattern(HuTypeEnum.TYPE_SEVEN);
 				seatData.getTingMap().put(danpai, pattern);
 			}
 		}
@@ -247,7 +251,7 @@ public class MaJianUtils {
 				{
 					HuPattern pattern = new HuPattern();
 					pattern.setFan( 2 );
-					pattern.setPattern(HuPattern.DUIDUIHU);
+					pattern.setPattern( HuTypeEnum.TYPE_DUI_DUI_HU);
 					seatData.getTingMap().put(p, pattern);
 				}
 					
@@ -273,7 +277,7 @@ public class MaJianUtils {
 	 * @param begin
 	 * @param end
 	 */
-	public static void checkBaseTingPai(MaJiangPlayerData seatData,int begin,int end)
+	public static void checkBaseTingPai(IMaJiangPlayerData seatData,int begin,int end)
 	{
 		synchronized (seatData) {
 			for(int i = begin;i <= end;i++ )
@@ -305,7 +309,7 @@ public class MaJianUtils {
 				{
 					HuPattern pattern = new HuPattern();
 					pattern.setFan(0);
-					pattern.setPattern(HuPattern.NORMAL);
+					pattern.setPattern( HuTypeEnum.TYPE_NORMAL);
 					seatData.getTingMap().put(i, pattern);
 				}
 				
@@ -317,7 +321,7 @@ public class MaJianUtils {
 	}
 	
 	
-	public static boolean checkCanHu(MaJiangPlayerData seatData)
+	public static boolean checkCanHu(IMaJiangPlayerData seatData)
 	{
 		if(seatData.getHolds().size() == 14)
 		{
@@ -365,7 +369,7 @@ public class MaJianUtils {
 		return false;
 	}
 	
-	private static boolean checkSingle(MaJiangPlayerData seatData)
+	private static boolean checkSingle(IMaJiangPlayerData seatData)
 	{
 		List<Integer> holds = seatData.getHolds();
 		int selected = -1;
@@ -422,7 +426,7 @@ public class MaJianUtils {
 	
 	
 	
-	private static boolean matchSingle(MaJiangPlayerData seatData,int selected)
+	private static boolean matchSingle(IMaJiangPlayerData seatData,int selected)
 	{
 		int mj_type = selected / 16;
 		if(mj_type >= 3)
@@ -570,7 +574,7 @@ public class MaJianUtils {
 		return false;
 	}
 	
-	public static void changeMapValue(MaJiangPlayerData seatData,int selected,int changeNum)
+	public static void changeMapValue(IMaJiangPlayerData seatData,int selected,int changeNum)
 	{
 		int old_value = seatData.getCountMap().get(selected);
 		seatData.getCountMap().put(selected, old_value + changeNum);

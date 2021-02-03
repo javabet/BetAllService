@@ -41,7 +41,6 @@ function getExcelPath(filePath:string,fileList:string[],ignoreList:string[])
 
 function makeDir( dirpath:string ) 
 {
-	let dirs = dirpath.split( path.sep );
 	let tmpPath = dirpath;
 	let makes = [];
     while( !fs.existsSync( tmpPath ) )
@@ -57,14 +56,14 @@ function makeDir( dirpath:string )
 	}
 }
 
-function getTemplateMsg(name:string):string | undefined
+function getTemplateMsg(name:string,suffix:string="txt"):string | undefined
 {
     //获得模块文件
-    let templatePath = `./config/${name}.txt`;
+    let templatePath = path.join(baseDirectory,`./config/${name}.` + suffix) ;
     let templateFileExist = fs.existsSync( templatePath );
     if(!templateFileExist)
     {
-        console.log("模板文件不存在");
+        console.log("模板文件不存在" + name);
         return undefined;
     }
 
@@ -73,6 +72,23 @@ function getTemplateMsg(name:string):string | undefined
     return templateStr;
 }
 
+
+//相对于运行目录位置，如果没有此文件，则创建一个空的文件
+function getRelativeTemplateMsg(name:string,suffix:string="txt",defaultContent:string = "{}"):string | undefined
+{
+    //获得模块文件
+    let templatePath =`./config/${name}.${suffix}`;
+    let templateFileExist = fs.existsSync( templatePath );
+    if(!templateFileExist)
+    {
+        makeDir("./config");
+        fs.writeFileSync(templatePath,defaultContent );
+    }
+
+    let templateStr = fs.readFileSync(templatePath,{encoding:"utf8"});
+
+    return templateStr;
+}
 
 /**
  * 
@@ -98,38 +114,21 @@ function main(sourcePath:string,outputConfigPath:string,outputScriptPath:string)
         return;
     }
 
-    let checkMd5Str = getTemplateMsg("fileCheck");
+    let checkMd5Str = getRelativeTemplateMsg("fileCheck","json","{}");
     let checkMd5Obj:{[key:string]:string} = {};
     if( checkMd5Str != null )
     {
         checkMd5Obj = JSON.parse(checkMd5Str);
     }
 
-
     let list:string[] = [];
     let ignoreList:string[] = [];
-    let ignoreFilePath = "./config/ignore.json";
-    let hasIgnoreFile:boolean = true;
-    if(!fs.existsSync( ignoreFilePath ))
+    let ignoreStr = getRelativeTemplateMsg("ignore","json","[]");
+    if( ignoreStr != null )
     {
-        hasIgnoreFile = false;
+        ignoreList = JSON.parse(ignoreStr);
     }
 
-    if( hasIgnoreFile )
-    {
-        let ignoreFileData = fs.readFileSync(ignoreFilePath,{encoding:"utf8"});
-        let jsonData
-        try
-        {
-            jsonData = JSON.parse(ignoreFileData);
-        }
-        catch(err)
-        {
-            console.log("解析忽略列表失败");
-        }
-        
-        ignoreList = jsonData;
-    }
 
     getExcelPath(sourcePath,list,ignoreList);
 
@@ -139,11 +138,6 @@ function main(sourcePath:string,outputConfigPath:string,outputScriptPath:string)
     for(let i = 0; i < list.length;i++)
     {
         let xlsFile = list[i];
-
-        if( xlsFile.indexOf("BaccaratBaseConfig") != -1)
-        {
-            console.log("go this..");
-        }
 
         //去掉前缀路径
         let midPath = xlsFile.replace(sourcePath,"");
@@ -167,9 +161,6 @@ function main(sourcePath:string,outputConfigPath:string,outputScriptPath:string)
         }
 
         let excelHandler:JavaExcelHandler = new JavaExcelHandler( xlsFile );
-
-   
-        
         excelHandler.doWork();
         
         let realyOutPutConfigPath = path.join(outputConfigPath,midPath);
@@ -197,7 +188,8 @@ function main(sourcePath:string,outputConfigPath:string,outputScriptPath:string)
     if( hasChg )
     {
         let checkMd5JsonStr = JSON.stringify(checkMd5Obj);
-        fs.writeFileSync("./config/fileCheck.txt",checkMd5JsonStr );
+        let checkPath:string = "./config/fileCheck.json";
+        fs.writeFileSync(checkPath,checkMd5JsonStr );
         console.log("need repeat done");
     }
     else
@@ -233,19 +225,15 @@ let targetDirPath:string = Reflect.get(argv,"tPath");
 
 
 let sourcePath =  Reflect.get(argv,"xmlSourceDir");;
-let outputConfigPath= Reflect.get(argv,"outputJavaPath");
-let outputScriptPath= Reflect.get(argv,"outputDataPath");
+let outputScriptPath= Reflect.get(argv,"outputJavaPath");
+let outputConfigPath= Reflect.get(argv,"outputDataPath");
 let basePackagePath = Reflect.get(argv,"basePackagePath");;
 let xmlPath = Reflect.get(argv,"readXmlPath");
 
+var baseDirectory = fs.realpathSync(__dirname);
 
 let args = process.argv;
 console.log( args );
-//let sourcePath =  args[2] ||"D:\\E\\betGitWorkspace\\newServer\\public\\bin";
-//let outputConfigPath= args[3] || "D:\\E\\tsGitCode\\xhJSWorkspace\\Tools\\excelTools\\dist\\out";
-//let outputScriptPath= args[4] || "D:\\E\\tsGitCode\\xhJSWorkspace\\Tools\\excelTools\\dist\\out";
-//let basePackagePath = args[5] || "com.wisp.game.bet";
-//let xmlPath = args[6] || "./Config"
 
 main(sourcePath,outputConfigPath,outputScriptPath);
 

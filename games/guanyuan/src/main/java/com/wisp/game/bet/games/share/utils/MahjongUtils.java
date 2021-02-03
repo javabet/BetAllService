@@ -2,6 +2,7 @@ package com.wisp.game.bet.games.share.utils;
 
 import com.wisp.game.bet.games.share.common.HuPattern;
 import com.wisp.game.bet.games.share.common.MaJiangPlayerData;
+import com.wisp.game.bet.games.share.enums.HuTypeEnum;
 
 import java.util.*;
 
@@ -31,7 +32,7 @@ public class MahjongUtils
 			{
 				HuPattern pattern = new HuPattern();
 				pattern.setFan(0);
-				pattern.setPattern(HuPattern.NORMAL);
+				pattern.setPattern(HuTypeEnum.TYPE_NORMAL);
 				seatData.getTingMap().put(card, pattern);
 			}
 		}

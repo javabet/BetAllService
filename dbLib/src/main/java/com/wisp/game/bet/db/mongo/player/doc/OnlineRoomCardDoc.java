@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 public class OnlineRoomCardDoc extends BaseMongoDoc {
     @Field(targetType = FieldType.INT32) private int RoomNumber;
     @Field(targetType = FieldType.INT32) private int ServerId;
+    @Field(targetType = FieldType.INT32) private int GameId;
 
     public int getRoomNumber() {
         return RoomNumber;
@@ -24,5 +25,13 @@ public class OnlineRoomCardDoc extends BaseMongoDoc {
 
     public void setServerId(int serverId) {
         ServerId = serverId;
+    }
+
+    public int getGameId() {
+        return GameId;
+    }
+
+    public void setGameId(int gameId) {
+        GameId = gameId;
     }
 }

@@ -1,19 +1,12 @@
 package com.wisp.game.bet.games.share.common;
 
+import com.wisp.game.bet.games.share.enums.HuTypeEnum;
+
 public class HuPattern {
-	public final static String NORMAL = "normal";
-	public final static String SEVENN = "sevenPair";
-	public final static String DUIDUIHU = "duiDuihu";
-	
-	
-	
-	public final static String L_SEVEN = "l7pairs";
-	public final static String J_SEVEN = "j7pairs";
-	public final static String JIAN_DUI = "jiandui";
-	
+
 	private int fan;
 	
-	private String pattern;
+	private HuTypeEnum pattern;
 	
 	private int pai;
 	
@@ -25,11 +18,11 @@ public class HuPattern {
 		this.fan = fan;
 	}
 
-	public String getPattern() {
+	public HuTypeEnum getPattern() {
 		return pattern;
 	}
 
-	public void setPattern(String pattern) {
+	public void setPattern(HuTypeEnum pattern) {
 		this.pattern = pattern;
 	}
 

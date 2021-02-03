@@ -19,16 +19,18 @@ public class LogicTable {
     private List<LogicPlayer> seats;
     private int seatFlag = 0;               //坐位标识,如果有人，则为1，没人则为0
 
-
+    private GameGuanyunProtocol.msg_create_room_param create_room_param;
+    private int mjType;                             //麻将的牌类类型
     private int roomId;                             //房间号
     private int ownUid;                             //创建此房间的玩家
     private int numOfGames;                         //当前的轮数，从0开始
     private int button;                             //当前当庄位置
     private int nextButton;                         //下一把当庄位置
     private Set<Integer> gpsCheckSet;               //检查gps的玩家的集合
+    private Set<Integer> readyMap;                  //是否准备好了
     private GameSttus gameSttus;                    //当前桌子的状态
 
-    private long startTime = 0;                     //游戏开始时间
+    private int startTime = 0;                     //游戏开始时间
     private long nextStartTime = 0;                 //下局游戏开始时间戳
 
     private LogicCore logicCore;
@@ -38,48 +40,33 @@ public class LogicTable {
         playerMap = new HashMap<>();
         seats = new ArrayList<>();
         gpsCheckSet = new HashSet<>();
+        readyMap = new HashSet<>();
         this.roomId = roomId;
         gameSttus = GameSttus.STATUS_INIT;
+        this.mjType = 1;
     }
 
     public void heartheat(double elapsed)
     {
         int cur_tm_s = TimeHelper.Instance.get_cur_time();
-        if(  startTime > 0 && cur_tm_s >= startTime )
-        {
-            //如果时间到了，则游戏开始
-            startTime = 0;
 
-            for( LogicPlayer logicPlayer : seats )
+        if( gameSttus == GameSttus.STATUS_RUN )
+        {
+            if(  startTime > 0 && cur_tm_s >= startTime )
             {
-                if( !gpsCheckSet.contains(logicPlayer.get_pid()) )
+                //如果时间到了，则游戏开始
+                startTime = 0;
+
+                for( LogicPlayer logicPlayer : seats )
                 {
-                    gpsCheckSet.add(logicPlayer.get_pid());
+                    if( !gpsCheckSet.contains(logicPlayer.get_pid()) )
+                    {
+                        gpsCheckSet.add(logicPlayer.get_pid());
+                    }
                 }
-            }
-            logicCore.start();
-        }
-    }
-
-    public void set_room_cfg(ByteString room_cfg)
-    {
-        GameGuanyunProtocol.msg_yuan_room_rule msg_yuan_room_rule;
-        if(room_cfg != null )
-        {
-            try
-            {
-                msg_yuan_room_rule = GameGuanyunProtocol.msg_yuan_room_rule.parseFrom(room_cfg);
-            }
-            catch (Exception exception)
-            {
-                logger.error("player_enter_game parse room_cfg_has_error");
+                logicCore.start();
             }
         }
-    }
-
-    public void start()
-    {
-        logicCore = new LogicCore(this);
     }
 
     public boolean can_add_player(GamePlayer gamePlayer)
@@ -106,12 +93,114 @@ public class LogicTable {
         int freePos = getFreePos();
         logicPlayer.setRoomId( this.roomId );
         logicPlayer.setSeatIndex(freePos);
-        logicPlayer.setReady(true);
+        readyMap.add(logicPlayer.getSeatIndex());
         this.playerMap.put(logicPlayer.get_pid(),logicPlayer);
         this.seats.add(freePos,logicPlayer);
         seatFlag |= 1 << freePos;
 
         return MsgTypeDef.e_msg_result_def.e_rmt_success;
+    }
+
+    public MsgTypeDef.e_msg_result_def removePlayer( LogicPlayer logicPlayer )
+    {
+        if( gameSttus != GameSttus.STATUS_INIT )
+        {
+            return MsgTypeDef.e_msg_result_def.e_rmt_fail;
+        }
+
+        if( readyMap.contains( logicPlayer.getSeatIndex() ) )
+        {
+            readyMap.remove(logicPlayer.getSeatIndex());
+        }
+
+        if( gpsCheckSet.contains(logicPlayer.getSeatIndex()) )
+        {
+            gpsCheckSet.remove(logicPlayer.getSeatIndex());
+        }
+
+        if( playerMap.containsKey(logicPlayer.get_pid()) )
+        {
+            playerMap.remove(logicPlayer.get_pid());
+        }
+
+        GameGuanyunProtocol.packetl2c_leave_room_result.Builder builder =  GameGuanyunProtocol.packetl2c_leave_room_result.newBuilder();
+        builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_success);
+        builder.setSeatPos(logicPlayer.getSeatIndex());
+        broadcast_msg_to_client(builder);
+
+        return MsgTypeDef.e_msg_result_def.e_rmt_success;
+    }
+
+    public MsgTypeDef.e_msg_result_def ready(int seatPos,boolean ready)
+    {
+        if( gameSttus != GameSttus.STATUS_INIT )
+        {
+            return MsgTypeDef.e_msg_result_def.e_rmt_fail ;
+        }
+
+        if( ready )
+        {
+            if( readyMap.contains(seatPos) )
+            {
+                return MsgTypeDef.e_msg_result_def.e_rmt_fail;
+            }
+            readyMap.add(seatPos);
+        }
+        else
+        {
+            if( !readyMap.contains(seatPos) )
+            {
+                return MsgTypeDef.e_msg_result_def.e_rmt_fail;
+            }
+            readyMap.remove(seatPos);
+        }
+
+        //广播某个玩家的准备
+        GameGuanyunProtocol.packetl2c_ready_result.Builder builder = GameGuanyunProtocol.packetl2c_ready_result.newBuilder();
+        builder.setReady(ready);
+        builder.setSeatPos(seatPos);
+        broadcast_msg_to_client(builder);
+
+        if( readyMap.size() == 4 )
+        {
+            gameSttus = GameSttus.STATUS_RUN;
+            int cur_tm_s = TimeHelper.Instance.get_cur_time();
+            startTime =  cur_tm_s + 10;     //10s后游戏开始
+
+            GameGuanyunProtocol.packetl2c_game_start_nt.Builder startBuilder = GameGuanyunProtocol.packetl2c_game_start_nt.newBuilder();
+            startBuilder.setStartTm(startTime);
+            broadcast_msg_to_client(startBuilder);
+
+            logicCore = new LogicCore(this);
+        }
+
+        return MsgTypeDef.e_msg_result_def.e_rmt_success;
+    }
+
+
+    public MsgTypeDef.e_msg_result_def skip(int seat_pos)
+    {
+        return logicCore.skip( seat_pos );
+    }
+
+    public MsgTypeDef.e_msg_result_def peng(int seat_pos)
+    {
+        return logicCore.peng(seat_pos);
+    }
+
+    public MsgTypeDef.e_msg_result_def outCard(int seatPos,int card,boolean isTing)
+    {
+        return logicCore.outCard( seatPos,card,isTing );
+    }
+
+    public MsgTypeDef.e_msg_result_def gang(int seat_pos,int card)
+    {
+        return logicCore.gang(seat_pos,card);
+    }
+
+    public MsgTypeDef.e_msg_result_def hu( int seatPos )
+    {
+        return logicCore.hu(seatPos);
     }
 
     public int send_msg_to_client(Message.Builder builder,int seatIdx)
@@ -165,13 +254,6 @@ public class LogicTable {
     }
 
 
-    public Map<Integer, LogicPlayer> getPlayerMap() {
-        return playerMap;
-    }
-
-    public void setPlayerMap(Map<Integer, LogicPlayer> playerMap) {
-        this.playerMap = playerMap;
-    }
 
     public List<LogicPlayer> getSeats() {
         return seats;
@@ -233,8 +315,17 @@ public class LogicTable {
         return logicCore;
     }
 
-    public void setLogicCore(LogicCore logicCore) {
-        this.logicCore = logicCore;
+
+    public long getNextStartTime() {
+        return nextStartTime;
+    }
+
+    public void setNextStartTime(long nextStartTime) {
+        this.nextStartTime = nextStartTime;
+    }
+
+    public int getMjType() {
+        return mjType;
     }
 
     public GameSttus getGameSttus() {
@@ -245,20 +336,22 @@ public class LogicTable {
         this.gameSttus = gameSttus;
     }
 
-    public long getStartTime() {
-        return startTime;
+    public Map<Integer, LogicPlayer> getPlayerMap() {
+        return playerMap;
     }
 
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
+    public void setPlayerMap(Map<Integer, LogicPlayer> playerMap) {
+        this.playerMap = playerMap;
     }
 
-    public long getNextStartTime() {
-        return nextStartTime;
+    public void setCreate_room_param(GameGuanyunProtocol.msg_create_room_param create_room_param)
+    {
+        this.create_room_param = create_room_param;
     }
 
-    public void setNextStartTime(long nextStartTime) {
-        this.nextStartTime = nextStartTime;
+    public GameGuanyunProtocol.msg_create_room_param getCreate_room_param()
+    {
+        return create_room_param;
     }
 
     public enum GameSttus
