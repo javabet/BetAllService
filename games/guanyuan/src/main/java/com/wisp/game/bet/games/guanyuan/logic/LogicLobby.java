@@ -4,21 +4,29 @@ import com.google.protobuf.ByteString;
 import com.wisp.game.bet.games.guanyuan.mgr.GameEngine;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
+import com.wisp.game.guanyun.GuanYunConfig;
 import game_guanyuan_protocols.GameGuanyunProtocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class LogicLobby {
+public class LogicLobby implements InitializingBean
+{
     private Logger logger = LoggerFactory.getLogger(getClass());
     private ConcurrentHashMap<Integer,LogicTable> tableMap;                     //当前服务器里的桌子数量
     private ConcurrentHashMap<Integer,LogicPlayer> allPlayerMap;                //当前服务器里的玩家
     public LogicLobby() {
         tableMap = new ConcurrentHashMap<>();
         allPlayerMap = new ConcurrentHashMap<>();
+    }
+
+    public void afterPropertiesSet() throws Exception
+    {
+        GuanYunConfig.GetInstnace().Load();
     }
 
     public void heartbeat(double elapsed)

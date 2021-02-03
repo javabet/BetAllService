@@ -104,13 +104,6 @@ public final class GuanYunConfig {
             return false;
         }
 
-        Element root = xmlDoc.getRootElement();
-
-        if( root == null )
-        {
-            return false;
-        }
-
 
         Iterator<Element> iterator =  root.elementIterator();
 
