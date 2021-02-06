@@ -10,7 +10,7 @@
             "name": "Launch Program",
             "program": "${workspaceFolder}\\dist\\JavaApp.js",
             "cwd": "${workspaceFolder}\\dist",
-            "args": ["--outputJavaPath=./outjava","--outputDataPath=./outData"],
+            "args": ["--outputJavaPath=./outjava","--outputDataPath=./outData","--xmlSourceDir=./excel"],
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]

@@ -1,11 +1,10 @@
 package com.wisp.game.bet.world.gameMgr;
 
-import com.wisp.game.bet.GameConfig.MainGameVerConfig;
-import com.wisp.game.bet.GameConfig.MainRoomCardConfig;
 import com.wisp.game.bet.db.mongo.games.doc.GameRoomMgrDoc;
-import com.wisp.game.bet.db.mongo.games.doc.GameRoomSetDoc;
 import com.wisp.game.bet.db.mongo.player.doc.CommonConfigDoc;
 import com.wisp.game.bet.db.mongo.player.doc.OnlineRoomCardDoc;
+import com.wisp.game.bet.world.config.MainGameVerConfig;
+import com.wisp.game.bet.world.config.MainRoomCardConfig;
 import com.wisp.game.bet.world.db.DbGame;
 import com.wisp.game.bet.world.db.DbPlayer;
 import com.wisp.game.core.utils.CommonUtils;

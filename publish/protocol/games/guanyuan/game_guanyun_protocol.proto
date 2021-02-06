@@ -152,22 +152,24 @@ message msg_circle_over_info
 	optional int32  type         									= 1;//类型：0－流局；1-胡；2-自摸；
     optional int32  hu_pos       									= 2;//胡牌位置
     optional int32  last_pos     									= 3; //最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-    //repeated MjHandCardEntity  player_cards 						= 4;    //玩家的牌
-    //repeated MjScoreEntity     score_list   						= 5;    //玩家分数
-    repeated int32             hu_cards     						= 6;    //胡牌牌型
-    optional int32   circle_num                      				= 7;    //第几圈
-    optional int32   hu_card                        				= 8 ;//默认为0；有值时代表胡的哪张牌
-	repeated msg_circle_over_detail detailList0 					= 9;		//具体的结算情况
-	optional uint64 nextCircleStartTm								= 10;		//下局开始时间戳
+    optional int32   circle_num                      				= 4; //第几圈
+    optional int32   hu_card                        				= 5 ;//默认为0；有值时代表胡的哪张牌
+	optional uint64 next_circle_start_tm							= 6; //下局开始时间戳
+	optional bool is_last_circle									= 7; //是否是最后一轮
+	repeated  msg_circle_over_detail detail							= 8; //当前轮玩家的信息
 }
 
 message msg_circle_over_detail
 {
 	optional int32 pos						=	1;				//位置
-	optional int32 jiaoting_card			=	2;				//每个人叫听情况,如果没有，则为0
-	optional string detail           		= 	3;    //具体的名字
-	optional int32 fen           			= 	4;    //获得的分的数量
-	optional int32 hua           			= 	5;    //获得的花的数量
+	optional int32 ting_card				=	2;				//每个人叫听情况,如果没有，则为0
+	optional string hu_name           		= 	3;   	 		//胡牌后的名字
+	optional int32 fen           			= 	4;    			//获得的分的数量
+	optional int32 hua           			= 	5;    			//获得的花的数量
+	repeated int32 hand_cards				=	6;				//玩家的手牌
+	repeated int32 wall_cards				=	7;				//桌子自己的墙牌
+	repeated int32 out_cards				=	8;				//玩家自己出的牌
+	repeated int32 hua_cards				=	9;				//玩家的花牌
 }
 
 //游戏全部结束时的信息
@@ -176,18 +178,6 @@ message msg_game_over_info
 
 }
 
-
-//进入房间
-message packetc2l_enter_room {
-	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_enter_room];
-	optional int32 roomid = 2;
-}
-
-//进入桌子返回
-message packetl2c_enter_room_result {
-	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_enter_room_result];
-	optional msg_type_def.e_msg_result_def result = 2 [default = e_rmt_fail];
-}
 
 
 //离开桌子
@@ -243,8 +233,8 @@ message msg_gps_info
 	optional double lat  		=	2;			
 	optional int32 	status  	=	3;		//gps 是否开启			
 	optional string address  	=	4;		//玩家的具体地址
-	optional int32	seat_pos	= 5;		//具体位置
-}
+	optional int32	seat_pos	= 	5;		//具体位置
+} 
 
 
 
@@ -252,6 +242,12 @@ message msg_gps_info
 message packetc2l_dis_room
 {
 	optional e_server_msg_type packet_id = 1 [default = e_mst_c2l_dis_room];
+}
+
+message packetc2l_dis_room_result
+{
+	optional e_server_msg_type packet_id = 1 [default = e_mst_l2c_dis_room_result];
+	 
 }
 
 message msg_create_room_param

@@ -1,6 +1,5 @@
 package com.wisp.game.bet.world.config;
 
-import com.wisp.game.bet.config.MainBuyRoomCardCardConfig;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,10 +15,6 @@ public class WorldInitConfig implements InitializingBean {
     public  void afterPropertiesSet() throws Exception
     {
         //需要加载的xml数据
-        MainBuyRoomCardCardConfig.GetInstnace().Load();
-
-        MainBuyRoomCardCardConfig.MainBuyRoomCardCardConfigData data =  MainBuyRoomCardCardConfig.GetInstnace().GetData(1);
-
         RestTemplate restTemplate = new RestTemplate();
 
 

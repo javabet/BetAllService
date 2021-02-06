@@ -227,8 +227,12 @@ let targetDirPath:string = Reflect.get(argv,"tPath");
 let sourcePath =  Reflect.get(argv,"xmlSourceDir");;
 let outputScriptPath= Reflect.get(argv,"outputJavaPath");
 let outputConfigPath= Reflect.get(argv,"outputDataPath");
-let basePackagePath = Reflect.get(argv,"basePackagePath");;
+let basePackagePath:string = Reflect.get(argv,"basePackagePath");
 let xmlPath = Reflect.get(argv,"readXmlPath");
+
+//转换basePackagePath的位置
+basePackagePath = basePackagePath.replace(/\\/gi,".",);
+basePackagePath = basePackagePath.replace(/\//gi,".");
 
 var baseDirectory = fs.realpathSync(__dirname);
 

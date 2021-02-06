@@ -245,9 +245,23 @@ export class JavaExcelHandler
                 }
 
                 let rowValue:string = Reflect.get(tmpRowData,rowKey);// tmpRowData[  rowKey ];
+                if( rowValue == null )
+                {
+                    continue;
+                }
                 if( firstRowData.isArr )
                 {
-                    rowData[ firstRowData.colName ] = rowValue.split(",");
+                    try
+                    {
+                        
+                        rowData[ firstRowData.name ] = rowValue.split(",");
+                    }
+                    catch(error)
+                    {
+                        console.log("error handler");
+                        console.log(JSON.stringify(tmpRowData));
+                    }
+
                 }
                 else
                 {
@@ -284,8 +298,6 @@ export class JavaExcelHandler
         }
 
         xmlStr += "</Root>";
-
-        console.log(xmlStr)
 
         self.outPutXmlStr = xmlStr;
     }

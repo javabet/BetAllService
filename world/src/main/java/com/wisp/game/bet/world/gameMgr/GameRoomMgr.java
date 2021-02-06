@@ -1,9 +1,9 @@
 package com.wisp.game.bet.world.gameMgr;
 
 import com.mongodb.client.result.UpdateResult;
-import com.wisp.game.bet.GameConfig.MainGameVerConfig;
 import com.wisp.game.bet.db.mongo.games.doc.GameRoomMgrDoc;
 import com.wisp.game.bet.db.mongo.games.doc.GameRoomSetDoc;
+import com.wisp.game.bet.world.config.MainGameVerConfig;
 import com.wisp.game.bet.world.db.DbGame;
 import com.wisp.game.bet.world.dbConfig.AgentConfig;
 import com.wisp.game.bet.world.gameMgr.info.AgentRooms;

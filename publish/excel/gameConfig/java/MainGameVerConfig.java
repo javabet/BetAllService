@@ -1,6 +1,5 @@
-package com.wisp.game.bet.GameConfig;
+package com.wisp.game.bet.world.config;
 
-import com.wisp.game.bet.share.utils.MD5Util;
 import com.wisp.game.bet.utils.XMLUtils;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
@@ -8,11 +7,15 @@ import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 public final class MainGameVerConfig {
+
+	private static Logger logger = LoggerFactory.getLogger("XmlConfig");
 
     private static MainGameVerConfig Instance;
     public static MainGameVerConfig GetInstnace()
@@ -59,27 +62,38 @@ public final class MainGameVerConfig {
     public boolean Load(String path)
     {
         Document xmlDoc = null;
+        InputStream inputStream = null;
 
         ClassPathResource classPathResource = new ClassPathResource(path);
-        if (classPathResource.exists())
+        try
         {
-            try
+            if (classPathResource.exists())
             {
-                xmlDoc = XMLUtils.file2Document(classPathResource.getInputStream());
+                inputStream = classPathResource.getInputStream();
             }
-            catch (IOException ioexception)
+            else
             {
-                //do nothing
+                FileSystemResource fileSystemResource = new FileSystemResource(path);
+                inputStream = fileSystemResource.getInputStream();
             }
         }
+        catch (IOException ex)
+        {
+            logger.error("read xml has error %s",path);
+            return false;
+        }
+
+        if( inputStream == null )
+        {
+            logger.error("read xml has error {0}",path);
+            return false;
+        }
+
+        xmlDoc = XMLUtils.file2Document(inputStream);
 
         if( xmlDoc == null )
         {
-
-        }
-
-        if( xmlDoc == null )
-        {
+            logger.error("read xml has error {0}",path);
             return false;
         }
 
@@ -87,9 +101,9 @@ public final class MainGameVerConfig {
 
         if( root == null )
         {
+            logger.error("read xml has error {0}",path);
             return false;
         }
-
 
         Iterator<Element> iterator =  root.elementIterator();
 
@@ -121,11 +135,14 @@ public final class MainGameVerConfig {
                }
             }
            data.mGameType = XMLUtils.getIntByElement(childElement,"GameType");
+           data.mBindGameId = XMLUtils.getIntByElement(childElement,"BindGameId");
+           data.mWalletType = XMLUtils.getIntByElement(childElement,"WalletType");
+           data.mGoldCondition = XMLUtils.getIntByElement(childElement,"GoldCondition");
 
 
             if( mMapData.containsKey(data.mID) )
             {
-                System.out.printf("data refind:" + data.mID);
+                logger.error("data refind:" + data.mID);
                 continue;
             }
             mMapData.put(data.mID,data);
@@ -152,6 +169,12 @@ public final class MainGameVerConfig {
         private List<String> mH5GameVer; //游戏版本
 
         private int mGameType; //游戏类型:1自研 2API
+
+        private int mBindGameId; //实际上的服务器GameId
+
+        private int mWalletType; //钱包类型 0无 1中心钱包，2转账钱包
+
+        private int mGoldCondition; //API钱包游戏入场条件
 
 
         public int getmID() {
@@ -216,6 +239,30 @@ public final class MainGameVerConfig {
         
         public void setmGameType(int mGameType) {
             this.mGameType = mGameType;
+        }
+        
+        public int getmBindGameId() {
+            return mBindGameId;
+        }
+        
+        public void setmBindGameId(int mBindGameId) {
+            this.mBindGameId = mBindGameId;
+        }
+        
+        public int getmWalletType() {
+            return mWalletType;
+        }
+        
+        public void setmWalletType(int mWalletType) {
+            this.mWalletType = mWalletType;
+        }
+        
+        public int getmGoldCondition() {
+            return mGoldCondition;
+        }
+        
+        public void setmGoldCondition(int mGoldCondition) {
+            this.mGoldCondition = mGoldCondition;
         }
         
 
