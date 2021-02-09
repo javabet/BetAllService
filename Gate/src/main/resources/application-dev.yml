@@ -10,3 +10,6 @@ cfg:
   gate_type: web
   accountdb_url: 127.0.0.1:27017
   accountdb_name: AccountDB
+
+logging:
+  config: classpath:log4j2.xml

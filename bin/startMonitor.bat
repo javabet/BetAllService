@@ -1,0 +1,1 @@
+start "monitor" java -jar monitor.jar &

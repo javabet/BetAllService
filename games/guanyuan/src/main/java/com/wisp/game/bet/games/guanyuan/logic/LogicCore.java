@@ -41,11 +41,7 @@ public class LogicCore {
     private int currentIndex = 0;       //现在麻将的位置
     private int turn;                   //现在轮到谁的位置了
     private int chupai;                 //正在出牌的值
-    private int firstHuPai = -1;        //第一个胡牌的人
     protected int button;
-
-    private int lastHuPaiSeat = -1;
-    private int init_left_card = 0;         //现在余下牌的数量
 
     private List<MaJiangPlayerData> gameSeats;          //玩家列表
     private LogicTable logicTable;                      //桌子
@@ -54,6 +50,7 @@ public class LogicCore {
 
     private List<HistoryActionInfo> historyActionInfos;     //出牌历史
     private List<Integer> huPosList;           // 胡牌人的列表，多个人同时列表
+    private GameState gameState;
 
     public LogicCore( LogicTable logicTable) {
         this.logicTable = logicTable;
@@ -63,14 +60,20 @@ public class LogicCore {
         huPosList = new ArrayList<>();
     }
 
+    public void init()
+    {
+        gameState = GameState.READING;
+    }
+
     public void start()
     {
+        gameState = GameState.RUN;
+
         logicTable.setButton(logicTable.getNextButton());
         this.button = logicTable.getButton();
 
         this.turn = 0;
         this.chupai = -1;
-        this.firstHuPai = -1;
 
         this.logicTable.setNumOfGames(logicTable.getNumOfGames() + 1);
 
@@ -96,8 +99,6 @@ public class LogicCore {
         logicTable.setGameSttus(LogicTable.GameSttus.STATUS_RUN);
         //发牌
         deal();
-
-        init_left_card = mahjongs.size() - currentIndex;
 
         //记录玩家的手牌
         for(MaJiangPlayerData maJiangPlayerData : gameSeats)
@@ -782,8 +783,6 @@ public class LogicCore {
      */
     public void checkCanHu( MaJiangPlayerData maJiangPlayerData,int targetCard )
     {
-        lastHuPaiSeat = -1;
-
         maJiangPlayerData.setCanHu(false);
         //如果摸最后一张牌的人已经叫听，则打出的牌其他叫听的人不能胡;如果未叫听，则打出的牌其他人可以胡，默认不支持
         for (int key : maJiangPlayerData.getTingMap().keySet())
@@ -958,6 +957,30 @@ public class LogicCore {
         for(int i = start;i <= end; i ++)
         {
             cards.add(i);
+        }
+    }
+
+    public void get_scene_info_result(GameGuanyunProtocol.packetl2c_get_scene_info_result.Builder builder,int seatPos)
+    {
+        //e_game_ready					=	2;			//玩家满了，正在准备阶段
+        //e_game_gameing					=	3;			//游戏开始阶段
+        //e_game_circle_over				=	4;			//一局结束时
+
+        if( gameState == GameState.READING )
+        {
+            builder.setStatus(GameGuanyunProtocol.e_game_status_type.e_game_ready);
+        }
+        else if( gameState == GameState.RUN )
+        {
+            builder.setStatus(GameGuanyunProtocol.e_game_status_type.e_game_gameing);
+        }
+        else if( gameState == GameState.CIRCLE_OVER )
+        {
+            builder.setStatus((GameGuanyunProtocol.e_game_status_type.e_game_circle_over));
+        }
+        else if( gameState == GameState.GAME_OVER )
+        {
+            builder.setStatus((GameGuanyunProtocol.e_game_status_type.e_game_game_over));
         }
     }
 
@@ -1352,6 +1375,26 @@ public class LogicCore {
         if (maJiangPlayerData.isCanHu()) { return true; }
 
         return false;
+    }
+
+    public enum GameState
+    {
+        READING(0),            // 四人齐了
+        RUN(1),                 // 正在跑
+        CIRCLE_OVER(2),          // 一局结束
+        GAME_OVER(3)             //游戏结束
+        ;
+
+        private int state;
+        private int getNumber()
+        {
+            return state;
+        }
+
+        private GameState(int value)
+        {
+            state = value;
+        }
     }
 
 }

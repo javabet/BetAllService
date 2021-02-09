@@ -1,5 +1,6 @@
 package com.wisp.game.bet.games.baccarat.mgr;
 
+import com.google.protobuf.ByteString;
 import com.wisp.game.bet.GameConfig.GameConfig;
 import com.wisp.game.bet.games.baccarat.logic.LogicLobby;
 import com.wisp.game.bet.games.baccarat.logic.LogicPlayer;
@@ -57,6 +58,12 @@ public final class GameEngine extends AbstractGameEngine {
     @Override
     public boolean player_enter_game(GamePlayer gamePlayer, int roomId) {
         return logicLobby.player_enter_game(gamePlayer,roomId);
+    }
+
+    @Override
+    public boolean player_enter_game(GamePlayer gamePlayer, int roomNum, ByteString room_cfg)
+    {
+        return false;
     }
 
     @Override

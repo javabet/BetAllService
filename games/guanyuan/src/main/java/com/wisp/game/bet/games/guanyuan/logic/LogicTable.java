@@ -172,6 +172,7 @@ public class LogicTable {
             broadcast_msg_to_client(startBuilder);
 
             logicCore = new LogicCore(this);
+            logicCore.init();
         }
 
         return MsgTypeDef.e_msg_result_def.e_rmt_success;
@@ -201,6 +202,66 @@ public class LogicTable {
     public MsgTypeDef.e_msg_result_def hu( int seatPos )
     {
         return logicCore.hu(seatPos);
+    }
+
+    public void get_scene_info_result(GameGuanyunProtocol.packetl2c_get_scene_info_result.Builder builder,int seatPos)
+    {
+        for(LogicPlayer logicPlayer : playerMap.values())
+        {
+            GameGuanyunProtocol.msg_user_info.Builder msg_user_info_builder = GameGuanyunProtocol.msg_user_info.newBuilder();
+            msg_user_info_builder.setSex(0);
+            msg_user_info_builder.setHeadIcon("");
+            msg_user_info_builder.setUserName(logicPlayer.getGamePlayer().get_nickname());
+            msg_user_info_builder.setSeatPos(logicPlayer.getSeatIndex());
+            msg_user_info_builder.setPlayerId(logicPlayer.get_pid());
+            msg_user_info_builder.setLineStatus(0);
+            builder.addUserInfos(msg_user_info_builder);
+        }
+
+        GameGuanyunProtocol.msg_base_room_rule_info.Builder msg_base_room_rule_info_builder = GameGuanyunProtocol.msg_base_room_rule_info.newBuilder();
+        msg_base_room_rule_info_builder.setBaoType(create_room_param.getBaoType());
+        msg_base_room_rule_info_builder.setCircleCount(create_room_param.getCircleCount());
+        msg_base_room_rule_info_builder.setCardCost(10);
+        msg_base_room_rule_info_builder.setBaseScore(create_room_param.getBaseScore());
+        msg_base_room_rule_info_builder.setHuaType(create_room_param.getHuaType());
+        msg_base_room_rule_info_builder.setBaoType(create_room_param.getBaoType());
+        msg_base_room_rule_info_builder.setHuType(create_room_param.getHuaType());
+        msg_base_room_rule_info_builder.setRoomId(getRoomId());
+        msg_base_room_rule_info_builder.setCreatorId( ownUid );
+        msg_base_room_rule_info_builder.setCreateTime(startTime);
+        msg_base_room_rule_info_builder.setBaseHua(create_room_param.getBaseHua());
+        builder.setBaseRoomRuleInfo(msg_base_room_rule_info_builder);
+
+
+        //e_game_waiting					=	1;			//正在等待玩家的阶段
+            //e_game_ready					=	2;			//玩家满了，正在准备阶段
+            //e_game_gameing					=	3;			//游戏开始阶段
+            //e_game_circle_over				=	4;			//一局结束时
+            //e_game_game_over				=	5;			//游戏结束时
+
+        if( gameSttus == GameSttus.STATUS_INIT )
+        {
+            //还未开始
+            builder.setStatus(GameGuanyunProtocol.e_game_status_type.e_game_waiting);
+        }
+        else if( gameSttus == GameSttus.STATUS_RUN )
+        {
+            //正在玩中
+            //builder.setStatus(GameGuanyunProtocol.e_game_status_type.e_game_gameing);
+            //e_game_ready					=	2;			//玩家满了，正在准备阶段
+            //e_game_gameing					=	3;			//游戏开始阶段
+            //e_game_circle_over				=	4;			//一局结束时
+            logicCore.get_scene_info_result(builder, seatPos );
+        }
+        else if( gameSttus == GameSttus.STATUS_END )
+        {
+            //结束
+            builder.setStatus(GameGuanyunProtocol.e_game_status_type.e_game_game_over);
+        }
+
+
+
+
     }
 
     public int send_msg_to_client(Message.Builder builder,int seatIdx)

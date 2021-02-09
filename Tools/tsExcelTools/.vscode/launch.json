@@ -5,9 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "randomRoomNumber",
+            "program": "${workspaceFolder}\\dist\\RandomRoomNumber.js",
+            "cwd": "${workspaceFolder}\\dist",
+            "request": "launch",
+            "args": [],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "javaExcel",
             "program": "${workspaceFolder}\\dist\\JavaApp.js",
             "cwd": "${workspaceFolder}\\dist",
             "args": ["--outputJavaPath=./outjava","--outputDataPath=./outData","--xmlSourceDir=./excel"],

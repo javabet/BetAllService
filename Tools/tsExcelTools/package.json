@@ -9,7 +9,9 @@
   "dependencies": {
     "@types/minimist": "^1.2.0",
     "@types/node": "^12.0.12",
+    "log4js": "^6.3.0",
     "minimist": "^1.2.5",
+    "mongoose": "^5.11.15",
     "xlsx": "^0.14.3"
   }
 }

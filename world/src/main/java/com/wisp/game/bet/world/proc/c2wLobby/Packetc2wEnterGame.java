@@ -53,6 +53,19 @@ public class Packetc2wEnterGame extends DefaultWorldRequestMessage<Client2WorldP
                 result = MsgTypeDef.e_msg_result_def.e_rmt_server_down;
             }
         }
+        else if( msg.hasRoomcardNumber() && msg.getRoomcardNumber() == 0 )
+        {
+            //强制测试灌云游戏
+            GameEngineMgr.GameInfoStruct gameInfoStruct = GameEngineMgr.Instance.get_game_info_struct(msg.getGameid());
+            if (gameInfoStruct != null)
+            {
+                serverId = gameInfoStruct.serverId;
+            }
+            else
+            {
+                result = MsgTypeDef.e_msg_result_def.e_rmt_server_down;
+            }
+        }
         else
         {
             GameEngineMgr.GameInfoStruct gameInfoStruct = GameEngineMgr.Instance.get_game_info_struct(msg.getGameid());
@@ -62,6 +75,7 @@ public class Packetc2wEnterGame extends DefaultWorldRequestMessage<Client2WorldP
         {
             builder.setResult(result);
         }
+
         else if( serverId > 0 && AgentInfoConfig.Instance.hasGame(player.getPlayerInfoDoc().getChannelId(),msg.getGameid()))
         {
             int roomNum = -1;

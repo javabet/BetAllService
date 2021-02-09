@@ -5,9 +5,9 @@
 <configuration status="WARN" monitorInterval="30">
     <Properties>
         <!--自定义一些常量，之后使用${变量名}引用-->
-        <Property name="projectName">world</Property>
+        <Property name="projectName">gate</Property>
         <Property name="logFilePath">logs</Property>
-        <Property name="logFileName">world.log</Property>
+        <Property name="logFileName">gate.log</Property>
     </Properties>
     <!--appenders:定义输出内容,输出格式,输出方式,日志保存策略等,常用其下三种标签[console,File,RollingFile]-->
     <appenders>
@@ -19,7 +19,7 @@
         <!--File :同步输出日志到本地文件-->
         <!--append="false" :根据其下日志策略,每次清空文件重新输入日志,可用于测试-->
         <File name="log" fileName="${logFilePath}/${projectName}/${logFileName}" append="true">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd  HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
         </File>
         <!--SMTP :邮件发送日志-->
         <!--
@@ -33,7 +33,7 @@
             <!--ThresholdFilter :日志输出过滤-->
             <!--level="info" :日志级别,onMatch="ACCEPT" :级别在info之上则接受,onMismatch="DENY" :级别在info之下则拒绝-->
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
             <!-- Policies :日志滚动策略-->
             <Policies>
                 <!-- TimeBasedTriggeringPolicy :时间滚动策略,默认0点小时产生新的文件,interval="6" : 自定义文件滚动时间间隔,每隔6小时产生新文件, modulate="true" : 产生文件是否以0点偏移时间,即6点,12点,18点,0点-->
@@ -48,7 +48,7 @@
         <RollingFile name="RollingFileWarn" fileName="logs/${projectName}/warn.log"
                      filePattern="logs/${projectName}/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="100 MB"/>
@@ -57,7 +57,7 @@
         <RollingFile name="RollingFileError" fileName="logs/${projectName}/error.log"
                      filePattern="logs/${projectName}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="100 MB"/>

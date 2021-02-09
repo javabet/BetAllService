@@ -1,2 +1,23 @@
 server:
-  port: 8091
+  port: 12005
+
+
+cfg:
+  monitor_ip: 127.0.0.1
+  monitor_port: 11001
+  out_port: 14005
+
+  debug: 1
+
+  playerdb_url: 127.0.0.1:27017
+  playerdb_name: PlayerDB_DWC
+
+  logdb_url: 127.0.0.1:27017
+  logdb_name: LogDB_DWC
+  gamedb_url: 127.0.0.1:27017
+  gamedb_name: GameDB
+
+
+
+logging:
+  config: classpath:log4j2.xml

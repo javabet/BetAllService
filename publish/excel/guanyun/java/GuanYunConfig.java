@@ -1,6 +1,7 @@
-package com.wisp.game.guanyun;
+package com.wisp.game.bet.games.guanyun.config;
 
 import com.wisp.game.bet.utils.XMLUtils;
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.slf4j.Logger;
@@ -37,9 +38,9 @@ public final class GuanYunConfig {
         return mMapData.size();
     }
 
-    public GuanYunConfigData GetData(int mType)
+    public GuanYunConfigData GetData(int mKey)
     {
-        return this.mMapData.get(mType);
+        return this.mMapData.get(mKey);
     }
 
     public Map<Integer,GuanYunConfigData> GetMapData()
@@ -104,14 +105,6 @@ public final class GuanYunConfig {
             return false;
         }
 
-        Element root = xmlDoc.getRootElement();
-
-        if( root == null )
-        {
-            return false;
-        }
-
-
         Iterator<Element> iterator =  root.elementIterator();
 
         while (iterator.hasNext())
@@ -119,17 +112,48 @@ public final class GuanYunConfig {
             Element childElement = iterator.next();
             GuanYunConfigData data = new GuanYunConfigData();
             
+           data.mKey = XMLUtils.getIntByElement(childElement,"Key");
            data.mType = XMLUtils.getIntByElement(childElement,"Type");
-           data.mCount = XMLUtils.getIntByElement(childElement,"Count");
-           data.mCost = XMLUtils.getIntByElement(childElement,"Cost");
-
-
-            if( mMapData.containsKey(data.mType) )
             {
-                logger.error("data refind:" + data.mType);
+               data.mCount = new ArrayList<>();
+               Attribute attr =  childElement.attribute("Count");
+               if(attr != null)
+               {
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
+                   {
+                       String[] CountStr = eleStr.split(",");
+                       for(int i = 0; i < CountStr.length;i++)
+                       {
+                           data.mCount.add( Integer.valueOf(CountStr[i]) );
+                       }
+                   }
+               }
+            }
+            {
+               data.mCost = new ArrayList<>();
+               Attribute attr =  childElement.attribute("Cost");
+               if(attr != null)
+               {
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
+                   {
+                       String[] CostStr = eleStr.split(",");
+                       for(int i = 0; i < CostStr.length;i++)
+                       {
+                           data.mCost.add( Integer.valueOf(CostStr[i]) );
+                       }
+                   }
+               }
+            }
+
+
+            if( mMapData.containsKey(data.mKey) )
+            {
+                logger.error("data refind:" + data.mKey);
                 continue;
             }
-            mMapData.put(data.mType,data);
+            mMapData.put(data.mKey,data);
         }
 
         return true;
@@ -138,13 +162,23 @@ public final class GuanYunConfig {
     public class GuanYunConfigData
     {
        
+        private int mKey; //键值
+
         private int mType; //房间类型
 
-        private int mCount; //局数
+        private List<Integer> mCount; //局数
 
-        private int mCost; //花费的房卡
+        private List<Integer> mCost; //花费的房卡
 
 
+        public int getmKey() {
+            return mKey;
+        }
+        
+        public void setmKey(int mKey) {
+            this.mKey = mKey;
+        }
+        
         public int getmType() {
             return mType;
         }
@@ -153,19 +187,19 @@ public final class GuanYunConfig {
             this.mType = mType;
         }
         
-        public int getmCount() {
+        public List<Integer> getmCount() {
             return mCount;
         }
         
-        public void setmCount(int mCount) {
+        public void setmCount(List<Integer> mCount) {
             this.mCount = mCount;
         }
         
-        public int getmCost() {
+        public List<Integer> getmCost() {
             return mCost;
         }
         
-        public void setmCost(int mCost) {
+        public void setmCost(List<Integer> mCost) {
             this.mCost = mCost;
         }
         

@@ -22,21 +22,13 @@ public final class GameGuanyuanDef {
      */
     e_mst_start_c2l(0, 10000),
     /**
-     * <code>e_mst_c2l_get_room_info = 10001;</code>
+     * <code>e_mst_c2l_get_scene_info = 10001;</code>
      *
      * <pre>
      *得到房间
      * </pre>
      */
-    e_mst_c2l_get_room_info(1, 10001),
-    /**
-     * <code>e_mst_c2l_enter_room = 10002;</code>
-     *
-     * <pre>
-     *进入房间
-     * </pre>
-     */
-    e_mst_c2l_enter_room(2, 10002),
+    e_mst_c2l_get_scene_info(1, 10001),
     /**
      * <code>e_mst_c2l_leave_room = 10003;</code>
      *
@@ -44,7 +36,7 @@ public final class GameGuanyuanDef {
      *离开房间
      * </pre>
      */
-    e_mst_c2l_leave_room(3, 10003),
+    e_mst_c2l_leave_room(2, 10003),
     /**
      * <code>e_mst_c2l_action = 10004;</code>
      *
@@ -52,7 +44,7 @@ public final class GameGuanyuanDef {
      *动作请求:摸牌，打牌，碰,明杠，暗杠,吃，胡
      * </pre>
      */
-    e_mst_c2l_action(4, 10004),
+    e_mst_c2l_action(3, 10004),
     /**
      * <code>e_mst_c2l_ready = 10005;</code>
      *
@@ -60,7 +52,7 @@ public final class GameGuanyuanDef {
      *请求准备操作
      * </pre>
      */
-    e_mst_c2l_ready(5, 10005),
+    e_mst_c2l_ready(4, 10005),
     /**
      * <code>e_mst_c2l_gps = 10006;</code>
      *
@@ -68,7 +60,7 @@ public final class GameGuanyuanDef {
      *更新玩家的gps信息状态
      * </pre>
      */
-    e_mst_c2l_gps(6, 10006),
+    e_mst_c2l_gps(5, 10006),
     /**
      * <code>e_mst_c2l_dis_room = 10007;</code>
      *
@@ -76,7 +68,15 @@ public final class GameGuanyuanDef {
      *请求解散
      * </pre>
      */
-    e_mst_c2l_dis_room(7, 10007),
+    e_mst_c2l_dis_room(6, 10007),
+    /**
+     * <code>e_mst_c2l_dis_agree_or_not = 10008;</code>
+     *
+     * <pre>
+     *同意或是不同意解散游戏
+     * </pre>
+     */
+    e_mst_c2l_dis_agree_or_not(7, 10008),
     /**
      * <code>e_mst_c2l_check_state = 10010;</code>
      *
@@ -102,13 +102,13 @@ public final class GameGuanyuanDef {
      */
     e_mst_start_l2c(10, 15000),
     /**
-     * <code>e_mst_l2c_get_room_info_result = 15001;</code>
+     * <code>e_mst_l2c_get_scene_info_result = 15001;</code>
      *
      * <pre>
      *得到房间返回
      * </pre>
      */
-    e_mst_l2c_get_room_info_result(11, 15001),
+    e_mst_l2c_get_scene_info_result(11, 15001),
     /**
      * <code>e_mst_l2c_enter_room_result = 15002;</code>
      *
@@ -150,13 +150,29 @@ public final class GameGuanyuanDef {
      */
     e_mst_l2c_gps_result(16, 15006),
     /**
+     * <code>e_mst_l2c_dis_room_result = 15007;</code>
+     *
+     * <pre>
+     *请求解散信息反馈
+     * </pre>
+     */
+    e_mst_l2c_dis_room_result(17, 15007),
+    /**
+     * <code>e_mst_l2c_dis_agree_or_not_result = 15008;</code>
+     *
+     * <pre>
+     *玩家同意或是不同意解散游戏的广播
+     * </pre>
+     */
+    e_mst_l2c_dis_agree_or_not_result(18, 15008),
+    /**
      * <code>e_mst_l2c_check_state_result = 15010;</code>
      *
      * <pre>
      *检测游戏状态
      * </pre>
      */
-    e_mst_l2c_check_state_result(17, 15010),
+    e_mst_l2c_check_state_result(19, 15010),
     /**
      * <code>e_mst_l2c_game_start_nt = 15200;</code>
      *
@@ -164,7 +180,7 @@ public final class GameGuanyuanDef {
      *广播玩家游戏开始了
      * </pre>
      */
-    e_mst_l2c_game_start_nt(18, 15200),
+    e_mst_l2c_game_start_nt(20, 15200),
     /**
      * <code>e_mst_l2c_circle_start_nt = 15201;</code>
      *
@@ -172,7 +188,7 @@ public final class GameGuanyuanDef {
      *游戏开始
      * </pre>
      */
-    e_mst_l2c_circle_start_nt(19, 15201),
+    e_mst_l2c_circle_start_nt(21, 15201),
     /**
      * <code>e_mst_l2c_dice_nt = 15202;</code>
      *
@@ -180,7 +196,7 @@ public final class GameGuanyuanDef {
      *掷骰子
      * </pre>
      */
-    e_mst_l2c_dice_nt(20, 15202),
+    e_mst_l2c_dice_nt(22, 15202),
     /**
      * <code>e_mst_l2c_init_card_nt = 15203;</code>
      *
@@ -188,7 +204,7 @@ public final class GameGuanyuanDef {
      *初始化玩家手牌
      * </pre>
      */
-    e_mst_l2c_init_card_nt(21, 15203),
+    e_mst_l2c_init_card_nt(23, 15203),
     /**
      * <code>e_mst_l2c_trun_index_nt = 15204;</code>
      *
@@ -196,7 +212,7 @@ public final class GameGuanyuanDef {
      *提示玩家指向
      * </pre>
      */
-    e_mst_l2c_trun_index_nt(22, 15204),
+    e_mst_l2c_trun_index_nt(24, 15204),
     /**
      * <code>e_mst_l2c_replace_flower_nt = 15205;</code>
      *
@@ -204,7 +220,7 @@ public final class GameGuanyuanDef {
      *补花
      * </pre>
      */
-    e_mst_l2c_replace_flower_nt(23, 15205),
+    e_mst_l2c_replace_flower_nt(25, 15205),
     /**
      * <code>e_mst_l2c_player_action_nt = 15206;</code>
      *
@@ -212,7 +228,7 @@ public final class GameGuanyuanDef {
      *提示某个玩家的可以进行的保重
      * </pre>
      */
-    e_mst_l2c_player_action_nt(24, 15206),
+    e_mst_l2c_player_action_nt(26, 15206),
     /**
      * <code>e_mst_l2c_action_nt = 15207;</code>
      *
@@ -220,7 +236,7 @@ public final class GameGuanyuanDef {
      *广播给所有的玩家，某个
      * </pre>
      */
-    e_mst_l2c_action_nt(25, 15207),
+    e_mst_l2c_action_nt(27, 15207),
     /**
      * <code>e_mst_l2c_hu_info_nt = 15208;</code>
      *
@@ -228,7 +244,7 @@ public final class GameGuanyuanDef {
      *胡牌后广播
      * </pre>
      */
-    e_mst_l2c_hu_info_nt(26, 15208),
+    e_mst_l2c_hu_info_nt(28, 15208),
     /**
      * <code>e_mst_l2c_circle_result_nt = 15209;</code>
      *
@@ -236,7 +252,7 @@ public final class GameGuanyuanDef {
      *一局结束后 当前局详情广播
      * </pre>
      */
-    e_mst_l2c_circle_result_nt(27, 15209),
+    e_mst_l2c_circle_result_nt(29, 15209),
     /**
      * <code>e_mst_l2c_player_enter_room_nt = 15210;</code>
      *
@@ -244,7 +260,7 @@ public final class GameGuanyuanDef {
      *玩家进入房间通知
      * </pre>
      */
-    e_mst_l2c_player_enter_room_nt(28, 15210),
+    e_mst_l2c_player_enter_room_nt(30, 15210),
     /**
      * <code>e_mst_l2c_line_status_nt = 15211;</code>
      *
@@ -252,11 +268,11 @@ public final class GameGuanyuanDef {
      *玩家在线也离线情况
      * </pre>
      */
-    e_mst_l2c_line_status_nt(29, 15211),
+    e_mst_l2c_line_status_nt(31, 15211),
     /**
      * <code>e_mst_clend_index = 20000;</code>
      */
-    e_mst_clend_index(30, 20000),
+    e_mst_clend_index(32, 20000),
     ;
 
     /**
@@ -268,21 +284,13 @@ public final class GameGuanyuanDef {
      */
     public static final int e_mst_start_c2l_VALUE = 10000;
     /**
-     * <code>e_mst_c2l_get_room_info = 10001;</code>
+     * <code>e_mst_c2l_get_scene_info = 10001;</code>
      *
      * <pre>
      *得到房间
      * </pre>
      */
-    public static final int e_mst_c2l_get_room_info_VALUE = 10001;
-    /**
-     * <code>e_mst_c2l_enter_room = 10002;</code>
-     *
-     * <pre>
-     *进入房间
-     * </pre>
-     */
-    public static final int e_mst_c2l_enter_room_VALUE = 10002;
+    public static final int e_mst_c2l_get_scene_info_VALUE = 10001;
     /**
      * <code>e_mst_c2l_leave_room = 10003;</code>
      *
@@ -324,6 +332,14 @@ public final class GameGuanyuanDef {
      */
     public static final int e_mst_c2l_dis_room_VALUE = 10007;
     /**
+     * <code>e_mst_c2l_dis_agree_or_not = 10008;</code>
+     *
+     * <pre>
+     *同意或是不同意解散游戏
+     * </pre>
+     */
+    public static final int e_mst_c2l_dis_agree_or_not_VALUE = 10008;
+    /**
      * <code>e_mst_c2l_check_state = 10010;</code>
      *
      * <pre>
@@ -348,13 +364,13 @@ public final class GameGuanyuanDef {
      */
     public static final int e_mst_start_l2c_VALUE = 15000;
     /**
-     * <code>e_mst_l2c_get_room_info_result = 15001;</code>
+     * <code>e_mst_l2c_get_scene_info_result = 15001;</code>
      *
      * <pre>
      *得到房间返回
      * </pre>
      */
-    public static final int e_mst_l2c_get_room_info_result_VALUE = 15001;
+    public static final int e_mst_l2c_get_scene_info_result_VALUE = 15001;
     /**
      * <code>e_mst_l2c_enter_room_result = 15002;</code>
      *
@@ -395,6 +411,22 @@ public final class GameGuanyuanDef {
      * </pre>
      */
     public static final int e_mst_l2c_gps_result_VALUE = 15006;
+    /**
+     * <code>e_mst_l2c_dis_room_result = 15007;</code>
+     *
+     * <pre>
+     *请求解散信息反馈
+     * </pre>
+     */
+    public static final int e_mst_l2c_dis_room_result_VALUE = 15007;
+    /**
+     * <code>e_mst_l2c_dis_agree_or_not_result = 15008;</code>
+     *
+     * <pre>
+     *玩家同意或是不同意解散游戏的广播
+     * </pre>
+     */
+    public static final int e_mst_l2c_dis_agree_or_not_result_VALUE = 15008;
     /**
      * <code>e_mst_l2c_check_state_result = 15010;</code>
      *
@@ -510,22 +542,24 @@ public final class GameGuanyuanDef {
     public static e_server_msg_type valueOf(int value) {
       switch (value) {
         case 10000: return e_mst_start_c2l;
-        case 10001: return e_mst_c2l_get_room_info;
-        case 10002: return e_mst_c2l_enter_room;
+        case 10001: return e_mst_c2l_get_scene_info;
         case 10003: return e_mst_c2l_leave_room;
         case 10004: return e_mst_c2l_action;
         case 10005: return e_mst_c2l_ready;
         case 10006: return e_mst_c2l_gps;
         case 10007: return e_mst_c2l_dis_room;
+        case 10008: return e_mst_c2l_dis_agree_or_not;
         case 10010: return e_mst_c2l_check_state;
         case 11000: return e_mst_c2l_debug;
         case 15000: return e_mst_start_l2c;
-        case 15001: return e_mst_l2c_get_room_info_result;
+        case 15001: return e_mst_l2c_get_scene_info_result;
         case 15002: return e_mst_l2c_enter_room_result;
         case 15003: return e_mst_l2c_leave_room_result;
         case 15004: return e_mst_l2c_action_result;
         case 15005: return e_mst_l2c_ready_result;
         case 15006: return e_mst_l2c_gps_result;
+        case 15007: return e_mst_l2c_dis_room_result;
+        case 15008: return e_mst_l2c_dis_agree_or_not_result;
         case 15010: return e_mst_l2c_check_state_result;
         case 15200: return e_mst_l2c_game_start_nt;
         case 15201: return e_mst_l2c_circle_start_nt;
@@ -716,25 +750,27 @@ public final class GameGuanyuanDef {
   static {
     java.lang.String[] descriptorData = {
       "\n\027game_guanyuan_def.proto\022\027game_guanyuan" +
-      "_protocols*\210\007\n\021e_server_msg_type\022\024\n\017e_ms" +
-      "t_start_c2l\020\220N\022\034\n\027e_mst_c2l_get_room_inf" +
-      "o\020\221N\022\031\n\024e_mst_c2l_enter_room\020\222N\022\031\n\024e_mst" +
-      "_c2l_leave_room\020\223N\022\025\n\020e_mst_c2l_action\020\224" +
-      "N\022\024\n\017e_mst_c2l_ready\020\225N\022\022\n\re_mst_c2l_gps" +
-      "\020\226N\022\027\n\022e_mst_c2l_dis_room\020\227N\022\032\n\025e_mst_c2" +
-      "l_check_state\020\232N\022\024\n\017e_mst_c2l_debug\020\370U\022\024" +
-      "\n\017e_mst_start_l2c\020\230u\022#\n\036e_mst_l2c_get_ro" +
-      "om_info_result\020\231u\022 \n\033e_mst_l2c_enter_roo",
-      "m_result\020\232u\022 \n\033e_mst_l2c_leave_room_resu" +
-      "lt\020\233u\022\034\n\027e_mst_l2c_action_result\020\234u\022\033\n\026e" +
-      "_mst_l2c_ready_result\020\235u\022\031\n\024e_mst_l2c_gp" +
-      "s_result\020\236u\022!\n\034e_mst_l2c_check_state_res" +
+      "_protocols*\330\007\n\021e_server_msg_type\022\024\n\017e_ms" +
+      "t_start_c2l\020\220N\022\035\n\030e_mst_c2l_get_scene_in" +
+      "fo\020\221N\022\031\n\024e_mst_c2l_leave_room\020\223N\022\025\n\020e_ms" +
+      "t_c2l_action\020\224N\022\024\n\017e_mst_c2l_ready\020\225N\022\022\n" +
+      "\re_mst_c2l_gps\020\226N\022\027\n\022e_mst_c2l_dis_room\020" +
+      "\227N\022\037\n\032e_mst_c2l_dis_agree_or_not\020\230N\022\032\n\025e" +
+      "_mst_c2l_check_state\020\232N\022\024\n\017e_mst_c2l_deb" +
+      "ug\020\370U\022\024\n\017e_mst_start_l2c\020\230u\022$\n\037e_mst_l2c" +
+      "_get_scene_info_result\020\231u\022 \n\033e_mst_l2c_e",
+      "nter_room_result\020\232u\022 \n\033e_mst_l2c_leave_r" +
+      "oom_result\020\233u\022\034\n\027e_mst_l2c_action_result" +
+      "\020\234u\022\033\n\026e_mst_l2c_ready_result\020\235u\022\031\n\024e_ms" +
+      "t_l2c_gps_result\020\236u\022\036\n\031e_mst_l2c_dis_roo" +
+      "m_result\020\237u\022&\n!e_mst_l2c_dis_agree_or_no" +
+      "t_result\020\240u\022!\n\034e_mst_l2c_check_state_res" +
       "ult\020\242u\022\034\n\027e_mst_l2c_game_start_nt\020\340v\022\036\n\031" +
       "e_mst_l2c_circle_start_nt\020\341v\022\026\n\021e_mst_l2" +
       "c_dice_nt\020\342v\022\033\n\026e_mst_l2c_init_card_nt\020\343" +
-      "v\022\034\n\027e_mst_l2c_trun_index_nt\020\344v\022 \n\033e_mst" +
+      "v\022\034\n\027e_mst_l2c_trun_index_nt\020\344v\022 \n\033e_mst",
       "_l2c_replace_flower_nt\020\345v\022\037\n\032e_mst_l2c_p" +
-      "layer_action_nt\020\346v\022\030\n\023e_mst_l2c_action_n",
+      "layer_action_nt\020\346v\022\030\n\023e_mst_l2c_action_n" +
       "t\020\347v\022\031\n\024e_mst_l2c_hu_info_nt\020\350v\022\037\n\032e_mst" +
       "_l2c_circle_result_nt\020\351v\022#\n\036e_mst_l2c_pl" +
       "ayer_enter_room_nt\020\352v\022\035\n\030e_mst_l2c_line_" +

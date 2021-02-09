@@ -373,10 +373,10 @@ public class GameManager {
                 DbPlayer.Instance.getMongoTemplate().findAndModify(Query.query(criteria),Update.update("value",1),CommonConfigDoc.class);
             }
 
-            boolean flag = has_room_number(randomRoomNumberDoc.getRoomNumber());
+            boolean flag = has_room_number(randomRoomNumberDoc.getValue());
             if( !flag )
             {
-                room_no = randomRoomNumberDoc.getRoomNumber();
+                room_no = randomRoomNumberDoc.getValue();
                 break;
             }
             i++;
@@ -399,12 +399,8 @@ public class GameManager {
     public boolean has_room_number(int room_number)
     {
         OnlineRoomCardDoc onlineRoomCardDoc =  DbPlayer.Instance.getMongoTemplate().findOne(Query.query(Criteria.where("RoomNumber").is(room_number)), OnlineRoomCardDoc.class);
-        if( onlineRoomCardDoc == null )
-        {
-            return false;
-        }
 
-        return true;
+        return onlineRoomCardDoc != null;
     }
 
     public void on_exit_engine()

@@ -32,5 +32,5 @@ cfg:
   activiydb_url: 127.0.0.1:27017
 
   activiydb_name: CloudDB
-#logging:
-  #config: classpath:log4j2.xml
+logging:
+  config: classpath:log4j2.xml

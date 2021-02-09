@@ -11,3 +11,5 @@
 /games/*/target/
 /bin/*/*.jar
 /bin/*.jar
+/bin/logs/
+/bin/config/

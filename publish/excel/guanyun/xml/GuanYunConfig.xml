@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Root>
-  <Data Type="1" Count="1" Cost="1" />
-  <Data Type="1" Count="4" Cost="2" />
-  <Data Type="1" Count="8" Cost="4" />
-  <Data Type="1" Count="16" Cost="8" />
-  <Data Type="2" Count="1" Cost="1" />
-  <Data Type="2" Count="4" Cost="2" />
-  <Data Type="2" Count="8" Cost="4" />
-  <Data Type="2" Count="16" Cost="8" />
-  <Data Type="3" Count="1" Cost="1" />
-  <Data Type="3" Count="4" Cost="1" />
-  <Data Type="3" Count="8" Cost="1" />
-  <Data Type="3" Count="16" Cost="2" />
+  <Data Key="1" Type="1" Count="1,4,8,16" Cost="1,2,4,8" />
+  <Data Key="2" Type="2" Count="1,4,8,16" Cost="1,2,4,8" />
+  <Data Key="3" Type="3" Count="1,4,8,16" Cost="1,1,1,2" />
 </Root>

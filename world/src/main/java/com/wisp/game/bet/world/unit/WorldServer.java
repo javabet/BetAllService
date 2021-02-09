@@ -69,7 +69,7 @@ public class WorldServer extends ServerBase {
             {
                 try
                 {
-                    Thread.sleep(50);
+                    Thread.sleep(10);
                     elapsed = System.currentTimeMillis() - cur_tm_ms;
                 }
                 catch (Exception ex)

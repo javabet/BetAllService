@@ -1,10 +1,8 @@
 package com.wisp.game.bet.games.guanyuan.logic;
 
 import com.google.protobuf.ByteString;
-import com.wisp.game.bet.games.guanyuan.mgr.GameEngine;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
-import com.wisp.game.guanyun.GuanYunConfig;
 import game_guanyuan_protocols.GameGuanyunProtocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +24,7 @@ public class LogicLobby implements InitializingBean
 
     public void afterPropertiesSet() throws Exception
     {
-        GuanYunConfig.GetInstnace().Load();
+        com.wisp.game.bet.games.guanyun.config.GuanYunConfig.GetInstnace().Load();
     }
 
     public void heartbeat(double elapsed)
@@ -54,11 +52,12 @@ public class LogicLobby implements InitializingBean
             }
 
             //根据创建局数与创建方式，获得当前需要的房卡数
-            int needRoomCard = 1;// create_room_param.getCostType();
-            if( gamePlayer.RoomCard < needRoomCard )
-            {
-                return false;
-            }
+//            int needRoomCard = 1;// create_room_param.getCostType();
+//            if( gamePlayer.RoomCard < needRoomCard )
+//            {
+//                return false;
+//            }
+
             roomNum = GameManager.Instance.generate_room_no();
             LogicTable logicTable = new LogicTable(roomNum);
             logicTable.setButton(0);
@@ -94,6 +93,7 @@ public class LogicLobby implements InitializingBean
 
         LogicPlayer logicPlayer = new LogicPlayer();
         logicPlayer.setGamePlayer(gamePlayer);
+        gamePlayer.setPhandler(logicPlayer);
         logicPlayer.enter_game();
         allPlayerMap.put(logicPlayer.get_pid(),logicPlayer);
         logicTable.add_player(logicPlayer);

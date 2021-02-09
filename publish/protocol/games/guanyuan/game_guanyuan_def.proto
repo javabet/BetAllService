@@ -4,7 +4,8 @@ enum e_server_msg_type {
 	//客户端到服务端
     e_mst_start_c2l = 10000;
 	
-	e_mst_c2l_get_room_info 					= 10001;	//得到房间
+	e_mst_c2l_get_scene_info 					= 10001;	//得到房间
+	
 	e_mst_c2l_leave_room 						= 10003;	//离开房间
 	e_mst_c2l_action							= 10004;	//动作请求:摸牌，打牌，碰,明杠，暗杠,吃，胡
 	e_mst_c2l_ready								= 10005;	//请求准备操作
@@ -22,7 +23,7 @@ enum e_server_msg_type {
 	// 服务端到客户端---------------------------------------------------------------------------
 	e_mst_start_l2c = 15000;
 	
-	e_mst_l2c_get_room_info_result 						= 15001;	//得到房间返回
+	e_mst_l2c_get_scene_info_result 						= 15001;	//得到房间返回
 	e_mst_l2c_enter_room_result							= 15002;	//进入房间
 	e_mst_l2c_leave_room_result 						= 15003;	//离开房间
 	e_mst_l2c_action_result								= 15004;	//玩家通知请求返回		

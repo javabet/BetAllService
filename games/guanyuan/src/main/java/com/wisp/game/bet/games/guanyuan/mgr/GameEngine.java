@@ -3,6 +3,8 @@ package com.wisp.game.bet.games.guanyuan.mgr;
 import com.google.protobuf.ByteString;
 import com.wisp.game.bet.games.guanyuan.logic.LogicLobby;
 import com.wisp.game.bet.games.guanyuan.logic.LogicPlayer;
+import com.wisp.game.bet.games.guanyuan.logic.LogicTable;
+import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
 import com.wisp.game.bet.logic.sshare.AbstractGameEngine;
 import com.wisp.game.bet.logic.sshare.IGameEngine;
@@ -12,13 +14,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class GameEngine extends AbstractGameEngine {
 
+    private static int GAME_ID = 1;
+
     @Autowired
     private LogicLobby logicLobby;
 
-
     @Override
     public boolean init_engine() {
-        return false;
+        init_db();
+
+        GameManager.Instance.on_init_engine(GAME_ID,"1.0.0");
+        return true;
+    }
+
+    private void init_db()
+    {
+        //do nothing
     }
 
     @Override
@@ -75,7 +86,7 @@ public class GameEngine extends AbstractGameEngine {
 
     @Override
     public int get_gameid() {
-        return 0;
+        return GAME_ID;
     }
 
     @Override

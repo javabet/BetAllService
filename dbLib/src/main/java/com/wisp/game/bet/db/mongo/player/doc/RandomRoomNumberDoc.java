@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 @Document("RandomRoomNumber")
 public class RandomRoomNumberDoc extends BaseMongoDoc {
     @Field(targetType = FieldType.INT32,name = "Index")private int Index;
-    @Field(targetType = FieldType.INT32,name = "RoomNumber")private int RoomNumber;
+    @Field(targetType = FieldType.INT32,name = "Value")private int Value;
 
 
     public int getIndex() {
@@ -19,11 +19,13 @@ public class RandomRoomNumberDoc extends BaseMongoDoc {
         Index = index;
     }
 
-    public int getRoomNumber() {
-        return RoomNumber;
+    public int getValue()
+    {
+        return Value;
     }
 
-    public void setRoomNumber(int roomNumber) {
-        RoomNumber = roomNumber;
+    public void setValue(int value)
+    {
+        Value = value;
     }
 }

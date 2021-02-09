@@ -74,8 +74,16 @@ public class Packetc2wReqRoomConfig extends DefaultWorldRequestMessage<Client2Wo
             {
                 roomConfigBuilder.addAllCustomList(convertListToLong(gameRoomMgrDoc.getCustomList()));
             }
-            roomConfigBuilder.addAllPlatList( convertListToLong(gameRoomMgrDoc.getPlatList()) );
-            roomConfigBuilder.addAllRateList(gameRoomMgrDoc.getmRatePoolList());
+            if( gameRoomMgrDoc.getPlatList() != null )
+            {
+                roomConfigBuilder.addAllPlatList( convertListToLong(gameRoomMgrDoc.getPlatList()) );
+            }
+
+            if(gameRoomMgrDoc.getmRatePoolList() != null)
+            {
+                roomConfigBuilder.addAllRateList(gameRoomMgrDoc.getmRatePoolList());
+            }
+
 
             builder.addRoomCfg(roomConfigBuilder);
         }
