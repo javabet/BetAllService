@@ -825,11 +825,17 @@ public class LogicCore {
 
         int card = cardList.get(cardList.size() - 1);
         // 向出牌方发送摸牌指令，提示其可以出牌了
-        GameGuanyunProtocol.packetl2c_action_result.Builder actionBuilder = GameGuanyunProtocol.packetl2c_action_result.newBuilder();
+        GameGuanyunProtocol.packetl2c_action_nt.Builder actionBuilder = GameGuanyunProtocol.packetl2c_action_nt.newBuilder();
         actionBuilder.setCard(card);
-        actionBuilder.setLeftCardNum(mahjongs.size() - currentIndex);
         actionBuilder.setActionType(GameGuanyunProtocol.e_action_type.e_action_mo_card);
+        actionBuilder.setSeatPos(turn);
         logicTable.send_msg_to_client(actionBuilder,turn);
+
+        //向其它人广播摸牌动作，没有牌值
+        GameGuanyunProtocol.packetl2c_action_nt.Builder otherActionBuilder = GameGuanyunProtocol.packetl2c_action_nt.newBuilder();
+        otherActionBuilder.setActionType(GameGuanyunProtocol.e_action_type.e_action_mo_card);
+        otherActionBuilder.setSeatPos(turn);
+        logicTable.broadcast_msg_to_client(otherActionBuilder,turn);
 
         // 向所有人广播指指向,并提示倒计时
         setTurnIndexMsg(turn);

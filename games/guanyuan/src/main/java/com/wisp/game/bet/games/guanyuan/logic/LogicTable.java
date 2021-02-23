@@ -303,6 +303,10 @@ public class LogicTable {
         List<Integer> pids = new ArrayList<>();
         for(LogicPlayer logicPlayer : seats)
         {
+            if( logicPlayer.getSeatIndex() == except_id )
+            {
+                continue;
+            }
             pids.add(logicPlayer.get_pid());
         }
 

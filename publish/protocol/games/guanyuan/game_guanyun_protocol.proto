@@ -311,26 +311,9 @@ message packetl2c_game_start_nt {
 
 //一局游戏开始时发送
 message packetl2c_circle_start_nt {
-	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_circle_start_nt];
-	//optional int32 host_pos 						= 2;				//庄家位置
-	//optional int32 circle_idx  					= 3;    			//第几圈
-    //optional int32 east_start_pos   				= 4;    			//东风位置
-	//repeated int32 dice_list						= 5;				//骰子的值	
-	//optional int32 left_card_num 					= 6;				//余下牌的数量
-	//repeated msg_init_cards		init_cards		= 7;				//玩家的手牌的集合
-	//optional int32 turn_index						= 8;				//当前玩家的玩家的指向，即当前谁是可以操作的对象
-	
+	optional e_server_msg_type packet_id 			= 1 [default = e_mst_l2c_circle_start_nt];	
 	optional msg_status_gaming_info		gaming_info		=	2;				//当前玩家的信息
 }
-
-message msg_init_cards
-{
-	optional int32 seat_pos				=	1;			//玩家的位置
-	repeated int32 flowers				=	2;			//花牌的集合
-	optional int32 card_num				=	3;			//玩家的牌的数量
-	repeated int32 hands_cards			=	4;			//玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-}
-
 
 
 //指示某个的提示
