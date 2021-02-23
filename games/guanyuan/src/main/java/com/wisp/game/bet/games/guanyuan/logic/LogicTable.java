@@ -93,7 +93,7 @@ public class LogicTable {
         int freePos = getFreePos();
         logicPlayer.setRoomId( this.roomId );
         logicPlayer.setSeatIndex(freePos);
-        readyMap.add(logicPlayer.getSeatIndex());
+        //readyMap.add(logicPlayer.getSeatIndex());
         this.playerMap.put(logicPlayer.get_pid(),logicPlayer);
         this.seats.add(freePos,logicPlayer);
         seatFlag |= 1 << freePos;
@@ -123,10 +123,18 @@ public class LogicTable {
             playerMap.remove(logicPlayer.get_pid());
         }
 
+
+        seatFlag = ~seatFlag;
+        seatFlag |= (1 << logicPlayer.getSeatIndex());
+        seatFlag = ~seatFlag;
+
         GameGuanyunProtocol.packetl2c_leave_room_result.Builder builder =  GameGuanyunProtocol.packetl2c_leave_room_result.newBuilder();
         builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_success);
         builder.setSeatPos(logicPlayer.getSeatIndex());
         broadcast_msg_to_client(builder);
+
+        logicPlayer.setRoomId(0);
+        logicPlayer.setSeatIndex(-1);
 
         return MsgTypeDef.e_msg_result_def.e_rmt_success;
     }
@@ -165,7 +173,7 @@ public class LogicTable {
         {
             gameSttus = GameSttus.STATUS_RUN;
             int cur_tm_s = TimeHelper.Instance.get_cur_time();
-            startTime =  cur_tm_s + 10;     //10s后游戏开始
+            startTime =  cur_tm_s + 11;     //10s后游戏开始
 
             GameGuanyunProtocol.packetl2c_game_start_nt.Builder startBuilder = GameGuanyunProtocol.packetl2c_game_start_nt.newBuilder();
             startBuilder.setStartTm(startTime);
@@ -215,6 +223,8 @@ public class LogicTable {
             msg_user_info_builder.setSeatPos(logicPlayer.getSeatIndex());
             msg_user_info_builder.setPlayerId(logicPlayer.get_pid());
             msg_user_info_builder.setLineStatus(0);
+            boolean readFlag = readyMap.contains(logicPlayer.getSeatIndex()) ;
+            msg_user_info_builder.setReadyFlag(readFlag);
             builder.addUserInfos(msg_user_info_builder);
         }
 
@@ -251,7 +261,7 @@ public class LogicTable {
             //e_game_ready					=	2;			//玩家满了，正在准备阶段
             //e_game_gameing					=	3;			//游戏开始阶段
             //e_game_circle_over				=	4;			//一局结束时
-            logicCore.get_scene_info_result(builder, seatPos );
+            logicCore.set_scene_info_result(builder, seatPos );
         }
         else if( gameSttus == GameSttus.STATUS_END )
         {
@@ -305,7 +315,7 @@ public class LogicTable {
         {
             int flag = 1 << i;
 
-            if( (seatFlag & flag) == flag )
+            if( (seatFlag & flag) != flag )
             {
                 return i;
             }

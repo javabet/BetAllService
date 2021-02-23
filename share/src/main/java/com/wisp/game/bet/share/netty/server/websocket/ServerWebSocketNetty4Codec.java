@@ -17,7 +17,7 @@ import java.util.List;
 public class ServerWebSocketNetty4Codec extends ByteToMessageCodec<MsgBuf> {
 
     private RequestMessageRegister messageRegister;
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private static Logger logger = LoggerFactory.getLogger("ServerWebSocketNetty4Codec");
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, MsgBuf msgBuf, ByteBuf byteBuf) throws Exception {
@@ -30,6 +30,11 @@ public class ServerWebSocketNetty4Codec extends ByteToMessageCodec<MsgBuf> {
         else
         {
             byteString = msgBuf.getMsg().toByteString();
+        }
+
+        if(msgBuf.getPacket_id() == 444)
+        {
+            logger.info("ServerWebSocketNetty4Codec protocolId:" + msgBuf.getPacket_id());
         }
 
 

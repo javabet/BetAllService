@@ -1,10 +1,10 @@
 package com.wisp.game.bet.logic.gameObj;
 
 import com.google.protobuf.Message;
-import com.wisp.game.bet.GameConfig.MainRobotBaseConfig;
+import com.wisp.game.bet.logic.config.MainRobotBaseConfig;
+import com.wisp.game.bet.logic.config.MainRobotTypeConfig;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameMgr.GamePlayerMgr;
-import com.wisp.game.bet.GameConfig.MainRobotTypeConfig;
 import com.wisp.game.bet.logic.sshare.IGameEngine;
 import com.wisp.game.bet.logic.sshare.IGamePHandler;
 import com.wisp.game.bet.logic.sshare.e_player_state;
@@ -16,6 +16,7 @@ import com.wisp.game.bet.share.utils.ProtocolClassUtils;
 import com.wisp.game.bet.share.utils.SessionHelper;
 import com.wisp.game.core.random.RandomHandler;
 import logic2world_protocols.Logic2WorldProtocol;
+import msg_type_def.MsgTypeDef;
 import org.springframework.core.io.Resource;
 
 import java.util.List;
@@ -109,6 +110,7 @@ public class GamePlayer {
             {
                 Logic2WorldProtocol.packetl2w_player_logout_result.Builder logoutResultBuilder = Logic2WorldProtocol.packetl2w_player_logout_result.newBuilder();
                 logoutResultBuilder.setPlayerid(PlayerID);
+                logoutResultBuilder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_success);
                 m_botPeer.send_msg( logoutResultBuilder );
             }
         }
@@ -119,11 +121,13 @@ public class GamePlayer {
             {
                 //离开时，同步消息给所在的世界服
                 Logic2WorldProtocol.packetl2w_player_activity_change.Builder builder = Logic2WorldProtocol.packetl2w_player_activity_change.newBuilder();
+                serverPeer.send_msg(builder);
                 //TODO wisp
 
                 Logic2WorldProtocol.packetl2w_player_logout_result.Builder logoutResultBuilder = Logic2WorldProtocol.packetl2w_player_logout_result.newBuilder();
                 logoutResultBuilder.setPlayerid(PlayerID);
                 logoutResultBuilder.setShutdown(shutdown);
+                logoutResultBuilder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_success);
                 serverPeer.send_msg(logoutResultBuilder);
             }
         }

@@ -1,6 +1,6 @@
 package com.wisp.game.bet.logic.unit;
 
-import com.wisp.game.bet.GameConfig.LogicConfig;
+import com.wisp.game.bet.logic.config.LogicConfig;
 import com.wisp.game.bet.core.SpringContextHolder;
 import com.wisp.game.bet.logic.db.MongoDbService;
 import com.wisp.game.bet.logic.gameMgr.GameManager;

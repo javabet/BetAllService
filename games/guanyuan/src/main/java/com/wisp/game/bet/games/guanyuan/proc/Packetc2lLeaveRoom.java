@@ -31,7 +31,26 @@ public class Packetc2lLeaveRoom extends RequestMessageFromGate<GameGuanyunProtoc
             return true;
         }
 
+        if( logicTable.getOwnUid() == player.get_playerid() && logicTable.getPlayerMap().size() > 1)
+        {
+            builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_fail);      //房主在房间有其它时，不能直接退出，只能请求解散房间
+            logicPlayer.send_msg_to_client(builder);
+            return true;
+        }
+
+        if( logicTable.getGameSttus() != LogicTable.GameSttus.STATUS_INIT )
+        {
+            builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_fail);      //只能在准备时间退出
+            logicPlayer.send_msg_to_client(builder);
+            return true;
+        }
+
         logicTable.removePlayer(logicPlayer);
+
+        if( logicTable.getOwnUid() == player.get_playerid() )
+        {
+            logicLobby.removeRoomByRoomId(logicTable.getRoomId());
+        }
 
         return true;
     }

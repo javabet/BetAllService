@@ -33,7 +33,7 @@ public class Packetc2lReady extends RequestMessageFromGate<GameGuanyunProtocol.p
             return true;
         }
 
-        logicTable.ready(msg.getSeatPos(),msg.getReady());
+        logicTable.ready(logicPlayer.getSeatIndex(),msg.getReady());
 
         return true;
     }

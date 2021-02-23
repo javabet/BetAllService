@@ -79,9 +79,12 @@ public class MajiangCards {
 
         for( CardType cardType : list )
         {
-            for(int i = cardType.getStart(); i <= cardType.getEnd(); i ++)
+            for(int j = 0;  j < cardType.getRepeatNum();j++)
             {
-                cards.add(i);
+                for(int i = cardType.getStart(); i <= cardType.getEnd(); i ++)
+                {
+                    cards.add(i);
+                }
             }
         }
 

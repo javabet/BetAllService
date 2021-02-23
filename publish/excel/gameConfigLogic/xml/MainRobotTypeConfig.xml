@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Data ID="1" Weight="30" BeginTime="2,5" Interval="20,20" BetRate="0.05,0.2" LeaveGold="5000" />
+  <Data ID="2" Weight="25" BeginTime="4,12" Interval="1,2" BetRate="0.05,0.1" LeaveGold="5000" />
+  <Data ID="3" Weight="45" BeginTime="11,14" Interval="20,20" BetRate="0.1,0.3" LeaveGold="5000" />
+</Root>

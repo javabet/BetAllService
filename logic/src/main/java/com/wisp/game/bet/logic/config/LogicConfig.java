@@ -1,4 +1,4 @@
-package com.wisp.game.bet.GameConfig;
+package com.wisp.game.bet.logic.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

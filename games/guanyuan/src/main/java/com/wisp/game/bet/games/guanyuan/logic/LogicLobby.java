@@ -39,7 +39,7 @@ public class LogicLobby implements InitializingBean
     {
         GameGuanyunProtocol.msg_create_room_param create_room_param = null;
         //检查是否有足够的房卡去创建房间
-        if( room_cfg != null )
+        if( room_cfg != null && roomNum == 0 )
         {
             try
             {
@@ -77,10 +77,10 @@ public class LogicLobby implements InitializingBean
             create_room_param = logicTable.getCreate_room_param();
 
             int needRoomCard = 1;// create_room_param.getCostType();
-            if( gamePlayer.RoomCard < needRoomCard )
-            {
-                return false;
-            }
+//            if( gamePlayer.RoomCard < needRoomCard )
+//            {
+//                return false;
+//            }
         }
 
 
@@ -91,7 +91,15 @@ public class LogicLobby implements InitializingBean
             return false;
         }
 
+        if( logicTable.getPlayerMap().size() >= 4 )
+        {
+            return  false;
+        }
+
+        int free_pos = logicTable.getFreePos();
+
         LogicPlayer logicPlayer = new LogicPlayer();
+        logicPlayer.setSeatIndex(free_pos);
         logicPlayer.setGamePlayer(gamePlayer);
         gamePlayer.setPhandler(logicPlayer);
         logicPlayer.enter_game();
@@ -128,4 +136,11 @@ public class LogicLobby implements InitializingBean
         return null;
     }
 
+    public void removeRoomByRoomId(int roomId)
+    {
+        if(tableMap.containsKey(roomId))
+        {
+            tableMap.remove(roomId);
+        }
+    }
 }

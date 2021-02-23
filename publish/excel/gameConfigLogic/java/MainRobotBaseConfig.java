@@ -1,16 +1,21 @@
-package com.wisp.game.bet.GameConfig;
+package com.wisp.game.bet.logic.config;
 
 import com.wisp.game.bet.utils.XMLUtils;
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 public final class MainRobotBaseConfig {
+
+	private static Logger logger = LoggerFactory.getLogger("XmlConfig");
 
     private static MainRobotBaseConfig Instance;
     public static MainRobotBaseConfig GetInstnace()
@@ -57,27 +62,38 @@ public final class MainRobotBaseConfig {
     public boolean Load(String path)
     {
         Document xmlDoc = null;
+        InputStream inputStream = null;
 
         ClassPathResource classPathResource = new ClassPathResource(path);
-        if (classPathResource.exists())
+        try
         {
-            try
+            if (classPathResource.exists())
             {
-                xmlDoc = XMLUtils.file2Document(classPathResource.getInputStream());
+                inputStream = classPathResource.getInputStream();
             }
-            catch (IOException ioexception)
+            else
             {
-                //do nothing
+                FileSystemResource fileSystemResource = new FileSystemResource(path);
+                inputStream = fileSystemResource.getInputStream();
             }
         }
+        catch (IOException ex)
+        {
+            logger.error("read xml has error %s",path);
+            return false;
+        }
+
+        if( inputStream == null )
+        {
+            logger.error("read xml has error {0}",path);
+            return false;
+        }
+
+        xmlDoc = XMLUtils.file2Document(inputStream);
 
         if( xmlDoc == null )
         {
-
-        }
-
-        if( xmlDoc == null )
-        {
+            logger.error("read xml has error {0}",path);
             return false;
         }
 
@@ -85,9 +101,9 @@ public final class MainRobotBaseConfig {
 
         if( root == null )
         {
+            logger.error("read xml has error {0}",path);
             return false;
         }
-
 
         Iterator<Element> iterator =  root.elementIterator();
 
@@ -97,65 +113,87 @@ public final class MainRobotBaseConfig {
             MainRobotBaseConfigData data = new MainRobotBaseConfigData();
             
            data.mID = XMLUtils.getIntByElement(childElement,"ID");
+           data.mGameID = XMLUtils.getIntByElement(childElement,"GameID");
+           data.mRoomNameType = XMLUtils.getIntByElement(childElement,"RoomNameType");
            data.mName = XMLUtils.getStringByElement(childElement,"Name");
             {
                data.mRobotGold = new ArrayList<>();
-               String eleStr =  childElement.attribute("RobotGold").getValue();
-               if( eleStr != null && !eleStr.equals("") )
+               Attribute attr =  childElement.attribute("RobotGold");
+               if(attr != null)
                {
-                   String[] RobotGoldStr = eleStr.split(",");
-                   for(int i = 0; i < RobotGoldStr.length;i++)
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
                    {
-                       data.mRobotGold.add( Integer.valueOf(RobotGoldStr[i]) );
+                       String[] RobotGoldStr = eleStr.split(",");
+                       for(int i = 0; i < RobotGoldStr.length;i++)
+                       {
+                           data.mRobotGold.add( Integer.valueOf(RobotGoldStr[i]) );
+                       }
                    }
                }
             }
             {
                data.mGoldWeight = new ArrayList<>();
-               String eleStr =  childElement.attribute("GoldWeight").getValue();
-               if( eleStr != null && !eleStr.equals("") )
+               Attribute attr =  childElement.attribute("GoldWeight");
+               if(attr != null)
                {
-                   String[] GoldWeightStr = eleStr.split(",");
-                   for(int i = 0; i < GoldWeightStr.length;i++)
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
                    {
-                       data.mGoldWeight.add( Integer.valueOf(GoldWeightStr[i]) );
+                       String[] GoldWeightStr = eleStr.split(",");
+                       for(int i = 0; i < GoldWeightStr.length;i++)
+                       {
+                           data.mGoldWeight.add( Integer.valueOf(GoldWeightStr[i]) );
+                       }
                    }
                }
             }
            data.mLifeTime = XMLUtils.getIntByElement(childElement,"LifeTime");
             {
                data.mBetRobotCount = new ArrayList<>();
-               String eleStr =  childElement.attribute("BetRobotCount").getValue();
-               if( eleStr != null && !eleStr.equals("") )
+               Attribute attr =  childElement.attribute("BetRobotCount");
+               if(attr != null)
                {
-                   String[] BetRobotCountStr = eleStr.split(",");
-                   for(int i = 0; i < BetRobotCountStr.length;i++)
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
                    {
-                       data.mBetRobotCount.add( Integer.valueOf(BetRobotCountStr[i]) );
+                       String[] BetRobotCountStr = eleStr.split(",");
+                       for(int i = 0; i < BetRobotCountStr.length;i++)
+                       {
+                           data.mBetRobotCount.add( Integer.valueOf(BetRobotCountStr[i]) );
+                       }
                    }
                }
             }
             {
                data.mBankerRobotCount = new ArrayList<>();
-               String eleStr =  childElement.attribute("BankerRobotCount").getValue();
-               if( eleStr != null && !eleStr.equals("") )
+               Attribute attr =  childElement.attribute("BankerRobotCount");
+               if(attr != null)
                {
-                   String[] BankerRobotCountStr = eleStr.split(",");
-                   for(int i = 0; i < BankerRobotCountStr.length;i++)
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
                    {
-                       data.mBankerRobotCount.add( Integer.valueOf(BankerRobotCountStr[i]) );
+                       String[] BankerRobotCountStr = eleStr.split(",");
+                       for(int i = 0; i < BankerRobotCountStr.length;i++)
+                       {
+                           data.mBankerRobotCount.add( Integer.valueOf(BankerRobotCountStr[i]) );
+                       }
                    }
                }
             }
             {
                data.mBankerRobotGold = new ArrayList<>();
-               String eleStr =  childElement.attribute("BankerRobotGold").getValue();
-               if( eleStr != null && !eleStr.equals("") )
+               Attribute attr =  childElement.attribute("BankerRobotGold");
+               if(attr != null)
                {
-                   String[] BankerRobotGoldStr = eleStr.split(",");
-                   for(int i = 0; i < BankerRobotGoldStr.length;i++)
+                   String eleStr =  attr.getValue();
+                   if( eleStr != null && !eleStr.equals("") )
                    {
-                       data.mBankerRobotGold.add( Integer.valueOf(BankerRobotGoldStr[i]) );
+                       String[] BankerRobotGoldStr = eleStr.split(",");
+                       for(int i = 0; i < BankerRobotGoldStr.length;i++)
+                       {
+                           data.mBankerRobotGold.add( Integer.valueOf(BankerRobotGoldStr[i]) );
+                       }
                    }
                }
             }
@@ -164,7 +202,7 @@ public final class MainRobotBaseConfig {
 
             if( mMapData.containsKey(data.mID) )
             {
-                System.out.printf("data refind:" + data.mID);
+                logger.error("data refind:" + data.mID);
                 continue;
             }
             mMapData.put(data.mID,data);
@@ -176,7 +214,11 @@ public final class MainRobotBaseConfig {
     public class MainRobotBaseConfigData
     {
        
-        private int mID; //tagID 游戏ID
+        private int mID; //tagID 游戏ID*100+RoomNameType
+
+        private int mGameID; //tagID 游戏ID
+
+        private int mRoomNameType; //对战类房间类型
 
         private String mName; //游戏名字
 
@@ -201,6 +243,22 @@ public final class MainRobotBaseConfig {
         
         public void setmID(int mID) {
             this.mID = mID;
+        }
+        
+        public int getmGameID() {
+            return mGameID;
+        }
+        
+        public void setmGameID(int mGameID) {
+            this.mGameID = mGameID;
+        }
+        
+        public int getmRoomNameType() {
+            return mRoomNameType;
+        }
+        
+        public void setmRoomNameType(int mRoomNameType) {
+            this.mRoomNameType = mRoomNameType;
         }
         
         public String getmName() {

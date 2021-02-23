@@ -41,6 +41,7 @@ message packetl2w_player_logout_result {
 	optional e_server_msg_type packet_id = 1 [default = e_mst_l2w_player_logout_result];		
 	optional fixed32 playerid = 2;
 	optional bool shutdown = 3 [default = false];   //关小游戏	
+	optional msg_type_def.e_msg_result_def result = 4 [default = e_rmt_fail];
 }
 
 enum e_flag_enable //更新开关枚举(每个枚举各占一个二进制位)

@@ -2,10 +2,10 @@ package com.wisp.game.bet.logic.gameMgr;
 
 import client2gate_protocols.Client2GateProtocol;
 import com.google.protobuf.Message;
-import com.wisp.game.bet.GameConfig.MainBaseConfig;
 import com.wisp.game.bet.db.mongo.player.doc.CommonConfigDoc;
 import com.wisp.game.bet.db.mongo.player.doc.OnlineRoomCardDoc;
 import com.wisp.game.bet.db.mongo.player.doc.RandomRoomNumberDoc;
+import com.wisp.game.bet.logic.config.MainBaseConfig;
 import com.wisp.game.bet.logic.db.DbPlayer;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
 import com.wisp.game.bet.logic.sshare.IGameEngine;

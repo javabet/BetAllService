@@ -30,9 +30,16 @@ public class Packetc2lAction  extends RequestMessageFromGate<GameGuanyunProtocol
         if( logicTable == null )
         {
             builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_fail);      //房间不存在
+            player.send_msg_to_client(builder);
             return true;
         }
 
+        if( logicTable.getGameSttus() != LogicTable.GameSttus.STATUS_RUN )
+        {
+            builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_fail);      //房间不存在
+            player.send_msg_to_client(builder);
+            return true;
+        }
 
         switch (msg.getActionType().getNumber())
         {
@@ -43,9 +50,21 @@ public class Packetc2lAction  extends RequestMessageFromGate<GameGuanyunProtocol
                     logicTable.peng(logicPlayer.getSeatIndex());
                 break;
             case GameGuanyunProtocol.e_action_type.e_action_out_card_VALUE:
+                    if( msg.getCardsCount() == 0 )
+                    {
+                        builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_fail);
+                        player.send_msg_to_client(builder);
+                        return true;
+                    }
                     logicTable.outCard(logicPlayer.getSeatIndex(),msg.getCards(0),false);
                 break;
             case GameGuanyunProtocol.e_action_type.e_action_gang_VALUE:
+                    if( msg.getCardsCount() == 0 )
+                    {
+                        builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_fail);
+                        player.send_msg_to_client(builder);
+                        return true;
+                    }
                     logicTable.gang(logicPlayer.getSeatIndex(),msg.getCards(0));
                 break;
             case GameGuanyunProtocol.e_action_type.e_action_hu_VALUE:

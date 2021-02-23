@@ -12,6 +12,7 @@ import java.util.Map;
 
 //打牌时玩家数据
 public class MaJiangPlayerData implements IMaJiangPlayerData {
+
 	
 	private int seatIndex; //玩家的坐位信息0,1,2,3
 	
@@ -136,6 +137,23 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
         }
     }
 
+	/**
+	 *增加一张牌
+	 */
+	public void moCard(int card)
+	{
+		holds.add(card);
+		if( countMap.containsKey(card) )
+		{
+			countMap.put(card,countMap.get(card) + 1);
+		}
+		else
+		{
+			countMap.put(card,1);
+		}
+
+
+	}
 
     public void outCard(int card)
 	{

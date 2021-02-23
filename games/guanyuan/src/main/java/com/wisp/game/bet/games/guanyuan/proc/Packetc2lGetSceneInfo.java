@@ -37,6 +37,7 @@ public class Packetc2lGetSceneInfo extends RequestMessageFromGate<GameGuanyunPro
             return true;
         }
         builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_success);
+        builder.setMyPos(logicPlayer.getSeatIndex());
         logicTable.get_scene_info_result(builder,logicPlayer.getSeatIndex() );
         player.send_msg_to_client(builder);
 

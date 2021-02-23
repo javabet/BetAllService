@@ -39,7 +39,9 @@ public class LogicCore {
     private List<Integer> mahjongs;         //当前的牌的全部
 
     private int currentIndex = 0;       //现在麻将的位置
+    private int lastTurn;               //前面的玩家的位置
     private int turn;                   //现在轮到谁的位置了
+    private int lastCard;               //前面一激活的牌值
     private int chupai;                 //正在出牌的值
     protected int button;
 
@@ -50,6 +52,7 @@ public class LogicCore {
 
     private List<HistoryActionInfo> historyActionInfos;     //出牌历史
     private List<Integer> huPosList;           // 胡牌人的列表，多个人同时列表
+    private List<Integer> diceList;
     private GameState gameState;
 
     public LogicCore( LogicTable logicTable) {
@@ -107,20 +110,21 @@ public class LogicCore {
             maJiangPlayerData.setInitFlowerCards( CommonUtils.deepSimpleList(maJiangPlayerData.getInitFlowerCards()) );
         }
 
-        GameGuanyunProtocol.packetl2c_circle_start_nt.Builder circleStartNt =  GameGuanyunProtocol.packetl2c_circle_start_nt.newBuilder();
-        circleStartNt.setHostPos(button);
-        circleStartNt.setCircleIdx( this.logicTable.getNumOfGames() );
-        circleStartNt.setEastStartPos(0);
-        logicTable.broadcast_msg_to_client(circleStartNt);
-
+        diceList = new ArrayList<>(2);
+        for(int i = 0; i < 2;i++)
+        {
+            int diceNum = RandomHandler.Instance.getRandomValue(1,7);
+            diceList.add(diceNum);
+        }
         for(MaJiangPlayerData maJiangPlayerData : gameSeats)
         {
-            GameGuanyunProtocol.packetl2c_init_card_nt.Builder cardSendNtBuilder = GameGuanyunProtocol.packetl2c_init_card_nt.newBuilder();
-            cardSendNtBuilder.addAllCards(maJiangPlayerData.getHolds());
-            cardSendNtBuilder.setLeftCardNum(mahjongs.size() - currentIndex);
-            logicTable.send_msg_to_client(cardSendNtBuilder,maJiangPlayerData.getSeatIndex());
+            GameGuanyunProtocol.packetl2c_circle_start_nt.Builder circleStartNt =  GameGuanyunProtocol.packetl2c_circle_start_nt.newBuilder();
+            circleStartNt.setGamingInfo( getGamingSceneInfo(maJiangPlayerData.getSeatIndex()) );
+            logicTable.send_msg_to_client(circleStartNt,maJiangPlayerData.getSeatIndex());
+
             maJiangPlayerData.calcCardMask();
         }
+
 
         //进行听牌检查
         for( MaJiangPlayerData maJiangPlayerData : gameSeats )
@@ -144,23 +148,7 @@ public class LogicCore {
         //通知玩家出牌
         MaJiangPlayerData turnSeat = gameSeats.get(turn);
         turnSeat.setCanChuPai(true);
-
-        int cur_tm_s = TimeHelper.Instance.get_cur_time();
-
-        setTurnIndexMsg(turn);
-
-        //告诉玩家色子
-        List<Integer> diceList = new ArrayList<>();
-        for(int i = 0; i < 2;i ++)
-        {
-            int dice = RandomHandler.Instance.getRandomValue(1,7);
-            diceList.add(dice);
-        }
-
-        GameGuanyunProtocol.packetl2c_dice_nt.Builder diceNtBuilder = GameGuanyunProtocol.packetl2c_dice_nt.newBuilder();
-        diceNtBuilder.setFirePos(turn);
-        diceNtBuilder.addAllDiceList(diceList);
-        logicTable.broadcast_msg_to_client(diceNtBuilder);
+        //setTurnIndexMsg(turn);
 
         checkCanJiaoTing(turnSeat);//检查叫听
         checkCanAnGang(turnSeat);//检查直杠
@@ -230,15 +218,14 @@ public class LogicCore {
         {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_hu);
-            builder.addActionType(msg_action_builder.build());
+            builder.addActionTypes(msg_action_builder.build());
         }
 
         if( maJiangPlayerData.isCanPeng() )
         {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_peng);
-            //msg_action_builder.addAllCards()
-            builder.addActionType(msg_action_builder.build());
+            builder.addActionTypes(msg_action_builder.build());
         }
 
         if( maJiangPlayerData.isCanAnGang() )
@@ -246,15 +233,14 @@ public class LogicCore {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_gang_an);
             msg_action_builder.addAllCards( maJiangPlayerData.getAngGangList() );
-            builder.addActionType(msg_action_builder.build());
+            builder.addActionTypes(msg_action_builder.build());
         }
 
         if( maJiangPlayerData.isCanDianGang() )
         {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_gang_ming);
-            //msg_action_builder.addAllCards( maJiangPlayerData.get );
-            builder.addActionType(msg_action_builder.build());
+            builder.addActionTypes(msg_action_builder.build());
         }
 
         if( maJiangPlayerData.isCanWanGang() )
@@ -262,22 +248,20 @@ public class LogicCore {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_gang_wang);
             msg_action_builder.addAllCards( maJiangPlayerData.getWangGangList() );
-            builder.addActionType(msg_action_builder.build());
+            builder.addActionTypes(msg_action_builder.build());
         }
 
         if( maJiangPlayerData.isCanJiaoTing() )
         {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_ting);
-            builder.addActionType(msg_action_builder.build());
+            builder.addActionTypes(msg_action_builder.build());
         }
 
-        if( builder.getActionTypeList().size() > 0 )
+        if( builder.getActionTypesList().size() > 0 )
         {
             logicTable.send_msg_to_client(builder,maJiangPlayerData.getSeatIndex());
         }
-
-        logicTable.send_msg_to_client(builder,maJiangPlayerData.getSeatIndex());
     }
 
     public MsgTypeDef.e_msg_result_def ready(int seatPos,boolean ready)
@@ -911,15 +895,13 @@ public class LogicCore {
             return card;
         }
 
-        seatData.getHolds().add(card);
-        if (seatData.getCountMap().containsKey(card))
+        seatData.moCard(card);
+
+        if( seatIndex == 0 )
         {
-            seatData.getCountMap().put(card, seatData.getCountMap().get(card) + 1);
+            logger.info("card:" + card);
         }
-        else
-        {
-            seatData.getCountMap().put(card, 1);
-        }
+
 
         return card;
     }
@@ -960,7 +942,7 @@ public class LogicCore {
         }
     }
 
-    public void get_scene_info_result(GameGuanyunProtocol.packetl2c_get_scene_info_result.Builder builder,int seatPos)
+    public void set_scene_info_result(GameGuanyunProtocol.packetl2c_get_scene_info_result.Builder builder,int seatPos)
     {
         //e_game_ready					=	2;			//玩家满了，正在准备阶段
         //e_game_gameing					=	3;			//游戏开始阶段
@@ -973,6 +955,7 @@ public class LogicCore {
         else if( gameState == GameState.RUN )
         {
             builder.setStatus(GameGuanyunProtocol.e_game_status_type.e_game_gameing);
+            builder.setGamingInfo( getGamingSceneInfo(seatPos) );
         }
         else if( gameState == GameState.CIRCLE_OVER )
         {
@@ -982,6 +965,48 @@ public class LogicCore {
         {
             builder.setStatus((GameGuanyunProtocol.e_game_status_type.e_game_game_over));
         }
+    }
+
+    private GameGuanyunProtocol.msg_status_gaming_info.Builder getGamingSceneInfo(int seatPos)
+    {
+        MaJiangPlayerData playerData = gameSeats.get(seatPos);
+        GameGuanyunProtocol.msg_status_gaming_info.Builder builder = GameGuanyunProtocol.msg_status_gaming_info.newBuilder();
+        builder.addAllHandHards(playerData.getHolds());
+        builder.setHostPos( button );
+        builder.setActivePos(turn);
+        builder.setLeftCardNum(mahjongs.size() - currentIndex);
+        builder.setLastOutCard( lastCard );
+        builder.setLastOutCardPos( lastTurn  );
+        builder.setCircleIdx(logicTable.getNumOfGames());
+        builder.setMyPos( seatPos );
+        builder.addAllDiceList( diceList );
+
+        for(int i = 0; i < 4;i++)
+        {
+            MaJiangPlayerData tmpPlayer = gameSeats.get(i);
+            GameGuanyunProtocol.msg_room_info.Builder msg_room_info_builder = GameGuanyunProtocol.msg_room_info.newBuilder();
+            msg_room_info_builder.setHandCardNum( tmpPlayer.getHolds().size() );
+            msg_room_info_builder.addAllOutWallCards( tmpPlayer.getFolds() );
+            msg_room_info_builder.addAllFlowerCards( tmpPlayer.getFlowers() );
+            msg_room_info_builder.setTingCard( tmpPlayer.getJiaoTingCard() );
+
+            for( HistoryActionInfo historyActionInfo : tmpPlayer.getOutHistoryList() )
+            {
+                GameGuanyunProtocol.msg_history_action_info.Builder msg_history_action_info_builder = GameGuanyunProtocol.msg_history_action_info.newBuilder();
+                msg_history_action_info_builder.setCard( historyActionInfo.getCard() );
+                msg_history_action_info_builder.setLinkedPos( historyActionInfo.getLinkedSeatPos() );
+                msg_history_action_info_builder.setActionType( GameGuanyunProtocol.e_history_action_type.valueOf( historyActionInfo.getAction().getValue() )   );
+                if( historyActionInfo.getLinkCards() != null && historyActionInfo.getLinkCards().size() > 0 )
+                {
+                    msg_history_action_info_builder.addAllLinkdedCards( historyActionInfo.getLinkCards() );
+                }
+                msg_room_info_builder.addHistoryActionInfo(msg_history_action_info_builder);
+            }
+
+            builder.addRoomInfo(msg_room_info_builder);
+        }
+
+        return builder;
     }
 
     //各种check

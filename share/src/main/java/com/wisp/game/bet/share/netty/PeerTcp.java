@@ -51,6 +51,17 @@ public abstract class PeerTcp {
         while( send_queue.size() > 0 )
         {
             MsgBuf msgBuf =  send_queue.remove();
+
+            if(msgBuf.getPacket_id() == 444)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.append("packet_send_msgs 444 start isActive:").append(this.channelHandlerContext.channel().isActive());
+                sb.append(" isOpen:").append(this.channelHandlerContext.channel().isOpen());
+                sb.append("protocolId:").append(msgBuf.getPacket_id());
+                logger.info(sb.toString());
+            }
+
+
             this.channelHandlerContext.write(msgBuf);
             needSend = true;
         }
@@ -127,6 +138,19 @@ public abstract class PeerTcp {
          receive_queue.add(msgBuf);
      }
 
+//    public void addSendMsg(com.google.protobuf.Message.Builder builder)
+//    {
+//        Message msg = builder.build();
+//        int protocolId =  ResponseMessageRegitser.Instance.getProtocolIdByMessageClass(msg);
+//
+//        MsgBuf msgBuf = new MsgBuf();
+//        msgBuf.setNeed_route(false);
+//        msgBuf.setPacket_id(protocolId);
+//        msgBuf.setMsg(msg);
+//
+//        this.send_queue.add(msgBuf);
+//    }
+
      public void addSendMsg(Message msg)
      {
          int protocolId =  ResponseMessageRegitser.Instance.getProtocolIdByMessageClass(msg);
@@ -137,6 +161,8 @@ public abstract class PeerTcp {
          msgBuf.setMsg(msg);
 
          this.send_queue.add(msgBuf);
+
+         logger.info("send_queue.size()" + send_queue.size());
      }
 
 

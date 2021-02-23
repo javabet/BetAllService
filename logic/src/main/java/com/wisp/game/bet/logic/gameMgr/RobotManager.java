@@ -1,10 +1,10 @@
 package com.wisp.game.bet.logic.gameMgr;
 
-import com.wisp.game.bet.GameConfig.MainMultiLanguageConfig;
-import com.wisp.game.bet.GameConfig.MainRobotBaseConfig;
-import com.wisp.game.bet.GameConfig.MainRobotNameConfig;
-import com.wisp.game.bet.GameConfig.MainRobotTypeConfig;
 import com.wisp.game.bet.db.mongo.player.doc.OrderPlayerIdDoc;
+import com.wisp.game.bet.logic.config.MainMultiLanguageConfig;
+import com.wisp.game.bet.logic.config.MainRobotBaseConfig;
+import com.wisp.game.bet.logic.config.MainRobotNameConfig;
+import com.wisp.game.bet.logic.config.MainRobotTypeConfig;
 import com.wisp.game.bet.logic.db.DbPlayer;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
 import com.wisp.game.bet.logic.sshare.IGameEngine;

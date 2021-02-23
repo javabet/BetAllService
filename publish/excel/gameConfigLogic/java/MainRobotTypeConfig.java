@@ -1,4 +1,4 @@
-package com.wisp.game.bet.GameConfig;
+package com.wisp.game.bet.logic.config;
 
 import com.wisp.game.bet.utils.XMLUtils;
 import org.dom4j.Attribute;
@@ -7,11 +7,15 @@ import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 public final class MainRobotTypeConfig {
+
+	private static Logger logger = LoggerFactory.getLogger("XmlConfig");
 
     private static MainRobotTypeConfig Instance;
     public static MainRobotTypeConfig GetInstnace()
@@ -58,27 +62,38 @@ public final class MainRobotTypeConfig {
     public boolean Load(String path)
     {
         Document xmlDoc = null;
+        InputStream inputStream = null;
 
         ClassPathResource classPathResource = new ClassPathResource(path);
-        if (classPathResource.exists())
+        try
         {
-            try
+            if (classPathResource.exists())
             {
-                xmlDoc = XMLUtils.file2Document(classPathResource.getInputStream());
+                inputStream = classPathResource.getInputStream();
             }
-            catch (IOException ioexception)
+            else
             {
-                //do nothing
+                FileSystemResource fileSystemResource = new FileSystemResource(path);
+                inputStream = fileSystemResource.getInputStream();
             }
         }
+        catch (IOException ex)
+        {
+            logger.error("read xml has error %s",path);
+            return false;
+        }
+
+        if( inputStream == null )
+        {
+            logger.error("read xml has error {0}",path);
+            return false;
+        }
+
+        xmlDoc = XMLUtils.file2Document(inputStream);
 
         if( xmlDoc == null )
         {
-
-        }
-
-        if( xmlDoc == null )
-        {
+            logger.error("read xml has error {0}",path);
             return false;
         }
 
@@ -86,6 +101,7 @@ public final class MainRobotTypeConfig {
 
         if( root == null )
         {
+            logger.error("read xml has error {0}",path);
             return false;
         }
 
@@ -151,7 +167,7 @@ public final class MainRobotTypeConfig {
 
             if( mMapData.containsKey(data.mID) )
             {
-                System.out.printf("data refind:" + data.mID);
+                logger.error("data refind:" + data.mID);
                 continue;
             }
             mMapData.put(data.mID,data);

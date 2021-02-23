@@ -24,7 +24,7 @@ enum e_server_msg_type {
 	e_mst_start_l2c = 15000;
 	
 	e_mst_l2c_get_scene_info_result 						= 15001;	//得到房间返回
-	e_mst_l2c_enter_room_result							= 15002;	//进入房间
+	//e_mst_l2c_enter_room_result							= 15002;	//进入房间
 	e_mst_l2c_leave_room_result 						= 15003;	//离开房间
 	e_mst_l2c_action_result								= 15004;	//玩家通知请求返回		
 	e_mst_l2c_ready_result								= 15005;	//玩家广播准备状态
@@ -37,8 +37,6 @@ enum e_server_msg_type {
 	
 	e_mst_l2c_game_start_nt									=	15200;			//广播玩家游戏开始了
 	e_mst_l2c_circle_start_nt								=	15201;			//游戏开始
-	e_mst_l2c_dice_nt										=	15202;			//掷骰子
-	e_mst_l2c_init_card_nt									=	15203;			//初始化玩家手牌
 	e_mst_l2c_trun_index_nt									=	15204;			//提示玩家指向
 	e_mst_l2c_replace_flower_nt								=	15205;			//补花
 	e_mst_l2c_player_action_nt								= 	15206;			//提示某个玩家的可以进行的保重

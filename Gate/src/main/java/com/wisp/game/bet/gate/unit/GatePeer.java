@@ -7,6 +7,8 @@ import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.bet.share.netty.PeerTcp;
 import com.wisp.game.bet.share.netty.infos.e_peer_state;
 import io.netty.channel.ChannelHandlerContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -72,6 +74,7 @@ public class GatePeer extends PeerTcp {
     }
 
     public void set_net_param() {
+        logger.info("set_net_param ready client start");
         if (ClientManager.Instance.is_shutdowning()) {
             Client2GateProtocol.packetg2c_net_param.Builder builder = Client2GateProtocol.packetg2c_net_param.newBuilder();
             builder.setShutdown(true);
@@ -105,6 +108,7 @@ public class GatePeer extends PeerTcp {
 
         Client2GateProtocol.packetcg2cg_start.Builder builder = Client2GateProtocol.packetcg2cg_start.newBuilder();
         addSendMsg(builder.build());
+        logger.info("init_net_param0 add packetcg2cg_start");
         //send_msg(builder.build());
     }
 

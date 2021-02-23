@@ -121,6 +121,7 @@ message packetc2w_leave_game{
 message packetw2c_leave_game_result {
 	optional e_server_msg_type packet_id = 1 [default = e_mst_w2c_leave_game_result];	
 	optional bool shutdown = 2 [default = false];   //关小游戏
+	optional msg_type_def.e_msg_result_def result = 3 [default = e_rmt_fail];
 }
 
 
