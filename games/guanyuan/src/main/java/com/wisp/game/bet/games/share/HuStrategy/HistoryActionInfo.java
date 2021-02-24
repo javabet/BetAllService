@@ -1,12 +1,13 @@
 package com.wisp.game.bet.games.share.HuStrategy;
 
+import com.wisp.game.bet.games.share.common.CardInfo;
 import com.wisp.game.bet.games.share.enums.HistoryActionEnum;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryActionInfo {
-    private int card;
+    private CardInfo cardInfo;
     private HistoryActionEnum action;
     private int seatPos;
     private int linkedSeatPos;          //被关联的玩家的位置，比如杠牌时，被杠的玩家的
@@ -16,18 +17,19 @@ public class HistoryActionInfo {
 
 
     public HistoryActionInfo() {
-        card = -1;
         isHu = false;
         linkCards = new ArrayList<>();
         isZiMo = false;
     }
 
-    public int getCard() {
-        return card;
+    public CardInfo getCardInfo()
+    {
+        return cardInfo;
     }
 
-    public void setCard(int card) {
-        this.card = card;
+    public void setCardInfo(CardInfo cardInfo)
+    {
+        this.cardInfo = cardInfo;
     }
 
     public HistoryActionEnum getAction() {
@@ -81,16 +83,4 @@ public class HistoryActionInfo {
 
 
 
-
-    public HistoryActionInfo clone()
-    {
-        HistoryActionInfo historyActionInfo = new HistoryActionInfo();
-       historyActionInfo.setSeatPos(seatPos);
-       historyActionInfo.setAction(action);
-       historyActionInfo.setCard(card);
-       historyActionInfo.setLinkedSeatPos(linkedSeatPos);
-       historyActionInfo.setHu(isHu);
-
-        return historyActionInfo;
-    }
 }

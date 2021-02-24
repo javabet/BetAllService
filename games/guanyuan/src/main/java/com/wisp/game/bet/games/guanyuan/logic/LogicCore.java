@@ -2,6 +2,7 @@ package com.wisp.game.bet.games.guanyuan.logic;
 
 import com.wisp.game.bet.games.guanyuan.logic.info.PlayerOperationInfo;
 import com.wisp.game.bet.games.share.HuStrategy.HistoryActionInfo;
+import com.wisp.game.bet.games.share.common.CardInfo;
 import com.wisp.game.bet.games.share.enums.CardTypeEnum;
 import com.wisp.game.bet.games.share.common.HuPattern;
 import com.wisp.game.bet.games.share.common.MaJiangPlayerData;
@@ -36,12 +37,13 @@ import java.util.Map;
 public class LogicCore {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private List<Integer> mahjongs;         //当前的牌的全部
+    private List<CardInfo> mahjongs;         //当前的牌的全部
+    private Map<Integer,CardInfo> mahjongMap;       //当前牌Id与牌值的情况
 
     private int currentIndex = 0;       //现在麻将的位置
     private int lastTurn;               //前面的玩家的位置
     private int turn;                   //现在轮到谁的位置了
-    private int lastCard;               //前面一激活的牌值
+    //private int lastCard;               //前面一激活的牌值
     private int chupai;                 //正在出牌的值
     protected int button;
 
@@ -87,16 +89,28 @@ public class LogicCore {
             this.gameSeats.add(maJiangPlayerData);
         }
 
-        mahjongs = MajiangCards.getCards(logicTable.getMjType());
+        List<Integer> sourceCardList = MajiangCards.getCards(logicTable.getMjType());
 
         //洗牌
-        for (int i = 0; i < mahjongs.size(); i++)
+        for (int i = 0; i < sourceCardList.size(); i++)
         {
-            int lastIndex = mahjongs.size() - 1 - i;
+            int lastIndex = sourceCardList.size() - 1 - i;
             int index = (int) Math.floor(Math.random() * lastIndex);
-            int t = mahjongs.get(index);
-            mahjongs.set(index, mahjongs.get(lastIndex));
-            mahjongs.set(lastIndex, t);
+            int t = sourceCardList.get(index);
+            sourceCardList.set(index, sourceCardList.get(lastIndex));
+            sourceCardList.set(lastIndex, t);
+        }
+
+        mahjongs = new ArrayList<>();
+        mahjongMap = new HashMap<>();
+
+        for(int i = 0; i < sourceCardList.size();i++)
+        {
+            CardInfo cardInfo = new CardInfo();
+            cardInfo.setCardId(i);
+            cardInfo.setCardValue( sourceCardList.get(i) );
+            mahjongs.add(cardInfo);
+            mahjongMap.put(i,cardInfo);
         }
 
         logicTable.setGameSttus(LogicTable.GameSttus.STATUS_RUN);
@@ -135,12 +149,13 @@ public class LogicCore {
             }
             else
             {
-                int lastCard = maJiangPlayerData.getHolds().remove(maJiangPlayerData.getHolds().size() - 1);
+                CardInfo lastCardInfo = maJiangPlayerData.getHolds().remove(maJiangPlayerData.getHolds().size() - 1);
+                int lastCard = lastCardInfo.getCardValue();
                 maJiangPlayerData.getCountMap().put(lastCard,maJiangPlayerData.getCountMap().get(lastCard) - 1);
 
                 checkCanTingPai(maJiangPlayerData);
 
-                maJiangPlayerData.getHolds().add(lastCard);
+                maJiangPlayerData.getHolds().add(lastCardInfo);
                 maJiangPlayerData.getCountMap().put(lastCard,maJiangPlayerData.getCountMap().get(lastCard) + 1);
             }
         }
@@ -152,7 +167,7 @@ public class LogicCore {
 
         checkCanJiaoTing(turnSeat);//检查叫听
         checkCanAnGang(turnSeat);//检查直杠
-        checkCanHu(turnSeat,turnSeat.getHolds().get(turnSeat.getHolds().size() - 1));//检查是否能胡
+        checkCanHu(turnSeat,turnSeat.getHolds().get(turnSeat.getHolds().size() - 1).getCardValue());//检查是否能胡
         sendOperations(turnSeat,chupai);
     }
 
@@ -165,7 +180,7 @@ public class LogicCore {
         // 每人13张 一共 13*4 ＝ 52张 庄家多一张 53张
         for(int i = 0; i < 13 * 4; i ++)
         {
-            List<Integer> list = mopaiWithHua(seatIndex);
+            List<CardInfo> list = mopaiWithHua(seatIndex);
             if( list.size() > 1 )
             {
                 MaJiangPlayerData playerData = gameSeats.get(seatIndex);
@@ -181,7 +196,7 @@ public class LogicCore {
 
         // 庄家多摸最后一张
         // mopai(button);
-        List<Integer> list = mopaiWithHua(button);
+        List<CardInfo> list = mopaiWithHua(button);
         if (list.size() > 1)
         {
             MaJiangPlayerData playerData = gameSeats.get(button);
@@ -209,7 +224,7 @@ public class LogicCore {
 
         if( card == -1 )
         {
-            card = maJiangPlayerData.getHolds().get(maJiangPlayerData.getHolds().size() - 1);
+            card = maJiangPlayerData.getHolds().get(maJiangPlayerData.getHolds().size() - 1).getCardValue();
         }
 
         GameGuanyunProtocol.packetl2c_player_action_nt.Builder builder = GameGuanyunProtocol.packetl2c_player_action_nt.newBuilder();
@@ -861,22 +876,22 @@ public class LogicCore {
      * @param seatIndex
      * @return
      */
-    protected List<Integer> mopaiWithHua(int seatIndex)
+    protected List<CardInfo> mopaiWithHua(int seatIndex)
     {
-        List<Integer> list = new ArrayList<>();
+        List<CardInfo> list = new ArrayList<>();
 
 
         while (true)
         {
-            int card = mopai(seatIndex);
-            list.add(card);
-            if (card == -1)
+            CardInfo cardInfo = mopai(seatIndex);
+            list.add(cardInfo);
+            if (cardInfo == null)
             {
                 break;
             }
             else
             {
-                CardTypeEnum mjType = MajiangCards.getCardType(logicTable.getMjType(),card);
+                CardTypeEnum mjType = MajiangCards.getCardType(logicTable.getMjType(),cardInfo.getCardValue());
                 if (mjType != CardTypeEnum.CARD_TYPE_HUA)
                 {
                     break;
@@ -887,15 +902,15 @@ public class LogicCore {
         return list;
     }
 
-    protected int mopai(int seatIndex)
+    protected CardInfo mopai(int seatIndex)
     {
-        if (currentIndex == mahjongs.size()) { return -1; }
+        if (currentIndex == mahjongs.size()) { return null; }
 
         MaJiangPlayerData seatData = this.gameSeats.get(seatIndex);
-        int card = mahjongs.get(currentIndex);
+        CardInfo card = mahjongs.get(currentIndex);
 
         currentIndex += 1;
-        CardTypeEnum mjType = MajiangCards.getCardType(logicTable.getMjType(),card);
+        CardTypeEnum mjType = MajiangCards.getCardType(logicTable.getMjType(),card.getCardValue());
         if (mjType == CardTypeEnum.CARD_TYPE_HUA)
         {
             return card;

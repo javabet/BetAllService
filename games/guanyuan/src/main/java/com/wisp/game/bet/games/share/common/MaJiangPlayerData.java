@@ -18,15 +18,15 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
 	
 	private long UID;			//玩家的uid
 	
-	private List<Integer> holds;	//玩家持有的牌
+	private List<CardInfo> holds;	//玩家持有的牌
 	
-	private List<Integer> folds;		//打出的牌  也就是桌面上自己跟前的牌
+	private List<CardInfo> outCardInfos;		//打出的牌  也就是桌面上自己跟前的牌
 	
-	private List<Integer> flowers;		//花的数量
+	private List<CardInfo> flowers;		        //花的数量
 	
-	private List<Integer> initHolds;			//初化时的玩家数据
+	private List<CardInfo> initHolds;			//初化时的玩家数据
 	
-	private List<Integer> initFlowerCards;		//初始化时花牌的数据
+	private List<CardInfo> initFlowerCards;		//初始化时花牌的数据
 	
 	private List<HistoryActionInfo> outHistoryList;		//已经推倒的牌  //包括,碰,杠(明杠,暗杠,点杠),吃 //wispAdd 用于替换上面的outCards里的数据,里面的数据mjActionList里的数据是一致的
 	
@@ -81,7 +81,7 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
 		// TODO Auto-generated constructor stub
 		
 		holds = new ArrayList<>();
-		folds = new ArrayList<>();
+		outCardInfos = new ArrayList<>();
 		flowers = new ArrayList<>();
 
         outHistoryList  = new ArrayList<>();
@@ -120,7 +120,7 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
 	//去掉最后一张打出去在牌
 	public void removeLastOutCard()
     {
-        int val = folds.remove(folds.size() - 1);
+        outCardInfos.remove(outCardInfos.size() - 1);
     }
 
 	public void addHistoryItem(HistoryActionInfo historyActionInfo)
@@ -140,32 +140,32 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
 	/**
 	 *增加一张牌
 	 */
-	public void moCard(int card)
+	public void moCard(CardInfo cardInfo)
 	{
-		holds.add(card);
-		if( countMap.containsKey(card) )
+		holds.add(cardInfo);
+		if( countMap.containsKey(cardInfo.getCardValue()) )
 		{
-			countMap.put(card,countMap.get(card) + 1);
+			countMap.put(cardInfo.getCardValue(),countMap.get(cardInfo.getCardValue()) + 1);
 		}
 		else
 		{
-			countMap.put(card,1);
+			countMap.put(cardInfo.getCardValue(),1);
 		}
 
 
 	}
 
-    public void outCard(int card)
+    public void outCard(CardInfo cardInfo)
 	{
-		int idx = holds.indexOf(card);
+		int idx = holds.indexOf(cardInfo);
 
 		holds.remove(idx);
-		countMap.put(card,countMap.get(card) - 1);
-		if( countMap.get(card) == 0 )
+		countMap.put(cardInfo.getCardValue(),countMap.get(cardInfo.getCardValue()) - 1);
+		if( countMap.get(cardInfo.getCardValue()) == 0 )
 		{
-			countMap.remove(card);
+			countMap.remove(cardInfo.getCardValue());
 		}
-		folds.add(card);
+		outCardInfos.add(cardInfo);
 		calcCardMask();
 	}
 
@@ -189,35 +189,30 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
 	}
 
 
-	public List<Integer> getHolds() {
-		return holds;
-	}
+
 
 	public void clearTingMap()
     {
         tingMap.clear();
     }
 
-	public void setHolds(List<Integer> holds) {
+	public void setHolds(List<CardInfo> holds) {
 		this.holds = holds;
 	}
 
 
-	public List<Integer> getFolds() {
-		return folds;
+	public List<CardInfo> getFolds() {
+		return outCardInfos;
 	}
 
 
-	public void setFolds(List<Integer> folds) {
-		this.folds = folds;
-	}
-	
-	public List<Integer> getFlowers() {
-		return flowers;
+	public void setFolds(List<CardInfo> folds) {
+		this.outCardInfos = folds;
 	}
 
 
-	public void setFlowers(List<Integer> flowers) {
+
+	public void setFlowers(List<CardInfo> flowers) {
 		this.flowers = flowers;
 	}
 
@@ -225,8 +220,14 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
 		return countMap;
 	}
 
+    @Override
+    public List<CardInfo> getHolds()
+    {
+        return null;
+    }
 
-	public void setCountMap(Map<Integer, Integer> countMap) {
+
+    public void setCountMap(Map<Integer, Integer> countMap) {
 		this.countMap = countMap;
 	}
 
@@ -388,22 +389,17 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
 		this.huList = huList;
 	}
 
-	public List<Integer> getInitHolds() {
+	public List<CardInfo> getInitHolds() {
 		return initHolds;
 	}
 
 
-	public void setInitHolds(List<Integer> initHolds) {
+	public void setInitHolds(List<CardInfo> initHolds) {
 		this.initHolds = initHolds;
 	}
 
 
-	public List<Integer> getInitFlowerCards() {
-		return initFlowerCards;
-	}
-
-
-	public void setInitFlowerCards(List<Integer> initFlowerCards) {
+	public void setInitFlowerCards(List<CardInfo> initFlowerCards) {
 		this.initFlowerCards = initFlowerCards;
 	}
 
@@ -417,7 +413,19 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
         return outHistoryList;
     }
 
-	public int getJiaoTingCard() {
+    @Override
+    public List<CardInfo> getInitFlowerCards()
+    {
+        return null;
+    }
+
+    @Override
+    public List<CardInfo> getFlowers()
+    {
+        return null;
+    }
+
+    public int getJiaoTingCard() {
 		return jiaoTingCard;
 	}
 

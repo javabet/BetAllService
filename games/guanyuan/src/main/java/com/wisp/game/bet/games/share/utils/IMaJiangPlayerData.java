@@ -1,6 +1,7 @@
 package com.wisp.game.bet.games.share.utils;
 
 import com.wisp.game.bet.games.share.HuStrategy.HistoryActionInfo;
+import com.wisp.game.bet.games.share.common.CardInfo;
 import com.wisp.game.bet.games.share.common.HuPattern;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface IMaJiangPlayerData
     public Map<Integer, Integer> getCountMap();
 
     //玩家手上的牌的集合
-    public List<Integer> getHolds();
+    public List<CardInfo> getHolds();
 
     //玩家听牌后的集合
     public Map<Integer, HuPattern> getTingMap();
@@ -25,8 +26,8 @@ public interface IMaJiangPlayerData
 
 
     //默认花的数量
-    public List<Integer> getInitFlowerCards();
+    public List<CardInfo> getInitFlowerCards();
 
     //后期花的列表
-    public List<Integer> getFlowers();
+    public List<CardInfo> getFlowers();
 }
