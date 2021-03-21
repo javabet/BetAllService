@@ -252,31 +252,87 @@ public final class GameGuanyunProtocol {
   public enum e_history_action_type
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
+     * <code>e_history_action_gang_null = -1;</code>
+     */
+    e_history_action_gang_null(0, -1),
+    /**
+     * <code>e_history_action_gang_skip = 0;</code>
+     */
+    e_history_action_gang_skip(1, 0),
+    /**
+     * <code>e_history_action_gang_chupai = 1;</code>
+     */
+    e_history_action_gang_chupai(2, 1),
+    /**
+     * <code>e_history_action_gang_mopai = 2;</code>
+     */
+    e_history_action_gang_mopai(3, 2),
+    /**
      * <code>e_history_action_gang_chi = 3;</code>
      */
-    e_history_action_gang_chi(0, 3),
+    e_history_action_gang_chi(4, 3),
     /**
      * <code>e_history_action_peng = 4;</code>
      */
-    e_history_action_peng(1, 4),
+    e_history_action_peng(5, 4),
     /**
      * <code>e_history_action_gang_dian = 5;</code>
      */
-    e_history_action_gang_dian(2, 5),
+    e_history_action_gang_dian(6, 5),
     /**
      * <code>e_history_action_gang_wang = 6;</code>
      */
-    e_history_action_gang_wang(3, 6),
+    e_history_action_gang_wang(7, 6),
     /**
      * <code>e_history_action_gang_an = 7;</code>
      */
-    e_history_action_gang_an(4, 7),
+    e_history_action_gang_an(8, 7),
+    /**
+     * <code>e_history_action_gang_ting_card = 8;</code>
+     */
+    e_history_action_gang_ting_card(9, 8),
     /**
      * <code>e_history_action_gang_hu = 9;</code>
      */
-    e_history_action_gang_hu(5, 9),
+    e_history_action_gang_hu(10, 9),
+    /**
+     * <code>e_history_action_gang_QIANG_GANG = 10;</code>
+     */
+    e_history_action_gang_QIANG_GANG(11, 10),
+    /**
+     * <code>e_history_action_gang_HU_ZIMO = 11;</code>
+     */
+    e_history_action_gang_HU_ZIMO(12, 11),
+    /**
+     * <code>e_history_action_gang_hu_DIAN_GANG = 12;</code>
+     */
+    e_history_action_gang_hu_DIAN_GANG(13, 12),
+    /**
+     * <code>e_history_action_gang_hu_GABNG_PAO = 13;</code>
+     */
+    e_history_action_gang_hu_GABNG_PAO(14, 13),
+    /**
+     * <code>e_history_action_gang_hu_FANG_PAO = 14;</code>
+     */
+    e_history_action_gang_hu_FANG_PAO(15, 14),
     ;
 
+    /**
+     * <code>e_history_action_gang_null = -1;</code>
+     */
+    public static final int e_history_action_gang_null_VALUE = -1;
+    /**
+     * <code>e_history_action_gang_skip = 0;</code>
+     */
+    public static final int e_history_action_gang_skip_VALUE = 0;
+    /**
+     * <code>e_history_action_gang_chupai = 1;</code>
+     */
+    public static final int e_history_action_gang_chupai_VALUE = 1;
+    /**
+     * <code>e_history_action_gang_mopai = 2;</code>
+     */
+    public static final int e_history_action_gang_mopai_VALUE = 2;
     /**
      * <code>e_history_action_gang_chi = 3;</code>
      */
@@ -298,21 +354,55 @@ public final class GameGuanyunProtocol {
      */
     public static final int e_history_action_gang_an_VALUE = 7;
     /**
+     * <code>e_history_action_gang_ting_card = 8;</code>
+     */
+    public static final int e_history_action_gang_ting_card_VALUE = 8;
+    /**
      * <code>e_history_action_gang_hu = 9;</code>
      */
     public static final int e_history_action_gang_hu_VALUE = 9;
+    /**
+     * <code>e_history_action_gang_QIANG_GANG = 10;</code>
+     */
+    public static final int e_history_action_gang_QIANG_GANG_VALUE = 10;
+    /**
+     * <code>e_history_action_gang_HU_ZIMO = 11;</code>
+     */
+    public static final int e_history_action_gang_HU_ZIMO_VALUE = 11;
+    /**
+     * <code>e_history_action_gang_hu_DIAN_GANG = 12;</code>
+     */
+    public static final int e_history_action_gang_hu_DIAN_GANG_VALUE = 12;
+    /**
+     * <code>e_history_action_gang_hu_GABNG_PAO = 13;</code>
+     */
+    public static final int e_history_action_gang_hu_GABNG_PAO_VALUE = 13;
+    /**
+     * <code>e_history_action_gang_hu_FANG_PAO = 14;</code>
+     */
+    public static final int e_history_action_gang_hu_FANG_PAO_VALUE = 14;
 
 
     public final int getNumber() { return value; }
 
     public static e_history_action_type valueOf(int value) {
       switch (value) {
+        case -1: return e_history_action_gang_null;
+        case 0: return e_history_action_gang_skip;
+        case 1: return e_history_action_gang_chupai;
+        case 2: return e_history_action_gang_mopai;
         case 3: return e_history_action_gang_chi;
         case 4: return e_history_action_peng;
         case 5: return e_history_action_gang_dian;
         case 6: return e_history_action_gang_wang;
         case 7: return e_history_action_gang_an;
+        case 8: return e_history_action_gang_ting_card;
         case 9: return e_history_action_gang_hu;
+        case 10: return e_history_action_gang_QIANG_GANG;
+        case 11: return e_history_action_gang_HU_ZIMO;
+        case 12: return e_history_action_gang_hu_DIAN_GANG;
+        case 13: return e_history_action_gang_hu_GABNG_PAO;
+        case 14: return e_history_action_gang_hu_FANG_PAO;
         default: return null;
       }
     }
@@ -7679,63 +7769,9 @@ public final class GameGuanyunProtocol {
      */
     int getActivePos();
 
-    // optional int32 left_card_num = 6;
+    // optional int32 circle_idx = 6;
     /**
-     * <code>optional int32 left_card_num = 6;</code>
-     *
-     * <pre>
-     *余下牌的数量
-     * </pre>
-     */
-    boolean hasLeftCardNum();
-    /**
-     * <code>optional int32 left_card_num = 6;</code>
-     *
-     * <pre>
-     *余下牌的数量
-     * </pre>
-     */
-    int getLeftCardNum();
-
-    // optional int32 last_out_card_pos = 7;
-    /**
-     * <code>optional int32 last_out_card_pos = 7;</code>
-     *
-     * <pre>
-     *最后出牌的位置
-     * </pre>
-     */
-    boolean hasLastOutCardPos();
-    /**
-     * <code>optional int32 last_out_card_pos = 7;</code>
-     *
-     * <pre>
-     *最后出牌的位置
-     * </pre>
-     */
-    int getLastOutCardPos();
-
-    // optional int32 last_out_card = 8;
-    /**
-     * <code>optional int32 last_out_card = 8;</code>
-     *
-     * <pre>
-     *最后出的牌
-     * </pre>
-     */
-    boolean hasLastOutCard();
-    /**
-     * <code>optional int32 last_out_card = 8;</code>
-     *
-     * <pre>
-     *最后出的牌
-     * </pre>
-     */
-    int getLastOutCard();
-
-    // optional int32 circle_idx = 9;
-    /**
-     * <code>optional int32 circle_idx = 9;</code>
+     * <code>optional int32 circle_idx = 6;</code>
      *
      * <pre>
      *当前的圈数
@@ -7743,7 +7779,7 @@ public final class GameGuanyunProtocol {
      */
     boolean hasCircleIdx();
     /**
-     * <code>optional int32 circle_idx = 9;</code>
+     * <code>optional int32 circle_idx = 6;</code>
      *
      * <pre>
      *当前的圈数
@@ -7751,9 +7787,9 @@ public final class GameGuanyunProtocol {
      */
     int getCircleIdx();
 
-    // repeated int32 dice_list = 10;
+    // repeated int32 dice_list = 7;
     /**
-     * <code>repeated int32 dice_list = 10;</code>
+     * <code>repeated int32 dice_list = 7;</code>
      *
      * <pre>
      *当前玩家的骰子的值
@@ -7761,7 +7797,7 @@ public final class GameGuanyunProtocol {
      */
     java.util.List<java.lang.Integer> getDiceListList();
     /**
-     * <code>repeated int32 dice_list = 10;</code>
+     * <code>repeated int32 dice_list = 7;</code>
      *
      * <pre>
      *当前玩家的骰子的值
@@ -7769,13 +7805,84 @@ public final class GameGuanyunProtocol {
      */
     int getDiceListCount();
     /**
-     * <code>repeated int32 dice_list = 10;</code>
+     * <code>repeated int32 dice_list = 7;</code>
      *
      * <pre>
      *当前玩家的骰子的值
      * </pre>
      */
     int getDiceList(int index);
+
+    // optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+     *
+     * <pre>
+     *最后一个动作
+     * </pre>
+     */
+    boolean hasHistoryActionInfo();
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+     *
+     * <pre>
+     *最后一个动作
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHistoryActionInfo();
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+     *
+     * <pre>
+     *最后一个动作
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHistoryActionInfoOrBuilder();
+
+    // repeated .game_guanyuan_protocols.msg_action_type action_types = 9;
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+     *
+     * <pre>
+     *玩家可以操作的列表
+     * </pre>
+     */
+    java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type> 
+        getActionTypesList();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+     *
+     * <pre>
+     *玩家可以操作的列表
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type getActionTypes(int index);
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+     *
+     * <pre>
+     *玩家可以操作的列表
+     * </pre>
+     */
+    int getActionTypesCount();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+     *
+     * <pre>
+     *玩家可以操作的列表
+     * </pre>
+     */
+    java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_action_typeOrBuilder> 
+        getActionTypesOrBuilderList();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+     *
+     * <pre>
+     *玩家可以操作的列表
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_action_typeOrBuilder getActionTypesOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code game_guanyuan_protocols.msg_status_gaming_info}
@@ -7878,43 +7985,49 @@ public final class GameGuanyunProtocol {
             }
             case 48: {
               bitField0_ |= 0x00000008;
-              leftCardNum_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000010;
-              lastOutCardPos_ = input.readInt32();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000020;
-              lastOutCard_ = input.readInt32();
-              break;
-            }
-            case 72: {
-              bitField0_ |= 0x00000040;
               circleIdx_ = input.readInt32();
               break;
             }
-            case 80: {
-              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+            case 56: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 diceList_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000200;
+                mutable_bitField0_ |= 0x00000040;
               }
               diceList_.add(input.readInt32());
               break;
             }
-            case 82: {
+            case 58: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
                 diceList_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000200;
+                mutable_bitField0_ |= 0x00000040;
               }
               while (input.getBytesUntilLimit() > 0) {
                 diceList_.add(input.readInt32());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 66: {
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = historyActionInfo_.toBuilder();
+              }
+              historyActionInfo_ = input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(historyActionInfo_);
+                historyActionInfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000010;
+              break;
+            }
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                actionTypes_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              actionTypes_.add(input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.PARSER, extensionRegistry));
               break;
             }
           }
@@ -7931,8 +8044,11 @@ public final class GameGuanyunProtocol {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           handHards_ = java.util.Collections.unmodifiableList(handHards_);
         }
-        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           diceList_ = java.util.Collections.unmodifiableList(diceList_);
+        }
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          actionTypes_ = java.util.Collections.unmodifiableList(actionTypes_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -8129,93 +8245,21 @@ public final class GameGuanyunProtocol {
       return activePos_;
     }
 
-    // optional int32 left_card_num = 6;
-    public static final int LEFT_CARD_NUM_FIELD_NUMBER = 6;
-    private int leftCardNum_;
-    /**
-     * <code>optional int32 left_card_num = 6;</code>
-     *
-     * <pre>
-     *余下牌的数量
-     * </pre>
-     */
-    public boolean hasLeftCardNum() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 left_card_num = 6;</code>
-     *
-     * <pre>
-     *余下牌的数量
-     * </pre>
-     */
-    public int getLeftCardNum() {
-      return leftCardNum_;
-    }
-
-    // optional int32 last_out_card_pos = 7;
-    public static final int LAST_OUT_CARD_POS_FIELD_NUMBER = 7;
-    private int lastOutCardPos_;
-    /**
-     * <code>optional int32 last_out_card_pos = 7;</code>
-     *
-     * <pre>
-     *最后出牌的位置
-     * </pre>
-     */
-    public boolean hasLastOutCardPos() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 last_out_card_pos = 7;</code>
-     *
-     * <pre>
-     *最后出牌的位置
-     * </pre>
-     */
-    public int getLastOutCardPos() {
-      return lastOutCardPos_;
-    }
-
-    // optional int32 last_out_card = 8;
-    public static final int LAST_OUT_CARD_FIELD_NUMBER = 8;
-    private int lastOutCard_;
-    /**
-     * <code>optional int32 last_out_card = 8;</code>
-     *
-     * <pre>
-     *最后出的牌
-     * </pre>
-     */
-    public boolean hasLastOutCard() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional int32 last_out_card = 8;</code>
-     *
-     * <pre>
-     *最后出的牌
-     * </pre>
-     */
-    public int getLastOutCard() {
-      return lastOutCard_;
-    }
-
-    // optional int32 circle_idx = 9;
-    public static final int CIRCLE_IDX_FIELD_NUMBER = 9;
+    // optional int32 circle_idx = 6;
+    public static final int CIRCLE_IDX_FIELD_NUMBER = 6;
     private int circleIdx_;
     /**
-     * <code>optional int32 circle_idx = 9;</code>
+     * <code>optional int32 circle_idx = 6;</code>
      *
      * <pre>
      *当前的圈数
      * </pre>
      */
     public boolean hasCircleIdx() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int32 circle_idx = 9;</code>
+     * <code>optional int32 circle_idx = 6;</code>
      *
      * <pre>
      *当前的圈数
@@ -8225,11 +8269,11 @@ public final class GameGuanyunProtocol {
       return circleIdx_;
     }
 
-    // repeated int32 dice_list = 10;
-    public static final int DICE_LIST_FIELD_NUMBER = 10;
+    // repeated int32 dice_list = 7;
+    public static final int DICE_LIST_FIELD_NUMBER = 7;
     private java.util.List<java.lang.Integer> diceList_;
     /**
-     * <code>repeated int32 dice_list = 10;</code>
+     * <code>repeated int32 dice_list = 7;</code>
      *
      * <pre>
      *当前玩家的骰子的值
@@ -8240,7 +8284,7 @@ public final class GameGuanyunProtocol {
       return diceList_;
     }
     /**
-     * <code>repeated int32 dice_list = 10;</code>
+     * <code>repeated int32 dice_list = 7;</code>
      *
      * <pre>
      *当前玩家的骰子的值
@@ -8250,7 +8294,7 @@ public final class GameGuanyunProtocol {
       return diceList_.size();
     }
     /**
-     * <code>repeated int32 dice_list = 10;</code>
+     * <code>repeated int32 dice_list = 7;</code>
      *
      * <pre>
      *当前玩家的骰子的值
@@ -8260,17 +8304,106 @@ public final class GameGuanyunProtocol {
       return diceList_.get(index);
     }
 
+    // optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;
+    public static final int HISTORY_ACTION_INFO_FIELD_NUMBER = 8;
+    private game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info historyActionInfo_;
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+     *
+     * <pre>
+     *最后一个动作
+     * </pre>
+     */
+    public boolean hasHistoryActionInfo() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+     *
+     * <pre>
+     *最后一个动作
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHistoryActionInfo() {
+      return historyActionInfo_;
+    }
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+     *
+     * <pre>
+     *最后一个动作
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHistoryActionInfoOrBuilder() {
+      return historyActionInfo_;
+    }
+
+    // repeated .game_guanyuan_protocols.msg_action_type action_types = 9;
+    public static final int ACTION_TYPES_FIELD_NUMBER = 9;
+    private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type> actionTypes_;
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+     *
+     * <pre>
+     *玩家可以操作的列表
+     * </pre>
+     */
+    public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type> getActionTypesList() {
+      return actionTypes_;
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+     *
+     * <pre>
+     *玩家可以操作的列表
+     * </pre>
+     */
+    public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_action_typeOrBuilder> 
+        getActionTypesOrBuilderList() {
+      return actionTypes_;
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+     *
+     * <pre>
+     *玩家可以操作的列表
+     * </pre>
+     */
+    public int getActionTypesCount() {
+      return actionTypes_.size();
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+     *
+     * <pre>
+     *玩家可以操作的列表
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type getActionTypes(int index) {
+      return actionTypes_.get(index);
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+     *
+     * <pre>
+     *玩家可以操作的列表
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_action_typeOrBuilder getActionTypesOrBuilder(
+        int index) {
+      return actionTypes_.get(index);
+    }
+
     private void initFields() {
       roomInfo_ = java.util.Collections.emptyList();
       myPos_ = 0;
       handHards_ = java.util.Collections.emptyList();
       hostPos_ = 0;
       activePos_ = 0;
-      leftCardNum_ = 0;
-      lastOutCardPos_ = 0;
-      lastOutCard_ = 0;
       circleIdx_ = 0;
       diceList_ = java.util.Collections.emptyList();
+      historyActionInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance();
+      actionTypes_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8300,19 +8433,16 @@ public final class GameGuanyunProtocol {
         output.writeInt32(5, activePos_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(6, leftCardNum_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(7, lastOutCardPos_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(8, lastOutCard_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(9, circleIdx_);
+        output.writeInt32(6, circleIdx_);
       }
       for (int i = 0; i < diceList_.size(); i++) {
-        output.writeInt32(10, diceList_.get(i));
+        output.writeInt32(7, diceList_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(8, historyActionInfo_);
+      }
+      for (int i = 0; i < actionTypes_.size(); i++) {
+        output.writeMessage(9, actionTypes_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -8350,19 +8480,7 @@ public final class GameGuanyunProtocol {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, leftCardNum_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, lastOutCardPos_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, lastOutCard_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, circleIdx_);
+          .computeInt32Size(6, circleIdx_);
       }
       {
         int dataSize = 0;
@@ -8372,6 +8490,14 @@ public final class GameGuanyunProtocol {
         }
         size += dataSize;
         size += 1 * getDiceListList().size();
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, historyActionInfo_);
+      }
+      for (int i = 0; i < actionTypes_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, actionTypes_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8486,6 +8612,8 @@ public final class GameGuanyunProtocol {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getRoomInfoFieldBuilder();
+          getHistoryActionInfoFieldBuilder();
+          getActionTypesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -8508,16 +8636,22 @@ public final class GameGuanyunProtocol {
         bitField0_ = (bitField0_ & ~0x00000008);
         activePos_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        leftCardNum_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        lastOutCardPos_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        lastOutCard_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
         circleIdx_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000020);
         diceList_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000040);
+        if (historyActionInfoBuilder_ == null) {
+          historyActionInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance();
+        } else {
+          historyActionInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000080);
+        if (actionTypesBuilder_ == null) {
+          actionTypes_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+        } else {
+          actionTypesBuilder_.clear();
+        }
         return this;
       }
 
@@ -8575,24 +8709,29 @@ public final class GameGuanyunProtocol {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.leftCardNum_ = leftCardNum_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.lastOutCardPos_ = lastOutCardPos_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.lastOutCard_ = lastOutCard_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000040;
-        }
         result.circleIdx_ = circleIdx_;
-        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
           diceList_ = java.util.Collections.unmodifiableList(diceList_);
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000040);
         }
         result.diceList_ = diceList_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (historyActionInfoBuilder_ == null) {
+          result.historyActionInfo_ = historyActionInfo_;
+        } else {
+          result.historyActionInfo_ = historyActionInfoBuilder_.build();
+        }
+        if (actionTypesBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            actionTypes_ = java.util.Collections.unmodifiableList(actionTypes_);
+            bitField0_ = (bitField0_ & ~0x00000100);
+          }
+          result.actionTypes_ = actionTypes_;
+        } else {
+          result.actionTypes_ = actionTypesBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8654,27 +8793,47 @@ public final class GameGuanyunProtocol {
         if (other.hasActivePos()) {
           setActivePos(other.getActivePos());
         }
-        if (other.hasLeftCardNum()) {
-          setLeftCardNum(other.getLeftCardNum());
-        }
-        if (other.hasLastOutCardPos()) {
-          setLastOutCardPos(other.getLastOutCardPos());
-        }
-        if (other.hasLastOutCard()) {
-          setLastOutCard(other.getLastOutCard());
-        }
         if (other.hasCircleIdx()) {
           setCircleIdx(other.getCircleIdx());
         }
         if (!other.diceList_.isEmpty()) {
           if (diceList_.isEmpty()) {
             diceList_ = other.diceList_;
-            bitField0_ = (bitField0_ & ~0x00000200);
+            bitField0_ = (bitField0_ & ~0x00000040);
           } else {
             ensureDiceListIsMutable();
             diceList_.addAll(other.diceList_);
           }
           onChanged();
+        }
+        if (other.hasHistoryActionInfo()) {
+          mergeHistoryActionInfo(other.getHistoryActionInfo());
+        }
+        if (actionTypesBuilder_ == null) {
+          if (!other.actionTypes_.isEmpty()) {
+            if (actionTypes_.isEmpty()) {
+              actionTypes_ = other.actionTypes_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+            } else {
+              ensureActionTypesIsMutable();
+              actionTypes_.addAll(other.actionTypes_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.actionTypes_.isEmpty()) {
+            if (actionTypesBuilder_.isEmpty()) {
+              actionTypesBuilder_.dispose();
+              actionTypesBuilder_ = null;
+              actionTypes_ = other.actionTypes_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+              actionTypesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getActionTypesFieldBuilder() : null;
+            } else {
+              actionTypesBuilder_.addAllMessages(other.actionTypes_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -9256,167 +9415,20 @@ public final class GameGuanyunProtocol {
         return this;
       }
 
-      // optional int32 left_card_num = 6;
-      private int leftCardNum_ ;
-      /**
-       * <code>optional int32 left_card_num = 6;</code>
-       *
-       * <pre>
-       *余下牌的数量
-       * </pre>
-       */
-      public boolean hasLeftCardNum() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional int32 left_card_num = 6;</code>
-       *
-       * <pre>
-       *余下牌的数量
-       * </pre>
-       */
-      public int getLeftCardNum() {
-        return leftCardNum_;
-      }
-      /**
-       * <code>optional int32 left_card_num = 6;</code>
-       *
-       * <pre>
-       *余下牌的数量
-       * </pre>
-       */
-      public Builder setLeftCardNum(int value) {
-        bitField0_ |= 0x00000020;
-        leftCardNum_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 left_card_num = 6;</code>
-       *
-       * <pre>
-       *余下牌的数量
-       * </pre>
-       */
-      public Builder clearLeftCardNum() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        leftCardNum_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 last_out_card_pos = 7;
-      private int lastOutCardPos_ ;
-      /**
-       * <code>optional int32 last_out_card_pos = 7;</code>
-       *
-       * <pre>
-       *最后出牌的位置
-       * </pre>
-       */
-      public boolean hasLastOutCardPos() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int32 last_out_card_pos = 7;</code>
-       *
-       * <pre>
-       *最后出牌的位置
-       * </pre>
-       */
-      public int getLastOutCardPos() {
-        return lastOutCardPos_;
-      }
-      /**
-       * <code>optional int32 last_out_card_pos = 7;</code>
-       *
-       * <pre>
-       *最后出牌的位置
-       * </pre>
-       */
-      public Builder setLastOutCardPos(int value) {
-        bitField0_ |= 0x00000040;
-        lastOutCardPos_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 last_out_card_pos = 7;</code>
-       *
-       * <pre>
-       *最后出牌的位置
-       * </pre>
-       */
-      public Builder clearLastOutCardPos() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        lastOutCardPos_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 last_out_card = 8;
-      private int lastOutCard_ ;
-      /**
-       * <code>optional int32 last_out_card = 8;</code>
-       *
-       * <pre>
-       *最后出的牌
-       * </pre>
-       */
-      public boolean hasLastOutCard() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional int32 last_out_card = 8;</code>
-       *
-       * <pre>
-       *最后出的牌
-       * </pre>
-       */
-      public int getLastOutCard() {
-        return lastOutCard_;
-      }
-      /**
-       * <code>optional int32 last_out_card = 8;</code>
-       *
-       * <pre>
-       *最后出的牌
-       * </pre>
-       */
-      public Builder setLastOutCard(int value) {
-        bitField0_ |= 0x00000080;
-        lastOutCard_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 last_out_card = 8;</code>
-       *
-       * <pre>
-       *最后出的牌
-       * </pre>
-       */
-      public Builder clearLastOutCard() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        lastOutCard_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 circle_idx = 9;
+      // optional int32 circle_idx = 6;
       private int circleIdx_ ;
       /**
-       * <code>optional int32 circle_idx = 9;</code>
+       * <code>optional int32 circle_idx = 6;</code>
        *
        * <pre>
        *当前的圈数
        * </pre>
        */
       public boolean hasCircleIdx() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional int32 circle_idx = 9;</code>
+       * <code>optional int32 circle_idx = 6;</code>
        *
        * <pre>
        *当前的圈数
@@ -9426,42 +9438,42 @@ public final class GameGuanyunProtocol {
         return circleIdx_;
       }
       /**
-       * <code>optional int32 circle_idx = 9;</code>
+       * <code>optional int32 circle_idx = 6;</code>
        *
        * <pre>
        *当前的圈数
        * </pre>
        */
       public Builder setCircleIdx(int value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000020;
         circleIdx_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 circle_idx = 9;</code>
+       * <code>optional int32 circle_idx = 6;</code>
        *
        * <pre>
        *当前的圈数
        * </pre>
        */
       public Builder clearCircleIdx() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000020);
         circleIdx_ = 0;
         onChanged();
         return this;
       }
 
-      // repeated int32 dice_list = 10;
+      // repeated int32 dice_list = 7;
       private java.util.List<java.lang.Integer> diceList_ = java.util.Collections.emptyList();
       private void ensureDiceListIsMutable() {
-        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           diceList_ = new java.util.ArrayList<java.lang.Integer>(diceList_);
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000040;
          }
       }
       /**
-       * <code>repeated int32 dice_list = 10;</code>
+       * <code>repeated int32 dice_list = 7;</code>
        *
        * <pre>
        *当前玩家的骰子的值
@@ -9472,7 +9484,7 @@ public final class GameGuanyunProtocol {
         return java.util.Collections.unmodifiableList(diceList_);
       }
       /**
-       * <code>repeated int32 dice_list = 10;</code>
+       * <code>repeated int32 dice_list = 7;</code>
        *
        * <pre>
        *当前玩家的骰子的值
@@ -9482,7 +9494,7 @@ public final class GameGuanyunProtocol {
         return diceList_.size();
       }
       /**
-       * <code>repeated int32 dice_list = 10;</code>
+       * <code>repeated int32 dice_list = 7;</code>
        *
        * <pre>
        *当前玩家的骰子的值
@@ -9492,7 +9504,7 @@ public final class GameGuanyunProtocol {
         return diceList_.get(index);
       }
       /**
-       * <code>repeated int32 dice_list = 10;</code>
+       * <code>repeated int32 dice_list = 7;</code>
        *
        * <pre>
        *当前玩家的骰子的值
@@ -9506,7 +9518,7 @@ public final class GameGuanyunProtocol {
         return this;
       }
       /**
-       * <code>repeated int32 dice_list = 10;</code>
+       * <code>repeated int32 dice_list = 7;</code>
        *
        * <pre>
        *当前玩家的骰子的值
@@ -9519,7 +9531,7 @@ public final class GameGuanyunProtocol {
         return this;
       }
       /**
-       * <code>repeated int32 dice_list = 10;</code>
+       * <code>repeated int32 dice_list = 7;</code>
        *
        * <pre>
        *当前玩家的骰子的值
@@ -9533,7 +9545,7 @@ public final class GameGuanyunProtocol {
         return this;
       }
       /**
-       * <code>repeated int32 dice_list = 10;</code>
+       * <code>repeated int32 dice_list = 7;</code>
        *
        * <pre>
        *当前玩家的骰子的值
@@ -9541,9 +9553,474 @@ public final class GameGuanyunProtocol {
        */
       public Builder clearDiceList() {
         diceList_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
+      }
+
+      // optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;
+      private game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info historyActionInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> historyActionInfoBuilder_;
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+       *
+       * <pre>
+       *最后一个动作
+       * </pre>
+       */
+      public boolean hasHistoryActionInfo() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+       *
+       * <pre>
+       *最后一个动作
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHistoryActionInfo() {
+        if (historyActionInfoBuilder_ == null) {
+          return historyActionInfo_;
+        } else {
+          return historyActionInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+       *
+       * <pre>
+       *最后一个动作
+       * </pre>
+       */
+      public Builder setHistoryActionInfo(game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info value) {
+        if (historyActionInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          historyActionInfo_ = value;
+          onChanged();
+        } else {
+          historyActionInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+       *
+       * <pre>
+       *最后一个动作
+       * </pre>
+       */
+      public Builder setHistoryActionInfo(
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder builderForValue) {
+        if (historyActionInfoBuilder_ == null) {
+          historyActionInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          historyActionInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+       *
+       * <pre>
+       *最后一个动作
+       * </pre>
+       */
+      public Builder mergeHistoryActionInfo(game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info value) {
+        if (historyActionInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080) &&
+              historyActionInfo_ != game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance()) {
+            historyActionInfo_ =
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.newBuilder(historyActionInfo_).mergeFrom(value).buildPartial();
+          } else {
+            historyActionInfo_ = value;
+          }
+          onChanged();
+        } else {
+          historyActionInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+       *
+       * <pre>
+       *最后一个动作
+       * </pre>
+       */
+      public Builder clearHistoryActionInfo() {
+        if (historyActionInfoBuilder_ == null) {
+          historyActionInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance();
+          onChanged();
+        } else {
+          historyActionInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+       *
+       * <pre>
+       *最后一个动作
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder getHistoryActionInfoBuilder() {
+        bitField0_ |= 0x00000080;
+        onChanged();
+        return getHistoryActionInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+       *
+       * <pre>
+       *最后一个动作
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHistoryActionInfoOrBuilder() {
+        if (historyActionInfoBuilder_ != null) {
+          return historyActionInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return historyActionInfo_;
+        }
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 8;</code>
+       *
+       * <pre>
+       *最后一个动作
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> 
+          getHistoryActionInfoFieldBuilder() {
+        if (historyActionInfoBuilder_ == null) {
+          historyActionInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder>(
+                  historyActionInfo_,
+                  getParentForChildren(),
+                  isClean());
+          historyActionInfo_ = null;
+        }
+        return historyActionInfoBuilder_;
+      }
+
+      // repeated .game_guanyuan_protocols.msg_action_type action_types = 9;
+      private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type> actionTypes_ =
+        java.util.Collections.emptyList();
+      private void ensureActionTypesIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          actionTypes_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type>(actionTypes_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_typeOrBuilder> actionTypesBuilder_;
+
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type> getActionTypesList() {
+        if (actionTypesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(actionTypes_);
+        } else {
+          return actionTypesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public int getActionTypesCount() {
+        if (actionTypesBuilder_ == null) {
+          return actionTypes_.size();
+        } else {
+          return actionTypesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type getActionTypes(int index) {
+        if (actionTypesBuilder_ == null) {
+          return actionTypes_.get(index);
+        } else {
+          return actionTypesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public Builder setActionTypes(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type value) {
+        if (actionTypesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureActionTypesIsMutable();
+          actionTypes_.set(index, value);
+          onChanged();
+        } else {
+          actionTypesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public Builder setActionTypes(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.Builder builderForValue) {
+        if (actionTypesBuilder_ == null) {
+          ensureActionTypesIsMutable();
+          actionTypes_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          actionTypesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public Builder addActionTypes(game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type value) {
+        if (actionTypesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureActionTypesIsMutable();
+          actionTypes_.add(value);
+          onChanged();
+        } else {
+          actionTypesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public Builder addActionTypes(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type value) {
+        if (actionTypesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureActionTypesIsMutable();
+          actionTypes_.add(index, value);
+          onChanged();
+        } else {
+          actionTypesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public Builder addActionTypes(
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.Builder builderForValue) {
+        if (actionTypesBuilder_ == null) {
+          ensureActionTypesIsMutable();
+          actionTypes_.add(builderForValue.build());
+          onChanged();
+        } else {
+          actionTypesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public Builder addActionTypes(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.Builder builderForValue) {
+        if (actionTypesBuilder_ == null) {
+          ensureActionTypesIsMutable();
+          actionTypes_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          actionTypesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public Builder addAllActionTypes(
+          java.lang.Iterable<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type> values) {
+        if (actionTypesBuilder_ == null) {
+          ensureActionTypesIsMutable();
+          super.addAll(values, actionTypes_);
+          onChanged();
+        } else {
+          actionTypesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public Builder clearActionTypes() {
+        if (actionTypesBuilder_ == null) {
+          actionTypes_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+          onChanged();
+        } else {
+          actionTypesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public Builder removeActionTypes(int index) {
+        if (actionTypesBuilder_ == null) {
+          ensureActionTypesIsMutable();
+          actionTypes_.remove(index);
+          onChanged();
+        } else {
+          actionTypesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.Builder getActionTypesBuilder(
+          int index) {
+        return getActionTypesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_action_typeOrBuilder getActionTypesOrBuilder(
+          int index) {
+        if (actionTypesBuilder_ == null) {
+          return actionTypes_.get(index);  } else {
+          return actionTypesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_action_typeOrBuilder> 
+           getActionTypesOrBuilderList() {
+        if (actionTypesBuilder_ != null) {
+          return actionTypesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(actionTypes_);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.Builder addActionTypesBuilder() {
+        return getActionTypesFieldBuilder().addBuilder(
+            game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.Builder addActionTypesBuilder(
+          int index) {
+        return getActionTypesFieldBuilder().addBuilder(
+            index, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_action_type action_types = 9;</code>
+       *
+       * <pre>
+       *玩家可以操作的列表
+       * </pre>
+       */
+      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.Builder> 
+           getActionTypesBuilderList() {
+        return getActionTypesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_typeOrBuilder> 
+          getActionTypesFieldBuilder() {
+        if (actionTypesBuilder_ == null) {
+          actionTypesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_type.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_action_typeOrBuilder>(
+                  actionTypes_,
+                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  getParentForChildren(),
+                  isClean());
+          actionTypes_ = null;
+        }
+        return actionTypesBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:game_guanyuan_protocols.msg_status_gaming_info)
@@ -10907,9 +11384,27 @@ public final class GameGuanyunProtocol {
      */
     int getCard();
 
-    // optional int32 linked_pos = 2;
+    // optional int32 seat_pos = 2;
     /**
-     * <code>optional int32 linked_pos = 2;</code>
+     * <code>optional int32 seat_pos = 2;</code>
+     *
+     * <pre>
+     *发起此操作的玩家
+     * </pre>
+     */
+    boolean hasSeatPos();
+    /**
+     * <code>optional int32 seat_pos = 2;</code>
+     *
+     * <pre>
+     *发起此操作的玩家
+     * </pre>
+     */
+    int getSeatPos();
+
+    // optional int32 linked_pos = 3;
+    /**
+     * <code>optional int32 linked_pos = 3;</code>
      *
      * <pre>
      *与此值相关的位置
@@ -10917,7 +11412,7 @@ public final class GameGuanyunProtocol {
      */
     boolean hasLinkedPos();
     /**
-     * <code>optional int32 linked_pos = 2;</code>
+     * <code>optional int32 linked_pos = 3;</code>
      *
      * <pre>
      *与此值相关的位置
@@ -10925,9 +11420,9 @@ public final class GameGuanyunProtocol {
      */
     int getLinkedPos();
 
-    // optional .game_guanyuan_protocols.e_history_action_type action_type = 3;
+    // optional .game_guanyuan_protocols.e_history_action_type action_type = 4;
     /**
-     * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 3;</code>
+     * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 4;</code>
      *
      * <pre>
      *当前动作的类型
@@ -10935,7 +11430,7 @@ public final class GameGuanyunProtocol {
      */
     boolean hasActionType();
     /**
-     * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 3;</code>
+     * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 4;</code>
      *
      * <pre>
      *当前动作的类型
@@ -10943,9 +11438,9 @@ public final class GameGuanyunProtocol {
      */
     game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type getActionType();
 
-    // repeated int32 linkded_cards = 4;
+    // repeated int32 linkded_cards = 5;
     /**
-     * <code>repeated int32 linkded_cards = 4;</code>
+     * <code>repeated int32 linkded_cards = 5;</code>
      *
      * <pre>
      *当为吃时，此时有值
@@ -10953,7 +11448,7 @@ public final class GameGuanyunProtocol {
      */
     java.util.List<java.lang.Integer> getLinkdedCardsList();
     /**
-     * <code>repeated int32 linkded_cards = 4;</code>
+     * <code>repeated int32 linkded_cards = 5;</code>
      *
      * <pre>
      *当为吃时，此时有值
@@ -10961,7 +11456,7 @@ public final class GameGuanyunProtocol {
      */
     int getLinkdedCardsCount();
     /**
-     * <code>repeated int32 linkded_cards = 4;</code>
+     * <code>repeated int32 linkded_cards = 5;</code>
      *
      * <pre>
      *当为吃时，此时有值
@@ -11027,34 +11522,39 @@ public final class GameGuanyunProtocol {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              linkedPos_ = input.readInt32();
+              seatPos_ = input.readInt32();
               break;
             }
             case 24: {
+              bitField0_ |= 0x00000004;
+              linkedPos_ = input.readInt32();
+              break;
+            }
+            case 32: {
               int rawValue = input.readEnum();
               game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type value = game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
+                unknownFields.mergeVarintField(4, rawValue);
               } else {
-                bitField0_ |= 0x00000004;
+                bitField0_ |= 0x00000008;
                 actionType_ = value;
               }
               break;
             }
-            case 32: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+            case 40: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 linkdedCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000010;
               }
               linkdedCards_.add(input.readInt32());
               break;
             }
-            case 34: {
+            case 42: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
                 linkdedCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000010;
               }
               while (input.getBytesUntilLimit() > 0) {
                 linkdedCards_.add(input.readInt32());
@@ -11070,7 +11570,7 @@ public final class GameGuanyunProtocol {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           linkdedCards_ = java.util.Collections.unmodifiableList(linkdedCards_);
         }
         this.unknownFields = unknownFields.build();
@@ -11129,21 +11629,45 @@ public final class GameGuanyunProtocol {
       return card_;
     }
 
-    // optional int32 linked_pos = 2;
-    public static final int LINKED_POS_FIELD_NUMBER = 2;
+    // optional int32 seat_pos = 2;
+    public static final int SEAT_POS_FIELD_NUMBER = 2;
+    private int seatPos_;
+    /**
+     * <code>optional int32 seat_pos = 2;</code>
+     *
+     * <pre>
+     *发起此操作的玩家
+     * </pre>
+     */
+    public boolean hasSeatPos() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 seat_pos = 2;</code>
+     *
+     * <pre>
+     *发起此操作的玩家
+     * </pre>
+     */
+    public int getSeatPos() {
+      return seatPos_;
+    }
+
+    // optional int32 linked_pos = 3;
+    public static final int LINKED_POS_FIELD_NUMBER = 3;
     private int linkedPos_;
     /**
-     * <code>optional int32 linked_pos = 2;</code>
+     * <code>optional int32 linked_pos = 3;</code>
      *
      * <pre>
      *与此值相关的位置
      * </pre>
      */
     public boolean hasLinkedPos() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 linked_pos = 2;</code>
+     * <code>optional int32 linked_pos = 3;</code>
      *
      * <pre>
      *与此值相关的位置
@@ -11153,21 +11677,21 @@ public final class GameGuanyunProtocol {
       return linkedPos_;
     }
 
-    // optional .game_guanyuan_protocols.e_history_action_type action_type = 3;
-    public static final int ACTION_TYPE_FIELD_NUMBER = 3;
+    // optional .game_guanyuan_protocols.e_history_action_type action_type = 4;
+    public static final int ACTION_TYPE_FIELD_NUMBER = 4;
     private game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type actionType_;
     /**
-     * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 3;</code>
+     * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 4;</code>
      *
      * <pre>
      *当前动作的类型
      * </pre>
      */
     public boolean hasActionType() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 3;</code>
+     * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 4;</code>
      *
      * <pre>
      *当前动作的类型
@@ -11177,11 +11701,11 @@ public final class GameGuanyunProtocol {
       return actionType_;
     }
 
-    // repeated int32 linkded_cards = 4;
-    public static final int LINKDED_CARDS_FIELD_NUMBER = 4;
+    // repeated int32 linkded_cards = 5;
+    public static final int LINKDED_CARDS_FIELD_NUMBER = 5;
     private java.util.List<java.lang.Integer> linkdedCards_;
     /**
-     * <code>repeated int32 linkded_cards = 4;</code>
+     * <code>repeated int32 linkded_cards = 5;</code>
      *
      * <pre>
      *当为吃时，此时有值
@@ -11192,7 +11716,7 @@ public final class GameGuanyunProtocol {
       return linkdedCards_;
     }
     /**
-     * <code>repeated int32 linkded_cards = 4;</code>
+     * <code>repeated int32 linkded_cards = 5;</code>
      *
      * <pre>
      *当为吃时，此时有值
@@ -11202,7 +11726,7 @@ public final class GameGuanyunProtocol {
       return linkdedCards_.size();
     }
     /**
-     * <code>repeated int32 linkded_cards = 4;</code>
+     * <code>repeated int32 linkded_cards = 5;</code>
      *
      * <pre>
      *当为吃时，此时有值
@@ -11214,8 +11738,9 @@ public final class GameGuanyunProtocol {
 
     private void initFields() {
       card_ = 0;
+      seatPos_ = 0;
       linkedPos_ = 0;
-      actionType_ = game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type.e_history_action_gang_chi;
+      actionType_ = game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type.e_history_action_gang_null;
       linkdedCards_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -11234,13 +11759,16 @@ public final class GameGuanyunProtocol {
         output.writeInt32(1, card_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, linkedPos_);
+        output.writeInt32(2, seatPos_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, actionType_.getNumber());
+        output.writeInt32(3, linkedPos_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(4, actionType_.getNumber());
       }
       for (int i = 0; i < linkdedCards_.size(); i++) {
-        output.writeInt32(4, linkdedCards_.get(i));
+        output.writeInt32(5, linkdedCards_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -11257,11 +11785,15 @@ public final class GameGuanyunProtocol {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, linkedPos_);
+          .computeInt32Size(2, seatPos_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, actionType_.getNumber());
+          .computeInt32Size(3, linkedPos_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, actionType_.getNumber());
       }
       {
         int dataSize = 0;
@@ -11390,12 +11922,14 @@ public final class GameGuanyunProtocol {
         super.clear();
         card_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        linkedPos_ = 0;
+        seatPos_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        actionType_ = game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type.e_history_action_gang_chi;
+        linkedPos_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        linkdedCards_ = java.util.Collections.emptyList();
+        actionType_ = game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type.e_history_action_gang_null;
         bitField0_ = (bitField0_ & ~0x00000008);
+        linkdedCards_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -11431,14 +11965,18 @@ public final class GameGuanyunProtocol {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.linkedPos_ = linkedPos_;
+        result.seatPos_ = seatPos_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
+        result.linkedPos_ = linkedPos_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
         result.actionType_ = actionType_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
           linkdedCards_ = java.util.Collections.unmodifiableList(linkdedCards_);
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.linkdedCards_ = linkdedCards_;
         result.bitField0_ = to_bitField0_;
@@ -11460,6 +11998,9 @@ public final class GameGuanyunProtocol {
         if (other.hasCard()) {
           setCard(other.getCard());
         }
+        if (other.hasSeatPos()) {
+          setSeatPos(other.getSeatPos());
+        }
         if (other.hasLinkedPos()) {
           setLinkedPos(other.getLinkedPos());
         }
@@ -11469,7 +12010,7 @@ public final class GameGuanyunProtocol {
         if (!other.linkdedCards_.isEmpty()) {
           if (linkdedCards_.isEmpty()) {
             linkdedCards_ = other.linkdedCards_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             ensureLinkdedCardsIsMutable();
             linkdedCards_.addAll(other.linkdedCards_);
@@ -11552,20 +12093,69 @@ public final class GameGuanyunProtocol {
         return this;
       }
 
-      // optional int32 linked_pos = 2;
+      // optional int32 seat_pos = 2;
+      private int seatPos_ ;
+      /**
+       * <code>optional int32 seat_pos = 2;</code>
+       *
+       * <pre>
+       *发起此操作的玩家
+       * </pre>
+       */
+      public boolean hasSeatPos() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 seat_pos = 2;</code>
+       *
+       * <pre>
+       *发起此操作的玩家
+       * </pre>
+       */
+      public int getSeatPos() {
+        return seatPos_;
+      }
+      /**
+       * <code>optional int32 seat_pos = 2;</code>
+       *
+       * <pre>
+       *发起此操作的玩家
+       * </pre>
+       */
+      public Builder setSeatPos(int value) {
+        bitField0_ |= 0x00000002;
+        seatPos_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 seat_pos = 2;</code>
+       *
+       * <pre>
+       *发起此操作的玩家
+       * </pre>
+       */
+      public Builder clearSeatPos() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        seatPos_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 linked_pos = 3;
       private int linkedPos_ ;
       /**
-       * <code>optional int32 linked_pos = 2;</code>
+       * <code>optional int32 linked_pos = 3;</code>
        *
        * <pre>
        *与此值相关的位置
        * </pre>
        */
       public boolean hasLinkedPos() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 linked_pos = 2;</code>
+       * <code>optional int32 linked_pos = 3;</code>
        *
        * <pre>
        *与此值相关的位置
@@ -11575,46 +12165,46 @@ public final class GameGuanyunProtocol {
         return linkedPos_;
       }
       /**
-       * <code>optional int32 linked_pos = 2;</code>
+       * <code>optional int32 linked_pos = 3;</code>
        *
        * <pre>
        *与此值相关的位置
        * </pre>
        */
       public Builder setLinkedPos(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         linkedPos_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 linked_pos = 2;</code>
+       * <code>optional int32 linked_pos = 3;</code>
        *
        * <pre>
        *与此值相关的位置
        * </pre>
        */
       public Builder clearLinkedPos() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         linkedPos_ = 0;
         onChanged();
         return this;
       }
 
-      // optional .game_guanyuan_protocols.e_history_action_type action_type = 3;
-      private game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type actionType_ = game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type.e_history_action_gang_chi;
+      // optional .game_guanyuan_protocols.e_history_action_type action_type = 4;
+      private game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type actionType_ = game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type.e_history_action_gang_null;
       /**
-       * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 3;</code>
+       * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 4;</code>
        *
        * <pre>
        *当前动作的类型
        * </pre>
        */
       public boolean hasActionType() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 3;</code>
+       * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 4;</code>
        *
        * <pre>
        *当前动作的类型
@@ -11624,7 +12214,7 @@ public final class GameGuanyunProtocol {
         return actionType_;
       }
       /**
-       * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 3;</code>
+       * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 4;</code>
        *
        * <pre>
        *当前动作的类型
@@ -11634,35 +12224,35 @@ public final class GameGuanyunProtocol {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         actionType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 3;</code>
+       * <code>optional .game_guanyuan_protocols.e_history_action_type action_type = 4;</code>
        *
        * <pre>
        *当前动作的类型
        * </pre>
        */
       public Builder clearActionType() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        actionType_ = game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type.e_history_action_gang_chi;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        actionType_ = game_guanyuan_protocols.GameGuanyunProtocol.e_history_action_type.e_history_action_gang_null;
         onChanged();
         return this;
       }
 
-      // repeated int32 linkded_cards = 4;
+      // repeated int32 linkded_cards = 5;
       private java.util.List<java.lang.Integer> linkdedCards_ = java.util.Collections.emptyList();
       private void ensureLinkdedCardsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           linkdedCards_ = new java.util.ArrayList<java.lang.Integer>(linkdedCards_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000010;
          }
       }
       /**
-       * <code>repeated int32 linkded_cards = 4;</code>
+       * <code>repeated int32 linkded_cards = 5;</code>
        *
        * <pre>
        *当为吃时，此时有值
@@ -11673,7 +12263,7 @@ public final class GameGuanyunProtocol {
         return java.util.Collections.unmodifiableList(linkdedCards_);
       }
       /**
-       * <code>repeated int32 linkded_cards = 4;</code>
+       * <code>repeated int32 linkded_cards = 5;</code>
        *
        * <pre>
        *当为吃时，此时有值
@@ -11683,7 +12273,7 @@ public final class GameGuanyunProtocol {
         return linkdedCards_.size();
       }
       /**
-       * <code>repeated int32 linkded_cards = 4;</code>
+       * <code>repeated int32 linkded_cards = 5;</code>
        *
        * <pre>
        *当为吃时，此时有值
@@ -11693,7 +12283,7 @@ public final class GameGuanyunProtocol {
         return linkdedCards_.get(index);
       }
       /**
-       * <code>repeated int32 linkded_cards = 4;</code>
+       * <code>repeated int32 linkded_cards = 5;</code>
        *
        * <pre>
        *当为吃时，此时有值
@@ -11707,7 +12297,7 @@ public final class GameGuanyunProtocol {
         return this;
       }
       /**
-       * <code>repeated int32 linkded_cards = 4;</code>
+       * <code>repeated int32 linkded_cards = 5;</code>
        *
        * <pre>
        *当为吃时，此时有值
@@ -11720,7 +12310,7 @@ public final class GameGuanyunProtocol {
         return this;
       }
       /**
-       * <code>repeated int32 linkded_cards = 4;</code>
+       * <code>repeated int32 linkded_cards = 5;</code>
        *
        * <pre>
        *当为吃时，此时有值
@@ -11734,7 +12324,7 @@ public final class GameGuanyunProtocol {
         return this;
       }
       /**
-       * <code>repeated int32 linkded_cards = 4;</code>
+       * <code>repeated int32 linkded_cards = 5;</code>
        *
        * <pre>
        *当为吃时，此时有值
@@ -11742,7 +12332,7 @@ public final class GameGuanyunProtocol {
        */
       public Builder clearLinkdedCards() {
         linkdedCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
@@ -13778,3403 +14368,52 @@ public final class GameGuanyunProtocol {
     // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.packetl2c_ready_result)
   }
 
-  public interface msg_circle_over_infoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-
-    // optional int32 type = 1;
-    /**
-     * <code>optional int32 type = 1;</code>
-     *
-     * <pre>
-     *类型：0－流局；1-胡；2-自摸；
-     * </pre>
-     */
-    boolean hasType();
-    /**
-     * <code>optional int32 type = 1;</code>
-     *
-     * <pre>
-     *类型：0－流局；1-胡；2-自摸；
-     * </pre>
-     */
-    int getType();
-
-    // optional int32 hu_pos = 2;
-    /**
-     * <code>optional int32 hu_pos = 2;</code>
-     *
-     * <pre>
-     *胡牌位置
-     * </pre>
-     */
-    boolean hasHuPos();
-    /**
-     * <code>optional int32 hu_pos = 2;</code>
-     *
-     * <pre>
-     *胡牌位置
-     * </pre>
-     */
-    int getHuPos();
-
-    // optional int32 last_pos = 3;
-    /**
-     * <code>optional int32 last_pos = 3;</code>
-     *
-     * <pre>
-     *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-     * </pre>
-     */
-    boolean hasLastPos();
-    /**
-     * <code>optional int32 last_pos = 3;</code>
-     *
-     * <pre>
-     *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-     * </pre>
-     */
-    int getLastPos();
-
-    // optional int32 circle_num = 4;
-    /**
-     * <code>optional int32 circle_num = 4;</code>
-     *
-     * <pre>
-     *第几圈
-     * </pre>
-     */
-    boolean hasCircleNum();
-    /**
-     * <code>optional int32 circle_num = 4;</code>
-     *
-     * <pre>
-     *第几圈
-     * </pre>
-     */
-    int getCircleNum();
-
-    // optional int32 hu_card = 5;
-    /**
-     * <code>optional int32 hu_card = 5;</code>
-     *
-     * <pre>
-     *默认为0；有值时代表胡的哪张牌
-     * </pre>
-     */
-    boolean hasHuCard();
-    /**
-     * <code>optional int32 hu_card = 5;</code>
-     *
-     * <pre>
-     *默认为0；有值时代表胡的哪张牌
-     * </pre>
-     */
-    int getHuCard();
-
-    // optional uint64 next_circle_start_tm = 6;
-    /**
-     * <code>optional uint64 next_circle_start_tm = 6;</code>
-     *
-     * <pre>
-     *下局开始时间戳
-     * </pre>
-     */
-    boolean hasNextCircleStartTm();
-    /**
-     * <code>optional uint64 next_circle_start_tm = 6;</code>
-     *
-     * <pre>
-     *下局开始时间戳
-     * </pre>
-     */
-    long getNextCircleStartTm();
-
-    // optional bool is_last_circle = 7;
-    /**
-     * <code>optional bool is_last_circle = 7;</code>
-     *
-     * <pre>
-     *是否是最后一轮
-     * </pre>
-     */
-    boolean hasIsLastCircle();
-    /**
-     * <code>optional bool is_last_circle = 7;</code>
-     *
-     * <pre>
-     *是否是最后一轮
-     * </pre>
-     */
-    boolean getIsLastCircle();
-
-    // repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-     *
-     * <pre>
-     *当前轮玩家的信息
-     * </pre>
-     */
-    java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> 
-        getDetailList();
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-     *
-     * <pre>
-     *当前轮玩家的信息
-     * </pre>
-     */
-    game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail getDetail(int index);
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-     *
-     * <pre>
-     *当前轮玩家的信息
-     * </pre>
-     */
-    int getDetailCount();
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-     *
-     * <pre>
-     *当前轮玩家的信息
-     * </pre>
-     */
-    java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder> 
-        getDetailOrBuilderList();
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-     *
-     * <pre>
-     *当前轮玩家的信息
-     * </pre>
-     */
-    game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder getDetailOrBuilder(
-        int index);
-  }
-  /**
-   * Protobuf type {@code game_guanyuan_protocols.msg_circle_over_info}
-   *
-   * <pre>
-   *一局结束时的信息
-   * </pre>
-   */
-  public static final class msg_circle_over_info extends
-      com.google.protobuf.GeneratedMessage
-      implements msg_circle_over_infoOrBuilder {
-    // Use msg_circle_over_info.newBuilder() to construct.
-    private msg_circle_over_info(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private msg_circle_over_info(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final msg_circle_over_info defaultInstance;
-    public static msg_circle_over_info getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public msg_circle_over_info getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private msg_circle_over_info(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              type_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              huPos_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              lastPos_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              circleNum_ = input.readInt32();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              huCard_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              nextCircleStartTm_ = input.readUInt64();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              isLastCircle_ = input.readBool();
-              break;
-            }
-            case 66: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-                detail_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail>();
-                mutable_bitField0_ |= 0x00000080;
-              }
-              detail_.add(input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.PARSER, extensionRegistry));
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-          detail_ = java.util.Collections.unmodifiableList(detail_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_info_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<msg_circle_over_info> PARSER =
-        new com.google.protobuf.AbstractParser<msg_circle_over_info>() {
-      public msg_circle_over_info parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new msg_circle_over_info(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<msg_circle_over_info> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    // optional int32 type = 1;
-    public static final int TYPE_FIELD_NUMBER = 1;
-    private int type_;
-    /**
-     * <code>optional int32 type = 1;</code>
-     *
-     * <pre>
-     *类型：0－流局；1-胡；2-自摸；
-     * </pre>
-     */
-    public boolean hasType() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 type = 1;</code>
-     *
-     * <pre>
-     *类型：0－流局；1-胡；2-自摸；
-     * </pre>
-     */
-    public int getType() {
-      return type_;
-    }
-
-    // optional int32 hu_pos = 2;
-    public static final int HU_POS_FIELD_NUMBER = 2;
-    private int huPos_;
-    /**
-     * <code>optional int32 hu_pos = 2;</code>
-     *
-     * <pre>
-     *胡牌位置
-     * </pre>
-     */
-    public boolean hasHuPos() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 hu_pos = 2;</code>
-     *
-     * <pre>
-     *胡牌位置
-     * </pre>
-     */
-    public int getHuPos() {
-      return huPos_;
-    }
-
-    // optional int32 last_pos = 3;
-    public static final int LAST_POS_FIELD_NUMBER = 3;
-    private int lastPos_;
-    /**
-     * <code>optional int32 last_pos = 3;</code>
-     *
-     * <pre>
-     *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-     * </pre>
-     */
-    public boolean hasLastPos() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int32 last_pos = 3;</code>
-     *
-     * <pre>
-     *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-     * </pre>
-     */
-    public int getLastPos() {
-      return lastPos_;
-    }
-
-    // optional int32 circle_num = 4;
-    public static final int CIRCLE_NUM_FIELD_NUMBER = 4;
-    private int circleNum_;
-    /**
-     * <code>optional int32 circle_num = 4;</code>
-     *
-     * <pre>
-     *第几圈
-     * </pre>
-     */
-    public boolean hasCircleNum() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 circle_num = 4;</code>
-     *
-     * <pre>
-     *第几圈
-     * </pre>
-     */
-    public int getCircleNum() {
-      return circleNum_;
-    }
-
-    // optional int32 hu_card = 5;
-    public static final int HU_CARD_FIELD_NUMBER = 5;
-    private int huCard_;
-    /**
-     * <code>optional int32 hu_card = 5;</code>
-     *
-     * <pre>
-     *默认为0；有值时代表胡的哪张牌
-     * </pre>
-     */
-    public boolean hasHuCard() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 hu_card = 5;</code>
-     *
-     * <pre>
-     *默认为0；有值时代表胡的哪张牌
-     * </pre>
-     */
-    public int getHuCard() {
-      return huCard_;
-    }
-
-    // optional uint64 next_circle_start_tm = 6;
-    public static final int NEXT_CIRCLE_START_TM_FIELD_NUMBER = 6;
-    private long nextCircleStartTm_;
-    /**
-     * <code>optional uint64 next_circle_start_tm = 6;</code>
-     *
-     * <pre>
-     *下局开始时间戳
-     * </pre>
-     */
-    public boolean hasNextCircleStartTm() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional uint64 next_circle_start_tm = 6;</code>
-     *
-     * <pre>
-     *下局开始时间戳
-     * </pre>
-     */
-    public long getNextCircleStartTm() {
-      return nextCircleStartTm_;
-    }
-
-    // optional bool is_last_circle = 7;
-    public static final int IS_LAST_CIRCLE_FIELD_NUMBER = 7;
-    private boolean isLastCircle_;
-    /**
-     * <code>optional bool is_last_circle = 7;</code>
-     *
-     * <pre>
-     *是否是最后一轮
-     * </pre>
-     */
-    public boolean hasIsLastCircle() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional bool is_last_circle = 7;</code>
-     *
-     * <pre>
-     *是否是最后一轮
-     * </pre>
-     */
-    public boolean getIsLastCircle() {
-      return isLastCircle_;
-    }
-
-    // repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;
-    public static final int DETAIL_FIELD_NUMBER = 8;
-    private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> detail_;
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-     *
-     * <pre>
-     *当前轮玩家的信息
-     * </pre>
-     */
-    public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> getDetailList() {
-      return detail_;
-    }
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-     *
-     * <pre>
-     *当前轮玩家的信息
-     * </pre>
-     */
-    public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder> 
-        getDetailOrBuilderList() {
-      return detail_;
-    }
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-     *
-     * <pre>
-     *当前轮玩家的信息
-     * </pre>
-     */
-    public int getDetailCount() {
-      return detail_.size();
-    }
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-     *
-     * <pre>
-     *当前轮玩家的信息
-     * </pre>
-     */
-    public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail getDetail(int index) {
-      return detail_.get(index);
-    }
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-     *
-     * <pre>
-     *当前轮玩家的信息
-     * </pre>
-     */
-    public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder getDetailOrBuilder(
-        int index) {
-      return detail_.get(index);
-    }
-
-    private void initFields() {
-      type_ = 0;
-      huPos_ = 0;
-      lastPos_ = 0;
-      circleNum_ = 0;
-      huCard_ = 0;
-      nextCircleStartTm_ = 0L;
-      isLastCircle_ = false;
-      detail_ = java.util.Collections.emptyList();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, type_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, huPos_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, lastPos_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, circleNum_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, huCard_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeUInt64(6, nextCircleStartTm_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBool(7, isLastCircle_);
-      }
-      for (int i = 0; i < detail_.size(); i++) {
-        output.writeMessage(8, detail_.get(i));
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, type_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, huPos_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, lastPos_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, circleNum_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, huCard_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(6, nextCircleStartTm_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(7, isLastCircle_);
-      }
-      for (int i = 0; i < detail_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, detail_.get(i));
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code game_guanyuan_protocols.msg_circle_over_info}
-     *
-     * <pre>
-     *一局结束时的信息
-     * </pre>
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_infoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_info_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.Builder.class);
-      }
-
-      // Construct using game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getDetailFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        type_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        huPos_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        lastPos_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        circleNum_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        huCard_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        nextCircleStartTm_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        isLastCircle_ = false;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        if (detailBuilder_ == null) {
-          detail_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
-        } else {
-          detailBuilder_.clear();
-        }
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor;
-      }
-
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info getDefaultInstanceForType() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.getDefaultInstance();
-      }
-
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info build() {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info buildPartial() {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info result = new game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.type_ = type_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.huPos_ = huPos_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.lastPos_ = lastPos_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.circleNum_ = circleNum_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.huCard_ = huCard_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.nextCircleStartTm_ = nextCircleStartTm_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.isLastCircle_ = isLastCircle_;
-        if (detailBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080)) {
-            detail_ = java.util.Collections.unmodifiableList(detail_);
-            bitField0_ = (bitField0_ & ~0x00000080);
-          }
-          result.detail_ = detail_;
-        } else {
-          result.detail_ = detailBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info) {
-          return mergeFrom((game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info other) {
-        if (other == game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.getDefaultInstance()) return this;
-        if (other.hasType()) {
-          setType(other.getType());
-        }
-        if (other.hasHuPos()) {
-          setHuPos(other.getHuPos());
-        }
-        if (other.hasLastPos()) {
-          setLastPos(other.getLastPos());
-        }
-        if (other.hasCircleNum()) {
-          setCircleNum(other.getCircleNum());
-        }
-        if (other.hasHuCard()) {
-          setHuCard(other.getHuCard());
-        }
-        if (other.hasNextCircleStartTm()) {
-          setNextCircleStartTm(other.getNextCircleStartTm());
-        }
-        if (other.hasIsLastCircle()) {
-          setIsLastCircle(other.getIsLastCircle());
-        }
-        if (detailBuilder_ == null) {
-          if (!other.detail_.isEmpty()) {
-            if (detail_.isEmpty()) {
-              detail_ = other.detail_;
-              bitField0_ = (bitField0_ & ~0x00000080);
-            } else {
-              ensureDetailIsMutable();
-              detail_.addAll(other.detail_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.detail_.isEmpty()) {
-            if (detailBuilder_.isEmpty()) {
-              detailBuilder_.dispose();
-              detailBuilder_ = null;
-              detail_ = other.detail_;
-              bitField0_ = (bitField0_ & ~0x00000080);
-              detailBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getDetailFieldBuilder() : null;
-            } else {
-              detailBuilder_.addAllMessages(other.detail_);
-            }
-          }
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      // optional int32 type = 1;
-      private int type_ ;
-      /**
-       * <code>optional int32 type = 1;</code>
-       *
-       * <pre>
-       *类型：0－流局；1-胡；2-自摸；
-       * </pre>
-       */
-      public boolean hasType() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 type = 1;</code>
-       *
-       * <pre>
-       *类型：0－流局；1-胡；2-自摸；
-       * </pre>
-       */
-      public int getType() {
-        return type_;
-      }
-      /**
-       * <code>optional int32 type = 1;</code>
-       *
-       * <pre>
-       *类型：0－流局；1-胡；2-自摸；
-       * </pre>
-       */
-      public Builder setType(int value) {
-        bitField0_ |= 0x00000001;
-        type_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 type = 1;</code>
-       *
-       * <pre>
-       *类型：0－流局；1-胡；2-自摸；
-       * </pre>
-       */
-      public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        type_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 hu_pos = 2;
-      private int huPos_ ;
-      /**
-       * <code>optional int32 hu_pos = 2;</code>
-       *
-       * <pre>
-       *胡牌位置
-       * </pre>
-       */
-      public boolean hasHuPos() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 hu_pos = 2;</code>
-       *
-       * <pre>
-       *胡牌位置
-       * </pre>
-       */
-      public int getHuPos() {
-        return huPos_;
-      }
-      /**
-       * <code>optional int32 hu_pos = 2;</code>
-       *
-       * <pre>
-       *胡牌位置
-       * </pre>
-       */
-      public Builder setHuPos(int value) {
-        bitField0_ |= 0x00000002;
-        huPos_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 hu_pos = 2;</code>
-       *
-       * <pre>
-       *胡牌位置
-       * </pre>
-       */
-      public Builder clearHuPos() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        huPos_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 last_pos = 3;
-      private int lastPos_ ;
-      /**
-       * <code>optional int32 last_pos = 3;</code>
-       *
-       * <pre>
-       *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-       * </pre>
-       */
-      public boolean hasLastPos() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 last_pos = 3;</code>
-       *
-       * <pre>
-       *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-       * </pre>
-       */
-      public int getLastPos() {
-        return lastPos_;
-      }
-      /**
-       * <code>optional int32 last_pos = 3;</code>
-       *
-       * <pre>
-       *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-       * </pre>
-       */
-      public Builder setLastPos(int value) {
-        bitField0_ |= 0x00000004;
-        lastPos_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 last_pos = 3;</code>
-       *
-       * <pre>
-       *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-       * </pre>
-       */
-      public Builder clearLastPos() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        lastPos_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 circle_num = 4;
-      private int circleNum_ ;
-      /**
-       * <code>optional int32 circle_num = 4;</code>
-       *
-       * <pre>
-       *第几圈
-       * </pre>
-       */
-      public boolean hasCircleNum() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 circle_num = 4;</code>
-       *
-       * <pre>
-       *第几圈
-       * </pre>
-       */
-      public int getCircleNum() {
-        return circleNum_;
-      }
-      /**
-       * <code>optional int32 circle_num = 4;</code>
-       *
-       * <pre>
-       *第几圈
-       * </pre>
-       */
-      public Builder setCircleNum(int value) {
-        bitField0_ |= 0x00000008;
-        circleNum_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 circle_num = 4;</code>
-       *
-       * <pre>
-       *第几圈
-       * </pre>
-       */
-      public Builder clearCircleNum() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        circleNum_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 hu_card = 5;
-      private int huCard_ ;
-      /**
-       * <code>optional int32 hu_card = 5;</code>
-       *
-       * <pre>
-       *默认为0；有值时代表胡的哪张牌
-       * </pre>
-       */
-      public boolean hasHuCard() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int32 hu_card = 5;</code>
-       *
-       * <pre>
-       *默认为0；有值时代表胡的哪张牌
-       * </pre>
-       */
-      public int getHuCard() {
-        return huCard_;
-      }
-      /**
-       * <code>optional int32 hu_card = 5;</code>
-       *
-       * <pre>
-       *默认为0；有值时代表胡的哪张牌
-       * </pre>
-       */
-      public Builder setHuCard(int value) {
-        bitField0_ |= 0x00000010;
-        huCard_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 hu_card = 5;</code>
-       *
-       * <pre>
-       *默认为0；有值时代表胡的哪张牌
-       * </pre>
-       */
-      public Builder clearHuCard() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        huCard_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional uint64 next_circle_start_tm = 6;
-      private long nextCircleStartTm_ ;
-      /**
-       * <code>optional uint64 next_circle_start_tm = 6;</code>
-       *
-       * <pre>
-       *下局开始时间戳
-       * </pre>
-       */
-      public boolean hasNextCircleStartTm() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional uint64 next_circle_start_tm = 6;</code>
-       *
-       * <pre>
-       *下局开始时间戳
-       * </pre>
-       */
-      public long getNextCircleStartTm() {
-        return nextCircleStartTm_;
-      }
-      /**
-       * <code>optional uint64 next_circle_start_tm = 6;</code>
-       *
-       * <pre>
-       *下局开始时间戳
-       * </pre>
-       */
-      public Builder setNextCircleStartTm(long value) {
-        bitField0_ |= 0x00000020;
-        nextCircleStartTm_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional uint64 next_circle_start_tm = 6;</code>
-       *
-       * <pre>
-       *下局开始时间戳
-       * </pre>
-       */
-      public Builder clearNextCircleStartTm() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        nextCircleStartTm_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // optional bool is_last_circle = 7;
-      private boolean isLastCircle_ ;
-      /**
-       * <code>optional bool is_last_circle = 7;</code>
-       *
-       * <pre>
-       *是否是最后一轮
-       * </pre>
-       */
-      public boolean hasIsLastCircle() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional bool is_last_circle = 7;</code>
-       *
-       * <pre>
-       *是否是最后一轮
-       * </pre>
-       */
-      public boolean getIsLastCircle() {
-        return isLastCircle_;
-      }
-      /**
-       * <code>optional bool is_last_circle = 7;</code>
-       *
-       * <pre>
-       *是否是最后一轮
-       * </pre>
-       */
-      public Builder setIsLastCircle(boolean value) {
-        bitField0_ |= 0x00000040;
-        isLastCircle_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bool is_last_circle = 7;</code>
-       *
-       * <pre>
-       *是否是最后一轮
-       * </pre>
-       */
-      public Builder clearIsLastCircle() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        isLastCircle_ = false;
-        onChanged();
-        return this;
-      }
-
-      // repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;
-      private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> detail_ =
-        java.util.Collections.emptyList();
-      private void ensureDetailIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          detail_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail>(detail_);
-          bitField0_ |= 0x00000080;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder> detailBuilder_;
-
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> getDetailList() {
-        if (detailBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(detail_);
-        } else {
-          return detailBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public int getDetailCount() {
-        if (detailBuilder_ == null) {
-          return detail_.size();
-        } else {
-          return detailBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail getDetail(int index) {
-        if (detailBuilder_ == null) {
-          return detail_.get(index);
-        } else {
-          return detailBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public Builder setDetail(
-          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail value) {
-        if (detailBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDetailIsMutable();
-          detail_.set(index, value);
-          onChanged();
-        } else {
-          detailBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public Builder setDetail(
-          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder builderForValue) {
-        if (detailBuilder_ == null) {
-          ensureDetailIsMutable();
-          detail_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          detailBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public Builder addDetail(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail value) {
-        if (detailBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDetailIsMutable();
-          detail_.add(value);
-          onChanged();
-        } else {
-          detailBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public Builder addDetail(
-          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail value) {
-        if (detailBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDetailIsMutable();
-          detail_.add(index, value);
-          onChanged();
-        } else {
-          detailBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public Builder addDetail(
-          game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder builderForValue) {
-        if (detailBuilder_ == null) {
-          ensureDetailIsMutable();
-          detail_.add(builderForValue.build());
-          onChanged();
-        } else {
-          detailBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public Builder addDetail(
-          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder builderForValue) {
-        if (detailBuilder_ == null) {
-          ensureDetailIsMutable();
-          detail_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          detailBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public Builder addAllDetail(
-          java.lang.Iterable<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> values) {
-        if (detailBuilder_ == null) {
-          ensureDetailIsMutable();
-          super.addAll(values, detail_);
-          onChanged();
-        } else {
-          detailBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public Builder clearDetail() {
-        if (detailBuilder_ == null) {
-          detail_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
-          onChanged();
-        } else {
-          detailBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public Builder removeDetail(int index) {
-        if (detailBuilder_ == null) {
-          ensureDetailIsMutable();
-          detail_.remove(index);
-          onChanged();
-        } else {
-          detailBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder getDetailBuilder(
-          int index) {
-        return getDetailFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder getDetailOrBuilder(
-          int index) {
-        if (detailBuilder_ == null) {
-          return detail_.get(index);  } else {
-          return detailBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder> 
-           getDetailOrBuilderList() {
-        if (detailBuilder_ != null) {
-          return detailBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(detail_);
-        }
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder addDetailBuilder() {
-        return getDetailFieldBuilder().addBuilder(
-            game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder addDetailBuilder(
-          int index) {
-        return getDetailFieldBuilder().addBuilder(
-            index, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 8;</code>
-       *
-       * <pre>
-       *当前轮玩家的信息
-       * </pre>
-       */
-      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder> 
-           getDetailBuilderList() {
-        return getDetailFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder> 
-          getDetailFieldBuilder() {
-        if (detailBuilder_ == null) {
-          detailBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder>(
-                  detail_,
-                  ((bitField0_ & 0x00000080) == 0x00000080),
-                  getParentForChildren(),
-                  isClean());
-          detail_ = null;
-        }
-        return detailBuilder_;
-      }
-
-      // @@protoc_insertion_point(builder_scope:game_guanyuan_protocols.msg_circle_over_info)
-    }
-
-    static {
-      defaultInstance = new msg_circle_over_info(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.msg_circle_over_info)
-  }
-
-  public interface msg_circle_over_detailOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-
-    // optional int32 pos = 1;
-    /**
-     * <code>optional int32 pos = 1;</code>
-     *
-     * <pre>
-     *位置
-     * </pre>
-     */
-    boolean hasPos();
-    /**
-     * <code>optional int32 pos = 1;</code>
-     *
-     * <pre>
-     *位置
-     * </pre>
-     */
-    int getPos();
-
-    // optional int32 ting_card = 2;
-    /**
-     * <code>optional int32 ting_card = 2;</code>
-     *
-     * <pre>
-     *每个人叫听情况,如果没有，则为0
-     * </pre>
-     */
-    boolean hasTingCard();
-    /**
-     * <code>optional int32 ting_card = 2;</code>
-     *
-     * <pre>
-     *每个人叫听情况,如果没有，则为0
-     * </pre>
-     */
-    int getTingCard();
-
-    // optional string hu_name = 3;
-    /**
-     * <code>optional string hu_name = 3;</code>
-     *
-     * <pre>
-     *胡牌后的名字
-     * </pre>
-     */
-    boolean hasHuName();
-    /**
-     * <code>optional string hu_name = 3;</code>
-     *
-     * <pre>
-     *胡牌后的名字
-     * </pre>
-     */
-    java.lang.String getHuName();
-    /**
-     * <code>optional string hu_name = 3;</code>
-     *
-     * <pre>
-     *胡牌后的名字
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getHuNameBytes();
-
-    // optional int32 fen = 4;
-    /**
-     * <code>optional int32 fen = 4;</code>
-     *
-     * <pre>
-     *获得的分的数量
-     * </pre>
-     */
-    boolean hasFen();
-    /**
-     * <code>optional int32 fen = 4;</code>
-     *
-     * <pre>
-     *获得的分的数量
-     * </pre>
-     */
-    int getFen();
-
-    // optional int32 hua = 5;
-    /**
-     * <code>optional int32 hua = 5;</code>
-     *
-     * <pre>
-     *获得的花的数量
-     * </pre>
-     */
-    boolean hasHua();
-    /**
-     * <code>optional int32 hua = 5;</code>
-     *
-     * <pre>
-     *获得的花的数量
-     * </pre>
-     */
-    int getHua();
-
-    // repeated int32 hand_cards = 6;
-    /**
-     * <code>repeated int32 hand_cards = 6;</code>
-     *
-     * <pre>
-     *玩家的手牌
-     * </pre>
-     */
-    java.util.List<java.lang.Integer> getHandCardsList();
-    /**
-     * <code>repeated int32 hand_cards = 6;</code>
-     *
-     * <pre>
-     *玩家的手牌
-     * </pre>
-     */
-    int getHandCardsCount();
-    /**
-     * <code>repeated int32 hand_cards = 6;</code>
-     *
-     * <pre>
-     *玩家的手牌
-     * </pre>
-     */
-    int getHandCards(int index);
-
-    // repeated int32 wall_cards = 7;
-    /**
-     * <code>repeated int32 wall_cards = 7;</code>
-     *
-     * <pre>
-     *桌子自己的墙牌
-     * </pre>
-     */
-    java.util.List<java.lang.Integer> getWallCardsList();
-    /**
-     * <code>repeated int32 wall_cards = 7;</code>
-     *
-     * <pre>
-     *桌子自己的墙牌
-     * </pre>
-     */
-    int getWallCardsCount();
-    /**
-     * <code>repeated int32 wall_cards = 7;</code>
-     *
-     * <pre>
-     *桌子自己的墙牌
-     * </pre>
-     */
-    int getWallCards(int index);
-
-    // repeated int32 out_cards = 8;
-    /**
-     * <code>repeated int32 out_cards = 8;</code>
-     *
-     * <pre>
-     *玩家自己出的牌
-     * </pre>
-     */
-    java.util.List<java.lang.Integer> getOutCardsList();
-    /**
-     * <code>repeated int32 out_cards = 8;</code>
-     *
-     * <pre>
-     *玩家自己出的牌
-     * </pre>
-     */
-    int getOutCardsCount();
-    /**
-     * <code>repeated int32 out_cards = 8;</code>
-     *
-     * <pre>
-     *玩家自己出的牌
-     * </pre>
-     */
-    int getOutCards(int index);
-
-    // repeated int32 hua_cards = 9;
-    /**
-     * <code>repeated int32 hua_cards = 9;</code>
-     *
-     * <pre>
-     *玩家的花牌
-     * </pre>
-     */
-    java.util.List<java.lang.Integer> getHuaCardsList();
-    /**
-     * <code>repeated int32 hua_cards = 9;</code>
-     *
-     * <pre>
-     *玩家的花牌
-     * </pre>
-     */
-    int getHuaCardsCount();
-    /**
-     * <code>repeated int32 hua_cards = 9;</code>
-     *
-     * <pre>
-     *玩家的花牌
-     * </pre>
-     */
-    int getHuaCards(int index);
-  }
-  /**
-   * Protobuf type {@code game_guanyuan_protocols.msg_circle_over_detail}
-   */
-  public static final class msg_circle_over_detail extends
-      com.google.protobuf.GeneratedMessage
-      implements msg_circle_over_detailOrBuilder {
-    // Use msg_circle_over_detail.newBuilder() to construct.
-    private msg_circle_over_detail(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private msg_circle_over_detail(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final msg_circle_over_detail defaultInstance;
-    public static msg_circle_over_detail getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public msg_circle_over_detail getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private msg_circle_over_detail(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              pos_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              tingCard_ = input.readInt32();
-              break;
-            }
-            case 26: {
-              bitField0_ |= 0x00000004;
-              huName_ = input.readBytes();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              fen_ = input.readInt32();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              hua_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                handCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
-              }
-              handCards_.add(input.readInt32());
-              break;
-            }
-            case 50: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
-                handCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                handCards_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 56: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-                wallCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000040;
-              }
-              wallCards_.add(input.readInt32());
-              break;
-            }
-            case 58: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
-                wallCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000040;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                wallCards_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 64: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-                outCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000080;
-              }
-              outCards_.add(input.readInt32());
-              break;
-            }
-            case 66: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080) && input.getBytesUntilLimit() > 0) {
-                outCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000080;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                outCards_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 72: {
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
-                huaCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000100;
-              }
-              huaCards_.add(input.readInt32());
-              break;
-            }
-            case 74: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100) && input.getBytesUntilLimit() > 0) {
-                huaCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000100;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                huaCards_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-          handCards_ = java.util.Collections.unmodifiableList(handCards_);
-        }
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-          wallCards_ = java.util.Collections.unmodifiableList(wallCards_);
-        }
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-          outCards_ = java.util.Collections.unmodifiableList(outCards_);
-        }
-        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
-          huaCards_ = java.util.Collections.unmodifiableList(huaCards_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_detail_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<msg_circle_over_detail> PARSER =
-        new com.google.protobuf.AbstractParser<msg_circle_over_detail>() {
-      public msg_circle_over_detail parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new msg_circle_over_detail(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<msg_circle_over_detail> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    // optional int32 pos = 1;
-    public static final int POS_FIELD_NUMBER = 1;
-    private int pos_;
-    /**
-     * <code>optional int32 pos = 1;</code>
-     *
-     * <pre>
-     *位置
-     * </pre>
-     */
-    public boolean hasPos() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 pos = 1;</code>
-     *
-     * <pre>
-     *位置
-     * </pre>
-     */
-    public int getPos() {
-      return pos_;
-    }
-
-    // optional int32 ting_card = 2;
-    public static final int TING_CARD_FIELD_NUMBER = 2;
-    private int tingCard_;
-    /**
-     * <code>optional int32 ting_card = 2;</code>
-     *
-     * <pre>
-     *每个人叫听情况,如果没有，则为0
-     * </pre>
-     */
-    public boolean hasTingCard() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 ting_card = 2;</code>
-     *
-     * <pre>
-     *每个人叫听情况,如果没有，则为0
-     * </pre>
-     */
-    public int getTingCard() {
-      return tingCard_;
-    }
-
-    // optional string hu_name = 3;
-    public static final int HU_NAME_FIELD_NUMBER = 3;
-    private java.lang.Object huName_;
-    /**
-     * <code>optional string hu_name = 3;</code>
-     *
-     * <pre>
-     *胡牌后的名字
-     * </pre>
-     */
-    public boolean hasHuName() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional string hu_name = 3;</code>
-     *
-     * <pre>
-     *胡牌后的名字
-     * </pre>
-     */
-    public java.lang.String getHuName() {
-      java.lang.Object ref = huName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          huName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string hu_name = 3;</code>
-     *
-     * <pre>
-     *胡牌后的名字
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getHuNameBytes() {
-      java.lang.Object ref = huName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        huName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional int32 fen = 4;
-    public static final int FEN_FIELD_NUMBER = 4;
-    private int fen_;
-    /**
-     * <code>optional int32 fen = 4;</code>
-     *
-     * <pre>
-     *获得的分的数量
-     * </pre>
-     */
-    public boolean hasFen() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 fen = 4;</code>
-     *
-     * <pre>
-     *获得的分的数量
-     * </pre>
-     */
-    public int getFen() {
-      return fen_;
-    }
-
-    // optional int32 hua = 5;
-    public static final int HUA_FIELD_NUMBER = 5;
-    private int hua_;
-    /**
-     * <code>optional int32 hua = 5;</code>
-     *
-     * <pre>
-     *获得的花的数量
-     * </pre>
-     */
-    public boolean hasHua() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 hua = 5;</code>
-     *
-     * <pre>
-     *获得的花的数量
-     * </pre>
-     */
-    public int getHua() {
-      return hua_;
-    }
-
-    // repeated int32 hand_cards = 6;
-    public static final int HAND_CARDS_FIELD_NUMBER = 6;
-    private java.util.List<java.lang.Integer> handCards_;
-    /**
-     * <code>repeated int32 hand_cards = 6;</code>
-     *
-     * <pre>
-     *玩家的手牌
-     * </pre>
-     */
-    public java.util.List<java.lang.Integer>
-        getHandCardsList() {
-      return handCards_;
-    }
-    /**
-     * <code>repeated int32 hand_cards = 6;</code>
-     *
-     * <pre>
-     *玩家的手牌
-     * </pre>
-     */
-    public int getHandCardsCount() {
-      return handCards_.size();
-    }
-    /**
-     * <code>repeated int32 hand_cards = 6;</code>
-     *
-     * <pre>
-     *玩家的手牌
-     * </pre>
-     */
-    public int getHandCards(int index) {
-      return handCards_.get(index);
-    }
-
-    // repeated int32 wall_cards = 7;
-    public static final int WALL_CARDS_FIELD_NUMBER = 7;
-    private java.util.List<java.lang.Integer> wallCards_;
-    /**
-     * <code>repeated int32 wall_cards = 7;</code>
-     *
-     * <pre>
-     *桌子自己的墙牌
-     * </pre>
-     */
-    public java.util.List<java.lang.Integer>
-        getWallCardsList() {
-      return wallCards_;
-    }
-    /**
-     * <code>repeated int32 wall_cards = 7;</code>
-     *
-     * <pre>
-     *桌子自己的墙牌
-     * </pre>
-     */
-    public int getWallCardsCount() {
-      return wallCards_.size();
-    }
-    /**
-     * <code>repeated int32 wall_cards = 7;</code>
-     *
-     * <pre>
-     *桌子自己的墙牌
-     * </pre>
-     */
-    public int getWallCards(int index) {
-      return wallCards_.get(index);
-    }
-
-    // repeated int32 out_cards = 8;
-    public static final int OUT_CARDS_FIELD_NUMBER = 8;
-    private java.util.List<java.lang.Integer> outCards_;
-    /**
-     * <code>repeated int32 out_cards = 8;</code>
-     *
-     * <pre>
-     *玩家自己出的牌
-     * </pre>
-     */
-    public java.util.List<java.lang.Integer>
-        getOutCardsList() {
-      return outCards_;
-    }
-    /**
-     * <code>repeated int32 out_cards = 8;</code>
-     *
-     * <pre>
-     *玩家自己出的牌
-     * </pre>
-     */
-    public int getOutCardsCount() {
-      return outCards_.size();
-    }
-    /**
-     * <code>repeated int32 out_cards = 8;</code>
-     *
-     * <pre>
-     *玩家自己出的牌
-     * </pre>
-     */
-    public int getOutCards(int index) {
-      return outCards_.get(index);
-    }
-
-    // repeated int32 hua_cards = 9;
-    public static final int HUA_CARDS_FIELD_NUMBER = 9;
-    private java.util.List<java.lang.Integer> huaCards_;
-    /**
-     * <code>repeated int32 hua_cards = 9;</code>
-     *
-     * <pre>
-     *玩家的花牌
-     * </pre>
-     */
-    public java.util.List<java.lang.Integer>
-        getHuaCardsList() {
-      return huaCards_;
-    }
-    /**
-     * <code>repeated int32 hua_cards = 9;</code>
-     *
-     * <pre>
-     *玩家的花牌
-     * </pre>
-     */
-    public int getHuaCardsCount() {
-      return huaCards_.size();
-    }
-    /**
-     * <code>repeated int32 hua_cards = 9;</code>
-     *
-     * <pre>
-     *玩家的花牌
-     * </pre>
-     */
-    public int getHuaCards(int index) {
-      return huaCards_.get(index);
-    }
-
-    private void initFields() {
-      pos_ = 0;
-      tingCard_ = 0;
-      huName_ = "";
-      fen_ = 0;
-      hua_ = 0;
-      handCards_ = java.util.Collections.emptyList();
-      wallCards_ = java.util.Collections.emptyList();
-      outCards_ = java.util.Collections.emptyList();
-      huaCards_ = java.util.Collections.emptyList();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, pos_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, tingCard_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getHuNameBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, fen_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, hua_);
-      }
-      for (int i = 0; i < handCards_.size(); i++) {
-        output.writeInt32(6, handCards_.get(i));
-      }
-      for (int i = 0; i < wallCards_.size(); i++) {
-        output.writeInt32(7, wallCards_.get(i));
-      }
-      for (int i = 0; i < outCards_.size(); i++) {
-        output.writeInt32(8, outCards_.get(i));
-      }
-      for (int i = 0; i < huaCards_.size(); i++) {
-        output.writeInt32(9, huaCards_.get(i));
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, pos_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, tingCard_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getHuNameBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, fen_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, hua_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < handCards_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(handCards_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getHandCardsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < wallCards_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(wallCards_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getWallCardsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < outCards_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(outCards_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getOutCardsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < huaCards_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(huaCards_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getHuaCardsList().size();
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code game_guanyuan_protocols.msg_circle_over_detail}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_detail_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder.class);
-      }
-
-      // Construct using game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        pos_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        tingCard_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        huName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
-        fen_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        hua_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        handCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
-        wallCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000040);
-        outCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000080);
-        huaCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000100);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor;
-      }
-
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail getDefaultInstanceForType() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.getDefaultInstance();
-      }
-
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail build() {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail buildPartial() {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail result = new game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.pos_ = pos_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.tingCard_ = tingCard_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.huName_ = huName_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.fen_ = fen_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.hua_ = hua_;
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          handCards_ = java.util.Collections.unmodifiableList(handCards_);
-          bitField0_ = (bitField0_ & ~0x00000020);
-        }
-        result.handCards_ = handCards_;
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          wallCards_ = java.util.Collections.unmodifiableList(wallCards_);
-          bitField0_ = (bitField0_ & ~0x00000040);
-        }
-        result.wallCards_ = wallCards_;
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
-          outCards_ = java.util.Collections.unmodifiableList(outCards_);
-          bitField0_ = (bitField0_ & ~0x00000080);
-        }
-        result.outCards_ = outCards_;
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
-          huaCards_ = java.util.Collections.unmodifiableList(huaCards_);
-          bitField0_ = (bitField0_ & ~0x00000100);
-        }
-        result.huaCards_ = huaCards_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail) {
-          return mergeFrom((game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail other) {
-        if (other == game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.getDefaultInstance()) return this;
-        if (other.hasPos()) {
-          setPos(other.getPos());
-        }
-        if (other.hasTingCard()) {
-          setTingCard(other.getTingCard());
-        }
-        if (other.hasHuName()) {
-          bitField0_ |= 0x00000004;
-          huName_ = other.huName_;
-          onChanged();
-        }
-        if (other.hasFen()) {
-          setFen(other.getFen());
-        }
-        if (other.hasHua()) {
-          setHua(other.getHua());
-        }
-        if (!other.handCards_.isEmpty()) {
-          if (handCards_.isEmpty()) {
-            handCards_ = other.handCards_;
-            bitField0_ = (bitField0_ & ~0x00000020);
-          } else {
-            ensureHandCardsIsMutable();
-            handCards_.addAll(other.handCards_);
-          }
-          onChanged();
-        }
-        if (!other.wallCards_.isEmpty()) {
-          if (wallCards_.isEmpty()) {
-            wallCards_ = other.wallCards_;
-            bitField0_ = (bitField0_ & ~0x00000040);
-          } else {
-            ensureWallCardsIsMutable();
-            wallCards_.addAll(other.wallCards_);
-          }
-          onChanged();
-        }
-        if (!other.outCards_.isEmpty()) {
-          if (outCards_.isEmpty()) {
-            outCards_ = other.outCards_;
-            bitField0_ = (bitField0_ & ~0x00000080);
-          } else {
-            ensureOutCardsIsMutable();
-            outCards_.addAll(other.outCards_);
-          }
-          onChanged();
-        }
-        if (!other.huaCards_.isEmpty()) {
-          if (huaCards_.isEmpty()) {
-            huaCards_ = other.huaCards_;
-            bitField0_ = (bitField0_ & ~0x00000100);
-          } else {
-            ensureHuaCardsIsMutable();
-            huaCards_.addAll(other.huaCards_);
-          }
-          onChanged();
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      // optional int32 pos = 1;
-      private int pos_ ;
-      /**
-       * <code>optional int32 pos = 1;</code>
-       *
-       * <pre>
-       *位置
-       * </pre>
-       */
-      public boolean hasPos() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 pos = 1;</code>
-       *
-       * <pre>
-       *位置
-       * </pre>
-       */
-      public int getPos() {
-        return pos_;
-      }
-      /**
-       * <code>optional int32 pos = 1;</code>
-       *
-       * <pre>
-       *位置
-       * </pre>
-       */
-      public Builder setPos(int value) {
-        bitField0_ |= 0x00000001;
-        pos_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 pos = 1;</code>
-       *
-       * <pre>
-       *位置
-       * </pre>
-       */
-      public Builder clearPos() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        pos_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 ting_card = 2;
-      private int tingCard_ ;
-      /**
-       * <code>optional int32 ting_card = 2;</code>
-       *
-       * <pre>
-       *每个人叫听情况,如果没有，则为0
-       * </pre>
-       */
-      public boolean hasTingCard() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 ting_card = 2;</code>
-       *
-       * <pre>
-       *每个人叫听情况,如果没有，则为0
-       * </pre>
-       */
-      public int getTingCard() {
-        return tingCard_;
-      }
-      /**
-       * <code>optional int32 ting_card = 2;</code>
-       *
-       * <pre>
-       *每个人叫听情况,如果没有，则为0
-       * </pre>
-       */
-      public Builder setTingCard(int value) {
-        bitField0_ |= 0x00000002;
-        tingCard_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 ting_card = 2;</code>
-       *
-       * <pre>
-       *每个人叫听情况,如果没有，则为0
-       * </pre>
-       */
-      public Builder clearTingCard() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        tingCard_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional string hu_name = 3;
-      private java.lang.Object huName_ = "";
-      /**
-       * <code>optional string hu_name = 3;</code>
-       *
-       * <pre>
-       *胡牌后的名字
-       * </pre>
-       */
-      public boolean hasHuName() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional string hu_name = 3;</code>
-       *
-       * <pre>
-       *胡牌后的名字
-       * </pre>
-       */
-      public java.lang.String getHuName() {
-        java.lang.Object ref = huName_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          huName_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string hu_name = 3;</code>
-       *
-       * <pre>
-       *胡牌后的名字
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getHuNameBytes() {
-        java.lang.Object ref = huName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          huName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string hu_name = 3;</code>
-       *
-       * <pre>
-       *胡牌后的名字
-       * </pre>
-       */
-      public Builder setHuName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        huName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string hu_name = 3;</code>
-       *
-       * <pre>
-       *胡牌后的名字
-       * </pre>
-       */
-      public Builder clearHuName() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        huName_ = getDefaultInstance().getHuName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string hu_name = 3;</code>
-       *
-       * <pre>
-       *胡牌后的名字
-       * </pre>
-       */
-      public Builder setHuNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        huName_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 fen = 4;
-      private int fen_ ;
-      /**
-       * <code>optional int32 fen = 4;</code>
-       *
-       * <pre>
-       *获得的分的数量
-       * </pre>
-       */
-      public boolean hasFen() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 fen = 4;</code>
-       *
-       * <pre>
-       *获得的分的数量
-       * </pre>
-       */
-      public int getFen() {
-        return fen_;
-      }
-      /**
-       * <code>optional int32 fen = 4;</code>
-       *
-       * <pre>
-       *获得的分的数量
-       * </pre>
-       */
-      public Builder setFen(int value) {
-        bitField0_ |= 0x00000008;
-        fen_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 fen = 4;</code>
-       *
-       * <pre>
-       *获得的分的数量
-       * </pre>
-       */
-      public Builder clearFen() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        fen_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 hua = 5;
-      private int hua_ ;
-      /**
-       * <code>optional int32 hua = 5;</code>
-       *
-       * <pre>
-       *获得的花的数量
-       * </pre>
-       */
-      public boolean hasHua() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int32 hua = 5;</code>
-       *
-       * <pre>
-       *获得的花的数量
-       * </pre>
-       */
-      public int getHua() {
-        return hua_;
-      }
-      /**
-       * <code>optional int32 hua = 5;</code>
-       *
-       * <pre>
-       *获得的花的数量
-       * </pre>
-       */
-      public Builder setHua(int value) {
-        bitField0_ |= 0x00000010;
-        hua_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 hua = 5;</code>
-       *
-       * <pre>
-       *获得的花的数量
-       * </pre>
-       */
-      public Builder clearHua() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        hua_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // repeated int32 hand_cards = 6;
-      private java.util.List<java.lang.Integer> handCards_ = java.util.Collections.emptyList();
-      private void ensureHandCardsIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          handCards_ = new java.util.ArrayList<java.lang.Integer>(handCards_);
-          bitField0_ |= 0x00000020;
-         }
-      }
-      /**
-       * <code>repeated int32 hand_cards = 6;</code>
-       *
-       * <pre>
-       *玩家的手牌
-       * </pre>
-       */
-      public java.util.List<java.lang.Integer>
-          getHandCardsList() {
-        return java.util.Collections.unmodifiableList(handCards_);
-      }
-      /**
-       * <code>repeated int32 hand_cards = 6;</code>
-       *
-       * <pre>
-       *玩家的手牌
-       * </pre>
-       */
-      public int getHandCardsCount() {
-        return handCards_.size();
-      }
-      /**
-       * <code>repeated int32 hand_cards = 6;</code>
-       *
-       * <pre>
-       *玩家的手牌
-       * </pre>
-       */
-      public int getHandCards(int index) {
-        return handCards_.get(index);
-      }
-      /**
-       * <code>repeated int32 hand_cards = 6;</code>
-       *
-       * <pre>
-       *玩家的手牌
-       * </pre>
-       */
-      public Builder setHandCards(
-          int index, int value) {
-        ensureHandCardsIsMutable();
-        handCards_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hand_cards = 6;</code>
-       *
-       * <pre>
-       *玩家的手牌
-       * </pre>
-       */
-      public Builder addHandCards(int value) {
-        ensureHandCardsIsMutable();
-        handCards_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hand_cards = 6;</code>
-       *
-       * <pre>
-       *玩家的手牌
-       * </pre>
-       */
-      public Builder addAllHandCards(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureHandCardsIsMutable();
-        super.addAll(values, handCards_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hand_cards = 6;</code>
-       *
-       * <pre>
-       *玩家的手牌
-       * </pre>
-       */
-      public Builder clearHandCards() {
-        handCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
-        onChanged();
-        return this;
-      }
-
-      // repeated int32 wall_cards = 7;
-      private java.util.List<java.lang.Integer> wallCards_ = java.util.Collections.emptyList();
-      private void ensureWallCardsIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          wallCards_ = new java.util.ArrayList<java.lang.Integer>(wallCards_);
-          bitField0_ |= 0x00000040;
-         }
-      }
-      /**
-       * <code>repeated int32 wall_cards = 7;</code>
-       *
-       * <pre>
-       *桌子自己的墙牌
-       * </pre>
-       */
-      public java.util.List<java.lang.Integer>
-          getWallCardsList() {
-        return java.util.Collections.unmodifiableList(wallCards_);
-      }
-      /**
-       * <code>repeated int32 wall_cards = 7;</code>
-       *
-       * <pre>
-       *桌子自己的墙牌
-       * </pre>
-       */
-      public int getWallCardsCount() {
-        return wallCards_.size();
-      }
-      /**
-       * <code>repeated int32 wall_cards = 7;</code>
-       *
-       * <pre>
-       *桌子自己的墙牌
-       * </pre>
-       */
-      public int getWallCards(int index) {
-        return wallCards_.get(index);
-      }
-      /**
-       * <code>repeated int32 wall_cards = 7;</code>
-       *
-       * <pre>
-       *桌子自己的墙牌
-       * </pre>
-       */
-      public Builder setWallCards(
-          int index, int value) {
-        ensureWallCardsIsMutable();
-        wallCards_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 wall_cards = 7;</code>
-       *
-       * <pre>
-       *桌子自己的墙牌
-       * </pre>
-       */
-      public Builder addWallCards(int value) {
-        ensureWallCardsIsMutable();
-        wallCards_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 wall_cards = 7;</code>
-       *
-       * <pre>
-       *桌子自己的墙牌
-       * </pre>
-       */
-      public Builder addAllWallCards(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureWallCardsIsMutable();
-        super.addAll(values, wallCards_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 wall_cards = 7;</code>
-       *
-       * <pre>
-       *桌子自己的墙牌
-       * </pre>
-       */
-      public Builder clearWallCards() {
-        wallCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000040);
-        onChanged();
-        return this;
-      }
-
-      // repeated int32 out_cards = 8;
-      private java.util.List<java.lang.Integer> outCards_ = java.util.Collections.emptyList();
-      private void ensureOutCardsIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          outCards_ = new java.util.ArrayList<java.lang.Integer>(outCards_);
-          bitField0_ |= 0x00000080;
-         }
-      }
-      /**
-       * <code>repeated int32 out_cards = 8;</code>
-       *
-       * <pre>
-       *玩家自己出的牌
-       * </pre>
-       */
-      public java.util.List<java.lang.Integer>
-          getOutCardsList() {
-        return java.util.Collections.unmodifiableList(outCards_);
-      }
-      /**
-       * <code>repeated int32 out_cards = 8;</code>
-       *
-       * <pre>
-       *玩家自己出的牌
-       * </pre>
-       */
-      public int getOutCardsCount() {
-        return outCards_.size();
-      }
-      /**
-       * <code>repeated int32 out_cards = 8;</code>
-       *
-       * <pre>
-       *玩家自己出的牌
-       * </pre>
-       */
-      public int getOutCards(int index) {
-        return outCards_.get(index);
-      }
-      /**
-       * <code>repeated int32 out_cards = 8;</code>
-       *
-       * <pre>
-       *玩家自己出的牌
-       * </pre>
-       */
-      public Builder setOutCards(
-          int index, int value) {
-        ensureOutCardsIsMutable();
-        outCards_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 out_cards = 8;</code>
-       *
-       * <pre>
-       *玩家自己出的牌
-       * </pre>
-       */
-      public Builder addOutCards(int value) {
-        ensureOutCardsIsMutable();
-        outCards_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 out_cards = 8;</code>
-       *
-       * <pre>
-       *玩家自己出的牌
-       * </pre>
-       */
-      public Builder addAllOutCards(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureOutCardsIsMutable();
-        super.addAll(values, outCards_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 out_cards = 8;</code>
-       *
-       * <pre>
-       *玩家自己出的牌
-       * </pre>
-       */
-      public Builder clearOutCards() {
-        outCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000080);
-        onChanged();
-        return this;
-      }
-
-      // repeated int32 hua_cards = 9;
-      private java.util.List<java.lang.Integer> huaCards_ = java.util.Collections.emptyList();
-      private void ensureHuaCardsIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
-          huaCards_ = new java.util.ArrayList<java.lang.Integer>(huaCards_);
-          bitField0_ |= 0x00000100;
-         }
-      }
-      /**
-       * <code>repeated int32 hua_cards = 9;</code>
-       *
-       * <pre>
-       *玩家的花牌
-       * </pre>
-       */
-      public java.util.List<java.lang.Integer>
-          getHuaCardsList() {
-        return java.util.Collections.unmodifiableList(huaCards_);
-      }
-      /**
-       * <code>repeated int32 hua_cards = 9;</code>
-       *
-       * <pre>
-       *玩家的花牌
-       * </pre>
-       */
-      public int getHuaCardsCount() {
-        return huaCards_.size();
-      }
-      /**
-       * <code>repeated int32 hua_cards = 9;</code>
-       *
-       * <pre>
-       *玩家的花牌
-       * </pre>
-       */
-      public int getHuaCards(int index) {
-        return huaCards_.get(index);
-      }
-      /**
-       * <code>repeated int32 hua_cards = 9;</code>
-       *
-       * <pre>
-       *玩家的花牌
-       * </pre>
-       */
-      public Builder setHuaCards(
-          int index, int value) {
-        ensureHuaCardsIsMutable();
-        huaCards_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hua_cards = 9;</code>
-       *
-       * <pre>
-       *玩家的花牌
-       * </pre>
-       */
-      public Builder addHuaCards(int value) {
-        ensureHuaCardsIsMutable();
-        huaCards_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hua_cards = 9;</code>
-       *
-       * <pre>
-       *玩家的花牌
-       * </pre>
-       */
-      public Builder addAllHuaCards(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureHuaCardsIsMutable();
-        super.addAll(values, huaCards_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hua_cards = 9;</code>
-       *
-       * <pre>
-       *玩家的花牌
-       * </pre>
-       */
-      public Builder clearHuaCards() {
-        huaCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000100);
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:game_guanyuan_protocols.msg_circle_over_detail)
-    }
-
-    static {
-      defaultInstance = new msg_circle_over_detail(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.msg_circle_over_detail)
-  }
-
   public interface msg_game_over_infoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 circleIdx = 1;
+    /**
+     * <code>optional int32 circleIdx = 1;</code>
+     *
+     * <pre>
+     *结束时的第几圈，有可能是提前结束
+     * </pre>
+     */
+    boolean hasCircleIdx();
+    /**
+     * <code>optional int32 circleIdx = 1;</code>
+     *
+     * <pre>
+     *结束时的第几圈，有可能是提前结束
+     * </pre>
+     */
+    int getCircleIdx();
+
+    // repeated int32 scores = 2;
+    /**
+     * <code>repeated int32 scores = 2;</code>
+     *
+     * <pre>
+     *当前各个玩家的分数情况
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getScoresList();
+    /**
+     * <code>repeated int32 scores = 2;</code>
+     *
+     * <pre>
+     *当前各个玩家的分数情况
+     * </pre>
+     */
+    int getScoresCount();
+    /**
+     * <code>repeated int32 scores = 2;</code>
+     *
+     * <pre>
+     *当前各个玩家的分数情况
+     * </pre>
+     */
+    int getScores(int index);
   }
   /**
    * Protobuf type {@code game_guanyuan_protocols.msg_game_over_info}
@@ -17213,6 +14452,7 @@ public final class GameGuanyunProtocol {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -17230,6 +14470,32 @@ public final class GameGuanyunProtocol {
               }
               break;
             }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              circleIdx_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                scores_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              scores_.add(input.readInt32());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                scores_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                scores_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -17238,6 +14504,9 @@ public final class GameGuanyunProtocol {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          scores_ = java.util.Collections.unmodifiableList(scores_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -17269,7 +14538,69 @@ public final class GameGuanyunProtocol {
       return PARSER;
     }
 
+    private int bitField0_;
+    // optional int32 circleIdx = 1;
+    public static final int CIRCLEIDX_FIELD_NUMBER = 1;
+    private int circleIdx_;
+    /**
+     * <code>optional int32 circleIdx = 1;</code>
+     *
+     * <pre>
+     *结束时的第几圈，有可能是提前结束
+     * </pre>
+     */
+    public boolean hasCircleIdx() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 circleIdx = 1;</code>
+     *
+     * <pre>
+     *结束时的第几圈，有可能是提前结束
+     * </pre>
+     */
+    public int getCircleIdx() {
+      return circleIdx_;
+    }
+
+    // repeated int32 scores = 2;
+    public static final int SCORES_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Integer> scores_;
+    /**
+     * <code>repeated int32 scores = 2;</code>
+     *
+     * <pre>
+     *当前各个玩家的分数情况
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getScoresList() {
+      return scores_;
+    }
+    /**
+     * <code>repeated int32 scores = 2;</code>
+     *
+     * <pre>
+     *当前各个玩家的分数情况
+     * </pre>
+     */
+    public int getScoresCount() {
+      return scores_.size();
+    }
+    /**
+     * <code>repeated int32 scores = 2;</code>
+     *
+     * <pre>
+     *当前各个玩家的分数情况
+     * </pre>
+     */
+    public int getScores(int index) {
+      return scores_.get(index);
+    }
+
     private void initFields() {
+      circleIdx_ = 0;
+      scores_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -17283,6 +14614,12 @@ public final class GameGuanyunProtocol {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, circleIdx_);
+      }
+      for (int i = 0; i < scores_.size(); i++) {
+        output.writeInt32(2, scores_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -17292,6 +14629,19 @@ public final class GameGuanyunProtocol {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, circleIdx_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < scores_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(scores_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getScoresList().size();
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -17412,6 +14762,10 @@ public final class GameGuanyunProtocol {
 
       public Builder clear() {
         super.clear();
+        circleIdx_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        scores_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -17438,6 +14792,18 @@ public final class GameGuanyunProtocol {
 
       public game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info buildPartial() {
         game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info result = new game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.circleIdx_ = circleIdx_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          scores_ = java.util.Collections.unmodifiableList(scores_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.scores_ = scores_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -17453,6 +14819,19 @@ public final class GameGuanyunProtocol {
 
       public Builder mergeFrom(game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info other) {
         if (other == game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.getDefaultInstance()) return this;
+        if (other.hasCircleIdx()) {
+          setCircleIdx(other.getCircleIdx());
+        }
+        if (!other.scores_.isEmpty()) {
+          if (scores_.isEmpty()) {
+            scores_ = other.scores_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureScoresIsMutable();
+            scores_.addAll(other.scores_);
+          }
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -17476,6 +14855,150 @@ public final class GameGuanyunProtocol {
             mergeFrom(parsedMessage);
           }
         }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 circleIdx = 1;
+      private int circleIdx_ ;
+      /**
+       * <code>optional int32 circleIdx = 1;</code>
+       *
+       * <pre>
+       *结束时的第几圈，有可能是提前结束
+       * </pre>
+       */
+      public boolean hasCircleIdx() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 circleIdx = 1;</code>
+       *
+       * <pre>
+       *结束时的第几圈，有可能是提前结束
+       * </pre>
+       */
+      public int getCircleIdx() {
+        return circleIdx_;
+      }
+      /**
+       * <code>optional int32 circleIdx = 1;</code>
+       *
+       * <pre>
+       *结束时的第几圈，有可能是提前结束
+       * </pre>
+       */
+      public Builder setCircleIdx(int value) {
+        bitField0_ |= 0x00000001;
+        circleIdx_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 circleIdx = 1;</code>
+       *
+       * <pre>
+       *结束时的第几圈，有可能是提前结束
+       * </pre>
+       */
+      public Builder clearCircleIdx() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        circleIdx_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated int32 scores = 2;
+      private java.util.List<java.lang.Integer> scores_ = java.util.Collections.emptyList();
+      private void ensureScoresIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          scores_ = new java.util.ArrayList<java.lang.Integer>(scores_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated int32 scores = 2;</code>
+       *
+       * <pre>
+       *当前各个玩家的分数情况
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getScoresList() {
+        return java.util.Collections.unmodifiableList(scores_);
+      }
+      /**
+       * <code>repeated int32 scores = 2;</code>
+       *
+       * <pre>
+       *当前各个玩家的分数情况
+       * </pre>
+       */
+      public int getScoresCount() {
+        return scores_.size();
+      }
+      /**
+       * <code>repeated int32 scores = 2;</code>
+       *
+       * <pre>
+       *当前各个玩家的分数情况
+       * </pre>
+       */
+      public int getScores(int index) {
+        return scores_.get(index);
+      }
+      /**
+       * <code>repeated int32 scores = 2;</code>
+       *
+       * <pre>
+       *当前各个玩家的分数情况
+       * </pre>
+       */
+      public Builder setScores(
+          int index, int value) {
+        ensureScoresIsMutable();
+        scores_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 scores = 2;</code>
+       *
+       * <pre>
+       *当前各个玩家的分数情况
+       * </pre>
+       */
+      public Builder addScores(int value) {
+        ensureScoresIsMutable();
+        scores_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 scores = 2;</code>
+       *
+       * <pre>
+       *当前各个玩家的分数情况
+       * </pre>
+       */
+      public Builder addAllScores(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureScoresIsMutable();
+        super.addAll(values, scores_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 scores = 2;</code>
+       *
+       * <pre>
+       *当前各个玩家的分数情况
+       * </pre>
+       */
+      public Builder clearScores() {
+        scores_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
         return this;
       }
 
@@ -26103,30 +23626,10 @@ public final class GameGuanyunProtocol {
     // optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_circle_start_nt];
     /**
      * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_circle_start_nt];</code>
-     *
-     * <pre>
-     *optional int32 host_pos 						= 2;				//庄家位置
-     *optional int32 circle_idx  					= 3;    			//第几圈
-     *optional int32 east_start_pos   				= 4;    			//东风位置
-     *repeated int32 dice_list						= 5;				//骰子的值	
-     *optional int32 left_card_num 					= 6;				//余下牌的数量
-     *repeated msg_init_cards		init_cards		= 7;				//玩家的手牌的集合
-     *optional int32 turn_index						= 8;				//当前玩家的玩家的指向，即当前谁是可以操作的对象
-     * </pre>
      */
     boolean hasPacketId();
     /**
      * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_circle_start_nt];</code>
-     *
-     * <pre>
-     *optional int32 host_pos 						= 2;				//庄家位置
-     *optional int32 circle_idx  					= 3;    			//第几圈
-     *optional int32 east_start_pos   				= 4;    			//东风位置
-     *repeated int32 dice_list						= 5;				//骰子的值	
-     *optional int32 left_card_num 					= 6;				//余下牌的数量
-     *repeated msg_init_cards		init_cards		= 7;				//玩家的手牌的集合
-     *optional int32 turn_index						= 8;				//当前玩家的玩家的指向，即当前谁是可以操作的对象
-     * </pre>
      */
     game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type getPacketId();
 
@@ -26280,32 +23783,12 @@ public final class GameGuanyunProtocol {
     private game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type packetId_;
     /**
      * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_circle_start_nt];</code>
-     *
-     * <pre>
-     *optional int32 host_pos 						= 2;				//庄家位置
-     *optional int32 circle_idx  					= 3;    			//第几圈
-     *optional int32 east_start_pos   				= 4;    			//东风位置
-     *repeated int32 dice_list						= 5;				//骰子的值	
-     *optional int32 left_card_num 					= 6;				//余下牌的数量
-     *repeated msg_init_cards		init_cards		= 7;				//玩家的手牌的集合
-     *optional int32 turn_index						= 8;				//当前玩家的玩家的指向，即当前谁是可以操作的对象
-     * </pre>
      */
     public boolean hasPacketId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_circle_start_nt];</code>
-     *
-     * <pre>
-     *optional int32 host_pos 						= 2;				//庄家位置
-     *optional int32 circle_idx  					= 3;    			//第几圈
-     *optional int32 east_start_pos   				= 4;    			//东风位置
-     *repeated int32 dice_list						= 5;				//骰子的值	
-     *optional int32 left_card_num 					= 6;				//余下牌的数量
-     *repeated msg_init_cards		init_cards		= 7;				//玩家的手牌的集合
-     *optional int32 turn_index						= 8;				//当前玩家的玩家的指向，即当前谁是可以操作的对象
-     * </pre>
      */
     public game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type getPacketId() {
       return packetId_;
@@ -26606,48 +24089,18 @@ public final class GameGuanyunProtocol {
       private game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type packetId_ = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.e_mst_l2c_circle_start_nt;
       /**
        * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_circle_start_nt];</code>
-       *
-       * <pre>
-       *optional int32 host_pos 						= 2;				//庄家位置
-       *optional int32 circle_idx  					= 3;    			//第几圈
-       *optional int32 east_start_pos   				= 4;    			//东风位置
-       *repeated int32 dice_list						= 5;				//骰子的值	
-       *optional int32 left_card_num 					= 6;				//余下牌的数量
-       *repeated msg_init_cards		init_cards		= 7;				//玩家的手牌的集合
-       *optional int32 turn_index						= 8;				//当前玩家的玩家的指向，即当前谁是可以操作的对象
-       * </pre>
        */
       public boolean hasPacketId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_circle_start_nt];</code>
-       *
-       * <pre>
-       *optional int32 host_pos 						= 2;				//庄家位置
-       *optional int32 circle_idx  					= 3;    			//第几圈
-       *optional int32 east_start_pos   				= 4;    			//东风位置
-       *repeated int32 dice_list						= 5;				//骰子的值	
-       *optional int32 left_card_num 					= 6;				//余下牌的数量
-       *repeated msg_init_cards		init_cards		= 7;				//玩家的手牌的集合
-       *optional int32 turn_index						= 8;				//当前玩家的玩家的指向，即当前谁是可以操作的对象
-       * </pre>
        */
       public game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type getPacketId() {
         return packetId_;
       }
       /**
        * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_circle_start_nt];</code>
-       *
-       * <pre>
-       *optional int32 host_pos 						= 2;				//庄家位置
-       *optional int32 circle_idx  					= 3;    			//第几圈
-       *optional int32 east_start_pos   				= 4;    			//东风位置
-       *repeated int32 dice_list						= 5;				//骰子的值	
-       *optional int32 left_card_num 					= 6;				//余下牌的数量
-       *repeated msg_init_cards		init_cards		= 7;				//玩家的手牌的集合
-       *optional int32 turn_index						= 8;				//当前玩家的玩家的指向，即当前谁是可以操作的对象
-       * </pre>
        */
       public Builder setPacketId(game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type value) {
         if (value == null) {
@@ -26660,16 +24113,6 @@ public final class GameGuanyunProtocol {
       }
       /**
        * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_circle_start_nt];</code>
-       *
-       * <pre>
-       *optional int32 host_pos 						= 2;				//庄家位置
-       *optional int32 circle_idx  					= 3;    			//第几圈
-       *optional int32 east_start_pos   				= 4;    			//东风位置
-       *repeated int32 dice_list						= 5;				//骰子的值	
-       *optional int32 left_card_num 					= 6;				//余下牌的数量
-       *repeated msg_init_cards		init_cards		= 7;				//玩家的手牌的集合
-       *optional int32 turn_index						= 8;				//当前玩家的玩家的指向，即当前谁是可以操作的对象
-       * </pre>
        */
       public Builder clearPacketId() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -26840,965 +24283,6 @@ public final class GameGuanyunProtocol {
     }
 
     // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.packetl2c_circle_start_nt)
-  }
-
-  public interface msg_init_cardsOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-
-    // optional int32 seat_pos = 1;
-    /**
-     * <code>optional int32 seat_pos = 1;</code>
-     *
-     * <pre>
-     *玩家的位置
-     * </pre>
-     */
-    boolean hasSeatPos();
-    /**
-     * <code>optional int32 seat_pos = 1;</code>
-     *
-     * <pre>
-     *玩家的位置
-     * </pre>
-     */
-    int getSeatPos();
-
-    // repeated int32 flowers = 2;
-    /**
-     * <code>repeated int32 flowers = 2;</code>
-     *
-     * <pre>
-     *花牌的集合
-     * </pre>
-     */
-    java.util.List<java.lang.Integer> getFlowersList();
-    /**
-     * <code>repeated int32 flowers = 2;</code>
-     *
-     * <pre>
-     *花牌的集合
-     * </pre>
-     */
-    int getFlowersCount();
-    /**
-     * <code>repeated int32 flowers = 2;</code>
-     *
-     * <pre>
-     *花牌的集合
-     * </pre>
-     */
-    int getFlowers(int index);
-
-    // optional int32 card_num = 3;
-    /**
-     * <code>optional int32 card_num = 3;</code>
-     *
-     * <pre>
-     *玩家的牌的数量
-     * </pre>
-     */
-    boolean hasCardNum();
-    /**
-     * <code>optional int32 card_num = 3;</code>
-     *
-     * <pre>
-     *玩家的牌的数量
-     * </pre>
-     */
-    int getCardNum();
-
-    // repeated int32 hands_cards = 4;
-    /**
-     * <code>repeated int32 hands_cards = 4;</code>
-     *
-     * <pre>
-     *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-     * </pre>
-     */
-    java.util.List<java.lang.Integer> getHandsCardsList();
-    /**
-     * <code>repeated int32 hands_cards = 4;</code>
-     *
-     * <pre>
-     *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-     * </pre>
-     */
-    int getHandsCardsCount();
-    /**
-     * <code>repeated int32 hands_cards = 4;</code>
-     *
-     * <pre>
-     *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-     * </pre>
-     */
-    int getHandsCards(int index);
-  }
-  /**
-   * Protobuf type {@code game_guanyuan_protocols.msg_init_cards}
-   */
-  public static final class msg_init_cards extends
-      com.google.protobuf.GeneratedMessage
-      implements msg_init_cardsOrBuilder {
-    // Use msg_init_cards.newBuilder() to construct.
-    private msg_init_cards(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private msg_init_cards(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final msg_init_cards defaultInstance;
-    public static msg_init_cards getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public msg_init_cards getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private msg_init_cards(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              seatPos_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                flowers_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              flowers_.add(input.readInt32());
-              break;
-            }
-            case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                flowers_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                flowers_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000002;
-              cardNum_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                handsCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              handsCards_.add(input.readInt32());
-              break;
-            }
-            case 34: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
-                handsCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                handsCards_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          flowers_ = java.util.Collections.unmodifiableList(flowers_);
-        }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          handsCards_ = java.util.Collections.unmodifiableList(handsCards_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_init_cards_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_init_cards_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<msg_init_cards> PARSER =
-        new com.google.protobuf.AbstractParser<msg_init_cards>() {
-      public msg_init_cards parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new msg_init_cards(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<msg_init_cards> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    // optional int32 seat_pos = 1;
-    public static final int SEAT_POS_FIELD_NUMBER = 1;
-    private int seatPos_;
-    /**
-     * <code>optional int32 seat_pos = 1;</code>
-     *
-     * <pre>
-     *玩家的位置
-     * </pre>
-     */
-    public boolean hasSeatPos() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 seat_pos = 1;</code>
-     *
-     * <pre>
-     *玩家的位置
-     * </pre>
-     */
-    public int getSeatPos() {
-      return seatPos_;
-    }
-
-    // repeated int32 flowers = 2;
-    public static final int FLOWERS_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> flowers_;
-    /**
-     * <code>repeated int32 flowers = 2;</code>
-     *
-     * <pre>
-     *花牌的集合
-     * </pre>
-     */
-    public java.util.List<java.lang.Integer>
-        getFlowersList() {
-      return flowers_;
-    }
-    /**
-     * <code>repeated int32 flowers = 2;</code>
-     *
-     * <pre>
-     *花牌的集合
-     * </pre>
-     */
-    public int getFlowersCount() {
-      return flowers_.size();
-    }
-    /**
-     * <code>repeated int32 flowers = 2;</code>
-     *
-     * <pre>
-     *花牌的集合
-     * </pre>
-     */
-    public int getFlowers(int index) {
-      return flowers_.get(index);
-    }
-
-    // optional int32 card_num = 3;
-    public static final int CARD_NUM_FIELD_NUMBER = 3;
-    private int cardNum_;
-    /**
-     * <code>optional int32 card_num = 3;</code>
-     *
-     * <pre>
-     *玩家的牌的数量
-     * </pre>
-     */
-    public boolean hasCardNum() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 card_num = 3;</code>
-     *
-     * <pre>
-     *玩家的牌的数量
-     * </pre>
-     */
-    public int getCardNum() {
-      return cardNum_;
-    }
-
-    // repeated int32 hands_cards = 4;
-    public static final int HANDS_CARDS_FIELD_NUMBER = 4;
-    private java.util.List<java.lang.Integer> handsCards_;
-    /**
-     * <code>repeated int32 hands_cards = 4;</code>
-     *
-     * <pre>
-     *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-     * </pre>
-     */
-    public java.util.List<java.lang.Integer>
-        getHandsCardsList() {
-      return handsCards_;
-    }
-    /**
-     * <code>repeated int32 hands_cards = 4;</code>
-     *
-     * <pre>
-     *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-     * </pre>
-     */
-    public int getHandsCardsCount() {
-      return handsCards_.size();
-    }
-    /**
-     * <code>repeated int32 hands_cards = 4;</code>
-     *
-     * <pre>
-     *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-     * </pre>
-     */
-    public int getHandsCards(int index) {
-      return handsCards_.get(index);
-    }
-
-    private void initFields() {
-      seatPos_ = 0;
-      flowers_ = java.util.Collections.emptyList();
-      cardNum_ = 0;
-      handsCards_ = java.util.Collections.emptyList();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, seatPos_);
-      }
-      for (int i = 0; i < flowers_.size(); i++) {
-        output.writeInt32(2, flowers_.get(i));
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(3, cardNum_);
-      }
-      for (int i = 0; i < handsCards_.size(); i++) {
-        output.writeInt32(4, handsCards_.get(i));
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, seatPos_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < flowers_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(flowers_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getFlowersList().size();
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, cardNum_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < handsCards_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(handsCards_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getHandsCardsList().size();
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code game_guanyuan_protocols.msg_init_cards}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cardsOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_init_cards_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_init_cards_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards.Builder.class);
-      }
-
-      // Construct using game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        seatPos_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        flowers_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
-        cardNum_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        handsCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_init_cards_descriptor;
-      }
-
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards getDefaultInstanceForType() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards.getDefaultInstance();
-      }
-
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards build() {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards buildPartial() {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards result = new game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.seatPos_ = seatPos_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          flowers_ = java.util.Collections.unmodifiableList(flowers_);
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.flowers_ = flowers_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.cardNum_ = cardNum_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          handsCards_ = java.util.Collections.unmodifiableList(handsCards_);
-          bitField0_ = (bitField0_ & ~0x00000008);
-        }
-        result.handsCards_ = handsCards_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards) {
-          return mergeFrom((game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards other) {
-        if (other == game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards.getDefaultInstance()) return this;
-        if (other.hasSeatPos()) {
-          setSeatPos(other.getSeatPos());
-        }
-        if (!other.flowers_.isEmpty()) {
-          if (flowers_.isEmpty()) {
-            flowers_ = other.flowers_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureFlowersIsMutable();
-            flowers_.addAll(other.flowers_);
-          }
-          onChanged();
-        }
-        if (other.hasCardNum()) {
-          setCardNum(other.getCardNum());
-        }
-        if (!other.handsCards_.isEmpty()) {
-          if (handsCards_.isEmpty()) {
-            handsCards_ = other.handsCards_;
-            bitField0_ = (bitField0_ & ~0x00000008);
-          } else {
-            ensureHandsCardsIsMutable();
-            handsCards_.addAll(other.handsCards_);
-          }
-          onChanged();
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (game_guanyuan_protocols.GameGuanyunProtocol.msg_init_cards) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      // optional int32 seat_pos = 1;
-      private int seatPos_ ;
-      /**
-       * <code>optional int32 seat_pos = 1;</code>
-       *
-       * <pre>
-       *玩家的位置
-       * </pre>
-       */
-      public boolean hasSeatPos() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>optional int32 seat_pos = 1;</code>
-       *
-       * <pre>
-       *玩家的位置
-       * </pre>
-       */
-      public int getSeatPos() {
-        return seatPos_;
-      }
-      /**
-       * <code>optional int32 seat_pos = 1;</code>
-       *
-       * <pre>
-       *玩家的位置
-       * </pre>
-       */
-      public Builder setSeatPos(int value) {
-        bitField0_ |= 0x00000001;
-        seatPos_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 seat_pos = 1;</code>
-       *
-       * <pre>
-       *玩家的位置
-       * </pre>
-       */
-      public Builder clearSeatPos() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        seatPos_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // repeated int32 flowers = 2;
-      private java.util.List<java.lang.Integer> flowers_ = java.util.Collections.emptyList();
-      private void ensureFlowersIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          flowers_ = new java.util.ArrayList<java.lang.Integer>(flowers_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-      /**
-       * <code>repeated int32 flowers = 2;</code>
-       *
-       * <pre>
-       *花牌的集合
-       * </pre>
-       */
-      public java.util.List<java.lang.Integer>
-          getFlowersList() {
-        return java.util.Collections.unmodifiableList(flowers_);
-      }
-      /**
-       * <code>repeated int32 flowers = 2;</code>
-       *
-       * <pre>
-       *花牌的集合
-       * </pre>
-       */
-      public int getFlowersCount() {
-        return flowers_.size();
-      }
-      /**
-       * <code>repeated int32 flowers = 2;</code>
-       *
-       * <pre>
-       *花牌的集合
-       * </pre>
-       */
-      public int getFlowers(int index) {
-        return flowers_.get(index);
-      }
-      /**
-       * <code>repeated int32 flowers = 2;</code>
-       *
-       * <pre>
-       *花牌的集合
-       * </pre>
-       */
-      public Builder setFlowers(
-          int index, int value) {
-        ensureFlowersIsMutable();
-        flowers_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 flowers = 2;</code>
-       *
-       * <pre>
-       *花牌的集合
-       * </pre>
-       */
-      public Builder addFlowers(int value) {
-        ensureFlowersIsMutable();
-        flowers_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 flowers = 2;</code>
-       *
-       * <pre>
-       *花牌的集合
-       * </pre>
-       */
-      public Builder addAllFlowers(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureFlowersIsMutable();
-        super.addAll(values, flowers_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 flowers = 2;</code>
-       *
-       * <pre>
-       *花牌的集合
-       * </pre>
-       */
-      public Builder clearFlowers() {
-        flowers_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
-        return this;
-      }
-
-      // optional int32 card_num = 3;
-      private int cardNum_ ;
-      /**
-       * <code>optional int32 card_num = 3;</code>
-       *
-       * <pre>
-       *玩家的牌的数量
-       * </pre>
-       */
-      public boolean hasCardNum() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 card_num = 3;</code>
-       *
-       * <pre>
-       *玩家的牌的数量
-       * </pre>
-       */
-      public int getCardNum() {
-        return cardNum_;
-      }
-      /**
-       * <code>optional int32 card_num = 3;</code>
-       *
-       * <pre>
-       *玩家的牌的数量
-       * </pre>
-       */
-      public Builder setCardNum(int value) {
-        bitField0_ |= 0x00000004;
-        cardNum_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 card_num = 3;</code>
-       *
-       * <pre>
-       *玩家的牌的数量
-       * </pre>
-       */
-      public Builder clearCardNum() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        cardNum_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // repeated int32 hands_cards = 4;
-      private java.util.List<java.lang.Integer> handsCards_ = java.util.Collections.emptyList();
-      private void ensureHandsCardsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          handsCards_ = new java.util.ArrayList<java.lang.Integer>(handsCards_);
-          bitField0_ |= 0x00000008;
-         }
-      }
-      /**
-       * <code>repeated int32 hands_cards = 4;</code>
-       *
-       * <pre>
-       *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-       * </pre>
-       */
-      public java.util.List<java.lang.Integer>
-          getHandsCardsList() {
-        return java.util.Collections.unmodifiableList(handsCards_);
-      }
-      /**
-       * <code>repeated int32 hands_cards = 4;</code>
-       *
-       * <pre>
-       *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-       * </pre>
-       */
-      public int getHandsCardsCount() {
-        return handsCards_.size();
-      }
-      /**
-       * <code>repeated int32 hands_cards = 4;</code>
-       *
-       * <pre>
-       *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-       * </pre>
-       */
-      public int getHandsCards(int index) {
-        return handsCards_.get(index);
-      }
-      /**
-       * <code>repeated int32 hands_cards = 4;</code>
-       *
-       * <pre>
-       *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-       * </pre>
-       */
-      public Builder setHandsCards(
-          int index, int value) {
-        ensureHandsCardsIsMutable();
-        handsCards_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hands_cards = 4;</code>
-       *
-       * <pre>
-       *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-       * </pre>
-       */
-      public Builder addHandsCards(int value) {
-        ensureHandsCardsIsMutable();
-        handsCards_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hands_cards = 4;</code>
-       *
-       * <pre>
-       *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-       * </pre>
-       */
-      public Builder addAllHandsCards(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureHandsCardsIsMutable();
-        super.addAll(values, handsCards_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hands_cards = 4;</code>
-       *
-       * <pre>
-       *玩家的手牌 	//只有自己的牌时才有值，别的牌时无值
-       * </pre>
-       */
-      public Builder clearHandsCards() {
-        handsCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
-        onChanged();
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:game_guanyuan_protocols.msg_init_cards)
-    }
-
-    static {
-      defaultInstance = new msg_init_cards(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.msg_init_cards)
   }
 
   public interface packetl2c_trun_index_ntOrBuilder
@@ -31000,6 +27484,24 @@ public final class GameGuanyunProtocol {
      * </pre>
      */
     game_guanyuan_protocols.GameGuanyunProtocol.e_action_type getActionType();
+
+    // optional int32 link_pos = 5;
+    /**
+     * <code>optional int32 link_pos = 5;</code>
+     *
+     * <pre>
+     *与当前操作相关的位置，只在杠与碰有效
+     * </pre>
+     */
+    boolean hasLinkPos();
+    /**
+     * <code>optional int32 link_pos = 5;</code>
+     *
+     * <pre>
+     *与当前操作相关的位置，只在杠与碰有效
+     * </pre>
+     */
+    int getLinkPos();
   }
   /**
    * Protobuf type {@code game_guanyuan_protocols.packetl2c_action_nt}
@@ -31086,6 +27588,11 @@ public final class GameGuanyunProtocol {
                 bitField0_ |= 0x00000008;
                 actionType_ = value;
               }
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              linkPos_ = input.readInt32();
               break;
             }
           }
@@ -31216,11 +27723,36 @@ public final class GameGuanyunProtocol {
       return actionType_;
     }
 
+    // optional int32 link_pos = 5;
+    public static final int LINK_POS_FIELD_NUMBER = 5;
+    private int linkPos_;
+    /**
+     * <code>optional int32 link_pos = 5;</code>
+     *
+     * <pre>
+     *与当前操作相关的位置，只在杠与碰有效
+     * </pre>
+     */
+    public boolean hasLinkPos() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 link_pos = 5;</code>
+     *
+     * <pre>
+     *与当前操作相关的位置，只在杠与碰有效
+     * </pre>
+     */
+    public int getLinkPos() {
+      return linkPos_;
+    }
+
     private void initFields() {
       packetId_ = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.e_mst_l2c_action_nt;
       seatPos_ = 0;
       card_ = 0;
       actionType_ = game_guanyuan_protocols.GameGuanyunProtocol.e_action_type.e_action_skip;
+      linkPos_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -31246,6 +27778,9 @@ public final class GameGuanyunProtocol {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeEnum(4, actionType_.getNumber());
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, linkPos_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -31270,6 +27805,10 @@ public final class GameGuanyunProtocol {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(4, actionType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, linkPos_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -31399,6 +27938,8 @@ public final class GameGuanyunProtocol {
         bitField0_ = (bitField0_ & ~0x00000004);
         actionType_ = game_guanyuan_protocols.GameGuanyunProtocol.e_action_type.e_action_skip;
         bitField0_ = (bitField0_ & ~0x00000008);
+        linkPos_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -31443,6 +27984,10 @@ public final class GameGuanyunProtocol {
           to_bitField0_ |= 0x00000008;
         }
         result.actionType_ = actionType_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.linkPos_ = linkPos_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -31470,6 +28015,9 @@ public final class GameGuanyunProtocol {
         }
         if (other.hasActionType()) {
           setActionType(other.getActionType());
+        }
+        if (other.hasLinkPos()) {
+          setLinkPos(other.getLinkPos());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -31684,6 +28232,55 @@ public final class GameGuanyunProtocol {
         return this;
       }
 
+      // optional int32 link_pos = 5;
+      private int linkPos_ ;
+      /**
+       * <code>optional int32 link_pos = 5;</code>
+       *
+       * <pre>
+       *与当前操作相关的位置，只在杠与碰有效
+       * </pre>
+       */
+      public boolean hasLinkPos() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 link_pos = 5;</code>
+       *
+       * <pre>
+       *与当前操作相关的位置，只在杠与碰有效
+       * </pre>
+       */
+      public int getLinkPos() {
+        return linkPos_;
+      }
+      /**
+       * <code>optional int32 link_pos = 5;</code>
+       *
+       * <pre>
+       *与当前操作相关的位置，只在杠与碰有效
+       * </pre>
+       */
+      public Builder setLinkPos(int value) {
+        bitField0_ |= 0x00000010;
+        linkPos_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 link_pos = 5;</code>
+       *
+       * <pre>
+       *与当前操作相关的位置，只在杠与碰有效
+       * </pre>
+       */
+      public Builder clearLinkPos() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        linkPos_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:game_guanyuan_protocols.packetl2c_action_nt)
     }
 
@@ -31708,103 +28305,57 @@ public final class GameGuanyunProtocol {
      */
     game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type getPacketId();
 
-    // optional int32 hu_pos = 2;
+    // optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;
     /**
-     * <code>optional int32 hu_pos = 2;</code>
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
      *
      * <pre>
-     *胡牌位置
+     *胡牌的操作类型
      * </pre>
      */
-    boolean hasHuPos();
+    boolean hasHistoryActionInfo();
     /**
-     * <code>optional int32 hu_pos = 2;</code>
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
      *
      * <pre>
-     *胡牌位置
+     *胡牌的操作类型
      * </pre>
      */
-    int getHuPos();
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHistoryActionInfo();
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
+     *
+     * <pre>
+     *胡牌的操作类型
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHistoryActionInfoOrBuilder();
 
-    // optional int32 fire_pos = 3;
+    // repeated int32 scores = 3;
     /**
-     * <code>optional int32 fire_pos = 3;</code>
+     * <code>repeated int32 scores = 3;</code>
      *
      * <pre>
-     *炮手位置
+     *当前轮的分数变化
      * </pre>
      */
-    boolean hasFirePos();
+    java.util.List<java.lang.Integer> getScoresList();
     /**
-     * <code>optional int32 fire_pos = 3;</code>
+     * <code>repeated int32 scores = 3;</code>
      *
      * <pre>
-     *炮手位置
+     *当前轮的分数变化
      * </pre>
      */
-    int getFirePos();
-
-    // optional int32 card = 4;
+    int getScoresCount();
     /**
-     * <code>optional int32 card = 4;</code>
+     * <code>repeated int32 scores = 3;</code>
      *
      * <pre>
-     *胡的哪张牌
+     *当前轮的分数变化
      * </pre>
      */
-    boolean hasCard();
-    /**
-     * <code>optional int32 card = 4;</code>
-     *
-     * <pre>
-     *胡的哪张牌
-     * </pre>
-     */
-    int getCard();
-
-    // optional int32 hu_type = 5;
-    /**
-     * <code>optional int32 hu_type = 5;</code>
-     *
-     * <pre>
-     *胡牌的类型 0：普通胡 1：抢杠胡
-     * </pre>
-     */
-    boolean hasHuType();
-    /**
-     * <code>optional int32 hu_type = 5;</code>
-     *
-     * <pre>
-     *胡牌的类型 0：普通胡 1：抢杠胡
-     * </pre>
-     */
-    int getHuType();
-
-    // repeated int32 scroes = 6;
-    /**
-     * <code>repeated int32 scroes = 6;</code>
-     *
-     * <pre>
-     *胡牌后每个的分数
-     * </pre>
-     */
-    java.util.List<java.lang.Integer> getScroesList();
-    /**
-     * <code>repeated int32 scroes = 6;</code>
-     *
-     * <pre>
-     *胡牌后每个的分数
-     * </pre>
-     */
-    int getScroesCount();
-    /**
-     * <code>repeated int32 scroes = 6;</code>
-     *
-     * <pre>
-     *胡牌后每个的分数
-     * </pre>
-     */
-    int getScroes(int index);
+    int getScores(int index);
   }
   /**
    * Protobuf type {@code game_guanyuan_protocols.packetl2c_hu_info_nt}
@@ -31872,43 +28423,36 @@ public final class GameGuanyunProtocol {
               }
               break;
             }
-            case 16: {
+            case 18: {
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = historyActionInfo_.toBuilder();
+              }
+              historyActionInfo_ = input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(historyActionInfo_);
+                historyActionInfo_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000002;
-              huPos_ = input.readInt32();
               break;
             }
             case 24: {
-              bitField0_ |= 0x00000004;
-              firePos_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              card_ = input.readInt32();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              huType_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                scroes_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                scores_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000004;
               }
-              scroes_.add(input.readInt32());
+              scores_.add(input.readInt32());
               break;
             }
-            case 50: {
+            case 26: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
-                scroes_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000020;
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
+                scores_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000004;
               }
               while (input.getBytesUntilLimit() > 0) {
-                scroes_.add(input.readInt32());
+                scores_.add(input.readInt32());
               }
               input.popLimit(limit);
               break;
@@ -31921,8 +28465,8 @@ public final class GameGuanyunProtocol {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-          scroes_ = java.util.Collections.unmodifiableList(scroes_);
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          scores_ = java.util.Collections.unmodifiableList(scores_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -31972,144 +28516,79 @@ public final class GameGuanyunProtocol {
       return packetId_;
     }
 
-    // optional int32 hu_pos = 2;
-    public static final int HU_POS_FIELD_NUMBER = 2;
-    private int huPos_;
+    // optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;
+    public static final int HISTORY_ACTION_INFO_FIELD_NUMBER = 2;
+    private game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info historyActionInfo_;
     /**
-     * <code>optional int32 hu_pos = 2;</code>
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
      *
      * <pre>
-     *胡牌位置
+     *胡牌的操作类型
      * </pre>
      */
-    public boolean hasHuPos() {
+    public boolean hasHistoryActionInfo() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 hu_pos = 2;</code>
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
      *
      * <pre>
-     *胡牌位置
+     *胡牌的操作类型
      * </pre>
      */
-    public int getHuPos() {
-      return huPos_;
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHistoryActionInfo() {
+      return historyActionInfo_;
+    }
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
+     *
+     * <pre>
+     *胡牌的操作类型
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHistoryActionInfoOrBuilder() {
+      return historyActionInfo_;
     }
 
-    // optional int32 fire_pos = 3;
-    public static final int FIRE_POS_FIELD_NUMBER = 3;
-    private int firePos_;
+    // repeated int32 scores = 3;
+    public static final int SCORES_FIELD_NUMBER = 3;
+    private java.util.List<java.lang.Integer> scores_;
     /**
-     * <code>optional int32 fire_pos = 3;</code>
+     * <code>repeated int32 scores = 3;</code>
      *
      * <pre>
-     *炮手位置
-     * </pre>
-     */
-    public boolean hasFirePos() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional int32 fire_pos = 3;</code>
-     *
-     * <pre>
-     *炮手位置
-     * </pre>
-     */
-    public int getFirePos() {
-      return firePos_;
-    }
-
-    // optional int32 card = 4;
-    public static final int CARD_FIELD_NUMBER = 4;
-    private int card_;
-    /**
-     * <code>optional int32 card = 4;</code>
-     *
-     * <pre>
-     *胡的哪张牌
-     * </pre>
-     */
-    public boolean hasCard() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 card = 4;</code>
-     *
-     * <pre>
-     *胡的哪张牌
-     * </pre>
-     */
-    public int getCard() {
-      return card_;
-    }
-
-    // optional int32 hu_type = 5;
-    public static final int HU_TYPE_FIELD_NUMBER = 5;
-    private int huType_;
-    /**
-     * <code>optional int32 hu_type = 5;</code>
-     *
-     * <pre>
-     *胡牌的类型 0：普通胡 1：抢杠胡
-     * </pre>
-     */
-    public boolean hasHuType() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 hu_type = 5;</code>
-     *
-     * <pre>
-     *胡牌的类型 0：普通胡 1：抢杠胡
-     * </pre>
-     */
-    public int getHuType() {
-      return huType_;
-    }
-
-    // repeated int32 scroes = 6;
-    public static final int SCROES_FIELD_NUMBER = 6;
-    private java.util.List<java.lang.Integer> scroes_;
-    /**
-     * <code>repeated int32 scroes = 6;</code>
-     *
-     * <pre>
-     *胡牌后每个的分数
+     *当前轮的分数变化
      * </pre>
      */
     public java.util.List<java.lang.Integer>
-        getScroesList() {
-      return scroes_;
+        getScoresList() {
+      return scores_;
     }
     /**
-     * <code>repeated int32 scroes = 6;</code>
+     * <code>repeated int32 scores = 3;</code>
      *
      * <pre>
-     *胡牌后每个的分数
+     *当前轮的分数变化
      * </pre>
      */
-    public int getScroesCount() {
-      return scroes_.size();
+    public int getScoresCount() {
+      return scores_.size();
     }
     /**
-     * <code>repeated int32 scroes = 6;</code>
+     * <code>repeated int32 scores = 3;</code>
      *
      * <pre>
-     *胡牌后每个的分数
+     *当前轮的分数变化
      * </pre>
      */
-    public int getScroes(int index) {
-      return scroes_.get(index);
+    public int getScores(int index) {
+      return scores_.get(index);
     }
 
     private void initFields() {
       packetId_ = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.e_mst_l2c_hu_info_nt;
-      huPos_ = 0;
-      firePos_ = 0;
-      card_ = 0;
-      huType_ = 0;
-      scroes_ = java.util.Collections.emptyList();
+      historyActionInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance();
+      scores_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -32127,19 +28606,10 @@ public final class GameGuanyunProtocol {
         output.writeEnum(1, packetId_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, huPos_);
+        output.writeMessage(2, historyActionInfo_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, firePos_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, card_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, huType_);
-      }
-      for (int i = 0; i < scroes_.size(); i++) {
-        output.writeInt32(6, scroes_.get(i));
+      for (int i = 0; i < scores_.size(); i++) {
+        output.writeInt32(3, scores_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -32156,28 +28626,16 @@ public final class GameGuanyunProtocol {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, huPos_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, firePos_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, card_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, huType_);
+          .computeMessageSize(2, historyActionInfo_);
       }
       {
         int dataSize = 0;
-        for (int i = 0; i < scroes_.size(); i++) {
+        for (int i = 0; i < scores_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(scroes_.get(i));
+            .computeInt32SizeNoTag(scores_.get(i));
         }
         size += dataSize;
-        size += 1 * getScroesList().size();
+        size += 1 * getScoresList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -32291,6 +28749,7 @@ public final class GameGuanyunProtocol {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHistoryActionInfoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -32301,16 +28760,14 @@ public final class GameGuanyunProtocol {
         super.clear();
         packetId_ = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.e_mst_l2c_hu_info_nt;
         bitField0_ = (bitField0_ & ~0x00000001);
-        huPos_ = 0;
+        if (historyActionInfoBuilder_ == null) {
+          historyActionInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance();
+        } else {
+          historyActionInfoBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
-        firePos_ = 0;
+        scores_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000004);
-        card_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        huType_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        scroes_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -32346,24 +28803,16 @@ public final class GameGuanyunProtocol {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.huPos_ = huPos_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
+        if (historyActionInfoBuilder_ == null) {
+          result.historyActionInfo_ = historyActionInfo_;
+        } else {
+          result.historyActionInfo_ = historyActionInfoBuilder_.build();
         }
-        result.firePos_ = firePos_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          scores_ = java.util.Collections.unmodifiableList(scores_);
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
-        result.card_ = card_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.huType_ = huType_;
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          scroes_ = java.util.Collections.unmodifiableList(scroes_);
-          bitField0_ = (bitField0_ & ~0x00000020);
-        }
-        result.scroes_ = scroes_;
+        result.scores_ = scores_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -32383,25 +28832,16 @@ public final class GameGuanyunProtocol {
         if (other.hasPacketId()) {
           setPacketId(other.getPacketId());
         }
-        if (other.hasHuPos()) {
-          setHuPos(other.getHuPos());
+        if (other.hasHistoryActionInfo()) {
+          mergeHistoryActionInfo(other.getHistoryActionInfo());
         }
-        if (other.hasFirePos()) {
-          setFirePos(other.getFirePos());
-        }
-        if (other.hasCard()) {
-          setCard(other.getCard());
-        }
-        if (other.hasHuType()) {
-          setHuType(other.getHuType());
-        }
-        if (!other.scroes_.isEmpty()) {
-          if (scroes_.isEmpty()) {
-            scroes_ = other.scroes_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+        if (!other.scores_.isEmpty()) {
+          if (scores_.isEmpty()) {
+            scores_ = other.scores_;
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
-            ensureScroesIsMutable();
-            scroes_.addAll(other.scroes_);
+            ensureScoresIsMutable();
+            scores_.addAll(other.scores_);
           }
           onChanged();
         }
@@ -32468,292 +28908,249 @@ public final class GameGuanyunProtocol {
         return this;
       }
 
-      // optional int32 hu_pos = 2;
-      private int huPos_ ;
+      // optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;
+      private game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info historyActionInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> historyActionInfoBuilder_;
       /**
-       * <code>optional int32 hu_pos = 2;</code>
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
        *
        * <pre>
-       *胡牌位置
+       *胡牌的操作类型
        * </pre>
        */
-      public boolean hasHuPos() {
+      public boolean hasHistoryActionInfo() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 hu_pos = 2;</code>
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
        *
        * <pre>
-       *胡牌位置
+       *胡牌的操作类型
        * </pre>
        */
-      public int getHuPos() {
-        return huPos_;
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHistoryActionInfo() {
+        if (historyActionInfoBuilder_ == null) {
+          return historyActionInfo_;
+        } else {
+          return historyActionInfoBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 hu_pos = 2;</code>
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
        *
        * <pre>
-       *胡牌位置
+       *胡牌的操作类型
        * </pre>
        */
-      public Builder setHuPos(int value) {
+      public Builder setHistoryActionInfo(game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info value) {
+        if (historyActionInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          historyActionInfo_ = value;
+          onChanged();
+        } else {
+          historyActionInfoBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000002;
-        huPos_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 hu_pos = 2;</code>
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
        *
        * <pre>
-       *胡牌位置
+       *胡牌的操作类型
        * </pre>
        */
-      public Builder clearHuPos() {
+      public Builder setHistoryActionInfo(
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder builderForValue) {
+        if (historyActionInfoBuilder_ == null) {
+          historyActionInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          historyActionInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
+       *
+       * <pre>
+       *胡牌的操作类型
+       * </pre>
+       */
+      public Builder mergeHistoryActionInfo(game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info value) {
+        if (historyActionInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              historyActionInfo_ != game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance()) {
+            historyActionInfo_ =
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.newBuilder(historyActionInfo_).mergeFrom(value).buildPartial();
+          } else {
+            historyActionInfo_ = value;
+          }
+          onChanged();
+        } else {
+          historyActionInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
+       *
+       * <pre>
+       *胡牌的操作类型
+       * </pre>
+       */
+      public Builder clearHistoryActionInfo() {
+        if (historyActionInfoBuilder_ == null) {
+          historyActionInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance();
+          onChanged();
+        } else {
+          historyActionInfoBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
-        huPos_ = 0;
-        onChanged();
         return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
+       *
+       * <pre>
+       *胡牌的操作类型
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder getHistoryActionInfoBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getHistoryActionInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
+       *
+       * <pre>
+       *胡牌的操作类型
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHistoryActionInfoOrBuilder() {
+        if (historyActionInfoBuilder_ != null) {
+          return historyActionInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return historyActionInfo_;
+        }
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_history_action_info history_action_info = 2;</code>
+       *
+       * <pre>
+       *胡牌的操作类型
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> 
+          getHistoryActionInfoFieldBuilder() {
+        if (historyActionInfoBuilder_ == null) {
+          historyActionInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder>(
+                  historyActionInfo_,
+                  getParentForChildren(),
+                  isClean());
+          historyActionInfo_ = null;
+        }
+        return historyActionInfoBuilder_;
       }
 
-      // optional int32 fire_pos = 3;
-      private int firePos_ ;
-      /**
-       * <code>optional int32 fire_pos = 3;</code>
-       *
-       * <pre>
-       *炮手位置
-       * </pre>
-       */
-      public boolean hasFirePos() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 fire_pos = 3;</code>
-       *
-       * <pre>
-       *炮手位置
-       * </pre>
-       */
-      public int getFirePos() {
-        return firePos_;
-      }
-      /**
-       * <code>optional int32 fire_pos = 3;</code>
-       *
-       * <pre>
-       *炮手位置
-       * </pre>
-       */
-      public Builder setFirePos(int value) {
-        bitField0_ |= 0x00000004;
-        firePos_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 fire_pos = 3;</code>
-       *
-       * <pre>
-       *炮手位置
-       * </pre>
-       */
-      public Builder clearFirePos() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        firePos_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 card = 4;
-      private int card_ ;
-      /**
-       * <code>optional int32 card = 4;</code>
-       *
-       * <pre>
-       *胡的哪张牌
-       * </pre>
-       */
-      public boolean hasCard() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 card = 4;</code>
-       *
-       * <pre>
-       *胡的哪张牌
-       * </pre>
-       */
-      public int getCard() {
-        return card_;
-      }
-      /**
-       * <code>optional int32 card = 4;</code>
-       *
-       * <pre>
-       *胡的哪张牌
-       * </pre>
-       */
-      public Builder setCard(int value) {
-        bitField0_ |= 0x00000008;
-        card_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 card = 4;</code>
-       *
-       * <pre>
-       *胡的哪张牌
-       * </pre>
-       */
-      public Builder clearCard() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        card_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 hu_type = 5;
-      private int huType_ ;
-      /**
-       * <code>optional int32 hu_type = 5;</code>
-       *
-       * <pre>
-       *胡牌的类型 0：普通胡 1：抢杠胡
-       * </pre>
-       */
-      public boolean hasHuType() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int32 hu_type = 5;</code>
-       *
-       * <pre>
-       *胡牌的类型 0：普通胡 1：抢杠胡
-       * </pre>
-       */
-      public int getHuType() {
-        return huType_;
-      }
-      /**
-       * <code>optional int32 hu_type = 5;</code>
-       *
-       * <pre>
-       *胡牌的类型 0：普通胡 1：抢杠胡
-       * </pre>
-       */
-      public Builder setHuType(int value) {
-        bitField0_ |= 0x00000010;
-        huType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 hu_type = 5;</code>
-       *
-       * <pre>
-       *胡牌的类型 0：普通胡 1：抢杠胡
-       * </pre>
-       */
-      public Builder clearHuType() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        huType_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // repeated int32 scroes = 6;
-      private java.util.List<java.lang.Integer> scroes_ = java.util.Collections.emptyList();
-      private void ensureScroesIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          scroes_ = new java.util.ArrayList<java.lang.Integer>(scroes_);
-          bitField0_ |= 0x00000020;
+      // repeated int32 scores = 3;
+      private java.util.List<java.lang.Integer> scores_ = java.util.Collections.emptyList();
+      private void ensureScoresIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          scores_ = new java.util.ArrayList<java.lang.Integer>(scores_);
+          bitField0_ |= 0x00000004;
          }
       }
       /**
-       * <code>repeated int32 scroes = 6;</code>
+       * <code>repeated int32 scores = 3;</code>
        *
        * <pre>
-       *胡牌后每个的分数
+       *当前轮的分数变化
        * </pre>
        */
       public java.util.List<java.lang.Integer>
-          getScroesList() {
-        return java.util.Collections.unmodifiableList(scroes_);
+          getScoresList() {
+        return java.util.Collections.unmodifiableList(scores_);
       }
       /**
-       * <code>repeated int32 scroes = 6;</code>
+       * <code>repeated int32 scores = 3;</code>
        *
        * <pre>
-       *胡牌后每个的分数
+       *当前轮的分数变化
        * </pre>
        */
-      public int getScroesCount() {
-        return scroes_.size();
+      public int getScoresCount() {
+        return scores_.size();
       }
       /**
-       * <code>repeated int32 scroes = 6;</code>
+       * <code>repeated int32 scores = 3;</code>
        *
        * <pre>
-       *胡牌后每个的分数
+       *当前轮的分数变化
        * </pre>
        */
-      public int getScroes(int index) {
-        return scroes_.get(index);
+      public int getScores(int index) {
+        return scores_.get(index);
       }
       /**
-       * <code>repeated int32 scroes = 6;</code>
+       * <code>repeated int32 scores = 3;</code>
        *
        * <pre>
-       *胡牌后每个的分数
+       *当前轮的分数变化
        * </pre>
        */
-      public Builder setScroes(
+      public Builder setScores(
           int index, int value) {
-        ensureScroesIsMutable();
-        scroes_.set(index, value);
+        ensureScoresIsMutable();
+        scores_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 scroes = 6;</code>
+       * <code>repeated int32 scores = 3;</code>
        *
        * <pre>
-       *胡牌后每个的分数
+       *当前轮的分数变化
        * </pre>
        */
-      public Builder addScroes(int value) {
-        ensureScroesIsMutable();
-        scroes_.add(value);
+      public Builder addScores(int value) {
+        ensureScoresIsMutable();
+        scores_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 scroes = 6;</code>
+       * <code>repeated int32 scores = 3;</code>
        *
        * <pre>
-       *胡牌后每个的分数
+       *当前轮的分数变化
        * </pre>
        */
-      public Builder addAllScroes(
+      public Builder addAllScores(
           java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureScroesIsMutable();
-        super.addAll(values, scroes_);
+        ensureScoresIsMutable();
+        super.addAll(values, scores_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 scroes = 6;</code>
+       * <code>repeated int32 scores = 3;</code>
        *
        * <pre>
-       *胡牌后每个的分数
+       *当前轮的分数变化
        * </pre>
        */
-      public Builder clearScroes() {
-        scroes_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
+      public Builder clearScores() {
+        scores_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -32782,176 +29179,31 @@ public final class GameGuanyunProtocol {
      */
     game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type getPacketId();
 
-    // optional int32 hu_type = 2;
+    // optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;
     /**
-     * <code>optional int32 hu_type = 2;</code>
+     * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
      *
      * <pre>
-     *类型：0；流局 1-胡；2-自摸；
+     *一局结束时的信息
      * </pre>
      */
-    boolean hasHuType();
+    boolean hasCircleInfo();
     /**
-     * <code>optional int32 hu_type = 2;</code>
+     * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
      *
      * <pre>
-     *类型：0；流局 1-胡；2-自摸；
+     *一局结束时的信息
      * </pre>
      */
-    int getHuType();
-
-    // optional int32 hu_pos = 3;
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info getCircleInfo();
     /**
-     * <code>optional int32 hu_pos = 3;</code>
+     * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
      *
      * <pre>
-     *胡牌位置
+     *一局结束时的信息
      * </pre>
      */
-    boolean hasHuPos();
-    /**
-     * <code>optional int32 hu_pos = 3;</code>
-     *
-     * <pre>
-     *胡牌位置
-     * </pre>
-     */
-    int getHuPos();
-
-    // optional int32 hued_pos = 4;
-    /**
-     * <code>optional int32 hued_pos = 4;</code>
-     *
-     * <pre>
-     *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-     * </pre>
-     */
-    boolean hasHuedPos();
-    /**
-     * <code>optional int32 hued_pos = 4;</code>
-     *
-     * <pre>
-     *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-     * </pre>
-     */
-    int getHuedPos();
-
-    // optional int32 circleN_idx = 5;
-    /**
-     * <code>optional int32 circleN_idx = 5;</code>
-     *
-     * <pre>
-     *当前是第几局
-     * </pre>
-     */
-    boolean hasCircleNIdx();
-    /**
-     * <code>optional int32 circleN_idx = 5;</code>
-     *
-     * <pre>
-     *当前是第几局
-     * </pre>
-     */
-    int getCircleNIdx();
-
-    // optional int32 next_circle_start_tm = 6;
-    /**
-     * <code>optional int32 next_circle_start_tm = 6;</code>
-     *
-     * <pre>
-     *下局开始时间戳
-     * </pre>
-     */
-    boolean hasNextCircleStartTm();
-    /**
-     * <code>optional int32 next_circle_start_tm = 6;</code>
-     *
-     * <pre>
-     *下局开始时间戳
-     * </pre>
-     */
-    int getNextCircleStartTm();
-
-    // optional int32 hu_card = 7;
-    /**
-     * <code>optional int32 hu_card = 7;</code>
-     *
-     * <pre>
-     *胡牌的值
-     * </pre>
-     */
-    boolean hasHuCard();
-    /**
-     * <code>optional int32 hu_card = 7;</code>
-     *
-     * <pre>
-     *胡牌的值
-     * </pre>
-     */
-    int getHuCard();
-
-    // optional int32 best_pao_player = 8;
-    /**
-     * <code>optional int32 best_pao_player = 8;</code>
-     *
-     * <pre>
-     *最佳炮手
-     * </pre>
-     */
-    boolean hasBestPaoPlayer();
-    /**
-     * <code>optional int32 best_pao_player = 8;</code>
-     *
-     * <pre>
-     *最佳炮手
-     * </pre>
-     */
-    int getBestPaoPlayer();
-
-    // repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-     *
-     * <pre>
-     *此局人物相关的数据
-     * </pre>
-     */
-    java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result> 
-        getPlayersResultList();
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-     *
-     * <pre>
-     *此局人物相关的数据
-     * </pre>
-     */
-    game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result getPlayersResult(int index);
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-     *
-     * <pre>
-     *此局人物相关的数据
-     * </pre>
-     */
-    int getPlayersResultCount();
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-     *
-     * <pre>
-     *此局人物相关的数据
-     * </pre>
-     */
-    java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_resultOrBuilder> 
-        getPlayersResultOrBuilderList();
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-     *
-     * <pre>
-     *此局人物相关的数据
-     * </pre>
-     */
-    game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_resultOrBuilder getPlayersResultOrBuilder(
-        int index);
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_infoOrBuilder getCircleInfoOrBuilder();
   }
   /**
    * Protobuf type {@code game_guanyuan_protocols.packetl2c_circle_result_nt}
@@ -33019,47 +29271,17 @@ public final class GameGuanyunProtocol {
               }
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              huType_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              huPos_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              huedPos_ = input.readInt32();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              circleNIdx_ = input.readInt32();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              nextCircleStartTm_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              huCard_ = input.readInt32();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000080;
-              bestPaoPlayer_ = input.readInt32();
-              break;
-            }
-            case 74: {
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
-                playersResult_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result>();
-                mutable_bitField0_ |= 0x00000100;
+            case 18: {
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = circleInfo_.toBuilder();
               }
-              playersResult_.add(input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.PARSER, extensionRegistry));
+              circleInfo_ = input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(circleInfo_);
+                circleInfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
               break;
             }
           }
@@ -33070,9 +29292,6 @@ public final class GameGuanyunProtocol {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
-          playersResult_ = java.util.Collections.unmodifiableList(playersResult_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -33121,240 +29340,43 @@ public final class GameGuanyunProtocol {
       return packetId_;
     }
 
-    // optional int32 hu_type = 2;
-    public static final int HU_TYPE_FIELD_NUMBER = 2;
-    private int huType_;
+    // optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;
+    public static final int CIRCLE_INFO_FIELD_NUMBER = 2;
+    private game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info circleInfo_;
     /**
-     * <code>optional int32 hu_type = 2;</code>
+     * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
      *
      * <pre>
-     *类型：0；流局 1-胡；2-自摸；
+     *一局结束时的信息
      * </pre>
      */
-    public boolean hasHuType() {
+    public boolean hasCircleInfo() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 hu_type = 2;</code>
+     * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
      *
      * <pre>
-     *类型：0；流局 1-胡；2-自摸；
+     *一局结束时的信息
      * </pre>
      */
-    public int getHuType() {
-      return huType_;
-    }
-
-    // optional int32 hu_pos = 3;
-    public static final int HU_POS_FIELD_NUMBER = 3;
-    private int huPos_;
-    /**
-     * <code>optional int32 hu_pos = 3;</code>
-     *
-     * <pre>
-     *胡牌位置
-     * </pre>
-     */
-    public boolean hasHuPos() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info getCircleInfo() {
+      return circleInfo_;
     }
     /**
-     * <code>optional int32 hu_pos = 3;</code>
+     * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
      *
      * <pre>
-     *胡牌位置
+     *一局结束时的信息
      * </pre>
      */
-    public int getHuPos() {
-      return huPos_;
-    }
-
-    // optional int32 hued_pos = 4;
-    public static final int HUED_POS_FIELD_NUMBER = 4;
-    private int huedPos_;
-    /**
-     * <code>optional int32 hued_pos = 4;</code>
-     *
-     * <pre>
-     *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-     * </pre>
-     */
-    public boolean hasHuedPos() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional int32 hued_pos = 4;</code>
-     *
-     * <pre>
-     *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-     * </pre>
-     */
-    public int getHuedPos() {
-      return huedPos_;
-    }
-
-    // optional int32 circleN_idx = 5;
-    public static final int CIRCLEN_IDX_FIELD_NUMBER = 5;
-    private int circleNIdx_;
-    /**
-     * <code>optional int32 circleN_idx = 5;</code>
-     *
-     * <pre>
-     *当前是第几局
-     * </pre>
-     */
-    public boolean hasCircleNIdx() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int32 circleN_idx = 5;</code>
-     *
-     * <pre>
-     *当前是第几局
-     * </pre>
-     */
-    public int getCircleNIdx() {
-      return circleNIdx_;
-    }
-
-    // optional int32 next_circle_start_tm = 6;
-    public static final int NEXT_CIRCLE_START_TM_FIELD_NUMBER = 6;
-    private int nextCircleStartTm_;
-    /**
-     * <code>optional int32 next_circle_start_tm = 6;</code>
-     *
-     * <pre>
-     *下局开始时间戳
-     * </pre>
-     */
-    public boolean hasNextCircleStartTm() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional int32 next_circle_start_tm = 6;</code>
-     *
-     * <pre>
-     *下局开始时间戳
-     * </pre>
-     */
-    public int getNextCircleStartTm() {
-      return nextCircleStartTm_;
-    }
-
-    // optional int32 hu_card = 7;
-    public static final int HU_CARD_FIELD_NUMBER = 7;
-    private int huCard_;
-    /**
-     * <code>optional int32 hu_card = 7;</code>
-     *
-     * <pre>
-     *胡牌的值
-     * </pre>
-     */
-    public boolean hasHuCard() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional int32 hu_card = 7;</code>
-     *
-     * <pre>
-     *胡牌的值
-     * </pre>
-     */
-    public int getHuCard() {
-      return huCard_;
-    }
-
-    // optional int32 best_pao_player = 8;
-    public static final int BEST_PAO_PLAYER_FIELD_NUMBER = 8;
-    private int bestPaoPlayer_;
-    /**
-     * <code>optional int32 best_pao_player = 8;</code>
-     *
-     * <pre>
-     *最佳炮手
-     * </pre>
-     */
-    public boolean hasBestPaoPlayer() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional int32 best_pao_player = 8;</code>
-     *
-     * <pre>
-     *最佳炮手
-     * </pre>
-     */
-    public int getBestPaoPlayer() {
-      return bestPaoPlayer_;
-    }
-
-    // repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;
-    public static final int PLAYERS_RESULT_FIELD_NUMBER = 9;
-    private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result> playersResult_;
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-     *
-     * <pre>
-     *此局人物相关的数据
-     * </pre>
-     */
-    public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result> getPlayersResultList() {
-      return playersResult_;
-    }
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-     *
-     * <pre>
-     *此局人物相关的数据
-     * </pre>
-     */
-    public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_resultOrBuilder> 
-        getPlayersResultOrBuilderList() {
-      return playersResult_;
-    }
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-     *
-     * <pre>
-     *此局人物相关的数据
-     * </pre>
-     */
-    public int getPlayersResultCount() {
-      return playersResult_.size();
-    }
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-     *
-     * <pre>
-     *此局人物相关的数据
-     * </pre>
-     */
-    public game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result getPlayersResult(int index) {
-      return playersResult_.get(index);
-    }
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-     *
-     * <pre>
-     *此局人物相关的数据
-     * </pre>
-     */
-    public game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_resultOrBuilder getPlayersResultOrBuilder(
-        int index) {
-      return playersResult_.get(index);
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_infoOrBuilder getCircleInfoOrBuilder() {
+      return circleInfo_;
     }
 
     private void initFields() {
       packetId_ = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.e_mst_l2c_circle_result_nt;
-      huType_ = 0;
-      huPos_ = 0;
-      huedPos_ = 0;
-      circleNIdx_ = 0;
-      nextCircleStartTm_ = 0;
-      huCard_ = 0;
-      bestPaoPlayer_ = 0;
-      playersResult_ = java.util.Collections.emptyList();
+      circleInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -33372,28 +29394,7 @@ public final class GameGuanyunProtocol {
         output.writeEnum(1, packetId_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, huType_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, huPos_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, huedPos_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, circleNIdx_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, nextCircleStartTm_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, huCard_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, bestPaoPlayer_);
-      }
-      for (int i = 0; i < playersResult_.size(); i++) {
-        output.writeMessage(9, playersResult_.get(i));
+        output.writeMessage(2, circleInfo_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -33410,35 +29411,7 @@ public final class GameGuanyunProtocol {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, huType_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, huPos_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, huedPos_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, circleNIdx_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, nextCircleStartTm_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, huCard_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, bestPaoPlayer_);
-      }
-      for (int i = 0; i < playersResult_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, playersResult_.get(i));
+          .computeMessageSize(2, circleInfo_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -33552,7 +29525,7 @@ public final class GameGuanyunProtocol {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getPlayersResultFieldBuilder();
+          getCircleInfoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -33563,26 +29536,12 @@ public final class GameGuanyunProtocol {
         super.clear();
         packetId_ = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.e_mst_l2c_circle_result_nt;
         bitField0_ = (bitField0_ & ~0x00000001);
-        huType_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        huPos_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        huedPos_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        circleNIdx_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        nextCircleStartTm_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        huCard_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        bestPaoPlayer_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        if (playersResultBuilder_ == null) {
-          playersResult_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000100);
+        if (circleInfoBuilder_ == null) {
+          circleInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.getDefaultInstance();
         } else {
-          playersResultBuilder_.clear();
+          circleInfoBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -33618,39 +29577,10 @@ public final class GameGuanyunProtocol {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.huType_ = huType_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.huPos_ = huPos_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.huedPos_ = huedPos_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.circleNIdx_ = circleNIdx_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.nextCircleStartTm_ = nextCircleStartTm_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.huCard_ = huCard_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.bestPaoPlayer_ = bestPaoPlayer_;
-        if (playersResultBuilder_ == null) {
-          if (((bitField0_ & 0x00000100) == 0x00000100)) {
-            playersResult_ = java.util.Collections.unmodifiableList(playersResult_);
-            bitField0_ = (bitField0_ & ~0x00000100);
-          }
-          result.playersResult_ = playersResult_;
+        if (circleInfoBuilder_ == null) {
+          result.circleInfo_ = circleInfo_;
         } else {
-          result.playersResult_ = playersResultBuilder_.build();
+          result.circleInfo_ = circleInfoBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -33671,52 +29601,8 @@ public final class GameGuanyunProtocol {
         if (other.hasPacketId()) {
           setPacketId(other.getPacketId());
         }
-        if (other.hasHuType()) {
-          setHuType(other.getHuType());
-        }
-        if (other.hasHuPos()) {
-          setHuPos(other.getHuPos());
-        }
-        if (other.hasHuedPos()) {
-          setHuedPos(other.getHuedPos());
-        }
-        if (other.hasCircleNIdx()) {
-          setCircleNIdx(other.getCircleNIdx());
-        }
-        if (other.hasNextCircleStartTm()) {
-          setNextCircleStartTm(other.getNextCircleStartTm());
-        }
-        if (other.hasHuCard()) {
-          setHuCard(other.getHuCard());
-        }
-        if (other.hasBestPaoPlayer()) {
-          setBestPaoPlayer(other.getBestPaoPlayer());
-        }
-        if (playersResultBuilder_ == null) {
-          if (!other.playersResult_.isEmpty()) {
-            if (playersResult_.isEmpty()) {
-              playersResult_ = other.playersResult_;
-              bitField0_ = (bitField0_ & ~0x00000100);
-            } else {
-              ensurePlayersResultIsMutable();
-              playersResult_.addAll(other.playersResult_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.playersResult_.isEmpty()) {
-            if (playersResultBuilder_.isEmpty()) {
-              playersResultBuilder_.dispose();
-              playersResultBuilder_ = null;
-              playersResult_ = other.playersResult_;
-              bitField0_ = (bitField0_ & ~0x00000100);
-              playersResultBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getPlayersResultFieldBuilder() : null;
-            } else {
-              playersResultBuilder_.addAllMessages(other.playersResult_);
-            }
-          }
+        if (other.hasCircleInfo()) {
+          mergeCircleInfo(other.getCircleInfo());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -33781,659 +29667,157 @@ public final class GameGuanyunProtocol {
         return this;
       }
 
-      // optional int32 hu_type = 2;
-      private int huType_ ;
+      // optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;
+      private game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info circleInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_infoOrBuilder> circleInfoBuilder_;
       /**
-       * <code>optional int32 hu_type = 2;</code>
+       * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
        *
        * <pre>
-       *类型：0；流局 1-胡；2-自摸；
+       *一局结束时的信息
        * </pre>
        */
-      public boolean hasHuType() {
+      public boolean hasCircleInfo() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 hu_type = 2;</code>
+       * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
        *
        * <pre>
-       *类型：0；流局 1-胡；2-自摸；
+       *一局结束时的信息
        * </pre>
        */
-      public int getHuType() {
-        return huType_;
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info getCircleInfo() {
+        if (circleInfoBuilder_ == null) {
+          return circleInfo_;
+        } else {
+          return circleInfoBuilder_.getMessage();
+        }
       }
       /**
-       * <code>optional int32 hu_type = 2;</code>
+       * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
        *
        * <pre>
-       *类型：0；流局 1-胡；2-自摸；
+       *一局结束时的信息
        * </pre>
        */
-      public Builder setHuType(int value) {
+      public Builder setCircleInfo(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info value) {
+        if (circleInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          circleInfo_ = value;
+          onChanged();
+        } else {
+          circleInfoBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000002;
-        huType_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>optional int32 hu_type = 2;</code>
+       * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
        *
        * <pre>
-       *类型：0；流局 1-胡；2-自摸；
+       *一局结束时的信息
        * </pre>
        */
-      public Builder clearHuType() {
+      public Builder setCircleInfo(
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.Builder builderForValue) {
+        if (circleInfoBuilder_ == null) {
+          circleInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          circleInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
+       *
+       * <pre>
+       *一局结束时的信息
+       * </pre>
+       */
+      public Builder mergeCircleInfo(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info value) {
+        if (circleInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              circleInfo_ != game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.getDefaultInstance()) {
+            circleInfo_ =
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.newBuilder(circleInfo_).mergeFrom(value).buildPartial();
+          } else {
+            circleInfo_ = value;
+          }
+          onChanged();
+        } else {
+          circleInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
+       *
+       * <pre>
+       *一局结束时的信息
+       * </pre>
+       */
+      public Builder clearCircleInfo() {
+        if (circleInfoBuilder_ == null) {
+          circleInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.getDefaultInstance();
+          onChanged();
+        } else {
+          circleInfoBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
-        huType_ = 0;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
+       *
+       * <pre>
+       *一局结束时的信息
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.Builder getCircleInfoBuilder() {
+        bitField0_ |= 0x00000002;
         onChanged();
-        return this;
-      }
-
-      // optional int32 hu_pos = 3;
-      private int huPos_ ;
-      /**
-       * <code>optional int32 hu_pos = 3;</code>
-       *
-       * <pre>
-       *胡牌位置
-       * </pre>
-       */
-      public boolean hasHuPos() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return getCircleInfoFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional int32 hu_pos = 3;</code>
+       * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
        *
        * <pre>
-       *胡牌位置
+       *一局结束时的信息
        * </pre>
        */
-      public int getHuPos() {
-        return huPos_;
-      }
-      /**
-       * <code>optional int32 hu_pos = 3;</code>
-       *
-       * <pre>
-       *胡牌位置
-       * </pre>
-       */
-      public Builder setHuPos(int value) {
-        bitField0_ |= 0x00000004;
-        huPos_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 hu_pos = 3;</code>
-       *
-       * <pre>
-       *胡牌位置
-       * </pre>
-       */
-      public Builder clearHuPos() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        huPos_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 hued_pos = 4;
-      private int huedPos_ ;
-      /**
-       * <code>optional int32 hued_pos = 4;</code>
-       *
-       * <pre>
-       *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-       * </pre>
-       */
-      public boolean hasHuedPos() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional int32 hued_pos = 4;</code>
-       *
-       * <pre>
-       *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-       * </pre>
-       */
-      public int getHuedPos() {
-        return huedPos_;
-      }
-      /**
-       * <code>optional int32 hued_pos = 4;</code>
-       *
-       * <pre>
-       *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-       * </pre>
-       */
-      public Builder setHuedPos(int value) {
-        bitField0_ |= 0x00000008;
-        huedPos_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 hued_pos = 4;</code>
-       *
-       * <pre>
-       *最后出牌的位置，也就是放炮的位置，如自摸就是自己，如－1代表无意义
-       * </pre>
-       */
-      public Builder clearHuedPos() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        huedPos_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 circleN_idx = 5;
-      private int circleNIdx_ ;
-      /**
-       * <code>optional int32 circleN_idx = 5;</code>
-       *
-       * <pre>
-       *当前是第几局
-       * </pre>
-       */
-      public boolean hasCircleNIdx() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int32 circleN_idx = 5;</code>
-       *
-       * <pre>
-       *当前是第几局
-       * </pre>
-       */
-      public int getCircleNIdx() {
-        return circleNIdx_;
-      }
-      /**
-       * <code>optional int32 circleN_idx = 5;</code>
-       *
-       * <pre>
-       *当前是第几局
-       * </pre>
-       */
-      public Builder setCircleNIdx(int value) {
-        bitField0_ |= 0x00000010;
-        circleNIdx_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 circleN_idx = 5;</code>
-       *
-       * <pre>
-       *当前是第几局
-       * </pre>
-       */
-      public Builder clearCircleNIdx() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        circleNIdx_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 next_circle_start_tm = 6;
-      private int nextCircleStartTm_ ;
-      /**
-       * <code>optional int32 next_circle_start_tm = 6;</code>
-       *
-       * <pre>
-       *下局开始时间戳
-       * </pre>
-       */
-      public boolean hasNextCircleStartTm() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional int32 next_circle_start_tm = 6;</code>
-       *
-       * <pre>
-       *下局开始时间戳
-       * </pre>
-       */
-      public int getNextCircleStartTm() {
-        return nextCircleStartTm_;
-      }
-      /**
-       * <code>optional int32 next_circle_start_tm = 6;</code>
-       *
-       * <pre>
-       *下局开始时间戳
-       * </pre>
-       */
-      public Builder setNextCircleStartTm(int value) {
-        bitField0_ |= 0x00000020;
-        nextCircleStartTm_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 next_circle_start_tm = 6;</code>
-       *
-       * <pre>
-       *下局开始时间戳
-       * </pre>
-       */
-      public Builder clearNextCircleStartTm() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        nextCircleStartTm_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 hu_card = 7;
-      private int huCard_ ;
-      /**
-       * <code>optional int32 hu_card = 7;</code>
-       *
-       * <pre>
-       *胡牌的值
-       * </pre>
-       */
-      public boolean hasHuCard() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional int32 hu_card = 7;</code>
-       *
-       * <pre>
-       *胡牌的值
-       * </pre>
-       */
-      public int getHuCard() {
-        return huCard_;
-      }
-      /**
-       * <code>optional int32 hu_card = 7;</code>
-       *
-       * <pre>
-       *胡牌的值
-       * </pre>
-       */
-      public Builder setHuCard(int value) {
-        bitField0_ |= 0x00000040;
-        huCard_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 hu_card = 7;</code>
-       *
-       * <pre>
-       *胡牌的值
-       * </pre>
-       */
-      public Builder clearHuCard() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        huCard_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 best_pao_player = 8;
-      private int bestPaoPlayer_ ;
-      /**
-       * <code>optional int32 best_pao_player = 8;</code>
-       *
-       * <pre>
-       *最佳炮手
-       * </pre>
-       */
-      public boolean hasBestPaoPlayer() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional int32 best_pao_player = 8;</code>
-       *
-       * <pre>
-       *最佳炮手
-       * </pre>
-       */
-      public int getBestPaoPlayer() {
-        return bestPaoPlayer_;
-      }
-      /**
-       * <code>optional int32 best_pao_player = 8;</code>
-       *
-       * <pre>
-       *最佳炮手
-       * </pre>
-       */
-      public Builder setBestPaoPlayer(int value) {
-        bitField0_ |= 0x00000080;
-        bestPaoPlayer_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 best_pao_player = 8;</code>
-       *
-       * <pre>
-       *最佳炮手
-       * </pre>
-       */
-      public Builder clearBestPaoPlayer() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        bestPaoPlayer_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;
-      private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result> playersResult_ =
-        java.util.Collections.emptyList();
-      private void ensurePlayersResultIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
-          playersResult_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result>(playersResult_);
-          bitField0_ |= 0x00000100;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_resultOrBuilder> playersResultBuilder_;
-
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result> getPlayersResultList() {
-        if (playersResultBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(playersResult_);
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_infoOrBuilder getCircleInfoOrBuilder() {
+        if (circleInfoBuilder_ != null) {
+          return circleInfoBuilder_.getMessageOrBuilder();
         } else {
-          return playersResultBuilder_.getMessageList();
+          return circleInfo_;
         }
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
+       * <code>optional .game_guanyuan_protocols.msg_circle_over_info circle_info = 2;</code>
        *
        * <pre>
-       *此局人物相关的数据
+       *一局结束时的信息
        * </pre>
        */
-      public int getPlayersResultCount() {
-        if (playersResultBuilder_ == null) {
-          return playersResult_.size();
-        } else {
-          return playersResultBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result getPlayersResult(int index) {
-        if (playersResultBuilder_ == null) {
-          return playersResult_.get(index);
-        } else {
-          return playersResultBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public Builder setPlayersResult(
-          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result value) {
-        if (playersResultBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePlayersResultIsMutable();
-          playersResult_.set(index, value);
-          onChanged();
-        } else {
-          playersResultBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public Builder setPlayersResult(
-          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder builderForValue) {
-        if (playersResultBuilder_ == null) {
-          ensurePlayersResultIsMutable();
-          playersResult_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          playersResultBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public Builder addPlayersResult(game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result value) {
-        if (playersResultBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePlayersResultIsMutable();
-          playersResult_.add(value);
-          onChanged();
-        } else {
-          playersResultBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public Builder addPlayersResult(
-          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result value) {
-        if (playersResultBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePlayersResultIsMutable();
-          playersResult_.add(index, value);
-          onChanged();
-        } else {
-          playersResultBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public Builder addPlayersResult(
-          game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder builderForValue) {
-        if (playersResultBuilder_ == null) {
-          ensurePlayersResultIsMutable();
-          playersResult_.add(builderForValue.build());
-          onChanged();
-        } else {
-          playersResultBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public Builder addPlayersResult(
-          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder builderForValue) {
-        if (playersResultBuilder_ == null) {
-          ensurePlayersResultIsMutable();
-          playersResult_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          playersResultBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public Builder addAllPlayersResult(
-          java.lang.Iterable<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result> values) {
-        if (playersResultBuilder_ == null) {
-          ensurePlayersResultIsMutable();
-          super.addAll(values, playersResult_);
-          onChanged();
-        } else {
-          playersResultBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public Builder clearPlayersResult() {
-        if (playersResultBuilder_ == null) {
-          playersResult_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000100);
-          onChanged();
-        } else {
-          playersResultBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public Builder removePlayersResult(int index) {
-        if (playersResultBuilder_ == null) {
-          ensurePlayersResultIsMutable();
-          playersResult_.remove(index);
-          onChanged();
-        } else {
-          playersResultBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder getPlayersResultBuilder(
-          int index) {
-        return getPlayersResultFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_resultOrBuilder getPlayersResultOrBuilder(
-          int index) {
-        if (playersResultBuilder_ == null) {
-          return playersResult_.get(index);  } else {
-          return playersResultBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_resultOrBuilder> 
-           getPlayersResultOrBuilderList() {
-        if (playersResultBuilder_ != null) {
-          return playersResultBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(playersResult_);
-        }
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder addPlayersResultBuilder() {
-        return getPlayersResultFieldBuilder().addBuilder(
-            game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder addPlayersResultBuilder(
-          int index) {
-        return getPlayersResultFieldBuilder().addBuilder(
-            index, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .game_guanyuan_protocols.msg_player_circle_result players_result = 9;</code>
-       *
-       * <pre>
-       *此局人物相关的数据
-       * </pre>
-       */
-      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder> 
-           getPlayersResultBuilderList() {
-        return getPlayersResultFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_resultOrBuilder> 
-          getPlayersResultFieldBuilder() {
-        if (playersResultBuilder_ == null) {
-          playersResultBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_resultOrBuilder>(
-                  playersResult_,
-                  ((bitField0_ & 0x00000100) == 0x00000100),
+      private com.google.protobuf.SingleFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_infoOrBuilder> 
+          getCircleInfoFieldBuilder() {
+        if (circleInfoBuilder_ == null) {
+          circleInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_infoOrBuilder>(
+                  circleInfo_,
                   getParentForChildren(),
                   isClean());
-          playersResult_ = null;
+          circleInfo_ = null;
         }
-        return playersResultBuilder_;
+        return circleInfoBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:game_guanyuan_protocols.packetl2c_circle_result_nt)
@@ -34447,239 +29831,158 @@ public final class GameGuanyunProtocol {
     // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.packetl2c_circle_result_nt)
   }
 
-  public interface msg_player_circle_resultOrBuilder
+  public interface msg_circle_over_infoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // repeated int32 hide_cards = 1;
+    // optional int32 circle_num = 1;
     /**
-     * <code>repeated int32 hide_cards = 1;</code>
+     * <code>optional int32 circle_num = 1;</code>
      *
      * <pre>
-     *玩家最后手上的牌
+     *第几圈
      * </pre>
      */
-    java.util.List<java.lang.Integer> getHideCardsList();
+    boolean hasCircleNum();
     /**
-     * <code>repeated int32 hide_cards = 1;</code>
+     * <code>optional int32 circle_num = 1;</code>
      *
      * <pre>
-     *玩家最后手上的牌
+     *第几圈
      * </pre>
      */
-    int getHideCardsCount();
-    /**
-     * <code>repeated int32 hide_cards = 1;</code>
-     *
-     * <pre>
-     *玩家最后手上的牌
-     * </pre>
-     */
-    int getHideCards(int index);
+    int getCircleNum();
 
-    // repeated int32 gang_cards = 2;
+    // optional uint64 next_circle_start_tm = 2;
     /**
-     * <code>repeated int32 gang_cards = 2;</code>
+     * <code>optional uint64 next_circle_start_tm = 2;</code>
      *
      * <pre>
-     *玩家最后手上的牌
+     *下局开始时间戳
      * </pre>
      */
-    java.util.List<java.lang.Integer> getGangCardsList();
+    boolean hasNextCircleStartTm();
     /**
-     * <code>repeated int32 gang_cards = 2;</code>
+     * <code>optional uint64 next_circle_start_tm = 2;</code>
      *
      * <pre>
-     *玩家最后手上的牌
+     *下局开始时间戳
      * </pre>
      */
-    int getGangCardsCount();
-    /**
-     * <code>repeated int32 gang_cards = 2;</code>
-     *
-     * <pre>
-     *玩家最后手上的牌
-     * </pre>
-     */
-    int getGangCards(int index);
+    long getNextCircleStartTm();
 
-    // repeated int32 angang_cards = 3;
+    // repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;
     /**
-     * <code>repeated int32 angang_cards = 3;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
      *
      * <pre>
-     *暗杠牌
+     *当前轮各个玩家的信息
      * </pre>
      */
-    java.util.List<java.lang.Integer> getAngangCardsList();
+    java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> 
+        getDetailList();
     /**
-     * <code>repeated int32 angang_cards = 3;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
      *
      * <pre>
-     *暗杠牌
+     *当前轮各个玩家的信息
      * </pre>
      */
-    int getAngangCardsCount();
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail getDetail(int index);
     /**
-     * <code>repeated int32 angang_cards = 3;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
      *
      * <pre>
-     *暗杠牌
+     *当前轮各个玩家的信息
      * </pre>
      */
-    int getAngangCards(int index);
+    int getDetailCount();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+     *
+     * <pre>
+     *当前轮各个玩家的信息
+     * </pre>
+     */
+    java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder> 
+        getDetailOrBuilderList();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+     *
+     * <pre>
+     *当前轮各个玩家的信息
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder getDetailOrBuilder(
+        int index);
 
-    // repeated int32 peng_cards = 4;
+    // repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;
     /**
-     * <code>repeated int32 peng_cards = 4;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
      *
      * <pre>
-     *碰牌的
+     *胡的操作历史			为空时，则一定是流局
      * </pre>
      */
-    java.util.List<java.lang.Integer> getPengCardsList();
+    java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> 
+        getHuHistoryActionInfoList();
     /**
-     * <code>repeated int32 peng_cards = 4;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
      *
      * <pre>
-     *碰牌的
+     *胡的操作历史			为空时，则一定是流局
      * </pre>
      */
-    int getPengCardsCount();
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHuHistoryActionInfo(int index);
     /**
-     * <code>repeated int32 peng_cards = 4;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
      *
      * <pre>
-     *碰牌的
+     *胡的操作历史			为空时，则一定是流局
      * </pre>
      */
-    int getPengCards(int index);
-
-    // repeated int32 flower_cards = 5;
+    int getHuHistoryActionInfoCount();
     /**
-     * <code>repeated int32 flower_cards = 5;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
      *
      * <pre>
-     *吃的牌的集合
+     *胡的操作历史			为空时，则一定是流局
      * </pre>
      */
-    java.util.List<java.lang.Integer> getFlowerCardsList();
+    java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> 
+        getHuHistoryActionInfoOrBuilderList();
     /**
-     * <code>repeated int32 flower_cards = 5;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
      *
      * <pre>
-     *吃的牌的集合
+     *胡的操作历史			为空时，则一定是流局
      * </pre>
      */
-    int getFlowerCardsCount();
-    /**
-     * <code>repeated int32 flower_cards = 5;</code>
-     *
-     * <pre>
-     *吃的牌的集合
-     * </pre>
-     */
-    int getFlowerCards(int index);
-
-    // optional int32 score = 6;
-    /**
-     * <code>optional int32 score = 6;</code>
-     *
-     * <pre>
-     *玩家得分
-     * </pre>
-     */
-    boolean hasScore();
-    /**
-     * <code>optional int32 score = 6;</code>
-     *
-     * <pre>
-     *玩家得分
-     * </pre>
-     */
-    int getScore();
-
-    // optional int32 ting_card = 7;
-    /**
-     * <code>optional int32 ting_card = 7;</code>
-     *
-     * <pre>
-     *玩家叫听的牌
-     * </pre>
-     */
-    boolean hasTingCard();
-    /**
-     * <code>optional int32 ting_card = 7;</code>
-     *
-     * <pre>
-     *玩家叫听的牌
-     * </pre>
-     */
-    int getTingCard();
-
-    // repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
-     *
-     * <pre>
-     *胡牌时的信息状态
-     * </pre>
-     */
-    java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> 
-        getDetailInfoList();
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
-     *
-     * <pre>
-     *胡牌时的信息状态
-     * </pre>
-     */
-    game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info getDetailInfo(int index);
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
-     *
-     * <pre>
-     *胡牌时的信息状态
-     * </pre>
-     */
-    int getDetailInfoCount();
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
-     *
-     * <pre>
-     *胡牌时的信息状态
-     * </pre>
-     */
-    java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder> 
-        getDetailInfoOrBuilderList();
-    /**
-     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
-     *
-     * <pre>
-     *胡牌时的信息状态
-     * </pre>
-     */
-    game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder getDetailInfoOrBuilder(
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHuHistoryActionInfoOrBuilder(
         int index);
   }
   /**
-   * Protobuf type {@code game_guanyuan_protocols.msg_player_circle_result}
+   * Protobuf type {@code game_guanyuan_protocols.msg_circle_over_info}
+   *
+   * <pre>
+   *一局结束时的信息
+   * </pre>
    */
-  public static final class msg_player_circle_result extends
+  public static final class msg_circle_over_info extends
       com.google.protobuf.GeneratedMessage
-      implements msg_player_circle_resultOrBuilder {
-    // Use msg_player_circle_result.newBuilder() to construct.
-    private msg_player_circle_result(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements msg_circle_over_infoOrBuilder {
+    // Use msg_circle_over_info.newBuilder() to construct.
+    private msg_circle_over_info(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private msg_player_circle_result(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private msg_circle_over_info(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final msg_player_circle_result defaultInstance;
-    public static msg_player_circle_result getDefaultInstance() {
+    private static final msg_circle_over_info defaultInstance;
+    public static msg_circle_over_info getDefaultInstance() {
       return defaultInstance;
     }
 
-    public msg_player_circle_result getDefaultInstanceForType() {
+    public msg_circle_over_info getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -34689,7 +29992,7 @@ public final class GameGuanyunProtocol {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private msg_player_circle_result(
+    private msg_circle_over_info(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -34713,126 +30016,29 @@ public final class GameGuanyunProtocol {
               break;
             }
             case 8: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                hideCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              hideCards_.add(input.readInt32());
-              break;
-            }
-            case 10: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
-                hideCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                hideCards_.add(input.readInt32());
-              }
-              input.popLimit(limit);
+              bitField0_ |= 0x00000001;
+              circleNum_ = input.readInt32();
               break;
             }
             case 16: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                gangCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              gangCards_.add(input.readInt32());
-              break;
-            }
-            case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                gangCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                gangCards_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 24: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                angangCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              angangCards_.add(input.readInt32());
+              bitField0_ |= 0x00000002;
+              nextCircleStartTm_ = input.readUInt64();
               break;
             }
             case 26: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                angangCards_ = new java.util.ArrayList<java.lang.Integer>();
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                detail_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail>();
                 mutable_bitField0_ |= 0x00000004;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                angangCards_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 32: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                pengCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              pengCards_.add(input.readInt32());
+              detail_.add(input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.PARSER, extensionRegistry));
               break;
             }
             case 34: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
-                pengCards_ = new java.util.ArrayList<java.lang.Integer>();
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                huHistoryActionInfo_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info>();
                 mutable_bitField0_ |= 0x00000008;
               }
-              while (input.getBytesUntilLimit() > 0) {
-                pengCards_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 40: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                flowerCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000010;
-              }
-              flowerCards_.add(input.readInt32());
-              break;
-            }
-            case 42: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
-                flowerCards_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000010;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                flowerCards_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000001;
-              score_ = input.readInt32();
-              break;
-            }
-            case 56: {
-              bitField0_ |= 0x00000002;
-              tingCard_ = input.readInt32();
-              break;
-            }
-            case 66: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-                detailInfo_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info>();
-                mutable_bitField0_ |= 0x00000080;
-              }
-              detailInfo_.add(input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.PARSER, extensionRegistry));
+              huHistoryActionInfo_.add(input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.PARSER, extensionRegistry));
               break;
             }
           }
@@ -34843,23 +30049,11 @@ public final class GameGuanyunProtocol {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          hideCards_ = java.util.Collections.unmodifiableList(hideCards_);
-        }
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          gangCards_ = java.util.Collections.unmodifiableList(gangCards_);
-        }
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          angangCards_ = java.util.Collections.unmodifiableList(angangCards_);
+          detail_ = java.util.Collections.unmodifiableList(detail_);
         }
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          pengCards_ = java.util.Collections.unmodifiableList(pengCards_);
-        }
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-          flowerCards_ = java.util.Collections.unmodifiableList(flowerCards_);
-        }
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-          detailInfo_ = java.util.Collections.unmodifiableList(detailInfo_);
+          huHistoryActionInfo_ = java.util.Collections.unmodifiableList(huHistoryActionInfo_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -34867,320 +30061,197 @@ public final class GameGuanyunProtocol {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_player_circle_result_descriptor;
+      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_player_circle_result_fieldAccessorTable
+      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_info_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder.class);
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<msg_player_circle_result> PARSER =
-        new com.google.protobuf.AbstractParser<msg_player_circle_result>() {
-      public msg_player_circle_result parsePartialFrom(
+    public static com.google.protobuf.Parser<msg_circle_over_info> PARSER =
+        new com.google.protobuf.AbstractParser<msg_circle_over_info>() {
+      public msg_circle_over_info parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new msg_player_circle_result(input, extensionRegistry);
+        return new msg_circle_over_info(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<msg_player_circle_result> getParserForType() {
+    public com.google.protobuf.Parser<msg_circle_over_info> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
-    // repeated int32 hide_cards = 1;
-    public static final int HIDE_CARDS_FIELD_NUMBER = 1;
-    private java.util.List<java.lang.Integer> hideCards_;
+    // optional int32 circle_num = 1;
+    public static final int CIRCLE_NUM_FIELD_NUMBER = 1;
+    private int circleNum_;
     /**
-     * <code>repeated int32 hide_cards = 1;</code>
+     * <code>optional int32 circle_num = 1;</code>
      *
      * <pre>
-     *玩家最后手上的牌
+     *第几圈
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getHideCardsList() {
-      return hideCards_;
-    }
-    /**
-     * <code>repeated int32 hide_cards = 1;</code>
-     *
-     * <pre>
-     *玩家最后手上的牌
-     * </pre>
-     */
-    public int getHideCardsCount() {
-      return hideCards_.size();
-    }
-    /**
-     * <code>repeated int32 hide_cards = 1;</code>
-     *
-     * <pre>
-     *玩家最后手上的牌
-     * </pre>
-     */
-    public int getHideCards(int index) {
-      return hideCards_.get(index);
-    }
-
-    // repeated int32 gang_cards = 2;
-    public static final int GANG_CARDS_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> gangCards_;
-    /**
-     * <code>repeated int32 gang_cards = 2;</code>
-     *
-     * <pre>
-     *玩家最后手上的牌
-     * </pre>
-     */
-    public java.util.List<java.lang.Integer>
-        getGangCardsList() {
-      return gangCards_;
-    }
-    /**
-     * <code>repeated int32 gang_cards = 2;</code>
-     *
-     * <pre>
-     *玩家最后手上的牌
-     * </pre>
-     */
-    public int getGangCardsCount() {
-      return gangCards_.size();
-    }
-    /**
-     * <code>repeated int32 gang_cards = 2;</code>
-     *
-     * <pre>
-     *玩家最后手上的牌
-     * </pre>
-     */
-    public int getGangCards(int index) {
-      return gangCards_.get(index);
-    }
-
-    // repeated int32 angang_cards = 3;
-    public static final int ANGANG_CARDS_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Integer> angangCards_;
-    /**
-     * <code>repeated int32 angang_cards = 3;</code>
-     *
-     * <pre>
-     *暗杠牌
-     * </pre>
-     */
-    public java.util.List<java.lang.Integer>
-        getAngangCardsList() {
-      return angangCards_;
-    }
-    /**
-     * <code>repeated int32 angang_cards = 3;</code>
-     *
-     * <pre>
-     *暗杠牌
-     * </pre>
-     */
-    public int getAngangCardsCount() {
-      return angangCards_.size();
-    }
-    /**
-     * <code>repeated int32 angang_cards = 3;</code>
-     *
-     * <pre>
-     *暗杠牌
-     * </pre>
-     */
-    public int getAngangCards(int index) {
-      return angangCards_.get(index);
-    }
-
-    // repeated int32 peng_cards = 4;
-    public static final int PENG_CARDS_FIELD_NUMBER = 4;
-    private java.util.List<java.lang.Integer> pengCards_;
-    /**
-     * <code>repeated int32 peng_cards = 4;</code>
-     *
-     * <pre>
-     *碰牌的
-     * </pre>
-     */
-    public java.util.List<java.lang.Integer>
-        getPengCardsList() {
-      return pengCards_;
-    }
-    /**
-     * <code>repeated int32 peng_cards = 4;</code>
-     *
-     * <pre>
-     *碰牌的
-     * </pre>
-     */
-    public int getPengCardsCount() {
-      return pengCards_.size();
-    }
-    /**
-     * <code>repeated int32 peng_cards = 4;</code>
-     *
-     * <pre>
-     *碰牌的
-     * </pre>
-     */
-    public int getPengCards(int index) {
-      return pengCards_.get(index);
-    }
-
-    // repeated int32 flower_cards = 5;
-    public static final int FLOWER_CARDS_FIELD_NUMBER = 5;
-    private java.util.List<java.lang.Integer> flowerCards_;
-    /**
-     * <code>repeated int32 flower_cards = 5;</code>
-     *
-     * <pre>
-     *吃的牌的集合
-     * </pre>
-     */
-    public java.util.List<java.lang.Integer>
-        getFlowerCardsList() {
-      return flowerCards_;
-    }
-    /**
-     * <code>repeated int32 flower_cards = 5;</code>
-     *
-     * <pre>
-     *吃的牌的集合
-     * </pre>
-     */
-    public int getFlowerCardsCount() {
-      return flowerCards_.size();
-    }
-    /**
-     * <code>repeated int32 flower_cards = 5;</code>
-     *
-     * <pre>
-     *吃的牌的集合
-     * </pre>
-     */
-    public int getFlowerCards(int index) {
-      return flowerCards_.get(index);
-    }
-
-    // optional int32 score = 6;
-    public static final int SCORE_FIELD_NUMBER = 6;
-    private int score_;
-    /**
-     * <code>optional int32 score = 6;</code>
-     *
-     * <pre>
-     *玩家得分
-     * </pre>
-     */
-    public boolean hasScore() {
+    public boolean hasCircleNum() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 score = 6;</code>
+     * <code>optional int32 circle_num = 1;</code>
      *
      * <pre>
-     *玩家得分
+     *第几圈
      * </pre>
      */
-    public int getScore() {
-      return score_;
+    public int getCircleNum() {
+      return circleNum_;
     }
 
-    // optional int32 ting_card = 7;
-    public static final int TING_CARD_FIELD_NUMBER = 7;
-    private int tingCard_;
+    // optional uint64 next_circle_start_tm = 2;
+    public static final int NEXT_CIRCLE_START_TM_FIELD_NUMBER = 2;
+    private long nextCircleStartTm_;
     /**
-     * <code>optional int32 ting_card = 7;</code>
+     * <code>optional uint64 next_circle_start_tm = 2;</code>
      *
      * <pre>
-     *玩家叫听的牌
+     *下局开始时间戳
      * </pre>
      */
-    public boolean hasTingCard() {
+    public boolean hasNextCircleStartTm() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 ting_card = 7;</code>
+     * <code>optional uint64 next_circle_start_tm = 2;</code>
      *
      * <pre>
-     *玩家叫听的牌
+     *下局开始时间戳
      * </pre>
      */
-    public int getTingCard() {
-      return tingCard_;
+    public long getNextCircleStartTm() {
+      return nextCircleStartTm_;
     }
 
-    // repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;
-    public static final int DETAIL_INFO_FIELD_NUMBER = 8;
-    private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> detailInfo_;
+    // repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;
+    public static final int DETAIL_FIELD_NUMBER = 3;
+    private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> detail_;
     /**
-     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
      *
      * <pre>
-     *胡牌时的信息状态
+     *当前轮各个玩家的信息
      * </pre>
      */
-    public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> getDetailInfoList() {
-      return detailInfo_;
+    public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> getDetailList() {
+      return detail_;
     }
     /**
-     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
      *
      * <pre>
-     *胡牌时的信息状态
+     *当前轮各个玩家的信息
      * </pre>
      */
-    public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder> 
-        getDetailInfoOrBuilderList() {
-      return detailInfo_;
+    public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder> 
+        getDetailOrBuilderList() {
+      return detail_;
     }
     /**
-     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
      *
      * <pre>
-     *胡牌时的信息状态
+     *当前轮各个玩家的信息
      * </pre>
      */
-    public int getDetailInfoCount() {
-      return detailInfo_.size();
+    public int getDetailCount() {
+      return detail_.size();
     }
     /**
-     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
      *
      * <pre>
-     *胡牌时的信息状态
+     *当前轮各个玩家的信息
      * </pre>
      */
-    public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info getDetailInfo(int index) {
-      return detailInfo_.get(index);
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail getDetail(int index) {
+      return detail_.get(index);
     }
     /**
-     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+     * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
      *
      * <pre>
-     *胡牌时的信息状态
+     *当前轮各个玩家的信息
      * </pre>
      */
-    public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder getDetailInfoOrBuilder(
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder getDetailOrBuilder(
         int index) {
-      return detailInfo_.get(index);
+      return detail_.get(index);
+    }
+
+    // repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;
+    public static final int HU_HISTORY_ACTION_INFO_FIELD_NUMBER = 4;
+    private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> huHistoryActionInfo_;
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+     *
+     * <pre>
+     *胡的操作历史			为空时，则一定是流局
+     * </pre>
+     */
+    public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> getHuHistoryActionInfoList() {
+      return huHistoryActionInfo_;
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+     *
+     * <pre>
+     *胡的操作历史			为空时，则一定是流局
+     * </pre>
+     */
+    public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> 
+        getHuHistoryActionInfoOrBuilderList() {
+      return huHistoryActionInfo_;
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+     *
+     * <pre>
+     *胡的操作历史			为空时，则一定是流局
+     * </pre>
+     */
+    public int getHuHistoryActionInfoCount() {
+      return huHistoryActionInfo_.size();
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+     *
+     * <pre>
+     *胡的操作历史			为空时，则一定是流局
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHuHistoryActionInfo(int index) {
+      return huHistoryActionInfo_.get(index);
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+     *
+     * <pre>
+     *胡的操作历史			为空时，则一定是流局
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHuHistoryActionInfoOrBuilder(
+        int index) {
+      return huHistoryActionInfo_.get(index);
     }
 
     private void initFields() {
-      hideCards_ = java.util.Collections.emptyList();
-      gangCards_ = java.util.Collections.emptyList();
-      angangCards_ = java.util.Collections.emptyList();
-      pengCards_ = java.util.Collections.emptyList();
-      flowerCards_ = java.util.Collections.emptyList();
-      score_ = 0;
-      tingCard_ = 0;
-      detailInfo_ = java.util.Collections.emptyList();
+      circleNum_ = 0;
+      nextCircleStartTm_ = 0L;
+      detail_ = java.util.Collections.emptyList();
+      huHistoryActionInfo_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -35194,29 +30265,17 @@ public final class GameGuanyunProtocol {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (int i = 0; i < hideCards_.size(); i++) {
-        output.writeInt32(1, hideCards_.get(i));
-      }
-      for (int i = 0; i < gangCards_.size(); i++) {
-        output.writeInt32(2, gangCards_.get(i));
-      }
-      for (int i = 0; i < angangCards_.size(); i++) {
-        output.writeInt32(3, angangCards_.get(i));
-      }
-      for (int i = 0; i < pengCards_.size(); i++) {
-        output.writeInt32(4, pengCards_.get(i));
-      }
-      for (int i = 0; i < flowerCards_.size(); i++) {
-        output.writeInt32(5, flowerCards_.get(i));
-      }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(6, score_);
+        output.writeInt32(1, circleNum_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(7, tingCard_);
+        output.writeUInt64(2, nextCircleStartTm_);
       }
-      for (int i = 0; i < detailInfo_.size(); i++) {
-        output.writeMessage(8, detailInfo_.get(i));
+      for (int i = 0; i < detail_.size(); i++) {
+        output.writeMessage(3, detail_.get(i));
+      }
+      for (int i = 0; i < huHistoryActionInfo_.size(); i++) {
+        output.writeMessage(4, huHistoryActionInfo_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -35227,62 +30286,21 @@ public final class GameGuanyunProtocol {
       if (size != -1) return size;
 
       size = 0;
-      {
-        int dataSize = 0;
-        for (int i = 0; i < hideCards_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(hideCards_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getHideCardsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < gangCards_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(gangCards_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getGangCardsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < angangCards_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(angangCards_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getAngangCardsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < pengCards_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(pengCards_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getPengCardsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < flowerCards_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(flowerCards_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getFlowerCardsList().size();
-      }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, score_);
+          .computeInt32Size(1, circleNum_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, tingCard_);
+          .computeUInt64Size(2, nextCircleStartTm_);
       }
-      for (int i = 0; i < detailInfo_.size(); i++) {
+      for (int i = 0; i < detail_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, detailInfo_.get(i));
+          .computeMessageSize(3, detail_.get(i));
+      }
+      for (int i = 0; i < huHistoryActionInfo_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, huHistoryActionInfo_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -35296,53 +30314,53 @@ public final class GameGuanyunProtocol {
       return super.writeReplace();
     }
 
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parseFrom(
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parseFrom(
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parseFrom(byte[] data)
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parseFrom(
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parseFrom(java.io.InputStream input)
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parseFrom(
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parseDelimitedFrom(java.io.InputStream input)
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parseDelimitedFrom(
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parseFrom(
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parseFrom(
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -35351,7 +30369,7 @@ public final class GameGuanyunProtocol {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result prototype) {
+    public static Builder newBuilder(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -35363,24 +30381,28 @@ public final class GameGuanyunProtocol {
       return builder;
     }
     /**
-     * Protobuf type {@code game_guanyuan_protocols.msg_player_circle_result}
+     * Protobuf type {@code game_guanyuan_protocols.msg_circle_over_info}
+     *
+     * <pre>
+     *一局结束时的信息
+     * </pre>
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_resultOrBuilder {
+       implements game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_infoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_player_circle_result_descriptor;
+        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_player_circle_result_fieldAccessorTable
+        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_info_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.Builder.class);
+                game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.Builder.class);
       }
 
-      // Construct using game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.newBuilder()
+      // Construct using game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -35392,7 +30414,8 @@ public final class GameGuanyunProtocol {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getDetailInfoFieldBuilder();
+          getDetailFieldBuilder();
+          getHuHistoryActionInfoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -35401,25 +30424,21 @@ public final class GameGuanyunProtocol {
 
       public Builder clear() {
         super.clear();
-        hideCards_ = java.util.Collections.emptyList();
+        circleNum_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        gangCards_ = java.util.Collections.emptyList();
+        nextCircleStartTm_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
-        angangCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
-        pengCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
-        flowerCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000010);
-        score_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        tingCard_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        if (detailInfoBuilder_ == null) {
-          detailInfo_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
+        if (detailBuilder_ == null) {
+          detail_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
-          detailInfoBuilder_.clear();
+          detailBuilder_.clear();
+        }
+        if (huHistoryActionInfoBuilder_ == null) {
+          huHistoryActionInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          huHistoryActionInfoBuilder_.clear();
         }
         return this;
       }
@@ -35430,66 +30449,50 @@ public final class GameGuanyunProtocol {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_player_circle_result_descriptor;
+        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor;
       }
 
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result getDefaultInstanceForType() {
-        return game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.getDefaultInstance();
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info getDefaultInstanceForType() {
+        return game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.getDefaultInstance();
       }
 
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result build() {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result result = buildPartial();
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info build() {
+        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result buildPartial() {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result result = new game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result(this);
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info buildPartial() {
+        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info result = new game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          hideCards_ = java.util.Collections.unmodifiableList(hideCards_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.hideCards_ = hideCards_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          gangCards_ = java.util.Collections.unmodifiableList(gangCards_);
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.gangCards_ = gangCards_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          angangCards_ = java.util.Collections.unmodifiableList(angangCards_);
-          bitField0_ = (bitField0_ & ~0x00000004);
-        }
-        result.angangCards_ = angangCards_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          pengCards_ = java.util.Collections.unmodifiableList(pengCards_);
-          bitField0_ = (bitField0_ & ~0x00000008);
-        }
-        result.pengCards_ = pengCards_;
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          flowerCards_ = java.util.Collections.unmodifiableList(flowerCards_);
-          bitField0_ = (bitField0_ & ~0x00000010);
-        }
-        result.flowerCards_ = flowerCards_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.score_ = score_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+        result.circleNum_ = circleNum_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.tingCard_ = tingCard_;
-        if (detailInfoBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080)) {
-            detailInfo_ = java.util.Collections.unmodifiableList(detailInfo_);
-            bitField0_ = (bitField0_ & ~0x00000080);
+        result.nextCircleStartTm_ = nextCircleStartTm_;
+        if (detailBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            detail_ = java.util.Collections.unmodifiableList(detail_);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
-          result.detailInfo_ = detailInfo_;
+          result.detail_ = detail_;
         } else {
-          result.detailInfo_ = detailInfoBuilder_.build();
+          result.detail_ = detailBuilder_.build();
+        }
+        if (huHistoryActionInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            huHistoryActionInfo_ = java.util.Collections.unmodifiableList(huHistoryActionInfo_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.huHistoryActionInfo_ = huHistoryActionInfo_;
+        } else {
+          result.huHistoryActionInfo_ = huHistoryActionInfoBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -35497,95 +30500,71 @@ public final class GameGuanyunProtocol {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result) {
-          return mergeFrom((game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result)other);
+        if (other instanceof game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info) {
+          return mergeFrom((game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result other) {
-        if (other == game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result.getDefaultInstance()) return this;
-        if (!other.hideCards_.isEmpty()) {
-          if (hideCards_.isEmpty()) {
-            hideCards_ = other.hideCards_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureHideCardsIsMutable();
-            hideCards_.addAll(other.hideCards_);
-          }
-          onChanged();
+      public Builder mergeFrom(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info other) {
+        if (other == game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info.getDefaultInstance()) return this;
+        if (other.hasCircleNum()) {
+          setCircleNum(other.getCircleNum());
         }
-        if (!other.gangCards_.isEmpty()) {
-          if (gangCards_.isEmpty()) {
-            gangCards_ = other.gangCards_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureGangCardsIsMutable();
-            gangCards_.addAll(other.gangCards_);
-          }
-          onChanged();
+        if (other.hasNextCircleStartTm()) {
+          setNextCircleStartTm(other.getNextCircleStartTm());
         }
-        if (!other.angangCards_.isEmpty()) {
-          if (angangCards_.isEmpty()) {
-            angangCards_ = other.angangCards_;
-            bitField0_ = (bitField0_ & ~0x00000004);
-          } else {
-            ensureAngangCardsIsMutable();
-            angangCards_.addAll(other.angangCards_);
-          }
-          onChanged();
-        }
-        if (!other.pengCards_.isEmpty()) {
-          if (pengCards_.isEmpty()) {
-            pengCards_ = other.pengCards_;
-            bitField0_ = (bitField0_ & ~0x00000008);
-          } else {
-            ensurePengCardsIsMutable();
-            pengCards_.addAll(other.pengCards_);
-          }
-          onChanged();
-        }
-        if (!other.flowerCards_.isEmpty()) {
-          if (flowerCards_.isEmpty()) {
-            flowerCards_ = other.flowerCards_;
-            bitField0_ = (bitField0_ & ~0x00000010);
-          } else {
-            ensureFlowerCardsIsMutable();
-            flowerCards_.addAll(other.flowerCards_);
-          }
-          onChanged();
-        }
-        if (other.hasScore()) {
-          setScore(other.getScore());
-        }
-        if (other.hasTingCard()) {
-          setTingCard(other.getTingCard());
-        }
-        if (detailInfoBuilder_ == null) {
-          if (!other.detailInfo_.isEmpty()) {
-            if (detailInfo_.isEmpty()) {
-              detailInfo_ = other.detailInfo_;
-              bitField0_ = (bitField0_ & ~0x00000080);
+        if (detailBuilder_ == null) {
+          if (!other.detail_.isEmpty()) {
+            if (detail_.isEmpty()) {
+              detail_ = other.detail_;
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
-              ensureDetailInfoIsMutable();
-              detailInfo_.addAll(other.detailInfo_);
+              ensureDetailIsMutable();
+              detail_.addAll(other.detail_);
             }
             onChanged();
           }
         } else {
-          if (!other.detailInfo_.isEmpty()) {
-            if (detailInfoBuilder_.isEmpty()) {
-              detailInfoBuilder_.dispose();
-              detailInfoBuilder_ = null;
-              detailInfo_ = other.detailInfo_;
-              bitField0_ = (bitField0_ & ~0x00000080);
-              detailInfoBuilder_ = 
+          if (!other.detail_.isEmpty()) {
+            if (detailBuilder_.isEmpty()) {
+              detailBuilder_.dispose();
+              detailBuilder_ = null;
+              detail_ = other.detail_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              detailBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getDetailInfoFieldBuilder() : null;
+                   getDetailFieldBuilder() : null;
             } else {
-              detailInfoBuilder_.addAllMessages(other.detailInfo_);
+              detailBuilder_.addAllMessages(other.detail_);
+            }
+          }
+        }
+        if (huHistoryActionInfoBuilder_ == null) {
+          if (!other.huHistoryActionInfo_.isEmpty()) {
+            if (huHistoryActionInfo_.isEmpty()) {
+              huHistoryActionInfo_ = other.huHistoryActionInfo_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureHuHistoryActionInfoIsMutable();
+              huHistoryActionInfo_.addAll(other.huHistoryActionInfo_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.huHistoryActionInfo_.isEmpty()) {
+            if (huHistoryActionInfoBuilder_.isEmpty()) {
+              huHistoryActionInfoBuilder_.dispose();
+              huHistoryActionInfoBuilder_ = null;
+              huHistoryActionInfo_ = other.huHistoryActionInfo_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              huHistoryActionInfoBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getHuHistoryActionInfoFieldBuilder() : null;
+            } else {
+              huHistoryActionInfoBuilder_.addAllMessages(other.huHistoryActionInfo_);
             }
           }
         }
@@ -35601,11 +30580,11 @@ public final class GameGuanyunProtocol {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result parsedMessage = null;
+        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (game_guanyuan_protocols.GameGuanyunProtocol.msg_player_circle_result) e.getUnfinishedMessage();
+          parsedMessage = (game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_info) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -35616,895 +30595,3288 @@ public final class GameGuanyunProtocol {
       }
       private int bitField0_;
 
-      // repeated int32 hide_cards = 1;
-      private java.util.List<java.lang.Integer> hideCards_ = java.util.Collections.emptyList();
-      private void ensureHideCardsIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          hideCards_ = new java.util.ArrayList<java.lang.Integer>(hideCards_);
-          bitField0_ |= 0x00000001;
-         }
-      }
+      // optional int32 circle_num = 1;
+      private int circleNum_ ;
       /**
-       * <code>repeated int32 hide_cards = 1;</code>
+       * <code>optional int32 circle_num = 1;</code>
        *
        * <pre>
-       *玩家最后手上的牌
+       *第几圈
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getHideCardsList() {
-        return java.util.Collections.unmodifiableList(hideCards_);
+      public boolean hasCircleNum() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>repeated int32 hide_cards = 1;</code>
+       * <code>optional int32 circle_num = 1;</code>
        *
        * <pre>
-       *玩家最后手上的牌
+       *第几圈
        * </pre>
        */
-      public int getHideCardsCount() {
-        return hideCards_.size();
+      public int getCircleNum() {
+        return circleNum_;
       }
       /**
-       * <code>repeated int32 hide_cards = 1;</code>
+       * <code>optional int32 circle_num = 1;</code>
        *
        * <pre>
-       *玩家最后手上的牌
+       *第几圈
        * </pre>
        */
-      public int getHideCards(int index) {
-        return hideCards_.get(index);
-      }
-      /**
-       * <code>repeated int32 hide_cards = 1;</code>
-       *
-       * <pre>
-       *玩家最后手上的牌
-       * </pre>
-       */
-      public Builder setHideCards(
-          int index, int value) {
-        ensureHideCardsIsMutable();
-        hideCards_.set(index, value);
+      public Builder setCircleNum(int value) {
+        bitField0_ |= 0x00000001;
+        circleNum_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 hide_cards = 1;</code>
+       * <code>optional int32 circle_num = 1;</code>
        *
        * <pre>
-       *玩家最后手上的牌
+       *第几圈
        * </pre>
        */
-      public Builder addHideCards(int value) {
-        ensureHideCardsIsMutable();
-        hideCards_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hide_cards = 1;</code>
-       *
-       * <pre>
-       *玩家最后手上的牌
-       * </pre>
-       */
-      public Builder addAllHideCards(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureHideCardsIsMutable();
-        super.addAll(values, hideCards_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 hide_cards = 1;</code>
-       *
-       * <pre>
-       *玩家最后手上的牌
-       * </pre>
-       */
-      public Builder clearHideCards() {
-        hideCards_ = java.util.Collections.emptyList();
+      public Builder clearCircleNum() {
         bitField0_ = (bitField0_ & ~0x00000001);
+        circleNum_ = 0;
         onChanged();
         return this;
       }
 
-      // repeated int32 gang_cards = 2;
-      private java.util.List<java.lang.Integer> gangCards_ = java.util.Collections.emptyList();
-      private void ensureGangCardsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          gangCards_ = new java.util.ArrayList<java.lang.Integer>(gangCards_);
-          bitField0_ |= 0x00000002;
-         }
-      }
+      // optional uint64 next_circle_start_tm = 2;
+      private long nextCircleStartTm_ ;
       /**
-       * <code>repeated int32 gang_cards = 2;</code>
+       * <code>optional uint64 next_circle_start_tm = 2;</code>
        *
        * <pre>
-       *玩家最后手上的牌
+       *下局开始时间戳
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getGangCardsList() {
-        return java.util.Collections.unmodifiableList(gangCards_);
+      public boolean hasNextCircleStartTm() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>repeated int32 gang_cards = 2;</code>
+       * <code>optional uint64 next_circle_start_tm = 2;</code>
        *
        * <pre>
-       *玩家最后手上的牌
+       *下局开始时间戳
        * </pre>
        */
-      public int getGangCardsCount() {
-        return gangCards_.size();
+      public long getNextCircleStartTm() {
+        return nextCircleStartTm_;
       }
       /**
-       * <code>repeated int32 gang_cards = 2;</code>
+       * <code>optional uint64 next_circle_start_tm = 2;</code>
        *
        * <pre>
-       *玩家最后手上的牌
+       *下局开始时间戳
        * </pre>
        */
-      public int getGangCards(int index) {
-        return gangCards_.get(index);
-      }
-      /**
-       * <code>repeated int32 gang_cards = 2;</code>
-       *
-       * <pre>
-       *玩家最后手上的牌
-       * </pre>
-       */
-      public Builder setGangCards(
-          int index, int value) {
-        ensureGangCardsIsMutable();
-        gangCards_.set(index, value);
+      public Builder setNextCircleStartTm(long value) {
+        bitField0_ |= 0x00000002;
+        nextCircleStartTm_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 gang_cards = 2;</code>
+       * <code>optional uint64 next_circle_start_tm = 2;</code>
        *
        * <pre>
-       *玩家最后手上的牌
+       *下局开始时间戳
        * </pre>
        */
-      public Builder addGangCards(int value) {
-        ensureGangCardsIsMutable();
-        gangCards_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 gang_cards = 2;</code>
-       *
-       * <pre>
-       *玩家最后手上的牌
-       * </pre>
-       */
-      public Builder addAllGangCards(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureGangCardsIsMutable();
-        super.addAll(values, gangCards_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 gang_cards = 2;</code>
-       *
-       * <pre>
-       *玩家最后手上的牌
-       * </pre>
-       */
-      public Builder clearGangCards() {
-        gangCards_ = java.util.Collections.emptyList();
+      public Builder clearNextCircleStartTm() {
         bitField0_ = (bitField0_ & ~0x00000002);
+        nextCircleStartTm_ = 0L;
         onChanged();
         return this;
       }
 
-      // repeated int32 angang_cards = 3;
-      private java.util.List<java.lang.Integer> angangCards_ = java.util.Collections.emptyList();
-      private void ensureAngangCardsIsMutable() {
+      // repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;
+      private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> detail_ =
+        java.util.Collections.emptyList();
+      private void ensureDetailIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          angangCards_ = new java.util.ArrayList<java.lang.Integer>(angangCards_);
+          detail_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail>(detail_);
           bitField0_ |= 0x00000004;
          }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder> detailBuilder_;
+
       /**
-       * <code>repeated int32 angang_cards = 3;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
        *
        * <pre>
-       *暗杠牌
+       *当前轮各个玩家的信息
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getAngangCardsList() {
-        return java.util.Collections.unmodifiableList(angangCards_);
+      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> getDetailList() {
+        if (detailBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(detail_);
+        } else {
+          return detailBuilder_.getMessageList();
+        }
       }
       /**
-       * <code>repeated int32 angang_cards = 3;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
        *
        * <pre>
-       *暗杠牌
+       *当前轮各个玩家的信息
        * </pre>
        */
-      public int getAngangCardsCount() {
-        return angangCards_.size();
+      public int getDetailCount() {
+        if (detailBuilder_ == null) {
+          return detail_.size();
+        } else {
+          return detailBuilder_.getCount();
+        }
       }
       /**
-       * <code>repeated int32 angang_cards = 3;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
        *
        * <pre>
-       *暗杠牌
+       *当前轮各个玩家的信息
        * </pre>
        */
-      public int getAngangCards(int index) {
-        return angangCards_.get(index);
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail getDetail(int index) {
+        if (detailBuilder_ == null) {
+          return detail_.get(index);
+        } else {
+          return detailBuilder_.getMessage(index);
+        }
       }
       /**
-       * <code>repeated int32 angang_cards = 3;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
        *
        * <pre>
-       *暗杠牌
+       *当前轮各个玩家的信息
        * </pre>
        */
-      public Builder setAngangCards(
-          int index, int value) {
-        ensureAngangCardsIsMutable();
-        angangCards_.set(index, value);
-        onChanged();
+      public Builder setDetail(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail value) {
+        if (detailBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDetailIsMutable();
+          detail_.set(index, value);
+          onChanged();
+        } else {
+          detailBuilder_.setMessage(index, value);
+        }
         return this;
       }
       /**
-       * <code>repeated int32 angang_cards = 3;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
        *
        * <pre>
-       *暗杠牌
+       *当前轮各个玩家的信息
        * </pre>
        */
-      public Builder addAngangCards(int value) {
-        ensureAngangCardsIsMutable();
-        angangCards_.add(value);
-        onChanged();
+      public Builder setDetail(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder builderForValue) {
+        if (detailBuilder_ == null) {
+          ensureDetailIsMutable();
+          detail_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          detailBuilder_.setMessage(index, builderForValue.build());
+        }
         return this;
       }
       /**
-       * <code>repeated int32 angang_cards = 3;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
        *
        * <pre>
-       *暗杠牌
+       *当前轮各个玩家的信息
        * </pre>
        */
-      public Builder addAllAngangCards(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureAngangCardsIsMutable();
-        super.addAll(values, angangCards_);
-        onChanged();
+      public Builder addDetail(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail value) {
+        if (detailBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDetailIsMutable();
+          detail_.add(value);
+          onChanged();
+        } else {
+          detailBuilder_.addMessage(value);
+        }
         return this;
       }
       /**
-       * <code>repeated int32 angang_cards = 3;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
        *
        * <pre>
-       *暗杠牌
+       *当前轮各个玩家的信息
        * </pre>
        */
-      public Builder clearAngangCards() {
-        angangCards_ = java.util.Collections.emptyList();
+      public Builder addDetail(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail value) {
+        if (detailBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDetailIsMutable();
+          detail_.add(index, value);
+          onChanged();
+        } else {
+          detailBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public Builder addDetail(
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder builderForValue) {
+        if (detailBuilder_ == null) {
+          ensureDetailIsMutable();
+          detail_.add(builderForValue.build());
+          onChanged();
+        } else {
+          detailBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public Builder addDetail(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder builderForValue) {
+        if (detailBuilder_ == null) {
+          ensureDetailIsMutable();
+          detail_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          detailBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public Builder addAllDetail(
+          java.lang.Iterable<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail> values) {
+        if (detailBuilder_ == null) {
+          ensureDetailIsMutable();
+          super.addAll(values, detail_);
+          onChanged();
+        } else {
+          detailBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public Builder clearDetail() {
+        if (detailBuilder_ == null) {
+          detail_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          detailBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public Builder removeDetail(int index) {
+        if (detailBuilder_ == null) {
+          ensureDetailIsMutable();
+          detail_.remove(index);
+          onChanged();
+        } else {
+          detailBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder getDetailBuilder(
+          int index) {
+        return getDetailFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder getDetailOrBuilder(
+          int index) {
+        if (detailBuilder_ == null) {
+          return detail_.get(index);  } else {
+          return detailBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder> 
+           getDetailOrBuilderList() {
+        if (detailBuilder_ != null) {
+          return detailBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(detail_);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder addDetailBuilder() {
+        return getDetailFieldBuilder().addBuilder(
+            game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder addDetailBuilder(
+          int index) {
+        return getDetailFieldBuilder().addBuilder(
+            index, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_circle_over_detail detail = 3;</code>
+       *
+       * <pre>
+       *当前轮各个玩家的信息
+       * </pre>
+       */
+      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder> 
+           getDetailBuilderList() {
+        return getDetailFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder> 
+          getDetailFieldBuilder() {
+        if (detailBuilder_ == null) {
+          detailBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder>(
+                  detail_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          detail_ = null;
+        }
+        return detailBuilder_;
+      }
+
+      // repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;
+      private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> huHistoryActionInfo_ =
+        java.util.Collections.emptyList();
+      private void ensureHuHistoryActionInfoIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          huHistoryActionInfo_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info>(huHistoryActionInfo_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> huHistoryActionInfoBuilder_;
+
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> getHuHistoryActionInfoList() {
+        if (huHistoryActionInfoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(huHistoryActionInfo_);
+        } else {
+          return huHistoryActionInfoBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public int getHuHistoryActionInfoCount() {
+        if (huHistoryActionInfoBuilder_ == null) {
+          return huHistoryActionInfo_.size();
+        } else {
+          return huHistoryActionInfoBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHuHistoryActionInfo(int index) {
+        if (huHistoryActionInfoBuilder_ == null) {
+          return huHistoryActionInfo_.get(index);
+        } else {
+          return huHistoryActionInfoBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public Builder setHuHistoryActionInfo(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info value) {
+        if (huHistoryActionInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHuHistoryActionInfoIsMutable();
+          huHistoryActionInfo_.set(index, value);
+          onChanged();
+        } else {
+          huHistoryActionInfoBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public Builder setHuHistoryActionInfo(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder builderForValue) {
+        if (huHistoryActionInfoBuilder_ == null) {
+          ensureHuHistoryActionInfoIsMutable();
+          huHistoryActionInfo_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          huHistoryActionInfoBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public Builder addHuHistoryActionInfo(game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info value) {
+        if (huHistoryActionInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHuHistoryActionInfoIsMutable();
+          huHistoryActionInfo_.add(value);
+          onChanged();
+        } else {
+          huHistoryActionInfoBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public Builder addHuHistoryActionInfo(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info value) {
+        if (huHistoryActionInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHuHistoryActionInfoIsMutable();
+          huHistoryActionInfo_.add(index, value);
+          onChanged();
+        } else {
+          huHistoryActionInfoBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public Builder addHuHistoryActionInfo(
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder builderForValue) {
+        if (huHistoryActionInfoBuilder_ == null) {
+          ensureHuHistoryActionInfoIsMutable();
+          huHistoryActionInfo_.add(builderForValue.build());
+          onChanged();
+        } else {
+          huHistoryActionInfoBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public Builder addHuHistoryActionInfo(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder builderForValue) {
+        if (huHistoryActionInfoBuilder_ == null) {
+          ensureHuHistoryActionInfoIsMutable();
+          huHistoryActionInfo_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          huHistoryActionInfoBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public Builder addAllHuHistoryActionInfo(
+          java.lang.Iterable<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> values) {
+        if (huHistoryActionInfoBuilder_ == null) {
+          ensureHuHistoryActionInfoIsMutable();
+          super.addAll(values, huHistoryActionInfo_);
+          onChanged();
+        } else {
+          huHistoryActionInfoBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public Builder clearHuHistoryActionInfo() {
+        if (huHistoryActionInfoBuilder_ == null) {
+          huHistoryActionInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          huHistoryActionInfoBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public Builder removeHuHistoryActionInfo(int index) {
+        if (huHistoryActionInfoBuilder_ == null) {
+          ensureHuHistoryActionInfoIsMutable();
+          huHistoryActionInfo_.remove(index);
+          onChanged();
+        } else {
+          huHistoryActionInfoBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder getHuHistoryActionInfoBuilder(
+          int index) {
+        return getHuHistoryActionInfoFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHuHistoryActionInfoOrBuilder(
+          int index) {
+        if (huHistoryActionInfoBuilder_ == null) {
+          return huHistoryActionInfo_.get(index);  } else {
+          return huHistoryActionInfoBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> 
+           getHuHistoryActionInfoOrBuilderList() {
+        if (huHistoryActionInfoBuilder_ != null) {
+          return huHistoryActionInfoBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(huHistoryActionInfo_);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder addHuHistoryActionInfoBuilder() {
+        return getHuHistoryActionInfoFieldBuilder().addBuilder(
+            game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder addHuHistoryActionInfoBuilder(
+          int index) {
+        return getHuHistoryActionInfoFieldBuilder().addBuilder(
+            index, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info hu_history_action_info = 4;</code>
+       *
+       * <pre>
+       *胡的操作历史			为空时，则一定是流局
+       * </pre>
+       */
+      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder> 
+           getHuHistoryActionInfoBuilderList() {
+        return getHuHistoryActionInfoFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> 
+          getHuHistoryActionInfoFieldBuilder() {
+        if (huHistoryActionInfoBuilder_ == null) {
+          huHistoryActionInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder>(
+                  huHistoryActionInfo_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          huHistoryActionInfo_ = null;
+        }
+        return huHistoryActionInfoBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:game_guanyuan_protocols.msg_circle_over_info)
+    }
+
+    static {
+      defaultInstance = new msg_circle_over_info(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.msg_circle_over_info)
+  }
+
+  public interface msg_circle_over_detailOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 seat_pos = 1;
+    /**
+     * <code>optional int32 seat_pos = 1;</code>
+     *
+     * <pre>
+     *位置
+     * </pre>
+     */
+    boolean hasSeatPos();
+    /**
+     * <code>optional int32 seat_pos = 1;</code>
+     *
+     * <pre>
+     *位置
+     * </pre>
+     */
+    int getSeatPos();
+
+    // optional int32 fen = 2;
+    /**
+     * <code>optional int32 fen = 2;</code>
+     *
+     * <pre>
+     *获得的分的数量
+     * </pre>
+     */
+    boolean hasFen();
+    /**
+     * <code>optional int32 fen = 2;</code>
+     *
+     * <pre>
+     *获得的分的数量
+     * </pre>
+     */
+    int getFen();
+
+    // optional int32 hua = 3;
+    /**
+     * <code>optional int32 hua = 3;</code>
+     *
+     * <pre>
+     *获得的花的数量
+     * </pre>
+     */
+    boolean hasHua();
+    /**
+     * <code>optional int32 hua = 3;</code>
+     *
+     * <pre>
+     *获得的花的数量
+     * </pre>
+     */
+    int getHua();
+
+    // repeated int32 hand_cards = 4;
+    /**
+     * <code>repeated int32 hand_cards = 4;</code>
+     *
+     * <pre>
+     *玩家的手牌
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getHandCardsList();
+    /**
+     * <code>repeated int32 hand_cards = 4;</code>
+     *
+     * <pre>
+     *玩家的手牌
+     * </pre>
+     */
+    int getHandCardsCount();
+    /**
+     * <code>repeated int32 hand_cards = 4;</code>
+     *
+     * <pre>
+     *玩家的手牌
+     * </pre>
+     */
+    int getHandCards(int index);
+
+    // optional int32 ting_card = 5;
+    /**
+     * <code>optional int32 ting_card = 5;</code>
+     *
+     * <pre>
+     *每个人叫听情况,如果没有，则为0
+     * </pre>
+     */
+    boolean hasTingCard();
+    /**
+     * <code>optional int32 ting_card = 5;</code>
+     *
+     * <pre>
+     *每个人叫听情况,如果没有，则为0
+     * </pre>
+     */
+    int getTingCard();
+
+    // repeated int32 wall_cards = 6;
+    /**
+     * <code>repeated int32 wall_cards = 6;</code>
+     *
+     * <pre>
+     *桌子自己的墙牌
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getWallCardsList();
+    /**
+     * <code>repeated int32 wall_cards = 6;</code>
+     *
+     * <pre>
+     *桌子自己的墙牌
+     * </pre>
+     */
+    int getWallCardsCount();
+    /**
+     * <code>repeated int32 wall_cards = 6;</code>
+     *
+     * <pre>
+     *桌子自己的墙牌
+     * </pre>
+     */
+    int getWallCards(int index);
+
+    // repeated int32 out_cards = 7;
+    /**
+     * <code>repeated int32 out_cards = 7;</code>
+     *
+     * <pre>
+     *玩家自己出的牌
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getOutCardsList();
+    /**
+     * <code>repeated int32 out_cards = 7;</code>
+     *
+     * <pre>
+     *玩家自己出的牌
+     * </pre>
+     */
+    int getOutCardsCount();
+    /**
+     * <code>repeated int32 out_cards = 7;</code>
+     *
+     * <pre>
+     *玩家自己出的牌
+     * </pre>
+     */
+    int getOutCards(int index);
+
+    // repeated int32 hua_cards = 8;
+    /**
+     * <code>repeated int32 hua_cards = 8;</code>
+     *
+     * <pre>
+     *玩家的花牌
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getHuaCardsList();
+    /**
+     * <code>repeated int32 hua_cards = 8;</code>
+     *
+     * <pre>
+     *玩家的花牌
+     * </pre>
+     */
+    int getHuaCardsCount();
+    /**
+     * <code>repeated int32 hua_cards = 8;</code>
+     *
+     * <pre>
+     *玩家的花牌
+     * </pre>
+     */
+    int getHuaCards(int index);
+
+    // repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+     *
+     * <pre>
+     *玩家吃碰杠牌情况
+     * </pre>
+     */
+    java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> 
+        getHistoryActionInfosList();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+     *
+     * <pre>
+     *玩家吃碰杠牌情况
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHistoryActionInfos(int index);
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+     *
+     * <pre>
+     *玩家吃碰杠牌情况
+     * </pre>
+     */
+    int getHistoryActionInfosCount();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+     *
+     * <pre>
+     *玩家吃碰杠牌情况
+     * </pre>
+     */
+    java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> 
+        getHistoryActionInfosOrBuilderList();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+     *
+     * <pre>
+     *玩家吃碰杠牌情况
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHistoryActionInfosOrBuilder(
+        int index);
+
+    // repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+     *
+     * <pre>
+     *胡牌具体结果
+     * </pre>
+     */
+    java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> 
+        getHuDetailInfosList();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+     *
+     * <pre>
+     *胡牌具体结果
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info getHuDetailInfos(int index);
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+     *
+     * <pre>
+     *胡牌具体结果
+     * </pre>
+     */
+    int getHuDetailInfosCount();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+     *
+     * <pre>
+     *胡牌具体结果
+     * </pre>
+     */
+    java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder> 
+        getHuDetailInfosOrBuilderList();
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+     *
+     * <pre>
+     *胡牌具体结果
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder getHuDetailInfosOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code game_guanyuan_protocols.msg_circle_over_detail}
+   */
+  public static final class msg_circle_over_detail extends
+      com.google.protobuf.GeneratedMessage
+      implements msg_circle_over_detailOrBuilder {
+    // Use msg_circle_over_detail.newBuilder() to construct.
+    private msg_circle_over_detail(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private msg_circle_over_detail(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final msg_circle_over_detail defaultInstance;
+    public static msg_circle_over_detail getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public msg_circle_over_detail getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private msg_circle_over_detail(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              seatPos_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              fen_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              hua_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                handCards_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              handCards_.add(input.readInt32());
+              break;
+            }
+            case 34: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
+                handCards_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                handCards_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              tingCard_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                wallCards_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              wallCards_.add(input.readInt32());
+              break;
+            }
+            case 50: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
+                wallCards_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                wallCards_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 56: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                outCards_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              outCards_.add(input.readInt32());
+              break;
+            }
+            case 58: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
+                outCards_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                outCards_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 64: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                huaCards_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              huaCards_.add(input.readInt32());
+              break;
+            }
+            case 66: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080) && input.getBytesUntilLimit() > 0) {
+                huaCards_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                huaCards_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                historyActionInfos_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              historyActionInfos_.add(input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.PARSER, extensionRegistry));
+              break;
+            }
+            case 82: {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                huDetailInfos_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              huDetailInfos_.add(input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          handCards_ = java.util.Collections.unmodifiableList(handCards_);
+        }
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          wallCards_ = java.util.Collections.unmodifiableList(wallCards_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          outCards_ = java.util.Collections.unmodifiableList(outCards_);
+        }
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          huaCards_ = java.util.Collections.unmodifiableList(huaCards_);
+        }
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          historyActionInfos_ = java.util.Collections.unmodifiableList(historyActionInfos_);
+        }
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+          huDetailInfos_ = java.util.Collections.unmodifiableList(huDetailInfos_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_detail_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<msg_circle_over_detail> PARSER =
+        new com.google.protobuf.AbstractParser<msg_circle_over_detail>() {
+      public msg_circle_over_detail parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new msg_circle_over_detail(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<msg_circle_over_detail> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional int32 seat_pos = 1;
+    public static final int SEAT_POS_FIELD_NUMBER = 1;
+    private int seatPos_;
+    /**
+     * <code>optional int32 seat_pos = 1;</code>
+     *
+     * <pre>
+     *位置
+     * </pre>
+     */
+    public boolean hasSeatPos() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 seat_pos = 1;</code>
+     *
+     * <pre>
+     *位置
+     * </pre>
+     */
+    public int getSeatPos() {
+      return seatPos_;
+    }
+
+    // optional int32 fen = 2;
+    public static final int FEN_FIELD_NUMBER = 2;
+    private int fen_;
+    /**
+     * <code>optional int32 fen = 2;</code>
+     *
+     * <pre>
+     *获得的分的数量
+     * </pre>
+     */
+    public boolean hasFen() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 fen = 2;</code>
+     *
+     * <pre>
+     *获得的分的数量
+     * </pre>
+     */
+    public int getFen() {
+      return fen_;
+    }
+
+    // optional int32 hua = 3;
+    public static final int HUA_FIELD_NUMBER = 3;
+    private int hua_;
+    /**
+     * <code>optional int32 hua = 3;</code>
+     *
+     * <pre>
+     *获得的花的数量
+     * </pre>
+     */
+    public boolean hasHua() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 hua = 3;</code>
+     *
+     * <pre>
+     *获得的花的数量
+     * </pre>
+     */
+    public int getHua() {
+      return hua_;
+    }
+
+    // repeated int32 hand_cards = 4;
+    public static final int HAND_CARDS_FIELD_NUMBER = 4;
+    private java.util.List<java.lang.Integer> handCards_;
+    /**
+     * <code>repeated int32 hand_cards = 4;</code>
+     *
+     * <pre>
+     *玩家的手牌
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getHandCardsList() {
+      return handCards_;
+    }
+    /**
+     * <code>repeated int32 hand_cards = 4;</code>
+     *
+     * <pre>
+     *玩家的手牌
+     * </pre>
+     */
+    public int getHandCardsCount() {
+      return handCards_.size();
+    }
+    /**
+     * <code>repeated int32 hand_cards = 4;</code>
+     *
+     * <pre>
+     *玩家的手牌
+     * </pre>
+     */
+    public int getHandCards(int index) {
+      return handCards_.get(index);
+    }
+
+    // optional int32 ting_card = 5;
+    public static final int TING_CARD_FIELD_NUMBER = 5;
+    private int tingCard_;
+    /**
+     * <code>optional int32 ting_card = 5;</code>
+     *
+     * <pre>
+     *每个人叫听情况,如果没有，则为0
+     * </pre>
+     */
+    public boolean hasTingCard() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 ting_card = 5;</code>
+     *
+     * <pre>
+     *每个人叫听情况,如果没有，则为0
+     * </pre>
+     */
+    public int getTingCard() {
+      return tingCard_;
+    }
+
+    // repeated int32 wall_cards = 6;
+    public static final int WALL_CARDS_FIELD_NUMBER = 6;
+    private java.util.List<java.lang.Integer> wallCards_;
+    /**
+     * <code>repeated int32 wall_cards = 6;</code>
+     *
+     * <pre>
+     *桌子自己的墙牌
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getWallCardsList() {
+      return wallCards_;
+    }
+    /**
+     * <code>repeated int32 wall_cards = 6;</code>
+     *
+     * <pre>
+     *桌子自己的墙牌
+     * </pre>
+     */
+    public int getWallCardsCount() {
+      return wallCards_.size();
+    }
+    /**
+     * <code>repeated int32 wall_cards = 6;</code>
+     *
+     * <pre>
+     *桌子自己的墙牌
+     * </pre>
+     */
+    public int getWallCards(int index) {
+      return wallCards_.get(index);
+    }
+
+    // repeated int32 out_cards = 7;
+    public static final int OUT_CARDS_FIELD_NUMBER = 7;
+    private java.util.List<java.lang.Integer> outCards_;
+    /**
+     * <code>repeated int32 out_cards = 7;</code>
+     *
+     * <pre>
+     *玩家自己出的牌
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getOutCardsList() {
+      return outCards_;
+    }
+    /**
+     * <code>repeated int32 out_cards = 7;</code>
+     *
+     * <pre>
+     *玩家自己出的牌
+     * </pre>
+     */
+    public int getOutCardsCount() {
+      return outCards_.size();
+    }
+    /**
+     * <code>repeated int32 out_cards = 7;</code>
+     *
+     * <pre>
+     *玩家自己出的牌
+     * </pre>
+     */
+    public int getOutCards(int index) {
+      return outCards_.get(index);
+    }
+
+    // repeated int32 hua_cards = 8;
+    public static final int HUA_CARDS_FIELD_NUMBER = 8;
+    private java.util.List<java.lang.Integer> huaCards_;
+    /**
+     * <code>repeated int32 hua_cards = 8;</code>
+     *
+     * <pre>
+     *玩家的花牌
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getHuaCardsList() {
+      return huaCards_;
+    }
+    /**
+     * <code>repeated int32 hua_cards = 8;</code>
+     *
+     * <pre>
+     *玩家的花牌
+     * </pre>
+     */
+    public int getHuaCardsCount() {
+      return huaCards_.size();
+    }
+    /**
+     * <code>repeated int32 hua_cards = 8;</code>
+     *
+     * <pre>
+     *玩家的花牌
+     * </pre>
+     */
+    public int getHuaCards(int index) {
+      return huaCards_.get(index);
+    }
+
+    // repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;
+    public static final int HISTORY_ACTION_INFOS_FIELD_NUMBER = 9;
+    private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> historyActionInfos_;
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+     *
+     * <pre>
+     *玩家吃碰杠牌情况
+     * </pre>
+     */
+    public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> getHistoryActionInfosList() {
+      return historyActionInfos_;
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+     *
+     * <pre>
+     *玩家吃碰杠牌情况
+     * </pre>
+     */
+    public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> 
+        getHistoryActionInfosOrBuilderList() {
+      return historyActionInfos_;
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+     *
+     * <pre>
+     *玩家吃碰杠牌情况
+     * </pre>
+     */
+    public int getHistoryActionInfosCount() {
+      return historyActionInfos_.size();
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+     *
+     * <pre>
+     *玩家吃碰杠牌情况
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHistoryActionInfos(int index) {
+      return historyActionInfos_.get(index);
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+     *
+     * <pre>
+     *玩家吃碰杠牌情况
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHistoryActionInfosOrBuilder(
+        int index) {
+      return historyActionInfos_.get(index);
+    }
+
+    // repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;
+    public static final int HU_DETAIL_INFOS_FIELD_NUMBER = 10;
+    private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> huDetailInfos_;
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+     *
+     * <pre>
+     *胡牌具体结果
+     * </pre>
+     */
+    public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> getHuDetailInfosList() {
+      return huDetailInfos_;
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+     *
+     * <pre>
+     *胡牌具体结果
+     * </pre>
+     */
+    public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder> 
+        getHuDetailInfosOrBuilderList() {
+      return huDetailInfos_;
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+     *
+     * <pre>
+     *胡牌具体结果
+     * </pre>
+     */
+    public int getHuDetailInfosCount() {
+      return huDetailInfos_.size();
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+     *
+     * <pre>
+     *胡牌具体结果
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info getHuDetailInfos(int index) {
+      return huDetailInfos_.get(index);
+    }
+    /**
+     * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+     *
+     * <pre>
+     *胡牌具体结果
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder getHuDetailInfosOrBuilder(
+        int index) {
+      return huDetailInfos_.get(index);
+    }
+
+    private void initFields() {
+      seatPos_ = 0;
+      fen_ = 0;
+      hua_ = 0;
+      handCards_ = java.util.Collections.emptyList();
+      tingCard_ = 0;
+      wallCards_ = java.util.Collections.emptyList();
+      outCards_ = java.util.Collections.emptyList();
+      huaCards_ = java.util.Collections.emptyList();
+      historyActionInfos_ = java.util.Collections.emptyList();
+      huDetailInfos_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, seatPos_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, fen_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, hua_);
+      }
+      for (int i = 0; i < handCards_.size(); i++) {
+        output.writeInt32(4, handCards_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, tingCard_);
+      }
+      for (int i = 0; i < wallCards_.size(); i++) {
+        output.writeInt32(6, wallCards_.get(i));
+      }
+      for (int i = 0; i < outCards_.size(); i++) {
+        output.writeInt32(7, outCards_.get(i));
+      }
+      for (int i = 0; i < huaCards_.size(); i++) {
+        output.writeInt32(8, huaCards_.get(i));
+      }
+      for (int i = 0; i < historyActionInfos_.size(); i++) {
+        output.writeMessage(9, historyActionInfos_.get(i));
+      }
+      for (int i = 0; i < huDetailInfos_.size(); i++) {
+        output.writeMessage(10, huDetailInfos_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, seatPos_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, fen_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, hua_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < handCards_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(handCards_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getHandCardsList().size();
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, tingCard_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < wallCards_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(wallCards_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getWallCardsList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < outCards_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(outCards_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getOutCardsList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < huaCards_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(huaCards_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getHuaCardsList().size();
+      }
+      for (int i = 0; i < historyActionInfos_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, historyActionInfos_.get(i));
+      }
+      for (int i = 0; i < huDetailInfos_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, huDetailInfos_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code game_guanyuan_protocols.msg_circle_over_detail}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detailOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_detail_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.class, game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.Builder.class);
+      }
+
+      // Construct using game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHistoryActionInfosFieldBuilder();
+          getHuDetailInfosFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        seatPos_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        fen_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        hua_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        handCards_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        tingCard_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        wallCards_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        outCards_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        huaCards_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000080);
+        if (historyActionInfosBuilder_ == null) {
+          historyActionInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+        } else {
+          historyActionInfosBuilder_.clear();
+        }
+        if (huDetailInfosBuilder_ == null) {
+          huDetailInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+        } else {
+          huDetailInfosBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor;
+      }
+
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail getDefaultInstanceForType() {
+        return game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.getDefaultInstance();
+      }
+
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail build() {
+        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail buildPartial() {
+        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail result = new game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.seatPos_ = seatPos_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.fen_ = fen_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.hua_ = hua_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          handCards_ = java.util.Collections.unmodifiableList(handCards_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.handCards_ = handCards_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.tingCard_ = tingCard_;
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          wallCards_ = java.util.Collections.unmodifiableList(wallCards_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.wallCards_ = wallCards_;
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          outCards_ = java.util.Collections.unmodifiableList(outCards_);
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.outCards_ = outCards_;
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          huaCards_ = java.util.Collections.unmodifiableList(huaCards_);
+          bitField0_ = (bitField0_ & ~0x00000080);
+        }
+        result.huaCards_ = huaCards_;
+        if (historyActionInfosBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            historyActionInfos_ = java.util.Collections.unmodifiableList(historyActionInfos_);
+            bitField0_ = (bitField0_ & ~0x00000100);
+          }
+          result.historyActionInfos_ = historyActionInfos_;
+        } else {
+          result.historyActionInfos_ = historyActionInfosBuilder_.build();
+        }
+        if (huDetailInfosBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+            huDetailInfos_ = java.util.Collections.unmodifiableList(huDetailInfos_);
+            bitField0_ = (bitField0_ & ~0x00000200);
+          }
+          result.huDetailInfos_ = huDetailInfos_;
+        } else {
+          result.huDetailInfos_ = huDetailInfosBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail) {
+          return mergeFrom((game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail other) {
+        if (other == game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail.getDefaultInstance()) return this;
+        if (other.hasSeatPos()) {
+          setSeatPos(other.getSeatPos());
+        }
+        if (other.hasFen()) {
+          setFen(other.getFen());
+        }
+        if (other.hasHua()) {
+          setHua(other.getHua());
+        }
+        if (!other.handCards_.isEmpty()) {
+          if (handCards_.isEmpty()) {
+            handCards_ = other.handCards_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureHandCardsIsMutable();
+            handCards_.addAll(other.handCards_);
+          }
+          onChanged();
+        }
+        if (other.hasTingCard()) {
+          setTingCard(other.getTingCard());
+        }
+        if (!other.wallCards_.isEmpty()) {
+          if (wallCards_.isEmpty()) {
+            wallCards_ = other.wallCards_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureWallCardsIsMutable();
+            wallCards_.addAll(other.wallCards_);
+          }
+          onChanged();
+        }
+        if (!other.outCards_.isEmpty()) {
+          if (outCards_.isEmpty()) {
+            outCards_ = other.outCards_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+          } else {
+            ensureOutCardsIsMutable();
+            outCards_.addAll(other.outCards_);
+          }
+          onChanged();
+        }
+        if (!other.huaCards_.isEmpty()) {
+          if (huaCards_.isEmpty()) {
+            huaCards_ = other.huaCards_;
+            bitField0_ = (bitField0_ & ~0x00000080);
+          } else {
+            ensureHuaCardsIsMutable();
+            huaCards_.addAll(other.huaCards_);
+          }
+          onChanged();
+        }
+        if (historyActionInfosBuilder_ == null) {
+          if (!other.historyActionInfos_.isEmpty()) {
+            if (historyActionInfos_.isEmpty()) {
+              historyActionInfos_ = other.historyActionInfos_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+            } else {
+              ensureHistoryActionInfosIsMutable();
+              historyActionInfos_.addAll(other.historyActionInfos_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.historyActionInfos_.isEmpty()) {
+            if (historyActionInfosBuilder_.isEmpty()) {
+              historyActionInfosBuilder_.dispose();
+              historyActionInfosBuilder_ = null;
+              historyActionInfos_ = other.historyActionInfos_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+              historyActionInfosBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getHistoryActionInfosFieldBuilder() : null;
+            } else {
+              historyActionInfosBuilder_.addAllMessages(other.historyActionInfos_);
+            }
+          }
+        }
+        if (huDetailInfosBuilder_ == null) {
+          if (!other.huDetailInfos_.isEmpty()) {
+            if (huDetailInfos_.isEmpty()) {
+              huDetailInfos_ = other.huDetailInfos_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+              ensureHuDetailInfosIsMutable();
+              huDetailInfos_.addAll(other.huDetailInfos_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.huDetailInfos_.isEmpty()) {
+            if (huDetailInfosBuilder_.isEmpty()) {
+              huDetailInfosBuilder_.dispose();
+              huDetailInfosBuilder_ = null;
+              huDetailInfos_ = other.huDetailInfos_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+              huDetailInfosBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getHuDetailInfosFieldBuilder() : null;
+            } else {
+              huDetailInfosBuilder_.addAllMessages(other.huDetailInfos_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (game_guanyuan_protocols.GameGuanyunProtocol.msg_circle_over_detail) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 seat_pos = 1;
+      private int seatPos_ ;
+      /**
+       * <code>optional int32 seat_pos = 1;</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
+       */
+      public boolean hasSeatPos() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 seat_pos = 1;</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
+       */
+      public int getSeatPos() {
+        return seatPos_;
+      }
+      /**
+       * <code>optional int32 seat_pos = 1;</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
+       */
+      public Builder setSeatPos(int value) {
+        bitField0_ |= 0x00000001;
+        seatPos_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 seat_pos = 1;</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
+       */
+      public Builder clearSeatPos() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        seatPos_ = 0;
         onChanged();
         return this;
       }
 
-      // repeated int32 peng_cards = 4;
-      private java.util.List<java.lang.Integer> pengCards_ = java.util.Collections.emptyList();
-      private void ensurePengCardsIsMutable() {
+      // optional int32 fen = 2;
+      private int fen_ ;
+      /**
+       * <code>optional int32 fen = 2;</code>
+       *
+       * <pre>
+       *获得的分的数量
+       * </pre>
+       */
+      public boolean hasFen() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 fen = 2;</code>
+       *
+       * <pre>
+       *获得的分的数量
+       * </pre>
+       */
+      public int getFen() {
+        return fen_;
+      }
+      /**
+       * <code>optional int32 fen = 2;</code>
+       *
+       * <pre>
+       *获得的分的数量
+       * </pre>
+       */
+      public Builder setFen(int value) {
+        bitField0_ |= 0x00000002;
+        fen_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 fen = 2;</code>
+       *
+       * <pre>
+       *获得的分的数量
+       * </pre>
+       */
+      public Builder clearFen() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        fen_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 hua = 3;
+      private int hua_ ;
+      /**
+       * <code>optional int32 hua = 3;</code>
+       *
+       * <pre>
+       *获得的花的数量
+       * </pre>
+       */
+      public boolean hasHua() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 hua = 3;</code>
+       *
+       * <pre>
+       *获得的花的数量
+       * </pre>
+       */
+      public int getHua() {
+        return hua_;
+      }
+      /**
+       * <code>optional int32 hua = 3;</code>
+       *
+       * <pre>
+       *获得的花的数量
+       * </pre>
+       */
+      public Builder setHua(int value) {
+        bitField0_ |= 0x00000004;
+        hua_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 hua = 3;</code>
+       *
+       * <pre>
+       *获得的花的数量
+       * </pre>
+       */
+      public Builder clearHua() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        hua_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated int32 hand_cards = 4;
+      private java.util.List<java.lang.Integer> handCards_ = java.util.Collections.emptyList();
+      private void ensureHandCardsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          pengCards_ = new java.util.ArrayList<java.lang.Integer>(pengCards_);
+          handCards_ = new java.util.ArrayList<java.lang.Integer>(handCards_);
           bitField0_ |= 0x00000008;
          }
       }
       /**
-       * <code>repeated int32 peng_cards = 4;</code>
+       * <code>repeated int32 hand_cards = 4;</code>
        *
        * <pre>
-       *碰牌的
+       *玩家的手牌
        * </pre>
        */
       public java.util.List<java.lang.Integer>
-          getPengCardsList() {
-        return java.util.Collections.unmodifiableList(pengCards_);
+          getHandCardsList() {
+        return java.util.Collections.unmodifiableList(handCards_);
       }
       /**
-       * <code>repeated int32 peng_cards = 4;</code>
+       * <code>repeated int32 hand_cards = 4;</code>
        *
        * <pre>
-       *碰牌的
+       *玩家的手牌
        * </pre>
        */
-      public int getPengCardsCount() {
-        return pengCards_.size();
+      public int getHandCardsCount() {
+        return handCards_.size();
       }
       /**
-       * <code>repeated int32 peng_cards = 4;</code>
+       * <code>repeated int32 hand_cards = 4;</code>
        *
        * <pre>
-       *碰牌的
+       *玩家的手牌
        * </pre>
        */
-      public int getPengCards(int index) {
-        return pengCards_.get(index);
+      public int getHandCards(int index) {
+        return handCards_.get(index);
       }
       /**
-       * <code>repeated int32 peng_cards = 4;</code>
+       * <code>repeated int32 hand_cards = 4;</code>
        *
        * <pre>
-       *碰牌的
+       *玩家的手牌
        * </pre>
        */
-      public Builder setPengCards(
+      public Builder setHandCards(
           int index, int value) {
-        ensurePengCardsIsMutable();
-        pengCards_.set(index, value);
+        ensureHandCardsIsMutable();
+        handCards_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 peng_cards = 4;</code>
+       * <code>repeated int32 hand_cards = 4;</code>
        *
        * <pre>
-       *碰牌的
+       *玩家的手牌
        * </pre>
        */
-      public Builder addPengCards(int value) {
-        ensurePengCardsIsMutable();
-        pengCards_.add(value);
+      public Builder addHandCards(int value) {
+        ensureHandCardsIsMutable();
+        handCards_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 peng_cards = 4;</code>
+       * <code>repeated int32 hand_cards = 4;</code>
        *
        * <pre>
-       *碰牌的
+       *玩家的手牌
        * </pre>
        */
-      public Builder addAllPengCards(
+      public Builder addAllHandCards(
           java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensurePengCardsIsMutable();
-        super.addAll(values, pengCards_);
+        ensureHandCardsIsMutable();
+        super.addAll(values, handCards_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 peng_cards = 4;</code>
+       * <code>repeated int32 hand_cards = 4;</code>
        *
        * <pre>
-       *碰牌的
+       *玩家的手牌
        * </pre>
        */
-      public Builder clearPengCards() {
-        pengCards_ = java.util.Collections.emptyList();
+      public Builder clearHandCards() {
+        handCards_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
 
-      // repeated int32 flower_cards = 5;
-      private java.util.List<java.lang.Integer> flowerCards_ = java.util.Collections.emptyList();
-      private void ensureFlowerCardsIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          flowerCards_ = new java.util.ArrayList<java.lang.Integer>(flowerCards_);
-          bitField0_ |= 0x00000010;
-         }
-      }
-      /**
-       * <code>repeated int32 flower_cards = 5;</code>
-       *
-       * <pre>
-       *吃的牌的集合
-       * </pre>
-       */
-      public java.util.List<java.lang.Integer>
-          getFlowerCardsList() {
-        return java.util.Collections.unmodifiableList(flowerCards_);
-      }
-      /**
-       * <code>repeated int32 flower_cards = 5;</code>
-       *
-       * <pre>
-       *吃的牌的集合
-       * </pre>
-       */
-      public int getFlowerCardsCount() {
-        return flowerCards_.size();
-      }
-      /**
-       * <code>repeated int32 flower_cards = 5;</code>
-       *
-       * <pre>
-       *吃的牌的集合
-       * </pre>
-       */
-      public int getFlowerCards(int index) {
-        return flowerCards_.get(index);
-      }
-      /**
-       * <code>repeated int32 flower_cards = 5;</code>
-       *
-       * <pre>
-       *吃的牌的集合
-       * </pre>
-       */
-      public Builder setFlowerCards(
-          int index, int value) {
-        ensureFlowerCardsIsMutable();
-        flowerCards_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 flower_cards = 5;</code>
-       *
-       * <pre>
-       *吃的牌的集合
-       * </pre>
-       */
-      public Builder addFlowerCards(int value) {
-        ensureFlowerCardsIsMutable();
-        flowerCards_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 flower_cards = 5;</code>
-       *
-       * <pre>
-       *吃的牌的集合
-       * </pre>
-       */
-      public Builder addAllFlowerCards(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureFlowerCardsIsMutable();
-        super.addAll(values, flowerCards_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 flower_cards = 5;</code>
-       *
-       * <pre>
-       *吃的牌的集合
-       * </pre>
-       */
-      public Builder clearFlowerCards() {
-        flowerCards_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000010);
-        onChanged();
-        return this;
-      }
-
-      // optional int32 score = 6;
-      private int score_ ;
-      /**
-       * <code>optional int32 score = 6;</code>
-       *
-       * <pre>
-       *玩家得分
-       * </pre>
-       */
-      public boolean hasScore() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional int32 score = 6;</code>
-       *
-       * <pre>
-       *玩家得分
-       * </pre>
-       */
-      public int getScore() {
-        return score_;
-      }
-      /**
-       * <code>optional int32 score = 6;</code>
-       *
-       * <pre>
-       *玩家得分
-       * </pre>
-       */
-      public Builder setScore(int value) {
-        bitField0_ |= 0x00000020;
-        score_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 score = 6;</code>
-       *
-       * <pre>
-       *玩家得分
-       * </pre>
-       */
-      public Builder clearScore() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        score_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 ting_card = 7;
+      // optional int32 ting_card = 5;
       private int tingCard_ ;
       /**
-       * <code>optional int32 ting_card = 7;</code>
+       * <code>optional int32 ting_card = 5;</code>
        *
        * <pre>
-       *玩家叫听的牌
+       *每个人叫听情况,如果没有，则为0
        * </pre>
        */
       public boolean hasTingCard() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int32 ting_card = 7;</code>
+       * <code>optional int32 ting_card = 5;</code>
        *
        * <pre>
-       *玩家叫听的牌
+       *每个人叫听情况,如果没有，则为0
        * </pre>
        */
       public int getTingCard() {
         return tingCard_;
       }
       /**
-       * <code>optional int32 ting_card = 7;</code>
+       * <code>optional int32 ting_card = 5;</code>
        *
        * <pre>
-       *玩家叫听的牌
+       *每个人叫听情况,如果没有，则为0
        * </pre>
        */
       public Builder setTingCard(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000010;
         tingCard_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 ting_card = 7;</code>
+       * <code>optional int32 ting_card = 5;</code>
        *
        * <pre>
-       *玩家叫听的牌
+       *每个人叫听情况,如果没有，则为0
        * </pre>
        */
       public Builder clearTingCard() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000010);
         tingCard_ = 0;
         onChanged();
         return this;
       }
 
-      // repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;
-      private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> detailInfo_ =
-        java.util.Collections.emptyList();
-      private void ensureDetailInfoIsMutable() {
+      // repeated int32 wall_cards = 6;
+      private java.util.List<java.lang.Integer> wallCards_ = java.util.Collections.emptyList();
+      private void ensureWallCardsIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          wallCards_ = new java.util.ArrayList<java.lang.Integer>(wallCards_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+      /**
+       * <code>repeated int32 wall_cards = 6;</code>
+       *
+       * <pre>
+       *桌子自己的墙牌
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getWallCardsList() {
+        return java.util.Collections.unmodifiableList(wallCards_);
+      }
+      /**
+       * <code>repeated int32 wall_cards = 6;</code>
+       *
+       * <pre>
+       *桌子自己的墙牌
+       * </pre>
+       */
+      public int getWallCardsCount() {
+        return wallCards_.size();
+      }
+      /**
+       * <code>repeated int32 wall_cards = 6;</code>
+       *
+       * <pre>
+       *桌子自己的墙牌
+       * </pre>
+       */
+      public int getWallCards(int index) {
+        return wallCards_.get(index);
+      }
+      /**
+       * <code>repeated int32 wall_cards = 6;</code>
+       *
+       * <pre>
+       *桌子自己的墙牌
+       * </pre>
+       */
+      public Builder setWallCards(
+          int index, int value) {
+        ensureWallCardsIsMutable();
+        wallCards_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 wall_cards = 6;</code>
+       *
+       * <pre>
+       *桌子自己的墙牌
+       * </pre>
+       */
+      public Builder addWallCards(int value) {
+        ensureWallCardsIsMutable();
+        wallCards_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 wall_cards = 6;</code>
+       *
+       * <pre>
+       *桌子自己的墙牌
+       * </pre>
+       */
+      public Builder addAllWallCards(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureWallCardsIsMutable();
+        super.addAll(values, wallCards_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 wall_cards = 6;</code>
+       *
+       * <pre>
+       *桌子自己的墙牌
+       * </pre>
+       */
+      public Builder clearWallCards() {
+        wallCards_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+
+      // repeated int32 out_cards = 7;
+      private java.util.List<java.lang.Integer> outCards_ = java.util.Collections.emptyList();
+      private void ensureOutCardsIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          outCards_ = new java.util.ArrayList<java.lang.Integer>(outCards_);
+          bitField0_ |= 0x00000040;
+         }
+      }
+      /**
+       * <code>repeated int32 out_cards = 7;</code>
+       *
+       * <pre>
+       *玩家自己出的牌
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getOutCardsList() {
+        return java.util.Collections.unmodifiableList(outCards_);
+      }
+      /**
+       * <code>repeated int32 out_cards = 7;</code>
+       *
+       * <pre>
+       *玩家自己出的牌
+       * </pre>
+       */
+      public int getOutCardsCount() {
+        return outCards_.size();
+      }
+      /**
+       * <code>repeated int32 out_cards = 7;</code>
+       *
+       * <pre>
+       *玩家自己出的牌
+       * </pre>
+       */
+      public int getOutCards(int index) {
+        return outCards_.get(index);
+      }
+      /**
+       * <code>repeated int32 out_cards = 7;</code>
+       *
+       * <pre>
+       *玩家自己出的牌
+       * </pre>
+       */
+      public Builder setOutCards(
+          int index, int value) {
+        ensureOutCardsIsMutable();
+        outCards_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 out_cards = 7;</code>
+       *
+       * <pre>
+       *玩家自己出的牌
+       * </pre>
+       */
+      public Builder addOutCards(int value) {
+        ensureOutCardsIsMutable();
+        outCards_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 out_cards = 7;</code>
+       *
+       * <pre>
+       *玩家自己出的牌
+       * </pre>
+       */
+      public Builder addAllOutCards(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureOutCardsIsMutable();
+        super.addAll(values, outCards_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 out_cards = 7;</code>
+       *
+       * <pre>
+       *玩家自己出的牌
+       * </pre>
+       */
+      public Builder clearOutCards() {
+        outCards_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        onChanged();
+        return this;
+      }
+
+      // repeated int32 hua_cards = 8;
+      private java.util.List<java.lang.Integer> huaCards_ = java.util.Collections.emptyList();
+      private void ensureHuaCardsIsMutable() {
         if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          detailInfo_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info>(detailInfo_);
+          huaCards_ = new java.util.ArrayList<java.lang.Integer>(huaCards_);
           bitField0_ |= 0x00000080;
+         }
+      }
+      /**
+       * <code>repeated int32 hua_cards = 8;</code>
+       *
+       * <pre>
+       *玩家的花牌
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getHuaCardsList() {
+        return java.util.Collections.unmodifiableList(huaCards_);
+      }
+      /**
+       * <code>repeated int32 hua_cards = 8;</code>
+       *
+       * <pre>
+       *玩家的花牌
+       * </pre>
+       */
+      public int getHuaCardsCount() {
+        return huaCards_.size();
+      }
+      /**
+       * <code>repeated int32 hua_cards = 8;</code>
+       *
+       * <pre>
+       *玩家的花牌
+       * </pre>
+       */
+      public int getHuaCards(int index) {
+        return huaCards_.get(index);
+      }
+      /**
+       * <code>repeated int32 hua_cards = 8;</code>
+       *
+       * <pre>
+       *玩家的花牌
+       * </pre>
+       */
+      public Builder setHuaCards(
+          int index, int value) {
+        ensureHuaCardsIsMutable();
+        huaCards_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 hua_cards = 8;</code>
+       *
+       * <pre>
+       *玩家的花牌
+       * </pre>
+       */
+      public Builder addHuaCards(int value) {
+        ensureHuaCardsIsMutable();
+        huaCards_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 hua_cards = 8;</code>
+       *
+       * <pre>
+       *玩家的花牌
+       * </pre>
+       */
+      public Builder addAllHuaCards(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureHuaCardsIsMutable();
+        super.addAll(values, huaCards_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 hua_cards = 8;</code>
+       *
+       * <pre>
+       *玩家的花牌
+       * </pre>
+       */
+      public Builder clearHuaCards() {
+        huaCards_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000080);
+        onChanged();
+        return this;
+      }
+
+      // repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;
+      private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> historyActionInfos_ =
+        java.util.Collections.emptyList();
+      private void ensureHistoryActionInfosIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          historyActionInfos_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info>(historyActionInfos_);
+          bitField0_ |= 0x00000100;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder> detailInfoBuilder_;
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> historyActionInfosBuilder_;
 
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *玩家吃碰杠牌情况
        * </pre>
        */
-      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> getDetailInfoList() {
-        if (detailInfoBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(detailInfo_);
+      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> getHistoryActionInfosList() {
+        if (historyActionInfosBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(historyActionInfos_);
         } else {
-          return detailInfoBuilder_.getMessageList();
+          return historyActionInfosBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *玩家吃碰杠牌情况
        * </pre>
        */
-      public int getDetailInfoCount() {
-        if (detailInfoBuilder_ == null) {
-          return detailInfo_.size();
+      public int getHistoryActionInfosCount() {
+        if (historyActionInfosBuilder_ == null) {
+          return historyActionInfos_.size();
         } else {
-          return detailInfoBuilder_.getCount();
+          return historyActionInfosBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *玩家吃碰杠牌情况
        * </pre>
        */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info getDetailInfo(int index) {
-        if (detailInfoBuilder_ == null) {
-          return detailInfo_.get(index);
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info getHistoryActionInfos(int index) {
+        if (historyActionInfosBuilder_ == null) {
+          return historyActionInfos_.get(index);
         } else {
-          return detailInfoBuilder_.getMessage(index);
+          return historyActionInfosBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *玩家吃碰杠牌情况
        * </pre>
        */
-      public Builder setDetailInfo(
-          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info value) {
-        if (detailInfoBuilder_ == null) {
+      public Builder setHistoryActionInfos(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info value) {
+        if (historyActionInfosBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureDetailInfoIsMutable();
-          detailInfo_.set(index, value);
+          ensureHistoryActionInfosIsMutable();
+          historyActionInfos_.set(index, value);
           onChanged();
         } else {
-          detailInfoBuilder_.setMessage(index, value);
+          historyActionInfosBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *玩家吃碰杠牌情况
        * </pre>
        */
-      public Builder setDetailInfo(
+      public Builder setHistoryActionInfos(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder builderForValue) {
+        if (historyActionInfosBuilder_ == null) {
+          ensureHistoryActionInfosIsMutable();
+          historyActionInfos_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          historyActionInfosBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public Builder addHistoryActionInfos(game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info value) {
+        if (historyActionInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHistoryActionInfosIsMutable();
+          historyActionInfos_.add(value);
+          onChanged();
+        } else {
+          historyActionInfosBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public Builder addHistoryActionInfos(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info value) {
+        if (historyActionInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHistoryActionInfosIsMutable();
+          historyActionInfos_.add(index, value);
+          onChanged();
+        } else {
+          historyActionInfosBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public Builder addHistoryActionInfos(
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder builderForValue) {
+        if (historyActionInfosBuilder_ == null) {
+          ensureHistoryActionInfosIsMutable();
+          historyActionInfos_.add(builderForValue.build());
+          onChanged();
+        } else {
+          historyActionInfosBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public Builder addHistoryActionInfos(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder builderForValue) {
+        if (historyActionInfosBuilder_ == null) {
+          ensureHistoryActionInfosIsMutable();
+          historyActionInfos_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          historyActionInfosBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public Builder addAllHistoryActionInfos(
+          java.lang.Iterable<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info> values) {
+        if (historyActionInfosBuilder_ == null) {
+          ensureHistoryActionInfosIsMutable();
+          super.addAll(values, historyActionInfos_);
+          onChanged();
+        } else {
+          historyActionInfosBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public Builder clearHistoryActionInfos() {
+        if (historyActionInfosBuilder_ == null) {
+          historyActionInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+          onChanged();
+        } else {
+          historyActionInfosBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public Builder removeHistoryActionInfos(int index) {
+        if (historyActionInfosBuilder_ == null) {
+          ensureHistoryActionInfosIsMutable();
+          historyActionInfos_.remove(index);
+          onChanged();
+        } else {
+          historyActionInfosBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder getHistoryActionInfosBuilder(
+          int index) {
+        return getHistoryActionInfosFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder getHistoryActionInfosOrBuilder(
+          int index) {
+        if (historyActionInfosBuilder_ == null) {
+          return historyActionInfos_.get(index);  } else {
+          return historyActionInfosBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> 
+           getHistoryActionInfosOrBuilderList() {
+        if (historyActionInfosBuilder_ != null) {
+          return historyActionInfosBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(historyActionInfos_);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder addHistoryActionInfosBuilder() {
+        return getHistoryActionInfosFieldBuilder().addBuilder(
+            game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder addHistoryActionInfosBuilder(
+          int index) {
+        return getHistoryActionInfosFieldBuilder().addBuilder(
+            index, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_history_action_info history_action_infos = 9;</code>
+       *
+       * <pre>
+       *玩家吃碰杠牌情况
+       * </pre>
+       */
+      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder> 
+           getHistoryActionInfosBuilderList() {
+        return getHistoryActionInfosFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder> 
+          getHistoryActionInfosFieldBuilder() {
+        if (historyActionInfosBuilder_ == null) {
+          historyActionInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_history_action_infoOrBuilder>(
+                  historyActionInfos_,
+                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  getParentForChildren(),
+                  isClean());
+          historyActionInfos_ = null;
+        }
+        return historyActionInfosBuilder_;
+      }
+
+      // repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;
+      private java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> huDetailInfos_ =
+        java.util.Collections.emptyList();
+      private void ensureHuDetailInfosIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          huDetailInfos_ = new java.util.ArrayList<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info>(huDetailInfos_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder> huDetailInfosBuilder_;
+
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+       *
+       * <pre>
+       *胡牌具体结果
+       * </pre>
+       */
+      public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> getHuDetailInfosList() {
+        if (huDetailInfosBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(huDetailInfos_);
+        } else {
+          return huDetailInfosBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+       *
+       * <pre>
+       *胡牌具体结果
+       * </pre>
+       */
+      public int getHuDetailInfosCount() {
+        if (huDetailInfosBuilder_ == null) {
+          return huDetailInfos_.size();
+        } else {
+          return huDetailInfosBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+       *
+       * <pre>
+       *胡牌具体结果
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info getHuDetailInfos(int index) {
+        if (huDetailInfosBuilder_ == null) {
+          return huDetailInfos_.get(index);
+        } else {
+          return huDetailInfosBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+       *
+       * <pre>
+       *胡牌具体结果
+       * </pre>
+       */
+      public Builder setHuDetailInfos(
+          int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info value) {
+        if (huDetailInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureHuDetailInfosIsMutable();
+          huDetailInfos_.set(index, value);
+          onChanged();
+        } else {
+          huDetailInfosBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
+       *
+       * <pre>
+       *胡牌具体结果
+       * </pre>
+       */
+      public Builder setHuDetailInfos(
           int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder builderForValue) {
-        if (detailInfoBuilder_ == null) {
-          ensureDetailInfoIsMutable();
-          detailInfo_.set(index, builderForValue.build());
+        if (huDetailInfosBuilder_ == null) {
+          ensureHuDetailInfosIsMutable();
+          huDetailInfos_.set(index, builderForValue.build());
           onChanged();
         } else {
-          detailInfoBuilder_.setMessage(index, builderForValue.build());
+          huDetailInfosBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public Builder addDetailInfo(game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info value) {
-        if (detailInfoBuilder_ == null) {
+      public Builder addHuDetailInfos(game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info value) {
+        if (huDetailInfosBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureDetailInfoIsMutable();
-          detailInfo_.add(value);
+          ensureHuDetailInfosIsMutable();
+          huDetailInfos_.add(value);
           onChanged();
         } else {
-          detailInfoBuilder_.addMessage(value);
+          huDetailInfosBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public Builder addDetailInfo(
+      public Builder addHuDetailInfos(
           int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info value) {
-        if (detailInfoBuilder_ == null) {
+        if (huDetailInfosBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureDetailInfoIsMutable();
-          detailInfo_.add(index, value);
+          ensureHuDetailInfosIsMutable();
+          huDetailInfos_.add(index, value);
           onChanged();
         } else {
-          detailInfoBuilder_.addMessage(index, value);
+          huDetailInfosBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public Builder addDetailInfo(
+      public Builder addHuDetailInfos(
           game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder builderForValue) {
-        if (detailInfoBuilder_ == null) {
-          ensureDetailInfoIsMutable();
-          detailInfo_.add(builderForValue.build());
+        if (huDetailInfosBuilder_ == null) {
+          ensureHuDetailInfosIsMutable();
+          huDetailInfos_.add(builderForValue.build());
           onChanged();
         } else {
-          detailInfoBuilder_.addMessage(builderForValue.build());
+          huDetailInfosBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public Builder addDetailInfo(
+      public Builder addHuDetailInfos(
           int index, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder builderForValue) {
-        if (detailInfoBuilder_ == null) {
-          ensureDetailInfoIsMutable();
-          detailInfo_.add(index, builderForValue.build());
+        if (huDetailInfosBuilder_ == null) {
+          ensureHuDetailInfosIsMutable();
+          huDetailInfos_.add(index, builderForValue.build());
           onChanged();
         } else {
-          detailInfoBuilder_.addMessage(index, builderForValue.build());
+          huDetailInfosBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public Builder addAllDetailInfo(
+      public Builder addAllHuDetailInfos(
           java.lang.Iterable<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info> values) {
-        if (detailInfoBuilder_ == null) {
-          ensureDetailInfoIsMutable();
-          super.addAll(values, detailInfo_);
+        if (huDetailInfosBuilder_ == null) {
+          ensureHuDetailInfosIsMutable();
+          super.addAll(values, huDetailInfos_);
           onChanged();
         } else {
-          detailInfoBuilder_.addAllMessages(values);
+          huDetailInfosBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public Builder clearDetailInfo() {
-        if (detailInfoBuilder_ == null) {
-          detailInfo_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
+      public Builder clearHuDetailInfos() {
+        if (huDetailInfosBuilder_ == null) {
+          huDetailInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
           onChanged();
         } else {
-          detailInfoBuilder_.clear();
+          huDetailInfosBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public Builder removeDetailInfo(int index) {
-        if (detailInfoBuilder_ == null) {
-          ensureDetailInfoIsMutable();
-          detailInfo_.remove(index);
+      public Builder removeHuDetailInfos(int index) {
+        if (huDetailInfosBuilder_ == null) {
+          ensureHuDetailInfosIsMutable();
+          huDetailInfos_.remove(index);
           onChanged();
         } else {
-          detailInfoBuilder_.remove(index);
+          huDetailInfosBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder getDetailInfoBuilder(
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder getHuDetailInfosBuilder(
           int index) {
-        return getDetailInfoFieldBuilder().getBuilder(index);
+        return getHuDetailInfosFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder getDetailInfoOrBuilder(
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder getHuDetailInfosOrBuilder(
           int index) {
-        if (detailInfoBuilder_ == null) {
-          return detailInfo_.get(index);  } else {
-          return detailInfoBuilder_.getMessageOrBuilder(index);
+        if (huDetailInfosBuilder_ == null) {
+          return huDetailInfos_.get(index);  } else {
+          return huDetailInfosBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
       public java.util.List<? extends game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder> 
-           getDetailInfoOrBuilderList() {
-        if (detailInfoBuilder_ != null) {
-          return detailInfoBuilder_.getMessageOrBuilderList();
+           getHuDetailInfosOrBuilderList() {
+        if (huDetailInfosBuilder_ != null) {
+          return huDetailInfosBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(detailInfo_);
+          return java.util.Collections.unmodifiableList(huDetailInfos_);
         }
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder addDetailInfoBuilder() {
-        return getDetailInfoFieldBuilder().addBuilder(
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder addHuDetailInfosBuilder() {
+        return getHuDetailInfosFieldBuilder().addBuilder(
             game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.getDefaultInstance());
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
-      public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder addDetailInfoBuilder(
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder addHuDetailInfosBuilder(
           int index) {
-        return getDetailInfoFieldBuilder().addBuilder(
+        return getHuDetailInfosFieldBuilder().addBuilder(
             index, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.getDefaultInstance());
       }
       /**
-       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info detail_info = 8;</code>
+       * <code>repeated .game_guanyuan_protocols.msg_hu_detail_info hu_detail_infos = 10;</code>
        *
        * <pre>
-       *胡牌时的信息状态
+       *胡牌具体结果
        * </pre>
        */
       public java.util.List<game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder> 
-           getDetailInfoBuilderList() {
-        return getDetailInfoFieldBuilder().getBuilderList();
+           getHuDetailInfosBuilderList() {
+        return getHuDetailInfosFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder> 
-          getDetailInfoFieldBuilder() {
-        if (detailInfoBuilder_ == null) {
-          detailInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getHuDetailInfosFieldBuilder() {
+        if (huDetailInfosBuilder_ == null) {
+          huDetailInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_hu_detail_infoOrBuilder>(
-                  detailInfo_,
-                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  huDetailInfos_,
+                  ((bitField0_ & 0x00000200) == 0x00000200),
                   getParentForChildren(),
                   isClean());
-          detailInfo_ = null;
+          huDetailInfos_ = null;
         }
-        return detailInfoBuilder_;
+        return huDetailInfosBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:game_guanyuan_protocols.msg_player_circle_result)
+      // @@protoc_insertion_point(builder_scope:game_guanyuan_protocols.msg_circle_over_detail)
     }
 
     static {
-      defaultInstance = new msg_player_circle_result(true);
+      defaultInstance = new msg_circle_over_detail(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.msg_player_circle_result)
+    // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.msg_circle_over_detail)
   }
 
   public interface msg_hu_detail_infoOrBuilder
@@ -37159,6 +34531,663 @@ public final class GameGuanyunProtocol {
     }
 
     // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.msg_hu_detail_info)
+  }
+
+  public interface packetl2c_game_over_ntOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];
+    /**
+     * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];</code>
+     */
+    boolean hasPacketId();
+    /**
+     * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];</code>
+     */
+    game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type getPacketId();
+
+    // optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+     *
+     * <pre>
+     *游戏结束时的状态
+     * </pre>
+     */
+    boolean hasMsgGameOverInfo();
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+     *
+     * <pre>
+     *游戏结束时的状态
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info getMsgGameOverInfo();
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+     *
+     * <pre>
+     *游戏结束时的状态
+     * </pre>
+     */
+    game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_infoOrBuilder getMsgGameOverInfoOrBuilder();
+  }
+  /**
+   * Protobuf type {@code game_guanyuan_protocols.packetl2c_game_over_nt}
+   */
+  public static final class packetl2c_game_over_nt extends
+      com.google.protobuf.GeneratedMessage
+      implements packetl2c_game_over_ntOrBuilder {
+    // Use packetl2c_game_over_nt.newBuilder() to construct.
+    private packetl2c_game_over_nt(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private packetl2c_game_over_nt(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final packetl2c_game_over_nt defaultInstance;
+    public static packetl2c_game_over_nt getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public packetl2c_game_over_nt getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private packetl2c_game_over_nt(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type value = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                packetId_ = value;
+              }
+              break;
+            }
+            case 18: {
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = msgGameOverInfo_.toBuilder();
+              }
+              msgGameOverInfo_ = input.readMessage(game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(msgGameOverInfo_);
+                msgGameOverInfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_packetl2c_game_over_nt_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_packetl2c_game_over_nt_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt.class, game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<packetl2c_game_over_nt> PARSER =
+        new com.google.protobuf.AbstractParser<packetl2c_game_over_nt>() {
+      public packetl2c_game_over_nt parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new packetl2c_game_over_nt(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<packetl2c_game_over_nt> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];
+    public static final int PACKET_ID_FIELD_NUMBER = 1;
+    private game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type packetId_;
+    /**
+     * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];</code>
+     */
+    public boolean hasPacketId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];</code>
+     */
+    public game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type getPacketId() {
+      return packetId_;
+    }
+
+    // optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;
+    public static final int MSG_GAME_OVER_INFO_FIELD_NUMBER = 2;
+    private game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info msgGameOverInfo_;
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+     *
+     * <pre>
+     *游戏结束时的状态
+     * </pre>
+     */
+    public boolean hasMsgGameOverInfo() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+     *
+     * <pre>
+     *游戏结束时的状态
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info getMsgGameOverInfo() {
+      return msgGameOverInfo_;
+    }
+    /**
+     * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+     *
+     * <pre>
+     *游戏结束时的状态
+     * </pre>
+     */
+    public game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_infoOrBuilder getMsgGameOverInfoOrBuilder() {
+      return msgGameOverInfo_;
+    }
+
+    private void initFields() {
+      packetId_ = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.e_mst_l2c_game_over_nt;
+      msgGameOverInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, packetId_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, msgGameOverInfo_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, packetId_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, msgGameOverInfo_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code game_guanyuan_protocols.packetl2c_game_over_nt}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_ntOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_packetl2c_game_over_nt_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_packetl2c_game_over_nt_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt.class, game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt.Builder.class);
+      }
+
+      // Construct using game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getMsgGameOverInfoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        packetId_ = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.e_mst_l2c_game_over_nt;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (msgGameOverInfoBuilder_ == null) {
+          msgGameOverInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.getDefaultInstance();
+        } else {
+          msgGameOverInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return game_guanyuan_protocols.GameGuanyunProtocol.internal_static_game_guanyuan_protocols_packetl2c_game_over_nt_descriptor;
+      }
+
+      public game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt getDefaultInstanceForType() {
+        return game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt.getDefaultInstance();
+      }
+
+      public game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt build() {
+        game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt buildPartial() {
+        game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt result = new game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.packetId_ = packetId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (msgGameOverInfoBuilder_ == null) {
+          result.msgGameOverInfo_ = msgGameOverInfo_;
+        } else {
+          result.msgGameOverInfo_ = msgGameOverInfoBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt) {
+          return mergeFrom((game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt other) {
+        if (other == game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt.getDefaultInstance()) return this;
+        if (other.hasPacketId()) {
+          setPacketId(other.getPacketId());
+        }
+        if (other.hasMsgGameOverInfo()) {
+          mergeMsgGameOverInfo(other.getMsgGameOverInfo());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (game_guanyuan_protocols.GameGuanyunProtocol.packetl2c_game_over_nt) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];
+      private game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type packetId_ = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.e_mst_l2c_game_over_nt;
+      /**
+       * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];</code>
+       */
+      public boolean hasPacketId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];</code>
+       */
+      public game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type getPacketId() {
+        return packetId_;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];</code>
+       */
+      public Builder setPacketId(game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        packetId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.e_server_msg_type packet_id = 1 [default = e_mst_l2c_game_over_nt];</code>
+       */
+      public Builder clearPacketId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        packetId_ = game_guanyuan_protocols.GameGuanyuanDef.e_server_msg_type.e_mst_l2c_game_over_nt;
+        onChanged();
+        return this;
+      }
+
+      // optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;
+      private game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info msgGameOverInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_infoOrBuilder> msgGameOverInfoBuilder_;
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+       *
+       * <pre>
+       *游戏结束时的状态
+       * </pre>
+       */
+      public boolean hasMsgGameOverInfo() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+       *
+       * <pre>
+       *游戏结束时的状态
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info getMsgGameOverInfo() {
+        if (msgGameOverInfoBuilder_ == null) {
+          return msgGameOverInfo_;
+        } else {
+          return msgGameOverInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+       *
+       * <pre>
+       *游戏结束时的状态
+       * </pre>
+       */
+      public Builder setMsgGameOverInfo(game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info value) {
+        if (msgGameOverInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          msgGameOverInfo_ = value;
+          onChanged();
+        } else {
+          msgGameOverInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+       *
+       * <pre>
+       *游戏结束时的状态
+       * </pre>
+       */
+      public Builder setMsgGameOverInfo(
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.Builder builderForValue) {
+        if (msgGameOverInfoBuilder_ == null) {
+          msgGameOverInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          msgGameOverInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+       *
+       * <pre>
+       *游戏结束时的状态
+       * </pre>
+       */
+      public Builder mergeMsgGameOverInfo(game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info value) {
+        if (msgGameOverInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              msgGameOverInfo_ != game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.getDefaultInstance()) {
+            msgGameOverInfo_ =
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.newBuilder(msgGameOverInfo_).mergeFrom(value).buildPartial();
+          } else {
+            msgGameOverInfo_ = value;
+          }
+          onChanged();
+        } else {
+          msgGameOverInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+       *
+       * <pre>
+       *游戏结束时的状态
+       * </pre>
+       */
+      public Builder clearMsgGameOverInfo() {
+        if (msgGameOverInfoBuilder_ == null) {
+          msgGameOverInfo_ = game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.getDefaultInstance();
+          onChanged();
+        } else {
+          msgGameOverInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+       *
+       * <pre>
+       *游戏结束时的状态
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.Builder getMsgGameOverInfoBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getMsgGameOverInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+       *
+       * <pre>
+       *游戏结束时的状态
+       * </pre>
+       */
+      public game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_infoOrBuilder getMsgGameOverInfoOrBuilder() {
+        if (msgGameOverInfoBuilder_ != null) {
+          return msgGameOverInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return msgGameOverInfo_;
+        }
+      }
+      /**
+       * <code>optional .game_guanyuan_protocols.msg_game_over_info msg_game_over_info = 2;</code>
+       *
+       * <pre>
+       *游戏结束时的状态
+       * </pre>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_infoOrBuilder> 
+          getMsgGameOverInfoFieldBuilder() {
+        if (msgGameOverInfoBuilder_ == null) {
+          msgGameOverInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info, game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_info.Builder, game_guanyuan_protocols.GameGuanyunProtocol.msg_game_over_infoOrBuilder>(
+                  msgGameOverInfo_,
+                  getParentForChildren(),
+                  isClean());
+          msgGameOverInfo_ = null;
+        }
+        return msgGameOverInfoBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:game_guanyuan_protocols.packetl2c_game_over_nt)
+    }
+
+    static {
+      defaultInstance = new packetl2c_game_over_nt(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:game_guanyuan_protocols.packetl2c_game_over_nt)
   }
 
   public interface packetl2c_player_enter_game_ntOrBuilder
@@ -39067,16 +37096,6 @@ public final class GameGuanyunProtocol {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_game_guanyuan_protocols_packetl2c_ready_result_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_game_guanyuan_protocols_msg_circle_over_info_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_game_guanyuan_protocols_msg_circle_over_detail_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_game_guanyuan_protocols_msg_game_over_info_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -39152,11 +37171,6 @@ public final class GameGuanyunProtocol {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_game_guanyuan_protocols_packetl2c_circle_start_nt_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_game_guanyuan_protocols_msg_init_cards_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_game_guanyuan_protocols_msg_init_cards_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_game_guanyuan_protocols_packetl2c_trun_index_nt_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -39192,15 +37206,25 @@ public final class GameGuanyunProtocol {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_game_guanyuan_protocols_packetl2c_circle_result_nt_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_game_guanyuan_protocols_msg_player_circle_result_descriptor;
+    internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_game_guanyuan_protocols_msg_player_circle_result_fieldAccessorTable;
+      internal_static_game_guanyuan_protocols_msg_circle_over_info_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_game_guanyuan_protocols_msg_circle_over_detail_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_game_guanyuan_protocols_msg_hu_detail_info_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_game_guanyuan_protocols_msg_hu_detail_info_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_game_guanyuan_protocols_packetl2c_game_over_nt_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_game_guanyuan_protocols_packetl2c_game_over_nt_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_game_guanyuan_protocols_packetl2c_player_enter_game_nt_descriptor;
   private static
@@ -39264,171 +37288,180 @@ public final class GameGuanyunProtocol {
       "ayerId\030\002 \001(\005\022\021\n\tuser_name\030\003 \001(\t\022\014\n\004gold\030" +
       "\004 \001(\005\022\021\n\thead_icon\030\005 \001(\t\022\013\n\003sex\030\006 \001(\005\022\r\n" +
       "\005score\030\007 \001(\005\022\023\n\013line_status\030\010 \001(\005\022\021\n\trea" +
-      "dyFlag\030\t \001(\010\"\215\002\n\026msg_status_gaming_info\022",
+      "dyFlag\030\t \001(\010\"\323\002\n\026msg_status_gaming_info\022",
       "9\n\troom_info\030\001 \003(\0132&.game_guanyuan_proto" +
       "cols.msg_room_info\022\016\n\006my_pos\030\002 \001(\005\022\022\n\nha" +
       "nd_hards\030\003 \003(\005\022\020\n\010host_pos\030\004 \001(\005\022\022\n\nacti" +
-      "ve_pos\030\005 \001(\005\022\025\n\rleft_card_num\030\006 \001(\005\022\031\n\021l" +
-      "ast_out_card_pos\030\007 \001(\005\022\025\n\rlast_out_card\030" +
-      "\010 \001(\005\022\022\n\ncircle_idx\030\t \001(\005\022\021\n\tdice_list\030\n" +
-      " \003(\005\"\266\001\n\rmsg_room_info\022\025\n\rhand_card_num\030" +
-      "\001 \001(\005\022\026\n\016out_wall_cards\030\002 \003(\005\022\024\n\014flower_" +
-      "cards\030\003 \003(\005\022\021\n\tting_card\030\004 \001(\005\022M\n\023histor" +
-      "y_action_info\030\005 \003(\01320.game_guanyuan_prot",
-      "ocols.msg_history_action_info\"\227\001\n\027msg_hi" +
-      "story_action_info\022\014\n\004card\030\001 \001(\005\022\022\n\nlinke" +
-      "d_pos\030\002 \001(\005\022C\n\013action_type\030\003 \001(\0162..game_" +
-      "guanyuan_protocols.e_history_action_type" +
-      "\022\025\n\rlinkded_cards\030\004 \003(\005\"M\n\021msg_dis_room_" +
-      "info\022\020\n\010playerId\030\001 \001(\005\022\023\n\013agree_poses\030\002 " +
-      "\003(\005\022\021\n\texpire_tm\030\003 \001(\003\"\202\001\n\017packetc2l_rea" +
-      "dy\022N\n\tpacket_id\030\001 \001(\0162*.game_guanyuan_pr" +
-      "otocols.e_server_msg_type:\017e_mst_c2l_rea" +
-      "dy\022\020\n\010seat_pos\030\002 \001(\005\022\r\n\005ready\030\003 \001(\010\"\220\001\n\026",
-      "packetl2c_ready_result\022U\n\tpacket_id\030\001 \001(" +
-      "\0162*.game_guanyuan_protocols.e_server_msg" +
-      "_type:\026e_mst_l2c_ready_result\022\020\n\010seat_po" +
-      "s\030\002 \001(\005\022\r\n\005ready\030\003 \001(\010\"\342\001\n\024msg_circle_ov" +
-      "er_info\022\014\n\004type\030\001 \001(\005\022\016\n\006hu_pos\030\002 \001(\005\022\020\n" +
-      "\010last_pos\030\003 \001(\005\022\022\n\ncircle_num\030\004 \001(\005\022\017\n\007h" +
-      "u_card\030\005 \001(\005\022\034\n\024next_circle_start_tm\030\006 \001" +
-      "(\004\022\026\n\016is_last_circle\030\007 \001(\010\022?\n\006detail\030\010 \003" +
-      "(\0132/.game_guanyuan_protocols.msg_circle_" +
-      "over_detail\"\261\001\n\026msg_circle_over_detail\022\013",
-      "\n\003pos\030\001 \001(\005\022\021\n\tting_card\030\002 \001(\005\022\017\n\007hu_nam" +
-      "e\030\003 \001(\t\022\013\n\003fen\030\004 \001(\005\022\013\n\003hua\030\005 \001(\005\022\022\n\nhan" +
-      "d_cards\030\006 \003(\005\022\022\n\nwall_cards\030\007 \003(\005\022\021\n\tout" +
-      "_cards\030\010 \003(\005\022\021\n\thua_cards\030\t \003(\005\"\024\n\022msg_g" +
-      "ame_over_info\"k\n\024packetc2l_leave_room\022S\n" +
-      "\tpacket_id\030\001 \001(\0162*.game_guanyuan_protoco" +
-      "ls.e_server_msg_type:\024e_mst_c2l_leave_ro" +
-      "om\"\312\001\n\033packetl2c_leave_room_result\022Z\n\tpa" +
-      "cket_id\030\001 \001(\0162*.game_guanyuan_protocols." +
-      "e_server_msg_type:\033e_mst_l2c_leave_room_",
-      "result\022=\n\006result\030\002 \001(\0162\036.msg_type_def.e_" +
-      "msg_result_def:\re_rmt_success\022\020\n\010seat_po" +
-      "s\030\003 \001(\005\"\257\001\n\020packetc2l_action\022O\n\tpacket_i" +
+      "ve_pos\030\005 \001(\005\022\022\n\ncircle_idx\030\006 \001(\005\022\021\n\tdice" +
+      "_list\030\007 \003(\005\022M\n\023history_action_info\030\010 \001(\013" +
+      "20.game_guanyuan_protocols.msg_history_a" +
+      "ction_info\022>\n\014action_types\030\t \003(\0132(.game_" +
+      "guanyuan_protocols.msg_action_type\"\266\001\n\rm" +
+      "sg_room_info\022\025\n\rhand_card_num\030\001 \001(\005\022\026\n\016o" +
+      "ut_wall_cards\030\002 \003(\005\022\024\n\014flower_cards\030\003 \003(",
+      "\005\022\021\n\tting_card\030\004 \001(\005\022M\n\023history_action_i" +
+      "nfo\030\005 \003(\01320.game_guanyuan_protocols.msg_" +
+      "history_action_info\"\251\001\n\027msg_history_acti" +
+      "on_info\022\014\n\004card\030\001 \001(\005\022\020\n\010seat_pos\030\002 \001(\005\022" +
+      "\022\n\nlinked_pos\030\003 \001(\005\022C\n\013action_type\030\004 \001(\016" +
+      "2..game_guanyuan_protocols.e_history_act" +
+      "ion_type\022\025\n\rlinkded_cards\030\005 \003(\005\"M\n\021msg_d" +
+      "is_room_info\022\020\n\010playerId\030\001 \001(\005\022\023\n\013agree_" +
+      "poses\030\002 \003(\005\022\021\n\texpire_tm\030\003 \001(\003\"\202\001\n\017packe" +
+      "tc2l_ready\022N\n\tpacket_id\030\001 \001(\0162*.game_gua",
+      "nyuan_protocols.e_server_msg_type:\017e_mst" +
+      "_c2l_ready\022\020\n\010seat_pos\030\002 \001(\005\022\r\n\005ready\030\003 " +
+      "\001(\010\"\220\001\n\026packetl2c_ready_result\022U\n\tpacket" +
+      "_id\030\001 \001(\0162*.game_guanyuan_protocols.e_se" +
+      "rver_msg_type:\026e_mst_l2c_ready_result\022\020\n" +
+      "\010seat_pos\030\002 \001(\005\022\r\n\005ready\030\003 \001(\010\"7\n\022msg_ga" +
+      "me_over_info\022\021\n\tcircleIdx\030\001 \001(\005\022\016\n\006score" +
+      "s\030\002 \003(\005\"k\n\024packetc2l_leave_room\022S\n\tpacke" +
+      "t_id\030\001 \001(\0162*.game_guanyuan_protocols.e_s" +
+      "erver_msg_type:\024e_mst_c2l_leave_room\"\312\001\n",
+      "\033packetl2c_leave_room_result\022Z\n\tpacket_i" +
       "d\030\001 \001(\0162*.game_guanyuan_protocols.e_serv" +
-      "er_msg_type:\020e_mst_c2l_action\022;\n\013action_" +
-      "type\030\002 \001(\0162&.game_guanyuan_protocols.e_a" +
-      "ction_type\022\r\n\005cards\030\003 \003(\005\"\222\002\n\027packetl2c_" +
-      "action_result\022V\n\tpacket_id\030\001 \001(\0162*.game_" +
-      "guanyuan_protocols.e_server_msg_type:\027e_" +
-      "mst_l2c_action_result\022=\n\006result\030\002 \001(\0162\036.",
-      "msg_type_def.e_msg_result_def:\re_rmt_suc" +
-      "cess\022;\n\013action_type\030\003 \001(\0162&.game_guanyua" +
-      "n_protocols.e_action_type\022\014\n\004card\030\004 \001(\005\022" +
-      "\025\n\rleft_card_num\030\005 \001(\005\"\226\001\n\rpacketc2l_gps" +
-      "\022L\n\tpacket_id\030\001 \001(\0162*.game_guanyuan_prot" +
-      "ocols.e_server_msg_type:\re_mst_c2l_gps\0227" +
-      "\n\010gps_info\030\002 \001(\0132%.game_guanyuan_protoco" +
-      "ls.msg_gps_info\"\344\001\n\024packetl2c_gps_result" +
-      "\022S\n\tpacket_id\030\001 \001(\0162*.game_guanyuan_prot" +
-      "ocols.e_server_msg_type:\024e_mst_l2c_gps_r",
-      "esult\022=\n\006result\030\002 \001(\0162\036.msg_type_def.e_m" +
-      "sg_result_def:\re_rmt_success\0228\n\tgps_info" +
-      "s\030\003 \003(\0132%.game_guanyuan_protocols.msg_gp" +
-      "s_info\"[\n\014msg_gps_info\022\013\n\003lng\030\001 \001(\001\022\013\n\003l" +
-      "at\030\002 \001(\001\022\016\n\006status\030\003 \001(\005\022\017\n\007address\030\004 \001(" +
-      "\t\022\020\n\010seat_pos\030\005 \001(\005\"g\n\022packetc2l_dis_roo" +
-      "m\022Q\n\tpacket_id\030\001 \001(\0162*.game_guanyuan_pro" +
-      "tocols.e_server_msg_type:\022e_mst_c2l_dis_" +
-      "room\"u\n\031packetc2l_dis_room_result\022X\n\tpac" +
-      "ket_id\030\001 \001(\0162*.game_guanyuan_protocols.e",
-      "_server_msg_type:\031e_mst_l2c_dis_room_res" +
-      "ult\"\213\001\n\032packetc2l_dis_agree_or_not\022Y\n\tpa" +
+      "er_msg_type:\033e_mst_l2c_leave_room_result" +
+      "\022=\n\006result\030\002 \001(\0162\036.msg_type_def.e_msg_re" +
+      "sult_def:\re_rmt_success\022\020\n\010seat_pos\030\003 \001(" +
+      "\005\"\257\001\n\020packetc2l_action\022O\n\tpacket_id\030\001 \001(" +
+      "\0162*.game_guanyuan_protocols.e_server_msg" +
+      "_type:\020e_mst_c2l_action\022;\n\013action_type\030\002" +
+      " \001(\0162&.game_guanyuan_protocols.e_action_" +
+      "type\022\r\n\005cards\030\003 \003(\005\"\222\002\n\027packetl2c_action",
+      "_result\022V\n\tpacket_id\030\001 \001(\0162*.game_guanyu" +
+      "an_protocols.e_server_msg_type:\027e_mst_l2" +
+      "c_action_result\022=\n\006result\030\002 \001(\0162\036.msg_ty" +
+      "pe_def.e_msg_result_def:\re_rmt_success\022;" +
+      "\n\013action_type\030\003 \001(\0162&.game_guanyuan_prot" +
+      "ocols.e_action_type\022\014\n\004card\030\004 \001(\005\022\025\n\rlef" +
+      "t_card_num\030\005 \001(\005\"\226\001\n\rpacketc2l_gps\022L\n\tpa" +
       "cket_id\030\001 \001(\0162*.game_guanyuan_protocols." +
-      "e_server_msg_type:\032e_mst_c2l_dis_agree_o" +
-      "r_not\022\022\n\nagree_flag\030\002 \001(\010\"\231\001\n!packetc2l_" +
-      "dis_agree_or_not_result\022`\n\tpacket_id\030\001 \001" +
-      "(\0162*.game_guanyuan_protocols.e_server_ms" +
-      "g_type:!e_mst_l2c_dis_agree_or_not_resul" +
-      "t\022\022\n\nagree_flag\030\002 \001(\010\"\232\001\n\025msg_create_roo" +
-      "m_param\022\024\n\014circle_count\030\001 \001(\005\022\021\n\tcost_ty",
-      "pe\030\002 \001(\005\022\022\n\nbase_score\030\003 \001(\005\022\017\n\007baseHua\030" +
-      "\004 \001(\005\022\020\n\010hua_type\030\005 \001(\005\022\020\n\010bao_type\030\006 \001(" +
-      "\005\022\017\n\007hu_type\030\007 \001(\005\"\203\001\n\027packetl2c_game_st" +
-      "art_nt\022V\n\tpacket_id\030\001 \001(\0162*.game_guanyua" +
-      "n_protocols.e_server_msg_type:\027e_mst_l2c" +
-      "_game_start_nt\022\020\n\010start_tm\030\002 \001(\005\"\273\001\n\031pac" +
-      "ketl2c_circle_start_nt\022X\n\tpacket_id\030\001 \001(" +
-      "\0162*.game_guanyuan_protocols.e_server_msg" +
-      "_type:\031e_mst_l2c_circle_start_nt\022D\n\013gami" +
-      "ng_info\030\002 \001(\0132/.game_guanyuan_protocols.",
-      "msg_status_gaming_info\"Z\n\016msg_init_cards" +
-      "\022\020\n\010seat_pos\030\001 \001(\005\022\017\n\007flowers\030\002 \003(\005\022\020\n\010c" +
-      "ard_num\030\003 \001(\005\022\023\n\013hands_cards\030\004 \003(\005\"\252\001\n\027p" +
-      "acketl2c_trun_index_nt\022V\n\tpacket_id\030\001 \001(" +
-      "\0162*.game_guanyuan_protocols.e_server_msg" +
-      "_type:\027e_mst_l2c_trun_index_nt\022\013\n\003pos\030\002 " +
-      "\001(\005\022\025\n\rleft_card_num\030\003 \001(\005\022\023\n\013time_expir" +
-      "e\030\004 \001(\005\"\267\001\n\033packetl2c_replace_flower_nt\022" +
-      "Z\n\tpacket_id\030\001 \001(\0162*.game_guanyuan_proto" +
-      "cols.e_server_msg_type:\033e_mst_l2c_replac",
-      "e_flower_nt\022\020\n\010seat_pos\030\002 \001(\005\022\024\n\014flower_" +
-      "cards\030\003 \003(\005\022\024\n\014replace_card\030\004 \001(\005\"\267\001\n\032pa" +
-      "cketl2c_player_action_nt\022Y\n\tpacket_id\030\001 " +
-      "\001(\0162*.game_guanyuan_protocols.e_server_m" +
-      "sg_type:\032e_mst_l2c_player_action_nt\022>\n\014a" +
-      "ction_types\030\002 \003(\0132(.game_guanyuan_protoc" +
-      "ols.msg_action_type\"c\n\017msg_action_type\022A" +
-      "\n\013action_type\030\001 \001(\0162,.game_guanyuan_prot" +
-      "ocols.e_player_ation_type\022\r\n\005cards\030\002 \003(\005" +
-      "\"\306\001\n\023packetl2c_action_nt\022R\n\tpacket_id\030\001 ",
-      "\001(\0162*.game_guanyuan_protocols.e_server_m" +
-      "sg_type:\023e_mst_l2c_action_nt\022\020\n\010seat_pos" +
-      "\030\002 \001(\005\022\014\n\004card\030\003 \001(\005\022;\n\013action_type\030\004 \001(" +
-      "\0162&.game_guanyuan_protocols.e_action_typ" +
-      "e\"\274\001\n\024packetl2c_hu_info_nt\022S\n\tpacket_id\030" +
+      "e_server_msg_type:\re_mst_c2l_gps\0227\n\010gps_" +
+      "info\030\002 \001(\0132%.game_guanyuan_protocols.msg",
+      "_gps_info\"\344\001\n\024packetl2c_gps_result\022S\n\tpa" +
+      "cket_id\030\001 \001(\0162*.game_guanyuan_protocols." +
+      "e_server_msg_type:\024e_mst_l2c_gps_result\022" +
+      "=\n\006result\030\002 \001(\0162\036.msg_type_def.e_msg_res" +
+      "ult_def:\re_rmt_success\0228\n\tgps_infos\030\003 \003(" +
+      "\0132%.game_guanyuan_protocols.msg_gps_info" +
+      "\"[\n\014msg_gps_info\022\013\n\003lng\030\001 \001(\001\022\013\n\003lat\030\002 \001" +
+      "(\001\022\016\n\006status\030\003 \001(\005\022\017\n\007address\030\004 \001(\t\022\020\n\010s" +
+      "eat_pos\030\005 \001(\005\"g\n\022packetc2l_dis_room\022Q\n\tp" +
+      "acket_id\030\001 \001(\0162*.game_guanyuan_protocols",
+      ".e_server_msg_type:\022e_mst_c2l_dis_room\"u" +
+      "\n\031packetc2l_dis_room_result\022X\n\tpacket_id" +
+      "\030\001 \001(\0162*.game_guanyuan_protocols.e_serve" +
+      "r_msg_type:\031e_mst_l2c_dis_room_result\"\213\001" +
+      "\n\032packetc2l_dis_agree_or_not\022Y\n\tpacket_i" +
+      "d\030\001 \001(\0162*.game_guanyuan_protocols.e_serv" +
+      "er_msg_type:\032e_mst_c2l_dis_agree_or_not\022" +
+      "\022\n\nagree_flag\030\002 \001(\010\"\231\001\n!packetc2l_dis_ag" +
+      "ree_or_not_result\022`\n\tpacket_id\030\001 \001(\0162*.g" +
+      "ame_guanyuan_protocols.e_server_msg_type",
+      ":!e_mst_l2c_dis_agree_or_not_result\022\022\n\na" +
+      "gree_flag\030\002 \001(\010\"\232\001\n\025msg_create_room_para" +
+      "m\022\024\n\014circle_count\030\001 \001(\005\022\021\n\tcost_type\030\002 \001" +
+      "(\005\022\022\n\nbase_score\030\003 \001(\005\022\017\n\007baseHua\030\004 \001(\005\022" +
+      "\020\n\010hua_type\030\005 \001(\005\022\020\n\010bao_type\030\006 \001(\005\022\017\n\007h" +
+      "u_type\030\007 \001(\005\"\203\001\n\027packetl2c_game_start_nt" +
+      "\022V\n\tpacket_id\030\001 \001(\0162*.game_guanyuan_prot" +
+      "ocols.e_server_msg_type:\027e_mst_l2c_game_" +
+      "start_nt\022\020\n\010start_tm\030\002 \001(\005\"\273\001\n\031packetl2c" +
+      "_circle_start_nt\022X\n\tpacket_id\030\001 \001(\0162*.ga",
+      "me_guanyuan_protocols.e_server_msg_type:" +
+      "\031e_mst_l2c_circle_start_nt\022D\n\013gaming_inf" +
+      "o\030\002 \001(\0132/.game_guanyuan_protocols.msg_st" +
+      "atus_gaming_info\"\252\001\n\027packetl2c_trun_inde" +
+      "x_nt\022V\n\tpacket_id\030\001 \001(\0162*.game_guanyuan_" +
+      "protocols.e_server_msg_type:\027e_mst_l2c_t" +
+      "run_index_nt\022\013\n\003pos\030\002 \001(\005\022\025\n\rleft_card_n" +
+      "um\030\003 \001(\005\022\023\n\013time_expire\030\004 \001(\005\"\267\001\n\033packet" +
+      "l2c_replace_flower_nt\022Z\n\tpacket_id\030\001 \001(\016" +
+      "2*.game_guanyuan_protocols.e_server_msg_",
+      "type:\033e_mst_l2c_replace_flower_nt\022\020\n\010sea" +
+      "t_pos\030\002 \001(\005\022\024\n\014flower_cards\030\003 \003(\005\022\024\n\014rep" +
+      "lace_card\030\004 \001(\005\"\267\001\n\032packetl2c_player_act" +
+      "ion_nt\022Y\n\tpacket_id\030\001 \001(\0162*.game_guanyua" +
+      "n_protocols.e_server_msg_type:\032e_mst_l2c" +
+      "_player_action_nt\022>\n\014action_types\030\002 \003(\0132" +
+      "(.game_guanyuan_protocols.msg_action_typ" +
+      "e\"c\n\017msg_action_type\022A\n\013action_type\030\001 \001(" +
+      "\0162,.game_guanyuan_protocols.e_player_ati" +
+      "on_type\022\r\n\005cards\030\002 \003(\005\"\330\001\n\023packetl2c_act",
+      "ion_nt\022R\n\tpacket_id\030\001 \001(\0162*.game_guanyua" +
+      "n_protocols.e_server_msg_type:\023e_mst_l2c" +
+      "_action_nt\022\020\n\010seat_pos\030\002 \001(\005\022\014\n\004card\030\003 \001" +
+      "(\005\022;\n\013action_type\030\004 \001(\0162&.game_guanyuan_" +
+      "protocols.e_action_type\022\020\n\010link_pos\030\005 \001(" +
+      "\005\"\312\001\n\024packetl2c_hu_info_nt\022S\n\tpacket_id\030" +
       "\001 \001(\0162*.game_guanyuan_protocols.e_server" +
-      "_msg_type:\024e_mst_l2c_hu_info_nt\022\016\n\006hu_po" +
-      "s\030\002 \001(\005\022\020\n\010fire_pos\030\003 \001(\005\022\014\n\004card\030\004 \001(\005\022" +
-      "\017\n\007hu_type\030\005 \001(\005\022\016\n\006scroes\030\006 \003(\005\"\322\002\n\032pac" +
-      "ketl2c_circle_result_nt\022Y\n\tpacket_id\030\001 \001",
-      "(\0162*.game_guanyuan_protocols.e_server_ms" +
-      "g_type:\032e_mst_l2c_circle_result_nt\022\017\n\007hu" +
-      "_type\030\002 \001(\005\022\016\n\006hu_pos\030\003 \001(\005\022\020\n\010hued_pos\030" +
-      "\004 \001(\005\022\023\n\013circleN_idx\030\005 \001(\005\022\034\n\024next_circl" +
-      "e_start_tm\030\006 \001(\005\022\017\n\007hu_card\030\007 \001(\005\022\027\n\017bes" +
-      "t_pao_player\030\010 \001(\005\022I\n\016players_result\030\t \003" +
-      "(\01321.game_guanyuan_protocols.msg_player_" +
-      "circle_result\"\346\001\n\030msg_player_circle_resu" +
-      "lt\022\022\n\nhide_cards\030\001 \003(\005\022\022\n\ngang_cards\030\002 \003" +
-      "(\005\022\024\n\014angang_cards\030\003 \003(\005\022\022\n\npeng_cards\030\004",
-      " \003(\005\022\024\n\014flower_cards\030\005 \003(\005\022\r\n\005score\030\006 \001(" +
-      "\005\022\021\n\tting_card\030\007 \001(\005\022@\n\013detail_info\030\010 \003(" +
-      "\0132+.game_guanyuan_protocols.msg_hu_detai" +
-      "l_info\"=\n\022msg_hu_detail_info\022\r\n\005hu_id\030\001 " +
-      "\001(\005\022\013\n\003fen\030\002 \001(\005\022\013\n\003hua\030\003 \001(\005\"\272\001\n\036packet" +
-      "l2c_player_enter_game_nt\022]\n\tpacket_id\030\001 " +
-      "\001(\0162*.game_guanyuan_protocols.e_server_m" +
-      "sg_type:\036e_mst_l2c_player_enter_room_nt\022" +
-      "9\n\tuser_info\030\002 \001(\0132&.game_guanyuan_proto" +
-      "cols.msg_user_info\"\232\001\n\030packetl2c_line_st",
-      "atus_nt\022W\n\tpacket_id\030\001 \001(\0162*.game_guanyu" +
-      "an_protocols.e_server_msg_type:\030e_mst_l2" +
-      "c_line_status_nt\022\020\n\010seat_pos\030\002 \001(\005\022\023\n\013li" +
-      "ne_status\030\003 \001(\005\";\n\021msg_chi_card_info\022\022\n\n" +
-      "start_card\030\001 \001(\005\022\022\n\neated_card\030\002 \001(\005*\332\001\n" +
-      "\re_action_type\022\021\n\re_action_skip\020\001\022\025\n\021e_a" +
-      "ction_out_card\020\002\022\025\n\021e_action_eat_card\020\003\022" +
-      "\021\n\re_action_gang\020\004\022\021\n\re_action_peng\020\005\022\021\n" +
-      "\re_action_ting\020\006\022\017\n\013e_action_hu\020\007\022\022\n\016e_a" +
-      "ction_ready\020\010\022\024\n\020e_action_unready\020\t\022\024\n\020e",
-      "_action_mo_card\020\n*\315\001\n\025e_history_action_t" +
-      "ype\022\035\n\031e_history_action_gang_chi\020\003\022\031\n\025e_" +
-      "history_action_peng\020\004\022\036\n\032e_history_actio" +
-      "n_gang_dian\020\005\022\036\n\032e_history_action_gang_w" +
-      "ang\020\006\022\034\n\030e_history_action_gang_an\020\007\022\034\n\030e" +
-      "_history_action_gang_hu\020\t*\266\001\n\023e_player_a" +
-      "tion_type\022\027\n\023e_player_ation_peng\020\001\022\025\n\021e_" +
-      "player_ation_hu\020\002\022\027\n\023e_player_ation_ting" +
-      "\020\003\022\032\n\026e_player_ation_gang_an\020\004\022\034\n\030e_play" +
-      "er_ation_gang_wang\020\005\022\034\n\030e_player_ation_g",
-      "ang_ming\020\006*|\n\022e_game_status_type\022\022\n\016e_ga" +
-      "me_waiting\020\001\022\020\n\014e_game_ready\020\002\022\022\n\016e_game" +
-      "_gameing\020\003\022\026\n\022e_game_circle_over\020\004\022\024\n\020e_" +
-      "game_game_over\020\005"
+      "_msg_type:\024e_mst_l2c_hu_info_nt\022M\n\023histo" +
+      "ry_action_info\030\002 \001(\01320.game_guanyuan_pro" +
+      "tocols.msg_history_action_info\022\016\n\006scores",
+      "\030\003 \003(\005\"\273\001\n\032packetl2c_circle_result_nt\022Y\n" +
+      "\tpacket_id\030\001 \001(\0162*.game_guanyuan_protoco" +
+      "ls.e_server_msg_type:\032e_mst_l2c_circle_r" +
+      "esult_nt\022B\n\013circle_info\030\002 \001(\0132-.game_gua" +
+      "nyuan_protocols.msg_circle_over_info\"\333\001\n" +
+      "\024msg_circle_over_info\022\022\n\ncircle_num\030\001 \001(" +
+      "\005\022\034\n\024next_circle_start_tm\030\002 \001(\004\022?\n\006detai" +
+      "l\030\003 \003(\0132/.game_guanyuan_protocols.msg_ci" +
+      "rcle_over_detail\022P\n\026hu_history_action_in" +
+      "fo\030\004 \003(\01320.game_guanyuan_protocols.msg_h",
+      "istory_action_info\"\273\002\n\026msg_circle_over_d" +
+      "etail\022\020\n\010seat_pos\030\001 \001(\005\022\013\n\003fen\030\002 \001(\005\022\013\n\003" +
+      "hua\030\003 \001(\005\022\022\n\nhand_cards\030\004 \003(\005\022\021\n\tting_ca" +
+      "rd\030\005 \001(\005\022\022\n\nwall_cards\030\006 \003(\005\022\021\n\tout_card" +
+      "s\030\007 \003(\005\022\021\n\thua_cards\030\010 \003(\005\022N\n\024history_ac" +
+      "tion_infos\030\t \003(\01320.game_guanyuan_protoco" +
+      "ls.msg_history_action_info\022D\n\017hu_detail_" +
+      "infos\030\n \003(\0132+.game_guanyuan_protocols.ms" +
+      "g_hu_detail_info\"=\n\022msg_hu_detail_info\022\r" +
+      "\n\005hu_id\030\001 \001(\005\022\013\n\003fen\030\002 \001(\005\022\013\n\003hua\030\003 \001(\005\"",
+      "\270\001\n\026packetl2c_game_over_nt\022U\n\tpacket_id\030" +
+      "\001 \001(\0162*.game_guanyuan_protocols.e_server" +
+      "_msg_type:\026e_mst_l2c_game_over_nt\022G\n\022msg" +
+      "_game_over_info\030\002 \001(\0132+.game_guanyuan_pr" +
+      "otocols.msg_game_over_info\"\272\001\n\036packetl2c" +
+      "_player_enter_game_nt\022]\n\tpacket_id\030\001 \001(\016" +
+      "2*.game_guanyuan_protocols.e_server_msg_" +
+      "type:\036e_mst_l2c_player_enter_room_nt\0229\n\t" +
+      "user_info\030\002 \001(\0132&.game_guanyuan_protocol" +
+      "s.msg_user_info\"\232\001\n\030packetl2c_line_statu",
+      "s_nt\022W\n\tpacket_id\030\001 \001(\0162*.game_guanyuan_" +
+      "protocols.e_server_msg_type:\030e_mst_l2c_l" +
+      "ine_status_nt\022\020\n\010seat_pos\030\002 \001(\005\022\023\n\013line_" +
+      "status\030\003 \001(\005\";\n\021msg_chi_card_info\022\022\n\nsta" +
+      "rt_card\030\001 \001(\005\022\022\n\neated_card\030\002 \001(\005*\332\001\n\re_" +
+      "action_type\022\021\n\re_action_skip\020\001\022\025\n\021e_acti" +
+      "on_out_card\020\002\022\025\n\021e_action_eat_card\020\003\022\021\n\r" +
+      "e_action_gang\020\004\022\021\n\re_action_peng\020\005\022\021\n\re_" +
+      "action_ting\020\006\022\017\n\013e_action_hu\020\007\022\022\n\016e_acti" +
+      "on_ready\020\010\022\024\n\020e_action_unready\020\t\022\024\n\020e_ac",
+      "tion_mo_card\020\n*\276\004\n\025e_history_action_type" +
+      "\022\'\n\032e_history_action_gang_null\020\377\377\377\377\377\377\377\377\377" +
+      "\001\022\036\n\032e_history_action_gang_skip\020\000\022 \n\034e_h" +
+      "istory_action_gang_chupai\020\001\022\037\n\033e_history" +
+      "_action_gang_mopai\020\002\022\035\n\031e_history_action" +
+      "_gang_chi\020\003\022\031\n\025e_history_action_peng\020\004\022\036" +
+      "\n\032e_history_action_gang_dian\020\005\022\036\n\032e_hist" +
+      "ory_action_gang_wang\020\006\022\034\n\030e_history_acti" +
+      "on_gang_an\020\007\022#\n\037e_history_action_gang_ti" +
+      "ng_card\020\010\022\034\n\030e_history_action_gang_hu\020\t\022",
+      "$\n e_history_action_gang_QIANG_GANG\020\n\022!\n" +
+      "\035e_history_action_gang_HU_ZIMO\020\013\022&\n\"e_hi" +
+      "story_action_gang_hu_DIAN_GANG\020\014\022&\n\"e_hi" +
+      "story_action_gang_hu_GABNG_PAO\020\r\022%\n!e_hi" +
+      "story_action_gang_hu_FANG_PAO\020\016*\266\001\n\023e_pl" +
+      "ayer_ation_type\022\027\n\023e_player_ation_peng\020\001" +
+      "\022\025\n\021e_player_ation_hu\020\002\022\027\n\023e_player_atio" +
+      "n_ting\020\003\022\032\n\026e_player_ation_gang_an\020\004\022\034\n\030" +
+      "e_player_ation_gang_wang\020\005\022\034\n\030e_player_a" +
+      "tion_gang_ming\020\006*|\n\022e_game_status_type\022\022",
+      "\n\016e_game_waiting\020\001\022\020\n\014e_game_ready\020\002\022\022\n\016" +
+      "e_game_gameing\020\003\022\026\n\022e_game_circle_over\020\004" +
+      "\022\024\n\020e_game_game_over\020\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -39476,7 +37509,7 @@ public final class GameGuanyunProtocol {
           internal_static_game_guanyuan_protocols_msg_status_gaming_info_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_msg_status_gaming_info_descriptor,
-              new java.lang.String[] { "RoomInfo", "MyPos", "HandHards", "HostPos", "ActivePos", "LeftCardNum", "LastOutCardPos", "LastOutCard", "CircleIdx", "DiceList", });
+              new java.lang.String[] { "RoomInfo", "MyPos", "HandHards", "HostPos", "ActivePos", "CircleIdx", "DiceList", "HistoryActionInfo", "ActionTypes", });
           internal_static_game_guanyuan_protocols_msg_room_info_descriptor =
             getDescriptor().getMessageTypes().get(7);
           internal_static_game_guanyuan_protocols_msg_room_info_fieldAccessorTable = new
@@ -39488,7 +37521,7 @@ public final class GameGuanyunProtocol {
           internal_static_game_guanyuan_protocols_msg_history_action_info_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_msg_history_action_info_descriptor,
-              new java.lang.String[] { "Card", "LinkedPos", "ActionType", "LinkdedCards", });
+              new java.lang.String[] { "Card", "SeatPos", "LinkedPos", "ActionType", "LinkdedCards", });
           internal_static_game_guanyuan_protocols_msg_dis_room_info_descriptor =
             getDescriptor().getMessageTypes().get(9);
           internal_static_game_guanyuan_protocols_msg_dis_room_info_fieldAccessorTable = new
@@ -39507,182 +37540,176 @@ public final class GameGuanyunProtocol {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_ready_result_descriptor,
               new java.lang.String[] { "PacketId", "SeatPos", "Ready", });
-          internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor =
-            getDescriptor().getMessageTypes().get(12);
-          internal_static_game_guanyuan_protocols_msg_circle_over_info_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor,
-              new java.lang.String[] { "Type", "HuPos", "LastPos", "CircleNum", "HuCard", "NextCircleStartTm", "IsLastCircle", "Detail", });
-          internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor =
-            getDescriptor().getMessageTypes().get(13);
-          internal_static_game_guanyuan_protocols_msg_circle_over_detail_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor,
-              new java.lang.String[] { "Pos", "TingCard", "HuName", "Fen", "Hua", "HandCards", "WallCards", "OutCards", "HuaCards", });
           internal_static_game_guanyuan_protocols_msg_game_over_info_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_game_guanyuan_protocols_msg_game_over_info_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_msg_game_over_info_descriptor,
-              new java.lang.String[] { });
+              new java.lang.String[] { "CircleIdx", "Scores", });
           internal_static_game_guanyuan_protocols_packetc2l_leave_room_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_game_guanyuan_protocols_packetc2l_leave_room_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetc2l_leave_room_descriptor,
               new java.lang.String[] { "PacketId", });
           internal_static_game_guanyuan_protocols_packetl2c_leave_room_result_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(14);
           internal_static_game_guanyuan_protocols_packetl2c_leave_room_result_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_leave_room_result_descriptor,
               new java.lang.String[] { "PacketId", "Result", "SeatPos", });
           internal_static_game_guanyuan_protocols_packetc2l_action_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_game_guanyuan_protocols_packetc2l_action_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetc2l_action_descriptor,
               new java.lang.String[] { "PacketId", "ActionType", "Cards", });
           internal_static_game_guanyuan_protocols_packetl2c_action_result_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_game_guanyuan_protocols_packetl2c_action_result_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_action_result_descriptor,
               new java.lang.String[] { "PacketId", "Result", "ActionType", "Card", "LeftCardNum", });
           internal_static_game_guanyuan_protocols_packetc2l_gps_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_game_guanyuan_protocols_packetc2l_gps_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetc2l_gps_descriptor,
               new java.lang.String[] { "PacketId", "GpsInfo", });
           internal_static_game_guanyuan_protocols_packetl2c_gps_result_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_game_guanyuan_protocols_packetl2c_gps_result_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_gps_result_descriptor,
               new java.lang.String[] { "PacketId", "Result", "GpsInfos", });
           internal_static_game_guanyuan_protocols_msg_gps_info_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_game_guanyuan_protocols_msg_gps_info_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_msg_gps_info_descriptor,
               new java.lang.String[] { "Lng", "Lat", "Status", "Address", "SeatPos", });
           internal_static_game_guanyuan_protocols_packetc2l_dis_room_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_game_guanyuan_protocols_packetc2l_dis_room_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetc2l_dis_room_descriptor,
               new java.lang.String[] { "PacketId", });
           internal_static_game_guanyuan_protocols_packetc2l_dis_room_result_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_game_guanyuan_protocols_packetc2l_dis_room_result_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetc2l_dis_room_result_descriptor,
               new java.lang.String[] { "PacketId", });
           internal_static_game_guanyuan_protocols_packetc2l_dis_agree_or_not_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_game_guanyuan_protocols_packetc2l_dis_agree_or_not_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetc2l_dis_agree_or_not_descriptor,
               new java.lang.String[] { "PacketId", "AgreeFlag", });
           internal_static_game_guanyuan_protocols_packetc2l_dis_agree_or_not_result_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_game_guanyuan_protocols_packetc2l_dis_agree_or_not_result_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetc2l_dis_agree_or_not_result_descriptor,
               new java.lang.String[] { "PacketId", "AgreeFlag", });
           internal_static_game_guanyuan_protocols_msg_create_room_param_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_game_guanyuan_protocols_msg_create_room_param_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_msg_create_room_param_descriptor,
               new java.lang.String[] { "CircleCount", "CostType", "BaseScore", "BaseHua", "HuaType", "BaoType", "HuType", });
           internal_static_game_guanyuan_protocols_packetl2c_game_start_nt_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_game_guanyuan_protocols_packetl2c_game_start_nt_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_game_start_nt_descriptor,
               new java.lang.String[] { "PacketId", "StartTm", });
           internal_static_game_guanyuan_protocols_packetl2c_circle_start_nt_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_game_guanyuan_protocols_packetl2c_circle_start_nt_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_circle_start_nt_descriptor,
               new java.lang.String[] { "PacketId", "GamingInfo", });
-          internal_static_game_guanyuan_protocols_msg_init_cards_descriptor =
-            getDescriptor().getMessageTypes().get(29);
-          internal_static_game_guanyuan_protocols_msg_init_cards_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_game_guanyuan_protocols_msg_init_cards_descriptor,
-              new java.lang.String[] { "SeatPos", "Flowers", "CardNum", "HandsCards", });
           internal_static_game_guanyuan_protocols_packetl2c_trun_index_nt_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_game_guanyuan_protocols_packetl2c_trun_index_nt_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_trun_index_nt_descriptor,
               new java.lang.String[] { "PacketId", "Pos", "LeftCardNum", "TimeExpire", });
           internal_static_game_guanyuan_protocols_packetl2c_replace_flower_nt_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_game_guanyuan_protocols_packetl2c_replace_flower_nt_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_replace_flower_nt_descriptor,
               new java.lang.String[] { "PacketId", "SeatPos", "FlowerCards", "ReplaceCard", });
           internal_static_game_guanyuan_protocols_packetl2c_player_action_nt_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_game_guanyuan_protocols_packetl2c_player_action_nt_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_player_action_nt_descriptor,
               new java.lang.String[] { "PacketId", "ActionTypes", });
           internal_static_game_guanyuan_protocols_msg_action_type_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_game_guanyuan_protocols_msg_action_type_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_msg_action_type_descriptor,
               new java.lang.String[] { "ActionType", "Cards", });
           internal_static_game_guanyuan_protocols_packetl2c_action_nt_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_game_guanyuan_protocols_packetl2c_action_nt_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_action_nt_descriptor,
-              new java.lang.String[] { "PacketId", "SeatPos", "Card", "ActionType", });
+              new java.lang.String[] { "PacketId", "SeatPos", "Card", "ActionType", "LinkPos", });
           internal_static_game_guanyuan_protocols_packetl2c_hu_info_nt_descriptor =
-            getDescriptor().getMessageTypes().get(35);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_game_guanyuan_protocols_packetl2c_hu_info_nt_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_hu_info_nt_descriptor,
-              new java.lang.String[] { "PacketId", "HuPos", "FirePos", "Card", "HuType", "Scroes", });
+              new java.lang.String[] { "PacketId", "HistoryActionInfo", "Scores", });
           internal_static_game_guanyuan_protocols_packetl2c_circle_result_nt_descriptor =
-            getDescriptor().getMessageTypes().get(36);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_game_guanyuan_protocols_packetl2c_circle_result_nt_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_circle_result_nt_descriptor,
-              new java.lang.String[] { "PacketId", "HuType", "HuPos", "HuedPos", "CircleNIdx", "NextCircleStartTm", "HuCard", "BestPaoPlayer", "PlayersResult", });
-          internal_static_game_guanyuan_protocols_msg_player_circle_result_descriptor =
-            getDescriptor().getMessageTypes().get(37);
-          internal_static_game_guanyuan_protocols_msg_player_circle_result_fieldAccessorTable = new
+              new java.lang.String[] { "PacketId", "CircleInfo", });
+          internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor =
+            getDescriptor().getMessageTypes().get(34);
+          internal_static_game_guanyuan_protocols_msg_circle_over_info_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_game_guanyuan_protocols_msg_player_circle_result_descriptor,
-              new java.lang.String[] { "HideCards", "GangCards", "AngangCards", "PengCards", "FlowerCards", "Score", "TingCard", "DetailInfo", });
+              internal_static_game_guanyuan_protocols_msg_circle_over_info_descriptor,
+              new java.lang.String[] { "CircleNum", "NextCircleStartTm", "Detail", "HuHistoryActionInfo", });
+          internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor =
+            getDescriptor().getMessageTypes().get(35);
+          internal_static_game_guanyuan_protocols_msg_circle_over_detail_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_game_guanyuan_protocols_msg_circle_over_detail_descriptor,
+              new java.lang.String[] { "SeatPos", "Fen", "Hua", "HandCards", "TingCard", "WallCards", "OutCards", "HuaCards", "HistoryActionInfos", "HuDetailInfos", });
           internal_static_game_guanyuan_protocols_msg_hu_detail_info_descriptor =
-            getDescriptor().getMessageTypes().get(38);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_game_guanyuan_protocols_msg_hu_detail_info_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_msg_hu_detail_info_descriptor,
               new java.lang.String[] { "HuId", "Fen", "Hua", });
+          internal_static_game_guanyuan_protocols_packetl2c_game_over_nt_descriptor =
+            getDescriptor().getMessageTypes().get(37);
+          internal_static_game_guanyuan_protocols_packetl2c_game_over_nt_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_game_guanyuan_protocols_packetl2c_game_over_nt_descriptor,
+              new java.lang.String[] { "PacketId", "MsgGameOverInfo", });
           internal_static_game_guanyuan_protocols_packetl2c_player_enter_game_nt_descriptor =
-            getDescriptor().getMessageTypes().get(39);
+            getDescriptor().getMessageTypes().get(38);
           internal_static_game_guanyuan_protocols_packetl2c_player_enter_game_nt_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_player_enter_game_nt_descriptor,
               new java.lang.String[] { "PacketId", "UserInfo", });
           internal_static_game_guanyuan_protocols_packetl2c_line_status_nt_descriptor =
-            getDescriptor().getMessageTypes().get(40);
+            getDescriptor().getMessageTypes().get(39);
           internal_static_game_guanyuan_protocols_packetl2c_line_status_nt_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_packetl2c_line_status_nt_descriptor,
               new java.lang.String[] { "PacketId", "SeatPos", "LineStatus", });
           internal_static_game_guanyuan_protocols_msg_chi_card_info_descriptor =
-            getDescriptor().getMessageTypes().get(41);
+            getDescriptor().getMessageTypes().get(40);
           internal_static_game_guanyuan_protocols_msg_chi_card_info_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_game_guanyuan_protocols_msg_chi_card_info_descriptor,

@@ -246,9 +246,17 @@ public final class GameGuanyuanDef {
      */
     e_mst_l2c_line_status_nt(28, 15211),
     /**
+     * <code>e_mst_l2c_game_over_nt = 15212;</code>
+     *
+     * <pre>
+     *几局游戏结束时的通知
+     * </pre>
+     */
+    e_mst_l2c_game_over_nt(29, 15212),
+    /**
      * <code>e_mst_clend_index = 20000;</code>
      */
-    e_mst_clend_index(29, 20000),
+    e_mst_clend_index(30, 20000),
     ;
 
     /**
@@ -484,6 +492,14 @@ public final class GameGuanyuanDef {
      */
     public static final int e_mst_l2c_line_status_nt_VALUE = 15211;
     /**
+     * <code>e_mst_l2c_game_over_nt = 15212;</code>
+     *
+     * <pre>
+     *几局游戏结束时的通知
+     * </pre>
+     */
+    public static final int e_mst_l2c_game_over_nt_VALUE = 15212;
+    /**
      * <code>e_mst_clend_index = 20000;</code>
      */
     public static final int e_mst_clend_index_VALUE = 20000;
@@ -522,6 +538,7 @@ public final class GameGuanyuanDef {
         case 15209: return e_mst_l2c_circle_result_nt;
         case 15210: return e_mst_l2c_player_enter_room_nt;
         case 15211: return e_mst_l2c_line_status_nt;
+        case 15212: return e_mst_l2c_game_over_nt;
         case 20000: return e_mst_clend_index;
         default: return null;
       }
@@ -699,7 +716,7 @@ public final class GameGuanyuanDef {
   static {
     java.lang.String[] descriptorData = {
       "\n\027game_guanyuan_def.proto\022\027game_guanyuan" +
-      "_protocols*\201\007\n\021e_server_msg_type\022\024\n\017e_ms" +
+      "_protocols*\236\007\n\021e_server_msg_type\022\024\n\017e_ms" +
       "t_start_c2l\020\220N\022\035\n\030e_mst_c2l_get_scene_in" +
       "fo\020\221N\022\031\n\024e_mst_c2l_leave_room\020\223N\022\025\n\020e_ms" +
       "t_c2l_action\020\224N\022\024\n\017e_mst_c2l_ready\020\225N\022\022\n" +
@@ -721,9 +738,10 @@ public final class GameGuanyuanDef {
       "\024e_mst_l2c_hu_info_nt\020\350v\022\037\n\032e_mst_l2c_ci" +
       "rcle_result_nt\020\351v\022#\n\036e_mst_l2c_player_en" +
       "ter_room_nt\020\352v\022\035\n\030e_mst_l2c_line_status_" +
-      "nt\020\353v\022\027\n\021e_mst_clend_index\020\240\234\001*T\n\014e_game" +
-      "_state\022\026\n\022e_state_game_begin\020\000\022\024\n\020e_stat" +
-      "e_game_bet\020\001\022\026\n\022e_state_game_award\020\002"
+      "nt\020\353v\022\033\n\026e_mst_l2c_game_over_nt\020\354v\022\027\n\021e_" +
+      "mst_clend_index\020\240\234\001*T\n\014e_game_state\022\026\n\022e" +
+      "_state_game_begin\020\000\022\024\n\020e_state_game_bet\020" +
+      "\001\022\026\n\022e_state_game_award\020\002"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

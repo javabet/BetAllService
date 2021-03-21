@@ -25,6 +25,7 @@ public class PacketServerConnect extends DefaultRequestMessage<ServerProtocol.pa
         }
         else
         {
+            logger.info(" packet_server_connect has regedit_server:" + msg.getServerType() + " id:" + msg.getServerId() );
             return false;
         }
 

@@ -6,6 +6,7 @@ import com.wisp.game.bet.games.share.enums.HistoryActionEnum;
 import java.util.ArrayList;
 import java.util.List;
 
+//一炮多响时的信息体
 public class PlayerOperationInfo {
     private int seatPos;
     private int linkPos;

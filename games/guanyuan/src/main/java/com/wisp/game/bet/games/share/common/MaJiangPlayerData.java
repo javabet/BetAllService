@@ -4,6 +4,8 @@ import com.wisp.game.bet.games.guanyuan.logic.info.PlayerOperationInfo;
 import com.wisp.game.bet.games.share.HuStrategy.HistoryActionInfo;
 import com.wisp.game.bet.games.share.enums.HistoryActionEnum;
 import com.wisp.game.bet.games.share.utils.IMaJiangPlayerData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +15,7 @@ import java.util.Map;
 //打牌时玩家数据
 public class MaJiangPlayerData implements IMaJiangPlayerData {
 
+    private Logger logger = LoggerFactory.getLogger("MaJiangPlayerData");
 	
 	private int seatIndex; //玩家的坐位信息0,1,2,3
 	
@@ -67,7 +70,7 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
 
 	private int lastFangGangSeat = -1;
 	
-	private int jiaoTingCard = 0;		//叫听的牌
+	private int tingCard = 0;		//叫听的牌
 	
 	private Map<String,Boolean> huList;			//当前玩家胡牌型 
 	
@@ -133,6 +136,22 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
             historyActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_AN_GANG ||
             historyActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_CHI_PAI)
         {
+        	if( historyActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_WANG_GANG  )
+			{
+				//如果是弯杠，则删除前面的已经存在的碰数据
+				for(int i = 0; i < outHistoryList.size();i++)
+				{
+					HistoryActionInfo historyActionInfo1 = outHistoryList.get(i);
+					if( historyActionInfo1.getAction() ==  HistoryActionEnum.HISTORY_ACTION_PENG &&
+							historyActionInfo.getCard() == historyActionInfo1.getCard()  )
+					{
+						historyActionInfo.setLinkedSeatPos(historyActionInfo1.getLinkedSeatPos());
+						outHistoryList.remove(i);
+						break;
+					}
+				}
+			}
+
             outHistoryList.add(historyActionInfo);
         }
     }
@@ -155,9 +174,14 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
 
 	}
 
-    public void outCard(int card)
+    public void removeCard(int card)
 	{
 		int idx = holds.indexOf(card);
+        if( idx == -1 )
+        {
+            logger.error("remove the card is not exist:" + card);
+            return;
+        }
 
 		holds.remove(idx);
 		countMap.put(card,countMap.get(card) - 1);
@@ -417,15 +441,15 @@ public class MaJiangPlayerData implements IMaJiangPlayerData {
         return outHistoryList;
     }
 
-	public int getJiaoTingCard() {
-		return jiaoTingCard;
+	public int getTingCard()
+	{
+		return tingCard;
 	}
 
-
-	public void setJiaoTingCard(int jiaoTingCard) {
-		this.jiaoTingCard = jiaoTingCard;
+	public void setTingCard(int tingCard)
+	{
+		this.tingCard = tingCard;
 	}
-
 
 	public List<Integer> getWangGangList() {
 		return wangGangList;

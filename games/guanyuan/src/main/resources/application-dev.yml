@@ -18,6 +18,5 @@ cfg:
   gamedb_name: GameDB
 
 
-
 logging:
   config: classpath:log4j2.xml

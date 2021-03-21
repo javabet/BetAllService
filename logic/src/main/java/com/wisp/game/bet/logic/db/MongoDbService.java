@@ -94,6 +94,11 @@ public class MongoDbService implements InitializingBean {
             DbAccount.Instance.init_db(environment.getProperty("cfg.accountdb_url"),environment.getProperty("cfg.accountdb_name"));
         }
 
+        if( environment.containsProperty("cfg.logdb_url") && environment.containsProperty("cfg.logdb_name") )
+        {
+            DbLog.Instance.init_db(environment.getProperty("cfg.logdb_url"),environment.getProperty("cfg.logdb_name"));
+        }
+
         return true;
     }
 

@@ -44,7 +44,8 @@ enum e_server_msg_type {
 	e_mst_l2c_hu_info_nt									= 	15208;			//胡牌后广播
 	e_mst_l2c_circle_result_nt								= 	15209;			//一局结束后 当前局详情广播
 	e_mst_l2c_player_enter_room_nt							= 	15210;			//玩家进入房间通知
-	e_mst_l2c_line_status_nt									=	15211;			//玩家在线也离线情况
+	e_mst_l2c_line_status_nt								=	15211;			//玩家在线也离线情况
+	e_mst_l2c_game_over_nt									=	15212;			//几局游戏结束时的通知
 
 	e_mst_clend_index = 20000;
 }

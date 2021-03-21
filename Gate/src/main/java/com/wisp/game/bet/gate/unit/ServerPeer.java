@@ -63,6 +63,7 @@ public final class ServerPeer extends PeerTcp {
             logger.info("logic_server regedit fail remote_id:" + get_remote_id() + "  remote_type:" + get_remote_type());
 
             //peerTcpClient.discannect();
+            this.m_state = e_peer_state.e_ps_connecting;
             peerTcpClient.reconnect();
         }
         else if( get_remote_type() == ServerBase.e_server_type.e_st_monitor_VALUE )

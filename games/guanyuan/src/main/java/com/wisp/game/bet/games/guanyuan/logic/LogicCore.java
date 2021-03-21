@@ -1,5 +1,9 @@
 package com.wisp.game.bet.games.guanyuan.logic;
 
+import com.wisp.game.bet.db.mongo.logs.doc.MjRoomLogDoc;
+import com.wisp.game.bet.db.mongo.logs.doc.MjRoundLogDoc;
+import com.wisp.game.bet.games.guanyuan.logic.info.HuCircleInfo;
+import com.wisp.game.bet.games.guanyuan.logic.info.HuCircleItemInfo;
 import com.wisp.game.bet.games.guanyuan.logic.info.PlayerOperationInfo;
 import com.wisp.game.bet.games.share.HuStrategy.HistoryActionInfo;
 import com.wisp.game.bet.games.share.enums.CardTypeEnum;
@@ -8,6 +12,7 @@ import com.wisp.game.bet.games.share.common.MaJiangPlayerData;
 import com.wisp.game.bet.games.share.enums.HistoryActionEnum;
 import com.wisp.game.bet.games.share.utils.MaJianUtils;
 import com.wisp.game.bet.games.share.utils.MajiangCards;
+import com.wisp.game.bet.logic.db.DbLog;
 import com.wisp.game.bet.logic.sshare.IGamePlayer;
 import com.wisp.game.bet.share.component.TimeHelper;
 import com.wisp.game.core.random.RandomHandler;
@@ -19,10 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.swing.text.html.HTML;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <!--
@@ -50,8 +52,8 @@ public class LogicCore {
     private QiangGangContext qiangGangContext;          //抢杠上下方
     private List<PlayerOperationInfo> operationInfos;       //需要进行的操作列表，用在抢杠胡时，
 
+    private  List<HuCircleInfo> huCircleInfos;              //当前胡的信息
     private List<HistoryActionInfo> historyActionInfos;     //出牌历史
-    private List<Integer> huPosList;           // 胡牌人的列表，多个人同时列表
     private List<Integer> diceList;
     private GameState gameState;
 
@@ -60,7 +62,7 @@ public class LogicCore {
         this.gameSeats = new ArrayList<>();
         historyActionInfos = new ArrayList<>();
         operationInfos = new ArrayList<>();
-        huPosList = new ArrayList<>();
+        huCircleInfos = new ArrayList<>();
     }
 
     public void init()
@@ -99,6 +101,8 @@ public class LogicCore {
             mahjongs.set(lastIndex, t);
         }
 
+        testInitCards(  );
+
         logicTable.setGameSttus(LogicTable.GameSttus.STATUS_RUN);
         //发牌
         deal();
@@ -113,7 +117,7 @@ public class LogicCore {
         diceList = new ArrayList<>(2);
         for(int i = 0; i < 2;i++)
         {
-            int diceNum = RandomHandler.Instance.getRandomValue(1,7);
+            int diceNum = RandomHandler.Instance.getRandomValue(1,6);
             diceList.add(diceNum);
         }
         for(MaJiangPlayerData maJiangPlayerData : gameSeats)
@@ -213,19 +217,33 @@ public class LogicCore {
         }
 
         GameGuanyunProtocol.packetl2c_player_action_nt.Builder builder = GameGuanyunProtocol.packetl2c_player_action_nt.newBuilder();
+        List<GameGuanyunProtocol.msg_action_type> msg_action_type_builder_list = getMsgActionTypeList(maJiangPlayerData);
+        if( msg_action_type_builder_list.size() > 0 )
+        {
+            builder.addAllActionTypes(msg_action_type_builder_list);
+        }
 
+        if( builder.getActionTypesList().size() > 0 )
+        {
+            logicTable.send_msg_to_client(builder,maJiangPlayerData.getSeatIndex());
+        }
+    }
+
+    private List<GameGuanyunProtocol.msg_action_type> getMsgActionTypeList(MaJiangPlayerData maJiangPlayerData)
+    {
+        List<GameGuanyunProtocol.msg_action_type> actionList = new ArrayList<>();
         if( maJiangPlayerData.isCanHu() )
         {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_hu);
-            builder.addActionTypes(msg_action_builder.build());
+            actionList.add(msg_action_builder.build());
         }
 
         if( maJiangPlayerData.isCanPeng() )
         {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_peng);
-            builder.addActionTypes(msg_action_builder.build());
+            actionList.add(msg_action_builder.build());
         }
 
         if( maJiangPlayerData.isCanAnGang() )
@@ -233,14 +251,14 @@ public class LogicCore {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_gang_an);
             msg_action_builder.addAllCards( maJiangPlayerData.getAngGangList() );
-            builder.addActionTypes(msg_action_builder.build());
+            actionList.add(msg_action_builder.build());
         }
 
         if( maJiangPlayerData.isCanDianGang() )
         {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_gang_ming);
-            builder.addActionTypes(msg_action_builder.build());
+            actionList.add(msg_action_builder.build());
         }
 
         if( maJiangPlayerData.isCanWanGang() )
@@ -248,20 +266,17 @@ public class LogicCore {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_gang_wang);
             msg_action_builder.addAllCards( maJiangPlayerData.getWangGangList() );
-            builder.addActionTypes(msg_action_builder.build());
+            actionList.add(msg_action_builder.build());
         }
 
         if( maJiangPlayerData.isCanJiaoTing() )
         {
             GameGuanyunProtocol.msg_action_type.Builder msg_action_builder = GameGuanyunProtocol.msg_action_type.newBuilder();
             msg_action_builder.setActionType(GameGuanyunProtocol.e_player_ation_type.e_player_ation_ting);
-            builder.addActionTypes(msg_action_builder.build());
+            actionList.add(msg_action_builder.build());
         }
 
-        if( builder.getActionTypesList().size() > 0 )
-        {
-            logicTable.send_msg_to_client(builder,maJiangPlayerData.getSeatIndex());
-        }
+        return actionList;
     }
 
     public MsgTypeDef.e_msg_result_def ready(int seatPos,boolean ready)
@@ -291,12 +306,12 @@ public class LogicCore {
            return  MsgTypeDef.e_msg_result_def.e_rmt_fail;
        }
 
-        GameGuanyunProtocol.packetl2c_action_result.Builder actionBuilder = GameGuanyunProtocol.packetl2c_action_result.newBuilder();
-       actionBuilder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_success);
-       actionBuilder.setActionType(GameGuanyunProtocol.e_action_type.e_action_skip);
-       actionBuilder.setCard(chupai);
-       actionBuilder.setLeftCardNum(mahjongs.size() - currentIndex);
-       logicTable.send_msg_to_client(actionBuilder,seat_pos);
+//       GameGuanyunProtocol.packetl2c_action_result.Builder actionBuilder = GameGuanyunProtocol.packetl2c_action_result.newBuilder();
+//       actionBuilder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_success);
+//       actionBuilder.setActionType(GameGuanyunProtocol.e_action_type.e_action_skip);
+//       actionBuilder.setCard(chupai);
+//       actionBuilder.setLeftCardNum(mahjongs.size() - currentIndex);
+//       logicTable.send_msg_to_client(actionBuilder,seat_pos);
 
        //seatData.getLuoList().add(chupai);
 
@@ -320,7 +335,8 @@ public class LogicCore {
         }
         else
         {
-
+            moveToNextUser();
+            doUserMoPai();
         }
 
 
@@ -378,7 +394,7 @@ public class LogicCore {
 
 
         maJiangPlayerData.setCanChuPai(true);
-        maJiangPlayerData.outCard(card);
+        maJiangPlayerData.removeCard(card);
         saveHistory(seatPos,HistoryActionEnum.HISTORY_ACTION_CHUPAI,card);
         checkCanTingPai( maJiangPlayerData);
 
@@ -498,17 +514,14 @@ public class LogicCore {
             return MsgTypeDef.e_msg_result_def.e_rmt_fail;
         }
 
-        maJiangPlayerData.clearAllOptions();
-        maJiangPlayerData.setCanChuPai(false);
+        //maJiangPlayerData.clearAllOptions();
+        //maJiangPlayerData.setCanChuPai(false);
 
         clearAllOption();
 
-        maJiangPlayerData.getCountMap().put(card,maJiangPlayerData.getCountMap().size() - 2);
-        for(int i = 0; i < 2 ;i ++)
-        {
-            int idx = maJiangPlayerData.getHolds().indexOf(card);
-            maJiangPlayerData.getHolds().remove(idx);
-        }
+        //删除两张卡
+        maJiangPlayerData.removeCard(card);
+        maJiangPlayerData.removeCard(card);
 
         MaJiangPlayerData turnPlayer = gameSeats.get(turn);
         turnPlayer.removeLastOutCard();
@@ -521,9 +534,50 @@ public class LogicCore {
         actionBuilder.setSeatPos(maJiangPlayerData.getSeatIndex());
         actionBuilder.setActionType(GameGuanyunProtocol.e_action_type.e_action_peng);
         actionBuilder.setCard(chupai);
+        actionBuilder.setLinkPos(turn);
         logicTable.broadcast_msg_to_client(actionBuilder);
 
+        turn = maJiangPlayerData.getSeatIndex();
+        maJiangPlayerData.setCanChuPai(true);
+
+        checkCanJiaoTing(maJiangPlayerData);
+        checkCanAnGang(maJiangPlayerData);
+        sendOperations(maJiangPlayerData);
+
+        maJiangPlayerData.calcCardMask();
+
         return MsgTypeDef.e_msg_result_def.e_rmt_success;
+    }
+
+    public MsgTypeDef.e_msg_result_def gang(int seat_pos,List<Integer> cards)
+    {
+        if( seat_pos >= 4  || seat_pos < 0 )
+        {
+            return MsgTypeDef.e_msg_result_def.e_rmt_fail;
+        }
+
+        MaJiangPlayerData maJiangPlayerData = gameSeats.get(seat_pos);
+
+        if( maJiangPlayerData.isHued() )
+        {
+            return MsgTypeDef.e_msg_result_def.e_rmt_fail;
+        }
+
+        int checkGangCard = 0;
+        if( turn != seat_pos )
+        {
+            checkGangCard = chupai;
+        }
+        else
+        {
+            if( cards == null || cards.size() < 0 )
+            {
+                return MsgTypeDef.e_msg_result_def.e_rmt_fail;
+            }
+            checkGangCard = cards.get(0);
+        }
+
+        return gang( seat_pos,checkGangCard );
     }
 
     //杠
@@ -636,7 +690,26 @@ public class LogicCore {
         saveHistory(historyActionInfo);
 
         MaJiangPlayerData gangPlayer = gameSeats.get(gangPos);
-        //MaJiangPlayerData gangedPlayer = gameSeats.get(gangedPos);
+        MaJiangPlayerData gangedPlayer = gameSeats.get(gangedPos);
+
+        if( historyActionEnum == HistoryActionEnum.HISTORY_ACTION_AN_GANG )
+        {
+            //暗杠扣玩家四张牌，其它扣一张牌
+            gangPlayer.removeCard(card);
+            gangPlayer.removeCard(card);
+            gangPlayer.removeCard(card);
+            gangPlayer.removeCard(card);
+        }
+        else
+        {
+            gangPlayer.removeCard(card);
+        }
+
+        //如果是点杠，则需要从对方的牌河走移走当前牌
+        if( historyActionEnum == HistoryActionEnum.HISTORY_ACTION_DIAN_GANG )
+        {
+            gangedPlayer.removeLastOutCard();
+        }
 
         checkCanTingPai( gangPlayer );
 
@@ -645,6 +718,7 @@ public class LogicCore {
         builder.setCard(card);
         builder.setSeatPos(gangPos);
         builder.setActionType(GameGuanyunProtocol.e_action_type.e_action_gang);
+        builder.setLinkPos( gangedPos );
         logicTable.broadcast_msg_to_client(builder);
 
         turn = gangPos;
@@ -671,43 +745,73 @@ public class LogicCore {
         MaJiangPlayerData turnPlayer = gameSeats.get(turn);
 
         int huCard = chupai;  //被胡的那牌值
-        boolean isZimo = false;
         int huedSeatPos = -1;           //被胡方，如果是自摸的话，此值为-1
         HistoryActionEnum historyActionEnum = HistoryActionEnum.HISTORY_ACTION_NULL;            //当前的胡的类型
         HistoryActionInfo historyActionInfo = new HistoryActionInfo();
         if( qiangGangContext != null )
         {
             //抢杠糊
-
             qiangGangContext.setHuCnt(qiangGangContext.getHuCnt() + 1);
             huedSeatPos = qiangGangContext.getSeatPos();
             huCard = qiangGangContext.getCard();
+
+            //一炮多响时，只有第一个人拿走此牌
+            if( IsHasHuHistory() )
+            {
+                turnPlayer.removeLastOutCard();
+            }
+            historyActionEnum = HistoryActionEnum.HISTORY_ACTION_HU_QIANG_GANG;
         }
         else if( chupai == -1 )
         {
-            isZimo = true;
-
             huCard = maJiangPlayerData.getHolds().get( maJiangPlayerData.getHolds().size() - 1 );
             huedSeatPos = -1;
+            historyActionEnum = HistoryActionEnum.HISTORY_ACTION_HU_ZIMO;
         }
         else
         {
             //普通放炮胡
             huedSeatPos = turn;
+            historyActionEnum = HistoryActionEnum.HISTORY_ACTION_HU;
         }
 
+
+        historyActionInfo.setCard(huCard);
+        historyActionInfo.setSeatPos( seatPos );
+        historyActionInfo.setLinkedSeatPos( huedSeatPos );
         historyActionInfo.setAction(historyActionEnum);
         saveHistory(historyActionInfo);
 
-        huPosList.add(seatPos);     //胡牌人的列表
+        //保存当前局的输赢情况
+        List<HuCircleItemInfo> huCircleList =  CalcGameScroe.calcScores(this);
+        HuCircleInfo huCircleInfo = new HuCircleInfo();
+        huCircleInfo.setCircleIdx(logicTable.getNumOfGames());
+        huCircleInfo.setHuCircleItemInfoList( huCircleList );
+        huCircleInfos.add(huCircleInfo);
+        logicTable.addHuCircleInfo(huCircleInfo);
+
+        List<Integer> scoreList = new ArrayList<>(4);
+        for(int i = 0; i < 4;i++)
+        {
+            scoreList.add(0);
+        }
+        for( int i = 0; i < huCircleList.size();i++ )
+        {
+            HuCircleItemInfo huCircleItemInfo = huCircleList.get(i);
+            scoreList.set( huCircleItemInfo.getSeatPos(),huCircleItemInfo.getScore() );
+        }
 
         //广播胡牌信息
         GameGuanyunProtocol.packetl2c_hu_info_nt.Builder builder = GameGuanyunProtocol.packetl2c_hu_info_nt.newBuilder();
-        builder.setHuPos(seatPos);
-        builder.setFirePos(huedSeatPos);
-        builder.setCard(huCard);
-
+        HistoryActionInfo lastHuActionInfo = historyActionInfos.get(historyActionInfos.size() - 1);
+        GameGuanyunProtocol.msg_history_action_info.Builder msg_history_action_info_builder = convertToProtoType( lastHuActionInfo );
+        builder.setHistoryActionInfo(msg_history_action_info_builder);
+        builder.addAllScores(scoreList);
         logicTable.broadcast_msg_to_client(builder);
+
+        clearAllOption();
+
+
 
         //查看是否还有胡的情况
         if( operationInfos.size() > 0 )
@@ -719,7 +823,7 @@ public class LogicCore {
             return MsgTypeDef.e_msg_result_def.e_rmt_success ;
         }
 
-
+        doGameOver(seatPos,false);
 
         return MsgTypeDef.e_msg_result_def.e_rmt_success;
     }
@@ -917,11 +1021,153 @@ public class LogicCore {
 
     }
 
-    public void doGameOver(int seatPos,boolean force)
+    public void doGameOver(int seatPos,boolean isForce)
     {
+        this.gameState = GameState.CIRCLE_OVER;
+
+        if( isForce )
+        {
+            //强制结束后计算情况
+            endGameHandler(true,true);
+            return;
+        }
+
+        boolean hasHuFlag = IsHasHuHistory();
+        if( hasHuFlag )
+        {
+            //连庄 + 轮庄
+            HistoryActionInfo historyActionInfo = getFirstHuHistoryActionInfo();
+            if( logicTable.getButton() ==  historyActionInfo.getSeatPos() )
+            {
+                logicTable.setNextButton( logicTable.getButton() );
+            }
+            else
+            {
+                logicTable.setNextButton( (logicTable.getButton() + 1) %  4  );
+            }
+        }
+        else
+        {
+            //流局，当前庄家的下一个玩家
+            logicTable.setNextButton( (logicTable.getButton() + 1) %  4  );
+        }
+
+        if( logicTable.getNumOfGames() == 1 )
+        {
+            // 如果是第一局，需要扣除玩家的房卡数量
+            logicTable.costRoomCard();
+        }
+
+        boolean isEnd = logicTable.getNumOfGames() >= logicTable.getCreate_room_param().getCircleCount();
+
+        //测试，一局就结束
+        isEnd = true;
+
+        endGameHandler(isEnd,false);
 
     }
 
+    private void endGameHandler(boolean isEnd,boolean isForce)
+    {
+        //保存当前局的日志信息
+        int cur_tm_s = TimeHelper.Instance.get_cur_time();
+        if( logicTable.getNumOfGames() == 1 )
+        {
+            logicTable.saveRoomInfoLog();
+        }
+
+        int cur_time_s = TimeHelper.Instance.get_cur_time();
+        //发送当前局的一局结束信息
+        Map<Integer,Integer> scoreMap = new HashMap<>();
+        scoreMap.put(0,0);
+        scoreMap.put(1,0);
+        scoreMap.put(2,0);
+        scoreMap.put(3,0);
+        for(HuCircleInfo huCircleInfo : huCircleInfos)
+        {
+           for(HuCircleItemInfo huCircleItemInfo : huCircleInfo.getHuCircleItemInfoList())
+           {
+               if( !scoreMap.containsKey(huCircleItemInfo.getSeatPos()) )
+               {
+                   scoreMap.put(huCircleItemInfo.getSeatPos(),0);
+               }
+               int curScore = scoreMap.get(huCircleItemInfo.getSeatPos());
+               scoreMap.put( huCircleItemInfo.getSeatPos(),curScore + huCircleItemInfo.getScore() );
+           }
+        }
+
+        GameGuanyunProtocol.packetl2c_circle_result_nt.Builder circle_result_builder = GameGuanyunProtocol.packetl2c_circle_result_nt.newBuilder();
+        GameGuanyunProtocol.msg_circle_over_info.Builder msg_circle_over_info_builder =  GameGuanyunProtocol.msg_circle_over_info.newBuilder();
+        msg_circle_over_info_builder.setCircleNum( logicTable.getNumOfGames() );
+        msg_circle_over_info_builder.setNextCircleStartTm( cur_time_s );
+        for(int i = 0; i < 4; i ++)
+        {
+            MaJiangPlayerData playerData = gameSeats.get(i);
+            GameGuanyunProtocol.msg_circle_over_detail.Builder msg_circle_over_detail_builder =  GameGuanyunProtocol.msg_circle_over_detail.newBuilder();
+            msg_circle_over_detail_builder.setSeatPos(i);
+            msg_circle_over_detail_builder.setFen(scoreMap.get(i));
+            msg_circle_over_detail_builder.setHua(0);
+            msg_circle_over_detail_builder.addAllHandCards( playerData.getHolds() );
+            msg_circle_over_detail_builder.setTingCard( playerData.getTingCard() );
+            msg_circle_over_detail_builder.addAllOutCards( playerData.getFolds() );
+            msg_circle_over_detail_builder.addAllHuaCards( playerData.getFlowers() );
+            for(int j = 0; j < playerData.getOutHistoryList().size();j++ )
+            {
+                HistoryActionInfo historyActionInfo = playerData.getOutHistoryList().get(i);
+                GameGuanyunProtocol.msg_history_action_info.Builder msg_history_actiion_info_builder = convertToProtoType(historyActionInfo);
+                msg_circle_over_detail_builder.addHistoryActionInfos(msg_history_actiion_info_builder);
+            }
+            msg_circle_over_info_builder.addDetail(msg_circle_over_detail_builder);
+        }
+        for(int i = 0; i < historyActionInfos.size();i++)
+        {
+            HistoryActionInfo historyActionInfo = historyActionInfos.get(i);
+            boolean isHu = isHuActionType( historyActionInfo );
+            if( isHu )
+            {
+                GameGuanyunProtocol.msg_history_action_info.Builder  history_builder = convertToProtoType(historyActionInfo);
+                msg_circle_over_info_builder.addHuHistoryActionInfo( history_builder );
+            }
+        }
+        circle_result_builder.setCircleInfo(msg_circle_over_info_builder);
+        logicTable.broadcast_msg_to_client(circle_result_builder);
+
+        //数据库保存当前局的对局信息
+        List<Integer> scoreList = new ArrayList<>();
+        scoreList.add( scoreMap.get(0) );
+        scoreList.add( scoreMap.get(1) );
+        scoreList.add( scoreMap.get(2) );
+        scoreList.add( scoreMap.get(3) );
+        MjRoundLogDoc mjRoundLogDoc = new MjRoundLogDoc();
+        mjRoundLogDoc.setInitCards(mahjongs);
+        mjRoundLogDoc.setCircleIdx(logicTable.getNumOfGames());
+        mjRoundLogDoc.setCreateTimeNum(cur_time_s);
+        mjRoundLogDoc.setCreateTime(new Date(cur_time_s*1000));
+        mjRoundLogDoc.setRoomId(logicTable.getRoomId());
+        mjRoundLogDoc.setRounds(Collections.singletonList(historyActionInfos));
+        mjRoundLogDoc.setScroes( scoreList );
+        DbLog.Instance.getMongoTemplate().insert(mjRoundLogDoc);
+
+        if( !isEnd )
+        {
+            logicTable.setGameSttus(LogicTable.GameSttus.STATUS_INIT);
+            logicTable.restartGame();
+            return;
+        }
+
+        //发送游戏整体结束的消息
+        GameGuanyunProtocol.packetl2c_game_over_nt.Builder game_over_builder = GameGuanyunProtocol.packetl2c_game_over_nt.newBuilder();
+        GameGuanyunProtocol.msg_game_over_info.Builder game_over_info_builder = GameGuanyunProtocol.msg_game_over_info.newBuilder();
+        game_over_info_builder.setCircleIdx(logicTable.getNumOfGames());
+        game_over_info_builder.addScores(0);
+        game_over_info_builder.addScores(0);
+        game_over_info_builder.addScores(0);
+        game_over_info_builder.addScores(0);
+        game_over_builder.setMsgGameOverInfo(game_over_info_builder);
+        logicTable.broadcast_msg_to_client(game_over_builder);
+
+        logicTable.gameOver();
+    }
 
 
     private void clearAllOption()
@@ -980,12 +1226,18 @@ public class LogicCore {
         builder.addAllHandHards(playerData.getHolds());
         builder.setHostPos( button );
         builder.setActivePos(turn);
-        builder.setLeftCardNum(mahjongs.size() - currentIndex);
-        builder.setLastOutCard( lastCard );
-        builder.setLastOutCardPos( lastTurn  );
         builder.setCircleIdx(logicTable.getNumOfGames());
         builder.setMyPos( seatPos );
         builder.addAllDiceList( diceList );
+
+        if( historyActionInfos.size() > 0 )
+        {
+            HistoryActionInfo historyActionInfo = historyActionInfos.get(historyActionInfos.size() - 1);
+
+            GameGuanyunProtocol.msg_history_action_info.Builder msg_history_action_info_builder = convertToProtoType(historyActionInfo);
+            builder.setHistoryActionInfo(msg_history_action_info_builder);
+        }
+
 
         for(int i = 0; i < 4;i++)
         {
@@ -994,14 +1246,11 @@ public class LogicCore {
             msg_room_info_builder.setHandCardNum( tmpPlayer.getHolds().size() );
             msg_room_info_builder.addAllOutWallCards( tmpPlayer.getFolds() );
             msg_room_info_builder.addAllFlowerCards( tmpPlayer.getFlowers() );
-            msg_room_info_builder.setTingCard( tmpPlayer.getJiaoTingCard() );
+            msg_room_info_builder.setTingCard( tmpPlayer.getTingCard() );
 
             for( HistoryActionInfo historyActionInfo : tmpPlayer.getOutHistoryList() )
             {
-                GameGuanyunProtocol.msg_history_action_info.Builder msg_history_action_info_builder = GameGuanyunProtocol.msg_history_action_info.newBuilder();
-                msg_history_action_info_builder.setCard( historyActionInfo.getCard() );
-                msg_history_action_info_builder.setLinkedPos( historyActionInfo.getLinkedSeatPos() );
-                msg_history_action_info_builder.setActionType( GameGuanyunProtocol.e_history_action_type.valueOf( historyActionInfo.getAction().getValue() )   );
+                GameGuanyunProtocol.msg_history_action_info.Builder msg_history_action_info_builder = convertToProtoType(historyActionInfo);
                 if( historyActionInfo.getLinkCards() != null && historyActionInfo.getLinkCards().size() > 0 )
                 {
                     msg_history_action_info_builder.addAllLinkdedCards( historyActionInfo.getLinkCards() );
@@ -1010,6 +1259,12 @@ public class LogicCore {
             }
 
             builder.addRoomInfo(msg_room_info_builder);
+        }
+
+        List<GameGuanyunProtocol.msg_action_type> msg_action_type_list = getMsgActionTypeList(playerData);
+        if( msg_action_type_list.size() > 0 )
+        {
+            builder.addAllActionTypes(msg_action_type_list);
         }
 
         return builder;
@@ -1030,7 +1285,7 @@ public class LogicCore {
         }
 
         // 叫听后不能再碰了
-        if( maJiangPlayerData.isCanJiaoTing() )
+        if( maJiangPlayerData.getTingCard() > 0)
         {
             return;
         }
@@ -1207,7 +1462,7 @@ public class LogicCore {
 
         List<Integer> skipAngangList = new ArrayList<>();
         // 如果是在叫听的情况下，
-        if (seatData.getJiaoTingCard() > 0)
+        if (seatData.getTingCard() > 0)
         {
             // 先查找所以可以暗杠的牌
             List<Integer> anglist = new ArrayList<>();
@@ -1227,7 +1482,7 @@ public class LogicCore {
             // 如果去掉此杠牌还能听牌，并且听的牌与没有拿掉之前的一样，则认为此是可以杠
             for (int testCard : anglist)
             {
-                if (seatData.getJiaoTingCard() > 0)
+                if (seatData.getTingCard() > 0)
                 {
                     boolean isSameTing = checkSameTingType(seatData, testCard, 4);
                     if (!isSameTing)
@@ -1288,7 +1543,7 @@ public class LogicCore {
                     continue;
                 }
 
-                if (seatData.getJiaoTingCard() > 0)
+                if (seatData.getTingCard() > 0)
                 {
                     boolean isSameType = checkSameTingType(seatData, card, 1);
                     if (!isSameType)
@@ -1333,7 +1588,7 @@ public class LogicCore {
     protected boolean checkSameTingType(MaJiangPlayerData seatData, int targetPai, int checkNum)
     {
         // 叫听后，如果明杠，暗杠与补杠的可胡牌的牌型不能变
-        if (seatData.getJiaoTingCard() == 0) { return true; }
+        if (seatData.getTingCard() == 0) { return true; }
 
         if (seatData.getTingMap().size() > 1) { return false; }
 
@@ -1406,6 +1661,128 @@ public class LogicCore {
         if (maJiangPlayerData.isCanHu()) { return true; }
 
         return false;
+    }
+
+    private void testInitCards()
+    {
+        List<Integer> playerList1 = new ArrayList<>();
+        playerList1.add(0x01);
+        playerList1.add(0x01);
+        playerList1.add(0x01);
+        playerList1.add(0x02);
+        playerList1.add(0x02);
+        playerList1.add(0x02);
+        playerList1.add(0x03);
+        playerList1.add(0x03);
+        playerList1.add(0x03);
+        playerList1.add(0x04);
+        playerList1.add(0x04);
+        playerList1.add(0x04);
+        playerList1.add(0x05);
+
+
+        List<Integer> playerList2 = new ArrayList<>();
+        playerList2.add(0x01);
+        playerList2.add(0x02);
+        playerList2.add(0x03);
+        playerList2.add(0x04);
+        playerList2.add(0x05);
+
+        List<Integer> allReplaceCards = new ArrayList<>();
+        allReplaceCards.addAll( playerList1 );
+        allReplaceCards.addAll( playerList2 );
+
+        for(int i = 0; i < allReplaceCards.size();i++)
+        {
+            int curCard = allReplaceCards.get(i);
+            int findIdx = this.mahjongs.indexOf(curCard);
+            this.mahjongs.remove(findIdx);
+            this.mahjongs.add(curCard);
+        }
+
+        logger.info( "before:" + mahjongs.toString() );
+
+        replaceCardList(this.mahjongs,playerList1,0);
+        replaceCardList(this.mahjongs,playerList2,1);
+
+        logger.info( "after:" +  mahjongs.toString() );
+    }
+
+    private void replaceCardList(List<Integer> sourceList,List<Integer> replaceList,int idx)
+    {
+        for( int i = 0; i < replaceList.size();i++ )
+        {
+            int curIdx = 4 * i + idx;
+            int curCard = sourceList.get( curIdx );
+            int replaceCard = replaceList.get(i);
+            if( curCard == replaceCard )
+            {
+                continue;
+            }
+
+            sourceList.set(curIdx,replaceCard);
+            //从后面找到一个替换的图牌，并替换为当前的卡
+            int lastCardIdx = sourceList.lastIndexOf(replaceCard);
+            sourceList.set(lastCardIdx,curCard);
+
+            //logger.info("curIdx:" + curIdx + " curCard:" + curCard + " replaceCard:" + replaceCard + " lastCardIdx:" + lastCardIdx);
+            //logger.info("replaceList:" + sourceList.toString());
+        }
+    }
+
+    private boolean IsHasHuHistory()
+    {
+        //一炮多响时，只有第一个人拿走此牌
+        if( historyActionInfos.size() == 0 )
+        {
+           return  false;
+        }
+
+        HistoryActionInfo lastHistoryActionInfo = historyActionInfos.get( historyActionInfos.size() - 1 );
+        return isHuActionType( lastHistoryActionInfo );
+    }
+
+    //获得第一个胡的记录
+    private HistoryActionInfo getFirstHuHistoryActionInfo()
+    {
+       for(int i = 0; i < historyActionInfos.size();i++)
+       {
+           if( isHuActionType( historyActionInfos.get(i) )  )
+           {
+               return historyActionInfos.get(i);
+           }
+       }
+
+        return null;
+    }
+
+    //判断是否是胡的类型
+    private boolean isHuActionType(HistoryActionInfo lastHistoryActionInfo)
+    {
+        boolean needRemoveCardFromPool = true;
+        if(lastHistoryActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_HU  ||
+                lastHistoryActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_HU_QIANG_GANG ||
+                lastHistoryActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_HU_ZIMO ||
+                lastHistoryActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_HU_DIAN_GANG ||
+                lastHistoryActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_HU_GABNG_PAO ||
+                lastHistoryActionInfo.getAction() == HistoryActionEnum.HISTORY_ACTION_HU_FANG_PAO )
+        {
+
+            //如果上一个操作就是胡，则不需要
+            needRemoveCardFromPool = false;
+        }
+
+        return needRemoveCardFromPool;
+    }
+
+    private GameGuanyunProtocol.msg_history_action_info.Builder convertToProtoType(HistoryActionInfo historyActionInfo)
+    {
+        GameGuanyunProtocol.msg_history_action_info.Builder msg_history_action_info_builder = GameGuanyunProtocol.msg_history_action_info.newBuilder();
+        msg_history_action_info_builder.setActionType(GameGuanyunProtocol.e_history_action_type.valueOf( historyActionInfo.getAction().getValue() ));
+        msg_history_action_info_builder.setCard(historyActionInfo.getCard());
+        msg_history_action_info_builder.setLinkedPos(historyActionInfo.getLinkedSeatPos());
+        msg_history_action_info_builder.setSeatPos( historyActionInfo.getSeatPos() );
+        return msg_history_action_info_builder;
     }
 
     public enum GameState

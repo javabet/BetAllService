@@ -149,9 +149,14 @@ public class BackstageManager extends EnableObjectManager<Integer,ServerPeer> im
                 case e_st_gstate:
                 case e_st_activity:
                     ServerPeer serverPeer = get_server_byid(server_info.getServerPort());
-                    if( serverPeer == null || serverPeer.get_state() == e_peer_state.e_ps_disconnected )
+                    if( serverPeer == null  )
                     {
                         needCoonect = true;
+                    }
+                    else if( serverPeer.get_state() == e_peer_state.e_ps_disconnected )
+                    {
+                        needCoonect = true;
+                        logger.info("backstageManager,the gatePeer disconnected:" + server_info.getServerType().getNumber());
                     }
 
                     break;

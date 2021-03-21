@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @Document("common_config")
 public class CommonConfigDoc implements Serializable {
+    private static final long serialVersionUID = -2193338475840916538L;
     private String type;
     private int value;
 

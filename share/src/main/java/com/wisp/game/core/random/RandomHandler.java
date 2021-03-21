@@ -25,7 +25,7 @@ public class RandomHandler {
     public int getRandomValue(int maxValue) {
         if( maxValue <= 0 )
         {
-            System.out.printf("go this...");
+            System.out.printf("getRandomValue go has error");
 
             maxValue = 1;
         }

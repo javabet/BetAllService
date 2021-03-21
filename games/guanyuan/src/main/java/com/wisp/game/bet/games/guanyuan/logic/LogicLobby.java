@@ -35,7 +35,7 @@ public class LogicLobby implements InitializingBean
         }
     }
 
-    public boolean player_enter_game(GamePlayer gamePlayer, int roomNum, ByteString room_cfg)
+    public synchronized boolean player_enter_game(GamePlayer gamePlayer, int roomNum, ByteString room_cfg)
     {
         GameGuanyunProtocol.msg_create_room_param create_room_param = null;
         //检查是否有足够的房卡去创建房间
@@ -61,7 +61,7 @@ public class LogicLobby implements InitializingBean
             roomNum = GameManager.Instance.generate_room_no();
             LogicTable logicTable = new LogicTable(roomNum);
             logicTable.setButton(0);
-            logicTable.setNumOfGames(1);
+            logicTable.setNumOfGames(0);
             logicTable.setOwnUid(gamePlayer.get_playerid());
             logicTable.setCreate_room_param(create_room_param);
             tableMap.put(roomNum,logicTable);
@@ -126,7 +126,7 @@ public class LogicLobby implements InitializingBean
         return  true;
     }
 
-    public LogicTable getLogicByRoomId(int roomId)
+    public synchronized LogicTable getLogicByRoomId(int roomId)
     {
         if( tableMap.containsKey(roomId) )
         {
@@ -136,7 +136,7 @@ public class LogicLobby implements InitializingBean
         return null;
     }
 
-    public void removeRoomByRoomId(int roomId)
+    public synchronized void removeRoomByRoomId(int roomId)
     {
         if(tableMap.containsKey(roomId))
         {

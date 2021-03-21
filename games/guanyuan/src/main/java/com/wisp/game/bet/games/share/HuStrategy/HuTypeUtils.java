@@ -854,7 +854,7 @@ public class HuTypeUtils
             return false;
         }
 
-        return mjAction.isZiMo();
+        return mjAction.getSeatPos() == mjAction.getLinkedSeatPos();
     }
 
     //玩家只能胡一张牌，且这张牌已被自己或是其它的玩家碰过
@@ -870,7 +870,7 @@ public class HuTypeUtils
             return false;
         }
 
-        if( seatData.getJiaoTingCard() == 0 )
+        if( seatData.getTingCard() == 0 )
         {
             return false;
         }

@@ -59,13 +59,7 @@ public class Packetc2lAction  extends RequestMessageFromGate<GameGuanyunProtocol
                     logicTable.outCard(logicPlayer.getSeatIndex(),msg.getCards(0),false);
                 break;
             case GameGuanyunProtocol.e_action_type.e_action_gang_VALUE:
-                    if( msg.getCardsCount() == 0 )
-                    {
-                        builder.setResult(MsgTypeDef.e_msg_result_def.e_rmt_fail);
-                        player.send_msg_to_client(builder);
-                        return true;
-                    }
-                    logicTable.gang(logicPlayer.getSeatIndex(),msg.getCards(0));
+                    logicTable.gang(logicPlayer.getSeatIndex(),msg.getCardsList());
                 break;
             case GameGuanyunProtocol.e_action_type.e_action_hu_VALUE:
                     logicTable.hu(logicPlayer.getSeatIndex());

@@ -2,6 +2,11 @@ package com.wisp.game.bet.games.guanyuan.logic;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
+import com.wisp.game.bet.core.SpringContextHolder;
+import com.wisp.game.bet.db.mongo.logs.doc.MjRoomLogDoc;
+import com.wisp.game.bet.games.guanyuan.logic.info.HuCircleInfo;
+import com.wisp.game.bet.games.share.common.MaJiangPlayerData;
+import com.wisp.game.bet.logic.db.DbLog;
 import com.wisp.game.bet.logic.gameMgr.GameManager;
 import com.wisp.game.bet.logic.gameObj.GamePlayer;
 import com.wisp.game.bet.share.component.TimeHelper;
@@ -35,6 +40,7 @@ public class LogicTable {
 
     private LogicCore logicCore;
 
+    private List<HuCircleInfo> huCircleInfos;
 
     public LogicTable(int roomId) {
         playerMap = new HashMap<>();
@@ -44,6 +50,8 @@ public class LogicTable {
         this.roomId = roomId;
         gameSttus = GameSttus.STATUS_INIT;
         this.mjType = 1;
+        huCircleInfos = new ArrayList<>();
+        this.numOfGames = 0;
     }
 
     public void heartheat(double elapsed)
@@ -169,6 +177,11 @@ public class LogicTable {
         builder.setSeatPos(seatPos);
         broadcast_msg_to_client(builder);
 
+        if( readyMap.size() == 2 )
+        {
+            saveRoomInfoLog();
+        }
+
         if( readyMap.size() == 4 )
         {
             gameSttus = GameSttus.STATUS_RUN;
@@ -201,11 +214,11 @@ public class LogicTable {
     {
         return logicCore.outCard( seatPos,card,isTing );
     }
-
-    public MsgTypeDef.e_msg_result_def gang(int seat_pos,int card)
+    public MsgTypeDef.e_msg_result_def gang(int seat_pos,List<Integer> cards)
     {
-        return logicCore.gang(seat_pos,card);
+        return logicCore.gang(seat_pos,cards);
     }
+
 
     public MsgTypeDef.e_msg_result_def hu( int seatPos )
     {
@@ -268,10 +281,56 @@ public class LogicTable {
             //结束
             builder.setStatus(GameGuanyunProtocol.e_game_status_type.e_game_game_over);
         }
+    }
+
+    public void costRoomCard()
+    {
+
+    }
+
+    public void restartGame()
+    {
+
+    }
+
+    public void gameOver()
+    {
+        LogicLobby logicLobby = SpringContextHolder.getApplicationContext().getBean(LogicLobby.class);
+
+        for( LogicPlayer logicPlayer : playerMap.values() )
+        {
+            logicPlayer.setRoomId(0);
+        }
+
+        logicLobby.removeRoomByRoomId( roomId );
 
 
+    }
 
+    public void saveRoomInfoLog()
+    {
+        int cur_tm_s = TimeHelper.Instance.get_cur_time();
+        MjRoomLogDoc mjRoomLogDoc = new MjRoomLogDoc();
+        mjRoomLogDoc.setCreateTimeNum( cur_tm_s );
+        mjRoomLogDoc.setCreateTime(new Date( cur_tm_s * 1000 ));
+        mjRoomLogDoc.setRoomId( roomId );
+        //mjRoomLogDoc.setRoomRule(create_room_param);
+        List<Map<String,Object>> playerList = new ArrayList<>();
+        for( LogicPlayer logicPlayer : playerMap.values()  )
+        {
+            Map<String,Object> map = new HashMap<>();
+            map.put("SeatId",logicPlayer.getSeatIndex());
+            map.put("PlayerId",logicPlayer.get_pid());
+            playerList.add(map);
+        }
+        mjRoomLogDoc.setPlayers(playerList);
 
+        DbLog.Instance.getMongoTemplate().insert( mjRoomLogDoc );
+    }
+
+    public void addHuCircleInfo(HuCircleInfo huCircleInfo)
+    {
+        this.huCircleInfos.add(huCircleInfo);
     }
 
     public int send_msg_to_client(Message.Builder builder,int seatIdx)
@@ -282,7 +341,7 @@ public class LogicTable {
 
     public  int broadcast_msg_to_client(Message.Builder builder)
     {
-        return broadcast_msg_to_client( builder,0 );
+        return broadcast_msg_to_client( builder,-1 );
     }
 
     public  int broadcast_msg_to_client(Message.Builder builder,int except_id)
