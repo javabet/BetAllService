@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 public class ResponseResultVo<T>
 {
     private int code;
-    private T body;
+    private T data;
     private String msg;
 
     public ResponseResultVo()
@@ -23,14 +23,14 @@ public class ResponseResultVo<T>
         this.code = code;
     }
 
-    public T getBody()
+    public T getData()
     {
-        return body;
+        return data;
     }
 
-    public void setBody(T body)
+    public void setData(T data)
     {
-        this.body = body;
+        this.data = data;
     }
 
     public String getMsg()
@@ -52,14 +52,14 @@ public class ResponseResultVo<T>
     public static ResponseResultVo<Object> success(Object data) {
         ResponseResultVo result = new ResponseResultVo();
         result.setCode(HttpStatus.OK.value());
-        result.setBody(data);
+        result.setData(data);
         return result;
     }
 
     public static ResponseResultVo<Object> success(Object data, String message) {
         ResponseResultVo result = new ResponseResultVo();
         result.setCode(HttpStatus.OK.value());
-        result.setBody(data);
+        result.setData(data);
         result.setMsg(message);
         return result;
     }
