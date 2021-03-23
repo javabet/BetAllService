@@ -1,5 +1,18 @@
 server:
-  port: 3001
+  port: 3002
+
+spring:
+  datasource:
+    first:
+      url: jdbc:mysql://localhost:3306/test1?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+      username: root
+      password: 123456
+      driverClassName: com.mysql.jdbc.Driver
+    second:
+      url: jdbc:mysql://localhost:3306/test2?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+      username: root
+      password: 123456
+      driverClassName: com.mysql.jdbc.Driver
 
 
 cfg:

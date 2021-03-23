@@ -13,6 +13,12 @@ public class ResponseResultVo<T>
         msg = "";
     }
 
+    public ResponseResultVo(int code,String msg)
+    {
+        this.msg = msg;
+        this.code = code;
+    }
+
     public int getCode()
     {
         return code;
