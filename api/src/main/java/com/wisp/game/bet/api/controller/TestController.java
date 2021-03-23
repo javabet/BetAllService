@@ -1,9 +1,12 @@
 package com.wisp.game.bet.api.controller;
 
-import com.wisp.game.bet.api.exceptions.CustomException;
+
+import com.wisp.game.bet.api.crud.log.BindYbService;
+import com.wisp.game.bet.api.crud.pay.PayService;
+import com.wisp.game.bet.api.dao.log.entity.BindYbLogEntity;
 import com.wisp.game.bet.api.info.UserInfo;
-import com.wisp.game.bet.api.service.ResponseResult;
-import com.wisp.game.bet.api.vo.ResponseResultVo;
+import com.wisp.core.service.ResponseResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +19,14 @@ import java.util.Map;
 @ResponseResult
 public class TestController
 {
+
+    @Autowired
+    private BindYbService bindYbService;
+
+    @Autowired
+    private PayService payService;
+
+
     @RequestMapping("/test")
     public Object test()
     {
@@ -31,6 +42,10 @@ public class TestController
         userInfo.setAge(11);
         userInfo.setDate(new Date());
 
-        return userInfo;
+        BindYbLogEntity bindYbLogEntity = bindYbService.findLogById(1);
+
+        return payService.findById(1);
+
+        //return bindYbLogEntity;
     }
 }

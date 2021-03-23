@@ -1,4 +1,4 @@
-package com.wisp.core.config.bean;
+package com.wisp.game.bet.api.beanConfig;
 
 import com.wisp.core.cache.redis.redisson.CacheRedissonClient;
 import com.wisp.core.email.EmailHanderImpl;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
-@Configuration
+//@Configuration
 public class ConfigBeans
 {
     @Bean

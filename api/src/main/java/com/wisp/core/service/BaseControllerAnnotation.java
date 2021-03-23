@@ -1,4 +1,4 @@
-package com.wisp.game.bet.api.service;
+package com.wisp.core.service;
 
 import org.springframework.web.bind.annotation.RestController;
 

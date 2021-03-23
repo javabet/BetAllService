@@ -1,4 +1,4 @@
-package com.wisp.game.bet.api.vo;
+package com.wisp.core.vo;
 
 import org.springframework.http.HttpStatus;
 

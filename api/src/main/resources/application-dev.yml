@@ -3,16 +3,16 @@ server:
 
 spring:
   datasource:
-    first:
-      url: jdbc:mysql://localhost:3306/test1?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    log:
+      url: jdbc:mysql://localhost:3306/cqlog?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
       username: root
       password: 123456
-      driverClassName: com.mysql.jdbc.Driver
-    second:
-      url: jdbc:mysql://localhost:3306/test2?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+      driverClassName: com.mysql.cj.jdbc.Driver
+    pay:
+      url: jdbc:mysql://localhost:3306/cqpay?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
       username: root
       password: 123456
-      driverClassName: com.mysql.jdbc.Driver
+      driverClassName: com.mysql.cj.jdbc.Driver
 
 
 cfg:

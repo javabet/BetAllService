@@ -2,12 +2,14 @@ package com.wisp.core.idg;
 
 
 import com.wisp.core.idg.api.IdGeneratorApi;
+import org.springframework.stereotype.Component;
 
 /**
  * id工具类
  *
  * @author Fe 2016年4月15日
  */
+@Component
 public class IDGeneratorHanderImpl implements IDGeneratorHander {
 
     private IdGeneratorApi idGenerator;

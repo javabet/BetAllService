@@ -2,7 +2,7 @@ package com.wisp.core.utils;
 
 import com.wisp.core.utils.exception.BusinessCommonException;
 import com.wisp.core.web.base.BaseController;
-import com.wisp.game.bet.api.vo.ResponseResultVo;
+import com.wisp.core.vo.ResponseResultVo;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

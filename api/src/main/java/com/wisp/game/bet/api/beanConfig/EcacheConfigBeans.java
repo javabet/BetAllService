@@ -1,4 +1,4 @@
-package com.wisp.core.config.bean;
+package com.wisp.game.bet.api.beanConfig;
 
 //import com.wisp.core.cache.ehcache.EhcacheManager;
 //import org.springframework.cache.ehcache.EhCacheFactoryBean;

@@ -1,4 +1,4 @@
-package com.wisp.game.bet.api.exceptions;
+package com.wisp.core.exceptions;
 
 public class CustomException extends RuntimeException
 {

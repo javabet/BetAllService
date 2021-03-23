@@ -1,8 +1,8 @@
-package com.wisp.game.bet.api.interceptor;
+package com.wisp.core.interceptor;
 
-import com.wisp.game.bet.api.constants.Constant;
-import com.wisp.game.bet.api.service.BaseControllerAnnotation;
-import com.wisp.game.bet.api.service.ResponseResult;
+import com.wisp.core.constants.Constant;
+import com.wisp.core.service.BaseControllerAnnotation;
+import com.wisp.core.service.ResponseResult;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

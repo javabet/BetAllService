@@ -33,8 +33,8 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 	private String tableName;
 	@Autowired
 	protected D dao;
-	@Autowired
-	protected CacheHander cacheHander;
+	//@Autowired
+	//protected CacheHander cacheHander;
 
 	/**
 	 * 清除缓存，由各实现服务自己实现

@@ -1,11 +1,11 @@
-package com.wisp.game.bet.api.manager;
+package com.wisp.core.manager;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.wisp.game.bet.api.interceptor.AllowOriginInterceptor;
-import com.wisp.game.bet.api.interceptor.ResponseResultInterceptor;
-import com.wisp.game.bet.api.interceptor.TimeCostInterceptor;
+import com.wisp.core.interceptor.AllowOriginInterceptor;
+import com.wisp.core.interceptor.ResponseResultInterceptor;
+import com.wisp.core.interceptor.TimeCostInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

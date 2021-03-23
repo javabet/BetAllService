@@ -1,4 +1,4 @@
-package com.wisp.core.config.bean;
+package com.wisp.game.bet.api.beanConfig;
 
 import com.wisp.core.cache.redis.RedisCacheHanderImpl;
 import com.wisp.core.cache.redis.redisson.CacheRedissonClient;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPoolConfig;
 
-@Configuration
+//@Configuration
 public class RedisConfigBeans
 {
     @Value("cache.host")

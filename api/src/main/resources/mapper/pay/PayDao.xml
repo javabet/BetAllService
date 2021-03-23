@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisp.game.bet.api.dao.pay.PayDao">
+
+    <sql id="payColumns">
+        a.id AS "id",
+        a.uid AS "uid",
+        a.tm AS "tm",
+        a.token AS "token"
+
+    </sql>
+
+    <sql id="payJoins">
+    </sql>
+
+    <select id="findById" resultType="com.wisp.game.bet.api.dao.pay.entity.PayEntity">
+        SELECT
+        <include refid="payColumns"/>
+        FROM pay a
+        <include refid="payJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+
+</mapper>

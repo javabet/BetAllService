@@ -1,9 +1,8 @@
-package com.wisp.game.bet.api.interceptor;
+package com.wisp.core.interceptor;
 
-import com.alibaba.druid.wall.violation.ErrorCode;
-import com.wisp.game.bet.api.constants.Constant;
-import com.wisp.game.bet.api.manager.ErrorCodeManager;
-import com.wisp.game.bet.api.vo.ResponseResultVo;
+import com.wisp.core.constants.Constant;
+import com.wisp.core.manager.ErrorCodeManager;
+import com.wisp.core.vo.ResponseResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

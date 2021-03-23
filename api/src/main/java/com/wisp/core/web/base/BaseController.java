@@ -1,7 +1,7 @@
 package com.wisp.core.web.base;
 
 import com.wisp.core.utils.MVCExceptionHandle;
-import com.wisp.game.bet.api.vo.ResponseResultVo;
+import com.wisp.core.vo.ResponseResultVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.slf4j.Logger;

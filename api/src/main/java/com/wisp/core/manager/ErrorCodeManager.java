@@ -1,4 +1,4 @@
-package com.wisp.game.bet.api.manager;
+package com.wisp.core.manager;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
