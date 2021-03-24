@@ -13,7 +13,7 @@
     <sql id="payJoins">
     </sql>
 
-    <select id="findById" resultType="com.wisp.game.bet.api.dao.pay.entity.PayEntity">
+    <select id="findById" resultType="PayEntity">
         SELECT
         <include refid="payColumns"/>
         FROM pay a

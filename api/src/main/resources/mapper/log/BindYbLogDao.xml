@@ -15,7 +15,7 @@
     <sql id="bndYbLogJoins">
     </sql>
 
-    <select id="findById" resultType="com.wisp.game.bet.api.dao.log.entity.BindYbLogEntity">
+    <select id="findById" resultType="BindYbLogEntity">
         SELECT
         <include refid="bndybLogColumns"/>
         FROM bndyb_log a

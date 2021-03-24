@@ -16,6 +16,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,7 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	private String tableName;
 	@Autowired
+	//@Resource
 	protected D dao;
 	//@Autowired
 	//protected CacheHander cacheHander;

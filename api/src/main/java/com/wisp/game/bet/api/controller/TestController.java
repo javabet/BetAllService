@@ -44,8 +44,8 @@ public class TestController
 
         BindYbLogEntity bindYbLogEntity = bindYbService.findLogById(1);
 
-        return payService.findById(1);
+        //return payService.findById(1);
 
-        //return bindYbLogEntity;
+        return bindYbLogEntity;
     }
 }
