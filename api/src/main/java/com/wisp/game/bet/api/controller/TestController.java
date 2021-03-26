@@ -48,4 +48,23 @@ public class TestController
 
         return bindYbLogEntity;
     }
+
+    @RequestMapping("/insert")
+    public Object insertData()
+    {
+
+        BindYbLogEntity bindYbLogEntity = new BindYbLogEntity();
+        bindYbLogEntity.setCid(200);
+        bindYbLogEntity.setParcnt(200);
+        bindYbLogEntity.setParid(200);
+        bindYbLogEntity.setSub(200);
+        bindYbLogEntity.setTm(2000);
+        bindYbLogEntity.setUid(200);
+        bindYbService.insert(bindYbLogEntity);
+
+
+        //return payService.findById(1);
+
+        return bindYbLogEntity;
+    }
 }

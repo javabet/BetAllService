@@ -6,7 +6,6 @@
         a.id AS "id",
         a.cid AS "cid",
         a.uid AS "uid",
-        a.tm AS "tm",
         a.sub AS "sub",
         a.parcnt AS "parcnt",
         a.tm AS "tm"
@@ -23,5 +22,22 @@
         WHERE a.id = #{id}
     </select>
 
+    <insert id="insert">
+        INSERT INTO bndyb_log (
+			id,
+			cid,
+			uid,
+			tm,
+			sub,
+			parcnt
+		) VALUES (
+			#{id},
+			#{cid},
+			#{uid},
+			#{tm},
+			#{sub},
+			#{parcnt}
+		)
+    </insert>
 
 </mapper>
