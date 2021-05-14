@@ -4,6 +4,7 @@
 package com.wisp.core.persistence;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.SerializedName;
 import com.wisp.core.utils.supcan.SupCol;
 import com.wisp.core.utils.supcan.SupTreeList;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -24,6 +25,8 @@ public abstract class BaseEntity implements Serializable {
     /**
      * 实体编号（唯一标识）
      */
+    //@JSONField(name = "Id")
+    @SerializedName("Id")
     protected Long id;
 
     public BaseEntity() {

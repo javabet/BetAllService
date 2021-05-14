@@ -1,7 +1,10 @@
 package com.wisp.core.utils;
 
-import com.alibaba.fastjson.JSON;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.*;
 
 public abstract class GfJsonUtil {
@@ -20,7 +23,10 @@ public abstract class GfJsonUtil {
         if (json == null) {
             return null;
         }
-        return (T) JSON.parseObject(json, clazz);
+
+        Gson gson = new Gson();
+        return gson.fromJson(json,clazz);
+        //return (T) JSON.parseObject(json, clazz);
     }
 
     /**
@@ -33,7 +39,10 @@ public abstract class GfJsonUtil {
         if (t == null) {
             return null;
         }
-        return JSON.toJSONString(t);
+
+        return new Gson().toJson(t);
+
+        //return JSON.toJSONString(t);
     }
 
     /**
@@ -79,7 +88,11 @@ public abstract class GfJsonUtil {
         if (json == null) {
             return Collections.emptyList();
         }
-        return JSON.parseArray(json, clazz);
+
+        Gson gson = new Gson();
+        return gson.fromJson(json,new TypeToken<List<T>>(){}.getType());
+
+        //return JSON.parseArray(json, clazz);
     }
 
     /**

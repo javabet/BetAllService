@@ -1,6 +1,8 @@
 package com.wisp.core.web.base;
 
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.wisp.core.extjs.data.DataGrid;
 import com.wisp.core.log.LogExceptionStackTrace;
 import com.wisp.core.persistence.Page;
@@ -63,8 +65,10 @@ public abstract class ExtJsController {
 	 *
 	 * @return
 	 */
-	protected JSONObject getRequestJson() {
-		return JSONObject.parseObject(getRequestJsonString());
+	protected JsonObject getRequestJson() {
+		JsonObject jsonObject = new Gson().fromJson(getRequestJsonString(),JsonObject.class);
+		return jsonObject;
+		//return JSONObject.parseObject(getRequestJsonString());
 	}
 
 	/**
@@ -87,6 +91,7 @@ public abstract class ExtJsController {
 	 * @return
 	 */
 	protected <T> Page<T> getPage(String jsonStr, Class<T> clazz) {
+		/**
 		JSONObject json = JSONObject.parseObject(jsonStr);
 		T t = JSONObject.parseObject(json.getString("data"), clazz);
 		long start = json.getLongValue("start");
@@ -94,6 +99,13 @@ public abstract class ExtJsController {
 		if (length == 0L) {
 			length = 20L;
 		}
+		 **/
+
+		JsonObject jsonObject = new Gson().fromJson(jsonStr,JsonObject.class);
+		long start =  jsonObject.get("start").getAsLong();
+		long length = jsonObject.get("limit").getAsLong();
+		T t = new Gson().fromJson(jsonStr,clazz);
+
 		return new Page<T>(t, start, length);
 	}
 
@@ -105,7 +117,8 @@ public abstract class ExtJsController {
 	 * @return
 	 */
 	protected <T> T getForm(Class<T> clazz) {
-		return JSONObject.parseObject(getRequestJsonString(), clazz);
+		return new Gson().fromJson(getRequestJsonString(),clazz);
+		//return JSONObject.parseObject(getRequestJsonString(), clazz);
 	}
 
 	/**

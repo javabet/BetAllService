@@ -1,6 +1,6 @@
 package com.wisp.core.log;
 
-import com.alibaba.fastjson.annotation.JSONField;
+
 
 import java.util.Date;
 
@@ -23,7 +23,7 @@ public class LogCommand {
     private Date dtNow;
     private String hostName;
 
-    @JSONField(name="LogType")
+
     public String getLogType() {
         return logType;
     }
@@ -31,7 +31,7 @@ public class LogCommand {
     public void setLogType(String logType) {
         this.logType = logType;
     }
-    @JSONField(name="SiteID")
+
     public Integer getSiteID() {
         return siteID;
     }
@@ -39,7 +39,7 @@ public class LogCommand {
     public void setSiteID(Integer siteID) {
         this.siteID = siteID;
     }
-    @JSONField(name="Site")
+
     public String getSite() {
         return site;
     }
@@ -47,7 +47,7 @@ public class LogCommand {
     public void setSite(String site) {
         this.site = site;
     }
-    @JSONField(name="Url")
+
     public String getUrl() {
         return url;
     }
@@ -55,7 +55,7 @@ public class LogCommand {
     public void setUrl(String url) {
         this.url = url;
     }
-    @JSONField(name="LogLevel")
+
     public Integer getLogLevel() {
         return logLevel;
     }
@@ -63,7 +63,7 @@ public class LogCommand {
     public void setLogLevel(Integer logLevel) {
         this.logLevel = logLevel;
     }
-    @JSONField(name="Ip")
+
     public String getIp() {
         return ip;
     }
@@ -71,7 +71,7 @@ public class LogCommand {
     public void setIp(String ip) {
         this.ip = ip;
     }
-    @JSONField(name="Subject")
+
     public String getSubject() {
         return subject;
     }
@@ -79,7 +79,7 @@ public class LogCommand {
     public void setSubject(String subject) {
         this.subject = subject;
     }
-    @JSONField(name="Content")
+
     public String getContent() {
         return content;
     }
@@ -87,7 +87,7 @@ public class LogCommand {
     public void setContent(String content) {
         this.content = content;
     }
-    @JSONField(name="AppName")
+
     public String getAppName() {
         return appName;
     }
@@ -95,7 +95,7 @@ public class LogCommand {
     public void setAppName(String appName) {
         this.appName = appName;
     }
-    @JSONField(name="DtNow",format="yyyy-MM-dd HH:mm:ss")
+
     public Date getDtNow() {
         return dtNow;
     }
@@ -103,7 +103,7 @@ public class LogCommand {
     public void setDtNow(Date dtNow) {
         this.dtNow = dtNow;
     }
-    @JSONField(name="HostName")
+
     public String getHostName() {
         return hostName;
     }

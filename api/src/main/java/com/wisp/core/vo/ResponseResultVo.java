@@ -1,12 +1,19 @@
 package com.wisp.core.vo;
 
+
+import com.google.gson.annotations.SerializedName;
 import org.springframework.http.HttpStatus;
+
+import javax.validation.Valid;
 
 public class ResponseResultVo<T>
 {
+    @SerializedName(value = "Code")
     private int code;
+    @SerializedName(value = "Data")
     private T data;
-    private String msg;
+    @SerializedName(value = "Msg")
+    private String msg = "ok";
 
     public ResponseResultVo()
     {

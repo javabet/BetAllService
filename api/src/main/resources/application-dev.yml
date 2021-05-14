@@ -1,5 +1,6 @@
 server:
-  port: 3002
+  port1: 3002
+  port: 40000
 
 spring:
   datasource:
@@ -19,6 +20,14 @@ spring:
       mapperLocation: classpath:mapper/pay/*.xml
       typeAliasesPackage: com.wisp.game.bet.api.dao.pay.entity
       basePackage: com.wisp.game.bet.api.dao.pay
+    recharge:
+      url: jdbc:mysql://localhost:3306/cq_recharge?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+      username: root
+      password: 123456
+      driverClassName: com.mysql.cj.jdbc.Driver
+      mapperLocation: classpath:mapper/recharge/*.xml
+      typeAliasesPackage: com.wisp.game.bet.recharge.dao.entity
+      basePackage: com.wisp.game.bet.recharge.dao
 
 
 cfg:

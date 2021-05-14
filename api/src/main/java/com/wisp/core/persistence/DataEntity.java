@@ -1,5 +1,9 @@
 package com.wisp.core.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.Expose;
+
 import java.util.Date;
 
 /**
@@ -12,9 +16,10 @@ public abstract class DataEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    protected Date createTime;    // 创建日期
-    protected Date updateTime;    // 更新日期
-    protected int deleteFlag;    // 删除标记（0：正常；1：删除；2：审核）
+
+    protected transient Date createTime;    // 创建日期
+    protected transient  Date updateTime;    // 更新日期
+    protected transient int deleteFlag;    // 删除标记（0：正常；1：删除；2：审核）
 
     public DataEntity() {
         super();

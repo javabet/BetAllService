@@ -11,6 +11,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 
 /**
  * 控制器支持类
@@ -32,6 +33,15 @@ public abstract class BaseController extends MVCExceptionHandle {
     public ResponseResultVo<?> data(Object data) {
         ResponseResultVo responseResultVo = new ResponseResultVo();
         responseResultVo.setData(data);
+        responseResultVo.setMsg("ok");
+        responseResultVo.setCode(200);
+        return responseResultVo;
+    }
+
+    public ResponseResultVo<?> emptySucc() {
+        ResponseResultVo responseResultVo = new ResponseResultVo();
+        responseResultVo.setData(new HashMap<>());
+        responseResultVo.setMsg("ok");
         responseResultVo.setCode(200);
         return responseResultVo;
     }

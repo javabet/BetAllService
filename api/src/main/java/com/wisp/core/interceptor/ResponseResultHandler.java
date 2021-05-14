@@ -9,14 +9,24 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.Set;
 
-@ControllerAdvice
+/***
+ * 拦截Controller方法默认返回参数，统一处理返回值/响应体
+ */
+//@ControllerAdvice
+@RestControllerAdvice
 public class ResponseResultHandler implements ResponseBodyAdvice<Object>
 {
     @Autowired
@@ -33,6 +43,7 @@ public class ResponseResultHandler implements ResponseBodyAdvice<Object>
 
     public Object beforeBodyWrite(Object body, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse)
     {
+
         ResponseResultVo responseResultVo;
 
         if(!(body instanceof ResponseResultVo)) {
@@ -51,4 +62,5 @@ public class ResponseResultHandler implements ResponseBodyAdvice<Object>
 
         return responseResultVo;
     }
+
 }

@@ -1,6 +1,6 @@
 package com.wisp.core.web.monitor;
 
-import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 import com.wisp.core.web.monitor.model.*;
 import com.wisp.core.web.monitor.model.ThreadInfo;
 import org.slf4j.Logger;
@@ -63,7 +63,9 @@ public class MonitoringServlet extends HttpServlet {
         getMemoryPoolsInfo(jvmInfo);
         getGcMap(jvmInfo);
         getRuntimeInfo(jvmInfo);
-        return JSON.toJSONString(jvmInfo);
+        Gson gson = new Gson();
+        //return JSON.toJSONString(jvmInfo);
+        return gson.toJson(jvmInfo);
     }
 
     /**

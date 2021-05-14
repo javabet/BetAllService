@@ -4,13 +4,21 @@ import com.wisp.core.constants.Constant;
 import com.wisp.core.service.BaseControllerAnnotation;
 import com.wisp.core.service.ResponseResult;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.lang.reflect.Method;
+import java.util.Set;
 
+/**
+ * 拦截器 处理  统一包装返回体
+ * //https://developer.aliyun.com/article/779341
+ */
 @Service
 public class ResponseResultInterceptor  extends HandlerInterceptorAdapter
 {
@@ -34,4 +42,8 @@ public class ResponseResultInterceptor  extends HandlerInterceptorAdapter
 
         return super.preHandle(request, response, handler);
     }
+
+
+
+
 }
