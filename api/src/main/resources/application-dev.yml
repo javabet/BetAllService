@@ -1,6 +1,5 @@
 server:
-  port1: 3002
-  port: 40000
+  port: 3002
 
 spring:
   datasource:
@@ -47,3 +46,12 @@ cfg:
   clouddb_name: CloudDB
   activiydb_url: 127.0.0.1:27017
   activiydb_name: CloudDB
+
+
+redis:
+  cache:
+    host: 127.0.0.1
+    port: 6379
+    maxIdle: 3
+    maxTotal: 10
+    testOnBorrow: true

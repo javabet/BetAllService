@@ -22,12 +22,12 @@ public abstract class AbstractCommonService {
 	 * @param params
 	 * @return
 	 */
-	public Object findForPage(String listStr, String countStr, Object params) {
-		Page<Object> page = new Page<Object>(params, 0, 0);
-		page.setCount((Long) getCommonDao().findForObject(countStr, params));
-		page.setData(getCommonDao().findForList(listStr, params));
-		return page;
-	}
+//	public Object findForPage(String listStr, String countStr, Object params) {
+//		Page<Object> page = new Page<Object>(params, 0, 0);
+//		page.setCount((Long) getCommonDao().findForObject(countStr, params));
+//		page.setData(getCommonDao().findForList(listStr, params));
+//		return page;
+//	}
 	
 	/**
 	 * 查找对象

@@ -17,8 +17,8 @@ public abstract class DataEntity extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
 
-    protected transient Date createTime;    // 创建日期
-    protected transient  Date updateTime;    // 更新日期
+    protected transient Date CreateTime;    // 创建日期
+    protected transient  Date UpdateTime;    // 更新日期
     protected transient int deleteFlag;    // 删除标记（0：正常；1：删除；2：审核）
 
     public DataEntity() {
@@ -37,19 +37,19 @@ public abstract class DataEntity extends BaseEntity {
     }
 
     public Date getCreateTime() {
-        return createTime;
+        return CreateTime;
     }
 
     public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+        this.CreateTime = createTime;
     }
 
     public Date getUpdateTime() {
-        return updateTime;
+        return UpdateTime;
     }
 
     public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+        this.UpdateTime = updateTime;
     }
 
     public int getDeleteFlag() {

@@ -1,5 +1,6 @@
 package com.wisp.game.bet.recharge.crud.recharge;
 
+import com.google.gson.Gson;
 import com.wisp.core.persistence.Page;
 import com.wisp.core.service.CrudService;
 import com.wisp.game.bet.recharge.dao.NodeDao;
@@ -22,6 +23,9 @@ public class NodeService extends CrudService<NodeDao, NodeEntity>
         page.setStart(0);
         page.setLength(1000l);
         List<NodeEntity> nodeEntities =  dao.findList(page);
+
+        System.out.println(new Gson().toJson(nodeEntities));
+
         return nodeEntities;
     }
 

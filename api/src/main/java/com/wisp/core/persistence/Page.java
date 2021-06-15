@@ -19,47 +19,20 @@ public class Page<T> {
     public static final String DEL_FLAG_NORMAL = "0";
     public static final String DEL_FLAG_DELETE = "1";
     public static final long MAX_RESULT_COUNT = 100;
-    private String draw;
     private long start;
     private Long length;
     private long iTotalRecords;
     private long iTotalDisplayRecords;
     private List<T> data;
-    private T p;
 
     public Page() {
         length = MAX_RESULT_COUNT;
     }
 
-    public Page(T entity) {
-        if (entity == null)
-            throw new NullPointerException();
-        try {
-            RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-            if (ra == null) {
-                throw new RuntimeException("RequestContextHolder未在Spring中配置");
-            }
-            HttpServletRequest request = ((ServletRequestAttributes)ra).getRequest();
-            String sStart = request.getParameter("start");
-            String sLength = request.getParameter("length");
-            this.draw = request.getParameter("draw");
-
-            if (sStart != null)
-                start = Integer.parseInt(sStart);
-            if (sLength != null)
-                length = Long.parseLong(sLength);
-            else
-                length = MAX_RESULT_COUNT;
-            this.p = entity;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public Page(T entity, long start, long length) {
+    public Page(long start, long length) {
         this.start = start;
         this.length = length;
-        this.p = entity;
+
     }
 
     public Page<T> setData(List<T> data) {
@@ -86,14 +59,6 @@ public class Page<T> {
         return length;
     }
 
-    public String getDraw() {
-        return draw;
-    }
-
-    public void setDraw(String draw) {
-        this.draw = draw;
-    }
-
     public long getStart() {
         return start;
     }
@@ -108,6 +73,9 @@ public class Page<T> {
 
     public void setLength(Long length) {
         this.length = length;
+    }
+    public void setLength(int length) {
+        this.length = ((long) length);
     }
 
     public long getiTotalRecords() {
@@ -128,13 +96,5 @@ public class Page<T> {
 
     public List<T> getData() {
         return data;
-    }
-
-    public T getP() {
-        return p;
-    }
-
-    public void setP(T p) {
-        this.p = p;
     }
 }

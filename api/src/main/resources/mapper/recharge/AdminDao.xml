@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisp.game.bet.recharge.dao.AdminDao">
+
+    <sql id="adminColumns">
+        t.id AS "id",
+        t.username AS "Username",
+        t.password AS "Password",
+        t.role AS "Role",
+        t.create_role AS "CreateRole",
+        t.name AS "Name",
+        t.sex AS "Sex",
+        t.mobile AS "Mobile",
+        t.login_ip as "LoginIp",
+        t.status as "Status",
+        t.note as "Note",
+        t.parent_id as "ParentId",
+        t.parent_tree as "ParentTree",
+        t.login_time AS "LoginTime"
+    </sql>
+
+    <sql id="adminJoins">
+    </sql>
+
+    <sql id="adminWhere">
+        t.delete_flag = 0
+    </sql>
+
+
+    <insert id="insert" parameterType="com.wisp.game.bet.recharge.dao.AdminDao"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO recharge_sys_admin (
+            username,
+            password,
+            role,
+            create_role,
+            `name`,
+            sex,
+            mobile,
+            login_ip,
+            status,
+            note,
+            parent_id,
+            parent_tree,
+            create_time,
+            login_time
+        ) VALUES  (
+            #{Username},
+            #{Password},
+            #{Role},
+            #{CreateRole},
+            #{Name},
+            #{Sex},
+            #{Mobile},
+            #{LoginIp},
+            #{Status},
+            #{Note},
+            #{ParentId},
+            #{ParentTree},
+            #{CreateTime},
+            #{LoginTime}
+        )
+    </insert>
+
+    <update id="update" >
+        UPDATE recharge_sys_admin
+         <trim  prefix="set" suffixOverrides="," >
+            <if test="Username != null">
+                username = #{Username},
+            </if>
+            <if test="Password != null">
+                password = #{Password},
+            </if>
+             <if test="Role != null">
+                 `role` = #{Role},
+             </if>
+             <if test="CreateRole">
+                 `create_role` = #{CreateRole},
+             </if>
+             <if test="Name != null">
+                 `name` = #{Name},
+             </if>
+             <if test="Sex != null and Sex != 0">
+                 `sex` = #{Sex},
+             </if>
+
+             <if test="Mobile != null and Mobile != 0 ">
+                 mobile = #{Mobile},
+             </if>
+
+             <if test="LoginIp!= null">
+                 login_ip = #{LoginIp},
+             </if>
+             <if test="Status != null">
+                 status = #{Status},
+             </if>
+             <if test="Note != null">
+                 note = #{Note},
+             </if>
+
+            <if test="ParentId != null and ParentId != 0 ">
+                parent_id = #{ParentId},
+            </if>
+
+            <if test="ParentTree != null">
+                parent_tree = #{ParentTree},
+            </if>
+
+            <if test="LoginTime!= null">
+                login_time=#{LoginTime},
+            </if>
+         </trim >
+        where id = #{id}
+    </update>
+
+
+
+    <select id="get" resultType="AdminEntity">
+        SELECT
+        <include refid="adminColumns"/>
+        FROM recharge_sys_admin t
+        <include refid="adminJoins"/>
+        WHERE t.id = #{id}
+    </select>
+
+    <select id="findList" resultType="AdminEntity">
+        SELECT <include refid="adminColumns"/> FROM recharge_sys_admin t
+        <trim prefix="WHERE"  suffixOverrides="," prefixOverrides="AND" >
+            <if test="beginTime != 0 and beginTime != '' ">
+                t.create_time <![CDATA[>=]]> #{beginTime},
+            </if>
+            <if test="endTime != 0 and endTime != '' " >
+               AND t.create_time <![CDATA[ <= ]]> #{endTime},
+            </if>
+            <if test="keyWord != null and keyWord.length > 0">
+                AND ( `name` like '%'#{keyword}'%' or username like '%'#{keyword}'%' )
+            </if>
+        </trim>
+        ORDER BY id desc LIMIT #{start}, #{length}
+    </select>
+
+
+    <delete id="delete">
+        UPDATE  recharge_sys_admin set delete_flag = 1 where id = #{id}
+    </delete>
+
+
+</mapper>

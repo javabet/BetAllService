@@ -33,7 +33,7 @@ public interface CrudDao<T> extends BaseDao {
     /**
      * 查询数据条数
      *
-     * @param entity
+     * @param page
      * @return
      */
     long count(Page<T> page);
@@ -53,6 +53,15 @@ public interface CrudDao<T> extends BaseDao {
      * @return
      */
     int update(T entity);
+
+
+    /**
+     * 只更新部分字段处理
+     * @param entity
+     * @param fileds
+     * @return
+     */
+    int updateFields(T entity,String[] fileds);
 
     /**
      * 删除数据（一般为逻辑删除，更新del_flag字段为1）

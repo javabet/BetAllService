@@ -10,6 +10,7 @@ import com.wisp.game.bet.recharge.crud.recharge.NodeService;
 import com.wisp.game.bet.recharge.dao.entity.NodeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.GsonJsonParser;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
@@ -31,14 +32,10 @@ public class NodeController extends BaseController
     @RequestMapping(method = RequestMethod.GET,value = "/list")
     public Object List()
     {
-        NodeEntity nodeEntity = new NodeEntity();
-        nodeEntity.setParentTree("111");
-        nodeEntity.setDescription("说明");
-        nodeEntity.setIcon("go this");
-        nodeEntity.setTestStrong("testString1");
         return nodeService.list();
     }
 
+    @Transactional("rechargeTransactionManger")
     @PostMapping()
     public Object Add(@Valid @RequestBody NodeEntity nodeEntity)
     {

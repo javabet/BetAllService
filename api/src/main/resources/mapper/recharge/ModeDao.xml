@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisp.game.bet.recharge.dao.ModeDao">
+
+    <sql id="modeColumns">
+        t.id AS "id",
+        t.parent_id AS "ParentId",
+        t.node_id AS "NodeId",
+        t.name AS "Name",
+        t.key AS "Key",
+        t.md5 AS "Md5",
+        t.type AS "Type",
+        t.logs AS "Logs",
+        t.sort as "Sort",
+        t.description AS "Description"
+    </sql>
+
+    <sql id="modeJoins">
+    </sql>
+
+    <sql id="modeWhere">
+        t.delete_flag = 0
+    </sql>
+
+    <sql id="modeListWhere">
+        t.delete_flag = 0
+
+        <if test="KeyWord != ''">
+           and ( `name` like %keyword% or description like %keyword% or parent_id > -1 )
+        </if>
+
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO recharge_sys_mode (
+            parent_id,
+            node_id,
+            `name`,
+            `key`,
+            md5,
+            `type`,
+            logs,
+            sort,
+            description
+        ) VALUES  (
+            #{ParentId},
+            #{NodeId},
+            #{Name},
+            #{Key},
+            #{Md5},
+            #{Type},
+            #{Logs},
+            #{Sort},
+            #{Description,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="update" >
+        UPDATE recharge_sys_mode
+         <trim  prefix="set" suffixOverrides="," >
+             parent_id = #{ParentId},
+             node_id = #{NodeId},
+             `name` = #{Name},
+             `key` = #{Key},
+             `md5` = #{Md5},
+             `type` = #{Type},
+             `logs` = #{Logs},
+             sort = #{Sort},
+             description=#{Description}
+         </trim >
+        where id = #{id}
+    </update>
+
+
+    <select id="get" resultType="ModeEntity">
+        SELECT
+        <include refid="modeColumns"/>
+        FROM recharge_sys_mode t
+        <include refid="modeJoins"/>
+        WHERE t.id = #{id}
+    </select>
+
+    <select id="findList" resultType="ModeEntity">
+        SELECT <include refid="modeColumns"/> FROM recharge_sys_mode t <include refid="modeJoins"/>
+        WHERE <include refid="modeWhere"/> ORDER BY id desc LIMIT #{start}, #{length}
+    </select>
+
+    <select id="findByKey" resultType="ModeEntity">
+        SELECT <include refid="modeColumns"/> FROM recharge_sys_mode t <include refid="modeJoins"/>
+        WHERE <include refid="modeListWhere"/> ORDER BY type,sort,id
+    </select>
+
+    <delete id="delete">
+        UPDATE  recharge_sys_mode set delete_flag = 1 where id = #{id}
+    </delete>
+
+
+    <delete id="deleteChild">
+        UPDATE  recharge_sys_mode set delete_flag = 1 where parent_id = #{parentId}
+    </delete>
+
+</mapper>

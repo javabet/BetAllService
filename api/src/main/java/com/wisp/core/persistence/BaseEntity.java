@@ -43,6 +43,11 @@ public abstract class BaseEntity implements Serializable {
         return id;
     }
 
+    public int getIdInt()
+    {
+        return id.intValue();
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

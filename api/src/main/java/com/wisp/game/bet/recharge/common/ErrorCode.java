@@ -9,7 +9,7 @@ public enum ErrorCode
     ERR_DB_SELECT(1005,"查询数据失败"),
     ERR_PARAM_FIELD(1006,"查询数据失败"),
     ERR_NO_DATA(1007,"无此数据"),
-
+    ERR_USER_NAME(1008,"玩家已经存在"),
     ;
 
     public int getCode()

@@ -41,7 +41,12 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 	/**
 	 * 清除缓存，由各实现服务自己实现
 	 */
-	protected void clearCache(T entity) {}
+	protected void clearCache(T entity) {};
+
+	/**
+	 * 清除缓存，由各实现服务自己实现
+	 */
+	protected  void clearCache(long id){};
 
 	/**
 	 * 获取单条数据
@@ -52,13 +57,18 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 		return dao.get(id);
 	}
 
-	public List<T> findList(T entity) {
-		return dao.findList(new Page<T>(entity));
-	}
+	public T get(int id)
+    {
+        return dao.get( (long)id );
+    }
 
-	public List<T> findList(T entity, int maxResult) {
-		return dao.findList(new Page<T>(entity, 0, maxResult));
-	}
+//	public List<T> findList(T entity) {
+//		return dao.findList(new Page<T>(entity));
+//	}
+//
+//	public List<T> findList(T entity, int maxResult) {
+//		return dao.findList(new Page<T>(entity, 0, maxResult));
+//	}
 
 	public List<T> findList(Page<T> page) {
 		return dao.findList(page);
@@ -68,9 +78,9 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 	 * 查询分页数据
 	 * @return
 	 */
-	public Page<T> findPage(T entity) {
-		return findPage(new Page<T>(entity));
-	}
+//	public Page<T> findPage(T entity) {
+//		return findPage(new Page<T>(entity));
+//	}
 	/**
 	 * 查询分页数据
 	 * @param page 分页对象
@@ -90,16 +100,52 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 	 * 保存数据（插入或更新）
 	 * @param entity
 	 */
-	public void save(T entity) {
+	public int save(T entity) {
+	    int entityId = -1;
 		if (entity.isNewRecord()) {
 			this.preInsert(entity);
-			dao.insert(entity);
+            entityId = dao.insert(entity);
 		}else{
 			this.preUpdate(entity);
 			dao.update(entity);
+			entityId = entity.getId().intValue();
 		}
 		clearCache(entity);
+
+		return entityId;
 	}
+
+	public int save(T entity,boolean defaultIdFlag)
+    {
+        int chgNum = 0;
+        if (entity.isNewRecord()) {
+            if( defaultIdFlag )
+            {
+                if (entity.getCreateTime() == null)
+                {
+                    entity.setCreateTime(new Date());
+                }
+            }
+            else
+            {
+                this.preInsert(entity);
+            }
+			chgNum = dao.insert(entity);
+        }else{
+            this.preUpdate(entity);
+			chgNum = dao.update(entity);
+        }
+        clearCache(entity);
+        return chgNum;
+    }
+
+    //只更新部分字段的处理
+    public int updateField(T entity,String[] fileds)
+    {
+        this.preUpdate(entity);
+        int updateFieldNum =  dao.updateFields(entity,fileds);
+        return updateFieldNum;
+    }
 
 	/**
 	 * 更新前处理
@@ -146,6 +192,12 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 			dao.delete(entity.getId());
 			clearCache(entity);
 		}
+	}
+
+	public void delete(long id)
+	{
+		dao.delete(id);
+		clearCache(id);
 	}
 
 	//@Override

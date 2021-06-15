@@ -78,9 +78,9 @@ public abstract class ExtJsController {
 	 * @param <T>
 	 * @return
 	 */
-	protected <T> Page<T> getPage(Class<T> clazz) {
-		return getPage(getRequestJsonString(), clazz);
-	}
+//	protected <T> Page<T> getPage(Class<T> clazz) {
+//		return getPage(getRequestJsonString(), clazz);
+//	}
 
 	/**
 	 * json字符串转化为Page对象
@@ -90,24 +90,14 @@ public abstract class ExtJsController {
 	 * @param <T>
 	 * @return
 	 */
-	protected <T> Page<T> getPage(String jsonStr, Class<T> clazz) {
-		/**
-		JSONObject json = JSONObject.parseObject(jsonStr);
-		T t = JSONObject.parseObject(json.getString("data"), clazz);
-		long start = json.getLongValue("start");
-		long length = json.getLongValue("limit");
-		if (length == 0L) {
-			length = 20L;
-		}
-		 **/
-
-		JsonObject jsonObject = new Gson().fromJson(jsonStr,JsonObject.class);
-		long start =  jsonObject.get("start").getAsLong();
-		long length = jsonObject.get("limit").getAsLong();
-		T t = new Gson().fromJson(jsonStr,clazz);
-
-		return new Page<T>(t, start, length);
-	}
+//	protected <T> Page<T> getPage(String jsonStr, Class<T> clazz) {
+//		JsonObject jsonObject = new Gson().fromJson(jsonStr,JsonObject.class);
+//		long start =  jsonObject.get("start").getAsLong();
+//		long length = jsonObject.get("limit").getAsLong();
+//		T t = new Gson().fromJson(jsonStr,clazz);
+//
+//		return new Page<T>(t, start, length);
+//	}
 
 	/**
 	 * 将extjs form表单提交的json数据转换为实体类

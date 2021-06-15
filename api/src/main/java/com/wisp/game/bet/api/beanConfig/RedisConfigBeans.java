@@ -9,19 +9,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPoolConfig;
 
-//@Configuration
+@Configuration
 public class RedisConfigBeans
 {
-    @Value("cache.host")
+    @Value("${redis.cache.host}")
     private String cacheHost;
-    @Value("cache.port")
+    @Value("${redis.cache.port}")
     private String cachePort;
 
-    @Value("cache.maxIdle")
+    @Value("${redis.cache.maxIdle}")
     private int cacheMaxIdle;
-    @Value("cache.maxTotal")
+    @Value("${redis.cache.maxTotal}")
     private int cacheMaxTotal;
-    @Value("cache.testOnBorrow")
+    @Value("${redis.cache.testOnBorrow}")
     private boolean cacheTestOnBorrow;
 
     @Bean

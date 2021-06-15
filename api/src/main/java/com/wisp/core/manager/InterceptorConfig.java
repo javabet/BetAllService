@@ -2,6 +2,7 @@ package com.wisp.core.manager;
 
 
 import com.wisp.core.interceptor.AllowOriginInterceptor;
+import com.wisp.core.interceptor.LoginInterceptor;
 import com.wisp.core.interceptor.ResponseResultInterceptor;
 import com.wisp.core.interceptor.TimeCostInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,16 @@ public class InterceptorConfig extends WebMvcConfigurationSupport
     @Autowired
     private ResponseResultInterceptor responseResultInterceptor;
 
+    @Autowired
+    private LoginInterceptor loginInterceptor;
+
     @Override
     protected void addInterceptors(InterceptorRegistry registry)
     {
         super.addInterceptors(registry);
         registry.addInterceptor(allowOriginInterceptor).addPathPatterns("/**");
         registry.addInterceptor(timeCostInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/**");
         registry.addInterceptor(responseResultInterceptor).addPathPatterns("/**");
     }
 
