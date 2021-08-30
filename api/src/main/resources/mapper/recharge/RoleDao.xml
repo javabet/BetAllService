@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisp.game.bet.recharge.dao.RoleDao">
+
+    <sql id="roleColumns">
+        t.id AS "id",
+        t.admin_id AS "AdminId",
+        t.create_admin_id AS "CreateAdminId",
+        t.create_time_number AS "CreateTimeNumber",
+        t.update_time_number AS "UpdateTimeNumber",
+        t.delete_flag AS "deleteFlag",
+        t.name AS "Name",
+        t.permission AS "Permission",
+        t.node as "Node",
+        t.`system` as "System",
+        t.description as "Description",
+        t.type as "Type"
+    </sql>
+
+    <sql id="roleJoins">
+    </sql>
+
+    <sql id="roleWhere">
+        t.delete_flag = 0
+    </sql>
+
+    <sql id="listCond">
+        <trim prefix="WHERE"  suffixOverrides="," prefixOverrides="AND" >
+            <if test="beginTime != 0 and beginTime != '' ">
+                t.create_time <![CDATA[>=]]> #{beginTime},
+            </if>
+            <if test="endTime != 0 and endTime != '' " >
+                AND t.create_time <![CDATA[ <= ]]> #{endTime},
+            </if>
+            <if test="keyWord != null and keyWord.length > 0">
+                AND ( `name` like '%'#{keyWord}'%' or username like '%'#{keyWord}'%' )
+            </if>
+        </trim>
+    </sql>
+
+
+    <insert id="insert" parameterType="com.wisp.game.bet.recharge.dao.RoleDao"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO recharge_sys_role (
+            admin_id,
+            create_admin_id,
+            create_time_number,
+            update_time_number,
+            delete_flag,
+            `name`,
+            permission,
+            node,
+            `system`,
+            description,
+            `type`
+        ) VALUES  (
+            #{AdminId},
+            #{CreateAdminId},
+            #{CreateTimeNumber},
+            #{UpdateTimeNumber},
+            #{deleteFlag},
+            #{Name},
+            #{Permission},
+            #{Node},
+            #{System},
+            #{Description},
+            #{Type}
+        )
+    </insert>
+
+    <update id="update" >
+        UPDATE recharge_sys_role
+         <trim  prefix="set" suffixOverrides="," >
+            <if test="AdminId != null">
+                admin_id = #{AdminId},
+            </if>
+            <if test="CreateAdminId != null">
+                create_admin_id = #{CreateAdminId},
+            </if>
+             <if test="CreateTimeNumber != null">
+                 `create_time_number` = #{CreateTimeNumber},
+             </if>
+             <if test="UpdateTimeNumber">
+                 `update_time_number` = #{UpdateTimeNumber},
+             </if>
+             <if test="deleteFlag">
+                 delete_flag = #{deleteFlag},
+             </if>
+             <if test="Name != null">
+                 `name` = #{Name},
+             </if>
+             <if test="Permission != null">
+                 `permission` = #{Permission},
+             </if>
+
+             <if test="Node != null ">
+                 node = #{Node},
+             </if>
+
+             <if test="System!= null">
+                 system = #{System},
+             </if>
+             <if test="Description != null">
+                 description = #{Description},
+             </if>
+             <if test="Type != null">
+                 `type` = #{Type},
+             </if>
+         </trim >
+        where id = #{id}
+    </update>
+
+
+
+    <select id="get" resultType="RoleEntity">
+        SELECT
+        <include refid="roleColumns"/>
+        FROM recharge_sys_role t
+        <include refid="roleJoins"/>
+        WHERE t.id = #{id}
+    </select>
+
+    <select id="findList" resultType="RoleEntity">
+        SELECT <include refid="roleColumns"/> FROM recharge_sys_role t
+        <include refid="listCond"></include>
+        ORDER BY id desc LIMIT #{start}, #{length}
+    </select>
+
+
+    <delete id="delete">
+        UPDATE  recharge_sys_role set delete_flag = 1 where id = #{id}
+    </delete>
+
+    <select id="dbInIds" resultType="RoleEntity">
+        SELECT <include refid="roleColumns"/> FROM recharge_sys_role t
+        WHERE id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @MapperScan(basePackages = "com.wisp.game.bet.recharge.dao",sqlSessionTemplateRef ="rechargeSqlSessionTemplate",annotationClass = MyBatisDao.class)
-public class RechargeConfig
+public class RechargeMySqlConfig
 {
     @Value("${spring.datasource.recharge.url}")
     private String url;

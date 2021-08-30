@@ -32,6 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> extends BaseService implements InitializingBean {
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	private String tableName;
+
 	@Autowired
 	//@Resource
 	protected D dao;
@@ -124,6 +125,7 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
                 if (entity.getCreateTime() == null)
                 {
                     entity.setCreateTime(new Date());
+					entity.setCreateTimeNumber(getSecond(entity.getCreateTime()));
                 }
             }
             else
@@ -151,7 +153,10 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 	 * 更新前处理
 	 * @param entity
 	 */
-	protected void preUpdate(T entity) {}
+	protected void preUpdate(T entity) {
+		entity.setUpdateTime(new Date());
+		entity.setUpdateTimeNumber( getSecond(entity.getUpdateTime()));
+	}
 
 	/**
 	 * 获取下一个id
@@ -180,7 +185,11 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 		int random = new Random().nextInt(9999);
 		entity.setId(System.currentTimeMillis() + random );
 		if (entity.getCreateTime() == null)
+		{
 			entity.setCreateTime(new Date());
+			entity.setCreateTimeNumber( getSecond(entity.getCreateTime()));
+		}
+
 	}
 
 	/**
@@ -189,6 +198,7 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 	 */
 	public void delete(T entity) {
 		if (entity != null && entity.getId() != null) {
+			preDelete(entity);
 			dao.delete(entity.getId());
 			clearCache(entity);
 		}
@@ -196,8 +206,20 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 
 	public void delete(long id)
 	{
+		preDelete(id);
 		dao.delete(id);
 		clearCache(id);
+	}
+
+	protected void preDelete(T entity)
+	{
+		entity.setDeleteTime(new Date());
+		entity.setDeleteTimeNumber( getSecond(entity.getDeleteTime()));
+	}
+
+	protected void preDelete(long id)
+	{
+
 	}
 
 	//@Override
@@ -244,4 +266,37 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity> ex
 		}
 		return newList;
 	}
+
+	/**
+	 * 获取某个
+	 * @param ids
+	 * @return
+	 */
+	public List<T> DbInIds(List<Integer> ids)
+	{
+		if( ids == null || ids.size() == 0 )
+		{
+			return new ArrayList<>();
+		}
+		return dao.dbInIds(ids);
+	}
+
+	private long getSecond(Date date)
+	{
+		long millionSeconds = date.getTime();
+		long second = millionSeconds % 1000;
+		second = (millionSeconds - second) / 1000;
+		return second;
+	}
+
+	public long count(Page<T> page)
+	{
+		return dao.count(page);
+	}
+
+
+	public List<T> findAll()
+    {
+        return dao.findAll();
+    }
 }

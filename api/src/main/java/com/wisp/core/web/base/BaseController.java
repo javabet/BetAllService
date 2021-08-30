@@ -1,15 +1,17 @@
 package com.wisp.core.web.base;
 
+import com.wisp.core.cache.CacheHander;
 import com.wisp.core.utils.MVCExceptionHandle;
 import com.wisp.core.vo.ResponseResultVo;
-import org.apache.commons.lang3.StringUtils;
+import com.wisp.game.bet.recharge.common.UicCacheKey;
+import com.wisp.game.bet.recharge.dao.info.CacheUserInfo;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
@@ -21,6 +23,9 @@ import java.util.HashMap;
  */
 public abstract class BaseController extends MVCExceptionHandle {
     //public static final BaseRspBean SUCCESS = new SuccessRspBean<>(), ERROR = new ErrorRspBean();
+
+    @Autowired
+    protected CacheHander cacheHander;
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -66,6 +71,13 @@ public abstract class BaseController extends MVCExceptionHandle {
         return responseResultVo;
     }
 
+    public ResponseResultVo error(BaseErrorCode code) {
+        ResponseResultVo responseResultVo = new ResponseResultVo();
+        responseResultVo.setCode(code.getCode());
+        responseResultVo.setMsg("");
+        return responseResultVo;
+    }
+
     /**ErrorRspBean
      * 错误
      *
@@ -79,14 +91,14 @@ public abstract class BaseController extends MVCExceptionHandle {
         return responseResultVo;
     }
 
-    /**
-     * 获取token
-     *
-     * @return
-     */
-    protected String getToken() {
-        return getToken(getRequest());
+    public ResponseResultVo error(BaseErrorCode code, String message) {
+        ResponseResultVo responseResultVo = new ResponseResultVo();
+        responseResultVo.setCode(code.getCode());
+        responseResultVo.setMsg(message);
+        return responseResultVo;
     }
+
+
 
     /**
      * 获得Ip地址
@@ -97,20 +109,6 @@ public abstract class BaseController extends MVCExceptionHandle {
         return getRequest().getLocalAddr();
     }
 
-    /**
-     * 获取token
-     *
-     * @param request
-     * @return
-     */
-    protected String getToken(ServletRequest request) {
-        String token = getRequest().getHeader(OAuth.HeaderType.AUTHORIZATION);
-        if (StringUtils.isBlank(token)) {
-            throw new LbmOAuthException();
-        } else {
-            return token;
-        }
-    }
 
 
     /**
@@ -126,50 +124,10 @@ public abstract class BaseController extends MVCExceptionHandle {
      *
      * @return
      */
-    protected String getTokenNoError() {
+    protected String getToken() {
         return getRequest().getHeader(OAuth.HeaderType.AUTHORIZATION);
     }
 
-    /**
-     * 获取App-Version
-     *
-     * @param request
-     * @return
-     */
-    protected String getAppVersion(ServletRequest request) {
-        return ((HttpServletRequest) request).getHeader("App-Version");
-    }
-
-    /**
-     * 获取App-Version
-     *
-     * @return
-     */
-    protected String getAppVersion() {
-        return getAppVersion(getRequest());
-    }
-
-
-    protected int getVersion() {
-        String version = getAppVersion();
-        return getVersion(version);
-    }
-
-    protected int getVersion(String version) {
-        if (StringUtils.isBlank(version)) {
-            return -1;
-        }
-        String[] vs = version.split("\\.");
-        int value = 0;
-        try {
-            for (String v : vs) {
-                value = value * 100 + Integer.parseInt(v);
-            }
-        } catch (Exception e) {
-            return -2;
-        }
-        return value;
-    }
 
     /**
      * 获取request
@@ -180,41 +138,21 @@ public abstract class BaseController extends MVCExceptionHandle {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
 
-    /**
-     * 获取渠道
-     *
-     * @param request
-     * @return
-     */
-    protected String getAppChannel(ServletRequest request) {
-        return getRequest().getHeader("App-Channel");
-    }
-
-    /**
-     * 获取渠道
-     *
-     * @return
-     */
-    protected String getAppChannel() {
-        return getAppChannel(getRequest());
-    }
-
-
-    public static class LbmOAuthException extends RuntimeException {
-        private static final long serialVersionUID = 5067141585734438228L;
-    }
-
-    public static class ChannelErrorException extends RuntimeException {
-        private static final long serialVersionUID = 7308727782750338596L;
-
-        public ChannelErrorException() {
-            super();
+    public CacheUserInfo getCacheUserInfo()
+    {
+        String token = getToken();
+        if(  token == null || "".equals(token))
+        {
+            return null;
         }
 
-        public ChannelErrorException(String message) {
-            super(message);
-        }
+        String cache_key = UicCacheKey.OAUTH2_TOKEN_INFO.key(token);
+
+        CacheUserInfo cacheUserInfo =  cacheHander.get(cache_key);
+
+        return cacheUserInfo;
     }
+
 
     protected String appendUrlParam(String url, String param) {
         return url + (url.contains("?") ? "&" : "?") + param;

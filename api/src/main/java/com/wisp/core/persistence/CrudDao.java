@@ -3,6 +3,8 @@
  */
 package com.wisp.core.persistence;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -20,6 +22,8 @@ public interface CrudDao<T> extends BaseDao {
      * @param id
      * @return
      */
+
+
     T get(Long id);
 
     /**
@@ -78,4 +82,14 @@ public interface CrudDao<T> extends BaseDao {
      * @return
      */
     List<T> findListByUserId(Long userId);
+
+    /**
+     * 获取某些ids里的数据
+     * @param ids
+     * @return
+     */
+    List<T> dbInIds(@Param("list") List<Integer> list);
+
+    //获取所有的数据
+    List<T> findAll();
 }

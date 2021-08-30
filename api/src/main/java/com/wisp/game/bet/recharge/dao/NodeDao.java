@@ -3,6 +3,7 @@ package com.wisp.game.bet.recharge.dao;
 import com.wisp.core.persistence.CrudDao;
 import com.wisp.core.persistence.MyBatisDao;
 import com.wisp.game.bet.recharge.dao.entity.NodeEntity;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,4 +11,6 @@ import java.util.List;
 public interface NodeDao  extends CrudDao<NodeEntity>
 {
     List<NodeEntity> list();
+
+    List<NodeEntity> findListByOrder( );
 }

@@ -2,6 +2,7 @@ package com.wisp.game.bet.recharge.dao;
 
 import com.wisp.core.persistence.CrudDao;
 import com.wisp.core.persistence.MyBatisDao;
+import com.wisp.game.bet.recharge.common.commonInfo.Pagination;
 import com.wisp.game.bet.recharge.dao.entity.AdminEntity;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,4 +13,6 @@ public interface AdminDao  extends CrudDao<AdminEntity>
 
 
     AdminEntity getAdminByUserName(@Param("Username") String username,@Param("Password") String password );
+
+    //long count(Pagination pagination);
 }

@@ -4,6 +4,7 @@ import com.wisp.core.persistence.Page;
 
 public class QueryPage<T> extends Page<T>
 {
+
     private long beginTime;
     private long endTime;
     private String keyWord;

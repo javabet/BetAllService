@@ -26,6 +26,20 @@
         t.delete_flag = 0
     </sql>
 
+    <sql id="listCond">
+        <trim prefix="WHERE"  suffixOverrides="," prefixOverrides="AND" >
+            <if test="beginTime != 0 and beginTime != '' ">
+                t.create_time <![CDATA[>=]]> #{beginTime},
+            </if>
+            <if test="endTime != 0 and endTime != '' " >
+                AND t.create_time <![CDATA[ <= ]]> #{endTime},
+            </if>
+            <if test="keyWord != null and keyWord.length > 0">
+                AND ( `name` like '%'#{keyWord}'%' or username like '%'#{keyWord}'%' )
+            </if>
+        </trim>
+    </sql>
+
 
     <insert id="insert" parameterType="com.wisp.game.bet.recharge.dao.AdminDao"  useGeneratedKeys="true" keyProperty="id">
         INSERT INTO recharge_sys_admin (
@@ -124,18 +138,13 @@
 
     <select id="findList" resultType="AdminEntity">
         SELECT <include refid="adminColumns"/> FROM recharge_sys_admin t
-        <trim prefix="WHERE"  suffixOverrides="," prefixOverrides="AND" >
-            <if test="beginTime != 0 and beginTime != '' ">
-                t.create_time <![CDATA[>=]]> #{beginTime},
-            </if>
-            <if test="endTime != 0 and endTime != '' " >
-               AND t.create_time <![CDATA[ <= ]]> #{endTime},
-            </if>
-            <if test="keyWord != null and keyWord.length > 0">
-                AND ( `name` like '%'#{keyword}'%' or username like '%'#{keyword}'%' )
-            </if>
-        </trim>
+        <include refid="listCond" />
         ORDER BY id desc LIMIT #{start}, #{length}
+    </select>
+
+    <select id="count" resultType="long">
+        SELECT count(*) FROM recharge_sys_admin t
+        <include refid="listCond" />
     </select>
 
 
@@ -143,5 +152,8 @@
         UPDATE  recharge_sys_admin set delete_flag = 1 where id = #{id}
     </delete>
 
+    <select id="getAdminByUserName" resultType="AdminEntity">
+        SELECT * from recharge_sys_admin t where t.username = #{Username}
+    </select>
 
 </mapper>

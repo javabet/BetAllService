@@ -9,12 +9,8 @@ import javax.validation.constraints.NotNull;
 
 public class NodeEntity extends DataEntity
 {
-
-    //@JSONField(name = "ParentId")
     private long  ParentId;
-    //@JSONField(name = "ParentTree")
     private String ParentTree;
-    //@JSONField(name = "Icon")
     private String Icon;
     //@JSONField(name = "Sort")
     @NotNull
@@ -25,14 +21,9 @@ public class NodeEntity extends DataEntity
     //@JSONField(name = "Url")
     @NotNull(message = "地址不能为空")
     private String Url;
-    //@JSONField(name = "LangCn")
     private String LangCn;
-    //@JSONField(name = "LangTw")
-    private String LangTw;
-    //@JSONField(name = "LangUs")
-    private String LangUs;
-    //@JSONField(name = "Description")
     private String Description;
+    private int IsLib;          //是否是库路径
 
     @Expose
     //@JSONField(name="TestStrong")
@@ -42,10 +33,9 @@ public class NodeEntity extends DataEntity
     {
         this.ParentId = -1;
         this.LangCn = "";
-        this.LangTw = "";
-        this.LangUs = "";
         this.Description = "";
         this.deleteFlag = 0;
+        this.IsLib = 0;
     }
 
     public void setId(long id)
@@ -123,26 +113,6 @@ public class NodeEntity extends DataEntity
         LangCn = langCn;
     }
 
-    public String getLangTw()
-    {
-        return LangTw;
-    }
-
-    public void setLangTw(String langTw)
-    {
-        LangTw = langTw;
-    }
-
-    public String getLangUs()
-    {
-        return LangUs;
-    }
-
-    public void setLangUs(String langUs)
-    {
-        LangUs = langUs;
-    }
-
     public String getDescription()
     {
         return Description;
@@ -153,7 +123,6 @@ public class NodeEntity extends DataEntity
         Description = description;
     }
 
-
     public String getTestStrong()
     {
         return testStrong;
@@ -162,5 +131,15 @@ public class NodeEntity extends DataEntity
     public void setTestStrong(String testStrong)
     {
         this.testStrong = testStrong;
+    }
+
+    public int getIsLib()
+    {
+        return IsLib;
+    }
+
+    public void setIsLib(int isLib)
+    {
+        IsLib = isLib;
     }
 }

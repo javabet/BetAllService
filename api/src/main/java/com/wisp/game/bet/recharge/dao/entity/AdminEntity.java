@@ -30,7 +30,7 @@ public class AdminEntity extends DataEntity
     private int ParentId;       //父节点
     private String ParentTree;  //父节点树
     private int LoginTime;      //登陆时间
-    private int Mobile;         //电话
+    private String Mobile;         //电话
     private String Note;        //备注
 
     public String getUsername()
@@ -143,16 +143,15 @@ public class AdminEntity extends DataEntity
         LoginTime = loginTime;
     }
 
-    public int getMobile()
+    public String getMobile()
     {
         return Mobile;
     }
 
-    public void setMobile(int mobile)
+    public void setMobile(String mobile)
     {
         Mobile = mobile;
     }
-
 
     public String getNote()
     {

@@ -1,14 +1,19 @@
 package com.wisp.game.bet.recharge.controller.system;
 
+import com.wisp.core.interceptor.SkipAuthToken;
 import com.wisp.core.persistence.Page;
 import com.wisp.core.service.ResponseResult;
 import com.wisp.core.web.base.BaseController;
+import com.wisp.game.bet.recharge.beanConfig.YmlConfig;
 import com.wisp.game.bet.recharge.common.ErrorCode;
+import com.wisp.game.bet.recharge.controller.RechargeBaseController;
+import com.wisp.game.bet.recharge.crud.recharge.AdminService;
 import com.wisp.game.bet.recharge.crud.recharge.ModeService;
 import com.wisp.game.bet.recharge.crud.recharge.RoleService;
 import com.wisp.game.bet.recharge.dao.entity.ModeEntity;
 import com.wisp.game.bet.recharge.dao.entity.RoleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +26,19 @@ import java.util.Map;
 @RequestMapping("/system/role")
 @ResponseResult
 @Validated
-public class RoleController extends BaseController
+@SkipAuthToken
+public class RoleController extends RechargeBaseController
 {
     @Autowired
     private RoleService roleService;
     @Autowired
     private ModeService modeService;
+
+    @Autowired
+    private YmlConfig ymlConfig;
+
+    @Autowired
+    private AdminService adminService;
 
     @RequestMapping(method = RequestMethod.GET,value = "/list")
     public Object List()
@@ -55,14 +67,35 @@ public class RoleController extends BaseController
         return map;
     }
 
+    @Transactional("rechargeTransactionManger")
     @RequestMapping(method = RequestMethod.POST,value = {"/",""})
     public Object Add(@Valid @RequestBody RoleEntity roleEntity)
     {
-         int id =  roleService.save(roleEntity,true);
+        long adminUid = ymlConfig.getSystemAdminId();
+        long adminId = getAdminId();
+        if( adminId == NULL_ADMIN_ID )
+        {
+            return ErrorCode.ERR_TOKEN;
+        }
+
+        boolean permisFlag =  roleService.VerifyRolePermission(adminId,roleEntity.getPermission());
+        if( permisFlag  == false )
+        {
+            return ErrorCode.ERR_RIGHT;
+        }
+
+        roleEntity.setAdminId( adminId );
+        roleEntity.setCreateAdminId(adminId);
+        roleEntity.setType(2);      //
+
+         roleService.save(roleEntity,true);
+
+         adminService.AppendCreateRole(adminId,roleEntity.getId());
 
          return emptySucc();
     }
 
+    @Transactional("rechargeTransactionManger")
     @RequestMapping(method = RequestMethod.PUT,value = {"/",""})
     public Object Edit(@Valid @RequestBody RoleEntity roleEntity)
     {
@@ -71,16 +104,41 @@ public class RoleController extends BaseController
             return error(ErrorCode.ERR_PARAM.getCode());
         }
 
+        long adminId = getAdminId();
+        boolean permissionFlag = roleService.VerifyRolePermission( adminId,roleEntity.getPermission() );
+        if( !permissionFlag  )
+        {
+            return ErrorCode.ERR_RIGHT;
+        }
+
         roleEntity.setType(2);
+        roleEntity.setAdminId( adminId );
+        long adminUid = ymlConfig.getSystemAdminId();
+        if( adminId != adminUid )
+        {
+            RoleEntity dbRoleEntity =  roleService.get(roleEntity.getId());
+            if( dbRoleEntity == null )
+            {
+                return ErrorCode.ERR_NOT_SELF_ROLE;
+            }
+        }
 
         roleService.save(roleEntity);
 
         return emptySucc();
     }
 
+    @Transactional("rechargeTransactionManger")
     @RequestMapping(method = RequestMethod.DELETE,value = "/{id}")
     public Object Del(@PathVariable("id") int id)
     {
+       if( id == 0 )
+       {
+           return ErrorCode.ERR_PARAM;
+       }
+
+       
+
         return null;
     }
 }

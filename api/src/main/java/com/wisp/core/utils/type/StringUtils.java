@@ -13,10 +13,7 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -449,7 +446,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**  
      * 得到一个字符串的长度,显示的长度,一个汉字或日韩文长度为2,英文字符长度为1  
-     * @param String s 需要得到长度的字符串  
+     * @param  s 需要得到长度的字符串
      * @return int 得到的字符串长度  
      */   
     public static int length(String s) {  
@@ -469,7 +466,31 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static boolean isLetter(char c) {   
         int k = 0x80;   
         return c / k == 0 ? true : false;   
-    } 
+    }
+
+
+    /**
+     * 将        ,xx,xx,xx, 这样的格式转换化为数组
+     * @param str
+     * @return
+     */
+    public static List<Integer> convertStringToArray(String str)
+    {
+        String[] arr = str.split(",");
+
+        List<Integer> list = new ArrayList<>();
+
+        for(int i = 0; i < arr.length;i++ )
+        {
+            if( list.indexOf(arr[i]) != -1 )
+            {
+                continue;
+            }
+            list.add(  Integer.valueOf(arr[i])  );
+        }
+
+        return list;
+    }
     
 }
 

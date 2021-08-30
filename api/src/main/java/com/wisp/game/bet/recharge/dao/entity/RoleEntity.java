@@ -3,13 +3,19 @@ package com.wisp.game.bet.recharge.dao.entity;
 import com.wisp.core.persistence.DataEntity;
 import org.apache.logging.log4j.core.config.plugins.validation.constraints.Required;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class RoleEntity  extends CommonDataEntity
 {
     @Required
     private String Name;
 
     @Required
+    @NotNull
+    @NotEmpty
     private String Permission;
+
 
     private String Node;
 
@@ -20,6 +26,10 @@ public class RoleEntity  extends CommonDataEntity
 
     private int Type;
 
+    public RoleEntity()
+    {
+        System = "";
+    }
 
     public String getName()
     {
@@ -80,4 +90,5 @@ public class RoleEntity  extends CommonDataEntity
     {
         Type = type;
     }
+
 }

@@ -55,3 +55,8 @@ redis:
     maxIdle: 3
     maxTotal: 10
     testOnBorrow: true
+
+common:
+  passwordSalt: passwordSalt    #密码加密时额外处理
+  SystemAdminId: -1             #超级开发者
+  SpecialPermissions: [127,128] #特殊需过滤的权限

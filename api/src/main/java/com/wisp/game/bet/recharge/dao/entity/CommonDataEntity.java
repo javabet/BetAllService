@@ -4,25 +4,25 @@ import com.wisp.core.persistence.DataEntity;
 
 public class CommonDataEntity extends DataEntity
 {
-    private int AdminId;//所有人
-    private int CreateAdminId;//创建人
+    private long AdminId;//所有人
+    private long CreateAdminId;//创建人
 
-    public int getAdminId()
+    public long getAdminId()
     {
         return AdminId;
     }
 
-    public void setAdminId(int adminId)
+    public void setAdminId(long adminId)
     {
         AdminId = adminId;
     }
 
-    public int getCreateAdminId()
+    public long getCreateAdminId()
     {
         return CreateAdminId;
     }
 
-    public void setCreateAdminId(int createAdminId)
+    public void setCreateAdminId(long createAdminId)
     {
         CreateAdminId = createAdminId;
     }

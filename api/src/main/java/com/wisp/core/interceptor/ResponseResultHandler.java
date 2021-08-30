@@ -3,6 +3,7 @@ package com.wisp.core.interceptor;
 import com.wisp.core.constants.Constant;
 import com.wisp.core.manager.ErrorCodeManager;
 import com.wisp.core.vo.ResponseResultVo;
+import com.wisp.core.web.base.BaseErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -46,13 +47,18 @@ public class ResponseResultHandler implements ResponseBodyAdvice<Object>
 
         ResponseResultVo responseResultVo;
 
-        if(!(body instanceof ResponseResultVo)) {
-            // 包装返回体
-            responseResultVo = ResponseResultVo.success(body);
+        if(body instanceof ResponseResultVo) {
+            responseResultVo = (ResponseResultVo)body;
+        }
+        else if(body instanceof BaseErrorCode)
+        {
+            BaseErrorCode baseErrorCode = (BaseErrorCode)body;
+            responseResultVo = ResponseResultVo.failure(baseErrorCode.getCode());
         }
         else
         {
-            responseResultVo = (ResponseResultVo)body;
+            // 包装返回体
+            responseResultVo = ResponseResultVo.success(body);
         }
 
         if( "".equals(responseResultVo.getMsg()) || responseResultVo.getMsg() == null )

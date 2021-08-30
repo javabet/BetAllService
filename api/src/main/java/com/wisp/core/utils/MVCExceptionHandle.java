@@ -70,13 +70,7 @@ public class MVCExceptionHandle {
             sb.delete(sb.length() - 1, sb.length());
             logger.warn("参数非法 param={} ex={} traceId={}", sb.toString(), ExceptionUtils.getStackTrace(e), traceId);
             return ResponseResultVo.failure(400,sb.toString());
-        } else if (e instanceof BaseController.LbmOAuthException) {
-            logger.error("用户没有登录: ex={}, traceId={}", ExceptionUtils.getStackTrace(e), traceId);
-            return new ResponseResultVo(401, "登录信息已失效，请重新登录");
-        } else if (e instanceof BaseController.ChannelErrorException) {
-            logger.error("渠道不存在或被禁用 ex={}, traceId={}", ExceptionUtils.getStackTrace(e), traceId);
-            return new ResponseResultVo(402, "渠道不存在或被禁用");
-        } else if (e instanceof HttpMessageNotReadableException) {
+        }  else if (e instanceof HttpMessageNotReadableException) {
             HttpMessageNotReadableException le = (HttpMessageNotReadableException) e;
             logger.error("请传入body ex={} traceId={}", ExceptionUtils.getStackTrace(le), traceId);
             return new ResponseResultVo(400, "请传入body");

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wisp.game.bet.recharge.dao.NodeDao">
 
-    <sql id="rechargeColumns">
+    <sql id="columns">
         t.id AS "id",
         t.parent_id AS "ParentId",
         t.icon AS "Icon",
@@ -10,8 +10,6 @@
         t.name AS "Name",
         t.url AS "Url",
         t.lang_cn AS "LangCn",
-        t.lang_tw AS "LangTw",
-        t.lang_us AS "LangUs",
         t.parent_tree as "ParentTree",
         t.description AS "Description"
     </sql>
@@ -32,8 +30,6 @@
             `name`,
             url,
             lang_cn,
-            lang_tw,
-            lang_us,
             description
         ) VALUES  (
             #{ParentId},
@@ -43,8 +39,6 @@
             #{Name},
             #{Url},
             #{LangCn},
-            #{LangTw},
-            #{LangUs},
             #{Description}
         )
     </insert>
@@ -59,8 +53,6 @@
              `name` = #{Name},
              url = #{Url},
              lang_cn = #{LangCn},
-             lang_tw = #{LangTw},
-             lang_us = #{LangUs},
              description=#{Description}
          </trim >
         where id = #{id}
@@ -69,19 +61,27 @@
 
     <select id="get" resultType="NodeEntity">
         SELECT
-        <include refid="rechargeColumns"/>
+        <include refid="columns"/>
         FROM recharge_sys_node t
         <include refid="rechargeJoins"/>
         WHERE t.id = #{id}
     </select>
 
     <select id="findList" resultType="NodeEntity">
-        SELECT <include refid="rechargeColumns"/> FROM recharge_sys_node t <include refid="rechargeJoins"/>
+        SELECT <include refid="columns"/> FROM recharge_sys_node t <include refid="rechargeJoins"/>
         WHERE <include refid="rechargeWhere"/> ORDER BY id desc LIMIT #{start}, #{length}
     </select>
 
     <delete id="delete">
         UPDATE  recharge_sys_node set delete_flag = 1 where id = #{id}
     </delete>
+
+    <select id="dbInIds" resultType="NodeEntity">
+        SELECT <include refid="columns"/> FROM recharge_sys_node t
+        WHERE id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
 
 </mapper>

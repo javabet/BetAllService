@@ -39,6 +39,11 @@ public class NodeController extends BaseController
     @PostMapping()
     public Object Add(@Valid @RequestBody NodeEntity nodeEntity)
     {
+        if( nodeEntity.getParentId() == 0 )
+        {
+            nodeEntity.setParentId(-1);
+        }
+
         nodeEntity.setParentTree(",-1,");
         if( nodeEntity.getParentId() > 0 )
         {
@@ -51,17 +56,13 @@ public class NodeController extends BaseController
         }
 
         //更新ParentTree，链接自身的Id
-        int insertNum =  nodeService.add(nodeEntity);
+        int insertNum =  nodeService.save(nodeEntity,true);
         if( insertNum == 0 )
         {
             return error(ErrorCode.ERR_DB_INSERT.getCode());
         }
-        nodeEntity.setParentTree(nodeEntity.getParentTree()  +  nodeEntity.getId());
-        int updateNum =  nodeService.update(nodeEntity);
-        if( updateNum == 0 )
-        {
-            return error(ErrorCode.ERR_DB_UPDATE.getCode());
-        }
+        nodeEntity.setParentTree(nodeEntity.getParentTree()  +  nodeEntity.getId() + "");
+        nodeService.save(nodeEntity);
 
         return emptySucc();
     }
@@ -84,7 +85,7 @@ public class NodeController extends BaseController
         {
             return error(ErrorCode.ERR_PARAM_FIELD.getCode());
         }
-        nodeService.update(nodeEntity);
+        nodeService.save(nodeEntity);
         //TODO wisp
         //存入redis缓存
         return nodeEntity;

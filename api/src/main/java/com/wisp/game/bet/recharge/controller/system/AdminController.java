@@ -1,10 +1,13 @@
 package com.wisp.game.bet.recharge.controller.system;
 
+import com.wisp.core.interceptor.SkipAuthToken;
 import com.wisp.core.persistence.Page;
 import com.wisp.core.service.ResponseResult;
 import com.wisp.core.utils.encrypt.MD5Util;
 import com.wisp.core.web.base.BaseController;
+import com.wisp.game.bet.recharge.beanConfig.YmlConfig;
 import com.wisp.game.bet.recharge.common.ErrorCode;
+import com.wisp.game.bet.recharge.common.commonInfo.Pagination;
 import com.wisp.game.bet.recharge.common.commonInfo.QueryInfo;
 import com.wisp.game.bet.recharge.common.commonInfo.QueryPage;
 import com.wisp.game.bet.recharge.crud.recharge.AdminService;
@@ -16,46 +19,68 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/system/admin")
 @ResponseResult
 @Validated
+@SkipAuthToken
 public class AdminController extends BaseController
 {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private YmlConfig ymlConfig;
+
+    /**
+     * @return
+     */
     @GetMapping("/list")
-    public Object List(@Valid @RequestBody QueryInfo queryInfo)
+    public Object List(@RequestParam("Page") @Valid  long requestPage,
+                       @RequestParam("PageSize") @Valid long pageSize,
+                       @RequestParam("KeyWord") @Valid String keyWord,
+                       @RequestParam(value = "BeginTime",required = false) Integer beginTime,
+                       @RequestParam(value = "EndTime",required = false) Integer endTime)
     {
+
+
         QueryPage<AdminEntity> page = new QueryPage<>();
-        page.setStart( queryInfo.getPage() * queryInfo.getPageSize());
-        page.setLength( queryInfo.getPageSize() );
-        page.setBeginTime(queryInfo.getBeginTime());
-        page.setEndTime(queryInfo.getEndTime());
-        page.setKeyWord(queryInfo.getKeyword());
+        if( beginTime != null )
+        {
+            page.setBeginTime(beginTime);
+        }
+        if( endTime != null )
+        {
+            page.setEndTime(endTime);
+        }
+        page.setKeyWord(keyWord);
+        long count = adminService.count(page);
+
+        Pagination pagination = new Pagination(requestPage,pageSize,count);
+        pagination.setCurrPage(requestPage);
+        pagination.setMaxCount((int)count);
+        page.setStart( pagination.getOffset() );
+        page.setLength( pageSize );
+
         List<AdminEntity> list = adminService.findList(page);
 
-        return list;
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("Items",list);
+        map.put("Pagination",pagination);
+
+        return map;
+
     }
 
     @Transactional("rechargeTransactionManger")
     @PostMapping({"/",""})
     public Object Add(@Valid @RequestBody AdminEntity adminEntity)
     {
-//        AdminEntity test = new AdminEntity();
-//        test.setId(219l);
-//        test.setStatus(100);
-//
-//        boolean debug = true;
-//        if( debug )
-//        {
-//            adminService.save(test);
-//            return emptySucc();
-//        }
-
         adminEntity.setStatus(1);
 
         //开发者不能增加
@@ -87,7 +112,7 @@ public class AdminController extends BaseController
 
         adminEntity.setParentId(-1);
         adminEntity.setParentTree(",-1,");
-        adminEntity.setPassword(MD5Util.getMD5(adminEntity.getPassword() + "PasswordSalt"));        //增加一个passwordSalt打乱md5码数据
+        adminEntity.setPassword(MD5Util.getMD5(adminEntity.getPassword() + ymlConfig.getPasswordSalt()));        //增加一个passwordSalt打乱md5码数据
         adminEntity.setCreateTime(new Date());
 
         adminService.save(adminEntity,true);
@@ -106,7 +131,7 @@ public class AdminController extends BaseController
     public Object Get(@PathVariable("id") int id)
     {
         AdminEntity adminEntity = adminService.get(id);
-        if( adminEntity != null )
+        if( adminEntity == null )
         {
             return error(ErrorCode.ERR_NO_DATA.getCode());
         }
