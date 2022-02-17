@@ -23,9 +23,6 @@ public class RoleService extends CrudService<RoleDao, RoleEntity>
     @Autowired
     private AdminService adminService;
 
-    @Autowired
-    private RoleService roleService;
-
     public  Object List()
     {
         return null;
@@ -33,7 +30,7 @@ public class RoleService extends CrudService<RoleDao, RoleEntity>
 
     public List<RoleEntity> getRoleList(long adminId)
     {
-        List<RoleEntity> list  = roleService.getRoleList(adminId);
+        List<RoleEntity> list  = dao.findListByAdminId(adminId);
         return list;
     }
 
@@ -63,7 +60,8 @@ public class RoleService extends CrudService<RoleDao, RoleEntity>
         String adminRolePermission = "";
         for( int i = 0;i < adminRoleArr.size();i++ )
         {
-            RoleEntity roleEntity =  roleService.get(adminRoleArr.get(i));
+            Integer adminRoleId = adminRoleArr.get(i);
+            RoleEntity roleEntity =  dao.get(adminRoleId.longValue());
             if( roleEntity == null )
             {
                 logger.warn("the role {} is not in role db",adminRoleArr.get(i));

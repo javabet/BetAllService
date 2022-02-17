@@ -6,6 +6,7 @@ import com.wisp.core.constants.RedisCommonEnum;
 import com.wisp.core.service.ResponseResult;
 import com.wisp.core.vo.ResponseResultVo;
 import com.wisp.game.bet.recharge.common.ErrorCode;
+import com.wisp.game.bet.recharge.common.UicCacheKey;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,7 +23,7 @@ import java.lang.reflect.Method;
 public class LoginInterceptor implements HandlerInterceptor
 {
     @Autowired
-    private CacheHander redisCache;
+    private CacheHander cacheHander;
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if(!( handler instanceof HandlerMethod))
@@ -54,7 +55,7 @@ public class LoginInterceptor implements HandlerInterceptor
         }
 
         //在redis中判断是否有此token,
-        boolean existFlag = redisCache.exists(RedisCommonEnum.AUTH_KEY_PREFIX.getKey());
+        boolean existFlag = cacheHander.exists(UicCacheKey.OAUTH2_TOKEN_INFO.key(token));
         if( !existFlag )
         {
             return false;

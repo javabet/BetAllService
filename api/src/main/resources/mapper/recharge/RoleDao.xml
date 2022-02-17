@@ -138,4 +138,9 @@
         </foreach>
     </select>
 
+    <select id="findListByAdminId" resultType="RoleEntity">
+        SELECT <include refid="roleColumns"/> from recharge_sys_role t
+        WHERE t.admin_id = #{admin_id}
+    </select>
+
 </mapper>

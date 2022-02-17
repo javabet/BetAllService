@@ -7,10 +7,7 @@ import com.wisp.core.utils.APIUtils;
 import com.wisp.core.vo.ResponseResultVo;
 import com.wisp.core.web.base.BaseController;
 import com.wisp.game.bet.recharge.common.ErrorCode;
-import com.wisp.game.bet.recharge.controller.test.info.BankToBankInfo;
-import com.wisp.game.bet.recharge.controller.test.info.PlayerPayUrlInfo;
-import com.wisp.game.bet.recharge.controller.test.info.PlayerPaymentInfo;
-import com.wisp.game.bet.recharge.controller.test.info.UsdtInfo;
+import com.wisp.game.bet.recharge.controller.test.info.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +21,7 @@ import java.util.*;
 public class BetTestController extends BaseController
 {
     @PostMapping(value = "/playerpayment")
-    public Object playerpayment(@RequestParam("PayType") int PayType,@RequestParam("AccountName") String  accountName )
+    public Object playerpayment(@RequestParam("PayType") int PayType,@RequestParam(value = "AccountName",required = false) String  accountName )
     {
         long expire_tm = new Date().getTime()/1000l + 1800;
         if( PayType == 12 )
@@ -34,7 +31,7 @@ public class BetTestController extends BaseController
             bankToBankInfo.setReceiveBank("bankName");
             bankToBankInfo.setReceiveSubbank("subBankName");
             bankToBankInfo.setReceiveBankAccount("bankAccount");
-            bankToBankInfo.setReceiveRemark("remark");
+            bankToBankInfo.setReceiveRemark("remark"); 
             bankToBankInfo.setReceiveExtend("extends");
             bankToBankInfo.setReceiveName("receiveName");
             bankToBankInfo.setReturnParam(accountName);
@@ -83,10 +80,23 @@ public class BetTestController extends BaseController
 
             return  playerPaymentInfo;
         }
+        else
+        {
+            NormalRechargeInfo normalRechargeInfo = new NormalRechargeInfo();
+            normalRechargeInfo.setType(1);
+            normalRechargeInfo.setData("https://wwww.baidu.com");
 
-        return emptySucc();
+            PlayerPaymentInfo playerPaymentInfo = new PlayerPaymentInfo();
+            playerPaymentInfo.setOrderId(APIUtils.getUUID());
+            playerPaymentInfo.setOwnWebBrowser(false);
+            playerPaymentInfo.setPayUrl( new Gson().toJson(normalRechargeInfo));
+            return playerPaymentInfo;
+        }
+
+        //return emptySucc();
     }
 
+    /**
     @PostMapping(value = "/playerwithdraw")
     public Object playerwithdraw(@RequestParam("PlayerId") int PlayerId,@RequestParam("GameOrderId") String GameOrderId,@RequestParam("ChannelId") String ChannelId,
                                  @RequestParam("AccountType") int AccountType,@RequestParam("Amount") int Amount,
@@ -98,7 +108,17 @@ public class BetTestController extends BaseController
 
         return data("success");
     }
+    **/
 
+    @RequestMapping(value = "/playerwithdraw")
+    public Object playerwithdraw( )
+    {
+
+
+        System.out.println("playerWithdraw");
+
+        return data("success");
+    }
 
     @RequestMapping(value="/usdtrate")
     public Object usdtrate()

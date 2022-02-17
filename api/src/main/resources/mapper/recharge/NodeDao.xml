@@ -30,6 +30,7 @@
             `name`,
             url,
             lang_cn,
+            is_lib,
             description
         ) VALUES  (
             #{ParentId},
@@ -39,6 +40,7 @@
             #{Name},
             #{Url},
             #{LangCn},
+            #{IsLib},
             #{Description}
         )
     </insert>
@@ -82,6 +84,11 @@
         <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>
+    </select>
+
+    <select id="findListByOrder" resultType="NodeEntity">
+        SELECT  <include refid="columns" /> from recharge_sys_node t
+        ORDER BY t.sort ASC ,t.id desc
     </select>
 
 </mapper>

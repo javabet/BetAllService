@@ -107,4 +107,8 @@
         </foreach>
     </select>
 
+    <select id="findAll" resultType="ModeEntity">
+        SELECT <include refid="columns" /> from recharge_sys_mode t
+    </select>
+
 </mapper>

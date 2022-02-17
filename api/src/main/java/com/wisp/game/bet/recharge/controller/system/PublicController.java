@@ -39,7 +39,7 @@ public class PublicController  extends BaseController
 
 
     @GetMapping(value = "/config")
-    public Object config(@RequestParam(value = "type") String type)
+    public Object config(@RequestParam(value = "type",required = false) String type)
     {
         CacheUserInfo cacheUserInfo = getCacheUserInfo();
         if( cacheUserInfo == null )

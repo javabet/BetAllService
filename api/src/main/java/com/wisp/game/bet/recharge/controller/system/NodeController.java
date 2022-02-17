@@ -44,6 +44,11 @@ public class NodeController extends BaseController
             nodeEntity.setParentId(-1);
         }
 
+        if( nodeEntity.getId() == -1 )
+        {
+            nodeEntity.setId(null);
+        }
+
         nodeEntity.setParentTree(",-1,");
         if( nodeEntity.getParentId() > 0 )
         {
@@ -61,7 +66,7 @@ public class NodeController extends BaseController
         {
             return error(ErrorCode.ERR_DB_INSERT.getCode());
         }
-        nodeEntity.setParentTree(nodeEntity.getParentTree()  +  nodeEntity.getId() + "");
+        nodeEntity.setParentTree(nodeEntity.getParentTree()  +  nodeEntity.getId() + ",");
         nodeService.save(nodeEntity);
 
         return emptySucc();
