@@ -25,6 +25,7 @@
 
     <build>
         <plugins>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -33,6 +34,17 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 指定该Main Class为全局的唯一入口 -->
+                    <mainClass>main.ApiMain</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -372,7 +384,6 @@
         <!-- TEST end -->
 
     </dependencies>
-
 
 
 </project>
