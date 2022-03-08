@@ -23,23 +23,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
+    <!--
     <build>
         <plugins>
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-            -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!-- 指定该Main Class为全局的唯一入口 -->
                     <mainClass>main.ApiMain</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
@@ -47,6 +37,108 @@
 
         </plugins>
     </build>
+    -->
+
+    <build>
+        <plugins>
+
+            <!--
+                官方解释：These are miscellaneous tools available through Maven by default.
+                Dependency manipulation (copy, unpack) and analysis.
+                这个插件的作用：把第三方依赖包复制到target/lib/目录下，达到分离的目的。
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <!-- 复制第三方 jar 到项目目录下的 target/lib/ 下 -->
+                    <execution>
+                        <goals>
+                            <!--
+                             takes the list of project direct dependencies and optionally transitive
+                             dependencies and copies them to a specified location, stripping the version
+                             if desired.
+                             This goal can also be run from the command line.
+                            -->
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <excludeScope>provided</excludeScope>
+                            <!-- 配置的作用：跳过复制第三方依赖这一步。这是在首次上传
+                                  第三方依赖到服务器之后，启用这个选项，可以不用在打包时
+                                  重复复制，节省时间。-->
+                            <skip>false</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+                官方解释：These plugins relate to packaging respective artifact types.
+                Build a JAR from the current project.
+                这个插件的作用：把项目打成jar包，插件配置的意思是：把第三方依赖的路径，
+                写入到MANIFEST.MF 文件中，格式是./lib/xxx.jar。这样做，就是 让项目包在
+                运行的时候，能够像以前一样找到第三方依赖包。
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- 指定 Spring Boot 启动类，实际测试中必须 -->
+                            <mainClass>main.ApiMain</mainClass>
+                            <!-- 将所有第三方 jar 添加到项目 jar 的 MANIFEST.MF 文件中，这样运行 jar 时依赖包才能
+                                   被加载 。此为关键步骤，有了这一步，我们在把第三方依赖包与项目包分离的情况
+                                   下，在服务器运行，就和没有分离时， 是一摸一样的了。-->
+                            <addClasspath>true</addClasspath>
+                            <!-- 指定第三方 jar 的目标目录为 ./lib/-->
+                            <classpathPrefix>./lib/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!--
+                上面的插件，只是把项目包打成符合maven的标准格式，还有利用spring boot的插件，
+                把包打成符合spring boot的格式才行。
+                官方文档：https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/htmlsingle/
+                为了让用户方便使用 Maven，少进行配置甚至不用配置，就需要用 Maven 构建项目。Maven 在安
+                装好后，自动为生命周期的主要阶段绑定很多插件的目标。
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- repackage 时排除掉 第三方依赖 jar 文件，我们的可运行 Spring Boot 的 jar 文件瞬间变小 ^_^
+                下面的配置给出了怎样将生命周期的阶段与插件的目标相互绑定。这样，在执行mvn命令时，会自
+                动执行 这个插件的目标。
+                目标可以有一个默认的阶段绑定，我们将在下面讨论。
+                目标有一个默认的阶段绑定，然后它将在该阶段执行。但是，如果目标没有绑定到任何生命周期阶
+                段， 那么它就不会在构建生命周期中执行。
+                官方文档：https://maven.apache.org/guides/mini/guide-configuring-plugins.html
+                -->
+                <!--                <executions>
+                                    <execution>
+                                        <goals>
+                                            <goal>repackage</goal>
+                                        </goals>
+                                    </execution>
+                                </executions>-->
+                <!--配置重新打包时，要包含的第三方依赖包，配置为nothing，那么就会排除掉所有的第三方依赖
+                    包-->
+                <configuration>
+                    <mainClass>main.ApiMain</mainClass>
+                    <includes>
+                        <include>
+                            <groupId>nothing</groupId>
+                            <artifactId>nothing</artifactId>
+                        </include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 
     <dependencies>
 
