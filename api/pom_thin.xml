@@ -24,6 +24,22 @@
         <output.resource.file.path>     /</output.resource.file.path>
     </properties>
 
+    <!--
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>main.ApiMain</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+    -->
+
     <!--声明多环境-->
     <profiles>
         <profile>
@@ -56,30 +72,10 @@
         </profile>
     </profiles>
 
-
-    <!--
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>main.ApiMain</mainClass>
-                    <layout>ZIP</layout>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
-    -->
-
-
-
     <build>
         <plugins>
 
-            <!-- 用于复制指定的文件 -->
-            <!--
+            <!-- 复制指定环境配置文件到指定目录 -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
@@ -94,20 +90,18 @@
                                 <resource>
                                     <directory>src/main/resources</directory>
                                     <includes>
-                                        <include>*.properties</include>
-                                        <include>*.yml</include>
-                                        <include>*/*.properties</include>
-                                        <include>*/*.properties</include>
+                                        <include>application.yml</include>
+                                        <include>application-${profiles.active}.yml</include>
+                                        <include>*.xml</include>
                                         <include>mapper/*/*.xml</include>
                                     </includes>
                                 </resource>
                             </resources>
-                            <outputDirectory>${project.build.directory}/${output.resource.file.path}</outputDirectory>
+                            <outputDirectory>${project.build.directory}/config</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            -->
 
             <!--
                 官方解释：These are miscellaneous tools available through Maven by default.
@@ -158,6 +152,16 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
+                    <excludes>
+                        <!-- 打包后的jar包中不包括配置文件 -->
+                        <!-- 通常是指classpath下目录下的文件，这样可以避免编写时的找不到相应文件 -->
+
+                        <exclude>*.xml</exclude>
+                        <exclude>*.properties</exclude>
+                        <exclude>*.yml</exclude>
+                        <exclude>mapper/*/*.xml</exclude>
+
+                    </excludes>
                     <archive>
                         <addMavenDescriptor>false</addMavenDescriptor>
                         <manifest>
@@ -202,6 +206,7 @@
                 <!--配置重新打包时，要包含的第三方依赖包，配置为nothing，那么就会排除掉所有的第三方依赖
                     包-->
                 <configuration>
+                    <mainClass>main.ApiMain</mainClass>
                     <includes>
                         <include>
                             <groupId>nothing</groupId>
@@ -224,16 +229,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- 跳过单元测试 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 

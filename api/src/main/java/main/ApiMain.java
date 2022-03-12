@@ -18,7 +18,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ComponentScan(basePackages = {"com.wisp.game","com.wisp.core"})
 @ServletComponentScan
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})
-@ImportResource(locations = "application-context.xml")
+//@ImportResource(locations = "application-context.xml")
 public class ApiMain {
 
     public static void main(String[] args)
